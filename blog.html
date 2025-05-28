@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diario de Creación | La Pluma y el Faro</title>
+    <meta name="description" content="Diario de creación donde se comparten reflexiones sobre procesos creativos, fragmentos inéditos y pensamientos de escritor desde las voces de Lauren Cuervo y A.C. Elysia.">
+    
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/blog.css">
+</head>
+<body>
+    <!-- Preloader con animación -->
+    <div class="preloader">
+        <div class="preloader-icon">
+            <i class="fas fa-feather-alt"></i>
+            <i class="fas fa-lighthouse"></i>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
+                    La Pluma y el Faro
+                </a>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="about.html">Sobre Nosotros</a></li>
+                    <li><a href="portfolio.html">Obras</a></li>
+                    <li><a href="blog.html" class="active">Diario</a></li>
+                    <li><a href="services.html">Servicios</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <div class="blog-hero-overlay"></div>
+        <div class="container">
+            <div class="blog-hero-content fade-in">
+                <h1 class="blog-hero-title">Diario de Creación</h1>
+                <div class="blog-hero-divider"></div>
+                <p class="blog-hero-subtitle">Reflexiones, fragmentos y pensamientos desde dos voces</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtro de Blog -->
+    <section class="blog-filter">
+        <div class="container">
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">Todas las Entradas</button>
+                <button class="filter-btn" data-filter="lauren">Lauren Cuervo</button>
+                <button class="filter-btn" data-filter="elysia">A.C. Elysia</button>
+                <button class="filter-btn" data-filter="process">Procesos Creativos</button>
+                <button class="filter-btn" data-filter="fragments">Fragmentos Inéditos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Entrada Destacada -->
+    <section class="featured-post">
+        <div class="container">
+            <div class="featured-post-container">
+                <div class="featured-post-image">
+                    <div class="featured-post-overlay">
+                        <div class="featured-post-date">
+                            <span class="day">15</span>
+                            <span class="month">Abril</span>
+                            <span class="year">2025</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-post-content">
+                    <div class="post-category">
+                        <span class="category-tag process">Proceso Creativo</span>
+                        <span class="author-tag collab-tag">Lauren & Elysia</span>
+                    </div>
+                    <h2 class="featured-post-title">La Dualidad como Motor Creativo</h2>
+                    <p class="featured-post-excerpt">Cuando me preguntan cómo logro mantener dos voces tan distintas, suelo responder que no es un esfuerzo consciente sino el reflejo natural de nuestra complejidad humana. Todos contenemos multitudes, todos somos capaces de habitar diferentes perspectivas...</p>
+                    <div class="featured-post-meta">
+                        <span class="meta-item"><i class="fas fa-clock"></i> 10 min de lectura</span>
+                        <span class="meta-item"><i class="fas fa-comment"></i> 24 comentarios</span>
+                    </div>
+                    <a href="#" class="btn btn-featured">Leer Entrada Completa</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grid de Entradas -->
+    <section class="blog-grid">
+        <div class="container">
+            <div class="blog-posts-grid">
+                <!-- Entrada 1 - Lauren -->
+                <article class="blog-post lauren process" data-category="lauren process">
+                    <div class="post-image lauren-post-1">
+                        <div class="post-date">
+                            <span class="day">10</span>
+                            <span class="month">Abril</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <div class="post-categories">
+                                <span class="category-tag process">Proceso Creativo</span>
+                            </div>
+                            <div class="post-author">
+                                <span class="author-tag lauren-tag">Lauren Cuervo</span>
+                            </div>
+                        </div>
+                        <h3 class="post-title">Tecnología como Extensión del Ser</h3>
+                        <p class="post-excerpt">Cuando escribo sobre tecnología, no me interesa tanto la especulación futurista como la forma en que estos avances reflejan y amplifican nuestros deseos y miedos más profundos...</p>
+                        <div class="post-meta">
+                            <span class="meta-item"><i class="fas fa-clock"></i> 7 min</span>
+                            <span class="meta-item"><i class="fas fa-comment"></i> 12</span>
+                        </div>
+                        <a href="#" class="post-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <!-- Entrada 2 - Elysia -->
+                <article class="blog-post elysia fragments" data-category="elysia fragments">
+                    <div class="post-image elysia-post-1">
+                        <div class="post-date">
+                            <span class="day">05</span>
+                            <span class="month">Abril</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <div class="post-categories">
+                                <span class="category-tag fragments">Fragmento Inédito</span>
+                            </div>
+                            <div class="post-author">
+                                <span class="author-tag elysia-tag">A.C. Elysia</span>
+                            </div>
+                        </div>
+                        <h3 class="post-title">El Guardián de las Historias</h3>
+                        <p class="post-excerpt">El viejo guardián del faro encendía cada noche no solo la luz que guiaba a los navegantes, sino también las historias que había recolectado a lo largo de décadas. Cada una brillaba con intensidad diferente...</p>
+                        <div class="post-meta">
+                            <span class="meta-item"><i class="fas fa-clock"></i> 5 min</span>
+                            <span class="meta-item"><i class="fas fa-comment"></i> 8</span>
+                        </div>
+                        <a href="#" class="post-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <!-- Entrada 3 - Lauren -->
+                <article class="blog-post lauren fragments" data-category="lauren fragments">
+                    <div class="post-image lauren-post-2">
+                        <div class="post-date">
+                            <span class="day">28</span>
+                            <span class="month">Marzo</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <div class="post-categories">
+                                <span class="category-tag fragments">Fragmento Inédito</span>
+                            </div>
+                            <div class="post-author">
+                                <span class="author-tag lauren-tag">Lauren Cuervo</span>
+                            </div>
+                        </div>
+                        <h3 class="post-title">Algoritmos del Caos</h3>
+                        <p class="post-excerpt">El código se desplegaba ante sus ojos como un mapa de su propia conciencia fragmentada. Cada línea, cada función, era un reflejo de las decisiones que había tomado, de los caminos que había elegido no recorrer...</p>
+                        <div class="post-meta">
+                            <span class="meta-item"><i class="fas fa-clock"></i> 6 min</span>
+                            <span class="meta-item"><i class="fas fa-comment"></i> 15</span>
+                        </div>
+                        <a href="#" class="post-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <!-- Entrada 4 - Elysia -->
+                <article class="blog-post elysia process" data-category="elysia process">
+                    <div class="post-image elysia-post-2">
+                        <div class="post-date">
+                            <span class="day">20</span>
+                            <span class="month">Marzo</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <div class="post-categories">
+                                <span class="category-tag process">Proceso Creativo</span>
+                            </div>
+                            <div class="post-author">
+                                <span class="author-tag elysia-tag">A.C. Elysia</span>
+                            </div>
+                        </div>
+                        <h3 class="post-title">El Silencio como Lienzo</h3>
+                        <p class="post-excerpt">Mi proceso creativo comienza siempre en el silencio. No un silencio vacío, sino uno lleno de posibilidades, como un lienzo en blanco que espera los primeros trazos. Es en ese espacio donde las voces de los personajes comienzan a susurrar...</p>
+                        <div class="post-meta">
+                            <span class="meta-item"><i class="fas fa-clock"></i> 8 min</span>
+                            <span class="meta-item"><i class="fas fa-comment"></i> 10</span>
+                        </div>
+                        <a href="#" class="post-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <!-- Entrada 5 - Lauren -->
+                <article class="blog-post lauren process" data-category="lauren process">
+                    <div class="post-image lauren-post-3">
+                        <div class="post-date">
+                            <span class="day">15</span>
+                            <span class="month">Marzo</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <div class="post-categories">
+                                <span class="category-tag process">Proceso Creativo</span>
+                            </div>
+                            <div class="post-author">
+                                <span class="author-tag lauren-tag">Lauren Cuervo</span>
+                            </div>
+                        </div>
+                        <h3 class="post-title">La Violencia Simbólica en la Narrativa</h3>
+                        <p class="post-excerpt">Cuando escribo sobre violencia, rara vez me interesa su manifestación física. Lo que me fascina es la violencia simbólica: esos sistemas invisibles que moldean nuestras percepciones y relaciones sin que seamos conscientes de ello...</p>
+                        <div class="post-meta">
+                            <span class="meta-item"><i class="fas fa-clock"></i> 9 min</span>
+                            <span class="meta-item"><i class="fas fa-comment"></i> 18</span>
+                        </div>
+                        <a href="#" class="post-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <!-- Entrada 6 - Elysia -->
+                <article class="blog-post elysia fragments" data-category="elysia fragments">
+                    <div class="post-image elysia-post-3">
+                        <div class="post-date">
+                            <span class="day">08</span>
+                            <span class="month">Marzo</span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <div class="post-categories">
+                                <span class="category-tag fragments">Fragmento Inédito</span>
+                            </div>
+                            <div class="post-author">
+                                <span class="author-tag elysia-tag">A.C. Elysia</span>
+                            </div>
+                        </div>
+                        <h3 class="post-title">Cartografía del Alma: Poema VII</h3>
+                        <p class="post-excerpt">En el séptimo círculo del alma / donde la luz y la sombra se encuentran / hay un jardín secreto que florece / con cada lágrima derramada en silencio...</p>
+                        <div class="post-meta">
+                            <span class="meta-item"><i class="fas fa-clock"></i> 3 min</span>
+                            <span class="meta-item"><i class="fas fa-comment"></i> 7</span>
+                        </div>
+                        <a href="#" class="post-link">Leer más <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Paginación -->
+            <div class="pagination">
+                <a href="#" class="page-link active">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link">3</a>
+                <span class="page-dots">...</span>
+                <a href="#" class="page-link">7</a>
+                <a href="#" class="page-next"><i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Suscripción -->
+    <section class="blog-subscribe">
+        <div class="container">
+            <div class="subscribe-container">
+                <div class="subscribe-content">
+                    <h2>Suscríbete al Diario de Creación</h2>
+                    <p>Recibe en tu correo las nuevas entradas, fragmentos inéditos y reflexiones sobre el proceso creativo. Prometo que solo recibirás contenido valioso y nunca compartiré tu información.</p>
+                    <form class="subscribe-form">
+                        <input type="email" placeholder="Tu correo electrónico" required>
+                        <button type="submit" class="btn btn-subscribe">Suscribirme</button>
+                    </form>
+                    <div class="subscribe-note">
+                        <i class="fas fa-shield-alt"></i> Tu información está segura y nunca será compartida.
+                    </div>
+                </div>
+                <div class="subscribe-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Temas -->
+    <section class="blog-topics">
+        <div class="container">
+            <h2 class="section-title">Explora por Temas</h2>
+            
+            <div class="topics-grid">
+                <a href="#" class="topic-item lauren-topic">
+                    <div class="topic-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Tecnología</h3>
+                    <span class="topic-count">12 entradas</span>
+                </a>
+                
+                <a href="#" class="topic-item lauren-topic">
+                    <div class="topic-icon"><i class="fas fa-city"></i></div>
+                    <h3>Distopías</h3>
+                    <span class="topic-count">8 entradas</span>
+                </a>
+                
+                <a href="#" class="topic-item lauren-topic">
+                    <div class="topic-icon"><i class="fas fa-balance-scale"></i></div>
+                    <h3>Ética</h3>
+                    <span class="topic-count">15 entradas</span>
+                </a>
+                
+                <a href="#" class="topic-item elysia-topic">
+                    <div class="topic-icon"><i class="fas fa-pray"></i></div>
+                    <h3>Espiritualidad</h3>
+                    <span class="topic-count">14 entradas</span>
+                </a>
+                
+                <a href="#" class="topic-item elysia-topic">
+                    <div class="topic-icon"><i class="fas fa-star"></i></div>
+                    <h3>Simbolismo</h3>
+                    <span class="topic-count">11 entradas</span>
+                </a>
+                
+                <a href="#" class="topic-item elysia-topic">
+                    <div class="topic-icon"><i class="fas fa-heart-broken"></i></div>
+                    <h3>Sanación</h3>
+                    <span class="topic-count">9 entradas</span>
+                </a>
+                
+                <a href="#" class="topic-item collab-topic">
+                    <div class="topic-icon"><i class="fas fa-pen-fancy"></i></div>
+                    <h3>Escritura</h3>
+                    <span class="topic-count">20 entradas</span>
+                </a>
+                
+                <a href="#" class="topic-item collab-topic">
+                    <div class="topic-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Literatura</h3>
+                    <span class="topic-count">17 entradas</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
+                    La Pluma y el Faro
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-goodreads"></i></a>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3>Suscríbete al newsletter</h3>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu correo electrónico" required>
+                        <button type="submit" class="btn btn-lauren">Suscribir</button>
+                    </form>
+                </div>
+                
+                <div class="footer-nav">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="about.html">Sobre Nosotros</a></li>
+                        <li><a href="portfolio.html">Obras</a></li>
+                        <li><a href="blog.html">Diario</a></li>
+                        <li><a href="services.html">Servicios</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-copyright">
+                    <p>&copy; 2025 La Pluma y el Faro. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/blog.js"></script>
+</body>
+</html>

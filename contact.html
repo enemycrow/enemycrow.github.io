@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | La Pluma y el Faro</title>
+    <meta name="description" content="Contacta con La Pluma y el Faro para consultas sobre servicios creativos, colaboraciones o cualquier otra información.">
+    
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+    <!-- Preloader con animación -->
+    <div class="preloader">
+        <div class="preloader-icon">
+            <i class="fas fa-feather-alt"></i>
+            <i class="fas fa-lighthouse"></i>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
+                    La Pluma y el Faro
+                </a>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="about.html">Sobre Nosotros</a></li>
+                    <li><a href="portfolio.html">Obras</a></li>
+                    <li><a href="blog.html">Diario</a></li>
+                    <li><a href="services.html">Servicios</a></li>
+                    <li><a href="contact.html" class="active">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="contact-hero-overlay"></div>
+        <div class="container">
+            <div class="contact-hero-content fade-in">
+                <h1 class="contact-hero-title">Contacto</h1>
+                <div class="contact-hero-divider"></div>
+                <p class="contact-hero-subtitle">Conecta con las voces detrás de La Pluma y el Faro</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto Principal -->
+    <section class="contact-main">
+        <div class="container">
+            <div class="contact-container">
+                <!-- Información de Contacto -->
+                <div class="contact-info">
+                    <h2>Hablemos</h2>
+                    <p class="contact-intro">Ya sea que tengas una consulta sobre mis servicios creativos, quieras discutir una posible colaboración o simplemente desees compartir tus impresiones sobre alguna de mis obras, estaré encantado de escucharte.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-details">
+                                <h3>Correo Electrónico</h3>
+                                <p>contacto@laplumayelfaro.com</p>
+                                <p class="response-time">Respuesta en 24-48 horas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="method-details">
+                                <h3>Teléfono</h3>
+                                <p>+34 612 345 678</p>
+                                <p class="response-time">Lunes a Viernes, 10:00 - 18:00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-details">
+                                <h3>Ubicación</h3>
+                                <p>Santiago, Chile</p>
+                                <p class="response-time">Disponible para reuniones virtuales</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-connect">
+                        <h3>Conéctate en Redes</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-goodreads"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulario de Contacto -->
+                <div class="contact-form-container">
+                    <h2>Envía un Mensaje</h2>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="voice">¿Con qué voz te gustaría hablar?</label>
+                            <select id="voice" name="voice">
+                                <option value="both">Ambas voces</option>
+                                <option value="lauren">Lauren Cuervo</option>
+                                <option value="elysia">A.C. Elysia</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">Suscribirme al newsletter</label>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            <label for="privacy">He leído y acepto la <a href="#">política de privacidad</a></label>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Newsletter -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-container">
+                <div class="newsletter-content">
+                    <h2>Suscríbete al Newsletter</h2>
+                    <p>Recibe actualizaciones mensuales sobre nuevas obras, entradas del diario de creación, eventos y ofertas especiales en servicios creativos. Prometo que solo recibirás contenido valioso y nunca compartiré tu información.</p>
+                    
+                    <div class="newsletter-features">
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Adelantos Exclusivos</h3>
+                                <p>Fragmentos inéditos y adelantos de obras en proceso.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Contenido Especial</h3>
+                                <p>Reflexiones, recursos creativos y contenido exclusivo para suscriptores.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Eventos y Novedades</h3>
+                                <p>Información sobre lanzamientos, eventos y talleres.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="newsletter-form-container">
+                    <h3>Únete a la Comunidad</h3>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <div class="form-group">
+                            <label for="nl-name">Nombre</label>
+                            <input type="text" id="nl-name" name="nl-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nl-email">Correo Electrónico</label>
+                            <input type="email" id="nl-email" name="nl-email" required>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="nl-lauren" name="nl-lauren" checked>
+                            <label for="nl-lauren">Contenido de Lauren Cuervo</label>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="nl-elysia" name="nl-elysia" checked>
+                            <label for="nl-elysia">Contenido de A.C. Elysia</label>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="nl-privacy" name="nl-privacy" required>
+                            <label for="nl-privacy">He leído y acepto la <a href="#">política de privacidad</a></label>
+                        </div>
+                        
+                        <button type="submit" class="btn-newsletter">Suscribirme</button>
+                    </form>
+                    
+                    <div class="newsletter-note">
+                        <i class="fas fa-shield-alt"></i> Tu información está segura y nunca será compartida.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de FAQ -->
+    <section class="contact-faq">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Cuál es el tiempo de respuesta habitual a los mensajes?</h3>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Normalmente respondo a todos los mensajes en un plazo de 24-48 horas laborables. Para consultas urgentes, recomiendo indicarlo claramente en el asunto del mensaje o utilizar el contacto telefónico durante el horario de atención.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Estás disponible para colaboraciones o entrevistas?</h3>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, estoy abierto a colaboraciones con otros creadores, participación en podcasts, entrevistas y eventos literarios. Por favor, proporciona detalles específicos sobre la naturaleza de la colaboración en tu mensaje para que pueda evaluar adecuadamente la propuesta.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Con qué frecuencia se envía el newsletter?</h3>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>El newsletter se envía una vez al mes, generalmente en la primera semana. Ocasionalmente, pueden enviarse comunicaciones adicionales para anuncios importantes como lanzamientos de libros o eventos especiales, pero nunca más de dos veces al mes.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Ofreces sesiones de mentoría para escritores?</h3>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, ofrezco sesiones de mentoría personalizadas para escritores en diferentes etapas de su carrera. Estas sesiones pueden enfocarse en aspectos técnicos de la escritura, desarrollo de la voz autoral, estrategias de publicación o cualquier otro aspecto del oficio literario. Contacta para más detalles y disponibilidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
+                    La Pluma y el Faro
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-goodreads"></i></a>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3>Suscríbete al newsletter</h3>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu correo electrónico" required>
+                        <button type="submit" class="btn btn-lauren">Suscribir</button>
+                    </form>
+                </div>
+                
+                <div class="footer-nav">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="about.html">Sobre Nosotros</a></li>
+                        <li><a href="portfolio.html">Obras</a></li>
+                        <li><a href="blog.html">Diario</a></li>
+                        <li><a href="services.html">Servicios</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-copyright">
+                    <p>&copy; 2025 La Pluma y el Faro. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>
