@@ -75,7 +75,7 @@
   padding: 1rem 2rem;
   border: none;
   background-color: var(--gris-oscuro);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   font-family: var(--fuente-manuscrita);
   font-size: 1.1rem;
   cursor: pointer;
@@ -104,7 +104,7 @@
 /* Trial View */
 .trial-view {
   background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .trial-container {
@@ -113,7 +113,7 @@
   align-items: stretch;
 }
 
-.lauren-side, .elysia-side {
+.lauren-side, .elysia-side, .sahir-side {
   flex: 1;
   padding: 2rem;
   border-radius: 5px;
@@ -124,13 +124,19 @@
 
 .lauren-side {
   background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin-right: 1rem;
 }
 
 .elysia-side {
   background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--violeta-pálido) 100%);
   color: var(--negro-profundo);
+  margin-left: 1rem;
+}
+
+.sahir-side {
+  background: linear-gradient(135deg, var(--gris-oscuro) 0%, var(--gris-claro) 100%);
+  color: var(--blanco-etéreo);
   margin-left: 1rem;
 }
 
@@ -192,6 +198,11 @@
   box-shadow: 0 0 20px rgba(107, 79, 158, 0.5);
 }
 
+.sahir-image .author-image-frame {
+  background: linear-gradient(to right, var(--gris-oscuro), var(--gris-claro));
+  box-shadow: 0 0 20px rgba(128, 128, 128, 0.5);
+}
+
 .author-image {
   width: 100%;
   height: 100%;
@@ -208,6 +219,11 @@
 .elysia-image .author-image {
   background-image: url('../images/elysia.jpg');
   background-color: var(--violeta-profundo); /* Fallback */
+}
+
+.sahir-image .author-image {
+  background-image: url('../images/sahir.jpg');
+  background-color: var(--gris-oscuro);
 }
 
 .author-name {
@@ -279,23 +295,33 @@
 
 .lauren-side .theme-icon {
   background: var(--azul-noche);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .elysia-side .theme-icon {
   background: var(--violeta-profundo);
+  color: var(--blanco-etereo);
+}
+
+.sahir-side .theme-icon {
+  background: var(--gris-oscuro);
   color: var(--blanco-etéreo);
 }
 
 /* Single Author Views */
 .lauren-view {
   background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .elysia-view {
   background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--violeta-pálido) 70%);
   color: var(--negro-profundo);
+}
+
+.sahir-view {
+  background: linear-gradient(135deg, var(--gris-oscuro) 0%, var(--gris-claro) 100%);
+  color: var(--blanco-etéreo);
 }
 
 .single-author-container {
@@ -330,6 +356,11 @@
   box-shadow: 0 0 30px rgba(107, 79, 158, 0.5);
 }
 
+.sahir-image-large .author-image-frame-large {
+  background: linear-gradient(to right, var(--gris-oscuro), var(--gris-claro));
+  box-shadow: 0 0 30px rgba(128, 128, 128, 0.5);
+}
+
 .author-image-large-inner {
   width: 100%;
   height: 100%;
@@ -346,6 +377,11 @@
 .elysia-image-large .author-image-large-inner {
   background-image: url('../images/elysia-large.jpg');
   background-color: var(--violeta-profundo); /* Fallback */
+}
+
+.sahir-image-large .author-image-large-inner {
+  background-image: url('../images/sahir-large.jpg');
+  background-color: var(--gris-oscuro); /* Fallback */
 }
 
 .author-title {
@@ -383,6 +419,10 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+.sahir-view .author-bio, .sahir-view .author-philosophy, .sahir-view .author-works {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .author-bio h3, .author-philosophy h3, .author-works h3 {
   font-family: var(--fuente-titulos);
   font-size: 1.8rem;
@@ -406,6 +446,10 @@
 
 .elysia-view .author-bio h3::after, .elysia-view .author-philosophy h3::after, .elysia-view .author-works h3::after {
   background: linear-gradient(to right, var(--violeta-profundo), var(--violeta-pálido));
+}
+
+.sahir-view .author-bio h3::after, .sahir-view .author-philosophy h3::after, .sahir-view .author-works h3::after {
+  background: linear-gradient(to right, var(--gris-oscuro), var(--gris-claro));
 }
 
 .author-bio p, .author-philosophy p {
@@ -470,6 +514,21 @@
   background-color: var(--violeta-profundo); /* Fallback */
 }
 
+.sahir-work-1 {
+  background-image: url('../images/sahir-work-1.jpg');
+  background-color: var(--gris-oscuro); /* Fallback */
+}
+
+.sahir-work-2 {
+  background-image: url('../images/sahir-work-2.jpg');
+  background-color: var(--gris-oscuro); /* Fallback */
+}
+
+.sahir-work-3 {
+  background-image: url('../images/sahir-work-3.jpg');
+  background-color: var(--gris-oscuro); /* Fallback */
+}
+
 .work-info {
   padding: 1.5rem;
 }
@@ -480,6 +539,10 @@
 
 .elysia-view .work-info {
   background: rgba(255, 255, 255, 0.3);
+}
+
+.sahir-view .work-info {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .work-info h4 {
@@ -497,7 +560,7 @@
 .creative-process {
   background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--negro-sombra) 100%);
   padding: 6rem 0;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .process-content {

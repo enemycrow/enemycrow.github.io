@@ -131,7 +131,7 @@
 
 .lauren-section {
   background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin-right: 1rem;
 }
 
@@ -143,7 +143,7 @@
 
 .sahir-section {
   background: linear-gradient(135deg, var(--verde-sahir) 0%, var(--ambar-antiguo) 100%);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin-top: 1rem;
 }
 
@@ -263,7 +263,7 @@
 }
 
 .ampersand {
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin: 0 1rem;
 }
 
@@ -350,7 +350,7 @@
 .footer-logo {
   font-family: var(--fuente-titulos);
   font-size: 1.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
@@ -386,7 +386,7 @@
   font-family: var(--fuente-manuscrita);
   font-size: 1.3rem;
   margin-bottom: 1rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .newsletter-form {
@@ -400,7 +400,7 @@
   padding: 0.8rem;
   border: none;
   background: var(--gris-oscuro);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   border-radius: 3px 0 0 3px;
 }
 

@@ -65,7 +65,7 @@
   font-family: var(--fuente-titulos);
   font-size: 2.5rem;
   margin-bottom: 2rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .intro-text {
@@ -100,7 +100,7 @@
 
 .btn-intro-alt {
   background: transparent;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   padding: 1rem 2rem;
   border-radius: 3px;
   font-family: var(--fuente-manuscrita);
@@ -169,7 +169,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   text-align: center;
 }
 
@@ -216,18 +216,18 @@
 
 .lauren-voice {
   background: var(--azul-noche);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .elysia-voice {
   background: var(--violeta-profundo);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .voice-name {
   font-family: var(--fuente-titulos);
   font-size: 1.1rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin-right: 0.5rem;
   min-width: unset;
 }
@@ -243,7 +243,7 @@
   font-family: var(--fuente-manuscrita);
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .service-features ul {
@@ -334,7 +334,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .timeline-content p {
@@ -405,7 +405,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.2rem;
   margin-bottom: 0.3rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .author-info p {
@@ -426,7 +426,7 @@
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.3);
   border: none;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -491,7 +491,7 @@
 .faq-question h3 {
   font-family: var(--fuente-titulos);
   font-size: 1.3rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin: 0;
 }
 
@@ -542,18 +542,18 @@
   font-family: var(--fuente-titulos);
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .cta-content p {
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin-bottom: 2rem;
   font-size: 1.1rem;
   line-height: 1.6;
 }
 
 .btn-cta {
-  background: var(--blanco-etéreo);
+  background: var(--blanco-etereo);
   color: var(--violeta-profundo);
   padding: 1rem 2rem;
   border-radius: 3px;
