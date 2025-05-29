@@ -1,0 +1,33 @@
+/* Estilos específicos para A.C. Elysia */
+.elysia-side {
+    background-color: var(--elysia-primario);
+    color: var(--elysia-secundario);
+    border-color: var(--elysia-secundario);
+}
+
+.elysia-side .author-name {
+    color: var(--negro-profundo); /* Nombre en azul oscuro para contraste */
+    font-family: var(--fuente-titulos);
+}
+.elysia-side .author-description {
+    color: var(--gris-oscuro); /* Descripción en gris oscuro */
+    font-family: var(--fuente-cuerpo);
+}
+
+.elysia-side .author-themes h4 {
+     color: var(--negro-profundo); /* Título de temas en azul oscuro */
+     font-family: var(--fuente-manuscrita);
+}
+
+.elysia-side .theme-list li {
+    color: var(--gris-oscuro); /* Temas en gris oscuro */
+    font-family: var(--fuente-cuerpo);
+}
+
+.elysia-side .theme-icon {
+    color: var(--elysia-acento); /* Iconos con color de acento dorado */
+}
+
+.elysia-side .author-image {
+    border-color: var(--elysia-secundario);
+}

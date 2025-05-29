@@ -1,0 +1,33 @@
+/* Estilos específicos para Draco Sahir */
+.sahir-side {
+    background-color: var(--sahir-primario);
+    color: var(--sahir-secundario);
+    border-color: var(--sahir-acento);
+}
+
+.sahir-side .author-name {
+    color: var(--sahir-acento); /* Nombre en color de acento */
+    font-family: var(--fuente-titulos);
+}
+.sahir-side .author-description {
+     color: var(--gris-claro); /* Descripción en gris claro */
+     font-family: var(--fuente-cuerpo);
+}
+
+.sahir-side .author-themes h4 {
+     color: var(--sahir-secundario);
+     font-family: var(--fuente-manuscrita);
+}
+
+.sahir-side .theme-list li {
+    color: var(--gris-claro); /* Temas en gris claro */
+    font-family: var(--fuente-cuerpo);
+}
+
+.sahir-side .theme-icon {
+    color: var(--sahir-acento); /* Iconos con color de acento */
+}
+
+.sahir-side .author-image {
+    border-color: var(--sahir-acento);
+}

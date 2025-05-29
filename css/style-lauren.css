@@ -1,0 +1,34 @@
+/* Estilos específicos para Lauren Cuervo */
+.lauren-side {
+    background-color: var(--lauren-primario);
+    color: var(--lauren-secundario);
+    border-color: var(--lauren-acento);
+}
+
+.lauren-side .author-name {
+    color: var(--lauren-secundario);
+    font-family: var(--fuente-titulos);
+}
+
+.lauren-side .author-description {
+    color: var(--lauren-secundario);
+    font-family: var(--fuente-cuerpo);
+}
+
+.lauren-side .author-themes h4 {
+     color: var(--lauren-secundario);
+     font-family: var(--fuente-manuscrita);
+}
+
+.lauren-side .theme-list li {
+    color: var(--lauren-secundario);
+    font-family: var(--fuente-cuerpo);
+}
+
+.lauren-side .theme-icon {
+    color: var(--lauren-acento); /* Iconos con color de acento */
+}
+
+.lauren-side .author-image {
+    border-color: var(--lauren-acento);
+}
