@@ -113,7 +113,7 @@
   margin-bottom: 4rem;
 }
 
-.duality-container {
+.triality-container {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
@@ -444,7 +444,7 @@
     font-size: 1.5rem;
   }
   
-  .duality-container {
+  .triality-container {
     flex-direction: column;
   }
   

@@ -146,8 +146,8 @@ a:hover {
   transform: translateX(-50%);
 }
 
-/* Estilos para la dualidad */
-.duality-container {
+/* Estilos para la trialidad */
+.triality-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -251,7 +251,7 @@ a:hover {
 
 /* Estilos responsivos */
 @media screen and (max-width: 768px) {
-  .duality-container {
+  .triality-container {
     flex-direction: column;
   }
   
