@@ -120,7 +120,7 @@
   margin-bottom: 4rem;
 }
 
-.lauren-section, .elysia-section {
+.lauren-section, .elysia-section, .sahir-section {
   flex: 1;
   padding: 2.5rem;
   border-radius: 5px;
@@ -141,7 +141,13 @@
   margin-left: 1rem;
 }
 
-.lauren-section h3, .elysia-section h3 {
+.sahir-section {
+  background: linear-gradient(135deg, var(--verde-sahir) 0%, var(--ambar-antiguo) 100%);
+  color: var(--blanco-etéreo);
+  margin-top: 1rem;
+}
+
+.lauren-section h3, .elysia-section h3, .sahir-section h3 {
   font-family: var(--fuente-titulos);
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
@@ -254,6 +260,25 @@
 .elysia-signature {
   color: var(--violeta-pálido);
   margin-left: 1rem;
+}
+
+.ampersand {
+  color: var(--blanco-etéreo);
+  margin: 0 1rem;
+}
+
+.sahir-signature {
+  color: var(--ambar-antiguo);
+  margin-left: 1rem;
+}
+
+.author-name {
+  min-height: 2.8em; /* Ajusta según tu tamaño de fuente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.4;
 }
 
 .cta-container {
@@ -423,7 +448,7 @@
     flex-direction: column;
   }
   
-  .lauren-section, .elysia-section {
+  .lauren-section, .elysia-section, .sahir-section {
     margin: 0 0 2rem 0;
   }
   
@@ -465,4 +490,62 @@
   .newsletter-form button {
     border-radius: 3px;
   }
+}
+
+/* Color Palette */
+:root {
+  --azul-noche: #0A1128;
+  --vino-sangre: #590d22;
+
+  --violeta-profundo: #4B0F6B;
+  --lavanda-eterica: #d6b8ff;
+
+  --verde-sahir: #114e3b;
+  --ambar-antiguo: #d4a373;
+
+  --fondo-general: #0b0d10;
+  --blanco-etereo: #f5f5f5;
+  --gris-claro: #cccccc;
+}
+
+body {
+  background-color: var(--fondo-general);
+  color: var(--blanco-etereo);
+}
+
+/* Estilo para cada autor */
+.lauren-voice {
+  background: var(--azul-noche);
+  color: var(--blanco-etereo);
+}
+
+.elysia-voice {
+  background: var(--violeta-profundo);
+  color: var(--blanco-etereo);
+}
+
+.sahir-voice {
+  background: var(--verde-sahir);
+  color: var(--blanco-etereo);
+}
+
+/* Añadir clases generales para íconos o secciones */
+.lauren-theme {
+  border-left: 4px solid var(--vino-sangre);
+}
+
+.elysia-theme {
+  border-left: 4px solid var(--lavanda-eterica);
+}
+
+.sahir-theme {
+  border-left: 4px solid var(--ambar-antiguo);
+}
+
+/* Enlaces */
+a {
+  color: var(--lavanda-eterica);
+}
+a:hover {
+  color: var(--ambar-antiguo);
 }
