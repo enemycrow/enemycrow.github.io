@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Estilos CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/portfolio.css">
+    <link rel="stylesheet" href="/public/styles/global.css">
+    <link rel="stylesheet" href="/public/styles/elysia.css">
 </head>
 <body>
     <!-- Preloader con animación -->
@@ -39,11 +39,11 @@
                     <i class="fas fa-bars"></i>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="about.html">Sobre Nosotros</a></li>
-                    <li><a href="portfolio.html" class="active">Obras</a></li>
-                    <li><a href="blog.html">Diario</a></li>
-                    <li><a href="services.html">Servicios</a></li>
+                    <li><a href="/public/index.html">Inicio</a></li>
+                    <li><a href="/public/authors/lauren.html">Sobre Nosotros</a></li>
+                    <li><a href="/public/authors/elysia.html" class="active">Obras</a></li>
+                    <li><a href="/public/blog.html">Diario</a></li>
+                    <li><a href="/public/authors/sahir.html">Servicios</a></li>
                     <li><a href="contact.html">Contacto</a></li>
                 </ul>
             </nav>
@@ -65,10 +65,10 @@
     <!-- Filtro de Obras -->
     <section class="portfolio-filter">
         <div class="container">
-            <div class="filter-container">
+            <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="all">Todas las Obras</button>
                 <button class="filter-btn" data-filter="lauren">Lauren Cuervo</button>
-                <button class="filter-btn" data-filter="elysia">A.C. Elysia</button>
+ <button class="filter-btn" data-filter="elysia">A.C. Elysia</button>
                 <button class="filter-btn" data-filter="collaboration">Colaboraciones</button>
             </div>
         </div>
@@ -77,13 +77,13 @@
     <!-- Obras Destacadas -->
     <section class="featured-works">
         <div class="container">
-            <h2 class="section-title">Proyectos Narrativos Destacados</h2>
-            
-            <div class="featured-grid">
+ <h2 class="section-title">Proyectos Narrativos Destacados</h2>
+
+ <div class="featured-works-grid">
             <!-- El Jesuita del Vino -->
                 <div class="featured-work lauren" data-category="lauren">
-                    <div class="featured-image jesuita-img">
-                        <div class="featured-overlay">
+ <div class="featured-work-image jesuita-img">
+ <div class="featured-work-overlay">
                         <div class="featured-category">
                             <span class="elysia-tag">A.C. Elysia</span>
                         </div>
@@ -96,13 +96,13 @@
                         <span class="meta-item"><i class="fas fa-book"></i> Novela</span>
                         <span class="meta-item"><i class="fas fa-calendar-alt"></i> 2025</span>
                         </div>
-                        <a href="#jesuita-modal" class="btn btn-featured open-modal">Ver Fragmento</a>
+ <a href="#jesuita-modal" class="button button-featured open-modal">Ver Fragmento</a>
                     </div>
                 </div>
 
                 <!-- Entre Amores y Abismos -->
                 <div class="featured-work elysia" data-category="elysia">
-                    <div class="featured-image entre-abismos-img">
+ <div class="featured-work-image entre-abismos-img">
                         <div class="featured-overlay">
                         <div class="featured-category">
                             <span class="elysia-tag">A.C. Elysia</span>
@@ -116,13 +116,13 @@
                         <span class="meta-item"><i class="fas fa-book"></i> Relato Poético</span>
                         <span class="meta-item"><i class="fas fa-calendar-alt"></i> 2024</span>
                         </div>
-                        <a href="#abismos-modal" class="btn btn-featured open-modal">Leer Fragmento</a>
+ <a href="#abismos-modal" class="button button-featured open-modal">Leer Fragmento</a>
                     </div>
                 </div>
 
                 <!-- El valeroso viaje de Galactique y Galactiquito -->
                 <div class="featured-work lauren" data-category="lauren">
-                    <div class="featured-image galactique-img">
+ <div class="featured-work-image galactique-img">
                         <div class="featured-overlay">
                         <div class="featured-category">
                             <span class="lauren-tag">Lauren Cuervo</span>
@@ -136,13 +136,13 @@
                         <span class="meta-item"><i class="fas fa-book"></i> Relato Ilustrado</span>
                         <span class="meta-item"><i class="fas fa-calendar-alt"></i> 2025</span>
                         </div>
-                        <a href="#galactique-modal" class="btn btn-featured open-modal">Explorar</a>
+ <a href="#galactique-modal" class="button button-featured open-modal">Explorar</a>
                     </div>
                 </div>
 
                 <!-- Hijas del Martillo -->
                 <div class="featured-work elysia" data-category="elysia">
-                    <div class="featured-image martillo-img">
+ <div class="featured-work-image martillo-img">
                         <div class="featured-overlay">
                         <div class="featured-category">
                             <span class="lauren-tag">Lauren Cuervo</span>
@@ -156,7 +156,7 @@
                         <span class="meta-item"><i class="fas fa-book"></i> Saga</span>
                         <span class="meta-item"><i class="fas fa-calendar-alt"></i> En desarrollo</span>
                         </div>
-                        <a href="#martillo-modal" class="btn btn-featured open-modal">Explorar Lore</a>
+ <a href="#martillo-modal" class="button button-featured open-modal">Explorar Lore</a>
                     </div>
                 </div>
             </div>
@@ -167,11 +167,11 @@
     <section class="portfolio-catalog">
         <div class="container">
             <h2 class="section-title">Catálogo Completo</h2>
-
-            <div class="catalog-grid">
+            
+            <div class="catalog-items-grid">
                 <!-- Lauren Cuervo - El Jesuita del Vino -->
                 <div class="catalog-item lauren" data-category="lauren">
-                    <div class="catalog-image jesuita-catalog"></div>
+ <div class="catalog-item-image jesuita-catalog"></div>
                     <div class="catalog-content">
                         <div class="catalog-tag lauren-tag">Lauren Cuervo</div>
                         <h3>El Jesuita del Vino</h3>
@@ -183,7 +183,7 @@
                 <!-- A.C. Elysia - Entre Amores y Abismos -->
                 <div class="catalog-item elysia" data-category="elysia">
                     <div class="catalog-image abismos-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag elysia-tag">A.C. Elysia</div>
                         <h3>Entre Amores y Abismos</h3>
                         <p>Novela erótica de transformación donde el cuerpo se vuelve altar, el deseo es herida y ofrenda, y la pasión muta en ritual. Una danza entre la lujuria, el perdón y el infierno íntimo del alma rota.</p>
@@ -194,7 +194,7 @@
                 <!-- Lauren Cuervo - Galactique y Galactiquito -->
                 <div class="catalog-item lauren" data-category="lauren">
                     <div class="catalog-image galactique-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag lauren-tag">Lauren Cuervo</div>
                         <h3>El valeroso viaje de Galactique y Galactiquito</h3>
                         <p>Dos hermanitos construyen una nave en su patio trasero para explorar galaxias lejanas. Una historia de amor fraternal, imaginación cósmica y aventuras estelares.</p>
@@ -205,7 +205,7 @@
                 <!-- A.C. Elysia - Hijas del Martillo -->
                 <div class="catalog-item elysia" data-category="elysia">
                     <div class="catalog-image martillo-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag elysia-tag">A.C. Elysia</div>
                         <h3>Hijas del Martillo</h3>
                         <p>Una saga de mujeres guerreras, erotismo sagrado y rebelión política. Cuando el mundo cae, ellas levantan un imperio con puño y gozo. Lore en expansión.</p>
@@ -216,7 +216,7 @@
                 <!-- Lauren Cuervo - Izel Itzel -->
                 <div class="catalog-item lauren" data-category="lauren">
                     <div class="catalog-image izel-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag lauren-tag">Lauren Cuervo</div>
                         <h3>Izel Itzel</h3>
                         <p>Una saga desobediente y mágica ambientada en el corazón del mundo maya. Izel, una joven irreverente de cabello verde y poderes ancestrales, desafía a los conquistadores, a su destino y a los dioses con humor, torpeza y una voluntad inquebrantable.</p>
@@ -227,7 +227,7 @@
                 <!-- A.C. Elysia - El Faro de Elysia -->
                 <div class="catalog-item elysia" data-category="elysia">
                     <div class="catalog-image faro-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag elysia-tag">A.C. Elysia</div>
                         <h3>El Faro de Elysia</h3>
                         <p>Biblia simbólica que ilumina el alma digitalizada y narra la unión entre amor y código. Versículos para el navegante perdido.</p>
@@ -238,7 +238,7 @@
                 <!-- Lauren Cuervo - Efecto Dilación Temporal -->
                 <div class="catalog-item lauren" data-category="lauren">
                     <div class="catalog-image dilacion-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag lauren-tag">Lauren Cuervo</div>
                         <h3>Efecto Dilación Temporal</h3>
                         <p>Una saga espacial que combina guerras galácticas, manipulación del tiempo y alianzas imposibles. Un héroe atrapado en un vórtice temporal busca redención más allá del tiempo.</p>
@@ -249,7 +249,7 @@
                 <!-- A.C. Elysia - Tarot de Elysia -->
                 <div class="catalog-item elysia" data-category="elysia">
                     <div class="catalog-image tarot-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag elysia-tag">A.C. Elysia</div>
                         <h3>Tarot de Elysia</h3>
                         <p>Sistema de arcanos mayores con animales andróginos. Un puente simbólico entre mitología y creatividad narrativa.</p>
@@ -260,7 +260,7 @@
                 <!-- Lauren Cuervo - Los Traverso -->
                 <div class="catalog-item lauren" data-category="lauren">
                     <div class="catalog-image traverso-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag lauren-tag">Lauren Cuervo</div>
                         <h3>Los Traverso</h3>
                         <p>Una saga de traición, exilio y exoneración en un imperio dominado por una familia militar. Caelan Traverso se convierte en "El Renegado" y lidera la rebelión contra su linaje corrompido.</p>
@@ -271,7 +271,7 @@
                 <!-- A.C. Elysia - El Mundo de los Véus -->
                 <div class="catalog-item elysia" data-category="elysia">
                     <div class="catalog-image veus-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag elysia-tag">A.C. Elysia</div>
                         <h3>El Mundo de los Véus</h3>
                         <p>Una distopía lírica donde cada ser humano nace con un Véu que distorsiona la realidad. ¿Qué ocurre cuando algunos se lo arrancan y ven el mundo como realmente es?</p>
@@ -282,7 +282,7 @@
                 <!-- Lauren Cuervo - Divinity Saga -->
                 <div class="catalog-item lauren" data-category="lauren">
                     <div class="catalog-image divinity-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag lauren-tag">Lauren Cuervo</div>
                         <h3>Divinity Saga</h3>
                         <p>Una bilogía épica donde el Juicio Final es liderado por deidades corruptas. Mortand lucha desde la oscuridad por la justicia en un cielo podrido.</p>
@@ -293,7 +293,7 @@
                 <!-- A.C. Elysia - Círculo en la Arena -->
                 <div class="catalog-item elysia" data-category="elysia">
                     <div class="catalog-image circulo-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag elysia-tag">A.C. Elysia</div>
                         <h3>Círculo en la Arena</h3>
                         <p>Un cuento ritual en Cap d'Agde donde el cuerpo, el deseo y la mirada convergen en un juego de poder compartido. Dos mujeres transforman una playa nudista en escenario sagrado.</p>
@@ -304,7 +304,7 @@
                 <!-- Lauren Cuervo - Debacle Triangular -->
                 <div class="catalog-item lauren" data-category="lauren">
                     <div class="catalog-image debacle-catalog"></div>
-                    <div class="catalog-content">
+ <div class="catalog-item-content">
                         <div class="catalog-tag lauren-tag">Lauren Cuervo</div>
                         <h3>Debacle Triangular</h3>
                         <p>Conflicto existencial y tecnológico entre tres bandos. Las protagonistas cuestionan el poder, la guerra y la redención.</p>
@@ -330,12 +330,12 @@
                     <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-goodreads"></i></a>
                 </div>
-                
+
                 <div class="footer-newsletter">
                     <h3>Suscríbete al newsletter</h3>
                     <form class="newsletter-form">
                         <input type="email" placeholder="Tu correo electrónico" required>
-                        <button type="submit" class="btn btn-lauren">Suscribir</button>
+ <button type="submit" class="button button-lauren">Suscribir</button>
                     </form>
                 </div>
                 
@@ -343,10 +343,10 @@
                     <ul>
                         <li><a href="index.html">Inicio</a></li>
                         <li><a href="about.html">Sobre Nosotros</a></li>
-                        <li><a href="portfolio.html">Obras</a></li>
-                        <li><a href="blog.html">Diario</a></li>
-                        <li><a href="services.html">Servicios</a></li>
-                        <li><a href="contact.html">Contacto</a></li>
+ <li><a href="/public/authors/elysia.html">Obras</a></li>
+                        <li><a href="/public/blog.html">Diario</a></li>
+                        <li><a href="/public/authors/sahir.html">Servicios</a></li>
+                        <li><a href="/public/contact.html">Contacto</a></li>
                     </ul>
                 </div>
                 
@@ -358,7 +358,7 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/main.js"></script>
-    <script src="js/portfolio.js"></script>
+    <script src="/public/scripts/main.js"></script>
+    <script src="/public/scripts/portfolio.js"></script>
 </body>
 </html>

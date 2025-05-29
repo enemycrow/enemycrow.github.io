@@ -1,0 +1,301 @@
+.lauren-section {
+  height: 60vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url('../assets/images/lauren-bg.jpg') no-repeat center center;
+  background-size: cover;
+  color: var(--blanco-brillante);
+}
+
+.about-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.lauren-section .section-title {
+  font-family: var(--fuente-titulos);
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.lauren-section .section-divider {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-lauren-principal), var(--color-lauren-secundario));
+  margin: 1.5rem auto;
+}
+
+.lauren-section .section-subtitle {
+  font-family: var(--fuente-manuscrita);
+  font-size: 1.5rem;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* Specific Lauren Styles */
+.lauren-side {
+  background: linear-gradient(135deg, var(--color-lauren-oscuro) 0%, var(--color-lauren-principal) 100%);
+  color: var(--blanco-etereo);
+  margin-right: 1rem; /* Adjust as needed for layout */
+}
+
+.lauren-view {
+  background: linear-gradient(135deg, var(--color-lauren-oscuro) 0%, var(--color-lauren-principal) 100%);
+  color: var(--blanco-etereo);
+}
+
+.lauren-image-frame {
+  background: linear-gradient(to right, var(--color-lauren-principal), var(--color-lauren-secundario));
+  box-shadow: 0 0 20px rgba(26, 35, 126, 0.5);
+}
+
+.lauren-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.lauren-image.small {
+  background-image: url('../assets/images/lauren-small.jpg'); /* Use a specific small image if available */
+  background-color: var(--color-lauren-principal); /* Fallback */
+}
+
+.lauren-image.large {
+  background-image: url('../assets/images/lauren-large.jpg'); /* Use a specific large image */
+  background-color: var(--color-lauren-principal); /* Fallback */
+}
+
+.author-name {
+  font-family: var(--fuente-titulos);
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Author Themes */
+.author-themes {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 5px;
+}
+
+.lauren-side .author-themes {
+  background: rgba(10, 10, 10, 0.3);
+}
+
+
+.theme-list {
+  list-style: none;
+}
+
+.theme-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  font-family: var(--fuente-cuerpo);
+}
+
+.theme-icon {
+  margin-right: 1rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lauren-side .theme-icon {
+  background: var(--color-lauren-principal);
+  color: var(--blanco-etereo);
+}
+
+.lauren-image-frame-large {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.lauren-image-large .author-image-frame-large {
+  background: linear-gradient(to right, var(--color-lauren-principal), var(--color-lauren-secundario));
+  box-shadow: 0 0 30px rgba(26, 35, 126, 0.5);
+}
+
+.author-image-large-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.lauren-image-large .author-image-large-inner {
+  background-image: url('../assets/images/lauren-large.jpg');
+  background-color: var(--color-lauren-principal); /* Fallback */
+}
+
+.lauren-view .author-bio, .lauren-view .author-philosophy, .lauren-view .author-works {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.lauren-view .author-bio h3::after, .lauren-view .author-philosophy h3::after, .lauren-view .author-works h3::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background: linear-gradient(to right, var(--color-lauren-principal), var(--color-lauren-secundario));
+}
+
+/* Works Grid */
+.lauren-work-item .work-image {
+  background-size: cover;
+  background-position: center;
+}
+
+.lauren-work-item.work-1 .work-image {
+  background-image: url('../assets/images/lauren-work-1.jpg');
+  background-color: var(--color-lauren-principal); /* Fallback */
+}
+
+.lauren-work-item.work-2 .work-image {
+  background-image: url('../assets/images/lauren-work-2.jpg');
+  background-color: var(--color-lauren-principal); /* Fallback */
+}
+
+.lauren-work-item.work-3 .work-image {
+  background-image: url('../assets/images/lauren-work-3.jpg');
+  background-color: var(--color-lauren-principal); /* Fallback */
+}
+
+.lauren-view .work-info {
+  background: var(--negro-sombra); /* Using a global dark shade */
+}
+
+.lauren-view .work-info h4 {
+  font-family: var(--fuente-titulos);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+
+.creative-process {
+  background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--negro-sombra) 100%);
+  padding: 6rem 0;
+  color: var(--blanco-etereo);
+}
+
+.process-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.process-intro {
+  font-family: var(--fuente-manuscrita);
+  font-size: 1.3rem;
+  text-align: center;
+  margin-bottom: 4rem;
+  line-height: 1.8;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+}
+
+.step-number {
+  font-family: var(--fuente-titulos);
+  font-size: 3rem;
+  color: var(--violeta-pálido);
+  opacity: 0.5;
+  margin-right: 1.5rem;
+  line-height: 1;
+}
+
+.step-content h3 {
+  font-family: var(--fuente-titulos);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--blanco-brillante);
+}
+
+.step-content p {
+  font-family: var(--fuente-cuerpo);
+  line-height: 1.8;
+}
+
+/* Quote Section - Specific Lauren styling */
+.quote-section {
+  /* Assuming a specific background image for Lauren's quote section */
+  background: url('../assets/images/lauren-quote-bg.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 6rem 0;
+  position: relative;
+  color: var(--blanco-brillante);
+}
+
+.quote-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Using Lauren's colors for the overlay */
+  height: 100%;
+  background: linear-gradient(135deg, rgba(var(--color-lauren-principal-rgb), 0.8) 0%, rgba(var(--color-lauren-secundario-rgb), 0.8) 100%);
+}
+
+.quote-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.quote-mark {
+  /* Using Lauren's accent color for the quote mark */
+  font-size: 4rem;
+  color: var(--color-lauren-secundario);
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+blockquote {
+  font-family: var(--fuente-manuscrita);
+  font-size: 1.8rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.quote-author {
+  font-family: var(--fuente-titulos);
+  font-size: 1.2rem;
+}
+
+/* Responsive Styles - Specific Lauren adjustments if needed */
+@media screen and (max-width: 768px) {
+  .lauren-section .section-title {
+    font-size: 2.5rem;
+  }
+  /* Add any specific responsive styles for Lauren's page here */
+
+}

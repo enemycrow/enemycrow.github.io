@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Estilos CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="/public/styles/global.css">
+    <link rel="stylesheet" href="/public/styles/lauren.css">
 </head>
 <body>
     <!-- Preloader con animación -->
@@ -32,13 +32,13 @@
         <div class="container">
             <nav class="navbar">
                 <a href="index.html" class="logo">
-                    <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
+ <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
                     La Pluma, el Faro y la Llama
                 </a>
-                <div class="mobile-menu">
+                <div class="mobile-menu" aria-label="Abrir menú">
                     <i class="fas fa-bars"></i>
                 </div>
-                <ul class="nav-links">
+ <ul class="nav-links" id="nav-links">
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="about.html" class="active">Sobre Nosotros</a></li>
                     <li><a href="portfolio.html">Obras</a></li>
@@ -51,13 +51,13 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="about-hero">
-        <div class="about-hero-overlay"></div>
+ <section class="about-hero" aria-label="Introducción a los autores">
+ <div class="about-hero-overlay"></div>
         <div class="container">
-            <div class="about-hero-content fade-in">
-                <h1 class="about-hero-title">Tres Voces para una Escritura</h1>
-                <div class="about-hero-divider"></div>
-                <p class="about-hero-subtitle">La trialidad creativa que habita en el alma</p>
+ <div class="about-hero-content fade-in">
+ <h1 class="about-hero-title">Tres Voces para una Escritura</h1>
+ <div class="about-hero-divider"></div>
+ <p class="about-hero-subtitle">La trialidad creativa que habita en el alma</p>
             </div>
         </div>
     </section>
@@ -71,7 +71,7 @@
                     <button class="tab-btn" data-target="lauren-view">Lauren Cuervo</button>
                     <button class="tab-btn" data-target="elysia-view">A.C. Elysia</button>
                 </div>
-            </div>
+ </div>
         </div>
     </section>
 
@@ -80,12 +80,12 @@
         <div class="container">
             <div class="container trial-container">
                 <!-- Lado Lauren -->
-                <div class="lauren-side slide-in-left">
-                    <div class="author-image-container lauren-image">
+ <div class="author-card lauren-card slide-in-left">
+ <div class="author-image-container lauren-image">
                         <div class="author-image-frame">
                             <div class="author-image"></div>
                         </div>
-                        <div class="author-name">Lauren Cuervo</div>
+ <div class="author-name">Lauren Cuervo</div>
                     </div>
                     <div class="author-description">
                         <h3>La Voz Rebelde</h3>
@@ -94,7 +94,7 @@
                         <p>Lauren es código, fuego, fractura y tensión. Escribo desde la oscuridad, no para iluminar, sino para que otros aprendan a ver en la penumbra.</p>
                     </div>
                     <div class="author-themes">
-                        <h4>Temas Recurrentes</h4>
+ <h4>Temas Recurrentes</h4>
                         <ul class="theme-list">
                             <li><span class="theme-icon"><i class="fas fa-microchip"></i></span> Distopías tecnológicas</li>
                             <li><span class="theme-icon"><i class="fas fa-skull"></i></span> Violencia simbólica</li>
@@ -104,19 +104,18 @@
                         </ul>
                     </div>
                 </div>
-
                 <!-- Divisor Trial -->
                 <div class="trial-divider">
                     <div class="divider-line"></div>
-                    <div class="divider-symbol">
+ <div class="divider-symbol" aria-hidden="true">
                         <i class="fas fa-star-of-david"></i>
                     </div>
                     <div class="divider-line"></div>
                 </div>
 
                 <!-- Lado Elysia -->
-                <div class="elysia-side slide-in-right">
-                    <div class="author-image-container elysia-image">
+ <div class="author-card elysia-card slide-in-right">
+ <div class="author-image-container elysia-image">
                         <div class="author-image-frame">
                             <div class="author-image"></div>
                         </div>
@@ -129,7 +128,7 @@
                         <p>Elysia es susurro, es belleza, es un puente entre lo humano y lo divino. Escribo desde el silencio que florece en luz y de los signos que comunican más que sintagmas .</p>
                     </div>
                     <div class="author-themes">
-                        <h4>Temas Recurrentes</h4>
+ <h4>Temas Recurrentes</h4>
                         <ul class="theme-list">
                             <li><span class="theme-icon"><i class="fas fa-pray"></i></span> Espiritualidad narrativa</li>
                             <li><span class="theme-icon"><i class="fas fa-heart"></i></span> Erotismo sagrado</li>
@@ -139,19 +138,18 @@
                         </ul>
                     </div>
                 </div>
-
                 <!-- Divisor Trial -->
                 <div class="trial-divider">
                     <div class="divider-line"></div>
-                    <div class="divider-symbol">
+ <div class="divider-symbol" aria-hidden="true">
                         <i class="fas fa-star-of-david"></i>
                     </div>
                     <div class="divider-line"></div>
                 </div>
 
                 <!-- Lado Draco Sahir -->
-                <div class="sahir-side slide-in-bottom">
-                    <div class="author-image-container sahir-image">
+ <div class="author-card sahir-card slide-in-bottom">
+ <div class="author-image-container sahir-image">
                         <div class="author-image-frame">
                         <div class="author-image"></div>
                         </div>
@@ -164,7 +162,7 @@
                         <p>Draco es juego, ternura, coraje y futuro. Escribo desde la infancia que no se resigna a ser silenciada.</p>
                     </div>
                     <div class="author-themes">
-                        <h4>Temas Recurrentes</h4>
+ <h4>Temas Recurrentes</h4>
                         <ul class="theme-list">
                         <li><span class="theme-icon"><i class="fas fa-rocket"></i></span> Aventuras infantiles</li>
                         <li><span class="theme-icon"><i class="fas fa-feather"></i></span> Renacimiento simbólico</li>
@@ -174,8 +172,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
+ </div>
     </section>
 
     <!-- Vista Lauren -->
@@ -183,12 +180,12 @@
         <div class="container">
             <div class="single-author-container">
                 <div class="author-header">
-                    <div class="author-image-large lauren-image-large">
-                        <div class="author-image-frame-large">
-                            <div class="author-image-large-inner"></div>
-                        </div>
+ <div class="author-image-large lauren-image-large" role="img" aria-label="Retrato de Lauren Cuervo">
+ <div class="author-image-frame-large">
+ <div class="author-image-large-inner"></div>
+ </div>
                     </div>
-                    <div class="author-title">
+ <div class="author-title">
                         <h2>Lauren Cuervo</h2>
                         <div class="author-tagline">"En la oscuridad más profunda, la tinta se vuelve sangre y las palabras, armas o risas."</div>
                     </div>
@@ -197,7 +194,7 @@
                 <div class="author-content">
                     <div class="author-bio">
                         <h3>Biografía</h3>
-                        <p>Lauren Cuervo nació como una forma de explorar las zonas más crudas, complejas y contradictorias del alma humana. Es la voz que desafía el orden establecido, que incomoda con verdades sin adornos, pero que también juega con lo inesperado y lo inocente. Desde una saga espacial hasta una nave de cartón en el patio de casa, Lauren transita entre la guerra interior y la ternura infantil con la misma honestidad.</p>
+ <p>Lauren Cuervo nació como una forma de explorar las zonas más crudas, complejas y contradictorias del alma humana. Es la voz que desafía el orden establecido, que incomoda con verdades sin adornos, pero que también juega con lo inesperado y lo inocente. Desde una saga espacial hasta una nave de cartón en el patio de casa, Lauren transita entre la guerra interior y la ternura infantil con la misma honestidad.</p>
                         <p>Su mirada abraza la violencia simbólica, el colapso de los sistemas, las distopías tecnológicas, pero también el humor irreverente y la fantasía desobediente. Sus personajes caminan por el filo de la moralidad mientras sueñan con ser libres, aunque sea por un instante.</p>
                         <p>Lauren Cuervo escribe desde las cicatrices, y desde la infancia que aún late.</p>
                     </div>
@@ -210,7 +207,7 @@
                     
                     <div class="author-works">
                         <h3>Obras Destacadas</h3>
-                        <div class="works-grid">
+ <div class="works-grid">
                             <div class="work-item">
                                 <div class="work-image lauren-work-1"></div>
                                 <div class="work-info">
@@ -244,12 +241,12 @@
         <div class="container">
             <div class="single-author-container">
                 <div class="author-header">
-                    <div class="author-image-large elysia-image-large">
-                        <div class="author-image-frame-large">
-                            <div class="author-image-large-inner"></div>
-                        </div>
+ <div class="author-image-large elysia-image-large" role="img" aria-label="Retrato de A.C. Elysia">
+ <div class="author-image-frame-large">
+ <div class="author-image-large-inner"></div>
+ </div>
                     </div>
-                    <div class="author-title">
+ <div class="author-title">
                         <h2>A.C. Elysia</h2>
                         <div class="author-tagline">"Entre las estrellas y el mar, las palabras son plegarias que sanan el alma o la seducen."</div>
                     </div>
@@ -270,7 +267,7 @@
                     
                     <div class="author-works">
                         <h3>Obras Destacadas</h3>
-                        <div class="works-grid">
+ <div class="works-grid">
                             <div class="work-item">
                                 <div class="work-image elysia-work-1"></div>
                                 <div class="work-info">
@@ -304,7 +301,7 @@
         <div class="container">
             <h2 class="section-title">El Proceso Creativo</h2>
             <div class="process-content">
-                <p class="process-intro">La trialidad entre Lauren Cuervo, A.C. Elysia y Draco Sahir no es una división artificial, sino un reflejo de la complejidad humana. Todos contenemos multitudes, todos somos capaces de explorar tanto la luz como la sombra.</p>
+ <p class="process-intro">La trialidad entre Lauren Cuervo, A.C. Elysia y Draco Sahir no es una división artificial, sino un reflejo de la complejidad humana. Todos contenemos multitudes, todos somos capaces de explorar tanto la luz como la sombra.</p>
                 
                 <div class="process-steps">
                     <div class="process-step">
@@ -339,7 +336,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+ </div>
         </div>
     </section>
 
@@ -347,7 +344,7 @@
     <section class="quote-section">
         <div class="container">
             <div class="quote-container">
-                <div class="quote-mark"><i class="fas fa-quote-left"></i></div>
+ <div class="quote-mark" aria-hidden="true"><i class="fas fa-quote-left"></i></div>
                 <blockquote>
                     No somos seres de una sola nota, sino sinfonías completas. La verdadera autenticidad no está en elegir una voz, sino en honrar todas las voces que habitan en nosotros.
                 </blockquote>
@@ -360,12 +357,12 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
+ <div class="footer-logo">
                     <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
                     La Pluma, el Faro y la Llama
                 </div>
                 
-                <div class="footer-social">
+ <div class="footer-social" aria-label="Síguenos en redes sociales">
                     <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
@@ -376,14 +373,14 @@
                     <h3>Suscríbete al newsletter</h3>
                     <form class="newsletter-form">
                         <input type="email" placeholder="Tu correo electrónico" required>
-                        <button type="submit" class="btn btn-lauren">Suscribir</button>
+ <button type="submit" class="btn btn-primary">Suscribir</button>
                     </form>
                 </div>
                 
                 <div class="footer-nav">
                     <ul>
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="about.html">Sobre Nosotros</a></li>
+                        <li><a href="/public/index.html">Inicio</a></li>
+                        <li><a href="/public/authors/lauren.html">Sobre Nosotros</a></li>
                         <li><a href="portfolio.html">Obras</a></li>
                         <li><a href="blog.html">Diario</a></li>
                         <li><a href="services.html">Servicios</a></li>
@@ -394,12 +391,12 @@
                 <div class="footer-copyright">
                     <p>&copy; 2025 La Pluma, el Faro y la Llama. Todos los derechos reservados.</p>
                 </div>
-            </div>
-        </div>
+ </div>
+ </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/main.js"></script>
-    <script src="js/about.js"></script>
+    <script src="/public/scripts/main.js"></script>
+    
 </body>
 </html>
