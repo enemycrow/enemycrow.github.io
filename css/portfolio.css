@@ -70,7 +70,7 @@
   margin: 0.5rem;
   border: none;
   background-color: var(--gris-oscuro);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   font-family: var(--fuente-manuscrita);
   font-size: 1rem;
   cursor: pointer;
@@ -166,22 +166,22 @@
 
 .lauren-tag {
   background-color: var(--azul-noche);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .elysia-tag {
   background-color: var(--violeta-profundo);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .collab-tag {
   background: linear-gradient(to right, var(--azul-noche), var(--violeta-profundo));
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .ampersand {
   margin: 0 0.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   font-family: var(--fuente-manuscrita);
   font-style: italic;
 }
@@ -194,7 +194,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .featured-description {
@@ -324,7 +324,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.3rem;
   margin-bottom: 0.8rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .catalog-content p {
@@ -395,7 +395,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .upcoming-author {
@@ -443,7 +443,7 @@
   max-width: 800px;
   margin: 0 auto 3rem;
   text-align: center;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   font-size: 1.1rem;
   line-height: 1.8;
 }
@@ -497,7 +497,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .symbolic-content p {
@@ -544,7 +544,7 @@
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   position: relative;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   animation: modalFadeIn 0.5s ease;
 }
 

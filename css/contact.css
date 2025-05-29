@@ -73,7 +73,7 @@
   font-family: var(--fuente-titulos);
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .contact-intro {
@@ -110,7 +110,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .method-details p {
@@ -128,7 +128,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.3rem;
   margin-bottom: 1rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .social-icons {
@@ -144,7 +144,7 @@
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   transition: all 0.3s ease;
 }
 
@@ -166,7 +166,7 @@
   font-family: var(--fuente-titulos);
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .contact-form {
@@ -181,7 +181,7 @@
 
 .form-group label {
   margin-bottom: 0.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   font-family: var(--fuente-manuscrita);
 }
 
@@ -192,7 +192,7 @@
   border: none;
   border-radius: 3px;
   background: rgba(255, 255, 255, 0.1);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   font-family: var(--fuente-cuerpo);
 }
 
@@ -271,11 +271,11 @@
   font-family: var(--fuente-titulos);
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .newsletter-content p {
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin-bottom: 2.5rem;
   line-height: 1.8;
   font-size: 1.1rem;
@@ -308,11 +308,11 @@
   font-family: var(--fuente-titulos);
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .feature-text p {
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin-bottom: 0;
   opacity: 0.8;
   font-size: 1rem;
@@ -329,7 +329,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .newsletter-form {
@@ -341,7 +341,7 @@
   padding: 1rem 2rem;
   border: none;
   border-radius: 3px;
-  background: var(--blanco-etéreo);
+  background: var(--blanco-etereo);
   color: var(--violeta-profundo);
   font-family: var(--fuente-manuscrita);
   font-size: 1.1rem;
@@ -357,7 +357,7 @@
 
 .newsletter-note {
   margin-top: 1.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   font-size: 0.9rem;
   opacity: 0.7;
   text-align: center;
@@ -401,7 +401,7 @@
 .faq-question h3 {
   font-family: var(--fuente-titulos);
   font-size: 1.3rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin: 0;
 }
 

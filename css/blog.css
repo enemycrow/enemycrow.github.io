@@ -70,7 +70,7 @@
   margin: 0.5rem;
   border: none;
   background-color: var(--gris-oscuro);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   font-family: var(--fuente-manuscrita);
   font-size: 1rem;
   cursor: pointer;
@@ -128,7 +128,7 @@
   background: rgba(0, 0, 0, 0.7);
   padding: 1rem;
   border-radius: 5px;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .featured-post-date .day {
@@ -164,34 +164,34 @@
 
 .category-tag.process {
   background-color: #2c3e50;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .category-tag.fragments {
   background-color: #8e44ad;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .lauren-tag {
   background-color: var(--azul-noche);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .elysia-tag {
   background-color: var(--violeta-profundo);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .collab-tag {
   background: linear-gradient(to right, var(--azul-noche), var(--violeta-profundo));
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .featured-post-title {
   font-family: var(--fuente-titulos);
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .featured-post-excerpt {
@@ -306,7 +306,7 @@
   background: rgba(0, 0, 0, 0.7);
   padding: 0.5rem;
   border-radius: 3px;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   text-align: center;
 }
 
@@ -343,7 +343,7 @@
   font-family: var(--fuente-titulos);
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .post-excerpt {
@@ -399,7 +399,7 @@
 
 .page-link {
   background-color: var(--gris-oscuro);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .page-link:hover, .page-next:hover {
@@ -418,7 +418,7 @@
 
 .page-next {
   background-color: var(--gris-oscuro);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 /* Sección de Suscripción */
@@ -444,11 +444,11 @@
   font-family: var(--fuente-titulos);
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .subscribe-content p {
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin-bottom: 2rem;
   line-height: 1.8;
 }
@@ -464,7 +464,7 @@
   border: none;
   border-radius: 3px 0 0 3px;
   background: rgba(255, 255, 255, 0.1);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   font-family: var(--fuente-cuerpo);
 }
 
@@ -476,7 +476,7 @@
   padding: 1rem 2rem;
   border: none;
   border-radius: 0 3px 3px 0;
-  background: var(--blanco-etéreo);
+  background: var(--blanco-etereo);
   color: var(--violeta-profundo);
   font-family: var(--fuente-manuscrita);
   cursor: pointer;
@@ -489,7 +489,7 @@
 }
 
 .subscribe-note {
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   font-size: 0.9rem;
   opacity: 0.7;
 }
@@ -572,24 +572,24 @@
 
 .lauren-topic .topic-icon {
   background: var(--azul-noche);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .elysia-topic .topic-icon {
   background: var(--violeta-profundo);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .collab-topic .topic-icon {
   background: linear-gradient(to right, var(--azul-noche), var(--violeta-profundo));
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .topic-item h3 {
   font-family: var(--fuente-titulos);
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .topic-count {

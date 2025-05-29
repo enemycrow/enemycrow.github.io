@@ -7,7 +7,7 @@
   --gris-medio: #666666;
   --gris-claro: #999999;
   --blanco-brillante: #ffffff;
-  --blanco-etéreo: #f5f5f7;
+  --blanco-etereo: #f5f5f7;
   --violeta-pálido: #d8c2ff;
   --violeta-profundo: #6b4f9e;
   --azul-noche: #1a237e;
@@ -19,7 +19,7 @@
   --lauren-acento: var(--azul-noche);
   
   /* Colores para A.C. Elysia (etéreo) */
-  --elysia-primario: var(--blanco-etéreo);
+  --elysia-primario: var(--blanco-etereo);
   --elysia-secundario: var(--violeta-pálido);
   --elysia-acento: var(--violeta-profundo);
   
@@ -40,7 +40,7 @@
 body {
   font-family: var(--fuente-cuerpo);
   background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--negro-sombra) 100%);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -155,7 +155,7 @@ a:hover {
 
 .lauren-section {
   background: linear-gradient(to right, var(--negro-profundo), var(--azul-noche));
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   padding: 2rem;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
