@@ -12,6 +12,9 @@
   --violeta-profundo: #6b4f9e;
   --azul-noche: #1a237e;
   --azul-etéreo: #4a5fc1;
+  --azul-cometa: #2d3c7a;
+  --celeste-pastel: #c1d3ff;
+  --dorado-magico: #ffd966;
   
   /* Colores para Lauren Cuervo (nocturno) */
   --lauren-primario: var(--negro-profundo);
@@ -24,9 +27,9 @@
   --elysia-acento: var(--violeta-profundo);
 
   /* Colores para Draco Sahir (cósmico mágico) */
---sahir-primario: #2d3c7a;     /* Azul cometa – más claro que Lauren, más puro que Elysia */
---sahir-secundario: #c1d3ff;   /* Celeste pastel – dulce y suave, ideal para el tono tierno */
---sahir-acento: #ffd966;       /* Dorado mágico – simboliza estrellas, luz y calidez */
+  --sahir-primario: var(--azul-cometa);
+  --sahir-secundario: var(--celeste-pastel);
+  --sahir-acento: var(--dorado-magico);
   
   /* Tipografías */
   --fuente-serif: 'Playfair Display', Georgia, serif;
@@ -156,24 +159,6 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.lauren-section {
-  background: linear-gradient(to right, var(--negro-profundo), var(--azul-noche));
-  color: var(--blanco-etereo);
-  padding: 2rem;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-}
-
-.elysia-section {
-  background: linear-gradient(to right, var(--violeta-profundo), var(--violeta-pálido));
-  color: var(--negro-profundo);
-  padding: 2rem;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
 }
 
 /* Botones estilizados */
