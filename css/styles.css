@@ -382,6 +382,62 @@ a:hover {
         margin-bottom: 20px; /* Espacio entre bloques apilados */
     }
 }
+
+.about-hero, .blog-hero, .contact-hero, .portfolio-hero, .services-hero {
+  height: 60vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--blanco-brillante);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.about-hero-overlay, .blog-hero-overlay, .contact-hero-overlay, .portfolio-hero-overlay, .services-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.8), rgba(107, 79, 158, 0.7));
+}
+
+.about-hero-content, .blog-hero-content, .contact-hero-content, .portfolio-hero-content, .services-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.about-hero-title, .blog-hero-title, .contact-hero-title, .portfolio-hero-title, .services-hero-title {
+  font-family: var(--fuente-titulos);
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.about-hero-divider, .blog-hero-divider, .contact-hero-divider, .portfolio-hero-divider, .services-hero-divider {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(to right, var(--azul-noche), var(--violeta-pálido));
+  margin: 1.5rem auto;
+}
+
+.about-hero-subtitle, .blog-hero-subtitle, .contact-hero-subtitle, .portfolio-hero-subtitle, .services-hero-subtitle {
+  font-family: var(--fuente-manuscrita);
+  font-size: 1.5rem;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 768px) {
+  .about-hero-title, .blog-hero-title, .contact-hero-title, .portfolio-hero-title, .services-hero-title {
+    font-size: 2.5rem;
+  }
+}
+
 /* Estilos comunes para filtros de Blog y Portafolio */
 .blog-filter,
 .portfolio-filter {
@@ -432,4 +488,3 @@ a:hover {
     margin: 0.3rem 0;
   }
 }
-
