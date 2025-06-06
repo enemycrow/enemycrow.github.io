@@ -257,14 +257,6 @@
   border-radius: 5px;
 }
 
-.lauren-side .author-themes {
-  background: rgba(10, 10, 10, 0.3);
-}
-
-.elysia-side .author-themes {
-  background: rgba(255, 255, 255, 0.2);
-}
-
 .author-themes h4 {
   font-family: var(--fuente-manuscrita);
   font-size: 1.3rem;

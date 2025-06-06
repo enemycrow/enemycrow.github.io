@@ -1,0 +1,104 @@
+/* Estilos específicos para Lauren Cuervo */
+
+/* Estilos para el "side" o panel lateral del autor */
+.lauren-side {
+    background: linear-gradient(135deg, var(--lauren-primario) 0%, var(--lauren-acento) 100%);
+    color: var(--blanco-etereo);
+    margin-right: 1rem;
+    border-color: var(--lauren-acento);
+}
+
+.lauren-side .author-name {
+    color: var(--lauren-secundario); /* Nombre del autor */
+    font-family: var(--fuente-titulos);
+}
+
+.lauren-side .author-description {
+    color: var(--blanco-brillante); /* Texto descripción del autor */
+    font-family: var(--fuente-cuerpo);
+}
+
+.lauren-side .author-themes {
+    background: rgba(10, 10, 10, 0.3); /* Fondo semitransparente para la sección de temas */
+}
+
+.lauren-side .author-themes h4 {
+     color: var(--lauren-secundario); /* Título de temas */
+     font-family: var(--fuente-manuscrita);
+}
+
+.lauren-side .theme-list li {
+    color: var(--lauren-secundario); /* Temas */
+    font-family: var(--fuente-cuerpo);
+}
+
+.lauren-side .theme-icon {
+    color: var(--lauren-acento); /* Iconos con color de acento */
+    background: var(--lauren-acento); /* Fondo para los iconos */
+    color: var(--blanco-etereo); /* Color de icono contrastante */
+}
+
+.lauren-side .author-image {
+    border-color: var(--lauren-acento); /* Borde de la imagen con color de acento */
+}
+
+/* Estilos para las secciones principales del autor */
+.lauren-section {
+    background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
+    color: var(--blanco-etereo);
+    margin-right: 1rem;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Estilos para las imágenes del autor */
+.lauren-image .author-image-frame {
+    background: linear-gradient(to right, var(--lauren-acento), var(--azul-etéreo));
+    box-shadow: 0 0 20px rgba(26, 35, 126, 0.5); /* Sombra con color temático */
+}
+
+.lauren-image .author-image {
+    background-image: url('../images/lauren.jpg'); /* Imagen pequeña del autor */
+    background-color: var(--lauren-acento); /* Fallback */
+}
+
+.lauren-image-large .author-image-large-inner {
+    background-image: url('../images/lauren-large.jpg'); /* Imagen grande del autor */
+    background-color: var(--azul-noche); /* Fallback */
+}
+
+/* Estilos para la vista detallada del autor */
+.lauren-view {
+    background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
+    color: var(--blanco-etereo);
+}
+
+.lauren-view .author-bio, .lauren-view .author-philosophy, .lauren-view .author-works {
+    background: rgba(10, 10, 10, 0.3); /* Fondos semitransparentes para secciones de contenido */
+}
+
+.lauren-view .author-bio h3::after, .lauren-view .author-philosophy h3::after, .lauren-view .author-works h3::after {
+    background: linear-gradient(to right, var(--azul-noche), var(--azul-etéreo)); /* Subrayado con gradiente */
+}
+
+/* Estilos para las imágenes de trabajos del autor */
+.lauren-work-1 {
+    background-image: url('../images/lauren-work-1.jpg'); /* Imagen del trabajo 1 */
+    background-color: var(--azul-noche); /* Fallback */
+}
+  
+.lauren-work-2 {
+    background-image: url('../images/lauren-work-2.jpg'); /* Imagen del trabajo 2 */
+    background-color: var(--azul-noche); /* Fallback */
+}
+  
+.lauren-work-3 {
+    background-image: url('../images/lauren-work-3.jpg'); /* Imagen del trabajo 3 */
+    background-color: var(--azul-noche); /* Fallback */
+}
+
+.lauren-view .work-info {
+    background: var(--negro-sombra); /* Fondo para la información del trabajo */
+}

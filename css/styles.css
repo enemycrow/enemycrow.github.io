@@ -1,4 +1,4 @@
-/* Estilos base para "La Pluma y el Faro" */
+/* Estilos base para "La Pluma, el Faro y la Llama" */
 :root {
   /* Paleta de colores principal */
   --negro-profundo: #0a0a0a;
@@ -12,6 +12,9 @@
   --violeta-profundo: #6b4f9e;
   --azul-noche: #1a237e;
   --azul-etéreo: #4a5fc1;
+  --azul-cometa: #2d3c7a;
+  --celeste-pastel: #c1d3ff;
+  --dorado-magico: #ffd966;
   
   /* Colores para Lauren Cuervo (nocturno) */
   --lauren-primario: var(--negro-profundo);
@@ -22,6 +25,11 @@
   --elysia-primario: var(--blanco-etereo);
   --elysia-secundario: var(--violeta-pálido);
   --elysia-acento: var(--violeta-profundo);
+
+  /* Colores para Draco Sahir (cósmico mágico) */
+  --sahir-primario: var(--azul-cometa);
+  --sahir-secundario: var(--celeste-pastel);
+  --sahir-acento: var(--dorado-magico);
   
   /* Tipografías */
   --fuente-serif: 'Playfair Display', Georgia, serif;
@@ -288,3 +296,89 @@ a:hover {
 
 /* Estilos específicos para secciones */
 /* Estos serán expandidos en archivos CSS separados */
+
+/* --- Estilos de la sección de autores --- */
+
+/* Contenedor general para los autores */
+.authors-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Layout responsivo de 3 columnas */
+    gap: 20px; /* Espacio entre columnas */
+    padding: 20px;
+    max-width: 1200px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centrar el contenedor */
+}
+
+/* Estilos base para cada bloque de autor */
+.author-side {
+    border: 1px solid var(--gris-medio); /* Usar variable de color base */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.author-side:hover {
+    transform: translateY(-5px); /* Pequeño efecto al pasar el ratón */
+}
+
+/* Estilos comunes para los elementos dentro de los bloques de autor */
+.author-image {
+    width: 150px; /* Tamaño fijo para las imágenes */
+    height: 150px;
+    border-radius: 50%; /* Imágenes redondas */
+    object-fit: cover; /* Asegurar que la imagen cubra el área sin distorsionarse */
+    margin-bottom: 15px;
+    border: 3px solid var(--gris-medio); /* Borde base */
+}
+
+.author-name {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.author-description {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: left; /* Alinear texto de descripción a la izquierda */
+}
+
+.author-themes {
+    margin-top: 20px;
+    border-top: 1px solid var(--gris-medio); /* Separador visual usando variable de color base */
+    padding-top: 15px;
+    text-align: left; /* Alinear lista de temas a la izquierda */
+}
+
+.author-themes h4 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.theme-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.theme-list li {
+    margin-bottom: 8px;
+    display: flex; /* Para alinear icono y texto */
+    align-items: center;
+}
+
+.theme-icon {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+/* Estilos responsivos específicos para la sección de autores */
+@media (max-width: 768px) {
+    .authors-section {
+        grid-template-columns: 1fr; /* Apilar columnas en pantallas pequeñas */
+    }
+    .author-side {
+        margin-bottom: 20px; /* Espacio entre bloques apilados */
+    }
+}
