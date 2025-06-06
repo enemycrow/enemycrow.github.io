@@ -136,7 +136,7 @@
 
 .sahir-side {
   background: linear-gradient(135deg, var(--gris-oscuro) 0%, var(--gris-claro) 100%);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
   margin-left: 1rem;
 }
 
@@ -297,7 +297,7 @@
 
 .sahir-side .theme-icon {
   background: var(--gris-oscuro);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 /* Single Author Views */
@@ -313,7 +313,7 @@
 
 .sahir-view {
   background: linear-gradient(135deg, var(--gris-oscuro) 0%, var(--gris-claro) 100%);
-  color: var(--blanco-etéreo);
+  color: var(--blanco-etereo);
 }
 
 .single-author-container {
