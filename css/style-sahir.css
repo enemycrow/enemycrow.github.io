@@ -3,7 +3,7 @@
 /* Estilos para el "side" o panel lateral del autor */
 .sahir-side {
     background: linear-gradient(135deg, var(--azul-cometa) 0%, var(--celeste-pastel) 100%);
-    color: var(--blanco-etéreo);
+    color: var(--blanco-etereo);
     margin-left: 1rem;
     border-color: var(--sahir-acento);
 }
@@ -35,7 +35,7 @@
 .sahir-side .theme-icon {
     color: var(--sahir-acento); /* Iconos con color de acento */
     background: var(--dorado-magico); /* Fondo para los iconos */
-    color: var(--blanco-etéreo); /* Color de icono contrastante */
+    color: var(--blanco-etereo); /* Color de icono contrastante */
 }
 
 .sahir-side .author-image {
@@ -72,7 +72,7 @@
 /* Estilos para la vista detallada del autor */
 .sahir-view {
     background: linear-gradient(135deg, var(--sahir-primario) 0%, var(--sahir-secundario) 100%);
-    color: var(--blanco-etéreo);
+    color: var(--blanco-etereo);
 }
 
 .sahir-view .author-bio, .sahir-view .author-philosophy, .sahir-view .author-works {

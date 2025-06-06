@@ -1,25 +1,5 @@
 // JavaScript para la página de Blog y Diario de Creación
 document.addEventListener('DOMContentLoaded', function() {
-    // Preloader
-    const preloader = document.querySelector('.preloader');
-    if (preloader) {
-        setTimeout(() => {
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
-        }, 1500);
-    }
-
-    // Navegación móvil
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (mobileMenu && navLinks) {
-        mobileMenu.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-        });
-    }
 
     // Filtrado de entradas de blog
     const filterBtns = document.querySelectorAll('.filter-btn');
