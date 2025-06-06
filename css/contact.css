@@ -2,52 +2,9 @@
 
 /* Hero Section */
 .contact-hero {
-  height: 60vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: url('../images/contact-bg.jpg') no-repeat center center;
-  background-size: cover;
-  color: var(--blanco-brillante);
+  background-image: url('../images/contact-bg.jpg');
 }
 
-.contact-hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.8), rgba(107, 79, 158, 0.7));
-}
-
-.contact-hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-}
-
-.contact-hero-title {
-  font-family: var(--fuente-titulos);
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  letter-spacing: 2px;
-}
-
-.contact-hero-divider {
-  width: 100px;
-  height: 2px;
-  background: linear-gradient(to right, var(--azul-noche), var(--violeta-pálido));
-  margin: 1.5rem auto;
-}
-
-.contact-hero-subtitle {
-  font-family: var(--fuente-manuscrita);
-  font-size: 1.5rem;
-  font-style: italic;
-  opacity: 0.9;
-}
 
 /* Sección de Contacto Principal */
 .contact-main {
@@ -470,9 +427,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .contact-hero-title {
-    font-size: 2.5rem;
-  }
   
   .contact-method {
     flex-direction: column;
