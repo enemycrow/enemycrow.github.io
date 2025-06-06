@@ -161,6 +161,24 @@ a:hover {
   justify-content: space-between;
 }
 
+.lauren-section {
+  background: linear-gradient(to right, var(--negro-profundo), var(--azul-noche));
+  color: var(--blanco-etereo);
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.elysia-section {
+  background: linear-gradient(to right, var(--violeta-profundo), var(--violeta-pálido));
+  color: var(--negro-profundo);
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
 /* Botones estilizados */
 .btn {
   display: inline-block;

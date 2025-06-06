@@ -129,6 +129,24 @@
   flex-direction: column;
 }
 
+.lauren-section {
+  background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
+  color: var(--blanco-etereo);
+  margin-right: 1rem;
+}
+
+.elysia-section {
+  background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--violeta-pálido) 100%);
+  color: var(--negro-profundo);
+  margin-left: 1rem;
+}
+
+.sahir-section {
+  background: linear-gradient(135deg, var(--verde-sahir) 0%, var(--ambar-antiguo) 100%);
+  color: var(--blanco-etereo);
+  margin-top: 1rem;
+}
+
 .lauren-section h3, .elysia-section h3, .sahir-section h3 {
   font-family: var(--fuente-titulos);
   font-size: 1.8rem;
