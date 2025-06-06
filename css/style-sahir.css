@@ -1,7 +1,10 @@
 /* Estilos específicos para Draco Sahir */
+
+/* Estilos para el "side" o panel lateral del autor */
 .sahir-side {
-    background-color: var(--sahir-primario);
-    color: var(--sahir-secundario);
+    background: linear-gradient(135deg, var(--azul-cometa) 0%, var(--celeste-pastel) 100%);
+    color: var(--blanco-etéreo);
+    margin-left: 1rem;
     border-color: var(--sahir-acento);
 }
 
@@ -9,34 +12,93 @@
     color: var(--sahir-acento); /* Nombre en color de acento */
     font-family: var(--fuente-titulos);
 }
+
 .sahir-side .author-description {
-     color: var(--gris-claro); /* Descripción en gris claro */
+     color: var(--blanco-brillante); /* Texto descripción en gris claro */
      font-family: var(--fuente-cuerpo);
 }
 
+.sahir-side .author-themes {
+    background: rgba(193, 211, 255, 0.3); /* Fondo semitransparente para la sección de temas */
+}
+
 .sahir-side .author-themes h4 {
-     color: var(--sahir-secundario);
+     color: var(--sahir-secundario); /* Título de temas */
      font-family: var(--fuente-manuscrita);
 }
 
 .sahir-side .theme-list li {
-    color: var(--gris-claro); /* Temas en gris claro */
+    color: var(--sahir-secundario); /* Temas en gris claro */
     font-family: var(--fuente-cuerpo);
 }
 
 .sahir-side .theme-icon {
     color: var(--sahir-acento); /* Iconos con color de acento */
+    background: var(--dorado-magico); /* Fondo para los iconos */
+    color: var(--blanco-etéreo); /* Color de icono contrastante */
 }
 
 .sahir-side .author-image {
-    border-color: var(--sahir-acento);
+    border-color: var(--sahir-acento); /* Borde de la imagen con color de acento */
 }
 
+/* Estilos para las secciones principales del autor */
 .sahir-section {
-    background: linear-gradient(to right, var(--azul-cometa), var(--celeste-psatel));
-    color: var(--negro-profundo);
+    background: linear-gradient(135deg, var(--sahir-primario) 0%, var(--sahir-secundario) 100%);
+    color: var(--blanco-etereo);
+    margin-top: 1rem;
     padding: 2rem;
     border-radius: 5px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
+}
+
+/* Estilos para las imágenes del autor */
+.sahir-image .author-image-frame {
+    background: linear-gradient(to right, var(--azul-cometa), var(--celeste-pastel));
+    box-shadow: 0 0 20px rgba(128, 128, 128, 0.5); /* Sombra con color temático */
+}
+
+.sahir-image .author-image {
+    background-image: url('../images/sahir.jpg'); /* Imagen pequeña del autor */
+    background-color: var(--azul-cometa); /* Fallback */
+}
+
+.sahir-image-large .author-image-large-inner {
+    background-image: url('../images/sahir-large.jpg'); /* Imagen grande del autor */
+    background-color: var(--sahir-primario); /* Fallback */
+}
+
+/* Estilos para la vista detallada del autor */
+.sahir-view {
+    background: linear-gradient(135deg, var(--sahir-primario) 0%, var(--sahir-secundario) 100%);
+    color: var(--blanco-etéreo);
+}
+
+.sahir-view .author-bio, .sahir-view .author-philosophy, .sahir-view .author-works {
+    background: rgba(193, 211, 255, 0.2); /* Fondos semitransparentes para secciones de contenido */
+}
+
+.sahir-view .author-bio h3::after, .sahir-view .author-philosophy h3::after, .sahir-view .author-works h3::after {
+    background: linear-gradient(to right, var(--sahir-primario), var(--sahir-secundario)); /* Subrayado con gradiente */
+}
+
+/* Estilos para las imágenes de trabajos del autor */
+.sahir-work-1 {
+    background-image: url('../images/sahir-work-1.jpg'); /* Imagen del trabajo 1 */
+    background-color: var(--sahir-primario); /* Fallback */
   }
+  
+.sahir-work-2 {
+    background-image: url('../images/sahir-work-2.jpg'); /* Imagen del trabajo 2 */
+    background-color: var(--sahir-primario); /* Fallback */
+}
+  
+.sahir-work-3 {
+    background-image: url('../images/sahir-work-3.jpg'); /* Imagen del trabajo 3 */
+    background-color: var(--sahir-primario); /* Fallback */
+}
+
+.sahir-view .work-info {
+    background: var(--celeste-pastel); /* Fondo para la información del trabajo */
+}

@@ -1,7 +1,10 @@
 /* Estilos específicos para A.C. Elysia */
+
+/* Estilos para el "side" o panel lateral del autor */
 .elysia-side {
-    background-color: var(--elysia-primario);
-    color: var(--elysia-secundario);
+    background: linear-gradient(135deg, var(--elysia-acento) 0%, var(--elysia-secundario) 100%);
+    color: var(--negro-profundo);
+    margin-left: 1rem;
     border-color: var(--elysia-secundario);
 }
 
@@ -9,34 +12,94 @@
     color: var(--negro-profundo); /* Nombre en azul oscuro para contraste */
     font-family: var(--fuente-titulos);
 }
+
 .elysia-side .author-description {
     color: var(--gris-oscuro); /* Descripción en gris oscuro */
     font-family: var(--fuente-cuerpo);
 }
 
+.elysia-side .author-themes {
+    background: rgba(255, 255, 255, 0.2); /* Fondo semitransparente para la sección de temas */
+}
+
 .elysia-side .author-themes h4 {
-     color: var(--negro-profundo); /* Título de temas en azul oscuro */
+     color: var(--elysia-secundario); /* Título de temas en azul oscuro */
      font-family: var(--fuente-manuscrita);
 }
 
 .elysia-side .theme-list li {
-    color: var(--gris-oscuro); /* Temas en gris oscuro */
+    color: var(--elysia-secundario); /* Temas en gris oscuro */
     font-family: var(--fuente-cuerpo);
 }
 
 .elysia-side .theme-icon {
     color: var(--elysia-acento); /* Iconos con color de acento dorado */
+    background: var(--elysia-acento); /* Fondo para los iconos */
+    color: var(--elysia-primario); /* Color de icono contrastante */
 }
 
 .elysia-side .author-image {
-    border-color: var(--elysia-secundario);
+    border-color: var(--elysia-acento); /* Borde de la imagen con color de acento */
 }
 
+/* Estilos para las secciones principales del autor */
 .elysia-section {
-    background: linear-gradient(to right, var(--violeta-profundo), var(--violeta-pálido));
+    background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--violeta-pálido) 100%);
     color: var(--negro-profundo);
+    margin-left: 1rem;
     padding: 2rem;
     border-radius: 5px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
-  }
+}
+
+/* Estilos para las imágenes del autor */
+.elysia-image .author-image-frame {
+    background: linear-gradient(to right, var(--elysia-acento), var(--elysia-secundario));
+    box-shadow: 0 0 20px rgba(107, 79, 158, 0.5); /* Sombra con color temático */
+}
+
+.elysia-image .author-image {
+    background-image: url('../images/elysia.jpg'); /* Imagen pequeña del autor */
+    background-color: var(--elysia-acento); /* Fallback */
+}
+
+.elysia-image-large .author-image-large-inner {
+    background-image: url('../images/elysia-large.jpg'); /* Imagen grande del autor */
+    background-color: var(--violeta-profundo); /* Fallback */
+}
+
+/* Estilos para la vista detallada del autor */
+.elysia-view {
+    background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--violeta-pálido) 70%);
+    color: var(--negro-profundo);
+}
+
+.elysia-view .author-bio, .elysia-view .author-philosophy, .elysia-view .author-works {
+    background: rgba(255, 255, 255, 0.2); /* Fondos semitransparentes para secciones de contenido */
+}
+
+.elysia-view .author-bio h3::after, .elysia-view .author-philosophy h3::after, .elysia-view .author-works h3::after {
+    background: linear-gradient(to right, var(--violeta-profundo), var(--violeta-pálido)); /* Subrayado con gradiente */
+}
+
+/* Estilos para las imágenes de trabajos del autor */
+.elysia-work-1 {
+    background-image: url('../images/elysia-work-1.jpg'); /* Imagen del trabajo 1 */
+    background-color: var(--violeta-profundo); /* Fallback */
+}
+  
+.elysia-work-2 {
+    background-image: url('../images/elysia-work-2.jpg'); /* Imagen del trabajo 2 */
+    background-color: var(--violeta-profundo); /* Fallback */
+}
+  
+.elysia-work-3 {
+    background-image: url('../images/elysia-work-3.jpg'); /* Imagen del trabajo 3 */
+    background-color: var(--violeta-profundo); /* Fallback */
+}
+
+.elysia-view .work-info {
+    background: var(--blanco-etereo); /* Fondo para la información del trabajo */
+}
+
