@@ -181,6 +181,11 @@
   color: var(--blanco-etereo);
 }
 
+.sahir-voice {
+  background: var(--verde-sahir);
+  color: var(--blanco-etereo);
+}
+
 .voice-name {
   font-family: var(--fuente-titulos);
   font-size: 1.1rem;
