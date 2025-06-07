@@ -4,7 +4,11 @@
 - [x] Crear estructura básica de directorios
 - [x] Crear archivos HTML principales (index, about, portfolio, blog, services, contact)
 - [x] Configurar estructura de archivos CSS
-- [ ] Configurar estructura de archivos JavaScript
+- [x] Configurar estructura de archivos JavaScript
+  - `js/` contiene un archivo principal (`main.js`) y un script específico
+    por página (`about.js`, `blog.js`, `contact.js`, `portfolio.js`,
+    `services.js`). Por ahora no se utiliza sistema de módulos ni build
+    system; se dejan como posibles mejoras futuras.
 
 ## Diseño y Estilo
 - [x] Definir paleta de colores (negros, grises, blancos brillantes, violeta pálido, azul noche)
