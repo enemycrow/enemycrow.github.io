@@ -61,6 +61,11 @@
   background-color: var(--violeta-profundo); /* Fallback */
 }
 
+.galactique-img {
+  background-image: url('../images/galactique.jpg');
+  background-color: var(--azul-cometa); /* Fallback */
+}
+
 .featured-overlay {
   position: absolute;
   top: 0;
@@ -78,7 +83,7 @@
   align-items: center;
 }
 
-.lauren-tag, .elysia-tag, .collab-tag {
+.lauren-tag, .elysia-tag, .sahir-tag, .collab-tag {
   padding: 0.5rem 1rem;
   border-radius: 3px;
   font-size: 0.8rem;
@@ -92,6 +97,11 @@
 
 .elysia-tag {
   background-color: var(--violeta-profundo);
+  color: var(--blanco-etereo);
+}
+
+.sahir-tag {
+  background-color: var(--azul-cometa);
   color: var(--blanco-etereo);
 }
 
@@ -226,6 +236,11 @@
 .collab-catalog-2 {
   background-image: url('../images/collab-catalog-2.jpg');
   background-color: var(--gris-oscuro); /* Fallback */
+}
+
+.galactique-catalog {
+  background-image: url('../images/galactique-catalog.jpg');
+  background-color: var(--azul-cometa); /* Fallback */
 }
 
 .catalog-content {
