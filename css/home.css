@@ -7,17 +7,12 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  background: url("../images/hero-bg.jpg") no-repeat center center;
+  background-size: cover;
 }
 
 .hero-bg-image {
-  width: 1920px;
-  height: 1200px;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  object-fit: cover;
-  z-index: 0;
+  display: none; /* Using CSS background instead */
 }
 
 .hero-gradient {
