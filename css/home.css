@@ -3,11 +3,12 @@
 /* Hero Section */
 .hero-section {
   display: flex;
-  height: 1200px;
+  height: 720px;
   justify-content: center;
   align-items: center;
   position: relative;
-  background: url("../images/hero-bg.jpg") no-repeat center center;
+  background: url("https://cdn.builder.io/api/v1/image/assets%2F33c5f996430b43939ac2042c30698447%2F296de50d7810414fbe188e3a88dc4835")
+    no-repeat center center;
   background-size: cover;
 }
 
