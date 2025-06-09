@@ -2,9 +2,27 @@
 
 /* Hero Section */
 .about-hero {
-  background-image: url('../images/about-bg.jpg');
+  display: flex;
+  align-items: center;
+  background-image: url("https://cdn.builder.io/api/v1/image/assets%2F33c5f996430b43939ac2042c30698447%2Fc5102fbfaa764c47b11def9261d24aad");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+  height: 868.5px;
+  justify-content: center;
+  position: relative;
+  text-align: center;
 }
 
+.about-hero .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 32px 0;
+}
 
 /* Voice Selector */
 .voice-selector {
@@ -44,7 +62,11 @@
 }
 
 .tab-btn.active {
-  background: linear-gradient(135deg, var(--azul-noche), var(--violeta-profundo));
+  background: linear-gradient(
+    135deg,
+    var(--azul-noche),
+    var(--violeta-profundo)
+  );
   color: var(--blanco-brillante);
 }
 
@@ -60,7 +82,11 @@
 
 /* Trial View */
 .trial-view {
-  background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--negro-profundo) 0%,
+    var(--azul-noche) 100%
+  );
   color: var(--blanco-etereo);
 }
 
@@ -70,7 +96,9 @@
   align-items: stretch;
 }
 
-.lauren-side, .elysia-side, .sahir-side {
+.lauren-side,
+.elysia-side,
+.sahir-side {
   flex: 1;
   padding: 2rem;
   border-radius: 5px;
@@ -80,19 +108,31 @@
 }
 
 .lauren-side {
-  background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--negro-profundo) 0%,
+    var(--azul-noche) 100%
+  );
   color: var(--blanco-etereo);
   margin-right: 1rem;
 }
 
 .elysia-side {
-  background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--violeta-pálido) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--violeta-profundo) 0%,
+    var(--violeta-pálido) 100%
+  );
   color: var(--negro-profundo);
   margin-left: 1rem;
 }
 
 .sahir-side {
-  background: linear-gradient(135deg, var(--gris-oscuro) 0%, var(--gris-claro) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gris-oscuro) 0%,
+    var(--gris-claro) 100%
+  );
   color: var(--blanco-etereo);
   margin-left: 1rem;
 }
@@ -108,7 +148,11 @@
 .divider-line {
   width: 1px;
   height: 100px;
-  background: linear-gradient(to bottom, var(--azul-noche), var(--violeta-pálido));
+  background: linear-gradient(
+    to bottom,
+    var(--azul-noche),
+    var(--violeta-pálido)
+  );
 }
 
 .divider-circle {
@@ -125,7 +169,11 @@
 
 .divider-circle i {
   font-size: 1.5rem;
-  background: linear-gradient(to right, var(--azul-noche), var(--violeta-pálido));
+  background: linear-gradient(
+    to right,
+    var(--azul-noche),
+    var(--violeta-pálido)
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -151,7 +199,11 @@
 }
 
 .elysia-image .author-image-frame {
-  background: linear-gradient(to right, var(--violeta-profundo), var(--violeta-pálido));
+  background: linear-gradient(
+    to right,
+    var(--violeta-profundo),
+    var(--violeta-pálido)
+  );
   box-shadow: 0 0 20px rgba(107, 79, 158, 0.5);
 }
 
@@ -169,17 +221,17 @@
 }
 
 .lauren-image .author-image {
-  background-image: url('../images/lauren.jpg');
+  background-image: url("../images/lauren.jpg");
   background-color: var(--azul-noche); /* Fallback */
 }
 
 .elysia-image .author-image {
-  background-image: url('../images/elysia.jpg');
+  background-image: url("../images/elysia.jpg");
   background-color: var(--violeta-profundo); /* Fallback */
 }
 
 .sahir-image .author-image {
-  background-image: url('../images/sahir.jpg');
+  background-image: url("../images/sahir.jpg");
   background-color: var(--gris-oscuro);
 }
 
@@ -259,17 +311,29 @@
 
 /* Single Author Views */
 .lauren-view {
-  background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--negro-profundo) 0%,
+    var(--azul-noche) 100%
+  );
   color: var(--blanco-etereo);
 }
 
 .elysia-view {
-  background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--violeta-pálido) 70%);
+  background: linear-gradient(
+    135deg,
+    var(--violeta-profundo) 0%,
+    var(--violeta-pálido) 70%
+  );
   color: var(--negro-profundo);
 }
 
 .sahir-view {
-  background: linear-gradient(135deg, var(--gris-oscuro) 0%, var(--gris-claro) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gris-oscuro) 0%,
+    var(--gris-claro) 100%
+  );
   color: var(--blanco-etereo);
 }
 
@@ -301,7 +365,11 @@
 }
 
 .elysia-image-large .author-image-frame-large {
-  background: linear-gradient(to right, var(--violeta-profundo), var(--violeta-pálido));
+  background: linear-gradient(
+    to right,
+    var(--violeta-profundo),
+    var(--violeta-pálido)
+  );
   box-shadow: 0 0 30px rgba(107, 79, 158, 0.5);
 }
 
@@ -319,17 +387,17 @@
 }
 
 .lauren-image-large .author-image-large-inner {
-  background-image: url('../images/lauren-large.jpg');
+  background-image: url("../images/lauren-large.jpg");
   background-color: var(--azul-noche); /* Fallback */
 }
 
 .elysia-image-large .author-image-large-inner {
-  background-image: url('../images/elysia-large.jpg');
+  background-image: url("../images/elysia-large.jpg");
   background-color: var(--violeta-profundo); /* Fallback */
 }
 
 .sahir-image-large .author-image-large-inner {
-  background-image: url('../images/sahir-large.jpg');
+  background-image: url("../images/sahir-large.jpg");
   background-color: var(--gris-oscuro); /* Fallback */
 }
 
@@ -357,22 +425,30 @@
   gap: 3rem;
 }
 
-.author-bio, .author-philosophy, .author-works {
+.author-bio,
+.author-philosophy,
+.author-works {
   background: rgba(0, 0, 0, 0.2);
   padding: 2rem;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.elysia-view .author-bio, .elysia-view .author-philosophy, .elysia-view .author-works {
+.elysia-view .author-bio,
+.elysia-view .author-philosophy,
+.elysia-view .author-works {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.sahir-view .author-bio, .sahir-view .author-philosophy, .sahir-view .author-works {
+.sahir-view .author-bio,
+.sahir-view .author-philosophy,
+.sahir-view .author-works {
   background: rgba(255, 255, 255, 0.1);
 }
 
-.author-bio h3, .author-philosophy h3, .author-works h3 {
+.author-bio h3,
+.author-philosophy h3,
+.author-works h3 {
   font-family: var(--fuente-titulos);
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
@@ -380,8 +456,10 @@
   display: inline-block;
 }
 
-.author-bio h3::after, .author-philosophy h3::after, .author-works h3::after {
-  content: '';
+.author-bio h3::after,
+.author-philosophy h3::after,
+.author-works h3::after {
+  content: "";
   position: absolute;
   width: 50px;
   height: 2px;
@@ -389,19 +467,30 @@
   left: 0;
 }
 
-.lauren-view .author-bio h3::after, .lauren-view .author-philosophy h3::after, .lauren-view .author-works h3::after {
+.lauren-view .author-bio h3::after,
+.lauren-view .author-philosophy h3::after,
+.lauren-view .author-works h3::after {
   background: linear-gradient(to right, var(--azul-noche), var(--azul-etéreo));
 }
 
-.elysia-view .author-bio h3::after, .elysia-view .author-philosophy h3::after, .elysia-view .author-works h3::after {
-  background: linear-gradient(to right, var(--violeta-profundo), var(--violeta-pálido));
+.elysia-view .author-bio h3::after,
+.elysia-view .author-philosophy h3::after,
+.elysia-view .author-works h3::after {
+  background: linear-gradient(
+    to right,
+    var(--violeta-profundo),
+    var(--violeta-pálido)
+  );
 }
 
-.sahir-view .author-bio h3::after, .sahir-view .author-philosophy h3::after, .sahir-view .author-works h3::after {
+.sahir-view .author-bio h3::after,
+.sahir-view .author-philosophy h3::after,
+.sahir-view .author-works h3::after {
   background: linear-gradient(to right, var(--gris-oscuro), var(--gris-claro));
 }
 
-.author-bio p, .author-philosophy p {
+.author-bio p,
+.author-philosophy p {
   font-family: var(--fuente-cuerpo);
   line-height: 1.8;
   margin-bottom: 1rem;
@@ -434,47 +523,47 @@
 }
 
 .lauren-work-1 {
-  background-image: url('../images/lauren-work-1.jpg');
+  background-image: url("../images/lauren-work-1.jpg");
   background-color: var(--azul-noche); /* Fallback */
 }
 
 .lauren-work-2 {
-  background-image: url('../images/lauren-work-2.jpg');
+  background-image: url("../images/lauren-work-2.jpg");
   background-color: var(--azul-noche); /* Fallback */
 }
 
 .lauren-work-3 {
-  background-image: url('../images/lauren-work-3.jpg');
+  background-image: url("../images/lauren-work-3.jpg");
   background-color: var(--azul-noche); /* Fallback */
 }
 
 .elysia-work-1 {
-  background-image: url('../images/elysia-work-1.jpg');
+  background-image: url("../images/elysia-work-1.jpg");
   background-color: var(--violeta-profundo); /* Fallback */
 }
 
 .elysia-work-2 {
-  background-image: url('../images/elysia-work-2.jpg');
+  background-image: url("../images/elysia-work-2.jpg");
   background-color: var(--violeta-profundo); /* Fallback */
 }
 
 .elysia-work-3 {
-  background-image: url('../images/elysia-work-3.jpg');
+  background-image: url("../images/elysia-work-3.jpg");
   background-color: var(--violeta-profundo); /* Fallback */
 }
 
 .sahir-work-1 {
-  background-image: url('../images/sahir-work-1.jpg');
+  background-image: url("../images/sahir-work-1.jpg");
   background-color: var(--gris-oscuro); /* Fallback */
 }
 
 .sahir-work-2 {
-  background-image: url('../images/sahir-work-2.jpg');
+  background-image: url("../images/sahir-work-2.jpg");
   background-color: var(--gris-oscuro); /* Fallback */
 }
 
 .sahir-work-3 {
-  background-image: url('../images/sahir-work-3.jpg');
+  background-image: url("../images/sahir-work-3.jpg");
   background-color: var(--gris-oscuro); /* Fallback */
 }
 
@@ -507,7 +596,11 @@
 
 /* Creative Process Section */
 .creative-process {
-  background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--negro-sombra) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--negro-profundo) 0%,
+    var(--negro-sombra) 100%
+  );
   padding: 6rem 0;
   color: var(--blanco-etereo);
 }
@@ -559,7 +652,7 @@
 
 /* Quote Section */
 .quote-section {
-  background: url('../images/quote-bg.jpg') no-repeat center center;
+  background: url("../images/quote-bg.jpg") no-repeat center center;
   background-size: cover;
   padding: 6rem 0;
   position: relative;
@@ -567,13 +660,17 @@
 }
 
 .quote-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(26, 35, 126, 0.8) 0%, rgba(107, 79, 158, 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(26, 35, 126, 0.8) 0%,
+    rgba(107, 79, 158, 0.8) 100%
+  );
 }
 
 .quote-container {
@@ -604,49 +701,49 @@ blockquote {
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
-  
   .trial-container {
     flex-direction: column;
   }
-  
-  .lauren-side, .elysia-side {
+
+  .lauren-side,
+  .elysia-side {
     margin: 0 0 2rem 0;
   }
-  
+
   .trial-divider {
     flex-direction: row;
     padding: 1.5rem 0;
     margin: 1rem 0;
   }
-  
+
   .divider-line {
     width: 100px;
     height: 1px;
   }
-  
+
   .divider-circle {
     margin: 0 1rem;
   }
-  
+
   .author-header {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .author-title {
     padding-left: 0;
     margin-top: 1.5rem;
   }
-  
+
   .process-step {
     flex-direction: column;
   }
-  
+
   .step-number {
     margin-right: 0;
     margin-bottom: 1rem;
   }
-  
+
   blockquote {
     font-size: 1.5rem;
   }
