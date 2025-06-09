@@ -194,11 +194,9 @@
 /* Sahir Card */
 .sahir-card .card-background {
   background: linear-gradient(161deg, #0075ff 0%, #4a5fc1 50%);
-  background-image: url("https://cdn.builder.io/api/v1/image/assets/TEMP/f1a39675bf4863dffd15b238fda1e77fc9f1be75?placeholderIfAbsent=true");
-  background-size: cover;
-  background-position: center;
   border-left: 4px solid #0a0a0a;
   color: #f5f5f7;
+  position: relative;
 }
 
 /* Author Header */
