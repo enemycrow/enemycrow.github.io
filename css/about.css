@@ -556,6 +556,105 @@
   line-height: 16px;
 }
 
+/* Hidden class for tab functionality */
+.hidden {
+  display: none;
+}
+
+/* Individual author views */
+.about-section {
+  min-height: 80vh;
+  padding: 4rem 0;
+}
+
+/* Lauren individual view */
+.lauren-view {
+  background: linear-gradient(
+    135deg,
+    var(--negro-profundo) 0%,
+    var(--azul-noche) 100%
+  );
+}
+
+/* Elysia individual view */
+.elysia-view {
+  background: linear-gradient(
+    135deg,
+    var(--violeta-profundo) 0%,
+    var(--violeta-pálido) 100%
+  );
+}
+
+/* Sahir individual view */
+.sahir-view {
+  background: linear-gradient(
+    135deg,
+    var(--azul-cometa) 0%,
+    var(--dorado-magico) 100%
+  );
+}
+
+/* Single author container */
+.single-author-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Author header for individual views */
+.author-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  gap: 2rem;
+}
+
+.author-image-large {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.author-title h2 {
+  font-family: var(--fuente-titulos);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.author-tagline {
+  font-family: var(--fuente-manuscrita);
+  font-style: italic;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Author content sections */
+.author-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.author-bio,
+.author-philosophy,
+.author-works {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.author-bio h3,
+.author-philosophy h3,
+.author-works h3 {
+  font-family: var(--fuente-titulos);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--violeta-pálido);
+}
+
 /* Responsive Design */
 @media screen and (max-width: 1200px) {
   .figma-container {
@@ -629,17 +728,13 @@
   .figma-themes-container {
     padding: 20px;
   }
-}
 
-/* Hidden class for tab functionality */
-.hidden {
-  display: none;
-}
+  .author-content {
+    grid-template-columns: 1fr;
+  }
 
-/* Individual author views */
-.about-section {
-  min-height: 80vh;
-  padding: 4rem 0;
+  .author-header {
+    flex-direction: column;
+    text-align: center;
+  }
 }
-
-/* Additional styles for individual author sections would go here */
