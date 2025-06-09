@@ -23,8 +23,8 @@
   left: 0;
   background: radial-gradient(
     31.25% 50% at 50% 50%,
-    rgba(26, 35, 126, 0.7) 0%,
-    rgba(10, 10, 10, 0.8) 75%
+    rgba(26, 35, 126, 0.4) 0%,
+    rgba(10, 10, 10, 0.5) 75%
   );
   z-index: 1;
 }
