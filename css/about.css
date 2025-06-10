@@ -657,6 +657,49 @@
   color: var(--violeta-pálido);
 }
 
+/* Sahir specific work images */
+.sahir-work-1,
+.sahir-work-2,
+.sahir-work-3 {
+  width: 100px;
+  height: 140px;
+  background-color: var(--azul-cometa);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.sahir-work-1 {
+  background: linear-gradient(
+    135deg,
+    var(--azul-cometa) 0%,
+    var(--dorado-magico) 100%
+  );
+}
+
+.sahir-work-2 {
+  background: linear-gradient(
+    135deg,
+    var(--dorado-magico) 0%,
+    var(--azul-cometa) 100%
+  );
+}
+
+.sahir-work-3 {
+  background: linear-gradient(
+    135deg,
+    var(--azul-cometa) 30%,
+    var(--dorado-magico) 70%
+  );
+}
+
+.sahir-image-large {
+  background: linear-gradient(
+    135deg,
+    var(--azul-cometa) 0%,
+    var(--dorado-magico) 100%
+  );
+}
+
 /* Responsive Design */
 @media screen and (max-width: 1200px) {
   .figma-container {
