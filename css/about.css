@@ -456,8 +456,7 @@
   align-items: center;
   align-self: stretch;
   position: relative;
-  min-height: 80px;
-  margin-bottom: 20px;
+  padding-bottom: 50px;
 }
 
 .figma-theme-icon-margin {
