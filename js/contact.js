@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Crear mensaje de éxito
             const successMessage = document.createElement('div');
-            successMessage.className = 'form-message success';
+            successMessage.className = 'contact-form__message contact-form__message--success';
             successMessage.textContent = '¡Mensaje enviado con éxito! Te responderemos lo antes posible.';
             
             // Insertar mensaje antes del formulario
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Crear mensaje de éxito
             const successMessage = document.createElement('div');
-            successMessage.className = 'form-message success';
+            successMessage.className = 'newsletter__message newsletter__message--success';
             successMessage.textContent = '¡Gracias por suscribirte! Pronto recibirás tu primer newsletter.';
             
             // Insertar mensaje antes del formulario
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Acordeón de FAQ
-    const faqQuestions = document.querySelectorAll('.faq-question');
+    const faqQuestions = document.querySelectorAll('.faq__question');
     
     if (faqQuestions.length > 0) {
         faqQuestions.forEach(question => {
@@ -78,12 +78,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const faqItem = this.parentElement;
                 
                 // Toggle clase active en el item actual
-                faqItem.classList.toggle('active');
+                faqItem.classList.toggle('faq__item--active');
                 
                 // Cerrar otros items si están abiertos
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    if (item !== faqItem && item.classList.contains('active')) {
-                        item.classList.remove('active');
+                document.querySelectorAll('.faq__item').forEach(item => {
+                    if (item !== faqItem && item.classList.contains('faq__item--active')) {
+                        item.classList.remove('faq__item--active');
                     }
                 });
             });
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Animación para elementos al hacer scroll
     const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.contact-method, .feature, .faq-item');
+        const elements = document.querySelectorAll('.contact-method, .newsletter__feature, .faq__item');
         
         elements.forEach(element => {
             const elementPosition = element.getBoundingClientRect().top;
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Crear mensaje de error
                 const errorMessage = document.createElement('div');
-                errorMessage.className = 'form-message error';
+                errorMessage.className = 'contact-form__message contact-form__message--error';
                 errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
                 
                 // Insertar mensaje antes del formulario
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Crear mensaje de error
                 const errorMessage = document.createElement('div');
-                errorMessage.className = 'form-message error';
+                errorMessage.className = 'newsletter__message newsletter__message--error';
                 errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
                 
                 // Insertar mensaje antes del formulario
