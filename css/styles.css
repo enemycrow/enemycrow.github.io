@@ -3,7 +3,7 @@
 /* Estilos para la página "Sobre Mí" */
 
 /* Hero Section */
-.about-hero {
+.hero.hero--about {
   display: flex;
   align-items: center;
   background-image: url("https://cdn.builder.io/api/v1/image/assets%2F33c5f996430b43939ac2042c30698447%2Fc5102fbfaa764c47b11def9261d24aad");
@@ -17,7 +17,7 @@
   text-align: center;
 }
 
-.about-hero .container {
+.hero__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -782,7 +782,7 @@ blockquote {
 /* Estilos para la página de Blog y Diario de Creación */
 
 /* Hero Section */
-.blog-hero {
+.hero.hero--blog {
   background-image: url('../images/blog-bg.jpg');
 }
 
@@ -1370,7 +1370,7 @@ blockquote {
 /* Estilos para la página de Contacto y Newsletter */
 
 /* Hero Section */
-.contact-hero {
+.hero.hero--contact {
   background-image: url('../images/contact-bg.jpg');
 }
 
@@ -2753,7 +2753,7 @@ a:hover {
 /* Estilos para la página de Obras y Portafolio */
 
 /* Hero Section */
-.portfolio-hero {
+.hero.hero--portfolio {
   background-image: url('../images/portfolio-bg.jpg');
 }
 
@@ -3401,7 +3401,7 @@ a:hover {
 /* Estilos para la página de Servicios Creativos */
 
 /* Hero Section */
-.services-hero {
+.hero.hero--services {
   background-image: url('../images/services-bg.jpg');
 }
 
@@ -4738,11 +4738,11 @@ a:hover {
   }
 }
 
-.about-hero,
-.blog-hero,
-.contact-hero,
-.portfolio-hero,
-.services-hero {
+.hero.hero--about,
+.hero.hero--blog,
+.hero.hero--contact,
+.hero.hero--portfolio,
+.hero.hero--services {
   height: 60vh;
   position: relative;
   display: flex;
@@ -4782,11 +4782,7 @@ a:hover {
   max-width: 800px;
 }
 
-.about-hero-title,
-.blog-hero-title,
-.contact-hero-title,
-.portfolio-hero-title,
-.services-hero-title {
+.hero__title {
   font-family: var(--fuente-titulos);
   font-size: 56px;
   line-height: 89.6px;
@@ -4794,17 +4790,13 @@ a:hover {
   letter-spacing: 2px;
 }
 
-.about-hero-title {
+.hero.hero--about .hero__title {
   font:
     400 56px/89.6px Cinzel,
     serif;
 }
 
-.about-hero-divider,
-.blog-hero-divider,
-.contact-hero-divider,
-.portfolio-hero-divider,
-.services-hero-divider {
+.hero__divider {
   width: 100px;
   height: 2px;
   background: linear-gradient(
@@ -4815,11 +4807,7 @@ a:hover {
   margin: 1.5rem auto;
 }
 
-.about-hero-subtitle,
-.blog-hero-subtitle,
-.contact-hero-subtitle,
-.portfolio-hero-subtitle,
-.services-hero-subtitle {
+.hero__subtitle {
   font-family: var(--fuente-manuscrita);
   font-size: 1.5rem;
   font-style: italic;
@@ -4827,11 +4815,7 @@ a:hover {
 }
 
 @media screen and (max-width: 768px) {
-  .about-hero-title,
-  .blog-hero-title,
-  .contact-hero-title,
-  .portfolio-hero-title,
-  .services-hero-title {
+  .hero__title {
     font-size: 2.5rem;
   }
 }

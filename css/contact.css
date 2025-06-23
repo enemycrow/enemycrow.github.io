@@ -1,7 +1,7 @@
 /* Estilos para la página de Contacto y Newsletter */
 
 /* Hero Section */
-.contact-hero {
+.hero.hero--contact {
   background-image: url('../images/contact-bg.jpg');
 }
 

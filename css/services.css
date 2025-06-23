@@ -1,7 +1,7 @@
 /* Estilos para la página de Servicios Creativos */
 
 /* Hero Section */
-.services-hero {
+.hero.hero--services {
   background-image: url('../images/services-bg.jpg');
 }
 

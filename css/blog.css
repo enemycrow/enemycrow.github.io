@@ -1,7 +1,7 @@
 /* Estilos para la página de Blog y Diario de Creación */
 
 /* Hero Section */
-.blog-hero {
+.hero.hero--blog {
   background-image: url('../images/blog-bg.jpg');
 }
 
