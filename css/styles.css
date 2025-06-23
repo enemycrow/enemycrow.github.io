@@ -48,7 +48,7 @@
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-.tab-btn {
+.voice-tab {
   padding: 1rem 2rem;
   border: none;
   background-color: var(--gris-oscuro);
@@ -59,11 +59,11 @@
   transition: all 0.3s ease;
 }
 
-.tab-btn:hover {
+.voice-tab:hover {
   background-color: var(--gris-medio);
 }
 
-.tab-btn.active {
+.voice-tab.active {
   background: linear-gradient(
     135deg,
     var(--azul-noche),
@@ -73,17 +73,17 @@
 }
 
 /* About Sections */
-.about-section {
+.voice-view {
   padding: 5rem 0;
   transition: all 0.5s ease;
 }
 
-.about-section.hidden {
+.voice-view.hidden {
   display: none;
 }
 
 /* Trial View */
-.trial-view {
+.voice-view--trial {
   background: linear-gradient(
     135deg,
     var(--negro-profundo) 0%,
@@ -98,9 +98,9 @@
   align-items: stretch;
 }
 
-.lauren-side,
-.elysia-side,
-.sahir-side {
+.voice-view--lauren,
+.voice-view--elysia,
+.voice-view--sahir {
   flex: 1;
   padding: 2rem;
   border-radius: 5px;
@@ -109,7 +109,7 @@
   align-items: center;
 }
 
-.lauren-side {
+.voice-view--lauren {
   background: linear-gradient(
     135deg,
     var(--negro-profundo) 0%,
@@ -119,7 +119,7 @@
   margin-right: 1rem;
 }
 
-.elysia-side {
+.voice-view--elysia {
   background: linear-gradient(
     135deg,
     var(--violeta-profundo) 0%,
@@ -129,7 +129,7 @@
   margin-left: 1rem;
 }
 
-.sahir-side {
+.voice-view--sahir {
   background: linear-gradient(
     135deg,
     var(--gris-oscuro) 0%,
@@ -182,12 +182,12 @@
 }
 
 /* Author Image */
-.author-image-container {
+.voice-view__image-container {
   margin-bottom: 2rem;
   text-align: center;
 }
 
-.author-image-frame {
+.voice-view__image-frame {
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -195,12 +195,12 @@
   margin: 0 auto 1rem;
 }
 
-.lauren-image .author-image-frame {
+.lauren-image .voice-view__image-frame {
   background: linear-gradient(to right, var(--azul-noche), var(--azul-etéreo));
   box-shadow: 0 0 20px rgba(26, 35, 126, 0.5);
 }
 
-.elysia-image .author-image-frame {
+.elysia-image .voice-view__image-frame {
   background: linear-gradient(
     to right,
     var(--violeta-profundo),
@@ -209,12 +209,12 @@
   box-shadow: 0 0 20px rgba(107, 79, 158, 0.5);
 }
 
-.sahir-image .author-image-frame {
+.sahir-image .voice-view__image-frame {
   background: linear-gradient(to right, var(--gris-oscuro), var(--gris-claro));
   box-shadow: 0 0 20px rgba(128, 128, 128, 0.5);
 }
 
-.author-image {
+.voice-view__image {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -222,86 +222,86 @@
   background-position: center;
 }
 
-.lauren-image .author-image {
+.lauren-image .voice-view__image {
   background-image: url("../images/lauren.jpg");
   background-color: var(--azul-noche); /* Fallback */
 }
 
-.elysia-image .author-image {
+.elysia-image .voice-view__image {
   background-image: url("../images/elysia.jpg");
   background-color: var(--violeta-profundo); /* Fallback */
 }
 
-.sahir-image .author-image {
+.sahir-image .voice-view__image {
   background-image: url("../images/sahir.jpg");
   background-color: var(--gris-oscuro);
 }
 
-.author-name {
+.voice-view__name {
   font-family: var(--fuente-titulos);
   font-size: 1.5rem;
   margin-top: 1rem;
 }
 
-.lauren-side .author-name {
+.voice-view--lauren .voice-view__name {
   color: #C7D8FF; /* Azul claro */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.elysia-side .author-name {
+.voice-view--elysia .voice-view__name {
   color: #5B277D; /* Violeta profundo */
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
 }
 
-.sahir-side .author-name {
+.voice-view--sahir .voice-view__name {
   color: #FFE699; /* Amarillo claro */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Author Description */
-.author-description {
+.voice-view__description {
   margin-bottom: 2rem;
   text-align: center;
 }
 
-.author-description h3 {
+.voice-view__description h3 {
   font-family: var(--fuente-titulos);
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
 }
 
-.author-description p {
+.voice-view__description p {
   font-family: var(--fuente-cuerpo);
   line-height: 1.8;
   margin-bottom: 1rem;
 }
 
 /* Author Themes */
-.author-themes {
+.voice-view__themes {
   width: 100%;
   padding: 1.5rem;
   border-radius: 5px;
 }
 
-.author-themes h4 {
+.voice-view__themes h4 {
   font-family: var(--fuente-manuscrita);
   font-size: 1.3rem;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-.theme-list {
+.voice-view__theme-list {
   list-style: none;
 }
 
-.theme-list li {
+.voice-view__theme-list li {
   display: flex;
   align-items: center;
   margin-bottom: 0.8rem;
   font-family: var(--fuente-cuerpo);
 }
 
-.theme-icon {
+.voice-view__theme-icon {
   margin-right: 1rem;
   width: 30px;
   height: 30px;
@@ -311,23 +311,23 @@
   justify-content: center;
 }
 
-.lauren-side .theme-icon {
+.voice-view--lauren .voice-view__theme-icon {
   background: var(--azul-noche);
   color: var(--blanco-etereo);
 }
 
-.elysia-side .theme-icon {
+.voice-view--elysia .voice-view__theme-icon {
   background: var(--violeta-profundo);
   color: var(--blanco-etereo);
 }
 
-.sahir-side .theme-icon {
+.voice-view--sahir .voice-view__theme-icon {
   background: var(--gris-oscuro);
   color: var(--blanco-etereo);
 }
 
 /* Single Author Views */
-.lauren-view {
+.voice-view--lauren {
   background: linear-gradient(
     135deg,
     var(--negro-profundo) 0%,
@@ -336,7 +336,7 @@
   color: var(--blanco-etereo);
 }
 
-.elysia-view {
+.voice-view--elysia {
   background: linear-gradient(
     135deg,
     var(--violeta-profundo) 0%,
@@ -345,7 +345,7 @@
   color: var(--negro-profundo);
 }
 
-.sahir-view {
+.voice-view--sahir {
   background: linear-gradient(
     135deg,
     var(--gris-oscuro) 0%,
@@ -451,15 +451,15 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.elysia-view .author-bio,
-.elysia-view .author-philosophy,
-.elysia-view .author-works {
+.voice-view--elysia .author-bio,
+.voice-view--elysia .author-philosophy,
+.voice-view--elysia .author-works {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.sahir-view .author-bio,
-.sahir-view .author-philosophy,
-.sahir-view .author-works {
+.voice-view--sahir .author-bio,
+.voice-view--sahir .author-philosophy,
+.voice-view--sahir .author-works {
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -484,15 +484,15 @@
   left: 0;
 }
 
-.lauren-view .author-bio h3::after,
-.lauren-view .author-philosophy h3::after,
-.lauren-view .author-works h3::after {
+.voice-view--lauren .author-bio h3::after,
+.voice-view--lauren .author-philosophy h3::after,
+.voice-view--lauren .author-works h3::after {
   background: linear-gradient(to right, var(--azul-noche), var(--azul-etéreo));
 }
 
-.elysia-view .author-bio h3::after,
-.elysia-view .author-philosophy h3::after,
-.elysia-view .author-works h3::after {
+.voice-view--elysia .author-bio h3::after,
+.voice-view--elysia .author-philosophy h3::after,
+.voice-view--elysia .author-works h3::after {
   background: linear-gradient(
     to right,
     var(--violeta-profundo),
@@ -500,9 +500,9 @@
   );
 }
 
-.sahir-view .author-bio h3::after,
-.sahir-view .author-philosophy h3::after,
-.sahir-view .author-works h3::after {
+.voice-view--sahir .author-bio h3::after,
+.voice-view--sahir .author-philosophy h3::after,
+.voice-view--sahir .author-works h3::after {
   background: linear-gradient(to right, var(--gris-oscuro), var(--gris-claro));
 }
 
@@ -588,24 +588,24 @@
   padding: 1.5rem;
 }
 
-.lauren-view .work-info {
+.voice-view--lauren .work-info {
   background: var(--negro-sombra);
 }
 
-.elysia-view .work-info {
+.voice-view--elysia .work-info {
   background: rgba(255, 255, 255, 0.3);
 }
 
-.sahir-view .work-info {
+.voice-view--sahir .work-info {
   background: rgba(42, 56, 107, 0.7); /* un azul más profundo con opacidad */
   color: var(--blanco-etereo);
 }
 
-.sahir-view .work-info h4 {
+.voice-view--sahir .work-info h4 {
   color: var(--blanco-brillante);
 }
 
-.sahir-view .work-info p {
+.voice-view--sahir .work-info p {
   color: var(--blanco-etereo);
 }
 
@@ -731,9 +731,9 @@ blockquote {
     flex-direction: column;
   }
 
-  .lauren-side,
-  .elysia-side,
-  .sahir-side {
+  .voice-view--lauren,
+  .voice-view--elysia,
+  .voice-view--sahir {
     margin: 0 0 2rem 0;
   }
 
@@ -2208,7 +2208,7 @@ blockquote {
 }
 
 /* Description */
-.author-card__description { /* Renamed from .author-description */
+.author-card__description { /* Renamed from .voice-view__description */
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -3755,7 +3755,7 @@ a:hover {
   align-items: center;
 }
 
-.author-image {
+.voice-view__image {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -3988,44 +3988,44 @@ a:hover {
 /* Estilos específicos para A.C. Elysia */
 
 /* Estilos para el "side" o panel lateral del autor */
-.elysia-side {
+.voice-view--elysia {
     background: linear-gradient(135deg, var(--elysia-acento) 0%, var(--elysia-secundario) 100%);
     color: var(--negro-profundo);
     margin-left: 1rem;
     border-color: var(--elysia-secundario);
 }
 
-.elysia-side .author-name {
+.voice-view--elysia .voice-view__name {
     color: var(--negro-profundo); /* Nombre en azul oscuro para contraste */
     font-family: var(--fuente-titulos);
 }
 
-.elysia-side .author-description {
+.voice-view--elysia .voice-view__description {
     color: var(--gris-oscuro); /* Descripción en gris oscuro */
     font-family: var(--fuente-cuerpo);
 }
 
-.elysia-side .author-themes {
+.voice-view--elysia .voice-view__themes {
     background: rgba(255, 255, 255, 0.2); /* Fondo semitransparente para la sección de temas */
 }
 
-.elysia-side .author-themes h4 {
+.voice-view--elysia .voice-view__themes h4 {
      color: var(--elysia-secundario); /* Título de temas en azul oscuro */
      font-family: var(--fuente-manuscrita);
 }
 
-.elysia-side .theme-list li {
+.voice-view--elysia .voice-view__theme-list li {
     color: var(--elysia-secundario); /* Temas en gris oscuro */
     font-family: var(--fuente-cuerpo);
 }
 
-.elysia-side .theme-icon {
+.voice-view--elysia .voice-view__theme-icon {
     color: var(--elysia-acento); /* Iconos con color de acento dorado */
     background: var(--elysia-acento); /* Fondo para los iconos */
     color: var(--elysia-primario); /* Color de icono contrastante */
 }
 
-.elysia-side .author-image {
+.voice-view--elysia .voice-view__image {
     border-color: var(--elysia-acento); /* Borde de la imagen con color de acento */
 }
 
@@ -4041,12 +4041,12 @@ a:hover {
 }
 
 /* Estilos para las imágenes del autor */
-.elysia-image .author-image-frame {
+.elysia-image .voice-view__image-frame {
     background: linear-gradient(to right, var(--elysia-acento), var(--elysia-secundario));
     box-shadow: 0 0 20px rgba(107, 79, 158, 0.5); /* Sombra con color temático */
 }
 
-.elysia-image .author-image {
+.elysia-image .voice-view__image {
     background-image: url('../images/elysia.jpg'); /* Imagen pequeña del autor */
     background-color: var(--elysia-acento); /* Fallback */
 }
@@ -4057,16 +4057,16 @@ a:hover {
 }
 
 /* Estilos para la vista detallada del autor */
-.elysia-view {
+.voice-view--elysia {
     background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--violeta-pálido) 70%);
     color: var(--negro-profundo);
 }
 
-.elysia-view .author-bio, .elysia-view .author-philosophy, .elysia-view .author-works {
+.voice-view--elysia .author-bio, .voice-view--elysia .author-philosophy, .voice-view--elysia .author-works {
     background: rgba(255, 255, 255, 0.2); /* Fondos semitransparentes para secciones de contenido */
 }
 
-.elysia-view .author-bio h3::after, .elysia-view .author-philosophy h3::after, .elysia-view .author-works h3::after {
+.voice-view--elysia .author-bio h3::after, .voice-view--elysia .author-philosophy h3::after, .voice-view--elysia .author-works h3::after {
     background: linear-gradient(to right, var(--violeta-profundo), var(--violeta-pálido)); /* Subrayado con gradiente */
 }
 
@@ -4086,7 +4086,7 @@ a:hover {
     background-color: var(--violeta-profundo); /* Fallback */
 }
 
-.elysia-view .work-info {
+.voice-view--elysia .work-info {
     background: var(--blanco-etereo); /* Fondo para la información del trabajo */
 }
 
@@ -4097,44 +4097,44 @@ a:hover {
 /* Estilos específicos para Lauren Cuervo */
 
 /* Estilos para el "side" o panel lateral del autor */
-.lauren-side {
+.voice-view--lauren {
     background: linear-gradient(135deg, var(--lauren-primario) 0%, var(--lauren-acento) 100%);
     color: var(--blanco-etereo);
     margin-right: 1rem;
     border-color: var(--lauren-acento);
 }
 
-.lauren-side .author-name {
+.voice-view--lauren .voice-view__name {
     color: var(--lauren-secundario); /* Nombre del autor */
     font-family: var(--fuente-titulos);
 }
 
-.lauren-side .author-description {
+.voice-view--lauren .voice-view__description {
     color: var(--blanco-brillante); /* Texto descripción del autor */
     font-family: var(--fuente-cuerpo);
 }
 
-.lauren-side .author-themes {
+.voice-view--lauren .voice-view__themes {
     background: rgba(10, 10, 10, 0.3); /* Fondo semitransparente para la sección de temas */
 }
 
-.lauren-side .author-themes h4 {
+.voice-view--lauren .voice-view__themes h4 {
      color: var(--lauren-secundario); /* Título de temas */
      font-family: var(--fuente-manuscrita);
 }
 
-.lauren-side .theme-list li {
+.voice-view--lauren .voice-view__theme-list li {
     color: var(--lauren-secundario); /* Temas */
     font-family: var(--fuente-cuerpo);
 }
 
-.lauren-side .theme-icon {
+.voice-view--lauren .voice-view__theme-icon {
     color: var(--lauren-acento); /* Iconos con color de acento */
     background: var(--lauren-acento); /* Fondo para los iconos */
     color: var(--blanco-etereo); /* Color de icono contrastante */
 }
 
-.lauren-side .author-image {
+.voice-view--lauren .voice-view__image {
     border-color: var(--lauren-acento); /* Borde de la imagen con color de acento */
 }
 
@@ -4150,12 +4150,12 @@ a:hover {
 }
 
 /* Estilos para las imágenes del autor */
-.lauren-image .author-image-frame {
+.lauren-image .voice-view__image-frame {
     background: linear-gradient(to right, var(--lauren-acento), var(--azul-etéreo));
     box-shadow: 0 0 20px rgba(26, 35, 126, 0.5); /* Sombra con color temático */
 }
 
-.lauren-image .author-image {
+.lauren-image .voice-view__image {
     background-image: url('../images/lauren.jpg'); /* Imagen pequeña del autor */
     background-color: var(--lauren-acento); /* Fallback */
 }
@@ -4166,16 +4166,16 @@ a:hover {
 }
 
 /* Estilos para la vista detallada del autor */
-.lauren-view {
+.voice-view--lauren {
     background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
     color: var(--blanco-etereo);
 }
 
-.lauren-view .author-bio, .lauren-view .author-philosophy, .lauren-view .author-works {
+.voice-view--lauren .author-bio, .voice-view--lauren .author-philosophy, .voice-view--lauren .author-works {
     background: rgba(10, 10, 10, 0.3); /* Fondos semitransparentes para secciones de contenido */
 }
 
-.lauren-view .author-bio h3::after, .lauren-view .author-philosophy h3::after, .lauren-view .author-works h3::after {
+.voice-view--lauren .author-bio h3::after, .voice-view--lauren .author-philosophy h3::after, .voice-view--lauren .author-works h3::after {
     background: linear-gradient(to right, var(--azul-noche), var(--azul-etéreo)); /* Subrayado con gradiente */
 }
 
@@ -4195,7 +4195,7 @@ a:hover {
     background-color: var(--azul-noche); /* Fallback */
 }
 
-.lauren-view .work-info {
+.voice-view--lauren .work-info {
     background: var(--negro-sombra); /* Fondo para la información del trabajo */
 }
 
@@ -4205,44 +4205,44 @@ a:hover {
 /* Estilos específicos para Draco Sahir */
 
 /* Estilos para el "side" o panel lateral del autor */
-.sahir-side {
+.voice-view--sahir {
     background: linear-gradient(135deg, var(--azul-cometa) 0%, var(--celeste-pastel) 100%);
     color: var(--blanco-etereo);
     margin-left: 1rem;
     border-color: var(--sahir-acento);
 }
 
-.sahir-side .author-name {
+.voice-view--sahir .voice-view__name {
     color: var(--sahir-acento); /* Nombre en color de acento */
     font-family: var(--fuente-titulos);
 }
 
-.sahir-side .author-description {
+.voice-view--sahir .voice-view__description {
      color: var(--blanco-brillante); /* Texto descripción en gris claro */
      font-family: var(--fuente-cuerpo);
 }
 
-.sahir-side .author-themes {
+.voice-view--sahir .voice-view__themes {
     background: rgba(193, 211, 255, 0.3); /* Fondo semitransparente para la sección de temas */
 }
 
-.sahir-side .author-themes h4 {
+.voice-view--sahir .voice-view__themes h4 {
      color: var(--sahir-secundario); /* Título de temas */
      font-family: var(--fuente-manuscrita);
 }
 
-.sahir-side .theme-list li {
+.voice-view--sahir .voice-view__theme-list li {
     color: var(--sahir-secundario); /* Temas en gris claro */
     font-family: var(--fuente-cuerpo);
 }
 
-.sahir-side .theme-icon {
+.voice-view--sahir .voice-view__theme-icon {
     color: var(--sahir-acento); /* Iconos con color de acento */
     background: var(--dorado-magico); /* Fondo para los iconos */
     color: var(--blanco-etereo); /* Color de icono contrastante */
 }
 
-.sahir-side .author-image {
+.voice-view--sahir .voice-view__image {
     border-color: var(--sahir-acento); /* Borde de la imagen con color de acento */
 }
 
@@ -4258,12 +4258,12 @@ a:hover {
 }
 
 /* Estilos para las imágenes del autor */
-.sahir-image .author-image-frame {
+.sahir-image .voice-view__image-frame {
     background: linear-gradient(to right, var(--azul-cometa), var(--celeste-pastel));
     box-shadow: 0 0 20px rgba(128, 128, 128, 0.5); /* Sombra con color temático */
 }
 
-.sahir-image .author-image {
+.sahir-image .voice-view__image {
     background-image: url('../images/sahir.jpg'); /* Imagen pequeña del autor */
     background-color: var(--azul-cometa); /* Fallback */
 }
@@ -4274,16 +4274,16 @@ a:hover {
 }
 
 /* Estilos para la vista detallada del autor */
-.sahir-view {
+.voice-view--sahir {
     background: linear-gradient(135deg, var(--sahir-primario) 0%, var(--sahir-secundario) 100%);
     color: var(--blanco-etereo);
 }
 
-.sahir-view .author-bio, .sahir-view .author-philosophy, .sahir-view .author-works {
+.voice-view--sahir .author-bio, .voice-view--sahir .author-philosophy, .voice-view--sahir .author-works {
     background: rgba(193, 211, 255, 0.2); /* Fondos semitransparentes para secciones de contenido */
 }
 
-.sahir-view .author-bio h3::after, .sahir-view .author-philosophy h3::after, .sahir-view .author-works h3::after {
+.voice-view--sahir .author-bio h3::after, .voice-view--sahir .author-philosophy h3::after, .voice-view--sahir .author-works h3::after {
     background: linear-gradient(to right, var(--sahir-primario), var(--sahir-secundario)); /* Subrayado con gradiente */
 }
 
@@ -4303,7 +4303,7 @@ a:hover {
     background-color: var(--sahir-primario); /* Fallback */
 }
 
-.sahir-view .work-info {
+.voice-view--sahir .work-info {
     background: var(--celeste-pastel); /* Fondo para la información del trabajo */
 }
 
@@ -4678,7 +4678,7 @@ a:hover {
 }
 
 /* Estilos comunes para los elementos dentro de los bloques de autor */
-.author-image {
+.voice-view__image {
   width: 150px; /* Tamaño fijo para las imágenes */
   height: 150px;
   border-radius: 50%; /* Imágenes redondas */
@@ -4687,43 +4687,43 @@ a:hover {
   border: 3px solid var(--gris-medio); /* Borde base */
 }
 
-.author-name {
+.voice-view__name {
   font-size: 1.8em;
   margin-bottom: 10px;
 }
 
-.author-description {
+.voice-view__description {
   font-size: 1em;
   line-height: 1.6;
   margin-bottom: 15px;
   text-align: left; /* Alinear texto de descripción a la izquierda */
 }
 
-.author-themes {
+.voice-view__themes {
   margin-top: 20px;
   border-top: 1px solid var(--gris-medio); /* Separador visual usando variable de color base */
   padding-top: 15px;
   text-align: left; /* Alinear lista de temas a la izquierda */
 }
 
-.author-themes h4 {
+.voice-view__themes h4 {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
 
-.theme-list {
+.voice-view__theme-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.theme-list li {
+.voice-view__theme-list li {
   margin-bottom: 8px;
   display: flex; /* Para alinear icono y texto */
   align-items: center;
 }
 
-.theme-icon {
+.voice-view__theme-icon {
   margin-right: 10px;
   font-size: 1.1em;
 }

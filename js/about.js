@@ -2,8 +2,8 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // Tabs para cambiar entre vistas
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const sections = document.querySelectorAll('.about-section');
+    const tabBtns = document.querySelectorAll('.voice-tab');
+    const sections = document.querySelectorAll('.voice-view');
     
     if (tabBtns.length > 0 && sections.length > 0) {
         tabBtns.forEach(btn => {
