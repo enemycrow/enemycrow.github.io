@@ -241,6 +241,21 @@
   margin-top: 1rem;
 }
 
+.lauren-side .author-name {
+  color: #C7D8FF; /* Azul claro */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.elysia-side .author-name {
+  color: #5B277D; /* Violeta profundo */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.sahir-side .author-name {
+  color: #FFE699; /* Amarillo claro */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
 /* Author Description */
 .author-description {
   margin-bottom: 2rem;
@@ -580,7 +595,16 @@
 }
 
 .sahir-view .work-info {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(42, 56, 107, 0.7); /* un azul más profundo con opacidad */
+  color: var(--blanco-etereo);
+}
+
+.sahir-view .work-info h4 {
+  color: var(--blanco-brillante);
+}
+
+.sahir-view .work-info p {
+  color: var(--blanco-etereo);
 }
 
 .work-info h4 {
@@ -706,7 +730,8 @@ blockquote {
   }
 
   .lauren-side,
-  .elysia-side {
+  .elysia-side,
+  .sahir-side {
     margin: 0 0 2rem 0;
   }
 
