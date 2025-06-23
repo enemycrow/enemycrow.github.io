@@ -33,3 +33,10 @@ Las opciones de despliegue se encuentran en `.firebaserc` y `firebase.json`.
 ## Plan del Proyecto
 
 El plan de trabajo (en español) se encuentra en el archivo [todo.md](todo.md).
+
+## Archivos CSS Históricos
+
+Las hojas `css/about.css`, `css/blog.css`, `css/contact.css`,
+`css/home.css`, `css/portfolio.css` y `css/services.css` se usaron en las primeras versiones del proyecto. Todo su
+contenido se consolidó en `css/styles.css`, por lo que se
+eliminaron para simplificar el repositorio.
