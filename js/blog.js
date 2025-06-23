@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // Filtrado de entradas de blog
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    const filterBtns = document.querySelectorAll('.blog-filter__button');
     const blogPosts = document.querySelectorAll('.blog-post');
     
     if (filterBtns.length > 0 && blogPosts.length > 0) {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (filter === 'all') {
                         post.style.display = 'flex';
                     } else {
-                        if (post.classList.contains(filter)) {
+                        if (post.classList.contains(`blog-post--${filter}`)) {
                             post.style.display = 'flex';
                         } else {
                             post.style.display = 'none';
