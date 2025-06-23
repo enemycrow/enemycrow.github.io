@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   background-image: url("https://cdn.builder.io/api/v1/image/assets%2F33c5f996430b43939ac2042c30698447%2Fc5102fbfaa764c47b11def9261d24aad");
-  background-position: 50% 50%;
+  background-position: 50% 10%;
   background-repeat: no-repeat;
   background-size: cover;
   color: rgb(255, 255, 255);
@@ -4773,7 +4773,6 @@ a:hover {
   text-align: center;
   color: var(--blanco-brillante);
   background-repeat: no-repeat;
-  background-position: center center;
   background-size: cover;
 }
 
