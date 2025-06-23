@@ -678,7 +678,7 @@
 
 /* Quote Section */
 .quote-section {
-  background: url("../images/quote-bg.jpg") no-repeat center center;
+  background: url("https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1650&q=80") no-repeat center center;
   background-size: cover;
   padding: 6rem 0;
   position: relative;
@@ -783,7 +783,7 @@ blockquote {
 
 /* Hero Section */
 .hero.hero--blog {
-  background-image: url('../images/blog-bg.jpg');
+  background-image: url('https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?auto=format&fit=crop&w=1650&q=80');
 }
 
 
@@ -1202,7 +1202,7 @@ blockquote {
 
 .subscribe-image {
   flex: 0 0 40%;
-  background: url('../images/subscribe-bg.jpg') no-repeat center center;
+  background: url('https://images.unsplash.com/photo-1492724441997-5dc865305da6?auto=format&fit=crop&w=1650&q=80') no-repeat center center;
   background-size: cover;
 }
 
@@ -1371,7 +1371,7 @@ blockquote {
 
 /* Hero Section */
 .hero.hero--contact {
-  background-image: url('../images/contact-bg.jpg');
+  background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1650&q=80');
 }
 
 
@@ -2754,7 +2754,7 @@ a:hover {
 
 /* Hero Section */
 .hero.hero--portfolio {
-  background-image: url('../images/portfolio-bg.jpg');
+  background-image: url('https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&w=1650&q=80');
 }
 
 
@@ -3402,7 +3402,7 @@ a:hover {
 
 /* Hero Section */
 .hero.hero--services {
-  background-image: url('../images/services-bg.jpg');
+  background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1650&q=80');
 }
 
 
