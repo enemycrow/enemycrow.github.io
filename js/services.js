@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Acordeón de FAQ
-    const faqQuestions = document.querySelectorAll('.faq-question');
+    const faqQuestions = document.querySelectorAll('.faq__question');
     
     if (faqQuestions.length > 0) {
         faqQuestions.forEach(question => {
@@ -85,12 +85,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const faqItem = this.parentElement;
                 
                 // Toggle clase active en el item actual
-                faqItem.classList.toggle('active');
+                faqItem.classList.toggle('faq__item--active');
                 
                 // Cerrar otros items si están abiertos
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    if (item !== faqItem && item.classList.contains('active')) {
-                        item.classList.remove('active');
+                document.querySelectorAll('.faq__item').forEach(item => {
+                    if (item !== faqItem && item.classList.contains('faq__item--active')) {
+                        item.classList.remove('faq__item--active');
                     }
                 });
             });
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Animación para elementos al hacer scroll
     const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.service-item, .timeline-item, .testimonial-item, .faq-item');
+        const elements = document.querySelectorAll('.service-item, .timeline-item, .testimonial-item, .faq__item');
         
         elements.forEach(element => {
             const elementPosition = element.getBoundingClientRect().top;
