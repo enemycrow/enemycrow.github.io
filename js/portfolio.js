@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Filtrado de obras
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.featured-work, .catalog-item');
+    const portfolioItems = document.querySelectorAll('.portfolio-item--featured, .portfolio-item--catalog');
     
     if (filterBtns.length > 0 && portfolioItems.length > 0) {
         filterBtns.forEach(btn => {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Animación para elementos al hacer scroll
     const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.featured-work, .catalog-item, .symbolic-item, .upcoming-project');
+        const elements = document.querySelectorAll('.portfolio-item--featured, .portfolio-item--catalog, .symbolic-item, .upcoming-project');
         
         elements.forEach(element => {
             const elementPosition = element.getBoundingClientRect().top;

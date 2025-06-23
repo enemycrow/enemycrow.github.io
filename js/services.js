@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 
                 const serviceItem = this.closest('.service-item');
-                const serviceDetails = serviceItem.querySelector('.service-details');
+                const serviceDetails = serviceItem.querySelector('.service-item__details');
                 
                 if (serviceDetails.style.display === 'block') {
                     serviceDetails.style.display = 'none';
