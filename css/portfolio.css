@@ -1,7 +1,7 @@
 /* Estilos para la página de Obras y Portafolio */
 
 /* Hero Section */
-.portfolio-hero {
+.hero.hero--portfolio {
   background-image: url('../images/portfolio-bg.jpg');
 }
 

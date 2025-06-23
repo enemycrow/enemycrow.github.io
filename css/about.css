@@ -1,7 +1,7 @@
 /* Estilos para la página "Sobre Mí" */
 
 /* Hero Section */
-.about-hero {
+.hero.hero--about {
   display: flex;
   align-items: center;
   background-image: url("https://cdn.builder.io/api/v1/image/assets%2F33c5f996430b43939ac2042c30698447%2Fc5102fbfaa764c47b11def9261d24aad");
@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.about-hero .container {
+.hero__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
