@@ -2131,7 +2131,7 @@ blockquote {
 }
 
 .author-card__background { /* Renamed from .card-background */
-  height: 808px;
+  height: 835px;
   width: 100%;
   border-radius: 5px;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.3);
@@ -4228,7 +4228,7 @@ a:hover {
 
 /* Estilos para el "side" o panel lateral del autor */
 .voice-view--sahir {
-    background: linear-gradient(135deg, var(--azul-cometa) 0%, var(--celeste-pastel) 100%);
+    background: linear-gradient(135deg, var(--azul-cometa) 0%, var(--azul-ftalo) 100%);
     color: var(--blanco-etereo);
     margin-left: 1rem;
     border-color: var(--sahir-acento);
@@ -4281,7 +4281,7 @@ a:hover {
 
 /* Estilos para las imágenes del autor */
 .sahir-image .voice-view__image-frame {
-    background: linear-gradient(to right, var(--azul-cometa), var(--celeste-pastel));
+    background: linear-gradient(to right, var(--azul-cometa), var(--azul-ftalo));
     box-shadow: 0 0 20px rgba(128, 128, 128, 0.5); /* Sombra con color temático */
 }
 
@@ -4326,7 +4326,7 @@ a:hover {
 }
 
 .voice-view--sahir .work-info {
-    background: var(--celeste-pastel); /* Fondo para la información del trabajo */
+    background: var(--azul-ftalo); /* Fondo para la información del trabajo */
 }
 
 /* --- End of style-sahir.css --- */
@@ -4346,9 +4346,12 @@ a:hover {
   --violeta-profundo: #6b4f9e;
   --azul-noche: #1a237e;
   --azul-etéreo: #4a5fc1;
-  --azul-cometa: #2d3c7a;
-  --celeste-pastel: #c1d3ff;
-  --dorado-magico: #ffd966;
+  --verde-hechicero: #255e4b;
+  --verde-abisal: #112e24;
+  --verde-lima-ritual: #c4ff70;
+  --violeta-mistico: #23002e;
+  --fucsia-brillante: #a82bb5;
+  --rosa-etereo: #ffc4ec;
 
   /* Colores para Lauren Cuervo (nocturno) */
   --lauren-primario: var(--negro-profundo);
@@ -4356,14 +4359,14 @@ a:hover {
   --lauren-acento: var(--azul-noche);
 
   /* Colores para A.C. Elysia (etéreo) */
-  --elysia-primario: var(--blanco-etereo);
-  --elysia-secundario: var(--violeta-pálido);
-  --elysia-acento: var(--violeta-profundo);
+  --elysia-primario: var(--violeta-mistico);
+  --elysia-secundario: var(--fucsia-brillante);
+  --elysia-acento: var(--rosa-etereo);
 
-  /* Colores para Draco Sahir (cósmico mágico) */
-  --sahir-primario: var(--azul-cometa);
-  --sahir-secundario: var(--celeste-pastel);
-  --sahir-acento: var(--dorado-magico);
+  /* Colores para Draco Sahir (verde mágico) */
+  --sahir-primario: var(--verde-hechicero);
+  --sahir-secundario: var(--verde-abisal);
+  --sahir-acento: var(--verde-lima-ritual);
 
   /* Tipografías */
   --fuente-serif: "Playfair Display", Georgia, serif;
@@ -4765,7 +4768,7 @@ a:hover {
 .hero.hero--contact,
 .hero.hero--portfolio,
 .hero.hero--services {
-  height: 60vh;
+  height: 67.5vh;
   position: relative;
   display: flex;
   align-items: center;
