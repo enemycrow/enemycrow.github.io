@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     const tabBtns = document.querySelectorAll('.voice-tab');
-    const sections = document.querySelectorAll('.voice-view');
+    const sections = document.querySelectorAll('section.voice-view');
 
     if (tabBtns.length > 0 && sections.length > 0) {
         tabBtns.forEach(btn => {
