@@ -17,14 +17,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Obtener el target
                 const target = this.getAttribute('data-target');
                 
-                // Ocultar todas las secciones
+                // Ocultar todas las secciones excepto el target
                 sections.forEach(section => {
-                    section.classList.add('hidden');
+                    if (section.id !== target) {
+                        section.classList.add('hidden');
+                    }
                 });
-                
-                // Mostrar la sección correspondiente
-                document.getElementById(target).classList.remove('hidden');
-            });
+
+                // Mostrar la sección correspondiente (solo si estaba oculta)
+                const targetSection = document.getElementById(target);
+                if (targetSection.classList.contains('hidden')) {
+                    targetSection.classList.remove('hidden');
+                });
         });
     }
 });
