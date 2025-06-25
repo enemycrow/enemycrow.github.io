@@ -1,0 +1,152 @@
+/* === Portfolio Destacados === */
+.jesuita-img {
+  background-image: url('../assets/images/jesuita.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.entre-abismos-img {
+  background-image: url('../assets/images/entre-abismos.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.galactique-img {
+  background-image: url('../assets/images/galactique.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.martillo-img {
+  background-image: url('../assets/images/martillo.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+
+/* === Catálogo Completo === */
+.jesuita-catalog {
+  background-image: url('../assets/images/jesuita-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.abismos-catalog {
+  background-image: url('../assets/images/abismos-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.galactique-catalog {
+  background-image: url('../assets/images/galactique-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.martillo-catalog {
+  background-image: url('../assets/images/martillo-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.izel-catalog {
+  background-image: url('../assets/images/izel-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.faro-catalog {
+  background-image: url('../assets/images/faro-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.dilacion-catalog {
+  background-image: url('../assets/images/dilacion-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.tarot-catalog {
+  background-image: url('../assets/images/tarot-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.traverso-catalog {
+  background-image: url('../assets/images/traverso-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.veus-catalog {
+  background-image: url('../assets/images/veus-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.divinity-catalog {
+  background-image: url('../assets/images/divinity-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.circulo-catalog {
+  background-image: url('../assets/images/circulo-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.debacle-catalog {
+  background-image: url('../assets/images/debacle-catalog.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+
+/* === Blog Principal (Featured) === */
+.featured-post-image {
+  background-image: url('../assets/images/featured-trialidad.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* === Blog Entradas === */
+.lauren-post-1 {
+  background-image: url('../assets/images/lauren-post-1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.elysia-post-1 {
+  background-image: url('../assets/images/elysia-post-1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.lauren-post-2 {
+  background-image: url('../assets/images/lauren-post-2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.elysia-post-2 {
+  background-image: url('../assets/images/elysia-post-2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.lauren-post-3 {
+  background-image: url('../assets/images/lauren-post-3.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.elysia-post-3 {
+  background-image: url('../assets/images/elysia-post-3.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* === Placeholder para Sahir === */
+/* .sahir-post-1 { ... } */

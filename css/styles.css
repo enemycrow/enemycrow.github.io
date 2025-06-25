@@ -3994,12 +3994,12 @@ a:hover {
 }
 
 .voice-view--elysia .voice-view__name {
-    color: var(--negro-profundo); /* Nombre en azul oscuro para contraste */
+    color: var(--elysia-texto); /* Nombre en blanco para contraste */
     font-family: var(--fuente-titulos);
 }
 
 .voice-view--elysia .voice-view__description {
-    color: var(--gris-oscuro); /* Descripción en gris oscuro */
+    color: var(--elysia-texto); /* Descripción en blanco */
     font-family: var(--fuente-cuerpo);
 }
 
@@ -4055,8 +4055,13 @@ a:hover {
 
 /* Estilos para la vista detallada del autor */
 .voice-view--elysia {
-    background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--violeta-pálido) 70%);
-    color: var(--negro-profundo);
+    background: linear-gradient(
+        135deg,
+        #3e2763 0%,       /* un violeta oscuro elegante */
+        #6f4a8e 50%,       /* violeta flor noble (el nuevo secundario) */
+        #9a6fff 100%       /* acento brillante, pero no lavado */
+    );
+    color: var(--elysia-texto); /* Y este debería ser blanco o violeta lechoso */
 }
 
 .voice-view--elysia .author-bio, .voice-view--elysia .author-philosophy, .voice-view--elysia .author-works {
@@ -4102,7 +4107,7 @@ a:hover {
 }
 
 .voice-view--lauren .voice-view__name {
-    color: var(--lauren-secundario); /* Nombre del autor */
+    color: var(--lauren-texto); /* Nombre del autor */
     font-family: var(--fuente-titulos);
 }
 
@@ -4334,11 +4339,11 @@ a:hover {
   --lauren-halo: rgba(26, 35, 126, 0.3);
 
   /* Colores para A.C. Elysia (Oráculo etéreo) */
-  --elysia-primario: #23002e;
-  --elysia-secundario: #6b4f9e;
-  --elysia-acento: #ffc4ec;
-  --elysia-texto: #ffffff;
-  --elysia-halo: rgba(168, 43, 181, 0.25);
+  --elysia-primario: #23002e;     /* se mantiene: violeta místico, raíz */
+  --elysia-secundario: #6f4a8e;   /* nuevo: violeta orquídea real */
+  --elysia-acento: #9a6fff;       /* nuevo: energía Nova viva */
+  --elysia-texto: #f3eaff;        /* blanco lechoso con tinte violeta */
+  --elysia-halo: rgba(154, 111, 255, 0.25);
 
   /* Colores para Draco Sahir (Hijo ambiguo) */
   --sahir-primario: #3a1f1c;
