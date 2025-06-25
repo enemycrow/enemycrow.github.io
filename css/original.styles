@@ -16,20 +16,26 @@
   --celeste-pastel: #c1d3ff;
   --dorado-magico: #ffd966;
 
-  /* Colores para Lauren Cuervo (nocturno) */
-  --lauren-primario: var(--negro-profundo);
-  --lauren-secundario: var(--gris-oscuro);
-  --lauren-acento: var(--azul-noche);
+  /* Colores para Lauren Cuervo (Caballero nocturno) */
+  --lauren-primario: #0a0a0a;
+  --lauren-secundario: #1a1a1a;
+  --lauren-acento: #1a237e;
+  --lauren-texto: #c7d8ff;
+  --lauren-halo: rgba(26, 35, 126, 0.3);
 
-  /* Colores para A.C. Elysia (etéreo) */
-  --elysia-primario: var(--blanco-etereo);
-  --elysia-secundario: var(--violeta-pálido);
-  --elysia-acento: var(--violeta-profundo);
+  /* Colores para A.C. Elysia (Oráculo etéreo) */
+  --elysia-primario: #23002e;
+  --elysia-secundario: #6b4f9e;
+  --elysia-acento: #ffc4ec;
+  --elysia-texto: #ffffff;
+  --elysia-halo: rgba(168, 43, 181, 0.25);
 
-  /* Colores para Draco Sahir (cósmico mágico) */
-  --sahir-primario: var(--azul-cometa);
-  --sahir-secundario: var(--celeste-pastel);
-  --sahir-acento: var(--dorado-magico);
+  /* Colores para Draco Sahir (Hijo ambiguo) */
+  --sahir-primario: #3a1f1c;
+  --sahir-secundario: #db5ca8;
+  --sahir-acento: #ff785a;
+  --sahir-texto: #fff0e6;
+  --sahir-halo: rgba(255, 120, 90, 0.2);
 
   /* Tipografías */
   --fuente-serif: "Playfair Display", Georgia, serif;
