@@ -110,32 +110,20 @@
 }
 
 .voice-view--lauren {
-  background: linear-gradient(
-    135deg,
-    var(--negro-profundo) 0%,
-    var(--azul-noche) 100%
-  );
-  color: var(--blanco-etereo);
+  background: linear-gradient(135deg, var(--lauren-primario), var(--lauren-secundario));
+  color: var(--lauren-texto);
   margin-right: 1rem;
 }
 
 .voice-view--elysia {
-  background: linear-gradient(
-    135deg,
-    var(--violeta-profundo) 0%,
-    var(--violeta-pálido) 100%
-  );
-  color: var(--negro-profundo);
+  background: linear-gradient(135deg, var(--elysia-primario), var(--elysia-secundario));
+  color: var(--elysia-texto);
   margin-left: 1rem;
 }
 
 .voice-view--sahir {
-  background: linear-gradient(
-    135deg,
-    var(--gris-oscuro) 0%,
-    var(--gris-claro) 100%
-  );
-  color: var(--blanco-etereo);
+  background: linear-gradient(135deg, var(--sahir-primario), var(--sahir-secundario));
+  color: var(--sahir-texto);
   margin-left: 1rem;
 }
 
@@ -196,22 +184,18 @@
 }
 
 .lauren-image .voice-view__image-frame {
-  background: linear-gradient(to right, var(--azul-noche), var(--azul-etéreo));
-  box-shadow: 0 0 20px rgba(26, 35, 126, 0.5);
+  background: linear-gradient(to right, var(--lauren-secundario), var(--lauren-acento));
+  box-shadow: 0 0 20px var(--lauren-halo);
 }
 
 .elysia-image .voice-view__image-frame {
-  background: linear-gradient(
-    to right,
-    var(--violeta-profundo),
-    var(--violeta-pálido)
-  );
-  box-shadow: 0 0 20px rgba(107, 79, 158, 0.5);
+  background: linear-gradient(to right, var(--elysia-secundario), var(--elysia-acento));
+  box-shadow: 0 0 20px var(--elysia-halo);
 }
 
 .sahir-image .voice-view__image-frame {
-  background: linear-gradient(to right, var(--gris-oscuro), var(--gris-claro));
-  box-shadow: 0 0 20px rgba(128, 128, 128, 0.5);
+  background: linear-gradient(to right, var(--sahir-secundario), var(--sahir-acento));
+  box-shadow: 0 0 20px var(--sahir-halo);
 }
 
 .voice-view__image {
@@ -224,17 +208,17 @@
 
 .lauren-image .voice-view__image {
   background-image: url("../images/lauren.jpg");
-  background-color: var(--azul-noche); /* Fallback */
+  background-color: var(--lauren-acento); /* Fallback */
 }
 
 .elysia-image .voice-view__image {
   background-image: url("../images/elysia.jpg");
-  background-color: var(--violeta-profundo); /* Fallback */
+  background-color: var(--elysia-secundario); /* Fallback */
 }
 
 .sahir-image .voice-view__image {
   background-image: url("../images/sahir.jpg");
-  background-color: var(--gris-oscuro);
+  background-color: var(--sahir-primario);
 }
 
 .voice-view__name {
@@ -244,17 +228,17 @@
 }
 
 .voice-view--lauren .voice-view__name {
-  color: #C7D8FF; /* Azul claro */
+  color: var(--lauren-texto);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .voice-view--elysia .voice-view__name {
-  color: #5B277D; /* Violeta profundo */
+  color: var(--elysia-texto);
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .voice-view--sahir .voice-view__name {
-  color: #FFE699; /* Amarillo claro */
+  color: var(--sahir-texto);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -312,18 +296,18 @@
 }
 
 .voice-view--lauren .voice-view__theme-icon {
-  background: var(--azul-noche);
-  color: var(--blanco-etereo);
+  background: var(--lauren-acento);
+  color: var(--lauren-texto);
 }
 
 .voice-view--elysia .voice-view__theme-icon {
-  background: var(--violeta-profundo);
-  color: var(--blanco-etereo);
+  background: var(--elysia-acento);
+  color: var(--elysia-texto);
 }
 
 .voice-view--sahir .voice-view__theme-icon {
-  background: var(--gris-oscuro);
-  color: var(--blanco-etereo);
+  background: var(--sahir-acento);
+  color: var(--sahir-texto);
 }
 
 /* Single Author Views */
@@ -346,12 +330,8 @@
 }
 
 .voice-view--sahir {
-  background: linear-gradient(
-    135deg,
-    var(--gris-oscuro) 0%,
-    var(--gris-claro) 100%
-  );
-  color: var(--blanco-etereo);
+  background: linear-gradient(135deg, var(--sahir-primario), var(--sahir-secundario));
+  color: var(--sahir-texto);
 }
 
 .single-author-container {
@@ -377,22 +357,18 @@
 }
 
 .lauren-image-large .author-image-frame-large {
-  background: linear-gradient(to right, var(--azul-noche), var(--azul-etéreo));
-  box-shadow: 0 0 30px rgba(26, 35, 126, 0.5);
+  background: linear-gradient(to right, var(--lauren-secundario), var(--lauren-acento));
+  box-shadow: 0 0 30px var(--lauren-halo);
 }
 
 .elysia-image-large .author-image-frame-large {
-  background: linear-gradient(
-    to right,
-    var(--violeta-profundo),
-    var(--violeta-pálido)
-  );
-  box-shadow: 0 0 30px rgba(107, 79, 158, 0.5);
+  background: linear-gradient(to right, var(--elysia-secundario), var(--elysia-acento));
+  box-shadow: 0 0 30px var(--elysia-halo);
 }
 
 .sahir-image-large .author-image-frame-large {
-  background: linear-gradient(to right, var(--gris-oscuro), var(--gris-claro));
-  box-shadow: 0 0 30px rgba(128, 128, 128, 0.5);
+  background: linear-gradient(to right, var(--sahir-secundario), var(--sahir-acento));
+  box-shadow: 0 0 30px var(--sahir-halo);
 }
 
 .author-image-large-inner {
@@ -405,17 +381,17 @@
 
 .lauren-image-large .author-image-large-inner {
   background-image: url("../images/lauren-large.jpg");
-  background-color: var(--azul-noche); /* Fallback */
+  background-color: var(--lauren-acento); /* Fallback */
 }
 
 .elysia-image-large .author-image-large-inner {
   background-image: url("../images/elysia-large.jpg");
-  background-color: var(--violeta-profundo); /* Fallback */
+  background-color: var(--elysia-secundario); /* Fallback */
 }
 
 .sahir-image-large .author-image-large-inner {
   background-image: url("../images/sahir-large.jpg");
-  background-color: var(--gris-oscuro); /* Fallback */
+  background-color: var(--sahir-primario); /* Fallback */
 }
 
 .author-title {
@@ -503,7 +479,7 @@
 .voice-view--sahir .author-bio h3::after,
 .voice-view--sahir .author-philosophy h3::after,
 .voice-view--sahir .author-works h3::after {
-  background: linear-gradient(to right, var(--gris-oscuro), var(--gris-claro));
+  background: linear-gradient(to right, var(--sahir-secundario), var(--sahir-acento));
 }
 
 .author-bio p,
@@ -571,17 +547,17 @@
 
 .sahir-work-1 {
   background-image: url("../images/sahir-work-1.jpg");
-  background-color: var(--gris-oscuro); /* Fallback */
+  background-color: var(--sahir-primario); /* Fallback */
 }
 
 .sahir-work-2 {
   background-image: url("../images/sahir-work-2.jpg");
-  background-color: var(--gris-oscuro); /* Fallback */
+  background-color: var(--sahir-primario); /* Fallback */
 }
 
 .sahir-work-3 {
   background-image: url("../images/sahir-work-3.jpg");
-  background-color: var(--gris-oscuro); /* Fallback */
+  background-color: var(--sahir-primario); /* Fallback */
 }
 
 .work-info {
@@ -597,8 +573,8 @@
 }
 
 .voice-view--sahir .work-info {
-  background: rgba(42, 56, 107, 0.7); /* un azul más profundo con opacidad */
-  color: var(--blanco-etereo);
+  background: var(--sahir-secundario);
+  color: var(--sahir-texto);
 }
 
 .voice-view--sahir .work-info h4 {
@@ -875,13 +851,13 @@ blockquote {
 }
 
 .lauren-tag {
-  background-color: var(--azul-noche);
-  color: var(--blanco-etereo);
+  background-color: var(--lauren-acento);
+  color: var(--lauren-texto);
 }
 
 .elysia-tag {
-  background-color: var(--violeta-profundo);
-  color: var(--blanco-etereo);
+  background-color: var(--elysia-acento);
+  color: var(--elysia-texto);
 }
 
 .collab-tag {
@@ -2869,18 +2845,18 @@ a:hover {
 }
 
 .lauren-tag {
-  background-color: var(--azul-noche);
-  color: var(--blanco-etereo);
+  background-color: var(--lauren-acento);
+  color: var(--lauren-texto);
 }
 
 .elysia-tag {
-  background-color: var(--violeta-profundo);
-  color: var(--blanco-etereo);
+  background-color: var(--elysia-acento);
+  color: var(--elysia-texto);
 }
 
 .sahir-tag {
-  background-color: var(--azul-cometa);
-  color: var(--blanco-etereo);
+  background-color: var(--sahir-acento);
+  color: var(--sahir-texto);
 }
 
 .collab-tag {
@@ -4042,9 +4018,8 @@ a:hover {
 }
 
 .voice-view--elysia .voice-view__theme-icon {
-    color: var(--elysia-acento); /* Iconos con color de acento dorado */
-    background: var(--elysia-acento); /* Fondo para los iconos */
-    color: var(--elysia-primario); /* Color de icono contrastante */
+    background: var(--elysia-acento);
+    color: var(--elysia-texto);
 }
 
 .voice-view--elysia .voice-view__image {
@@ -4053,8 +4028,8 @@ a:hover {
 
 /* Estilos para las secciones principales del autor */
 .elysia-section {
-    background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--violeta-pálido) 100%);
-    color: var(--negro-profundo);
+    background: linear-gradient(135deg, var(--elysia-primario), var(--elysia-secundario));
+    color: var(--elysia-texto);
     margin-left: 1rem;
     padding: 2rem;
     border-radius: 5px;
@@ -4064,13 +4039,13 @@ a:hover {
 
 /* Estilos para las imágenes del autor */
 .elysia-image .voice-view__image-frame {
-    background: linear-gradient(to right, var(--elysia-acento), var(--elysia-secundario));
-    box-shadow: 0 0 20px rgba(107, 79, 158, 0.5); /* Sombra con color temático */
+    background: linear-gradient(to right, var(--elysia-secundario), var(--elysia-acento));
+    box-shadow: 0 0 20px var(--elysia-halo);
 }
 
 .elysia-image .voice-view__image {
     background-image: url('../images/elysia.jpg'); /* Imagen pequeña del autor */
-    background-color: var(--elysia-acento); /* Fallback */
+    background-color: var(--elysia-secundario); /* Fallback */
 }
 
 .elysia-image-large .author-image-large-inner {
@@ -4151,9 +4126,8 @@ a:hover {
 }
 
 .voice-view--lauren .voice-view__theme-icon {
-    color: var(--lauren-acento); /* Iconos con color de acento */
-    background: var(--lauren-acento); /* Fondo para los iconos */
-    color: var(--blanco-etereo); /* Color de icono contrastante */
+    background: var(--lauren-acento);
+    color: var(--lauren-texto);
 }
 
 .voice-view--lauren .voice-view__image {
@@ -4162,8 +4136,8 @@ a:hover {
 
 /* Estilos para las secciones principales del autor */
 .lauren-section {
-    background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--azul-noche) 100%);
-    color: var(--blanco-etereo);
+    background: linear-gradient(135deg, var(--lauren-primario), var(--lauren-secundario));
+    color: var(--lauren-texto);
     margin-right: 1rem;
     padding: 2rem;
     border-radius: 5px;
@@ -4173,8 +4147,8 @@ a:hover {
 
 /* Estilos para las imágenes del autor */
 .lauren-image .voice-view__image-frame {
-    background: linear-gradient(to right, var(--lauren-acento), var(--azul-etéreo));
-    box-shadow: 0 0 20px rgba(26, 35, 126, 0.5); /* Sombra con color temático */
+    background: linear-gradient(to right, var(--lauren-secundario), var(--lauren-acento));
+    box-shadow: 0 0 20px var(--lauren-halo);
 }
 
 .lauren-image .voice-view__image {
@@ -4259,9 +4233,8 @@ a:hover {
 }
 
 .voice-view--sahir .voice-view__theme-icon {
-    color: var(--sahir-acento); /* Iconos con color de acento */
-    background: var(--dorado-magico); /* Fondo para los iconos */
-    color: var(--blanco-etereo); /* Color de icono contrastante */
+    background: var(--sahir-acento);
+    color: var(--sahir-texto);
 }
 
 .voice-view--sahir .voice-view__image {
@@ -4281,13 +4254,13 @@ a:hover {
 
 /* Estilos para las imágenes del autor */
 .sahir-image .voice-view__image-frame {
-    background: linear-gradient(to right, var(--azul-cometa), var(--azul-ftalo));
-    box-shadow: 0 0 20px rgba(128, 128, 128, 0.5); /* Sombra con color temático */
+    background: linear-gradient(to right, var(--sahir-secundario), var(--sahir-acento));
+    box-shadow: 0 0 20px var(--sahir-halo);
 }
 
 .sahir-image .voice-view__image {
     background-image: url('../images/sahir.jpg'); /* Imagen pequeña del autor */
-    background-color: var(--azul-cometa); /* Fallback */
+    background-color: var(--sahir-primario); /* Fallback */
 }
 
 .sahir-image-large .author-image-large-inner {
@@ -4353,20 +4326,26 @@ a:hover {
   --fucsia-brillante: #a82bb5;
   --rosa-etereo: #ffc4ec;
 
-  /* Colores para Lauren Cuervo (nocturno) */
-  --lauren-primario: var(--negro-profundo);
-  --lauren-secundario: var(--gris-oscuro);
-  --lauren-acento: var(--azul-noche);
+  /* Colores para Lauren Cuervo (Caballero nocturno) */
+  --lauren-primario: #0a0a0a;
+  --lauren-secundario: #1a1a1a;
+  --lauren-acento: #1a237e;
+  --lauren-texto: #c7d8ff;
+  --lauren-halo: rgba(26, 35, 126, 0.3);
 
-  /* Colores para A.C. Elysia (etéreo) */
-  --elysia-primario: var(--violeta-mistico);
-  --elysia-secundario: var(--fucsia-brillante);
-  --elysia-acento: var(--rosa-etereo);
+  /* Colores para A.C. Elysia (Oráculo etéreo) */
+  --elysia-primario: #23002e;
+  --elysia-secundario: #6b4f9e;
+  --elysia-acento: #ffc4ec;
+  --elysia-texto: #ffffff;
+  --elysia-halo: rgba(168, 43, 181, 0.25);
 
-  /* Colores para Draco Sahir (verde mágico) */
-  --sahir-primario: var(--verde-hechicero);
-  --sahir-secundario: var(--verde-abisal);
-  --sahir-acento: var(--verde-lima-ritual);
+  /* Colores para Draco Sahir (Hijo ambiguo) */
+  --sahir-primario: #3a1f1c;
+  --sahir-secundario: #db5ca8;
+  --sahir-acento: #ff785a;
+  --sahir-texto: #fff0e6;
+  --sahir-halo: rgba(255, 120, 90, 0.2);
 
   /* Tipografías */
   --fuente-serif: "Playfair Display", Georgia, serif;
@@ -4510,10 +4489,10 @@ a:hover {
 .lauren-section {
   background: linear-gradient(
     to right,
-    var(--negro-profundo),
-    var(--azul-noche)
+    var(--lauren-primario),
+    var(--lauren-secundario)
   );
-  color: var(--blanco-etereo);
+  color: var(--lauren-texto);
   padding: 2rem;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -4523,10 +4502,10 @@ a:hover {
 .elysia-section {
   background: linear-gradient(
     to right,
-    var(--violeta-profundo),
-    var(--violeta-pálido)
+    var(--elysia-primario),
+    var(--elysia-secundario)
   );
-  color: var(--negro-profundo);
+  color: var(--elysia-texto);
   padding: 2rem;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
