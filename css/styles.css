@@ -4943,4 +4943,59 @@ a:hover {
   }
 }
 
+/* Blog Entry Template */
+.blog-entry {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.blog-entry__title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-entry__date {
+  font-family: var(--fuente-manuscrita);
+  color: var(--gris-claro);
+  margin-bottom: 2rem;
+}
+
+.blog-entry__content {
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.blog-entry__signature {
+  font-family: var(--fuente-manuscrita);
+  text-align: right;
+}
+
+.blog-entry--lauren {
+  background: linear-gradient(
+    135deg,
+    var(--lauren-primario),
+    var(--lauren-secundario)
+  );
+  color: var(--lauren-texto);
+}
+
+.blog-entry--elysia {
+  background: linear-gradient(
+    135deg,
+    var(--elysia-primario),
+    var(--elysia-secundario)
+  );
+  color: var(--elysia-texto);
+}
+
+.blog-entry--sahir {
+  background: linear-gradient(
+    135deg,
+    var(--sahir-primario),
+    var(--sahir-secundario)
+  );
+  color: var(--sahir-texto);
+}
+
 /* --- End of styles.css --- */
