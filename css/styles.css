@@ -6,7 +6,7 @@
 .hero.hero--about {
   display: flex;
   align-items: center;
-  background-image: url("https://cdn.builder.io/api/v1/image/assets%2F33c5f996430b43939ac2042c30698447%2Fc5102fbfaa764c47b11def9261d24aad");
+  background-image: url("../assets/images/izelitzel.png");
   background-position: 50% 10%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -74,6 +74,9 @@
 
 /* About Sections */
 .voice-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 5rem 0;
   transition: all 0.5s ease;
 }
@@ -265,6 +268,7 @@
   width: 100%;
   padding: 1.5rem;
   border-radius: 5px;
+  margin-top: auto;
 }
 
 .voice-view__themes h4 {
@@ -759,7 +763,7 @@ blockquote {
 
 /* Hero Section */
 .hero.hero--blog {
-  background-image: url('https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?auto=format&fit=crop&w=1650&q=80');
+  background-image: url('../assets/images/efectodilaciontemporal.png');
 }
 
 
@@ -1347,7 +1351,7 @@ blockquote {
 
 /* Hero Section */
 .hero.hero--contact {
-  background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1650&q=80');
+  background-image: url('../assets/images/mundodelosveus.png');
 }
 
 
@@ -2750,7 +2754,7 @@ a:hover {
 
 /* Hero Section */
 .hero.hero--portfolio {
-  background-image: url('https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&w=1650&q=80');
+  background-image: url('../assets/images/librodelafusion.png');
 }
 
 
@@ -3400,7 +3404,7 @@ a:hover {
 
 /* Hero Section */
 .hero.hero--services {
-  background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1650&q=80');
+  background-image: url('../assets/images/reversiondelasdivinidades.png');
 }
 
 
@@ -4008,12 +4012,12 @@ a:hover {
 }
 
 .voice-view--elysia .voice-view__themes h4 {
-     color: var(--elysia-secundario); /* Título de temas en azul oscuro */
+     color: var(--elysia-texto); /* Título de temas en blanco */
      font-family: var(--fuente-manuscrita);
 }
 
 .voice-view--elysia .voice-view__theme-list li {
-    color: var(--elysia-secundario); /* Temas en gris oscuro */
+    color: var(--elysia-texto); /* Temas en blanco */
     font-family: var(--fuente-cuerpo);
 }
 
@@ -4121,12 +4125,12 @@ a:hover {
 }
 
 .voice-view--lauren .voice-view__themes h4 {
-     color: var(--lauren-secundario); /* Título de temas */
+     color: var(--lauren-texto); /* Título de temas */
      font-family: var(--fuente-manuscrita);
 }
 
 .voice-view--lauren .voice-view__theme-list li {
-    color: var(--lauren-secundario); /* Temas */
+    color: var(--lauren-texto); /* Temas */
     font-family: var(--fuente-cuerpo);
 }
 
@@ -4228,12 +4232,12 @@ a:hover {
 }
 
 .voice-view--sahir .voice-view__themes h4 {
-     color: var(--sahir-secundario); /* Título de temas */
+     color: var(--sahir-texto); /* Título de temas en blanco */
      font-family: var(--fuente-manuscrita);
 }
 
 .voice-view--sahir .voice-view__theme-list li {
-    color: var(--sahir-secundario); /* Temas en gris claro */
+    color: var(--sahir-texto); /* Temas en blanco */
     font-family: var(--fuente-cuerpo);
 }
 
@@ -4308,6 +4312,41 @@ a:hover {
 }
 
 /* --- End of style-sahir.css --- */
+
+/* --- Start of voice-view.css for every author --- */
+
+.voice-view__theme-list {
+  list-style: none;
+  padding: 1.2rem;
+  margin: 0;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.voice-view__theme-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--fuente-cuerpo);
+  font-size: 1rem;
+}
+
+.voice-view__theme-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1); /* opcional */
+  font-size: 1.2rem;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+/* --- End of voice-view.css for every author --- */
 
 /* --- Start of styles.css --- */
 /* Estilos base para "La Pluma, el Faro y la Llama" */
@@ -4613,6 +4652,21 @@ a:hover {
   }
   to {
     transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-bottom {
+  animation: slideInBottom 1s ease-in-out;
+}
+
+@keyframes slideInBottom {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
     opacity: 1;
   }
 }
