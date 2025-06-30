@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plantilla de Entrada de Blog</title>
-    <link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Título del Blog</title>
+  <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
-    <article class="blog-entry" data-author="lauren">
-        <h1 class="blog-entry__title">Título del blog</h1>
-        <p class="blog-entry__date">1 de enero de 2025</p>
-        <div class="blog-entry__content">
-            <p>Aquí va el contenido de la entrada del blog.</p>
-        </div>
-        <p class="blog-entry__signature">— Lauren Cuervo</p>
-    </article>
 
-    <script src="../js/blog-template.js"></script>
+  <article class="blog-entry blog-entry--lauren" data-author="lauren">
+    <h1 class="blog-entry__title">Título del blog</h1>
+    <span class="blog-entry__date">Fecha de publicación</span>
+
+    <div class="blog-entry__content">
+      <figure>
+        <img src="../assets/images/hijasdelmartillo.png" alt="Descripción de la imagen" />
+        <figcaption>Texto opcional para acompañar la imagen.</figcaption>
+      </figure>
+
+      <p>Tu primer párrafo de introducción va aquí. Puedes usar este espacio para dar contexto, emocionar o preparar al lector.</p>
+
+      <blockquote class="blog-entry__quote">
+        “Este es un bloque de cita para destacar alguna frase importante del artículo.”
+      </blockquote>
+
+      <p>Párrafos adicionales de contenido, divididos con claridad y buena legibilidad.</p>
+
+      <p>Otro párrafo o conclusión del artículo.</p>
+    </div>
+
+    <p class="blog-entry__signature">— Lauren Cuervo</p>
+  </article>
+
+  <script src="../js/blog-template.js"></script>
 </body>
 </html>
