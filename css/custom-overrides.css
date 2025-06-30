@@ -1,4 +1,4 @@
-/* === Portfolio Destacados === */
+/* === Catálogo Completo === */
 .jesuita-img {
   background-image: url('../assets/images/jesuitadelvino.png');
   background-size: cover;
@@ -11,98 +11,83 @@
   background-position: center;
 }
 
+.martillo-img {
+  background-image: url('../assets/images/hijasdelmartillo.png');
+  background-size: cover;
+  background-position: center;
+}
+
 .galactique-img {
   background-image: url('../assets/images/galactique.png');
   background-size: cover;
   background-position: center;
 }
 
-.martillo-img {
-  background-image: url('../assets/images/hijasdelmartillo.png');
-  background-size: cover;
-  background-position: center;
-} 
-
-
-/* === Catálogo Completo === */
-.jesuita-catalog {
-  background-image: url('../assets/images/jesuitadelvino.png');
-  background-size: cover;
-  background-position: center;
-}
-
-.abismos-catalog {
-  background-image: url('../assets/images/entreamoresabismos.png');
-  background-size: cover;
-  background-position: center;
-}
-
-.galactique-catalog {
-  background-image: url('../assets/images/galactique.png'');
-  background-size: cover;
-  background-position: center;
-}
-
-.martillo-catalog {
-  background-image: url('../assets/images/hijasdelmartillo.png');
-  background-size: cover;
-  background-position: center;
-}
-
-.izel-catalog {
+.izel-img {
   background-image: url('../assets/images/izelitzel.png');
   background-size: cover;
   background-position: center;
 }
 
-.faro-catalog {
+.libro-fusion-img {
   background-image: url('../assets/images/librodelafusion.png');
   background-size: cover;
   background-position: center;
 }
 
-.dilacion-catalog {
+.dilacion-img {
   background-image: url('../assets/images/efectodilaciontemporal.png');
   background-size: cover;
   background-position: center;
 }
 
-.tarot-catalog {
-  background-image: url('../assets/images/tarot-catalog.jpg');
+.tarotcuervoelysia-img {
+  background-image: url('../assets/images/tarotcuervoelysia.jpg');
   background-size: cover;
   background-position: center;
 }
 
-.traverso-catalog {
+.traverso-img {
   background-image: url('../assets/images/traverso.png');
   background-size: cover;
   background-position: center;
 }
 
-.veus-catalog {
+.veus-img {
   background-image: url('../assets/images/mundodelosveus.png');
   background-size: cover;
   background-position: center;
 }
 
-.divinity-catalog {
+.divinity-img {
   background-image: url('../assets/images/reversiondelasdivinidades.png');
   background-size: cover;
   background-position: center;
 }
 
-.circulo-catalog {
-  background-image: url('../assets/images/circulo-catalog.jpg');
+.circulo-img {
+  background-image: url('../assets/images/circuloarena.png');
   background-size: cover;
   background-position: center;
 }
 
-.debacle-catalog {
+.debacle-img {
   background-image: url('../assets/images/debacletriangular.png');
   background-size: cover;
   background-position: center;
 }
 
+.huevovolvio-img {
+  background-image: url('../assets/images/huevovolviocantar.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.cristalito-img {
+  background-image: url('../assets/images/cristalito.png');
+  background-size: cover;
+  background-position: center;
+}
 
 /* === Blog Principal (Featured) === */
 .featured-post-image {
