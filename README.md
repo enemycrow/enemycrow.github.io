@@ -40,3 +40,7 @@ Las hojas `css/about.css`, `css/blog.css`, `css/contact.css`,
 `css/home.css`, `css/portfolio.css` y `css/services.css` se usaron en las primeras versiones del proyecto. Todo su
 contenido se consolidó en `css/styles.css`, por lo que se
 eliminaron para simplificar el repositorio.
+
+## Admin Strapi
+
+https://beautiful-bat-b20fd0ce9b.strapiapp.com/admin

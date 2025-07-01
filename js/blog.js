@@ -1,93 +1,114 @@
-// JavaScript para la página de Blog y Diario de Creación
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+  const container = document.querySelector('#blog-posts-grid');
+  const filterBtns = document.querySelectorAll('.blog-filter__button');
 
-    // Filtrado de entradas de blog
-    const filterBtns = document.querySelectorAll('.blog-filter__button');
-    const blogPosts = document.querySelectorAll('.blog-post');
-    
-    if (filterBtns.length > 0 && blogPosts.length > 0) {
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remover clase active de todos los botones
-                filterBtns.forEach(b => b.classList.remove('active'));
-                
-                // Añadir clase active al botón clickeado
-                this.classList.add('active');
-                
-                // Obtener el filtro
-                const filter = this.getAttribute('data-filter');
-                
-                // Filtrar los elementos
-                blogPosts.forEach(post => {
-                    if (filter === 'all') {
-                        post.style.display = 'flex';
-                    } else {
-                        if (post.classList.contains(`blog-post--${filter}`)) {
-                            post.style.display = 'flex';
-                        } else {
-                            post.style.display = 'none';
-                        }
-                    }
-                });
-            });
-        });
+  // Función para cargar desde Strapi
+  async function cargarEntradas() {
+    try {
+      const res = await fetch("https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?populate=ImagenCobertura");
+      const data = await res.json();
+      const entries = data.data;
+
+      if (!container) {
+        console.warn("⚠️ No se encontró el contenedor #blog-posts-grid");
+        return;
+      }
+
+      entries.forEach(entry => {
+        const { titulo, autor, contenido, ImagenCobertura, FechaPublicacion } = entry;
+
+        // Convertir contenido tipográfico a HTML simple
+        let contenidoHtml = '';
+        if (Array.isArray(contenido)) {
+          contenidoHtml = contenido
+            .map(block => block.children?.map(child => child.text).join('') || '')
+            .join('<br><br>');
+        }
+
+        // Imagen
+        const imageUrl = ImagenCobertura?.formats?.medium?.url ||
+                         ImagenCobertura?.formats?.small?.url ||
+                         ImagenCobertura?.url || '';
+
+        const article = document.createElement('article');
+        article.classList.add('blog-post', `blog-post--${autor?.toLowerCase().replace(/\s+/g, '-') || 'otros'}`);
+
+        article.innerHTML = `
+          <h2 class="blog-entry__title">${titulo}</h2>
+          <p class="blog-entry__date">${new Date(FechaPublicacion).toLocaleDateString('es-CL')}</p>
+          ${imageUrl ? `<img src="${imageUrl}" alt="${titulo}" class="blog-entry__image" />` : ''}
+          <div class="blog-entry__content">${contenidoHtml}</div>
+          <p class="blog-entry__signature">— ${autor || 'Autor desconocido'}</p>
+        `;
+
+        container.appendChild(article);
+      });
+    } catch (error) {
+      console.error("❌ Error al cargar entradas:", error);
     }
+  }
 
-    // Animación para elementos al hacer scroll
-    const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.blog-post, .topic-item');
-        
-        elements.forEach(element => {
-            const elementPosition = element.getBoundingClientRect().top;
-            const screenPosition = window.innerHeight / 1.2;
-            
-            if (elementPosition < screenPosition) {
-                element.classList.add('fade-in');
-            }
-        });
-    };
-    
-    // Ejecutar animación al cargar la página
-    animateOnScroll();
-    
-    // Ejecutar animación al hacer scroll
-    window.addEventListener('scroll', animateOnScroll);
+  await cargarEntradas();
 
-    // Formulario de suscripción
-    const subscribeForm = document.querySelector('.subscribe-form');
-    if (subscribeForm) {
-        subscribeForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            
-            if (email) {
-                // Aquí iría la lógica para procesar la suscripción
-                alert('¡Gracias por suscribirte! Pronto recibirás noticias sobre nuevas entradas en el diario de creación.');
-                this.reset();
-            }
-        });
-    }
+  // Filtro
+  const blogPosts = document.querySelectorAll('.blog-post');
+  if (filterBtns.length > 0 && blogPosts.length > 0) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.getAttribute('data-filter');
 
-    // Paginación
-    const pageLinks = document.querySelectorAll('.page-link, .page-next');
-    if (pageLinks.length > 0) {
-        pageLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remover clase active de todos los enlaces
-                document.querySelectorAll('.page-link').forEach(l => {
-                    l.classList.remove('active');
-                });
-                
-                // Si es un número de página, añadir clase active
-                if (this.classList.contains('page-link')) {
-                    this.classList.add('active');
-                }
-                
-                // Aquí iría la lógica para cargar más entradas
-                // Por ahora solo es visual
-            });
+        blogPosts.forEach(post => {
+          if (filter === 'all' || post.classList.contains(`blog-post--${filter}`)) {
+            post.style.display = 'flex';
+          } else {
+            post.style.display = 'none';
+          }
         });
-    }
+      });
+    });
+  }
+
+  // Animación al hacer scroll
+  const animateOnScroll = function () {
+    const elements = document.querySelectorAll('.blog-post, .topic-item');
+    elements.forEach(element => {
+      const elementPosition = element.getBoundingClientRect().top;
+      const screenPosition = window.innerHeight / 1.2;
+
+      if (elementPosition < screenPosition) {
+        element.classList.add('fade-in');
+      }
+    });
+  };
+  animateOnScroll();
+  window.addEventListener('scroll', animateOnScroll);
+
+  // Formulario de suscripción
+  const subscribeForm = document.querySelector('.subscribe-form');
+  if (subscribeForm) {
+    subscribeForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      if (email) {
+        alert('¡Gracias por suscribirte! Pronto recibirás noticias sobre nuevas entradas en el diario de creación.');
+        this.reset();
+      }
+    });
+  }
+
+  // Paginación
+  const pageLinks = document.querySelectorAll('.page-link, .page-next');
+  if (pageLinks.length > 0) {
+    pageLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelectorAll('.page-link').forEach(l => l.classList.remove('active'));
+        if (this.classList.contains('page-link')) {
+          this.classList.add('active');
+        }
+      });
+    });
+  }
 });
