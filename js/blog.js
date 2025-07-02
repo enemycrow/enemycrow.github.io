@@ -24,24 +24,27 @@ document.addEventListener('DOMContentLoaded', function() {
       totalPages = meta.pageCount || 1;
 
       entries.forEach(item => {
-        const e = item.attributes || item;
-        const titulo = e.titulo || e.title || '';
-        const slug = e.slug || item.slug || '';
-        const autor = e.autor || 'Autor';
-        const fecha = e.FechaPublicacion || e.publishedAt || e.createdAt;
-        const img = e.ImagenCobertura;
+        const attr = item.attributes || {};
+        const id = item.id;
+        const slug = item.slug || attr.slug || '';
+        const titulo = attr.titulo || '';
+        const autor = attr.autor || 'Autor';
+        const fecha = attr.FechaPublicacion || attr.publishedAt || item.createdAt;
+        const img = attr.ImagenCobertura;
         const imageUrl = img?.data?.attributes?.url || img?.url || '';
-        const contenido = e.contenido || '';
+        const contenido = attr.contenido || '';
+        const resumenRaw = attr.resumen || '';
 
-        let text = '';
-        if (Array.isArray(contenido)) {
-          text = contenido.map(b => b.children?.map(c => c.text).join('') || '').join(' ');
-        } else if (typeof contenido === 'string') {
-          text = contenido;
-        }
-
-        const resumen = e.resumen || text.split(' ').slice(0, 30).join(' ') + (text.split(' ').length > 30 ? '...' : '');
-
+      // Extraer texto plano del resumen
+      let resumen = '';
+      if (Array.isArray(resumenRaw)) {
+        resumen = resumenRaw
+          .map(b => b.children?.map(c => c.text).join('') || '')
+          .join(' ');
+      } else if (typeof resumenRaw === 'string') {
+        resumen = resumenRaw;
+      }
+      
         const dateObj = fecha ? new Date(fecha) : new Date();
         const day = dateObj.toLocaleDateString('es-CL', { day: '2-digit' });
         const month = dateObj.toLocaleDateString('es-CL', { month: 'long' });
