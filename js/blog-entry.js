@@ -20,12 +20,26 @@ document.addEventListener('DOMContentLoaded', async function() {
     const titulo = e.titulo || e.title || '';
     const fecha = e.FechaPublicacion || e.publishedAt || e.createdAt;
     const contenido = e.contenido || '';
+    let snippet = '';
+    if (Array.isArray(contenido)) {
+      snippet = contenido
+        .map(b => b.children?.map(c => c.text).join('') || '')
+        .join(' ')
+        .slice(0, 160)
+        .trim();
+    } else if (typeof contenido === 'string') {
+      snippet = contenido
+        .replace(/<[^>]+>/g, '')
+        .slice(0, 160)
+        .trim();
+    }
     const autor = e.autor || 'Autor';
     const img = e.ImagenCobertura;
     const imageUrl = img?.data?.attributes?.url || img?.url || '';
 
     const titleEl = document.querySelector('.blog-entry__title');
     const dateEl = document.querySelector('.blog-entry__date');
+    const snippetEl = document.querySelector('.blog-entry__snippet');
     const contentEl = document.querySelector('.blog-entry__content');
     const authorEl = document.querySelector('.blog-entry__signature');
     const imgEl = document.querySelector('.blog-entry__image');
@@ -36,6 +50,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       const d = new Date(fecha);
       dateEl.textContent = d.toLocaleDateString('es-CL', { day: '2-digit', month: 'long', year: 'numeric' });
     }
+    if (snippetEl && snippet) snippetEl.textContent = snippet;
     if (contentEl) {
       if (typeof contenido === 'string') {
         contentEl.innerHTML = contenido;
