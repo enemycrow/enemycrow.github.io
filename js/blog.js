@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const imageUrl =
           img?.formats?.medium?.url ||
           img?.url ||
+          // Fallback to old nested structure for backward compatibility
           img?.data?.attributes?.formats?.medium?.url ||
           img?.data?.attributes?.url || '';
         const resumenRaw = entry.resumen || '';
