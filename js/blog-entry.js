@@ -10,17 +10,17 @@ document.addEventListener('DOMContentLoaded', async function() {
     const url = `https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=ImagenCobertura`;
     const res = await fetch(url);
     const data = await res.json();
-    const item = data.data?.[0];
-    if (!item) {
-      console.warn('Entrada no encontrada');
+    const entry = data.data?.[0];
+    if (!entry) {
+      console.warn('Entrada no encontrada', slug);
       return;
     }
 
-    const e = item.attributes || item;
+    const e = entry.attributes || entry;
     const titulo = e.titulo || e.title || '';
     const fecha = e.FechaPublicacion || e.publishedAt || e.createdAt;
     const contenido = e.contenido || '';
-    const autor = e.autor || '';
+    const autor = e.autor || 'Autor';
     const img = e.ImagenCobertura;
     const imageUrl = img?.data?.attributes?.url || img?.url || '';
 
@@ -52,4 +52,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   } catch (err) {
     console.error('Error al cargar la entrada', err);
   }
+
+  document.querySelector('.preloader')?.classList.add('hide'); // Ocultar preloader
 });
