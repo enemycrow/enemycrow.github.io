@@ -25,16 +25,18 @@ document.addEventListener('DOMContentLoaded', function() {
       totalPages = meta.pageCount || 1;
 
       entries.forEach(item => {
-        const attr = item.attributes || {};
-        const id = item.id;
-        const slug = item.slug || attr.slug || '';
-        const titulo = attr.titulo || '';
-        const autor = attr.autor || 'Autor';
-        const fecha = attr.FechaPublicacion || attr.publishedAt || item.createdAt;
-        const img = attr.ImagenCobertura;
-        const imageUrl = img?.data?.attributes?.formats?.medium?.url || img?.data?.attributes?.url || '';
-        const contenido = attr.contenido || '';
-        const resumenRaw = attr.resumen || '';
+        const entry = { ...item, ...(item.attributes || {}) };
+        const slug = entry.slug || '';
+        const titulo = entry.titulo || '';
+        const autor = entry.autor || 'Autor';
+        const fecha = entry.FechaPublicacion || entry.publishedAt || entry.createdAt;
+        const img = entry.ImagenCobertura;
+        const imageUrl =
+          img?.formats?.medium?.url ||
+          img?.url ||
+          img?.data?.attributes?.formats?.medium?.url ||
+          img?.data?.attributes?.url || '';
+        const resumenRaw = entry.resumen || '';
 
       // Extraer texto plano del resumen
       let resumen = '';
