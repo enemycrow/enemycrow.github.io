@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const pageSize = 6;
   let totalPages = 1;
 
+  // Verificar si el contenedor existe
   async function cargarEntradas(page = 1) {
     if (!container) {
       console.warn('⚠️ No se encontró el contenedor #blog-posts-grid');
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const autor = attr.autor || 'Autor';
         const fecha = attr.FechaPublicacion || attr.publishedAt || item.createdAt;
         const img = attr.ImagenCobertura;
-        const imageUrl = img?.data?.attributes?.url || img?.url || '';
+        const imageUrl = img?.data?.attributes?.formats?.medium?.url || img?.data?.attributes?.url || '';
         const contenido = attr.contenido || '';
         const resumenRaw = attr.resumen || '';
 
