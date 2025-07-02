@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
   const container = document.querySelector('#blog-posts-grid');
   const filterBtns = document.querySelectorAll('.blog-filter__button');
+  const paginationEl = document.querySelector('.pagination');
+  let currentPage = 1;
+  const pageSize = 6;
+  let totalPages = 1;
 
   async function cargarEntradas(page = 1) {
     if (!container) {
@@ -11,10 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
     container.innerHTML = '';
 
     try {
-      const url = `https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?populate=ImagenCobertura&pagination[page]=${page}`;
+      currentPage = page;
+      const url = `https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?populate=ImagenCobertura&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
       const res = await fetch(url);
       const data = await res.json();
       const entries = data.data || [];
+      const meta = data.meta?.pagination || {};
+      totalPages = meta.pageCount || 1;
 
       entries.forEach(item => {
         const e = item.attributes || item;
@@ -64,8 +71,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
         container.appendChild(article);
       });
+
+      actualizarPaginacion();
     } catch (error) {
       console.error('❌ Error al cargar entradas:', error);
+    }
+  }
+
+  function actualizarPaginacion() {
+    if (!paginationEl) return;
+    paginationEl.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+      const link = document.createElement('a');
+      link.href = '#';
+      link.className = 'page-link';
+      link.textContent = i;
+      if (i === currentPage) link.classList.add('active');
+      paginationEl.appendChild(link);
+    }
+
+    if (currentPage < totalPages) {
+      const next = document.createElement('a');
+      next.href = '#';
+      next.className = 'page-next';
+      next.innerHTML = '<i class="fas fa-chevron-right"></i>';
+      paginationEl.appendChild(next);
     }
   }
 
@@ -122,32 +153,26 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Paginación
-  const pageLinks = document.querySelectorAll('.page-link, .page-next');
-  if (pageLinks.length > 0) {
-    pageLinks.forEach(link => {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
+  if (paginationEl) {
+    paginationEl.addEventListener('click', function (e) {
+      const link = e.target.closest('.page-link');
+      const next = e.target.closest('.page-next');
+      if (!link && !next) return;
 
-        let page = 1;
-        if (this.classList.contains('page-link')) {
-          document.querySelectorAll('.page-link').forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
-          page = parseInt(this.textContent, 10) || 1;
-        } else {
-          const current = document.querySelector('.page-link.active');
-          page = (parseInt(current?.textContent, 10) || 1) + 1;
-          const nextLink = Array.from(document.querySelectorAll('.page-link')).find(l => parseInt(l.textContent, 10) === page);
-          if (nextLink) {
-            current.classList.remove('active');
-            nextLink.classList.add('active');
-          }
-        }
+      e.preventDefault();
+      let page = currentPage;
+      if (link) {
+        page = parseInt(link.textContent, 10) || 1;
+      } else if (next) {
+        page = Math.min(currentPage + 1, totalPages);
+      }
 
+      if (page !== currentPage) {
         cargarEntradas(page).then(() => {
           const activeFilter = document.querySelector('.blog-filter__button.active')?.getAttribute('data-filter') || 'all';
           aplicarFiltro(activeFilter);
         });
-      });
+      }
     });
   }
 });
