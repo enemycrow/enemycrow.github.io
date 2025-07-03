@@ -1,10 +1,48 @@
 document.addEventListener('DOMContentLoaded', function() {
+  const CACHE_DURATION = 1000 * 60 * 15; // 15 minutos
   const container = document.querySelector('#blog-posts-grid');
   const filterBtns = document.querySelectorAll('.blog-filter__button');
   const paginationEl = document.querySelector('.pagination');
   let currentPage = 1;
   const pageSize = 6;
   let totalPages = 1;
+
+  function showPlaceholders() {
+    if (!container) return;
+    container.innerHTML = '';
+    for (let i = 0; i < pageSize; i++) {
+      const ph = document.createElement('div');
+      ph.className = 'loading-placeholder';
+      container.appendChild(ph);
+    }
+  }
+
+  function clearPlaceholders() {
+    if (!container) return;
+    const phs = container.querySelectorAll('.loading-placeholder');
+    phs.forEach(el => el.remove());
+  }
+
+  function getCachedPage(page) {
+    const cached = localStorage.getItem(`blog_entries_page_${page}`);
+    if (!cached) return null;
+    try {
+      const parsed = JSON.parse(cached);
+      if (Date.now() - parsed.timestamp > CACHE_DURATION) {
+        localStorage.removeItem(`blog_entries_page_${page}`);
+        return null;
+      }
+      return parsed;
+    } catch (_) {
+      localStorage.removeItem(`blog_entries_page_${page}`);
+      return null;
+    }
+  }
+
+  function setCachedPage(page, entries, pageCount) {
+    const payload = { entries, pageCount, timestamp: Date.now() };
+    localStorage.setItem(`blog_entries_page_${page}`, JSON.stringify(payload));
+  }
 
   // Verificar si el contenedor existe
   async function cargarEntradas(page = 1) {
@@ -13,16 +51,29 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    container.innerHTML = '';
+    showPlaceholders();
+    currentPage = page;
 
-    try {
-      currentPage = page;
-      const url = `https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?populate=ImagenCobertura&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      const entries = data.data || [];
-      const meta = data.meta?.pagination || {};
-      totalPages = meta.pageCount || 1;
+    const cached = getCachedPage(page);
+    let entries = [];
+    if (cached) {
+      entries = cached.entries;
+      totalPages = cached.pageCount;
+    } else {
+      try {
+        const url = `https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?populate=ImagenCobertura&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        entries = data.data || [];
+        const meta = data.meta?.pagination || {};
+        totalPages = meta.pageCount || 1;
+        setCachedPage(page, entries, totalPages);
+      } catch (error) {
+        console.error('❌ Error al cargar entradas:', error);
+      }
+    }
+
+    clearPlaceholders();
 
       entries.forEach(item => {
         const entry = { ...item, ...(item.attributes || {}) };
@@ -80,9 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       actualizarPaginacion();
-    } catch (error) {
-      console.error('❌ Error al cargar entradas:', error);
-    }
   }
 
   function actualizarPaginacion() {

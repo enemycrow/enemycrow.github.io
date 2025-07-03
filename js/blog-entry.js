@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function() {
+  const CACHE_DURATION = 1000 * 60 * 15; // 15 minutos
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug');
   if (!slug) {
@@ -6,15 +7,47 @@ document.addEventListener('DOMContentLoaded', async function() {
     return;
   }
 
-  try {
-    const url = `https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=ImagenCobertura`;
-    const res = await fetch(url);
-    const data = await res.json();
-    const entry = data.data?.[0];
-    if (!entry) {
-      console.warn('Entrada no encontrada', slug);
-      return;
+  function getCachedEntry(key) {
+    const cached = localStorage.getItem(key);
+    if (!cached) return null;
+    try {
+      const parsed = JSON.parse(cached);
+      if (Date.now() - parsed.timestamp > CACHE_DURATION) {
+        localStorage.removeItem(key);
+        return null;
+      }
+      return parsed.entry;
+    } catch (_) {
+      localStorage.removeItem(key);
+      return null;
     }
+  }
+
+  function setCachedEntry(key, entry) {
+    const payload = { entry, timestamp: Date.now() };
+    localStorage.setItem(key, JSON.stringify(payload));
+  }
+
+  const cacheKey = `blog_entry_${slug}`;
+  let entry = getCachedEntry(cacheKey);
+
+  if (!entry) {
+    try {
+      const url = `https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=ImagenCobertura`;
+      const res = await fetch(url);
+      const data = await res.json();
+      entry = data.data?.[0];
+      if (entry) setCachedEntry(cacheKey, entry);
+    } catch (err) {
+      console.error('Error al cargar la entrada', err);
+    }
+  }
+
+  if (!entry) {
+    console.warn('Entrada no encontrada', slug);
+    document.querySelector('.preloader')?.classList.add('hide');
+    return;
+  }
 
     const e = entry.attributes || entry;
     const titulo = e.titulo || e.title || '';
