@@ -939,6 +939,13 @@ blockquote {
   flex-direction: column;
 }
 
+.loading-placeholder {
+  border-radius: 8px;
+  background: var(--gris-oscuro);
+  height: 320px;
+  animation: loadingPulse 1.5s infinite;
+}
+
 .blog-post:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
@@ -2533,6 +2540,12 @@ blockquote {
   50% {
     opacity: 1;
   }
+}
+
+@keyframes loadingPulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
 }
 
 /* Footer Styles */
