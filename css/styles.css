@@ -1876,9 +1876,9 @@ blockquote {
 
 .hero-container {
   display: flex;
-  width: 1200px;
+  width: 100%;
   max-width: 1200px;
-  padding: 32px 0px 64px 0px;
+  padding: 32px 0 64px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -1888,7 +1888,7 @@ blockquote {
 
 .hero-content-wrapper {
   display: flex;
-  width: 800px;
+  width: 100%;
   max-width: 800px;
   flex-direction: column;
   align-items: flex-start;
@@ -1954,22 +1954,18 @@ blockquote {
   width: 50px;
   height: 1px;
   background: linear-gradient(90deg, #0a1128 0%, #d8c2ff 100%);
-  position: absolute;
-  left: 375px;
-  top: 25px;
+  margin-right: 16px;
 }
 
 .hero-symbol-wrapper {
   display: flex;
-  padding: 9px 0px 10.19px 0px;
+  padding: 9px 0 10.19px;
   flex-direction: column;
   align-items: center;
   opacity: 0.8;
-  position: absolute;
-  left: 327px;
-  top: 0px;
   width: 32px;
   height: 51px;
+  margin: 0 16px;
 }
 
 .hero-feather-symbol {
@@ -1986,9 +1982,7 @@ blockquote {
 .hero-divider-spacer {
   width: 32px;
   height: 51px;
-  position: absolute;
-  left: 457px;
-  top: 0px;
+  margin-left: 16px;
 }
 
 .hero-scroll-indicator {
@@ -1996,9 +1990,7 @@ blockquote {
   width: 51.95px;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  left: 374.02px;
-  bottom: -31.25px;
+  margin: 32px auto 0;
   opacity: 0.7;
   animation: bounce 2s infinite;
 }
@@ -2054,6 +2046,26 @@ blockquote {
   }
   60% {
     transform: translateY(-5px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-container {
+    padding: 24px 0 48px;
+  }
+
+  .hero-main-title {
+    font-size: 36px;
+    line-height: 56px;
+  }
+
+  .hero-subtitle-text {
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .hero-scroll-indicator {
+    margin-top: 24px;
   }
 }
 
