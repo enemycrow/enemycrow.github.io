@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   background-image: url("../assets/images/izelitzel.png");
-  background-position: 50% 10%;
+  background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
   color: rgb(255, 255, 255);
@@ -1852,7 +1852,7 @@ blockquote {
   align-items: center;
   position: relative;
   background: url("https://cdn.builder.io/api/v1/image/assets%2F33c5f996430b43939ac2042c30698447%2F296de50d7810414fbe188e3a88dc4835")
-    no-repeat center center;
+    no-repeat center top;
   background-size: cover;
 }
 
@@ -4856,6 +4856,7 @@ a:hover {
   text-align: center;
   color: var(--blanco-brillante);
   background-repeat: no-repeat;
+  background-position: center top;
   background-size: cover;
 }
 
