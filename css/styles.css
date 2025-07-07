@@ -4706,7 +4706,17 @@ a:hover {
   }
 
   .nav-links.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000; /* o el color de fondo que uses */
+    z-index: 9999;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .nav-links li {
@@ -5066,3 +5076,14 @@ a:hover {
 }
 
 /* --- End of styles.css --- */
+
+/* --- Start of Header.css --- */
+
+/* Ocultar botón hamburguesa en desktop */
+@media screen and (min-width: 769px) {
+  .mobile-menu {
+    display: none !important;
+  }
+}
+
+/* --- End of Header.css --- */

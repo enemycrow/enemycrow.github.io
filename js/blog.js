@@ -15,7 +15,17 @@ document.addEventListener('DOMContentLoaded', async function() {
       }
 
       entries.forEach(entry => {
-        const { titulo, autor, contenido, ImagenCobertura, FechaPublicacion } = entry;
+        const attrs = entry.attributes;
+        const {
+          titulo,
+          autor,
+          contenido,
+          ImagenCobertura,
+          FechaPublicacion,
+          resumen,
+          slug,
+          tema
+        } = attrs;
 
         // Convertir contenido tipográfico a HTML simple
         let contenidoHtml = '';
@@ -25,11 +35,12 @@ document.addEventListener('DOMContentLoaded', async function() {
             .join('<br><br>');
         }
 
-        // Imagen
-        const imageUrl = ImagenCobertura?.formats?.medium?.url ||
-                         ImagenCobertura?.formats?.small?.url ||
-                         ImagenCobertura?.url || '';
+        // Imagen de cobertura
+        const imageUrl = ImagenCobertura?.data?.attributes?.formats?.medium?.url ||
+                         ImagenCobertura?.data?.attributes?.formats?.small?.url ||
+                         ImagenCobertura?.data?.attributes?.url || '';
 
+        // Crear elemento de entrada
         const article = document.createElement('article');
         article.classList.add('blog-post', `blog-post--${autor?.toLowerCase().replace(/\s+/g, '-') || 'otros'}`);
 
@@ -37,7 +48,8 @@ document.addEventListener('DOMContentLoaded', async function() {
           <h2 class="blog-entry__title">${titulo}</h2>
           <p class="blog-entry__date">${new Date(FechaPublicacion).toLocaleDateString('es-CL')}</p>
           ${imageUrl ? `<img src="${imageUrl}" alt="${titulo}" class="blog-entry__image" />` : ''}
-          <div class="blog-entry__content">${contenidoHtml}</div>
+          <p class="blog-entry__resumen">${getTextFromRichText(resumen)}</p>
+          <a href="entrada.html?slug=${slug}" class="blog-entry__leer-mas">Leer entrada completa</a>
           <p class="blog-entry__signature">— ${autor || 'Autor desconocido'}</p>
         `;
 
@@ -48,9 +60,15 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   }
 
+  // Extraer texto plano de bloques tipo `rich text`
+  function getTextFromRichText(blocks) {
+    if (!Array.isArray(blocks)) return '';
+    return blocks.map(b => b.children?.map(c => c.text).join('') || '').join(' ');
+  }
+
   await cargarEntradas();
 
-  // Filtro
+  // Filtro por autor o tema
   const blogPosts = document.querySelectorAll('.blog-post');
   if (filterBtns.length > 0 && blogPosts.length > 0) {
     filterBtns.forEach(btn => {
