@@ -75,20 +75,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     clearPlaceholders();
 
-      entries.forEach(item => {
-        const entry = { ...item, ...(item.attributes || {}) };
-        const slug = entry.slug || '';
-        const titulo = entry.titulo || '';
-        const autor = entry.autor || 'Autor';
-        const fecha = entry.FechaPublicacion || entry.publishedAt || entry.createdAt;
-        const img = entry.ImagenCobertura;
-        const imageUrl =
-          img?.formats?.medium?.url ||
-          img?.url ||
-          // Fallback to old nested structure for backward compatibility
-          img?.data?.attributes?.formats?.medium?.url ||
-          img?.data?.attributes?.url || '';
-        const resumenRaw = entry.resumen || '';
+    entries.forEach(item => {
+      if (!item || !item.attributes) {
+        console.warn('⚠️ Entrada inválida o sin atributos:', item);
+        return; // Salta esta entrada
+      }
+
+      const entry = item.attributes;
+      const slug = entry.slug || '';
+      const titulo = entry.titulo || '';
+      const autor = entry.autor || 'Autor';
+      const fecha = entry.FechaPublicacion || entry.publishedAt || entry.createdAt;
+      const img = entry.ImagenCobertura;
+
+      const imageUrl =
+        img?.formats?.medium?.url ||
+        img?.url ||
+        img?.data?.attributes?.formats?.medium?.url ||
+        img?.data?.attributes?.url || '';
+
+      const resumenRaw = entry.resumen || '';
 
       // Extraer texto plano del resumen
       let resumen = '';
@@ -99,36 +105,36 @@ document.addEventListener('DOMContentLoaded', function() {
       } else if (typeof resumenRaw === 'string') {
         resumen = resumenRaw;
       }
-      
-        const dateObj = fecha ? new Date(fecha) : new Date();
-        const day = dateObj.toLocaleDateString('es-CL', { day: '2-digit' });
-        const month = dateObj.toLocaleDateString('es-CL', { month: 'long' });
-        const authorSlug = autor.toLowerCase().replace(/\s+/g, '-');
 
-        const article = document.createElement('article');
-        article.classList.add('blog-post', `blog-post--${authorSlug}`);
-        article.setAttribute('data-category', authorSlug);
+      const dateObj = fecha ? new Date(fecha) : new Date();
+      const day = dateObj.toLocaleDateString('es-CL', { day: '2-digit' });
+      const month = dateObj.toLocaleDateString('es-CL', { month: 'long' });
+      const authorSlug = autor.toLowerCase().replace(/\s+/g, '-');
 
-        article.innerHTML = `
-          <div class="blog-post__image"${imageUrl ? ` style="background-image:url('${imageUrl}')"` : ''}>
-            <div class="blog-post__date">
-              <span class="day">${day}</span>
-              <span class="month">${month}</span>
+      const article = document.createElement('article');
+      article.classList.add('blog-post', `blog-post--${authorSlug}`);
+      article.setAttribute('data-category', authorSlug);
+
+      article.innerHTML = `
+        <div class="blog-post__image"${imageUrl ? ` style="background-image:url('${imageUrl}')"` : ''}>
+          <div class="blog-post__date">
+            <span class="day">${day}</span>
+            <span class="month">${month}</span>
+          </div>
+        </div>
+        <div class="blog-post__content">
+          <div class="blog-post__header">
+            <div class="blog-post__author">
+              <span class="author-tag ${authorSlug}-tag">${autor}</span>
             </div>
           </div>
-          <div class="blog-post__content">
-            <div class="blog-post__header">
-              <div class="blog-post__author">
-                <span class="author-tag ${authorSlug}-tag">${autor}</span>
-              </div>
-            </div>
-            <h3 class="blog-post__title">${titulo}</h3>
-            <p class="blog-post__excerpt">${resumen}</p>
-            <a href="templates/blog-entry.html?slug=${slug}" class="blog-post__link">Leer más <i class="fas fa-arrow-right"></i></a>
-          </div>`;
+          <h3 class="blog-post__title">${titulo}</h3>
+          <p class="blog-post__excerpt">${resumen}</p>
+          <a href="templates/blog-entry.html?slug=${slug}" class="blog-post__link">Leer más <i class="fas fa-arrow-right"></i></a>
+        </div>`;
 
-        container.appendChild(article);
-      });
+      container.appendChild(article);
+    });
 
       actualizarPaginacion();
   }
