@@ -1,89 +1,180 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', function() {
+  const CACHE_DURATION = 1000 * 60 * 15; // 15 minutos
   const container = document.querySelector('#blog-posts-grid');
   const filterBtns = document.querySelectorAll('.blog-filter__button');
+  const paginationEl = document.querySelector('.pagination');
+  let currentPage = 1;
+  const pageSize = 6;
+  let totalPages = 1;
 
-  // Función para cargar desde Strapi
-  async function cargarEntradas() {
-    try {
-      const res = await fetch("https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?populate=ImagenCobertura");
-      const data = await res.json();
-      const entries = data.data;
-
-      if (!container) {
-        console.warn("⚠️ No se encontró el contenedor #blog-posts-grid");
-        return;
-      }
-
-      entries.forEach(entry => {
-        const attrs = entry.attributes;
-        const {
-          titulo,
-          autor,
-          contenido,
-          ImagenCobertura,
-          FechaPublicacion,
-          resumen,
-          slug,
-          tema
-        } = attrs;
-
-        // Convertir contenido tipográfico a HTML simple
-        let contenidoHtml = '';
-        if (Array.isArray(contenido)) {
-          contenidoHtml = contenido
-            .map(block => block.children?.map(child => child.text).join('') || '')
-            .join('<br><br>');
-        }
-
-        // Imagen de cobertura
-        const imageUrl = ImagenCobertura?.data?.attributes?.formats?.medium?.url ||
-                         ImagenCobertura?.data?.attributes?.formats?.small?.url ||
-                         ImagenCobertura?.data?.attributes?.url || '';
-
-        // Crear elemento de entrada
-        const article = document.createElement('article');
-        article.classList.add('blog-post', `blog-post--${autor?.toLowerCase().replace(/\s+/g, '-') || 'otros'}`);
-
-        article.innerHTML = `
-          <h2 class="blog-entry__title">${titulo}</h2>
-          <p class="blog-entry__date">${new Date(FechaPublicacion).toLocaleDateString('es-CL')}</p>
-          ${imageUrl ? `<img src="${imageUrl}" alt="${titulo}" class="blog-entry__image" />` : ''}
-          <p class="blog-entry__resumen">${getTextFromRichText(resumen)}</p>
-          <a href="entrada.html?slug=${slug}" class="blog-entry__leer-mas">Leer entrada completa</a>
-          <p class="blog-entry__signature">— ${autor || 'Autor desconocido'}</p>
-        `;
-
-        container.appendChild(article);
-      });
-    } catch (error) {
-      console.error("❌ Error al cargar entradas:", error);
+  function showPlaceholders() {
+    if (!container) return;
+    container.innerHTML = '';
+    for (let i = 0; i < pageSize; i++) {
+      const ph = document.createElement('div');
+      ph.className = 'loading-placeholder';
+      container.appendChild(ph);
     }
   }
 
-  // Extraer texto plano de bloques tipo `rich text`
-  function getTextFromRichText(blocks) {
-    if (!Array.isArray(blocks)) return '';
-    return blocks.map(b => b.children?.map(c => c.text).join('') || '').join(' ');
+  function clearPlaceholders() {
+    if (!container) return;
+    const phs = container.querySelectorAll('.loading-placeholder');
+    phs.forEach(el => el.remove());
   }
 
-  await cargarEntradas();
+  function getCachedPage(page) {
+    const cached = localStorage.getItem(`blog_entries_page_${page}`);
+    if (!cached) return null;
+    try {
+      const parsed = JSON.parse(cached);
+      if (Date.now() - parsed.timestamp > CACHE_DURATION) {
+        localStorage.removeItem(`blog_entries_page_${page}`);
+        return null;
+      }
+      return parsed;
+    } catch (_) {
+      localStorage.removeItem(`blog_entries_page_${page}`);
+      return null;
+    }
+  }
 
-  // Filtro por autor o tema
-  const blogPosts = document.querySelectorAll('.blog-post');
-  if (filterBtns.length > 0 && blogPosts.length > 0) {
+  function setCachedPage(page, entries, pageCount) {
+    const payload = { entries, pageCount, timestamp: Date.now() };
+    localStorage.setItem(`blog_entries_page_${page}`, JSON.stringify(payload));
+  }
+
+  // Verificar si el contenedor existe
+  async function cargarEntradas(page = 1) {
+    if (!container) {
+      console.warn('⚠️ No se encontró el contenedor #blog-posts-grid');
+      return;
+    }
+
+    showPlaceholders();
+    currentPage = page;
+
+    const cached = getCachedPage(page);
+    let entries = [];
+    if (cached) {
+      entries = cached.entries;
+      totalPages = cached.pageCount;
+    } else {
+      try {
+        const url = `https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?populate=ImagenCobertura&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        entries = data.data || [];
+        const meta = data.meta?.pagination || {};
+        totalPages = meta.pageCount || 1;
+        setCachedPage(page, entries, totalPages);
+      } catch (error) {
+        console.error('❌ Error al cargar entradas:', error);
+      }
+    }
+
+    clearPlaceholders();
+
+      entries.forEach(item => {
+        const entry = { ...item, ...(item.attributes || {}) };
+        const slug = entry.slug || '';
+        const titulo = entry.titulo || '';
+        const autor = entry.autor || 'Autor';
+        const fecha = entry.FechaPublicacion || entry.publishedAt || entry.createdAt;
+        const img = entry.ImagenCobertura;
+        const imageUrl =
+          img?.formats?.medium?.url ||
+          img?.url ||
+          // Fallback to old nested structure for backward compatibility
+          img?.data?.attributes?.formats?.medium?.url ||
+          img?.data?.attributes?.url || '';
+        const resumenRaw = entry.resumen || '';
+
+      // Extraer texto plano del resumen
+      let resumen = '';
+      if (Array.isArray(resumenRaw)) {
+        resumen = resumenRaw
+          .map(b => b.children?.map(c => c.text).join('') || '')
+          .join(' ');
+      } else if (typeof resumenRaw === 'string') {
+        resumen = resumenRaw;
+      }
+      
+        const dateObj = fecha ? new Date(fecha) : new Date();
+        const day = dateObj.toLocaleDateString('es-CL', { day: '2-digit' });
+        const month = dateObj.toLocaleDateString('es-CL', { month: 'long' });
+        const authorSlug = autor.toLowerCase().replace(/\s+/g, '-');
+
+        const article = document.createElement('article');
+        article.classList.add('blog-post', `blog-post--${authorSlug}`);
+        article.setAttribute('data-category', authorSlug);
+
+        article.innerHTML = `
+          <div class="blog-post__image"${imageUrl ? ` style="background-image:url('${imageUrl}')"` : ''}>
+            <div class="blog-post__date">
+              <span class="day">${day}</span>
+              <span class="month">${month}</span>
+            </div>
+          </div>
+          <div class="blog-post__content">
+            <div class="blog-post__header">
+              <div class="blog-post__author">
+                <span class="author-tag ${authorSlug}-tag">${autor}</span>
+              </div>
+            </div>
+            <h3 class="blog-post__title">${titulo}</h3>
+            <p class="blog-post__excerpt">${resumen}</p>
+            <a href="templates/blog-entry.html?slug=${slug}" class="blog-post__link">Leer más <i class="fas fa-arrow-right"></i></a>
+          </div>`;
+
+        container.appendChild(article);
+      });
+
+      actualizarPaginacion();
+  }
+
+  function actualizarPaginacion() {
+    if (!paginationEl) return;
+    paginationEl.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+      const link = document.createElement('a');
+      link.href = '#';
+      link.className = 'page-link';
+      link.textContent = i;
+      if (i === currentPage) link.classList.add('active');
+      paginationEl.appendChild(link);
+    }
+
+    if (currentPage < totalPages) {
+      const next = document.createElement('a');
+      next.href = '#';
+      next.className = 'page-next';
+      next.innerHTML = '<i class="fas fa-chevron-right"></i>';
+      paginationEl.appendChild(next);
+    }
+  }
+
+  cargarEntradas();
+
+  // Filtro
+  function aplicarFiltro(filter) {
+    const posts = document.querySelectorAll('.blog-post');
+    posts.forEach(post => {
+      if (filter === 'all' || post.classList.contains(`blog-post--${filter}`)) {
+        post.style.display = 'flex';
+      } else {
+        post.style.display = 'none';
+      }
+    });
+  }
+
+  if (filterBtns.length > 0) {
     filterBtns.forEach(btn => {
       btn.addEventListener('click', function () {
         filterBtns.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
-        const filter = this.getAttribute('data-filter');
-
-        blogPosts.forEach(post => {
-          if (filter === 'all' || post.classList.contains(`blog-post--${filter}`)) {
-            post.style.display = 'flex';
-          } else {
-            post.style.display = 'none';
-          }
-        });
+        aplicarFiltro(this.getAttribute('data-filter'));
       });
     });
   }
@@ -117,16 +208,26 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 
   // Paginación
-  const pageLinks = document.querySelectorAll('.page-link, .page-next');
-  if (pageLinks.length > 0) {
-    pageLinks.forEach(link => {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelectorAll('.page-link').forEach(l => l.classList.remove('active'));
-        if (this.classList.contains('page-link')) {
-          this.classList.add('active');
-        }
-      });
+  if (paginationEl) {
+    paginationEl.addEventListener('click', function (e) {
+      const link = e.target.closest('.page-link');
+      const next = e.target.closest('.page-next');
+      if (!link && !next) return;
+
+      e.preventDefault();
+      let page = currentPage;
+      if (link) {
+        page = parseInt(link.textContent, 10) || 1;
+      } else if (next) {
+        page = Math.min(currentPage + 1, totalPages);
+      }
+
+      if (page !== currentPage) {
+        cargarEntradas(page).then(() => {
+          const activeFilter = document.querySelector('.blog-filter__button.active')?.getAttribute('data-filter') || 'all';
+          aplicarFiltro(activeFilter);
+        });
+      }
     });
   }
 });

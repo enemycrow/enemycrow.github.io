@@ -1,69 +1,104 @@
-// entrada.js
-
-document.addEventListener('DOMContentLoaded', async () => {
-  const slug = new URLSearchParams(window.location.search).get('slug');
-
+document.addEventListener('DOMContentLoaded', async function () {
+  const CACHE_DURATION = 1000 * 60 * 15; // 15 minutos
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('slug');
   if (!slug) {
-    document.body.innerHTML = '<h1>Error: No se proporcionó un slug.</h1>';
+    console.warn('Slug no especificado');
     return;
   }
 
-  try {
-    const response = await fetch(`https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?filters[slug][$eq]=${slug}&populate=*`);
-    const json = await response.json();
+  function getCachedEntry(key) {
+    const cached = localStorage.getItem(key);
+    if (!cached) return null;
+    try {
+      const parsed = JSON.parse(cached);
+      if (Date.now() - parsed.timestamp > CACHE_DURATION) {
+        localStorage.removeItem(key);
+        return null;
+      }
+      return parsed.entry;
+    } catch (_) {
+      localStorage.removeItem(key);
+      return null;
+    }
+  }
 
-    if (!json.data || json.data.length === 0) {
-      document.body.innerHTML = '<h1>Entrada no encontrada.</h1>';
+  function setCachedEntry(key, entry) {
+    const payload = { entry, timestamp: Date.now() };
+    localStorage.setItem(key, JSON.stringify(payload));
+  }
+
+  const cacheKey = `blog_entry_${slug}`;
+  let entry = getCachedEntry(cacheKey);
+
+  try {
+    if (!entry) {
+      const url = `https://beautiful-bat-b20fd0ce9b.strapiapp.com/api/blog-entries?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=ImagenCobertura`;
+      const res = await fetch(url);
+      const data = await res.json();
+      entry = data.data?.[0];
+      if (entry) setCachedEntry(cacheKey, entry);
+    }
+
+    if (!entry) {
+      console.warn('Entrada no encontrada', slug);
+      document.querySelector('.preloader')?.classList.add('hide');
       return;
     }
 
-    const entry = json.data[0].attributes;
+    const e = entry.attributes || entry;
+    const titulo = e.titulo || e.title || '';
+    const fecha = e.FechaPublicacion || e.publishedAt || e.createdAt;
+    const contenido = e.contenido || '';
+    let snippet = '';
+    if (Array.isArray(contenido)) {
+      snippet = contenido
+        .map(b => b.children?.map(c => c.text).join('') || '')
+        .join(' ')
+        .slice(0, 160)
+        .trim();
+    } else if (typeof contenido === 'string') {
+      snippet = contenido
+        .replace(/<[^>]+>/g, '')
+        .slice(0, 160)
+        .trim();
+    }
 
-    document.title = entry.titulo;
+    const autor = e.autor || 'Autor';
+    const img = e.ImagenCobertura;
+    const imageUrl = img?.data?.attributes?.url || img?.url || '';
 
-    const entryContainer = document.querySelector('.blog-entry');
-    entryContainer.classList.add(`blog-entry--${entry.autor.toLowerCase().replace(/\s+/g, '-')}`);
-    entryContainer.setAttribute('data-author', entry.autor.toLowerCase());
+    const titleEl = document.querySelector('.blog-entry__title');
+    const dateEl = document.querySelector('.blog-entry__date');
+    const snippetEl = document.querySelector('.blog-entry__snippet');
+    const contentEl = document.querySelector('.blog-entry__content');
+    const authorEl = document.querySelector('.blog-entry__signature');
+    const imgEl = document.querySelector('.blog-entry__image');
+    const article = document.querySelector('.blog-entry');
 
-    entryContainer.querySelector('.blog-entry__title').textContent = entry.titulo;
-    entryContainer.querySelector('.blog-entry__date').textContent = formatDate(entry.FechaPublicacion);
-    entryContainer.querySelector('.blog-entry__signature').textContent = `— ${entry.autor}`;
+    if (titleEl) titleEl.textContent = titulo;
+    if (dateEl && fecha) {
+      const d = new Date(fecha);
+      dateEl.textContent = d.toLocaleDateString('es-CL', { day: '2-digit', month: 'long', year: 'numeric' });
+    }
+    if (snippetEl && snippet) snippetEl.textContent = snippet;
+    if (contentEl) {
+      if (typeof contenido === 'string') {
+        contentEl.innerHTML = contenido;
+      } else if (Array.isArray(contenido)) {
+        contentEl.innerHTML = contenido.map(b => b.children?.map(c => c.text).join('') || '').join('<br>');
+      }
+    }
+    if (authorEl) authorEl.textContent = `— ${autor}`;
+    if (imgEl && imageUrl) imgEl.src = imageUrl;
+    if (article && autor) {
+      const slugAuthor = autor.toLowerCase().replace(/\s+/g, '-');
+      article.dataset.author = slugAuthor;
+    }
 
-    const contentContainer = entryContainer.querySelector('.blog-entry__content');
-    contentContainer.innerHTML = renderRichText(entry.contenido);
-
-  } catch (error) {
-    console.error(error);
-    document.body.innerHTML = '<h1>Error al cargar la entrada.</h1>';
+  } catch (err) {
+    console.error('Error al cargar la entrada', err);
   }
+
+  document.querySelector('.preloader')?.classList.add('hide');
 });
-
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('es-CL', { year: 'numeric', month: 'long', day: 'numeric' });
-}
-
-function renderRichText(content) {
-  return content.map(block => {
-    if (block.type === 'heading') {
-      return `<h${block.level}>${renderChildren(block.children)}</h${block.level}>`;
-    }
-    if (block.type === 'paragraph') {
-      return `<p>${renderChildren(block.children)}</p>`;
-    }
-    if (block.type === 'quote') {
-      return `<blockquote>${renderChildren(block.children)}</blockquote>`;
-    }
-    return '';
-  }).join('');
-}
-
-function renderChildren(children) {
-  return children.map(child => {
-    let text = child.text || '';
-    if (child.bold) text = `<strong>${text}</strong>`;
-    if (child.italic) text = `<em>${text}</em>`;
-    if (child.underline) text = `<u>${text}</u>`;
-    return text;
-  }).join('');
-}
