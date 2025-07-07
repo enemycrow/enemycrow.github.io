@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Entrada de Blog</title>
+
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.7.2/css/all.css" />
+
+    <!-- Tabler Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    
+    <!-- Estilos CSS -->
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+    <!-- Preloader con animación -->
+    <div class="preloader">
+        <div class="preloader-icon">
+            <i class="fas fa-feather-alt"></i>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
+                    La Pluma, el Faro y la Llama
+                </a>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="../about.html">Sobre Nosotros</a></li>
+                    <li><a href="../portfolio.html">Obras</a></li>
+                    <li><a href="../blog.html" class="active">Diario</a></li>
+                    <li><a href="../services.html">Servicios</a></li>
+                    <li><a href="../contact.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+  
+  <article class="blog-entry">
+    <h1 class="blog-entry__title"></h1>
+    <span class="blog-entry__date"></span>
+    <p class="blog-entry__snippet"></p>
+
+    <div class="blog-entry__content">
+      <figure>
+        <img src="" alt="" class="blog-entry__image" />
+        <figcaption></figcaption>
+      </figure>
+    </div>
+
+    <p class="blog-entry__signature"></p>
+  </article>
+
+  <script src="../js/blog-template.js"></script>
+  <script src="../js/blog-entry.js"></script>
+</body>
+</html>
