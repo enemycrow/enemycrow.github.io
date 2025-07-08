@@ -222,21 +222,6 @@
   background-position: center;
 }
 
-.lauren-image .voice-view__image {
-  background-image: url("../assets/images/lauren.png");
-  background-color: var(--lauren-acento); /* Fallback */
-}
-
-.elysia-image .voice-view__image {
-  background-image: url("../assets/images/elysia.png");
-  background-color: var(--elysia-secundario); /* Fallback */
-}
-
-.sahir-image .voice-view__image {
-  background-image: url("../assets/images/sahir.png");
-  background-color: var(--sahir-primario);
-}
-
 .voice-view__name {
   font-family: var(--fuente-titulos);
   font-size: 1.5rem;
@@ -3806,6 +3791,9 @@ a:hover {
   height: 60px;
   border-radius: 50%;
   background: #ccc;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   margin-right: 1rem;
 }
 
@@ -4132,12 +4120,12 @@ a:hover {
 }
   
 .elysia-work-3 {
-    background-image: url('../assets/images/circuloenlaanera.png'); /* Imagen de Circulo en la Arena */
+    background-image: url('../assets/images/circuloarena.png'); /* Imagen de Circulo en la Arena */
     background-color: var(--violeta-profundo); /* Fallback */
 }
 
 .voice-view--elysia .work-info {
-    background: var(--blanco-etereo); /* Fondo para la información del trabajo */
+    background: var(--elysia-primario); /* Fondo para la información del trabajo */
 }
 
 
