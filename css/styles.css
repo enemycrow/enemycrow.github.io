@@ -72,6 +72,19 @@
   color: var(--blanco-brillante);
 }
 
+@media screen and (max-width: 768px) {
+  .tab-container {
+    flex-wrap: wrap;
+    overflow: visible;
+    justify-content: center;
+  }
+
+  .voice-tab {
+    flex: 1 1 50%;
+    text-align: center;
+  }
+}
+
 /* About Sections */
 .voice-view {
   display: flex;

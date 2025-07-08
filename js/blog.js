@@ -76,12 +76,12 @@ document.addEventListener('DOMContentLoaded', function() {
     clearPlaceholders();
 
     entries.forEach(item => {
-      if (!item || !item.attributes) {
-        console.warn('⚠️ Entrada inválida o sin atributos:', item);
+      if (!item) {
+        console.warn('⚠️ Entrada inválida:', item);
         return; // Salta esta entrada
       }
 
-      const entry = item.attributes;
+      const entry = item.attributes || item;
       const slug = entry.slug || '';
       const titulo = entry.titulo || '';
       const autor = entry.autor || 'Autor';
