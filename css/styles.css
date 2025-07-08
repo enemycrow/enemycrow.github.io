@@ -210,17 +210,17 @@
 }
 
 .lauren-image .voice-view__image {
-  background-image: url("../images/lauren.jpg");
+  background-image: url("../assets/images/lauren.png");
   background-color: var(--lauren-acento); /* Fallback */
 }
 
 .elysia-image .voice-view__image {
-  background-image: url("../images/elysia.jpg");
+  background-image: url("../assets/images/elysia.png");
   background-color: var(--elysia-secundario); /* Fallback */
 }
 
 .sahir-image .voice-view__image {
-  background-image: url("../images/sahir.jpg");
+  background-image: url("../assets/images/sahir.png");
   background-color: var(--sahir-primario);
 }
 
