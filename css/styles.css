@@ -4092,12 +4092,12 @@ a:hover {
 }
 
 .elysia-image .voice-view__image {
-    background-image: url('../images/elysia.jpg'); /* Imagen pequeña del autor */
+    background-image: url('../assets/images/elysia.png'); /* Imagen pequeña del autor */
     background-color: var(--elysia-secundario); /* Fallback */
 }
 
 .elysia-image-large .author-image-large-inner {
-    background-image: url('../images/elysia-large.jpg'); /* Imagen grande del autor */
+    background-image: url('../assets/images/elysia-large.png'); /* Imagen grande del autor */
     background-color: var(--violeta-profundo); /* Fallback */
 }
 
@@ -4122,17 +4122,17 @@ a:hover {
 
 /* Estilos para las imágenes de trabajos del autor */
 .elysia-work-1 {
-    background-image: url('../images/elysia-work-1.jpg'); /* Imagen del trabajo 1 */
+    background-image: url('../assets/images/entreamoresabismos.png'); /* Imagen de Entre Amores y Abismos */
     background-color: var(--violeta-profundo); /* Fallback */
 }
   
 .elysia-work-2 {
-    background-image: url('../images/elysia-work-2.jpg'); /* Imagen del trabajo 2 */
+    background-image: url('../assets/images/librodelafusion.png'); /* Imagen del Libro de la Fusión */
     background-color: var(--violeta-profundo); /* Fallback */
 }
   
 .elysia-work-3 {
-    background-image: url('../images/elysia-work-3.jpg'); /* Imagen del trabajo 3 */
+    background-image: url('../assets/images/circuloenlaanera.png'); /* Imagen de Circulo en la Arena */
     background-color: var(--violeta-profundo); /* Fallback */
 }
 
@@ -4205,12 +4205,12 @@ a:hover {
 }
 
 .lauren-image .voice-view__image {
-    background-image: url('../images/lauren.jpg'); /* Imagen pequeña del autor */
+    background-image: url('../assets/images/lauren.png'); /* Imagen pequeña del autor */
     background-color: var(--lauren-acento); /* Fallback */
 }
 
 .lauren-image-large .author-image-large-inner {
-    background-image: url('../images/lauren-large.jpg'); /* Imagen grande del autor */
+    background-image: url('../assets/images/lauren-large.png'); /* Imagen grande del autor */
     background-color: var(--azul-noche); /* Fallback */
 }
 
@@ -4230,17 +4230,17 @@ a:hover {
 
 /* Estilos para las imágenes de trabajos del autor */
 .lauren-work-1 {
-    background-image: url('../images/lauren-work-1.jpg'); /* Imagen del trabajo 1 */
+    background-image: url('../assets/images/jesuitadelvino.png'); /* Imagen del Jesuita del Vino */
     background-color: var(--azul-noche); /* Fallback */
 }
   
 .lauren-work-2 {
-    background-image: url('../images/lauren-work-2.jpg'); /* Imagen del trabajo 2 */
+    background-image: url('../assets/images/izelitzel.png'); /* Imagen de Izel Itzel */
     background-color: var(--azul-noche); /* Fallback */
 }
   
 .lauren-work-3 {
-    background-image: url('../images/lauren-work-3.jpg'); /* Imagen del trabajo 3 */
+    background-image: url('../assets/images/debacletriangular.png'); /* Imagen de Debacle Triangular */
     background-color: var(--azul-noche); /* Fallback */
 }
 
@@ -4312,12 +4312,12 @@ a:hover {
 }
 
 .sahir-image .voice-view__image {
-    background-image: url('../images/sahir.jpg'); /* Imagen pequeña del autor */
+    background-image: url('../assets/images/sahir.png'); /* Imagen pequeña del autor */
     background-color: var(--sahir-primario); /* Fallback */
 }
 
 .sahir-image-large .author-image-large-inner {
-    background-image: url('../images/sahir-large.jpg'); /* Imagen grande del autor */
+    background-image: url('../assets/images/sahir-large.png'); /* Imagen grande del autor */
     background-color: var(--sahir-primario); /* Fallback */
 }
 
@@ -4337,17 +4337,17 @@ a:hover {
 
 /* Estilos para las imágenes de trabajos del autor */
 .sahir-work-1 {
-    background-image: url('../images/sahir-work-1.jpg'); /* Imagen del trabajo 1 */
+    background-image: url('../assets/images/galactique.png'); /* Imagen de Galactique */
     background-color: var(--sahir-primario); /* Fallback */
   }
   
 .sahir-work-2 {
-    background-image: url('../images/sahir-work-2.jpg'); /* Imagen del trabajo 2 */
+    background-image: url('../assets/images/huevovolviocantar.png'); /* Imagen del Huevo que volvió a cantar */
     background-color: var(--sahir-primario); /* Fallback */
 }
   
 .sahir-work-3 {
-    background-image: url('../images/sahir-work-3.jpg'); /* Imagen del trabajo 3 */
+    background-image: url('../assets/images/cristalito.png'); /* Imagen de Cristalito */
     background-color: var(--sahir-primario); /* Fallback */
 }
 
