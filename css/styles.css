@@ -3400,9 +3400,45 @@ a:hover {
   margin-top: 2rem;
 }
 
+.obra-entry {
+  padding: 3rem 0;
+}
+
+.obra-entry .container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.obra-entry__cover img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.obra-entry__meta {
+  font-family: var(--fuente-manuscrita);
+  color: var(--gris-claro);
+  margin-bottom: 1rem;
+}
+
+.obra-entry__description {
+  color: var(--gris-claro);
+  line-height: 1.7;
+}
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
   
+  .obra-entry .container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .obra-entry__cover {
+    margin-bottom: 1.5rem;
+  }
   
   .portfolio-grid--featured, .portfolio-grid--catalog, .symbolic-grid {
     grid-template-columns: 1fr;
