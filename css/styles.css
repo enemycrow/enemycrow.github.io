@@ -3411,6 +3411,12 @@ a:hover {
   align-items: flex-start;
 }
 
+.obra-entry--modal .container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .obra-entry__cover img {
   width: 100%;
   height: auto;
