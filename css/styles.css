@@ -3435,6 +3435,32 @@ a:hover {
   color: var(--gris-claro);
   line-height: 1.7;
 }
+
+.obra-copyright {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gris-suave); /* Ajustable */
+  font-size: 0.9rem;
+  color: var(--blanco-brillante); /* Asegura contraste con el fondo oscuro */
+  line-height: 1.6;
+}
+
+.obra-copyright strong {
+  color: var(--dorado-suave); /* Para destacar autor y número */
+  font-weight: 600;
+}
+
+.obra-copyright em {
+  font-style: italic;
+  color: var(--blanco-brillante);
+}
+
+.obra-copyright abbr {
+  text-decoration: none;
+  border-bottom: 1px dotted var(--blanco-brillante);
+  cursor: help;
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
   
