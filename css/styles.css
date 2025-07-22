@@ -2853,6 +2853,11 @@ a:hover {
   background-color: var(--azul-cometa); /* Fallback */
 }
 
+.bribones-img {
+  background-image: url('../images/reinadelosbribones.png');
+  background-color: var(--azul-cometa); /* Fallback */
+}
+
 .portfolio-item__overlay {
   position: absolute;
   top: 0;

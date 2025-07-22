@@ -89,6 +89,12 @@
   background-position: center;
 }
 
+.bribones-img {
+  background-image: url('../assets/images/reinadelosbribones.png');
+  background-size: cover;
+  background-position: center;
+}
+
 /* === Blog Principal (Featured) === */
 .featured-post-image {
   background-image: url('../assets/images/featured-trialidad.jpg');
