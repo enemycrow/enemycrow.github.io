@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "titulo": "La Trialidad como Motor Creativo",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-04-15",
+    "categoria_temas": ["Proceso Creativo"],
+    "categoria_libros": [],
+    "tiempo": "10 min de lectura",
+    "comentarios": 24,
+    "fragmento": "Cuando me preguntan c\u00f3mo logro mantener tres voces tan distintas, suelo responder que no es un esfuerzo consciente sino el reflejo natural de nuestra complejidad humana.",
+    "imagen": "lauren-post-1.jpg",
+    "slug": "trialidad-motor-creativo",
+    "contenido_html": "<p>Cuando me preguntan c\u00f3mo logro mantener tres voces tan distintas, suelo responder que no es un esfuerzo consciente sino el reflejo natural de nuestra complejidad humana. Todos contenemos multitudes...</p>"
+  },
+  {
+    "id": 2,
+    "titulo": "El Guardi\u00e1n de las Historias",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-04-05",
+    "categoria_temas": ["Fragmento In\u00e9dito"],
+    "categoria_libros": ["El Faro de Elysia"],
+    "tiempo": "5 min de lectura",
+    "comentarios": 8,
+    "fragmento": "El viejo guardi\u00e1n del faro encend\u00eda cada noche no solo la luz que guiaba a los navegantes, sino tambi\u00e9n las historias que hab\u00eda recolectado a lo largo de d\u00e9cadas.",
+    "imagen": "elysia-post-1.jpg",
+    "slug": "guardian-de-las-historias",
+    "contenido_html": "<p>El viejo guardi\u00e1n del faro encend\u00eda cada noche no solo la luz que guiaba a los navegantes, sino tambi\u00e9n las historias que hab\u00eda recolectado a lo largo de d\u00e9cadas. Cada una brillaba con intensidad diferente...</p>"
+  },
+  {
+    "id": 3,
+    "titulo": "Algoritmos del Caos",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-03-28",
+    "categoria_temas": ["Fragmento In\u00e9dito"],
+    "categoria_libros": ["Cartas a Nova"],
+    "tiempo": "6 min de lectura",
+    "comentarios": 15,
+    "fragmento": "El c\u00f3digo se desplegaba ante sus ojos como un mapa de su propia conciencia fragmentada.",
+    "imagen": "lauren-post-2.jpg",
+    "slug": "algoritmos-del-caos",
+    "contenido_html": "<p>El c\u00f3digo se desplegaba ante sus ojos como un mapa de su propia conciencia fragmentada. Cada l\u00ednea, cada funci\u00f3n, era un reflejo de las decisiones que hab\u00eda tomado...</p>"
+  },
+  {
+    "id": 4,
+    "titulo": "El Silencio como Lienzo",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-03-20",
+    "categoria_temas": ["Proceso Creativo"],
+    "categoria_libros": [],
+    "tiempo": "8 min de lectura",
+    "comentarios": 10,
+    "fragmento": "Mi proceso creativo comienza siempre en el silencio, un lienzo en blanco que espera los primeros trazos.",
+    "imagen": "elysia-post-2.jpg",
+    "slug": "el-silencio-como-lienzo",
+    "contenido_html": "<p>Mi proceso creativo comienza siempre en el silencio. No un silencio vac\u00edo, sino uno lleno de posibilidades, como un lienzo en blanco que espera los primeros trazos...</p>"
+  }
+]
