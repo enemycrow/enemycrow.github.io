@@ -12,11 +12,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function crearTarjeta(post) {
-    const fecha = new Date(post.fecha);
-    const day = fecha.toLocaleDateString('es-ES', { day: '2-digit' });
-    const month = fecha.toLocaleDateString('es-ES', { month: 'long' });
-    const year = fecha.getFullYear();
-    const authorSlug = slugify(post.autor.split(' ')[0]);
+    // Contador de visitas por entrada
+    const visitKey = `visits_${post.slug}`;
+    let visits = parseInt(localStorage.getItem(visitKey) || '0', 10);
+    // Corrige la fecha para evitar desfase por zona horaria
+    const [year, month, day] = post.fecha.split('-').map(Number);
+    const fecha = new Date(year, month - 1, day);
+    const dayStr = fecha.getDate().toString().padStart(2, '0');
+    const monthStr = fecha.toLocaleString('es-ES', { month: 'long' });
+    const yearStr = fecha.getFullYear();
+    
+    // Mapeo especial para autores con slugs personalizados
+    let authorSlug;
+    if (post.autor === 'A.C. Elysia') {
+      authorSlug = 'elysia';
+    } else if (post.autor === 'Lauren Cuervo') {
+      authorSlug = 'lauren';
+    } else if (post.autor === 'Draco Sahir') {
+      authorSlug = 'sahir';
+    } else {
+      authorSlug = slugify(post.autor.split(' ')[0]);
+    }
     const themeSlug = post.categoria_temas[0]
       ? slugify(post.categoria_temas[0])
       : 'general';
@@ -25,33 +41,31 @@ document.addEventListener('DOMContentLoaded', () => {
     article.className = `blog-post blog-entry blog-entry--${authorSlug} ${authorSlug} ${themeSlug}`;
     article.setAttribute('data-category', `${authorSlug} ${themeSlug}`);
 
+    // Obtener suma total de reacciones desde localStorage
+    const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
+    const storageKey = `reactions_${post.slug}`;
+    let reactionCounts = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    let totalReactions = reactionKeys.reduce((sum, key) => sum + (reactionCounts[key] || 0), 0);
+
     article.innerHTML = `
       <div class="blog-post__image" style="background-image:url('assets/images/${post.imagen}')">
         <div class="blog-post__date">
-          <span class="day">${day}</span>
-          <span class="month">${month}</span>
-          <span class="year">${year}</span>
+          <span>${dayStr} ${monthStr} ${yearStr}</span>
         </div>
       </div>
-      <div class="blog-post__content">
-        <div class="blog-post__header">
-          <div class="blog-post__categories">
-            ${post.categoria_temas
-              .map(cat => `<span class="category-tag">${cat}</span>`)
-              .join(' ')}
-          </div>
-          <div class="blog-post__author">
-            <span class="author-tag ${authorSlug}-tag">${post.autor}</span>
-          </div>
-        </div>
-        <h3 class="blog-post__title">${post.titulo}</h3>
-        <p class="blog-post__excerpt">${post.fragmento}</p>
-        <div class="blog-post__meta">
-          <span class="meta-item"><i class="fas fa-clock"></i> ${post.tiempo}</span>
-          <span class="meta-item"><i class="fas fa-comment"></i> ${post.comentarios}</span>
-        </div>
-        <a href="blog-entry.html?slug=${post.slug}" class="blog-post__link">Leer más <i class="fas fa-arrow-right"></i></a>
-      </div>`;
+      <div class="blog-post__meta">
+        <span class="category-tag">${post.categoria_temas[0] || ''}</span>
+        <span class="author-tag ${authorSlug}-tag">${post.autor}</span>
+      </div>
+      <h2 class="blog-post__title">${post.titulo}</h2>
+      <p class="blog-post__fragment">${post.fragmento}</p>
+      <div class="blog-post__footer">
+        <span class="meta-item"><i class="far fa-clock"></i> ${post.tiempo}</span>
+        <span class="meta-item"><i class="fas fa-bolt"></i> ${totalReactions} reacciones</span>
+        <span class="meta-item"><i class="far fa-eye"></i> ${visits} visitas</span>
+      </div>
+      <a href="blog-entry.html?slug=${post.slug}" class="blog-post__link">Leer más <span class="arrow">→</span></a>
+    `;
 
     container.appendChild(article);
   }

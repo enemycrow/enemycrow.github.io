@@ -44,3 +44,32 @@ eliminaron para simplificar el repositorio.
 ## Admin Strapi
 
 https://beautiful-bat-b20fd0ce9b.strapiapp.com/admin
+
+## Blog Dinámico
+
+El diario de creación funciona de forma totalmente dinámica usando el archivo `posts.json`.
+Cada entrada del archivo debe incluir los siguientes campos:
+
+- `id`: identificador numérico único
+- `titulo`: título de la entrada
+- `autor`: nombre del autor
+- `fecha`: en formato `YYYY-MM-DD`
+- `categoria_temas`: lista de temas (ej. `["Proceso Creativo"]`)
+- `categoria_libros`: lista de libros asociados (puede ser vacía)
+- `tiempo`: tiempo estimado de lectura
+- `comentarios`: número de comentarios
+- `fragmento`: breve resumen que aparece en la tarjeta
+- `imagen`: nombre de la imagen almacenada en `assets/images/`
+- `slug`: identificador para la URL (ej. `algoritmos-del-caos`)
+- `contenido_html`: cuerpo completo en HTML para `blog-entry.html`
+
+Para agregar una nueva entrada basta con editar `posts.json` y colocar la imagen correspondiente en `assets/images/`.
+Las páginas `blog.html` y `blog-entry.html` cargan este archivo mediante JavaScript, por lo que no es necesario modificar el HTML.
+
+Si quieres probar los cambios localmente ejecuta:
+
+```bash
+firebase serve
+```
+
+y abre `http://localhost:5000/blog.html` en tu navegador. Las tarjetas del blog se generarán automáticamente y cada enlace abrirá la entrada completa usando el slug en la URL.

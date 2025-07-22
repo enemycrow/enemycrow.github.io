@@ -4,8 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Entrada | La Pluma, el Faro y la Llama</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/custom-overrides.css">
+
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.7.2/css/all.css" />
+
+    <!-- Tabler Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/custom-overrides.css" />
+    <!-- <link rel="stylesheet" href="css/blog.css"> -->
 </head>
 <body>
 
@@ -33,6 +48,44 @@
   <article class="blog-entry blog-entry--individual">
     <div class="container">
       <img src="" alt="" id="entry-image" class="blog-entry__image" />
+      <!-- Bloque de reacciones -->
+      <div class="reactions-block">
+        <div class="reactions-list">
+          <div class="reaction" data-reaction="toco">
+            <span class="reaction-icon"><i class="fas fa-heart"></i></span>
+            <span class="reaction-count" id="reaction-toco-count">0</span>
+            <span class="reaction-tooltip">Esta historia me tocó</span>
+          </div>
+          <div class="reaction" data-reaction="sumergirme">
+            <span class="reaction-icon"><i class="fas fa-water"></i></span>
+            <span class="reaction-count" id="reaction-sumergirme-count">0</span>
+            <span class="reaction-tooltip">Quiero sumergirme en la trama</span>
+          </div>
+          <div class="reaction" data-reaction="personajes">
+            <span class="reaction-icon"><i class="fas fa-users"></i></span>
+            <span class="reaction-count" id="reaction-personajes-count">0</span>
+            <span class="reaction-tooltip">Quiero conocer a fondo a sus personajes</span>
+          </div>
+          <div class="reaction" data-reaction="mundo">
+            <span class="reaction-icon"><i class="fas fa-globe"></i></span>
+            <span class="reaction-count" id="reaction-mundo-count">0</span>
+            <span class="reaction-tooltip">Me intriga el mundo que han creado</span>
+          </div>
+          <div class="reaction" data-reaction="lugares">
+            <span class="reaction-icon"><i class="fas fa-map-marker-alt"></i></span>
+            <span class="reaction-count" id="reaction-lugares-count">0</span>
+            <span class="reaction-tooltip">Llévame a esos lugares</span>
+          </div>
+        </div>
+        <div class="entry-visits-block centered-block">
+          <span class="visits-icon">👁️</span>
+          <span id="entry-visits-count">0</span> visitas
+        </div>
+        <div class="entry-category-block centered-block">
+          <span class="category-icon">🏷️</span>
+          <span id="entry-categories"></span>
+        </div>
+      </div>
       <div class="post-category" id="entry-categories"></div>
       <h1 class="blog-entry__title" id="entry-title">Cargando...</h1>
       <span class="blog-entry__date" id="entry-date"></span>

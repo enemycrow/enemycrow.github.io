@@ -1,3 +1,149 @@
+/* Reacciones en entrada individual */
+
+.reactions-block {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+.reactions-list {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  margin-bottom: 0.5em;
+}
+
+.reaction {
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 16px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  color: white;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  text-align: center;
+  gap: 6px;
+  position: relative; /* ← importante para que el tooltip se posicione sobre este contenedor */
+}
+
+.reaction-icon {
+  font-size: 1.5rem;
+  color: #e06c88;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  padding: 0.5em;
+  margin-bottom: 4px;
+  transition: background-color 0.3s, transform 0.3s;
+  pointer-events: none;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+}
+
+.reaction:hover .reaction-icon {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.15);
+}
+
+.reaction[data-reaction="sumergirme"] .reaction-icon { color: #5ca6e6; }
+.reaction[data-reaction="personajes"] .reaction-icon { color: #e6c25c; }
+.reaction[data-reaction="mundo"] .reaction-icon { color: #7be6a6; }
+.reaction[data-reaction="lugares"] .reaction-icon { color: #a65ce6; }
+.reaction-count {
+  font-size: 1rem;
+  color: var(--blanco-brillante, #ccc);
+  margin-top: 4px;
+  font-weight: 600;
+  text-align: center;
+  font-family: 'Fraunces', serif;
+  letter-spacing: 0.5px;
+}
+
+.reaction-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  transition: opacity 0.3s ease, visibility 0.2s;
+  z-index: 10;
+}
+
+.reaction:hover .reaction-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Visit counter styles */
+.entry-visits-block {
+  text-align: center;
+  margin-top: 1.2em;
+  margin-bottom: 1em;
+}
+.entry-visits-block .visits-icon {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-right: 0.3em;
+}
+/* Category block styles */
+.entry-category-block {
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 1.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.entry-category-block .category-icon {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 0.2em;
+}
+.entry-category-block #entry-categories {
+  display: inline-block;
+}
+
+/* Etiqueta de categoría en el grid de blog */
+.category-tag {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.3em 1em;
+  font-size: 0.9rem;
+  font-family: var(--fuente-cuerpo);
+  font-weight: 500;
+  margin-right: 0.5em;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+/* Centrado de imagen en blog-entry individual */
+.blog-entry--individual .blog-entry__image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 480px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 1rem;
+}
 
 /* --- Start of about.css --- */
 /* Estilos para la página "Sobre Mí" */
@@ -938,6 +1084,19 @@ blockquote {
   flex-direction: column;
 }
 
+.blog-entry--lauren {
+  background: linear-gradient(135deg, var(--lauren-primario) 0%, var(--lauren-secundario) 70%, var(--lauren-acento) 100%);
+  color: var(--lauren-texto);
+}
+.blog-entry--elysia {
+  background: linear-gradient(135deg, var(--elysia-primario) 0%, var(--elysia-secundario) 70%, var(--elysia-acento) 100%);
+  color: var(--elysia-texto);
+}
+.blog-entry--sahir {
+  background: linear-gradient(135deg, var(--sahir-primario) 0%, var(--sahir-secundario) 70%, var(--sahir-acento) 100%);
+  color: var(--sahir-texto);
+}
+
 .loading-placeholder {
   border-radius: 8px;
   background: var(--gris-oscuro);
@@ -954,6 +1113,9 @@ blockquote {
   height: 200px;
   background-size: cover;
   background-position: center;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  margin-bottom: 1rem; /* esta es la separación nueva */
   position: relative;
 }
 
@@ -1051,6 +1213,8 @@ blockquote {
   font-family: var(--fuente-manuscrita);
   transition: all 0.3s ease;
   align-self: flex-start;
+  display: inline-block;
+  margin-top: 1rem; /* o la cantidad que prefieras */
 }
 
 .blog-post__link i {
