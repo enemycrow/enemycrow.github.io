@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#blog-posts-grid');
+  const featuredContainer = document.querySelector('#featured-posts-grid');
   const filterBtns = document.querySelectorAll('.blog-filter__button');
   const topicItems = document.querySelectorAll('.topics-grid .topic-item');
   let allPosts = [];
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/(^-|-$)/g, '');
   }
 
-  function crearTarjeta(post) {
+  function crearTarjeta(post, target) {
     // ...igual que antes...
     const visitKey = `visits_${post.slug}`;
     let visits = parseInt(localStorage.getItem(visitKey) || '0', 10);
@@ -89,17 +90,18 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <a href="blog-entry.html?slug=${post.slug}" class="blog-post__link">Leer más <span class="arrow">→</span></a>
     `;
-    container.appendChild(article);
+    target.appendChild(article);
   }
 
-  function renderPosts(posts) {
-    container.innerHTML = '';
-    posts.forEach(crearTarjeta);
+  function renderPosts(posts, target) {
+    if (!target) return;
+    target.innerHTML = '';
+    posts.forEach(post => crearTarjeta(post, target));
   }
 
   function aplicarFiltro(filter) {
     if (filter === 'all') {
-      renderPosts(allPosts);
+      renderPosts(allPosts, container);
       return;
     }
     // Filtro por autor/categoría (clase)
@@ -112,19 +114,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const themeSlug = post.categoria_temas[0] ? slugify(post.categoria_temas[0]) : 'general';
       return post && (authorSlug === filter || themeSlug === filter);
     });
-    renderPosts(filtered);
+    renderPosts(filtered, container);
   }
 
   function aplicarFiltroTopico(topico) {
     const filtered = allPosts.filter(post => Array.isArray(post.topicos) && post.topicos.includes(topico));
-    renderPosts(filtered);
+    renderPosts(filtered, container);
   }
 
   fetch('posts.json')
     .then(res => res.json())
     .then(data => {
       allPosts = data;
-      renderPosts(allPosts);
+      if (featuredContainer) {
+        const featured = allPosts.filter(p => p.destacado);
+        renderPosts(featured, featuredContainer);
+      }
+      renderPosts(allPosts, container);
       const active = document.querySelector('.blog-filter__button.active');
       if (active) aplicarFiltro(active.getAttribute('data-filter'));
     })
@@ -152,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         if (isActive) {
           // Si ya estaba activo, quitar filtro y mostrar todos
-          renderPosts(allPosts);
+          renderPosts(allPosts, container);
         } else {
           this.classList.add('active');
           const h3 = this.querySelector('h3');
