@@ -1495,28 +1495,36 @@ input, textarea, select, input *, textarea *, select * {
 @media (max-width: 600px) {
   .reactions-list {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px; /* reduce el espacio horizontal */
-    padding: 0 12px;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    gap: 4px; /* reduce el espacio horizontal */
+    padding: 0 8px;
   }
 
   .reaction {
-    width: 50px;
-    height: 50px;
-    padding: 10px;
+    width: 42px;
+    height: 42px;
+    padding: 6px;
     gap: 2px;
+    flex-direction: column;
   }
 
   .reaction-icon {
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
-    padding: 0.4em;
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+    padding: 0.25em;
   }
 
   .reaction-count {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+
+  .reaction-tooltip {
+    font-size: 0.7rem;
+    max-width: 100px;
+    padding: 0.25em 0.5em;
   }
 }
 
