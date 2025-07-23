@@ -1,6 +1,36 @@
+// --- Conteo de posts por tópico y actualización de la sección de tópicos ---
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const res = await fetch('posts.json');
+    const posts = await res.json();
+    // Construir un mapa de conteo de tópicos
+    const topicCounts = {};
+    posts.forEach(post => {
+      if (Array.isArray(post.topicos)) {
+        post.topicos.forEach(topico => {
+          topicCounts[topico] = (topicCounts[topico] || 0) + 1;
+        });
+      }
+    });
+    // Actualizar los contadores en la sección de tópicos
+    document.querySelectorAll('.topics-grid .topic-item').forEach(topicEl => {
+      const h3 = topicEl.querySelector('h3');
+      const countEl = topicEl.querySelector('.topic-count');
+      if (h3 && countEl) {
+        const nombre = h3.textContent.trim();
+        const count = topicCounts[nombre] || 0;
+        countEl.textContent = `${count} entrada${count === 1 ? '' : 's'}`;
+      }
+    });
+  } catch (err) {
+    // Silenciar error si no hay posts.json o estructura inesperada
+  }
+});
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#blog-posts-grid');
   const filterBtns = document.querySelectorAll('.blog-filter__button');
+  const topicItems = document.querySelectorAll('.topics-grid .topic-item');
+  let allPosts = [];
 
   function slugify(text) {
     return text
@@ -12,17 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function crearTarjeta(post) {
-    // Contador de visitas por entrada
+    // ...igual que antes...
     const visitKey = `visits_${post.slug}`;
     let visits = parseInt(localStorage.getItem(visitKey) || '0', 10);
-    // Corrige la fecha para evitar desfase por zona horaria
     const [year, month, day] = post.fecha.split('-').map(Number);
     const fecha = new Date(year, month - 1, day);
     const dayStr = fecha.getDate().toString().padStart(2, '0');
     const monthStr = fecha.toLocaleString('es-ES', { month: 'long' });
     const yearStr = fecha.getFullYear();
-    
-    // Mapeo especial para autores con slugs personalizados
     let authorSlug;
     if (post.autor === 'A.C. Elysia') {
       authorSlug = 'elysia';
@@ -36,17 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeSlug = post.categoria_temas[0]
       ? slugify(post.categoria_temas[0])
       : 'general';
-
     const article = document.createElement('article');
     article.className = `blog-post blog-entry blog-entry--${authorSlug} ${authorSlug} ${themeSlug}`;
     article.setAttribute('data-category', `${authorSlug} ${themeSlug}`);
-
-    // Obtener suma total de reacciones desde localStorage
     const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
     const storageKey = `reactions_${post.slug}`;
     let reactionCounts = JSON.parse(localStorage.getItem(storageKey) || '{}');
     let totalReactions = reactionKeys.reduce((sum, key) => sum + (reactionCounts[key] || 0), 0);
-
     article.innerHTML = `
       <div class="blog-post__image" style="background-image:url('assets/images/${post.imagen}')">
         <div class="blog-post__date">
@@ -66,25 +89,42 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <a href="blog-entry.html?slug=${post.slug}" class="blog-post__link">Leer más <span class="arrow">→</span></a>
     `;
-
     container.appendChild(article);
   }
 
+  function renderPosts(posts) {
+    container.innerHTML = '';
+    posts.forEach(crearTarjeta);
+  }
+
   function aplicarFiltro(filter) {
-    const posts = document.querySelectorAll('.blog-post');
-    posts.forEach(post => {
-      if (filter === 'all' || post.classList.contains(filter)) {
-        post.style.display = 'flex';
-      } else {
-        post.style.display = 'none';
-      }
+    if (filter === 'all') {
+      renderPosts(allPosts);
+      return;
+    }
+    // Filtro por autor/categoría (clase)
+    const filtered = allPosts.filter(post => {
+      let authorSlug;
+      if (post.autor === 'A.C. Elysia') authorSlug = 'elysia';
+      else if (post.autor === 'Lauren Cuervo') authorSlug = 'lauren';
+      else if (post.autor === 'Draco Sahir') authorSlug = 'sahir';
+      else authorSlug = slugify(post.autor.split(' ')[0]);
+      const themeSlug = post.categoria_temas[0] ? slugify(post.categoria_temas[0]) : 'general';
+      return post && (authorSlug === filter || themeSlug === filter);
     });
+    renderPosts(filtered);
+  }
+
+  function aplicarFiltroTopico(topico) {
+    const filtered = allPosts.filter(post => Array.isArray(post.topicos) && post.topicos.includes(topico));
+    renderPosts(filtered);
   }
 
   fetch('posts.json')
     .then(res => res.json())
     .then(data => {
-      data.forEach(crearTarjeta);
+      allPosts = data;
+      renderPosts(allPosts);
       const active = document.querySelector('.blog-filter__button.active');
       if (active) aplicarFiltro(active.getAttribute('data-filter'));
     })
@@ -96,6 +136,30 @@ document.addEventListener('DOMContentLoaded', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         aplicarFiltro(this.getAttribute('data-filter'));
+      });
+    });
+  }
+
+  // Filtro por tópico al hacer clic en un topic-item
+  if (topicItems.length > 0) {
+    topicItems.forEach(item => {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        const isActive = this.classList.contains('active');
+        // Quitar selección previa
+        topicItems.forEach(i => i.classList.remove('active'));
+        // Quitar selección de los filtros de arriba
+        filterBtns.forEach(b => b.classList.remove('active'));
+        if (isActive) {
+          // Si ya estaba activo, quitar filtro y mostrar todos
+          renderPosts(allPosts);
+        } else {
+          this.classList.add('active');
+          const h3 = this.querySelector('h3');
+          if (h3) {
+            aplicarFiltroTopico(h3.textContent.trim());
+          }
+        }
       });
     });
   }

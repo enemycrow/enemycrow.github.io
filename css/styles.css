@@ -1,3 +1,11 @@
+/* Tópico activo en la sección de tópicos */
+.topics-grid .topic-item.active {
+  border: 2px solid #7c4dff;
+  background: #221a3a;
+  box-shadow: 0 2px 12px 0 rgba(124,77,255,0.12);
+  color: #fff;
+  transition: border 0.2s, background 0.2s;
+}
 /* Evitar selección de texto en todo el sitio excepto formularios */
 body, body * {
   user-select: none;
@@ -1403,6 +1411,11 @@ blockquote {
   border: 1px solid var(--violeta-profundo);
 }
 
+.sahir-topic {
+  background: linear-gradient(135deg, rgba(58, 31, 28, 0.2) 0%, rgba(219, 92, 168, 0.3) 100%);
+  border: 1px solid var(--sahir-acento);
+}
+
 .collab-topic {
   background: linear-gradient(135deg, rgba(26, 35, 126, 0.2) 0%, rgba(107, 79, 158, 0.2) 100%);
   border: 1px solid var(--violeta-pálido);
@@ -1444,6 +1457,11 @@ blockquote {
 .elysia-topic .topic-icon {
   background: var(--violeta-profundo);
   color: var(--blanco-etereo);
+}
+
+.sahir-topic .topic-icon {
+  background: linear-gradient(to right, var(--sahir-secundario), var(--sahir-acento));
+  color: var(--sahir-texto);
 }
 
 .collab-topic .topic-icon {
