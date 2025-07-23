@@ -28,7 +28,65 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#blog-posts-grid');
-  const featuredContainer = document.querySelector('#featured-posts-grid');
+  const featuredContainer = document.querySelector('#featured-posts-container');
+  function crearFeaturedPost(post) {
+    // Formato destacado clásico
+    const visitKey = `visits_${post.slug}`;
+    let visits = parseInt(localStorage.getItem(visitKey) || '0', 10);
+    const [year, month, day] = post.fecha.split('-').map(Number);
+    const fecha = new Date(year, month - 1, day);
+    const dayStr = fecha.getDate().toString().padStart(2, '0');
+    const monthStr = fecha.toLocaleString('es-ES', { month: 'long' });
+    const yearStr = fecha.getFullYear();
+    let authorTag = '';
+    if (post.autor === 'A.C. Elysia') {
+      authorTag = '<span class="author-tag elysia-tag">A.C. Elysia</span>';
+    } else if (post.autor === 'Lauren Cuervo') {
+      authorTag = '<span class="author-tag lauren-tag">Lauren Cuervo</span>';
+    } else if (post.autor === 'Draco Sahir') {
+      authorTag = '<span class="author-tag sahir-tag">Draco Sahir</span>';
+    } else {
+      authorTag = `<span class="author-tag">${post.autor}</span>`;
+    }
+    // Si hay coautoría, puedes ajustar aquí
+    let categoryTag = '';
+    if (post.categoria_temas && post.categoria_temas[0]) {
+      const cat = post.categoria_temas[0];
+      const catClass = cat.toLowerCase().includes('proceso') ? 'process' : (cat.toLowerCase().includes('fragmento') ? 'fragments' : '');
+      categoryTag = `<span class="category-tag ${catClass}">${cat}</span>`;
+    }
+    const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
+    const storageKey = `reactions_${post.slug}`;
+    let reactionCounts = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    let totalReactions = reactionKeys.reduce((sum, key) => sum + (reactionCounts[key] || 0), 0);
+    return `
+      <div class="featured-post-container">
+        <div class="featured-post-image" style="background-image:url('assets/images/${post.imagen}')">
+          <div class="featured-post-overlay">
+            <div class="featured-post-date">
+              <span class="day">${dayStr}</span>
+              <span class="month">${monthStr.charAt(0).toUpperCase() + monthStr.slice(1)}</span>
+              <span class="year">${yearStr}</span>
+            </div>
+          </div>
+        </div>
+        <div class="featured-post-content">
+          <div class="post-category">
+            ${categoryTag}
+            ${authorTag}
+          </div>
+          <h2 class="featured-post-title">${post.titulo}</h2>
+          <p class="featured-post-excerpt">${post.fragmento}</p>
+          <div class="featured-post-meta">
+            <span class="meta-item"><i class="fas fa-clock"></i> ${post.tiempo}</span>
+            <span class="meta-item"><i class="fas fa-bolt"></i> ${totalReactions} reacciones</span>
+            <span class="meta-item"><i class="far fa-eye"></i> ${visits} visitas</span>
+          </div>
+          <a href="blog-entry.html?slug=${post.slug}" class="btn btn-featured">Leer Entrada Completa</a>
+        </div>
+      </div>
+    `;
+  }
   const filterBtns = document.querySelectorAll('.blog-filter__button');
   const topicItems = document.querySelectorAll('.topics-grid .topic-item');
   let allPosts = [];
@@ -127,8 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       allPosts = data;
       if (featuredContainer) {
-        const featured = allPosts.filter(p => p.destacado);
-        renderPosts(featured, featuredContainer);
+        const featuredPosts = allPosts.filter(p => p.destacado);
+        if (featuredPosts.length > 0) {
+          featuredContainer.innerHTML = featuredPosts.map(crearFeaturedPost).join('');
+        } else {
+          featuredContainer.innerHTML = '';
+        }
       }
       renderPosts(allPosts, container);
       const active = document.querySelector('.blog-filter__button.active');
