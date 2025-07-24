@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Página no encontrada</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Página no encontrada | La Pluma, El Faro y la Llama</title>
+  <link rel="stylesheet" href="styles.css" />
 
   <!-- Fuentes de Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,52 +14,18 @@
   <!-- Estilos principales -->
   <link rel="stylesheet" href="css/styles.css">
 
-  <style>
-    body {
-      background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--negro-sombra) 100%);
-      color: var(--blanco-etereo);
-      font-family: var(--fuente-cuerpo);
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #message {
-      background: var(--negro-sombra);
-      max-width: 360px;
-      padding: 32px 24px 24px;
-      border-radius: 5px;
-      text-align: center;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    }
-    #message h2 {
-      color: var(--violeta-pálido);
-      font-family: var(--fuente-titulos);
-      margin: 0 0 8px;
-    }
-    #message h1 {
-      font-size: 22px;
-      font-weight: 300;
-      color: var(--blanco-brillante);
-      margin: 0 0 16px;
-      font-family: var(--fuente-manuscrita);
-    }
-    #message p {
-      line-height: 1.4;
-      margin: 16px 0 24px;
-      font-size: 14px;
-    }
-  </style>
 </head>
-<body>
-  <div id="message">
-    <h2>404</h2>
-    <h1>Página no encontrada</h1>
-    <p>El archivo especificado no se encontró en este sitio web. Por favor verifica la URL e inténtalo de nuevo.</p>
-    <h3>¿Por qué veo esto?</h3>
-    <p>Esta página fue generada por la interfaz de línea de comandos de Firebase. Para modificarla, edita el archivo <code>404.html</code> en el directorio <code>public</code> configurado de tu proyecto.</p>
-    <a href="index.html" class="btn btn-elysia">Volver al inicio</a>
+<body class="not-found-body">
+  <div class="not-found-container">
+    <div class="not-found-overlay">
+      <h1 class="not-found-title">404 — Aquí no hay letras…</h1>
+      <p class="not-found-message">
+        Has llegado a un rincón donde la pluma dejó de escribir,<br/>
+        el faro no alcanza a alumbrar y la llama titila sin rumbo.<br/>
+        <em>Pero incluso aquí, donde no hay letras, aún hay belleza.</em><br/>
+      </p>
+      <a href="/" class="not-found-button">Volver al Hogar</a>
+    </div>
   </div>
 </body>
 </html>

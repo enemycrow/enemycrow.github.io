@@ -61,11 +61,13 @@ Cada entrada del archivo debe incluir los siguientes campos:
 - `fragmento`: breve resumen que aparece en la tarjeta
 - `imagen`: nombre de la imagen almacenada en `assets/images/`
 - `slug`: identificador para la URL (ej. `algoritmos-del-caos`)
+- `destacado`: marca la entrada como destacada si su valor es `true`
 - `contenido_html`: cuerpo completo en HTML para `blog-entry.html`
 
 Para agregar una nueva entrada basta con editar `posts.json` y colocar la imagen correspondiente en `assets/images/`.
 Las páginas `blog.html` y `blog-entry.html` cargan este archivo mediante JavaScript, por lo que no es necesario modificar el HTML.
 
+Si colocas `"destacado": true` en una entrada, aparecerá en la sección de entradas destacadas al inicio de `blog.html`.
 Si quieres probar los cambios localmente ejecuta:
 
 ```bash
