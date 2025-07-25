@@ -5494,6 +5494,44 @@ a:hover {
   transform: scale(1.05);
 }
 
+@media screen and (max-width: 500px) {
+  .not-found-body {
+  background: url('/assets/images/plumafarollama404m.png') no-repeat center center fixed;
+  background-size: unset;
+  }
+  
+  .not-found-container {
+    max-width: 85%;
+    padding: 0.5rem !important;
+    margin: 2vh auto !important;
+    backdrop-filter: blur(3px) brightness(0.45);
+  }
+
+  .not-found-overlay {
+    padding: 0.5rem !important;
+    background-color: rgba(0, 0, 0, 0.28) !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+  }
+
+  .not-found-title {
+    font-size: 1.4rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .not-found-message {
+    font-size: 0.75rem !important;
+    line-height: 1.4 !important;
+    margin: 0.5rem 0 1rem !important;
+  }
+
+  .not-found-button {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.8rem !important;
+    margin-top: 0.5rem !important;
+  }
+}
+
 /* --- End of 404 styles --- */
 
 /* --- End of styles.css --- */
@@ -5508,3 +5546,42 @@ a:hover {
 }
 
 /* --- End of Header.css --- */
+
+/* --- Start of special index.css --- */
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.01);
+    opacity: 1;
+  }
+}
+.latido-activo {
+  animation: latido 3s infinite ease-in-out;
+}
+
+.audio-player {
+  margin-top: 2rem;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.audio-player audio {
+  width: 100%;
+  max-width: 300px;
+}
+
+.audio-caption {
+  font-size: 0.9rem;
+  color: var(--blanco-tenue);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* --- End of special index.css --- */

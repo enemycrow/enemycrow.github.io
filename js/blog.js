@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalReactions = reactionKeys.reduce((sum, key) => sum + (reactionCounts[key] || 0), 0);
     return `
       <div class="featured-post-container">
-        <div class="featured-post-image" style="background-image:url('assets/images/${post.imagen}')">
+        <div class="featured-post-image" style="background-image:url('assets/images/blog/${post.imagen}')">
           <div class="featured-post-overlay">
             <div class="featured-post-date">
               <span class="day">${dayStr}</span>
@@ -119,18 +119,21 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       authorSlug = slugify(post.autor.split(' ')[0]);
     }
-    const themeSlug = post.categoria_temas[0]
-      ? slugify(post.categoria_temas[0])
-      : 'general';
+    const catRaw = post.categoria_temas[0] || '';
+    const themeSlug = slugify(catRaw);
+    const catClass =
+      themeSlug.includes('procesos-creativos') ? 'process' :
+      themeSlug.includes('fragmentos-ineditos') ? 'fragments' :
+      '';
     const article = document.createElement('article');
-    article.className = `blog-post blog-entry blog-entry--${authorSlug} ${authorSlug} ${themeSlug}`;
+    article.className = `blog-post blog-entry blog-entry--${authorSlug} ${authorSlug} ${themeSlug} ${catClass}`;
     article.setAttribute('data-category', `${authorSlug} ${themeSlug}`);
     const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
     const storageKey = `reactions_${post.slug}`;
     let reactionCounts = JSON.parse(localStorage.getItem(storageKey) || '{}');
     let totalReactions = reactionKeys.reduce((sum, key) => sum + (reactionCounts[key] || 0), 0);
     article.innerHTML = `
-      <div class="blog-post__image" style="background-image:url('assets/images/${post.imagen}')">
+      <div class="blog-post__image" style="background-image:url('assets/images/blog/${post.imagen}')">
         <div class="blog-post__date">
           <span>${dayStr} ${monthStr} ${yearStr}</span>
         </div>
@@ -170,7 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (post.autor === 'Draco Sahir') authorSlug = 'sahir';
       else authorSlug = slugify(post.autor.split(' ')[0]);
       const themeSlug = post.categoria_temas[0] ? slugify(post.categoria_temas[0]) : 'general';
-      return post && (authorSlug === filter || themeSlug === filter);
+      return post && (
+        authorSlug === filter ||
+        themeSlug === filter ||
+        (themeSlug.includes('procesos-creativos') && filter === 'process') ||
+        (themeSlug.includes('fragmentos-ineditos') && filter === 'fragments')
+      );
     });
     renderPosts(filtered, container);
   }

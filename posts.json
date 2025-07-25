@@ -5,7 +5,7 @@
     "autor": "Lauren Cuervo",
     "fecha": "2025-07-07",
     "categoria_temas": [
-      "Proceso Creativo"
+      "Procesos Creativos"
     ],
     "categoria_libros": [
       "Debacle Triangular"
@@ -14,7 +14,7 @@
       "Futuro",
       "Ética"
     ],
-    "tiempo": "15 min de lectura",
+    "tiempo": "12 min de lectura",
     "fragmento": "Una bienvenida íntima al nacimiento del blog \"La Pluma, el Faro y la Llama\". Este primer escrito reflexiona sobre el poder de comenzar, la belleza de compartir palabras sinceras frente a la primera personaje. La promesa de una voz que apenas empieza a encenderse.",
     "imagen": "Selena-post1.png",
     "slug": "la-primera-chispa",
@@ -27,7 +27,7 @@
     "autor": "A.C. Elysia",
     "fecha": "2025-07-22",
     "categoria_temas": [
-      "Proceso Creativo"
+      "Procesos Creativos"
     ],
     "categoria_libros": [
       "Círculo en la Arena"
@@ -36,7 +36,7 @@
       "Eros",
       "Simbolismo"
     ],
-    "tiempo": "12 min de lectura",
+    "tiempo": "11 min de lectura",
     "fragmento": "La autora se desdobla en un círculo íntimo donde el lenguaje es piel y la piel, memoria. En esta entrevista, Elysia se revela a sí misma con la delicadeza de quien se ofrece al fuego.",
     "imagen": "Circulo-post2.png",
     "slug": "la-voz-dentro-del-circulo",
@@ -49,7 +49,7 @@
     "autor": "Draco Sahir",
     "fecha": "2025-07-23",
     "categoria_temas": [
-      "Proceso Creativo"
+      "Procesos Creativos"
     ],
     "categoria_libros": [
       "El valeroso viaje de Galactique y Galactiquito"
@@ -66,20 +66,42 @@
   },
   {
     "id": 4,
-    "titulo": "El Silencio como Lienzo",
+    "titulo": "Una historia, una canción",
     "autor": "A.C. Elysia",
-    "fecha": "2025-03-20",
+    "fecha": "2025-07-24",
     "categoria_temas": [
-      "Proceso Creativo"
+      "Fragmentos Inéditos"
     ],
-    "categoria_libros": [],
+    "categoria_libros": [
+      "Entre Amores y Abismos: El Ritual de la Transformación"
+    ],
     "topicos": [
-      "Sanación"
+      "Eros, Sanación"
     ],
-    "tiempo": "8 min de lectura",
-    "fragmento": "Mi proceso creativo comienza siempre en el silencio, un lienzo en blanco que espera los primeros trazos.",
-    "imagen": "elysia-post-2.jpg",
-    "slug": "el-silencio-como-lienzo",
-    "contenido_html": "<p>Mi proceso creativo comienza siempre en el silencio. No un silencio vacío, sino uno lleno de posibilidades, como un lienzo en blanco que espera los primeros trazos...</p>"
+    "tiempo": "7 min de lectura",
+    "fragmento": "Cómo una obra escrita se convierte en música. En este extracto cuento sobre cómo los pasajes de mi novela se transformaron en canciones que susurran temores y secretos desde el alma gracias a Lauren Cuervo y GENNA Tech.",
+    "imagen": "Entreamoresabismos-post4.png",
+    "slug": "una-historia-una-cancion",
+    "contenido_html": "<p><h2>La transformación de párrafos en versos de \"Entre Amores y Abismos\"</h2></p><p>Entre Amores y Abismos ha sido mi primera novela publicada.<br> Su viaje ha sido un proceso difícil en el cuál los sentimientos me tocaron a fondo, con mucha sensibilidad. Natalia, un alma desbordada por su pasado. Daniel, un espíritu contenido por el dolor.<br> Estos personajes y su travesía de transformación me elevaron a un punto donde necesitaba exhalar un sentimiento profundo emanado desde su historia. Como si buscara en sus líneas aire fresco que sanaran lágrimas de emoción.<br> Creí escuchar el sonido de las plumas. Sentí el aparecer de una entidad silente.<br> Era él. <br> <br> <strong>Lauren Cuervo</strong>.<br> <br> Al girar mis cabellos violetas para poder observarlo, cruzamos nuestras miradas.<br> De sus labios me ofreció algo refrescante:<br><blockquote>Lauren: <em>¿Te gustaría transmutar tus palabras en música? ¿Tus llantos y fuego en melodías y armónicos? Conozco la manera de convertir tus pensamientos en frecuencias fundamentales.</em></blockquote><br> <blockquote>Elysia: <em>Me encantaría observar cómo opera tu alquimia.</em></blockquote><br></p> <p> —Respondí con un armónico cantado y poético.<br> Lauren Cuervo me habló de GENNA Tech. Una tecnología que está desarrollando. Trabajamos en conjunto. El Razocinio Codificado recibió la información para transformar mi poesía, así como el estilo propuesto en una pieza cautivante.<br> <br><blockquote>Lauren: <em>¿Me das un verso que brote de tus lágrimas?</em></blockquote><br><blockquote>Elysia:<br> <em>Quisiera ser la montaña,<br> la que esconde tu mañana.<br> Derretirme en nieve andina,<br> ser tu blanco,<br> tu radiante,<br> tu compañía genuina.</em></blockquote></p><p>Lauren sonrío. No con esa sonrisa lúgubre de su tinta. Una sincera que hizo brillar mis ojos.<br> <br><blockquote>Lauren: <em>Escucha esto. Es para ti. Desde mí.</em></blockquote><div class=\\\"audio-player\\\"><audio controls> <source src=\"assets/audios/Entreamoresabismos-post4.mp3\" type=\"audio/mpeg\">Tu navegador no soporta audio.</audio><br> <br><p class=\\\"audio-caption\\\"><em>Fragmento de \"Nos perdimimos allí\" interpretada por Natalia Del Monte</em><br> <br> Recibí la canción con emoción. Con algo renovado. Ya no era lamento por mis personajes. Era agradecimiento por algo sagrado. Por venerar sus viajes y la compañía.<br></p></div></p>"
+  },
+  {
+    "id": 5,
+    "titulo": "Un juego que se convierte en historia",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-07-25",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "Entre Amores y Abismos: El Ritual de la Transformación"
+    ],
+    "topicos": [
+      "Eros, Sanación"
+    ],
+    "tiempo": "15 min de lectura",
+    "fragmento": "Una historia que madura desde una forma de entretenimiento a una experiencia gráfica y un sueño cinemático.",
+    "imagen": "Efectodilaciontemporal-post5.png",
+    "slug": "un-juego-que-se-convierte-en-historia",
+    "contenido_html": "<p><h2>Una breve contextualización de \"Efecto Dilación Temporal\"</h2></p><p>Cuando era niño, siempre soñé con ser astronauta. Normalmente, visitaba el planetario de mi ciudad, donde pasaba horas maravillado por las estrellas y el proyector que giraba al centro del público. También, tuve varios libros del espacio. Solía mirar la composición planetaria y me declaro una persona que odió cuando Plutón recategorizado como planeta enano del Sistema Solar por la UAI.</p><p>Bueno. Tampoco fue lo que afectó mi vida. Lo que verdaderamente me afectó, fue el curso de la vida. Fue díficil creer en los sueños de niño, de convertirse en el viajero espacial que soñaba ser.<br> No obstante, la idea jamás murió. A como de lugar tenía que ir al espacio. Y lo haría... en una historia. </p><p>En esos años, tenía una amiga con la que pasaba las noches. Su compañía fue inspiración para retribuirle. Fue como contarle una historia, pero más dinámica. Tenía su atención y ella jugaba cada versión beta que publicaba.</p><p>En mi vida use mucho <i>RPG Maker</i>, un software para crear videojuegos. A través de él, pude dar vida a mis historias y personajes, explorando mundos que solo existían en mi imaginación.</p><p>En este entorno desarrollé no sólo la historia, sino que la comicidad de los personajes, sus habilidades, sistemas de juego. Lo más importante para mí fueron los paisajes. Fue uno de los principales desafíos conseguir <i>chipsets</i> —imágenes que se utilizan para diseñar en este software— que capturaran la esencia de mis mundos. En esos años, con suerte tenía para comer dos a tres raciones diarias. Por lo que gastar dinero comprándolos era un lujo. Por lo que tenía que recurrir a la investigación profunda: Pasar horas buscando algún chipset que valiera la pena.</p><p>Al final, me rendía. Porque no calzaban, porque RPG Maker tiene muchas versiones y todas son de tamaños diferentes. Dibujarlos hubiera consumido meses. Por lo que reutilicé los que habían de un modo ingenioso. Envolviéndolos con imágenes de fondo especiales, colores, luces FX. Sumé música... rippeada (sacada de otros lugares). Nunca pretendí comercializar, así que no era pecado. Además, fue un placer que pocos vivieron. Pero, avancé.</p><p>Finalmente, logré alrededor de 2 a 3 horas de juego continuo. Un avance. Un éxito para no ser programador.</p><p> Aún conservo copias de él. No publicadas. Aunque sería posible y... sueño con un día, contratar a un equipo entero y hacerlo nuevamente. Pero, esta vez, terminarlo.</p><p> El guión ha evolucionado con los años. Más de 10 años después, la historia creció. Hubo una fase donde vivió la experiencia de ser un cómic. Uno que detallaré en otra ocasión.</p><p>En la imagen está una de mis personajes principales, llamada Simüahí. Ella es una habitante de Siteria; sobreviviente de la guerra que se produjo en su mundo. Su apariencia, aunque refleja un demonio, dista de la sabiduría y las cicatrices que han madurado a través del tiempo. Pasando de ser un personaje vengativo a uno más estoico. La imagen es un concept art de lo que podría ser ella en un futuro. En la pantalla grande o en el séptimo arte.</p><p>Bueno... mi sueño es que un día, así como yo cumplí un sueño de viajar (aunque no de la manera en que esperaba), esta historia vuele al mundo del cine. Como un largometraje. Espero que ese día llegue y no sea tan lejano como las estrellas que quiero tocar.</p>"
   }
 ]

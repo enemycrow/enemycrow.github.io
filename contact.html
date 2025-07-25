@@ -34,7 +34,7 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="index.html" class="logo">
+                <a href="index.html" class="logo" data-sylvora-latido="true">
                     <span class="logo-icon"><i class="fa-solid fa-fire-flame-simple"></i></span>
                     La Pluma, el Faro y la Llama
                 </a>
@@ -72,8 +72,8 @@
                 <!-- Información de Contacto -->
                 <div class="contact-info">
                     <h2>Hablemos</h2>
-                    <p class="contact-intro">Ya sea que tengas una consulta sobre mis servicios creativos, quieras discutir una posible colaboración o simplemente desees compartir tus impresiones sobre alguna de mis obras, estaré encantado de escucharte.</p>
-                    
+                    <p class="contact-intro">Ya sea que tengas una consulta sobre nuestros servicios creativos, quieras discutir una posible colaboración o simplemente desees compartir tus impresiones sobre alguna de nuestras obras, estaremos encantados de escucharte.</p>
+
                     <div class="contact-methods">
                         <div class="contact-method">
                             <div class="method-icon">
@@ -86,6 +86,7 @@
                             </div>
                         </div>
                         
+                        <!--
                         <div class="contact-method">
                             <div class="method-icon">
                                 <i class="fas fa-phone-alt"></i>
@@ -96,6 +97,7 @@
                                 <p class="contact-method__response-time">Lunes a Viernes, 10:00 - 18:00</p>
                             </div>
                         </div>
+                        -->
                         
                         <div class="contact-method">
                             <div class="method-icon">
@@ -112,11 +114,15 @@
                     <div class="social-connect">
                         <h3>Conéctate en Redes</h3>
                         <div class="social-icons">
+                            <!--
                             <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            -->
                             <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <!--
                             <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
                             <a href="#" class="social-icon"><i class="fab fa-goodreads"></i></a>
                             <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            -->
                         </div>
                     </div>
                 </div>
@@ -143,7 +149,7 @@
                         <div class="contact-form__group">
                             <label for="voice">¿Con qué voz te gustaría hablar?</label>
                             <select id="voice" name="voice">
-                                <option value="both">Ambas voces</option>
+                                <option value="both">Las tres voces</option>
                                 <option value="lauren">Lauren Cuervo</option>
                                 <option value="elysia">A.C. Elysia</option>
                                 <option value="sahir">Draco Sahir</option>
@@ -178,8 +184,8 @@
             <div class="newsletter__container">
                 <div class="newsletter__content">
                     <h2>Suscríbete al Newsletter</h2>
-                    <p>Recibe actualizaciones mensuales sobre nuevas obras, entradas del diario de creación, eventos y ofertas especiales en servicios creativos. Prometo que solo recibirás contenido valioso y nunca compartiré tu información.</p>
-                    
+                    <p>Recibe actualizaciones mensuales sobre nuevas obras, entradas del diario de creación, eventos y ofertas especiales en servicios creativos. Prometemos que solo recibirás contenido valioso y nunca compartiremos tu información.</p>
+
                     <div class="newsletter__features">
                         <div class="newsletter__feature">
                             <div class="newsletter__feature-icon">
@@ -235,7 +241,12 @@
                             <input type="checkbox" id="nl-elysia" name="nl-elysia" checked>
                             <label for="nl-elysia">Contenido de A.C. Elysia</label>
                         </div>
-                        
+ 
+                        <div class="contact-form__group contact-form__checkbox-group">
+                            <input type="checkbox" id="nl-sahir" name="nl-sahir" checked>
+                            <label for="nl-sahir">Contenido de Draco Sahir</label>
+                        </div>
+
                         <div class="contact-form__group contact-form__checkbox-group">
                             <input type="checkbox" id="nl-privacy" name="nl-privacy" required>
                             <label for="nl-privacy">He leído y acepto la <a href="#">política de privacidad</a></label>

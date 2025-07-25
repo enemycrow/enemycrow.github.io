@@ -1,3 +1,17 @@
+// js/main.js
+// Activar el latido de Sylvora entre las 00:00 y 03:00
+const activarLatidoDeSylvora = () => {
+  const ahora = new Date();
+  const hora = ahora.getHours();
+  if (hora >= 0 && hora <= 3) { // Solo entre 00:00 y 03:00
+    document.querySelectorAll('[data-sylvora-latido="true"]').forEach(el => {
+      el.classList.add('latido-activo');
+    });
+  }
+};
+
+activarLatidoDeSylvora();
+
 // JavaScript principal para todas las páginas
 (function (window, document) {
     function setupPreloader() {
