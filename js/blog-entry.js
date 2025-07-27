@@ -1,13 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug');
-  // --- Contador de visitas por entrada ---
-  if (slug) {
-    const visitKey = `visits_${slug}`;
-    let visits = parseInt(localStorage.getItem(visitKey) || '0', 10);
-    visits++;
-    localStorage.setItem(visitKey, visits);
-  }
   if (!slug) return;
 
   try {
@@ -44,18 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         .join(' ');
     }
 
-    // Mostrar contador de visitas en la entrada
-    const visitKey = `visits_${slug}`;
-    let visits = parseInt(localStorage.getItem(visitKey) || '0', 10);
-    const visitsEl = document.getElementById('entry-visits-count');
-    if (visitsEl) visitsEl.textContent = visits;
 
-    // --- Lógica de reacciones ---
-    const reactionKeys = [
-      'toco',
-      'sumergirme',
-      'personajes',
-      'mundo',
       'lugares'
     ];
     // Cargar contadores desde localStorage (por entrada)
