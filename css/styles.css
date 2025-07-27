@@ -1542,7 +1542,7 @@ input, textarea, select, input *, textarea *, select * {
   color: #ccc;
   margin-bottom: 0.2em;
 }
-.entry-category-block #entry-categories {
+.entry-category-block #entry-categories-block {
   display: inline-block;
 }
 
