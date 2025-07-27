@@ -37,7 +37,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         .join(' ');
     }
 
-
+    const reactionKeys = [
+      'toco',
+      'sumergirme',
+      'personajes',
+      'mundo',
       'lugares'
     ];
     // Cargar contadores desde localStorage (por entrada)
