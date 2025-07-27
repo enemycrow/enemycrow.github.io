@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const timeEl = document.getElementById('entry-time');
     const commentsEl = document.getElementById('entry-comments');
     const catEl = document.getElementById('entry-categories');
-    const visitsEl = document.getElementById('entry-visits-count');
 
     if (titleEl) titleEl.textContent = entry.titulo;
     if (dateEl) dateEl.textContent = fechaTexto;
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const docRef = doc(db, 'reactions', slug);
     let snap = await getDoc(docRef);
     if (!snap.exists()) {
-      const initData = { visits: 0 };
+      const initData = {};
       reactionKeys.forEach(k => initData[k] = 0);
       await setDoc(docRef, initData);
       snap = await getDoc(docRef);
@@ -56,11 +55,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       const el = document.getElementById(`reaction-${key}-count`);
       if (el) el.textContent = data[key] || 0;
     });
-    if (visitsEl) visitsEl.textContent = data.visits || 0;
-
-    await updateDoc(docRef, { visits: increment(1) });
-    data = (await getDoc(docRef)).data();
-    if (visitsEl) visitsEl.textContent = data.visits || 0;
 
     const votedKey = `voted_${slug}`;
     const voted = JSON.parse(localStorage.getItem(votedKey) || '{}');
