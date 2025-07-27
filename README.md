@@ -78,7 +78,7 @@ y abre `http://localhost:5000/blog.html` en tu navegador. Las tarjetas del blog 
 
 ## Configuración de Firebase
 
-Para que las reacciones y el contador de visitas funcionen necesitas habilitar
+Para que las reacciones funcionen necesitas habilitar
 Firestore en tu proyecto y agregar tus credenciales al frontend:
 
 1. Ejecuta `firebase init` y selecciona **Firestore** cuando se solicite.
