@@ -1,71 +1,145 @@
 // JavaScript para la página de Contacto y Newsletter
+import { db } from './firebase-init.js';
+import { collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js';
+
 document.addEventListener('DOMContentLoaded', function() {
 
     // Formulario de contacto
     const contactForm = document.getElementById('contactForm');
     
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Aquí iría la lógica para enviar el formulario a un servidor
-            // Por ahora, simulamos una respuesta exitosa
-            
-            // Crear mensaje de éxito
-            const successMessage = document.createElement('div');
-            successMessage.className = 'contact-form__message contact-form__message--success';
-            successMessage.textContent = '¡Mensaje enviado con éxito! Te responderemos lo antes posible.';
-            
-            // Insertar mensaje antes del formulario
-            contactForm.parentNode.insertBefore(successMessage, contactForm);
-            
-            // Mostrar mensaje
-            successMessage.style.display = 'block';
-            
-            // Resetear formulario
-            contactForm.reset();
-            
-            // Ocultar mensaje después de 5 segundos
-            setTimeout(() => {
-                successMessage.style.display = 'none';
+
+            if (!validateForm(this)) {
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'contact-form__message contact-form__message--error';
+                errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
+                this.parentNode.insertBefore(errorMessage, this);
+                errorMessage.style.display = 'block';
                 setTimeout(() => {
-                    successMessage.remove();
-                }, 500);
-            }, 5000);
+                    errorMessage.style.display = 'none';
+                    setTimeout(() => {
+                        errorMessage.remove();
+                    }, 500);
+                }, 5000);
+                return;
+            }
+
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                subject: formData.get('subject'),
+                voice: formData.get('voice'),
+                message: formData.get('message'),
+                wantsNewsletter: formData.get('newsletter') !== null,
+                timestamp: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, 'contact_messages'), data);
+                if (data.wantsNewsletter) {
+                    await addDoc(collection(db, 'newsletter_subscribers'), {
+                        name: data.name,
+                        email: data.email,
+                        lauren: true,
+                        elysia: true,
+                        sahir: true,
+                        timestamp: serverTimestamp()
+                    });
+                }
+
+                const successMessage = document.createElement('div');
+                successMessage.className = 'contact-form__message contact-form__message--success';
+                successMessage.textContent = '¡Mensaje enviado con éxito! Te responderemos lo antes posible.';
+                contactForm.parentNode.insertBefore(successMessage, contactForm);
+                successMessage.style.display = 'block';
+                contactForm.reset();
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    setTimeout(() => {
+                        successMessage.remove();
+                    }, 500);
+                }, 5000);
+            } catch (err) {
+                console.error('Error al guardar el mensaje', err);
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'contact-form__message contact-form__message--error';
+                errorMessage.textContent = 'Ha ocurrido un error. Intenta nuevamente más tarde.';
+                this.parentNode.insertBefore(errorMessage, this);
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                    setTimeout(() => {
+                        errorMessage.remove();
+                    }, 500);
+                }, 5000);
+            }
         });
     }
 
     // Formulario de newsletter
     const newsletterForm = document.getElementById('newsletterForm');
-    
+
     if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
+        newsletterForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Aquí iría la lógica para enviar el formulario a un servidor
-            // Por ahora, simulamos una respuesta exitosa
-            
-            // Crear mensaje de éxito
-            const successMessage = document.createElement('div');
-            successMessage.className = 'newsletter__message newsletter__message--success';
-            successMessage.textContent = '¡Gracias por suscribirte! Pronto recibirás tu primer newsletter.';
-            
-            // Insertar mensaje antes del formulario
-            newsletterForm.parentNode.insertBefore(successMessage, newsletterForm);
-            
-            // Mostrar mensaje
-            successMessage.style.display = 'block';
-            
-            // Resetear formulario
-            newsletterForm.reset();
-            
-            // Ocultar mensaje después de 5 segundos
-            setTimeout(() => {
-                successMessage.style.display = 'none';
+
+            if (!validateForm(this)) {
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'newsletter__message newsletter__message--error';
+                errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
+                this.parentNode.insertBefore(errorMessage, this);
+                errorMessage.style.display = 'block';
                 setTimeout(() => {
-                    successMessage.remove();
-                }, 500);
-            }, 5000);
+                    errorMessage.style.display = 'none';
+                    setTimeout(() => {
+                        errorMessage.remove();
+                    }, 500);
+                }, 5000);
+                return;
+            }
+
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('nl-name'),
+                email: formData.get('nl-email'),
+                lauren: formData.get('nl-lauren') !== null,
+                elysia: formData.get('nl-elysia') !== null,
+                sahir: formData.get('nl-sahir') !== null,
+                timestamp: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, 'newsletter_subscribers'), data);
+
+                const successMessage = document.createElement('div');
+                successMessage.className = 'newsletter__message newsletter__message-success';
+                successMessage.textContent = '¡Gracias por suscribirte! Pronto recibirás tu primer newsletter.';
+                newsletterForm.parentNode.insertBefore(successMessage, newsletterForm);
+                successMessage.style.display = 'block';
+                newsletterForm.reset();
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    setTimeout(() => {
+                        successMessage.remove();
+                    }, 500);
+                }, 5000);
+            } catch (err) {
+                console.error('Error al guardar la suscripción', err);
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'newsletter__message newsletter__message--error';
+                errorMessage.textContent = 'Ha ocurrido un error. Intenta nuevamente más tarde.';
+                this.parentNode.insertBefore(errorMessage, this);
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                    setTimeout(() => {
+                        errorMessage.remove();
+                    }, 500);
+                }, 5000);
+            }
         });
     }
 
@@ -136,58 +210,4 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     };
     
-    // Aplicar validación a ambos formularios
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            if (!validateForm(this)) {
-                e.preventDefault();
-                
-                // Crear mensaje de error
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'contact-form__message contact-form__message--error';
-                errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
-                
-                // Insertar mensaje antes del formulario
-                this.parentNode.insertBefore(errorMessage, this);
-                
-                // Mostrar mensaje
-                errorMessage.style.display = 'block';
-                
-                // Ocultar mensaje después de 5 segundos
-                setTimeout(() => {
-                    errorMessage.style.display = 'none';
-                    setTimeout(() => {
-                        errorMessage.remove();
-                    }, 500);
-                }, 5000);
-            }
-        });
-    }
-    
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            if (!validateForm(this)) {
-                e.preventDefault();
-                
-                // Crear mensaje de error
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'newsletter__message newsletter__message--error';
-                errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
-                
-                // Insertar mensaje antes del formulario
-                this.parentNode.insertBefore(errorMessage, this);
-                
-                // Mostrar mensaje
-                errorMessage.style.display = 'block';
-                
-                // Ocultar mensaje después de 5 segundos
-                setTimeout(() => {
-                    errorMessage.style.display = 'none';
-                    setTimeout(() => {
-                        errorMessage.remove();
-                    }, 500);
-                }, 5000);
-            }
-        });
-    }
 });

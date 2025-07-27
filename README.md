@@ -85,3 +85,7 @@ Firestore en tu proyecto y agregar tus credenciales al frontend:
 2. Copia la configuración de tu proyecto en `js/firebase-init.js`.
 3. Ajusta las reglas en `firestore.rules` o usa el modo de prueba mientras
    desarrollas.
+
+Los formularios de contacto y newsletter guardan los datos en colecciones de
+Firestore. Asegúrate de completar `js/firebase-init.js` con las credenciales de
+tu proyecto para que esta funcionalidad esté disponible.
