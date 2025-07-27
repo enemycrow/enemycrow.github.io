@@ -1528,17 +1528,6 @@ input, textarea, select, input *, textarea *, select * {
   }
 }
 
-/* Visit counter styles */
-.entry-visits-block {
-  text-align: center;
-  margin-top: 1.2em;
-  margin-bottom: 1em;
-}
-.entry-visits-block .visits-icon {
-  font-size: 1.2rem;
-  color: #ccc;
-  margin-right: 0.3em;
-}
 /* Category block styles */
 .entry-category-block {
   text-align: center;
@@ -1553,7 +1542,7 @@ input, textarea, select, input *, textarea *, select * {
   color: #ccc;
   margin-bottom: 0.2em;
 }
-.entry-category-block #entry-categories {
+.entry-category-block #entry-categories-block {
   display: inline-block;
 }
 
@@ -3493,16 +3482,42 @@ a:hover {
   overflow-y: auto;
 }
 
-.modal-content {
-  background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--negro-sombra) 100%);
+.modal-wrapper {
   margin: 5% auto;
   width: 80%;
   max-width: 1000px;
+  display: flex;
+  position: relative;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--negro-sombra) 100%);
+  flex: 1;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   position: relative;
   color: var(--blanco-etereo);
   animation: modalFadeIn 0.5s ease;
+}
+
+.modal-banner {
+  display: none;
+  background-size: cover;
+  background-position: center;
+}
+
+@media screen and (min-width: 1024px) {
+  .modal-banner {
+    display: block;
+    width: 150px;
+  }
+}
+
+.modal-header-box {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
 }
 
 @keyframes modalFadeIn {

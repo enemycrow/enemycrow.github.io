@@ -35,8 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let filteredPosts = [];
   function crearFeaturedPost(post) {
     // Formato destacado clásico
-    const visitKey = `visits_${post.slug}`;
-    let visits = parseInt(localStorage.getItem(visitKey) || '0', 10);
     const [year, month, day] = post.fecha.split('-').map(Number);
     const fecha = new Date(year, month - 1, day);
     const dayStr = fecha.getDate().toString().padStart(2, '0');
@@ -84,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="featured-post-meta">
             <span class="meta-item"><i class="fas fa-clock"></i> ${post.tiempo}</span>
             <span class="meta-item"><i class="fas fa-bolt"></i> ${totalReactions} reacciones</span>
-            <span class="meta-item"><i class="far fa-eye"></i> ${visits} visitas</span>
           </div>
           <a href="blog-entry.html?slug=${post.slug}" class="btn btn-featured">Leer Entrada Completa</a>
         </div>
@@ -106,8 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function crearTarjeta(post, target) {
     // ...igual que antes...
-    const visitKey = `visits_${post.slug}`;
-    let visits = parseInt(localStorage.getItem(visitKey) || '0', 10);
     const [year, month, day] = post.fecha.split('-').map(Number);
     const fecha = new Date(year, month - 1, day);
     const dayStr = fecha.getDate().toString().padStart(2, '0');
@@ -151,7 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="blog-post__footer">
         <span class="meta-item"><i class="far fa-clock"></i> ${post.tiempo}</span>
         <span class="meta-item"><i class="fas fa-bolt"></i> ${totalReactions} reacciones</span>
-        <span class="meta-item"><i class="far fa-eye"></i> ${visits} visitas</span>
       </div>
       <a href="blog-entry.html?slug=${post.slug}" class="blog-post__link">Leer más <span class="arrow">→</span></a>
     `;

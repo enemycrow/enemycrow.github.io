@@ -75,3 +75,17 @@ firebase serve
 ```
 
 y abre `http://localhost:5000/blog.html` en tu navegador. Las tarjetas del blog se generarán automáticamente y cada enlace abrirá la entrada completa usando el slug en la URL.
+
+## Configuración de Firebase
+
+Para que las reacciones funcionen necesitas habilitar
+Firestore en tu proyecto y agregar tus credenciales al frontend:
+
+1. Ejecuta `firebase init` y selecciona **Firestore** cuando se solicite.
+2. Copia la configuración de tu proyecto en `js/firebase-init.js`.
+3. Ajusta las reglas en `firestore.rules` o usa el modo de prueba mientras
+   desarrollas.
+
+Los formularios de contacto y newsletter guardan los datos en colecciones de
+Firestore. Asegúrate de completar `js/firebase-init.js` con las credenciales de
+tu proyecto para que esta funcionalidad esté disponible.

@@ -1,13 +1,9 @@
+import { db } from './firebase-init.js';
+import { doc, getDoc, setDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js';
+
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug');
-  // --- Contador de visitas por entrada ---
-  if (slug) {
-    const visitKey = `visits_${slug}`;
-    let visits = parseInt(localStorage.getItem(visitKey) || '0', 10);
-    visits++;
-    localStorage.setItem(visitKey, visits);
-  }
   if (!slug) return;
 
   try {
@@ -31,6 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const timeEl = document.getElementById('entry-time');
     const commentsEl = document.getElementById('entry-comments');
     const catEl = document.getElementById('entry-categories');
+    const catElBlock = document.getElementById('entry-categories-block');
 
     if (titleEl) titleEl.textContent = entry.titulo;
     if (dateEl) dateEl.textContent = fechaTexto;
@@ -38,69 +35,52 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (contentEl) contentEl.innerHTML = entry.contenido_html;
     if (authorEl) authorEl.textContent = `— ${entry.autor}`;
     if (imgEl) imgEl.src = `assets/images/blog/${entry.imagen}`;
-    if (catEl) {
-      catEl.innerHTML = entry.categoria_temas
+    if (catEl || catElBlock) {
+      const catsHtml = entry.categoria_temas
         .map(c => `<span class="category-tag">${c}</span>`)
         .join(' ');
+      if (catEl) catEl.innerHTML = catsHtml;
+      if (catElBlock) catElBlock.innerHTML = catsHtml;
     }
 
-    // Mostrar contador de visitas en la entrada
-    const visitKey = `visits_${slug}`;
-    let visits = parseInt(localStorage.getItem(visitKey) || '0', 10);
-    const visitsEl = document.getElementById('entry-visits-count');
-    if (visitsEl) visitsEl.textContent = visits;
+    const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
+    const docRef = doc(db, 'reactions', slug);
+    let snap = await getDoc(docRef);
+    if (!snap.exists()) {
+      const initData = {};
+      reactionKeys.forEach(k => initData[k] = 0);
+      await setDoc(docRef, initData);
+      snap = await getDoc(docRef);
+    }
+    let data = snap.data() || {};
 
-    // --- Lógica de reacciones ---
-    const reactionKeys = [
-      'toco',
-      'sumergirme',
-      'personajes',
-      'mundo',
-      'lugares'
-    ];
-    // Cargar contadores desde localStorage (por entrada)
-    const storageKey = `reactions_${entry.slug}`;
-    let reactionCounts = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    // Inicializar si no existen
-    reactionKeys.forEach(key => {
-      if (typeof reactionCounts[key] !== 'number') reactionCounts[key] = 0;
-    });
-    // Mostrar contadores
     reactionKeys.forEach(key => {
       const el = document.getElementById(`reaction-${key}-count`);
-      if (el) el.textContent = reactionCounts[key];
+      if (el) el.textContent = data[key] || 0;
     });
-    // Control de votos por usuario (solo uno por reacción por entrada)
-    const votedKey = `voted_${entry.slug}`;
-    let voted = JSON.parse(localStorage.getItem(votedKey) || '{}');
-    // Evento click en cada reacción
+
+    const votedKey = `voted_${slug}`;
+    const voted = JSON.parse(localStorage.getItem(votedKey) || '{}');
+
     document.querySelectorAll('.reaction').forEach(reactionEl => {
       const key = reactionEl.getAttribute('data-reaction');
-      reactionEl.addEventListener('click', () => {
-        if (voted[key]) {
-          // Deseleccionar: resta y elimina voto
-          if (reactionCounts[key] > 0) reactionCounts[key]--;
-          voted[key] = false;
-          localStorage.setItem(storageKey, JSON.stringify(reactionCounts));
-          localStorage.setItem(votedKey, JSON.stringify(voted));
+      reactionEl.addEventListener('click', async () => {
+        try {
+          const change = voted[key] ? -1 : 1;
+          await updateDoc(docRef, { [key]: increment(change) });
+          const snap = await getDoc(docRef);
           const countEl = reactionEl.querySelector('.reaction-count');
-          if (countEl) countEl.textContent = reactionCounts[key];
-          reactionEl.classList.remove('reacted');
-        } else {
-          // Seleccionar: suma y guarda voto
-          reactionCounts[key]++;
-          voted[key] = true;
-          localStorage.setItem(storageKey, JSON.stringify(reactionCounts));
+          if (countEl) countEl.textContent = snap.data()[key] || 0;
+          voted[key] = !voted[key];
           localStorage.setItem(votedKey, JSON.stringify(voted));
-          const countEl = reactionEl.querySelector('.reaction-count');
-          if (countEl) countEl.textContent = reactionCounts[key];
-          reactionEl.classList.add('reacted');
+          reactionEl.classList.toggle('reacted', voted[key]);
+        } catch (err) {
+          console.error('Error al actualizar la reacción', err);
         }
       });
-      // Visual feedback si ya votó
       if (voted[key]) reactionEl.classList.add('reacted');
     });
-    // Oculta comentarios
+
     if (commentsEl) commentsEl.style.display = 'none';
   } catch (err) {
     console.error('Error al cargar la entrada', err);
