@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const timeEl = document.getElementById('entry-time');
     const commentsEl = document.getElementById('entry-comments');
     const catEl = document.getElementById('entry-categories');
+    const catElBlock = document.getElementById('entry-categories-block');
 
     if (titleEl) titleEl.textContent = entry.titulo;
     if (dateEl) dateEl.textContent = fechaTexto;
@@ -34,10 +35,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (contentEl) contentEl.innerHTML = entry.contenido_html;
     if (authorEl) authorEl.textContent = `— ${entry.autor}`;
     if (imgEl) imgEl.src = `assets/images/blog/${entry.imagen}`;
-    if (catEl) {
-      catEl.innerHTML = entry.categoria_temas
+    if (catEl || catElBlock) {
+      const catsHtml = entry.categoria_temas
         .map(c => `<span class="category-tag">${c}</span>`)
         .join(' ');
+      if (catEl) catEl.innerHTML = catsHtml;
+      if (catElBlock) catElBlock.innerHTML = catsHtml;
     }
 
     const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
