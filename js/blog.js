@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#blog-posts-grid');
   const featuredContainer = document.querySelector('#featured-posts-container');
+  const paginationContainer = document.querySelector('#pagination');
+  const postsPerPage = 3;
+  let currentPage = 1;
+  let filteredPosts = [];
   function crearFeaturedPost(post) {
     // Formato destacado clásico
     const visitKey = `visits_${post.slug}`;
@@ -160,9 +164,31 @@ document.addEventListener('DOMContentLoaded', () => {
     posts.forEach(post => crearTarjeta(post, target));
   }
 
+  function updatePagination() {
+    if (!paginationContainer) return;
+    const totalPages = Math.ceil(filteredPosts.length / postsPerPage) || 1;
+    paginationContainer.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'page-link' + (i === currentPage ? ' active' : '');
+      btn.textContent = i;
+      btn.addEventListener('click', () => renderPage(i));
+      paginationContainer.appendChild(btn);
+    }
+  }
+
+  function renderPage(page) {
+    currentPage = page;
+    const start = (currentPage - 1) * postsPerPage;
+    const end = start + postsPerPage;
+    renderPosts(filteredPosts.slice(start, end), container);
+    updatePagination();
+  }
+
   function aplicarFiltro(filter) {
     if (filter === 'all') {
-      renderPosts(allPosts, container);
+      filteredPosts = allPosts;
+      renderPage(1);
       return;
     }
     // Filtro por autor/categoría (clase)
@@ -180,18 +206,21 @@ document.addEventListener('DOMContentLoaded', () => {
         (themeSlug.includes('fragmentos-ineditos') && filter === 'fragments')
       );
     });
-    renderPosts(filtered, container);
+    filteredPosts = filtered;
+    renderPage(1);
   }
 
   function aplicarFiltroTopico(topico) {
     const filtered = allPosts.filter(post => Array.isArray(post.topicos) && post.topicos.includes(topico));
-    renderPosts(filtered, container);
+    filteredPosts = filtered;
+    renderPage(1);
   }
 
   fetch('posts.json')
     .then(res => res.json())
     .then(data => {
       allPosts = data;
+      filteredPosts = allPosts;
       if (featuredContainer) {
         const featuredPosts = allPosts.filter(p => p.destacado);
         if (featuredPosts.length > 0) {
@@ -200,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
           featuredContainer.innerHTML = '';
         }
       }
-      renderPosts(allPosts, container);
+      renderPage(1);
       const active = document.querySelector('.blog-filter__button.active');
       if (active) aplicarFiltro(active.getAttribute('data-filter'));
     })
@@ -228,7 +257,8 @@ document.addEventListener('DOMContentLoaded', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         if (isActive) {
           // Si ya estaba activo, quitar filtro y mostrar todos
-          renderPosts(allPosts, container);
+          filteredPosts = allPosts;
+          renderPage(1);
         } else {
           this.classList.add('active');
           const h3 = this.querySelector('h3');
