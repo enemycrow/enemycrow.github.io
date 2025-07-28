@@ -38,9 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             try {
-                await addDoc(collection(db, 'contact_messages'), data);
+                await addDoc(collection(db, 'mensajes_contacto'), data);
                 if (data.wantsNewsletter) {
-                    await addDoc(collection(db, 'newsletter_subscribers'), {
+                    await addDoc(collection(db, 'suscriptores_newsletter'), {
                         name: data.name,
                         email: data.email,
                         lauren: true,
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             try {
-                await addDoc(collection(db, 'newsletter_subscribers'), data);
+                await addDoc(collection(db, 'suscriptores_newsletter'), data);
 
                 const successMessage = document.createElement('div');
                 successMessage.className = 'newsletter__message newsletter__message-success';
