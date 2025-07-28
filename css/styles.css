@@ -3488,7 +3488,8 @@ a:hover {
   max-width: 1000px;
   display: flex;
   position: relative;
-  height: 100%;
+  /* Allow the wrapper to expand with its content */
+  min-height: 100%;
   align-items: flex-start;
   gap: 1rem;
 }
