@@ -65,15 +65,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll('.reaction').forEach(reactionEl => {
       const key = reactionEl.getAttribute('data-reaction');
       reactionEl.addEventListener('click', async () => {
+        if (voted[key]) return;
         try {
-          const change = voted[key] ? -1 : 1;
-          await docRef.update({ [key]: FieldValue.increment(change) });
+          await docRef.update({ [key]: FieldValue.increment(1) });
           const snap = await docRef.get();
           const countEl = reactionEl.querySelector('.reaction-count');
           if (countEl) countEl.textContent = snap.data()[key] || 0;
-          voted[key] = !voted[key];
+          voted[key] = true;
           localStorage.setItem(votedKey, JSON.stringify(voted));
-          reactionEl.classList.toggle('reacted', voted[key]);
+          reactionEl.classList.add('reacted');
         } catch (err) {
           console.error('Error al actualizar la reacción', err);
         }
