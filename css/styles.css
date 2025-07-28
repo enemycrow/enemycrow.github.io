@@ -3492,6 +3492,7 @@ a:hover {
 
 .modal-content {
   background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--negro-sombra) 100%);
+  background-color: var(--negro-sombra);
   flex: 1;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
