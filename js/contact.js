@@ -27,25 +27,32 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const formData = new FormData(this);
+            const selectedVoice = formData.get('voice');
             const data = {
                 name: formData.get('name'),
                 email: formData.get('email'),
                 subject: formData.get('subject'),
-                voice: formData.get('voice'),
+                voice: selectedVoice,
                 message: formData.get('message'),
                 wantsNewsletter: formData.get('newsletter') !== null,
                 timestamp: FieldValue.serverTimestamp()
             };
 
+            const voicePreferences = {
+                lauren: { lauren: true, elysia: false, sahir: false },
+                elysia: { lauren: false, elysia: true, sahir: false },
+                sahir: { lauren: false, elysia: false, sahir: true },
+                both: { lauren: true, elysia: true, sahir: true }
+            };
+
             try {
                 await db.collection('contact_messages').add(data);
                 if (data.wantsNewsletter) {
+                    const prefs = voicePreferences[selectedVoice] || voicePreferences.both;
                     await db.collection('newsletter_subscribers').add({
                         name: data.name,
                         email: data.email,
-                        lauren: true,
-                        elysia: true,
-                        sahir: true,
+                        ...prefs,
                         timestamp: FieldValue.serverTimestamp()
                     });
                 }
