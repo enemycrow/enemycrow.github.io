@@ -28,13 +28,12 @@
 - [x] Crear sección de servicios creativos
 - [x] Implementar formulario de newsletter
 - [x] Diseñar página de contacto
-- [ ] Trabajar en el blog (mejorar contenido, estructura y dinamismo)
+- [X] Trabajar en el blog (mejorar contenido, estructura y dinamismo)
 
 ## Optimización y Despliegue
 - [ ] Realizar pruebas de responsividad
 - [ ] Optimizar imágenes y recursos
 - [ ] Verificar compatibilidad con navegadores
-- [ ] Enlazar el proyecto a un CMS (Strapi) para dinamizar el contenido
 - [ ] Adquirir dominio y montar el sitio en el hosting
 - [ ] Desplegar sitio web
 - [ ] Presentar al usuario
