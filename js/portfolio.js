@@ -48,13 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const modal = document.getElementById(modalId);
                 if (modal) {
                     const banners = modal.querySelectorAll('.modal-banner');
+                    const baseName = modalId.replace('-modal', '');
                     banners.forEach(banner => {
-                        const img = banner.getAttribute('data-image');
-                        if (img) {
-                            banner.style.backgroundImage = `url(${img})`;
-                        } else {
-                            banner.style.display = 'none';
-                        }
+                        const side = banner.classList.contains('modal-banner-left') ? 'left' : 'right';
+                        const img = banner.getAttribute('data-image') ||
+                            `assets/images/banners/${baseName}-${side}.png`;
+                        banner.style.backgroundImage = `url(${img})`;
                     });
 
                     modal.style.display = 'block';

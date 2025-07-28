@@ -95,7 +95,10 @@ tu proyecto para que esta funcionalidad esté disponible.
 Cada elemento `<div class="modal-banner">` puede incluir el atributo `data-image` para especificar la imagen de fondo que se mostrará al abrir el modal. Por ejemplo:
 
 ```html
-<div class="modal-banner modal-banner-left" data-image="assets/images/banners/jesuita-left.jpg"></div>
+<div class="modal-banner modal-banner-left" data-image="assets/images/banners/jesuita-left.png"></div>
 ```
 
-Si el atributo está presente, `js/portfolio.js` cargará esa imagen y mostrará el banner. De lo contrario, el banner se ocultará.
+Si el atributo está presente, `js/portfolio.js` cargará esa imagen y mostrará el banner.
+Si se omite, el script buscará de forma automática una imagen con el patrón
+`assets/images/banners/{nombre-modal}-{lado}.png`, donde `nombre-modal` es el
+ID del modal sin el sufijo `-modal` y `lado` puede ser `left` o `right`.
