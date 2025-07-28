@@ -3489,6 +3489,8 @@ a:hover {
   display: flex;
   position: relative;
   height: 100%;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .modal-content {
@@ -3502,10 +3504,14 @@ a:hover {
 }
 
 .modal-banner {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
   display: none;
   background-size: cover;
   background-position: center;
-  height: 100%;
+  height: 100vh;
+  flex-shrink: 0;
 }
 
 @media screen and (min-width: 1024px) {
