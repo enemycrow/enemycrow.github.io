@@ -1,5 +1,5 @@
-import { db } from './firebase-init.js';
-import { doc, getDoc, setDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js';
+// Utiliza la instancia global `db` expuesta en firebase-init.js
+const { FieldValue } = firebase.firestore;
 
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
@@ -44,13 +44,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
-    const docRef = doc(db, 'reactions', slug);
-    let snap = await getDoc(docRef);
+    const docRef = db.collection('reactions').doc(slug);
+    let snap = await docRef.get();
     if (!snap.exists()) {
       const initData = {};
       reactionKeys.forEach(k => initData[k] = 0);
-      await setDoc(docRef, initData);
-      snap = await getDoc(docRef);
+      await docRef.set(initData);
+      snap = await docRef.get();
     }
     let data = snap.data() || {};
 
@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       reactionEl.addEventListener('click', async () => {
         try {
           const change = voted[key] ? -1 : 1;
-          await updateDoc(docRef, { [key]: increment(change) });
-          const snap = await getDoc(docRef);
+          await docRef.update({ [key]: FieldValue.increment(change) });
+          const snap = await docRef.get();
           const countEl = reactionEl.querySelector('.reaction-count');
           if (countEl) countEl.textContent = snap.data()[key] || 0;
           voted[key] = !voted[key];
