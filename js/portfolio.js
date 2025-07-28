@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         const img = banner.getAttribute('data-image');
                         if (img) {
                             banner.style.backgroundImage = `url(${img})`;
-                            banner.style.display = 'block';
                         } else {
                             banner.style.display = 'none';
                         }
