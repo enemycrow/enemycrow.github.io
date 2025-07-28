@@ -89,3 +89,13 @@ Firestore en tu proyecto y agregar tus credenciales al frontend:
 Los formularios de contacto y newsletter guardan los datos en colecciones de
 Firestore. Asegúrate de completar `js/firebase-init.js` con las credenciales de
 tu proyecto para que esta funcionalidad esté disponible.
+
+## Banners en los modales
+
+Cada elemento `<div class="modal-banner">` puede incluir el atributo `data-image` para especificar la imagen de fondo que se mostrará al abrir el modal. Por ejemplo:
+
+```html
+<div class="modal-banner modal-banner-left" data-image="assets/images/banners/jesuita-left.jpg"></div>
+```
+
+Si el atributo está presente, `js/portfolio.js` cargará esa imagen y mostrará el banner. De lo contrario, el banner se ocultará.
