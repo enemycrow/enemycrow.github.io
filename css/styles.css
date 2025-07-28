@@ -3666,6 +3666,12 @@ a:hover {
   align-items: flex-start;
 }
 
+.obra-entry--modal {
+  background-color: var(--negro-sombra); /* Un poco translúcido */
+  padding: 2rem;
+  border-radius: 8px;
+}
+
 .obra-entry--modal .container {
   display: flex;
   flex-direction: column;
