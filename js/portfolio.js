@@ -33,6 +33,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Banners de los modales
+    document.querySelectorAll('.modal-banner').forEach(banner => {
+        const url = banner.dataset.banner;
+        if (url) {
+            banner.style.backgroundImage = `url(${url})`;
+            banner.style.display = '';
+        }
+    });
+
     // Modales
     const modalLinks = document.querySelectorAll('.open-modal');
     
@@ -43,11 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Obtener el ID del modal
                 const modalId = this.getAttribute('href').substring(1);
-                
+
                 // Mostrar el modal
                 const modal = document.getElementById(modalId);
                 if (modal) {
-                    modal.style.display = 'block';
+                    modal.style.display = 'flex';
                     document.body.style.overflow = 'hidden'; // Prevenir scroll
                 }
             });
@@ -65,24 +74,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        
-        // Cerrar modal al hacer clic fuera del contenido
+
+        // Cerrar modal al hacer clic en el overlay
         const modals = document.querySelectorAll('.modal');
-        
+
         modals.forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.style.display = 'none';
+            const overlay = modal.querySelector('.modal-overlay');
+            if (overlay) {
+                overlay.addEventListener('click', function() {
+                    modal.style.display = 'none';
                     document.body.style.overflow = 'auto'; // Restaurar scroll
-                }
-            });
+                });
+            }
         });
         
         // Cerrar modal con tecla ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 modals.forEach(modal => {
-                    if (modal.style.display === 'block') {
+                    if (modal.style.display === 'flex' || modal.style.display === 'block') {
                         modal.style.display = 'none';
                         document.body.style.overflow = 'auto'; // Restaurar scroll
                     }

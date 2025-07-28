@@ -3473,26 +3473,29 @@ a:hover {
 .modal {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  inset: 0;
   z-index: 1000;
-  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-wrapper {
-  margin: 5% auto;
-  width: 80%;
-  max-width: 1000px;
-  display: flex;
   position: relative;
+  display: flex;
+  max-width: 1000px;
 }
 
 .modal-content {
   background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--negro-sombra) 100%);
-  flex: 1;
+  width: 700px;
+  max-width: 100%;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   position: relative;
@@ -3501,13 +3504,15 @@ a:hover {
 }
 
 .modal-banner {
+  flex-shrink: 0;
+  width: 0;
   display: none;
   background-size: cover;
   background-position: center;
 }
 
 @media screen and (min-width: 1024px) {
-  .modal-banner {
+  .modal-banner[data-banner] {
     display: block;
     width: 150px;
   }
