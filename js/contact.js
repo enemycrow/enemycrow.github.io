@@ -1,6 +1,6 @@
 // JavaScript para la página de Contacto y Newsletter
-import { db } from './firebase-init.js';
-import { collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js';
+// Utiliza la instancia global `db` expuesta en firebase-init.js
+const { FieldValue } = firebase.firestore;
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -34,19 +34,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 voice: formData.get('voice'),
                 message: formData.get('message'),
                 wantsNewsletter: formData.get('newsletter') !== null,
-                timestamp: serverTimestamp()
+                timestamp: FieldValue.serverTimestamp()
             };
 
             try {
-                await addDoc(collection(db, 'contact_messages'), data);
+                await db.collection('contact_messages').add(data);
                 if (data.wantsNewsletter) {
-                    await addDoc(collection(db, 'newsletter_subscribers'), {
+                    await db.collection('newsletter_subscribers').add({
                         name: data.name,
                         email: data.email,
                         lauren: true,
                         elysia: true,
                         sahir: true,
-                        timestamp: serverTimestamp()
+                        timestamp: FieldValue.serverTimestamp()
                     });
                 }
 
@@ -108,11 +108,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 lauren: formData.get('nl-lauren') !== null,
                 elysia: formData.get('nl-elysia') !== null,
                 sahir: formData.get('nl-sahir') !== null,
-                timestamp: serverTimestamp()
+                timestamp: FieldValue.serverTimestamp()
             };
 
             try {
-                await addDoc(collection(db, 'newsletter_subscribers'), data);
+                await db.collection('newsletter_subscribers').add(data);
 
                 const successMessage = document.createElement('div');
                 successMessage.className = 'newsletter__message newsletter__message-success';
