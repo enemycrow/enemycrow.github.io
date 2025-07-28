@@ -1,12 +1,12 @@
 (function(window) {
   // Configuración de Firebase
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCQh92caITNc5Rld8bfDs_RhDYD39RJDBY",
+    authDomain: "lapluma-elfaro-lallama.firebaseapp.com",
+    projectId: "lapluma-elfaro-lallama",
+    storageBucket: "lapluma-elfaro-lallama.firebasestorage.app",
+    messagingSenderId: "251148273163",
+    appId: "1:251148273163:web:a8cf595d3270ed1bd4a90e"
   };
 
   // Inicializar Firebase
