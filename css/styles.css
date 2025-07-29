@@ -1493,17 +1493,44 @@ blockquote {
   .blog-post__fragment,
   .blog-post__excerpt { font-size: 0.9rem; }
 
-  /* Filtros más compactos, en varias líneas */
+  /* Filtros en forma de chip para modo horizontal reducido */
+  .blog-filter {
+    max-height: 70px;
+    overflow-x: auto;
+    padding: 0.25rem 0;
+  }
+
   .blog-filter__container {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.25rem;
-  };
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
 
   .blog-filter__button {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.85rem;
-  };
+    flex: 0 0 auto;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    border-radius: 16px;
+    background-color: var(--gris-medio);
+    color: var(--blanco-etereo);
+    border: none;
+    white-space: nowrap;
+    scroll-snap-align: start;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  .blog-filter__button.active {
+    background: linear-gradient(
+      135deg,
+      var(--azul-noche),
+      var(--violeta-profundo)
+    );
+    color: var(--blanco-brillante);
+  }
 }
 
 /* Estilo para filtros en modo horizontal */
