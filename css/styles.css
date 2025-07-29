@@ -1479,7 +1479,7 @@ blockquote {
   }
   .blog-post__image {
     grid-row: 1 / -1;
-    height: 100%;
+    height: 350%;
   }
   .blog-post__meta,
   .blog-post__title,
@@ -1489,38 +1489,48 @@ blockquote {
   .blog-post__link {
     grid-column: 2;
   }
+  .blog-post__date { position: fixed; }
   .blog-post__title { font-size: 1.2rem; }
   .blog-post__fragment,
   .blog-post__excerpt { font-size: 0.9rem; }
 
   /* Filtros en forma de chip para modo horizontal reducido */
   .blog-filter {
-    max-height: 70px;
-    overflow-x: auto;
-    padding: 0.25rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--negro-sombra);
+    padding: 0; /* Espacio vertical para que respire */
+  }
+
+  .blog-filter .container {
+    padding: 0.5rem 0.5rem; 
   }
 
   .blog-filter__container {
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 0.5rem;
-    padding: 0 0.5rem;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    flex-wrap: wrap; /* ¡CLAVE! Permitimos que los botones salten a la siguiente línea */
+    justify-content: center; /* Centramos los botones horizontalmente */
+    gap: 0.5rem; /* Espacio entre los chips */
+    padding: 0; /* Padding lateral */
   }
 
   .blog-filter__button {
-    flex: 0 0 auto;
-    padding: 0.35rem 0.75rem;
-    font-size: 0.75rem;
-    border-radius: 16px;
-    background-color: var(--gris-medio);
+    text-align: center; /* Centramos el texto dentro del chip */
+    padding: 0.5rem; /* Padding interno más pequeño */
+    font-size: 0.8rem; /* Letra más pequeña y compacta */
+    border-radius: 99px; /* Forma de píldora */
+    background-color: var(--gris-oscuro);
     color: var(--blanco-etereo);
-    border: none;
+    border: 1px solid transparent;
     white-space: nowrap;
-    scroll-snap-align: start;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    box-shadow: none;
+    transition: all 0.2s ease-in-out;
+  }
+
+    .blog-filter__button:hover {
+     background-color: var(--gris-medio);
+     transform: translateY(-2px); /* Pequeño efecto al interactuar */
   }
 
   .blog-filter__button.active {
@@ -1530,45 +1540,41 @@ blockquote {
       var(--violeta-profundo)
     );
     color: var(--blanco-brillante);
+    border-color: var(--violeta-pálido); /* Un borde sutil para el chip activo */
+    font-weight: bold; /* Hacemos el texto del activo un poco más grueso */
   }
 }
 
-/* Estilo para filtros en modo horizontal */
+/* Solución para botones del filtro en vista móvil */
 @media screen and (max-width: 768px) {
   .blog-filter {
-    position: sticky;
-    top: 0;
-    background-color: #fff;
-    z-index: 999;
     padding: 0.5rem 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
+    overflow: visible;
   }
 
   .blog-filter__container {
     display: flex;
-    gap: 0.5rem;
-    overflow-x: auto;
-    padding: 0 1rem;
-    scroll-snap-type: x mandatory;
+    flex-wrap: nowrap; /* 1. Asegura que los botones estén en una sola línea */
+    overflow-x: auto;  /* 2. Permite el scroll horizontal */
+    justify-content: flex-start; /* Alinea los botones al inicio */
+    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+    gap: 0.75rem; /* Espacio entre botones */
+    padding: 0 1rem; /* Padding a los lados del contenedor */
+
+    /* 4. Ocultar la barra de scroll para un look más limpio */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .blog-filter__container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, y Opera */
   }
 
   .blog-filter__button {
-    flex: 0 0 auto;
-    font-size: 0.75rem;
-    padding: 0.3rem 0.75rem;
-    border-radius: 999px;
-    background-color: #f0f0f0;
-    color: #333;
-    border: none;
-    white-space: nowrap;
-    scroll-snap-align: start;
-    transition: background-color 0.3s ease;
-  }
-
-  .blog-filter__button.active {
-    background-color: #333;
-    color: #fff;
+    /* 3. Hacemos los botones un poco más pequeños */
+    flex: 0 0 auto; /* Evita que los botones se encojan o estiren */
+    font-size: 0.85rem; /* Reducimos el tamaño de la fuente */
+    padding: 0.5rem 1rem; /* Ajustamos el padding */
+    white-space: nowrap; /* Evita que el texto del botón se parta */
   }
 }
 
@@ -5499,7 +5505,6 @@ a:hover {
 .blog-filter__container {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 .filter-btn,
