@@ -1432,6 +1432,65 @@ blockquote {
   }
 }
 
+/* Ajustes para landscape con altura baja */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  /* Destacados: imagen a la izquierda, texto a la derecha */
+  .featured-post-container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .featured-post-image {
+    flex: 0 0 40%;
+    height: 260px;
+  }
+  .featured-post-content {
+    flex: 1;
+    padding: 0.5rem 1rem;
+  }
+  .featured-post-title { font-size: 1.5rem; }
+  .featured-post-excerpt { font-size: 0.95rem; }
+
+  /* Entradas del grid como tarjetas horizontales */
+  .blog-posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .blog-post {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    gap: 0.75rem;
+    min-height: 150px;
+  }
+  .blog-post__image {
+    grid-row: 1 / -1;
+    height: 100%;
+  }
+  .blog-post__meta,
+  .blog-post__title,
+  .blog-post__fragment,
+  .blog-post__excerpt,
+  .blog-post__footer,
+  .blog-post__link {
+    grid-column: 2;
+  }
+  .blog-post__title { font-size: 1.2rem; }
+  .blog-post__fragment,
+  .blog-post__excerpt { font-size: 0.9rem; }
+
+  /* Filtros más compactos, en varias líneas */
+  .blog-filter__container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+  .blog-filter__button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
 /* Tópico activo en la sección de tópicos */
 .topics-grid .topic-item.active {
   border: 2px solid #7c4dff;
