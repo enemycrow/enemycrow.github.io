@@ -1461,7 +1461,7 @@ blockquote {
   display: block;
   text-align: center;
   white-space: normal;
-  };
+  }
 }
 
   /* Entradas del grid como tarjetas horizontales */
@@ -1545,8 +1545,8 @@ blockquote {
   }
 }
 
-/* Solución para botones del filtro en vista móvil */
-@media screen and (max-width: 768px) {
+/* Estilo para filtros en modo horizontal */
+@media screen and (orientation: landscape) and (max-height: 500px) {
   .blog-filter {
     padding: 0.5rem 0;
     overflow: visible;
