@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const dateEl = document.getElementById('entry-date');
     const contentEl = document.getElementById('entry-content');
     const authorEl = document.getElementById('entry-author');
+    const licenseEl = document.getElementById('entry-license');
     const imgEl = document.getElementById('entry-image');
     const timeEl = document.getElementById('entry-time');
     const commentsEl = document.getElementById('entry-comments');
@@ -41,6 +42,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         .join(' ');
       if (catEl) catEl.innerHTML = catsHtml;
       if (catElBlock) catElBlock.innerHTML = catsHtml;
+    }
+
+    if (licenseEl) {
+      const year = fecha.getFullYear();
+      const link = window.location.href;
+      const titleWork = `Entrada de blog ${entry.titulo}`;
+      licenseEl.innerHTML =
+        `<a href="${link}">${titleWork}</a> © ${year} by ` +
+        `<a href="https://enemycrow.github.io">${entry.autor}</a> is licensed under ` +
+        `<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>` +
+        `<img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
+        `<img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
+        `<img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
+        `<img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">`;
     }
 
     const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
