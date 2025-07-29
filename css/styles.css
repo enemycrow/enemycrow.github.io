@@ -3539,13 +3539,13 @@ a:hover {
 .modal-wrapper {
   margin: 5% auto;
   width: 80%;
-  max-width: 1000px;
+  max-width: 1250px;
   display: flex;
   position: relative;
   /* Allow the wrapper to expand with its content */
   min-height: 100%;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 0rem;
 }
 
 .modal-content {
