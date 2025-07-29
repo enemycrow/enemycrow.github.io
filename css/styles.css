@@ -1451,7 +1451,21 @@ blockquote {
   .featured-post-title { font-size: 1.5rem; }
   .featured-post-excerpt { font-size: 0.95rem; }
 
+  .btn-featured {
+  padding: 0.8rem 1.2rem;
+  transition: all 0.3s ease;
+  width: 50%;
+  height: 100%;
+  margin: 0.5rem auto;
+  font-size: 0.85rem;
+  display: block;
+  text-align: center;
+  white-space: normal;
+  };
+}
+
   /* Entradas del grid como tarjetas horizontales */
+@media screen and (orientation: landscape) and (max-height: 500px) {
   .blog-posts-grid {
     display: flex;
     flex-direction: column;
@@ -1484,10 +1498,50 @@ blockquote {
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.25rem;
-  }
+  };
+
   .blog-filter__button {
     padding: 0.4rem 0.75rem;
     font-size: 0.85rem;
+  };
+}
+
+/* Estilo para filtros en modo horizontal */
+@media screen and (max-width: 768px) {
+  .blog-filter {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 999;
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+  }
+
+  .blog-filter__container {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0 1rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .blog-filter__button {
+    flex: 0 0 auto;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    white-space: nowrap;
+    scroll-snap-align: start;
+    transition: background-color 0.3s ease;
+  }
+
+  .blog-filter__button.active {
+    background-color: #333;
+    color: #fff;
   }
 }
 
