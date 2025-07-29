@@ -5489,6 +5489,12 @@ a:hover {
   margin-top: 3rem;
 }
 
+.blog-entry__license {
+  font-size: 0.9rem;
+  color: var(--gris-claro);
+  margin-top: 1rem;
+}
+
 .blog-entry--lauren {
   background: linear-gradient(
     135deg,
