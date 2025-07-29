@@ -1,5 +1,26 @@
 [
   {
+    "id": 7,
+    "titulo": "El nombre no es el destino, pero puede ser su llave",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-07-27",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "Los Traverso"
+    ],
+    "topicos": [
+      "Escritura"
+    ],
+    "tiempo": "7 min de lectura",
+    "fragmento": "El nombre de un personaje puede ser importante… o no. Pero, sin duda, es una llave que abre puertas a nuevas realidades. En este post, exploramos la relevancia del nombre en la creación de personajes y cómo puede influir en su destino tocando brevemente una de mis historia.",
+    "imagen": "Lostraverso-Post7.png",
+    "slug": "el-nombre-no-es-el-destino-pero-puede-ser-su-llave",
+    "contenido_html": "<section><h2>La relevancia del nombre</h2><p>Desde una perspectiva personal, <strong>el nombre de un personaje puede ser importante… o no</strong>. En serio. No hay razón para sentirse mal si no se dedica demasiado tiempo a encontrarlo. Sin embargo, es cierto que un buen nombre puede marcar una diferencia. Puede añadir una capa de profundidad, de intención. Aporta estructura, color, e incluso un eco que permanece en la memoria.</p><p>Y esto se aplica no solo a protagonistas, sino también a personajes secundarios o incluso terciarios.</p><p>Curiosamente, <strong>a veces el autor decide no nombrar a su protagonista</strong>. Esto ocurre a menudo en los videojuegos o relatos en primera persona, cuando se busca que el lector o jugador se sienta dentro del personaje, como si ese silencio fuera un espejo.</p><h2>Sobre los métodos de inspiración</h2><p>He visitado muchos sitios de escritores, y en todos encuentro lo mismo: hay quienes inventan sus nombres desde cero, quienes usan nombres genéricos, quienes se inspiran en personas reales, o quienes piden sugerencias a sus amistades. Algunos incluso delegan la elección por completo.</p><p>Hoy en día también existen <strong>generadores automáticos y herramientas de inteligencia artificial</strong> para esto. Y aunque algunas opciones nos parezcan más personales o más creativas que otras, lo cierto es que <strong>todas las formas de nombrar son válidas</strong>.</p><h2>Técnicas para crear nombres</h2><p>Los nombres pueden nacer de muchas fuentes:<br>– De un sustantivo común o propio.<br>– De una copia, una broma o una mezcla.<br>– De la música, de la ironía, del folklore.<br>– De las personas que amamos… o de quienes odiamos.<br>– De nuestro propio mundo simbólico o del <em>lore</em> de la obra.</p><p>Hay nombres que imponen respeto. Otros que buscan incomodar. Algunos resuenan como una canción olvidada. Y a veces, uno se tropieza con el nombre como si lo hubiese estado esperando.</p><h2>Ejemplo desde la experiencia</h2><p>En <em>Los Traverso</em>, uno de mis personajes cambia su nombre aristocrático por un sustantivo común. ¿Por qué lo hace? Tal vez para borrar su linaje. Tal vez para abrazar otro destino. O quizá, simplemente, para mostrar una transformación simbólica de clase.</p><p>No hay una sola razón correcta. Pero sí hay una verdad en esa decisión.</p><h2>Un consejo desde la pluma</h2><p>Lo que realmente importa no es el nombre…<br><strong>Sino lo que haces con él.</strong></p><p>A veces, el nombre llega tarde, cuando ya conoces al personaje. Otras veces, lo nombras de inmediato, como si nombrarlo fuese también invocarlo.</p><p>Confía en tu proceso.<br>Escribe con libertad.<br>Y recuerda: <strong>el nombre no es el destino, pero puede ser su llave</strong>.</p></section>",
+    "destacado": false
+  },
+  {
     "id": 6,
     "titulo": "La fuerza de las palabras",
     "autor": "A.C. Elysia",
