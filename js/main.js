@@ -78,24 +78,44 @@ activarLatidoDeSylvora();
         const footerNewsletterForm = document.querySelector('.footer .newsletter-form');
 
         if (footerNewsletterForm) {
-            footerNewsletterForm.addEventListener('submit', function (e) {
+            footerNewsletterForm.addEventListener('submit', async function (e) {
                 e.preventDefault();
 
                 const emailInput = this.querySelector('input[type="email"]');
 
                 if (emailInput && emailInput.value.trim()) {
-                    const successMessage = document.createElement('div');
-                    successMessage.className = 'newsletter-success';
-                    successMessage.textContent = '¡Gracias por suscribirte!';
-                    successMessage.style.color = '#2ecc71';
-                    successMessage.style.marginTop = '0.5rem';
+                    const data = {
+                        email: emailInput.value.trim(),
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    };
 
-                    this.appendChild(successMessage);
-                    this.reset();
+                    try {
+                        await db.collection('newsletter_subscribers').add(data);
 
-                    setTimeout(() => {
-                        successMessage.remove();
-                    }, 3000);
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'newsletter-success';
+                        successMessage.textContent = '¡Gracias por suscribirte!';
+                        successMessage.style.color = '#2ecc71';
+                        successMessage.style.marginTop = '0.5rem';
+
+                        this.appendChild(successMessage);
+                        this.reset();
+
+                        setTimeout(() => {
+                            successMessage.remove();
+                        }, 3000);
+                    } catch (err) {
+                        console.error('Error al guardar la suscripción', err);
+                        const errorMessage = document.createElement('div');
+                        errorMessage.className = 'newsletter-error';
+                        errorMessage.textContent = 'Hubo un problema. Intenta más tarde.';
+                        errorMessage.style.color = '#e74c3c';
+                        errorMessage.style.marginTop = '0.5rem';
+                        this.appendChild(errorMessage);
+                        setTimeout(() => {
+                            errorMessage.remove();
+                        }, 3000);
+                    }
                 }
             });
         }

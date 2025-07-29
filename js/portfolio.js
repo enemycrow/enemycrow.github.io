@@ -43,10 +43,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Obtener el ID del modal
                 const modalId = this.getAttribute('href').substring(1);
-                
-                // Mostrar el modal
+
+                // Mostrar el modal y configurar banners
                 const modal = document.getElementById(modalId);
                 if (modal) {
+                    const banners = modal.querySelectorAll('.modal-banner');
+                    const baseName = modalId.replace('-modal', '');
+                    banners.forEach(banner => {
+                        const side = banner.classList.contains('modal-banner-left') ? 'left' : 'right';
+                        const img = banner.getAttribute('data-image') ||
+                            `assets/images/banners/${baseName}-${side}.png`;
+                        banner.style.backgroundImage = `url(${img})`;
+                    });
+
                     modal.style.display = 'block';
                     document.body.style.overflow = 'hidden'; // Prevenir scroll
                 }

@@ -912,6 +912,60 @@ blockquote {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+@media screen and (max-width: 768px) {
+  .featured-post-container {
+    flex-direction: column;
+  }
+
+  .featured-post-image {
+    flex: 0 0 auto;
+    height: 250px; /* o lo que necesites para que se vea bien en móvil */
+    background-size: cover;
+  }
+
+  .featured-post-overlay {
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .featured-post-date {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .featured-post-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .featured-post-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .featured-post-excerpt {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .featured-post-meta {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .post-category {
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .btn-featured {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+
 /* Grid de Entradas */
 .blog-grid {
   padding: 5rem 0;
@@ -3488,6 +3542,10 @@ a:hover {
   max-width: 1000px;
   display: flex;
   position: relative;
+  /* Allow the wrapper to expand with its content */
+  min-height: 100%;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .modal-content {
@@ -3501,9 +3559,14 @@ a:hover {
 }
 
 .modal-banner {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
   display: none;
   background-size: cover;
   background-position: center;
+  height: 100vh;
+  flex-shrink: 0;
 }
 
 @media screen and (min-width: 1024px) {
@@ -3662,6 +3725,12 @@ a:hover {
   grid-template-columns: 1fr 2fr;
   gap: 2rem;
   align-items: flex-start;
+}
+
+.obra-entry--modal {
+  background-color: var(--negro-sombra); /* Un poco translúcido */
+  padding: 2rem;
+  border-radius: 8px;
 }
 
 .obra-entry--modal .container {

@@ -57,10 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const catClass = cat.toLowerCase().includes('proceso') ? 'process' : (cat.toLowerCase().includes('fragmento') ? 'fragments' : '');
       categoryTag = `<span class="category-tag ${catClass}">${cat}</span>`;
     }
-    const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
-    const storageKey = `reactions_${post.slug}`;
-    let reactionCounts = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    let totalReactions = reactionKeys.reduce((sum, key) => sum + (reactionCounts[key] || 0), 0);
+    const totalReactions = 0; // placeholder, se actualizará desde Firestore
     return `
       <div class="featured-post-container">
         <div class="featured-post-image" style="background-image:url('assets/images/blog/${post.imagen}')">
@@ -81,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="featured-post-excerpt">${post.fragmento}</p>
           <div class="featured-post-meta">
             <span class="meta-item"><i class="fas fa-clock"></i> ${post.tiempo}</span>
-            <span class="meta-item"><i class="fas fa-bolt"></i> ${totalReactions} reacciones</span>
+            <span class="meta-item"><i class="fas fa-bolt"></i> <span class="reactions-count" data-slug="${post.slug}">${totalReactions}</span> reacciones</span>
           </div>
           <a href="blog-entry.html?slug=${post.slug}" class="btn btn-featured">Leer Entrada Completa</a>
         </div>
@@ -99,6 +96,31 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/\p{Diacritic}/gu, '')
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
+  }
+
+  const reactionFields = ['toco','sumergirme','personajes','mundo','lugares'];
+
+  async function fetchTotalReactions(slug) {
+    try {
+      const snap = await db.collection('reactions').doc(slug).get();
+      const data = snap.exists ? snap.data() : {};
+      return reactionFields.reduce((sum, key) => sum + (data[key] || 0), 0);
+    } catch (err) {
+      console.error('Error al obtener reacciones', err);
+      return 0;
+    }
+  }
+
+  function updateReactionCounts() {
+    const elements = document.querySelectorAll('.reactions-count[data-slug]');
+    const slugs = [...new Set(Array.from(elements).map(el => el.dataset.slug))];
+    slugs.forEach(async slug => {
+      const total = await fetchTotalReactions(slug);
+      document.querySelectorAll(`.reactions-count[data-slug="${slug}"]`).forEach(el => {
+        el.textContent = total;
+      });
+      try { localStorage.removeItem(`reactions_${slug}`); } catch(e) {}
+    });
   }
 
   function crearTarjeta(post, target) {
@@ -127,10 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const article = document.createElement('article');
     article.className = `blog-post blog-entry blog-entry--${authorSlug} ${authorSlug} ${themeSlug} ${catClass}`;
     article.setAttribute('data-category', `${authorSlug} ${themeSlug}`);
-    const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
-    const storageKey = `reactions_${post.slug}`;
-    let reactionCounts = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    let totalReactions = reactionKeys.reduce((sum, key) => sum + (reactionCounts[key] || 0), 0);
+    const totalReactions = 0; // se actualizará desde Firestore
     article.innerHTML = `
       <div class="blog-post__image" style="background-image:url('assets/images/blog/${post.imagen}')">
         <div class="blog-post__date">
@@ -145,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="blog-post__fragment">${post.fragmento}</p>
       <div class="blog-post__footer">
         <span class="meta-item"><i class="far fa-clock"></i> ${post.tiempo}</span>
-        <span class="meta-item"><i class="fas fa-bolt"></i> ${totalReactions} reacciones</span>
+        <span class="meta-item"><i class="fas fa-bolt"></i> <span class="reactions-count" data-slug="${post.slug}">${totalReactions}</span> reacciones</span>
       </div>
       <a href="blog-entry.html?slug=${post.slug}" class="blog-post__link">Leer más <span class="arrow">→</span></a>
     `;
@@ -156,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!target) return;
     target.innerHTML = '';
     posts.forEach(post => crearTarjeta(post, target));
+    updateReactionCounts();
   }
 
   function updatePagination() {
@@ -222,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           featuredContainer.innerHTML = '';
         }
+        updateReactionCounts();
       }
       renderPage(1);
       const active = document.querySelector('.blog-filter__button.active');
