@@ -1534,7 +1534,7 @@ blockquote {
 }
 
 /* Estilo para filtros en modo horizontal */
-@media screen and (max-width: 768px) {
+@media screen and (orientation: landscape) and (max-height: 500px) {
   .blog-filter {
     position: sticky;
     top: 0;
