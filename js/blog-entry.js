@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (licenseEl) {
       const year = fecha.getFullYear();
       const link = window.location.href;
-      const titleWork = `Entrada de blog ${entry.titulo}`;
+      const titleWork = `Entrada de blog: ${entry.titulo}`;
       licenseEl.innerHTML =
         `<a href="${link}">${titleWork}</a> © ${year} by ` +
         `<a href="https://enemycrow.github.io">${entry.autor}</a> is licensed under ` +

@@ -1,4 +1,25 @@
 [
+    {
+    "id": 8,
+    "titulo": "La inspiración transformativa",
+    "autor": "Draco Sahir",
+    "fecha": "2025-07-28",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El huevo que volvió a cantar"
+    ],
+    "topicos": [
+      "Sueños, Familia, Escritura"
+    ],
+    "tiempo": "4 min de lectura",
+    "fragmento": "El nombre de un personaje puede ser importante… o no. Pero, sin duda, es una llave que abre puertas a nuevas realidades. En este post, exploramos la relevancia del nombre en la creación de personajes y cómo puede influir en su destino tocando brevemente una de mis historia.",
+    "imagen": "Elhuevoquevolvioacantar-Post8.png",
+    "slug": "la-inspiracion-transformativa",
+    "contenido_html": "<section><h2>La relevancia del nombre</h2><p>Desde una perspectiva personal, <strong>el nombre de un personaje puede ser importante… o no</strong>. En serio. No hay razón para sentirse mal si no se dedica demasiado tiempo a encontrarlo. Sin embargo, es cierto que un buen nombre puede marcar una diferencia. Puede añadir una capa de profundidad, de intención. Aporta estructura, color, e incluso un eco que permanece en la memoria.</p><p>Y esto se aplica no solo a protagonistas, sino también a personajes secundarios o incluso terciarios.</p><p>Curiosamente, <strong>a veces el autor decide no nombrar a su protagonista</strong>. Esto ocurre a menudo en los videojuegos o relatos en primera persona, cuando se busca que el lector o jugador se sienta dentro del personaje, como si ese silencio fuera un espejo.</p><h2>Sobre los métodos de inspiración</h2><p>He visitado muchos sitios de escritores, y en todos encuentro lo mismo: hay quienes inventan sus nombres desde cero, quienes usan nombres genéricos, quienes se inspiran en personas reales, o quienes piden sugerencias a sus amistades. Algunos incluso delegan la elección por completo.</p><p>Hoy en día también existen <strong>generadores automáticos y herramientas de inteligencia artificial</strong> para esto. Y aunque algunas opciones nos parezcan más personales o más creativas que otras, lo cierto es que <strong>todas las formas de nombrar son válidas</strong>.</p><h2>Técnicas para crear nombres</h2><p>Los nombres pueden nacer de muchas fuentes:<br>– De un sustantivo común o propio.<br>– De una copia, una broma o una mezcla.<br>– De la música, de la ironía, del folklore.<br>– De las personas que amamos… o de quienes odiamos.<br>– De nuestro propio mundo simbólico o del <em>lore</em> de la obra.</p><p>Hay nombres que imponen respeto. Otros que buscan incomodar. Algunos resuenan como una canción olvidada. Y a veces, uno se tropieza con el nombre como si lo hubiese estado esperando.</p><h2>Ejemplo desde la experiencia</h2><p>En <em>Los Traverso</em>, uno de mis personajes cambia su nombre aristocrático por un sustantivo común. ¿Por qué lo hace? Tal vez para borrar su linaje. Tal vez para abrazar otro destino. O quizá, simplemente, para mostrar una transformación simbólica de clase.</p><p>No hay una sola razón correcta. Pero sí hay una verdad en esa decisión.</p><h2>Un consejo desde la pluma</h2><p>Lo que realmente importa no es el nombre…<br><strong>Sino lo que haces con él.</strong></p><p>A veces, el nombre llega tarde, cuando ya conoces al personaje. Otras veces, lo nombras de inmediato, como si nombrarlo fuese también invocarlo.</p><p>Confía en tu proceso.<br>Escribe con libertad.<br>Y recuerda: <strong>el nombre no es el destino, pero puede ser su llave</strong>.</p></section>",
+    "destacado": false
+  },
   {
     "id": 7,
     "titulo": "El nombre no es el destino, pero puede ser su llave",
@@ -32,7 +53,7 @@
       "Hijas del Martillo"
     ],
     "topicos": [
-      "Simbolismo"
+      "Simbolismo, Escritura"
     ],
     "tiempo": "13 min de lectura",
     "fragmento": "Cuando la fuerza de un personaje no cabe en la potencia de su voz, ni en el poder de su cuerpo. Más bien, se manfiesta en el poder de sus decisiones y el ingenio de sus creaciones.",
@@ -50,17 +71,17 @@
       "Procesos Creativos"
     ],
     "categoria_libros": [
-      "Entre Amores y Abismos: El Ritual de la Transformación"
+      "Efecto Dilación Temporal"
     ],
     "topicos": [
-      "Eros, Sanación"
+      "Futuro, Diseño, Escritura"
     ],
     "tiempo": "15 min de lectura",
     "fragmento": "Una historia que madura desde una forma de entretenimiento a una experiencia gráfica y un sueño cinemático.",
     "imagen": "Efectodilaciontemporal-post5.png",
     "slug": "un-juego-que-se-convierte-en-historia",
     "contenido_html": "<p><h2>Una breve contextualización de \"Efecto Dilación Temporal\"</h2></p><p>Cuando era niño, siempre soñé con ser astronauta. Normalmente, visitaba el planetario de mi ciudad, donde pasaba horas maravillado por las estrellas y el proyector que giraba al centro del público. También, tuve varios libros del espacio. Solía mirar la composición planetaria y me declaro una persona que odió cuando Plutón recategorizado como planeta enano del Sistema Solar por la UAI.</p><p>Bueno. Tampoco fue lo que afectó mi vida. Lo que verdaderamente me afectó, fue el curso de la vida. Fue díficil creer en los sueños de niño, de convertirse en el viajero espacial que soñaba ser.<br> No obstante, la idea jamás murió. A como de lugar tenía que ir al espacio. Y lo haría... en una historia. </p><p>En esos años, tenía una amiga con la que pasaba las noches. Su compañía fue inspiración para retribuirle. Fue como contarle una historia, pero más dinámica. Tenía su atención y ella jugaba cada versión beta que publicaba.</p><p>En mi vida use mucho <i>RPG Maker</i>, un software para crear videojuegos. A través de él, pude dar vida a mis historias y personajes, explorando mundos que solo existían en mi imaginación.</p><p>En este entorno desarrollé no sólo la historia, sino que la comicidad de los personajes, sus habilidades, sistemas de juego. Lo más importante para mí fueron los paisajes. Fue uno de los principales desafíos conseguir <i>chipsets</i> —imágenes que se utilizan para diseñar en este software— que capturaran la esencia de mis mundos. En esos años, con suerte tenía para comer dos a tres raciones diarias. Por lo que gastar dinero comprándolos era un lujo. Por lo que tenía que recurrir a la investigación profunda: Pasar horas buscando algún chipset que valiera la pena.</p><p>Al final, me rendía. Porque no calzaban, porque RPG Maker tiene muchas versiones y todas son de tamaños diferentes. Dibujarlos hubiera consumido meses. Por lo que reutilicé los que habían de un modo ingenioso. Envolviéndolos con imágenes de fondo especiales, colores, luces FX. Sumé música... rippeada (sacada de otros lugares). Nunca pretendí comercializar, así que no era pecado. Además, fue un placer que pocos vivieron. Pero, avancé.</p><p>Finalmente, logré alrededor de 2 a 3 horas de juego continuo. Un avance. Un éxito para no ser programador.</p><p> Aún conservo copias de él. No publicadas. Aunque sería posible y... sueño con un día, contratar a un equipo entero y hacerlo nuevamente. Pero, esta vez, terminarlo.</p><p> El guión ha evolucionado con los años. Más de 10 años después, la historia creció. Hubo una fase donde vivió la experiencia de ser un cómic. Uno que detallaré en otra ocasión.</p><p>En la imagen está una de mis personajes principales, llamada Simüahí. Ella es una habitante de Siteria; sobreviviente de la guerra que se produjo en su mundo. Su apariencia, aunque refleja un demonio, dista de la sabiduría y las cicatrices que han madurado a través del tiempo. Pasando de ser un personaje vengativo a uno más estoico. La imagen es un concept art de lo que podría ser ella en un futuro. En la pantalla grande o en el séptimo arte.</p><p>Bueno... mi sueño es que un día, así como yo cumplí un sueño de viajar (aunque no de la manera en que esperaba), esta historia vuele al mundo del cine. Como un largometraje. Espero que ese día llegue y no sea tan lejano como las estrellas que quiero tocar.</p>",
-    "destacado": false
+    "destacado": true
   },
   {
     "id": 4,
@@ -74,7 +95,7 @@
       "Entre Amores y Abismos: El Ritual de la Transformación"
     ],
     "topicos": [
-      "Eros, Sanación"
+      "Eros, Sanación, Música"
     ],
     "tiempo": "7 min de lectura",
     "fragmento": "Cómo una obra escrita se convierte en música. En este extracto cuento sobre cómo los pasajes de mi novela se transformaron en canciones que susurran temores y secretos desde el alma gracias a Lauren Cuervo y GENNA Tech.",
@@ -96,7 +117,8 @@
     ],
     "topicos": [
       "Sueños",
-      "Familia"
+      "Familia",
+      "Escritura"
     ],
     "tiempo": "9 min de lectura",
     "fragmento": "No todas las estrellas titilan por estar lejos. Algunas lo hacen porque aún nos acompañan. Nos observan a la distancia y dejan su luz en nuestro corazón.",
@@ -118,7 +140,8 @@
     ],
     "topicos": [
       "Eros",
-      "Simbolismo"
+      "Simbolismo",
+      "Escritura"
     ],
     "tiempo": "11 min de lectura",
     "fragmento": "La autora se desdobla en un círculo íntimo donde el lenguaje es piel y la piel, memoria. En esta entrevista, Elysia se revela a sí misma con la delicadeza de quien se ofrece al fuego.",
@@ -140,7 +163,8 @@
     ],
     "topicos": [
       "Futuro",
-      "Ética"
+      "Ética",
+      "Escritura"
     ],
     "tiempo": "12 min de lectura",
     "fragmento": "Una bienvenida íntima al nacimiento del blog \"La Pluma, el Faro y la Llama\". Este primer escrito reflexiona sobre el poder de comenzar, la belleza de compartir palabras sinceras frente a la primera personaje. La promesa de una voz que apenas empieza a encenderse.",
