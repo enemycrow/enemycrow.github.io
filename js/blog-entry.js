@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (contentEl) contentEl.innerHTML = entry.contenido_html;
     if (authorEl) authorEl.textContent = `— ${entry.autor}`;
     if (imgEl) imgEl.src = `assets/images/blog/${entry.imagen}`;
+    if (imgEl) imgEl.alt = entry.titulo;
     if (catEl || catElBlock) {
       const catsHtml = entry.categoria_temas
         .map(c => `<span class="category-tag">${c}</span>`)
