@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#blog-posts-grid');
   const featuredContainer = document.querySelector('#featured-posts-container');
-  const paginationContainer = document.querySelector('#pagination');
+  const paginationContainers = document.querySelectorAll('.pagination');
   const postsPerPage = 3;
   let currentPage = 1;
   let filteredPosts = [];
@@ -179,16 +179,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updatePagination() {
-    if (!paginationContainer) return;
+    if (!paginationContainers || paginationContainers.length === 0) return;
     const totalPages = Math.ceil(filteredPosts.length / postsPerPage) || 1;
-    paginationContainer.innerHTML = '';
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.className = 'page-link' + (i === currentPage ? ' active' : '');
-      btn.textContent = i;
-      btn.addEventListener('click', () => renderPage(i));
-      paginationContainer.appendChild(btn);
-    }
+    paginationContainers.forEach(container => {
+      container.innerHTML = '';
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'page-link' + (i === currentPage ? ' active' : '');
+        btn.textContent = i;
+        btn.addEventListener('click', () => renderPage(i));
+        container.appendChild(btn);
+      }
+    });
   }
 
   function renderPage(page) {
