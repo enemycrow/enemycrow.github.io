@@ -102,3 +102,17 @@ Si el atributo está presente, `js/portfolio.js` cargará esa imagen y mostrará
 Si se omite, el script buscará de forma automática una imagen con el patrón
 `assets/images/banners/{nombre-modal}-{lado}.png`, donde `nombre-modal` es el
 ID del modal sin el sufijo `-modal` y `lado` puede ser `left` o `right`.
+
+## Pruebas
+
+Para verificar de forma simple los archivos HTML del sitio se utiliza [HTMLHint](https://htmlhint.com/).
+
+1. Instala las dependencias con:
+   ```bash
+   npm install
+   ```
+
+2. Ejecuta las pruebas con:
+   ```bash
+   npm test
+   ```
