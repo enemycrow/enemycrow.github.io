@@ -5,7 +5,7 @@
 .hero.hero--about {
   display: flex;
   align-items: center;
-  background-image: url("../assets/images/izelitzel.png");
+  background-image: url("../assets/images/oeuvres/izelitzel.webp");
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -381,17 +381,17 @@
 }
 
 .lauren-image-large .author-image-large-inner {
-  background-image: url("../images/lauren-large.jpg");
+  background-image: url("../images/authors/lauren-large.webp");
   background-color: var(--lauren-acento); /* Fallback */
 }
 
 .elysia-image-large .author-image-large-inner {
-  background-image: url("../images/elysia-large.jpg");
+  background-image: url("../images/authors/elysia-large.webp");
   background-color: var(--elysia-secundario); /* Fallback */
 }
 
 .sahir-image-large .author-image-large-inner {
-  background-image: url("../images/sahir-large.jpg");
+  background-image: url("../images/authors/sahir-large.webp");
   background-color: var(--sahir-primario); /* Fallback */
 }
 
@@ -760,7 +760,7 @@ blockquote {
 
 /* Hero Section */
 .hero.hero--blog {
-  background-image: url('../assets/images/efectodilaciontemporal.png');
+  background-image: url('../assets/images/oeuvres/efectodilaciontemporal.webp');
 }
 
 
@@ -1632,7 +1632,7 @@ input, textarea, select, input *, textarea *, select * {
 
 /* Hero Section */
 .hero.hero--contact {
-  background-image: url('../assets/images/mundodelosveus.png');
+  background-image: url('../assets/images/oeuvres/mundodelosveus.webp');
 }
 
 
@@ -3059,7 +3059,7 @@ a:hover {
 
 /* Hero Section */
 .hero.hero--portfolio {
-  background-image: url('../assets/images/librodelafusion.png');
+  background-image: url('../assets/images/oeuvres/librodelafusion.webp');
 }
 
 
@@ -3102,36 +3102,6 @@ a:hover {
 .portfolio-item--featured .portfolio-item__image {
   height: 250px;
   position: relative;
-}
-
-.divinity-saga-img {
-  background-image: url('../images/divinity-saga.jpg');
-  background-color: var(--azul-noche); /* Fallback */
-}
-
-.debacle-img {
-  background-image: url('../images/debacle.jpg');
-  background-color: var(--azul-noche); /* Fallback */
-}
-
-.faro-img {
-  background-image: url('../images/faro.jpg');
-  background-color: var(--violeta-profundo); /* Fallback */
-}
-
-.veus-img {
-  background-image: url('../images/veus.jpg');
-  background-color: var(--violeta-profundo); /* Fallback */
-}
-
-.galactique-img {
-  background-image: url('../images/galactique.jpg');
-  background-color: var(--azul-cometa); /* Fallback */
-}
-
-.bribones-img {
-  background-image: url('../images/reinadelosbribones.png');
-  background-color: var(--azul-cometa); /* Fallback */
 }
 
 .portfolio-item__overlay {
@@ -3823,7 +3793,7 @@ a:hover {
 
 /* Hero Section */
 .hero.hero--services {
-  background-image: url('../assets/images/reversiondelasdivinidades.png');
+  background-image: url('../assets/images/oeuvres/reversiondelasdivinidades.webp');
 }
 
 
@@ -4488,12 +4458,12 @@ a:hover {
 }
 
 .elysia-image .voice-view__image {
-    background-image: url('../assets/images/elysia.png'); /* Imagen pequeña del autor */
+    background-image: url('../assets/images/authors/elysia.webp'); /* Imagen pequeña del autor */
     background-color: var(--elysia-secundario); /* Fallback */
 }
 
 .elysia-image-large .author-image-large-inner {
-    background-image: url('../assets/images/elysia-large.png'); /* Imagen grande del autor */
+    background-image: url('../assets/images/authors/elysia-large.webp'); /* Imagen grande del autor */
     background-color: var(--violeta-profundo); /* Fallback */
 }
 
@@ -4518,17 +4488,17 @@ a:hover {
 
 /* Estilos para las imágenes de trabajos del autor */
 .elysia-work-1 {
-    background-image: url('../assets/images/entreamoresabismos.png'); /* Imagen de Entre Amores y Abismos */
+    background-image: url('../assets/images/oeuvres/entreamoresabismos.webp'); /* Imagen de Entre Amores y Abismos */
     background-color: var(--violeta-profundo); /* Fallback */
 }
   
 .elysia-work-2 {
-    background-image: url('../assets/images/librodelafusion.png'); /* Imagen del Libro de la Fusión */
+    background-image: url('../assets/images/oeuvres/librodelafusion.webp'); /* Imagen del Libro de la Fusión */
     background-color: var(--violeta-profundo); /* Fallback */
 }
   
 .elysia-work-3 {
-    background-image: url('../assets/images/circuloarena.png'); /* Imagen de Circulo en la Arena */
+    background-image: url('../assets/images/oeuvres/circuloarena.webp'); /* Imagen de Circulo en la Arena */
     background-color: var(--violeta-profundo); /* Fallback */
 }
 
@@ -4601,12 +4571,12 @@ a:hover {
 }
 
 .lauren-image .voice-view__image {
-    background-image: url('../assets/images/lauren.png'); /* Imagen pequeña del autor */
+    background-image: url('../assets/images/authors/lauren.webp'); /* Imagen pequeña del autor */
     background-color: var(--lauren-acento); /* Fallback */
 }
 
 .lauren-image-large .author-image-large-inner {
-    background-image: url('../assets/images/lauren-large.png'); /* Imagen grande del autor */
+    background-image: url('../assets/images/authors/lauren-large.webp'); /* Imagen grande del autor */
     background-color: var(--azul-noche); /* Fallback */
 }
 
@@ -4626,17 +4596,17 @@ a:hover {
 
 /* Estilos para las imágenes de trabajos del autor */
 .lauren-work-1 {
-    background-image: url('../assets/images/jesuitadelvino.png'); /* Imagen del Jesuita del Vino */
+    background-image: url('../assets/images/oeuvres/jesuitadelvino.webp'); /* Imagen del Jesuita del Vino */
     background-color: var(--azul-noche); /* Fallback */
 }
   
 .lauren-work-2 {
-    background-image: url('../assets/images/izelitzel.png'); /* Imagen de Izel Itzel */
+    background-image: url('../assets/images/oeuvres/izelitzel.webp'); /* Imagen de Izel Itzel */
     background-color: var(--azul-noche); /* Fallback */
 }
   
 .lauren-work-3 {
-    background-image: url('../assets/images/debacletriangular.png'); /* Imagen de Debacle Triangular */
+    background-image: url('../assets/images/oeuvres/debacletriangular.webp'); /* Imagen de Debacle Triangular */
     background-color: var(--azul-noche); /* Fallback */
 }
 
@@ -4708,12 +4678,12 @@ a:hover {
 }
 
 .sahir-image .voice-view__image {
-    background-image: url('../assets/images/sahir.png'); /* Imagen pequeña del autor */
+    background-image: url('../assets/images/authors/sahir.webp'); /* Imagen pequeña del autor */
     background-color: var(--sahir-primario); /* Fallback */
 }
 
 .sahir-image-large .author-image-large-inner {
-    background-image: url('../assets/images/sahir-large.png'); /* Imagen grande del autor */
+    background-image: url('../assets/images/authors/sahir-large.webp'); /* Imagen grande del autor */
     background-color: var(--sahir-primario); /* Fallback */
 }
 
@@ -4733,17 +4703,17 @@ a:hover {
 
 /* Estilos para las imágenes de trabajos del autor */
 .sahir-work-1 {
-    background-image: url('../assets/images/galactique.png'); /* Imagen de Galactique */
+    background-image: url('../assets/images/oeuvres/galactique.webp'); /* Imagen de Galactique */
     background-color: var(--sahir-primario); /* Fallback */
   }
   
 .sahir-work-2 {
-    background-image: url('../assets/images/huevovolviocantar.png'); /* Imagen del Huevo que volvió a cantar */
+    background-image: url('../assets/images/oeuvres/huevovolviocantar.webp'); /* Imagen del Huevo que volvió a cantar */
     background-color: var(--sahir-primario); /* Fallback */
 }
   
 .sahir-work-3 {
-    background-image: url('../assets/images/cristalito.png'); /* Imagen de Cristalito */
+    background-image: url('../assets/images/oeuvres/cristalito.webp'); /* Imagen de Cristalito */
     background-color: var(--sahir-primario); /* Fallback */
 }
 
@@ -5528,7 +5498,7 @@ a:hover {
   padding: 0;
   font-family: 'Georgia', serif;
   color: white;
-  background: url('/assets/images/plumafarollama404.png') no-repeat center center fixed;
+  background: url('/assets/images/site/plumafarollama404.webp') no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
   display: flex;
@@ -5586,7 +5556,7 @@ a:hover {
 
 @media screen and (max-width: 500px) {
   .not-found-body {
-  background: url('/assets/images/plumafarollama404m.png') no-repeat center center fixed;
+  background: url('/assets/images/site/plumafarollama404m.webp') no-repeat center center fixed;
   background-size: unset;
   }
   

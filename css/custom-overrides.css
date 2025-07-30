@@ -1,143 +1,101 @@
 /* === Catálogo Completo === */
 .jesuita-img {
-  background-image: url('../assets/images/jesuitadelvino.png');
+  background-image: url('../assets/images/oeuvres/jesuitadelvino.webp');
   background-size: cover;
   background-position: center;
 }
 
 .entre-abismos-img {
-  background-image: url('../assets/images/entreamoresabismos.png');
+  background-image: url('../assets/images/oeuvres/entreamoresabismos.webp');
   background-size: cover;
   background-position: center;
 }
 
 .martillo-img {
-  background-image: url('../assets/images/hijasdelmartillo.png');
+  background-image: url('../assets/images/oeuvres/hijasdelmartillo.webp');
   background-size: cover;
   background-position: center;
 }
 
 .galactique-img {
-  background-image: url('../assets/images/galactique.png');
+  background-image: url('../assets/images/oeuvres/galactique.webp');
   background-size: cover;
   background-position: center;
 }
 
 .izel-img {
-  background-image: url('../assets/images/izelitzel.png');
+  background-image: url('../assets/images/oeuvres/izelitzel.webp');
   background-size: cover;
   background-position: center;
 }
 
 .libro-fusion-img {
-  background-image: url('../assets/images/librodelafusion.png');
+  background-image: url('../assets/images/oeuvres/librodelafusion.webp');
   background-size: cover;
   background-position: center;
 }
 
 .dilacion-img {
-  background-image: url('../assets/images/efectodilaciontemporal.png');
+  background-image: url('../assets/images/oeuvres/efectodilaciontemporal.webp');
   background-size: cover;
   background-position: center;
 }
 
 .tarotcuervoelysia-img {
-  background-image: url('../assets/images/tarotcuervoelysia.jpg');
+  background-image: url('../assets/images/oeuvres/tarotcuervoelysia.webp');
   background-size: cover;
   background-position: center;
 }
 
 .traverso-img {
-  background-image: url('../assets/images/traverso.png');
+  background-image: url('../assets/images/oeuvres/traverso.webp');
   background-size: cover;
   background-position: center;
 }
 
 .veus-img {
-  background-image: url('../assets/images/mundodelosveus.png');
+  background-image: url('../assets/images/oeuvres/mundodelosveus.webp');
   background-size: cover;
   background-position: center;
 }
 
 .divinity-img {
-  background-image: url('../assets/images/reversiondelasdivinidades.png');
+  background-image: url('../assets/images/oeuvres/reversiondelasdivinidades.webp');
   background-size: cover;
   background-position: center;
 }
 
 .circulo-img {
-  background-image: url('../assets/images/circuloarena.png');
+  background-image: url('../assets/images/oeuvres/circuloarena.webp');
   background-size: cover;
   background-position: center;
 }
 
 .debacle-img {
-  background-image: url('../assets/images/debacletriangular.png');
+  background-image: url('../assets/images/oeuvres/debacletriangular.webp');
   background-size: cover;
   background-position: center;
 }
 
 .huevovolvio-img {
-  background-image: url('../assets/images/huevovolviocantar.png');
+  background-image: url('../assets/images/oeuvres/huevovolviocantar.webp');
   background-size: cover;
   background-position: center;
 }
 
 .cristalito-img {
-  background-image: url('../assets/images/cristalito.png');
+  background-image: url('../assets/images/oeuvres/cristalito.webp');
   background-size: cover;
   background-position: center;
 }
 
 .bribones-img {
-  background-image: url('../assets/images/reinadelosbribones.png');
+  background-image: url('../assets/images/oeuvres/reinadelosbribones.webp');
   background-size: cover;
   background-position: center;
 }
 
-/* === Blog Principal (Featured) === */
-.featured-post-image {
-  background-image: url('../assets/images/featured-trialidad.jpg');
-  background-size: cover;
-  background-position: center;
-}
+/* === Catálogo Completo === */
 
 /* === Blog Entradas === */
-.lauren-post-1 {
-  background-image: url('../assets/images/lauren-post-1.jpg');
-  background-size: cover;
-  background-position: center;
-}
 
-.elysia-post-1 {
-  background-image: url('../assets/images/elysia-post-1.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.lauren-post-2 {
-  background-image: url('../assets/images/lauren-post-2.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.elysia-post-2 {
-  background-image: url('../assets/images/elysia-post-2.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.lauren-post-3 {
-  background-image: url('../assets/images/lauren-post-3.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.elysia-post-3 {
-  background-image: url('../assets/images/elysia-post-3.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-/* === Placeholder para Sahir === */
-/* .sahir-post-1 { ... } */

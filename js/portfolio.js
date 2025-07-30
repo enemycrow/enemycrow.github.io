@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     banners.forEach(banner => {
                         const side = banner.classList.contains('modal-banner-left') ? 'left' : 'right';
                         const img = banner.getAttribute('data-image') ||
-                            `assets/images/banners/${baseName}-${side}.png`;
+                            `assets/images/banners/${baseName}-${side}.webp`;
                         banner.style.backgroundImage = `url(${img})`;
                     });
 
