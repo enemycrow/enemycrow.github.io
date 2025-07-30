@@ -1147,8 +1147,8 @@ blockquote {
 
 .page-link, .page-dots, .page-next {
   margin: 0 0.5rem;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1869,8 +1869,8 @@ input, textarea, select, input *, textarea *, select * {
 }
 
 .social-icon {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: var(--gris-oscuro);
   display: flex;
@@ -3012,8 +3012,8 @@ input, textarea, select, input *, textarea *, select * {
 }
 
 .social-icon {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: var(--gris-oscuro);
   display: flex;
@@ -4098,8 +4098,8 @@ a:hover {
 }
 
 .voice-icon {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -4323,8 +4323,8 @@ a:hover {
 }
 
 .control-prev, .control-next {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.3);
   border: none;
