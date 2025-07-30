@@ -753,6 +753,72 @@ blockquote {
   }
 }
 
+@media screen and (max-height: 500px) and (orientation: landscape) and (pointer: coarse) {
+  .trial-container {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .voice-view {
+    margin: 0 auto 1.5rem auto !important;
+    width: 100% !important;
+    max-width: 1000px;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 12px;
+  }
+
+  .voice-view__image-container {
+    justify-content: center;
+  }
+
+  .voice-view__description,
+  .voice-view__themes {
+    text-align: center;
+  }
+
+  .voice-view--lauren,
+  .voice-view--elysia,
+  .voice-view--sahir {
+  margin: 0 auto 1.5rem auto !important;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  }
+
+  .trial-divider {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0 2rem 0;
+  }
+
+  .divider-line {
+    width: 40px;
+    height: 2px;
+    background-color: #ccc;
+    margin: 0 8px;
+  }
+
+  .divider-symbol {
+    font-size: 1.2rem;
+    color: #888;
+  }
+
+  /* Solo mostrar el divisor debajo de cada voz */
+  .voice-view + .trial-divider {
+    display: flex;
+  }
+
+  /* Pero ocultar los divisores entre las tarjetas (si están entre medio en desktop) */
+  .trial-container > .trial-divider {
+    display: none;
+  }
+}
+
+
 /* --- End of about.css --- */
 
 /* --- Start of blog.css --- */
