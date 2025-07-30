@@ -1717,12 +1717,12 @@ input, textarea, select, input *, textarea *, select * {
   }
 
   .reaction-count {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     line-height: 1;
   }
 
   .reaction-tooltip {
-    font-size: 0.7rem;
+    font-size: 0.875rem;
     max-width: 100px;
     padding: 0.25em 0.5em;
   }
@@ -3431,7 +3431,7 @@ a:hover {
   display: inline-block;
   padding: 0.3rem 0.8rem;
   border-radius: 3px;
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   margin-bottom: 0.8rem;
   font-family: var(--fuente-manuscrita);
 }
@@ -4371,7 +4371,7 @@ a:hover {
   right: 10px;
   background: #ffa500b0;
   padding: 6px 12px;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: bold;
   color: black;
   border-radius: 6px;
@@ -5725,7 +5725,7 @@ a:hover {
   }
 
   .not-found-message {
-    font-size: 0.75rem !important;
+    font-size: 0.875rem !important;
     line-height: 1.4 !important;
     margin: 0.5rem 0 1rem !important;
   }
