@@ -4608,6 +4608,66 @@ a:hover {
 
 /* --- End of services.css --- */
 
+
+/* --- Start of shop.css --- */
+/* Estilos para la página de Tienda */
+
+.hero.hero--shop {
+  background-image: url('../assets/images/oeuvres/liralyrianimea.webp');
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 5rem 0;
+  background: linear-gradient(135deg, var(--negro-sombra) 0%, var(--negro-profundo) 100%);
+}
+
+.product-card {
+  background: var(--negro-sombra);
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.product-card .price {
+  font-weight: bold;
+  margin: 0.5rem 0 1rem;
+  color: var(--dorado-suave);
+}
+
+.btn-buy {
+  align-self: center;
+  background: var(--violeta-profundo);
+  color: var(--blanco-brillante);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn-buy:hover {
+  background: var(--violeta-pálido);
+}
+
+@media screen and (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- End of shop.css --- */
 /* --- Start of style-elysia.css --- */
 /* Estilos específicos para A.C. Elysia */
 
@@ -5448,7 +5508,8 @@ a:hover {
 .hero.hero--blog,
 .hero.hero--contact,
 .hero.hero--portfolio,
-.hero.hero--services {
+.hero.hero--services,
+.hero.hero--shop {
   height: 67.5vh;
   position: relative;
   display: flex;
@@ -5465,7 +5526,8 @@ a:hover {
 .blog-hero-overlay,
 .contact-hero-overlay,
 .portfolio-hero-overlay,
-.services-hero-overlay {
+.services-hero-overlay,
+.shop-hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -5482,7 +5544,8 @@ a:hover {
 .blog-hero-content,
 .contact-hero-content,
 .portfolio-hero-content,
-.services-hero-content {
+.services-hero-content,
+.shop-hero-content {
   position: relative;
   z-index: 2;
   max-width: 800px;
