@@ -21,12 +21,14 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/custom-overrides.css" />
     <!-- <link rel="stylesheet" href="css/portfolio.css"> -->
+    <link rel="canonical" href="https://enemycrow.github.io/portfolio.html" />
+    <meta name="robots" content="index, follow" />
 </head>
 <body>
     <!-- Preloader con animación -->
     <div class="preloader">
         <div class="preloader-icon">
-            <i class="fa-solid fa-fire-flame-simple"></i>
+            <i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i>
         </div>
     </div>
 
@@ -35,11 +37,11 @@
         <div class="container">
             <nav class="navbar">
                 <a href="index.html" class="logo" data-sylvora-latido="true">
-                    <span class="logo-icon"><i class="fa-solid fa-fire-flame-simple"></i></span>
+                    <span class="logo-icon"><i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i></span>
                     La Pluma, el Faro y la Llama
                 </a>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
+                <div class="mobile-menu" role="button" aria-label="Abrir menú">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
                 </div>
                 <ul class="nav-links">
                     <li><a href="index.html">Inicio</a></li>
@@ -47,11 +49,13 @@
                     <li><a href="portfolio.html" class="active">Obras</a></li>
                     <li><a href="blog.html">Diario</a></li>
                     <li><a href="services.html">Servicios</a></li>
+                    <li><a href="shop.html">Tienda</a></li>
                     <li><a href="contact.html">Contacto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+    <main>
 
     <!-- Hero Section -->
     <section class="hero hero--portfolio">
@@ -356,20 +360,21 @@
 
 
 
+    </main>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
+                    <span class="logo-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></span>
                     La Pluma, el Faro y la Llama
                 </div>
                 
                 <div class="footer-social">
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-goodreads"></i></a>
+                    <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#" class="social-icon" aria-label="Goodreads"><i class="fab fa-goodreads" aria-hidden="true"></i></a>
                 </div>
                 
                 <div class="footer-newsletter">
@@ -387,6 +392,7 @@
                         <li><a href="portfolio.html">Obras</a></li>
                         <li><a href="blog.html">Diario</a></li>
                         <li><a href="services.html">Servicios</a></li>
+                    <li><a href="shop.html">Tienda</a></li>
                         <li><a href="contact.html">Contacto</a></li>
                     </ul>
                 </div>
@@ -420,7 +426,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/jesuitadelvino.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/jesuitadelvino.webp" alt="Portada de El Jesuita del Vino" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -477,7 +483,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/entreamoresabismos.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/entreamoresabismos.webp" alt="Portada de Entre Amores y Abismos" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autora: <span>A.C. Elysia</span></p>
@@ -545,7 +551,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/galactique.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/galactique.webp" alt="Portada de El valeroso viaje de Galactique y Galactiquito" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Draco Sahir</span></p>
@@ -597,7 +603,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/izelitzel.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/izelitzel.webp" alt="Portada de Izel Itzel" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -662,7 +668,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/hijasdelmartillo.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/hijasdelmartillo.webp" alt="Portada de Hijas del Martillo" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autora: <span>A.C. Elysia</span></p>
@@ -726,7 +732,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/huevovolviocantar.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/huevovolviocantar.webp" alt="Portada de El huevo que volvió a cantar" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Draco Sahir</span></p>
@@ -784,7 +790,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/efectodilaciontemporal.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/efectodilaciontemporal.webp" alt="Portada de Efecto Dilación Temporal" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -856,7 +862,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/librodelafusion.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/librodelafusion.webp" alt="Portada de El Libro de la Fusión" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>A.C. Elysia</span></p>
@@ -913,7 +919,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/cristalito.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/cristalito.webp" alt="Portada de Cristalito: El potrillo de cristal" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Draco Sahir</span></p>
@@ -962,7 +968,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/tarotcuervoelysia.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/tarotcuervoelysia.webp" alt="Portada de Tarot del Cuervo y Elysia" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo &amp; A.C. Elysia</span></p>
@@ -1010,7 +1016,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/traverso.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/traverso.webp" alt="Portada de Los Traverso" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -1085,7 +1091,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/mundodelosveus.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/mundodelosveus.webp" alt="Portada de El Mundo de los Véus" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autora: <span>A.C. Elysia</span></p>
@@ -1154,7 +1160,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/reversiondelasdivinidades.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/reversiondelasdivinidades.webp" alt="Portada de La Reversión de las Divinidades" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -1213,7 +1219,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/circuloarena.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/circuloarena.webp" alt="Portada de Círculo en la Arena" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autora: <span>A.C. Elysia</span></p>
@@ -1280,7 +1286,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/debacletriangular.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/debacletriangular.webp" alt="Portada de Debacle Triangular" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -1350,7 +1356,7 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img loading="lazy" src="assets/images/oeuvres/reinadelosbribones.webp" alt="Imagen de la obra" />
+                        <img loading="lazy" src="assets/images/oeuvres/reinadelosbribones.webp" alt="Portada de La Reina de los Bribones" />
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
