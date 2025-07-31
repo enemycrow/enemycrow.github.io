@@ -3938,8 +3938,7 @@ a:hover {
 /* Estilos para la página de Servicios Creativos */
 
 /* Hero Section */
-.hero.hero--services,
-.hero.hero--shop {
+.hero.hero--services {
   background-image: url('../assets/images/oeuvres/reversiondelasdivinidades.webp');
 }
 
@@ -4548,7 +4547,7 @@ a:hover {
 /* Estilos para la página de Tienda */
 
 .hero.hero--shop {
-  background-image: url('../assets/images/oeuvres/galactique.webp');
+  background-image: url('../assets/images/oeuvres/liralyrianimea.webp');
 }
 
 .products-grid {
