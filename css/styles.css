@@ -4555,6 +4555,24 @@ a:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Botón de donación */
+.btn-donate {
+  background: var(--fucsia-brillante);
+  color: var(--blanco-brillante);
+  padding: 0.8rem 1.5rem;
+  border-radius: 3px;
+  font-family: var(--fuente-manuscrita);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-donate:hover {
+  background: var(--rosa-etereo);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  color: var(--negro-profundo);
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 992px) {
   .services-grid__list {
