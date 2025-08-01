@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
     const docRef = db.collection('reactions').doc(slug);
     let snap = await docRef.get();
-    if (!snap.exists()) {
+    if (!snap.exists) {
       const initData = {};
       reactionKeys.forEach(k => initData[k] = 0);
       await docRef.set(initData);
