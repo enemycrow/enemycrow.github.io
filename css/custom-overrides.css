@@ -100,12 +100,38 @@
 /* === Blog Entradas === */
 
 @media screen and (orientation: portrait) and (max-width: 600px) {
-  .jesuita-img { background-image: url('../assets/images/responsive/oeuvres/jesuitadelvino-400.webp'); }
-  .entre-abismos-img { background-image: url('../assets/images/responsive/oeuvres/entreamoresabismos-400.webp'); }
-  /* continue for all portfolio classes */
+  .jesuita-img         { background-image: url('../assets/images/oeuvres/jesuitadelvino.webp'); }
+  .entre-abismos-img   { background-image: url('../assets/images/oeuvres/entreamoresabismos.webp'); }
+  .martillo-img        { background-image: url('../assets/images/oeuvres/hijasdelmartillo.webp'); }
+  .galactique-img      { background-image: url('../assets/images/oeuvres/galactique.webp'); }
+  .izel-img            { background-image: url('../assets/images/oeuvres/izelitzel.webp'); }
+  .libro-fusion-img    { background-image: url('../assets/images/oeuvres/librodelafusion.webp'); }
+  .dilacion-img        { background-image: url('../assets/images/oeuvres/efectodilaciontemporal.webp'); }
+  .tarotcuervoelysia-img { background-image: url('../assets/images/oeuvres/tarotcuervoelysia.webp'); }
+  .traverso-img        { background-image: url('../assets/images/oeuvres/traverso.webp'); }
+  .veus-img            { background-image: url('../assets/images/oeuvres/mundodelosveus.webp'); }
+  .divinity-img        { background-image: url('../assets/images/oeuvres/reversiondelasdivinidades.webp'); }
+  .circulo-img         { background-image: url('../assets/images/oeuvres/circuloarena.webp'); }
+  .debacle-img         { background-image: url('../assets/images/oeuvres/debacletriangular.webp'); }
+  .huevovolvio-img     { background-image: url('../assets/images/oeuvres/huevovolviocantar.webp'); }
+  .cristalito-img      { background-image: url('../assets/images/oeuvres/cristalito.webp'); }
+  .bribones-img        { background-image: url('../assets/images/oeuvres/reinadelosbribones.webp'); }
 }
 @media screen and (orientation: landscape) and (max-height: 500px) {
-  .jesuita-img { background-image: url('../assets/images/responsive/oeuvres/jesuitadelvino-800.webp'); }
-  .entre-abismos-img { background-image: url('../assets/images/responsive/oeuvres/entreamoresabismos-800.webp'); }
-  /* continue for all portfolio classes */
+  .jesuita-img         { background-image: url('../assets/images/oeuvres/jesuitadelvino.webp'); }
+  .entre-abismos-img   { background-image: url('../assets/images/oeuvres/entreamoresabismos.webp'); }
+  .martillo-img        { background-image: url('../assets/images/oeuvres/hijasdelmartillo.webp'); }
+  .galactique-img      { background-image: url('../assets/images/oeuvres/galactique.webp'); }
+  .izel-img            { background-image: url('../assets/images/oeuvres/izelitzel.webp'); }
+  .libro-fusion-img    { background-image: url('../assets/images/oeuvres/librodelafusion.webp'); }
+  .dilacion-img        { background-image: url('../assets/images/oeuvres/efectodilaciontemporal.webp'); }
+  .tarotcuervoelysia-img { background-image: url('../assets/images/oeuvres/tarotcuervoelysia.webp'); }
+  .traverso-img        { background-image: url('../assets/images/oeuvres/traverso.webp'); }
+  .veus-img            { background-image: url('../assets/images/oeuvres/mundodelosveus.webp'); }
+  .divinity-img        { background-image: url('../assets/images/oeuvres/reversiondelasdivinidades.webp'); }
+  .circulo-img         { background-image: url('../assets/images/oeuvres/circuloarena.webp'); }
+  .debacle-img         { background-image: url('../assets/images/oeuvres/debacletriangular.webp'); }
+  .huevovolvio-img     { background-image: url('../assets/images/oeuvres/huevovolviocantar.webp'); }
+  .cristalito-img      { background-image: url('../assets/images/oeuvres/cristalito.webp'); }
+  .bribones-img        { background-image: url('../assets/images/oeuvres/reinadelosbribones.webp'); }
 }
