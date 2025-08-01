@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/custom-overrides.css" />
     <!-- <link rel="stylesheet" href="css/blog.css"> -->
+    <link rel="canonical" href="https://enemycrow.github.io/blog-entry.html" />
+    <meta name="robots" content="index, follow" />
 </head>
 <body>
 
@@ -29,7 +31,7 @@
     <div class="container">
       <nav class="navbar">
         <a href="index.html" class="logo" data-sylvora-latido="true">
-          <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
+          <span class="logo-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></span>
           La Pluma, el Faro y la Llama
         </a>
         <ul class="nav-links">
@@ -38,41 +40,52 @@
           <li><a href="portfolio.html">Obras</a></li>
           <li><a href="blog.html" class="active">Diario</a></li>
           <li><a href="services.html">Servicios</a></li>
+          <li><a href="shop.html">Tienda</a></li>
           <li><a href="contact.html">Contacto</a></li>
+          <li><a href="donate.html" class="btn btn-donate">Donar</a></li>
         </ul>
       </nav>
     </div>
   </header>
+  <main>
 
   <!-- Entrada del Blog -->
   <article class="blog-entry blog-entry--individual">
     <div class="container">
-      <img src="" alt="" id="entry-image" class="blog-entry__image" />
+      <img
+        id="entry-image"
+        class="blog-entry__image"
+        src=""
+        srcset=""
+        sizes="(max-width: 600px) 100vw, 800px"
+        alt="Imagen representativa de la entrada"
+        loading="lazy"
+        fetchpriority="low">
       <!-- Bloque de reacciones -->
       <div class="reactions-block">
         <div class="reactions-list">
-          <div class="reaction" data-reaction="toco">
-            <span class="reaction-icon"><i class="fas fa-heart"></i></span>
+          <div class="reaction" data-reaction="toco" role="button">
+            <span class="reaction-icon"><i class="fas fa-heart" aria-hidden="true"></i></span>
             <span class="reaction-count" id="reaction-toco-count">0</span>
             <span class="reaction-tooltip">Esta historia me tocó</span>
           </div>
-          <div class="reaction" data-reaction="sumergirme">
-            <span class="reaction-icon"><i class="fas fa-water"></i></span>
+          <div class="reaction" data-reaction="sumergirme" role="button">
+            <span class="reaction-icon"><i class="fas fa-water" aria-hidden="true"></i></span>
             <span class="reaction-count" id="reaction-sumergirme-count">0</span>
             <span class="reaction-tooltip">Quiero sumergirme en la trama</span>
           </div>
-          <div class="reaction" data-reaction="personajes">
-            <span class="reaction-icon"><i class="fas fa-users"></i></span>
+          <div class="reaction" data-reaction="personajes" role="button">
+            <span class="reaction-icon"><i class="fas fa-users" aria-hidden="true"></i></span>
             <span class="reaction-count" id="reaction-personajes-count">0</span>
             <span class="reaction-tooltip">Quiero conocer a fondo a sus personajes</span>
           </div>
-          <div class="reaction" data-reaction="mundo">
-            <span class="reaction-icon"><i class="fas fa-globe"></i></span>
+          <div class="reaction" data-reaction="mundo" role="button">
+            <span class="reaction-icon"><i class="fas fa-globe" aria-hidden="true"></i></span>
             <span class="reaction-count" id="reaction-mundo-count">0</span>
             <span class="reaction-tooltip">Me intriga el mundo que han creado</span>
           </div>
-          <div class="reaction" data-reaction="lugares">
-            <span class="reaction-icon"><i class="fas fa-map-marker-alt"></i></span>
+          <div class="reaction" data-reaction="lugares" role="button">
+            <span class="reaction-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></span>
             <span class="reaction-count" id="reaction-lugares-count">0</span>
             <span class="reaction-tooltip">Llévame a esos lugares</span>
           </div>
@@ -99,6 +112,7 @@
       <p class="blog-entry__license" id="entry-license"></p>
     </div>
   </article>
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -108,9 +122,9 @@
   </footer>
 
   <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
-  <script src="js/firebase-init.js"></script>
-  <script src="js/blog-entry.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
+  <script defer src="js/firebase-init.js"></script>
+  <script defer src="js/blog-entry.js"></script>
 </body>
 </html>

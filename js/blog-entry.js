@@ -35,7 +35,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (timeEl) timeEl.textContent = entry.tiempo;
     if (contentEl) contentEl.innerHTML = entry.contenido_html;
     if (authorEl) authorEl.textContent = `— ${entry.autor}`;
-    if (imgEl) imgEl.src = `assets/images/blog/${entry.imagen}`;
+    if (imgEl) {
+      const base = entry.imagen.replace('.webp', '');
+      imgEl.src = `assets/images/responsive/blog/${base}-800.webp`;
+      imgEl.srcset = `
+        assets/images/responsive/blog/${base}-400.webp 400w,
+        assets/images/responsive/blog/${base}-800.webp 800w,
+        assets/images/responsive/blog/${base}-1200.webp 1200w`;
+      imgEl.sizes = "(max-width: 600px) 100vw, 800px";
+      imgEl.alt = entry.titulo;
+    }
     if (catEl || catElBlock) {
       const catsHtml = entry.categoria_temas
         .map(c => `<span class="category-tag">${c}</span>`)
@@ -52,16 +61,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         `<a href="${link}">${titleWork}</a> © ${year} by ` +
         `<a href="https://enemycrow.github.io">${entry.autor}</a> is licensed under ` +
         `<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>` +
-        `<img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
-        `<img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
-        `<img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
-        `<img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">`;
+        `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
+        `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
+        `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
+        `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">`;
     }
 
     const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
     const docRef = db.collection('reactions').doc(slug);
     let snap = await docRef.get();
-    if (!snap.exists()) {
+    if (!snap.exists) {
       const initData = {};
       reactionKeys.forEach(k => initData[k] = 0);
       await docRef.set(initData);

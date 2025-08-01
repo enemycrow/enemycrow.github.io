@@ -21,12 +21,14 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/custom-overrides.css" />
     <!-- <link rel="stylesheet" href="css/portfolio.css"> -->
+    <link rel="canonical" href="https://enemycrow.github.io/portfolio.html" />
+    <meta name="robots" content="index, follow" />
 </head>
 <body>
     <!-- Preloader con animación -->
     <div class="preloader">
         <div class="preloader-icon">
-            <i class="fa-solid fa-fire-flame-simple"></i>
+            <i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i>
         </div>
     </div>
 
@@ -35,11 +37,11 @@
         <div class="container">
             <nav class="navbar">
                 <a href="index.html" class="logo" data-sylvora-latido="true">
-                    <span class="logo-icon"><i class="fa-solid fa-fire-flame-simple"></i></span>
+                    <span class="logo-icon"><i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i></span>
                     La Pluma, el Faro y la Llama
                 </a>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
+                <div class="mobile-menu" role="button" aria-label="Abrir menú">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
                 </div>
                 <ul class="nav-links">
                     <li><a href="index.html">Inicio</a></li>
@@ -47,11 +49,14 @@
                     <li><a href="portfolio.html" class="active">Obras</a></li>
                     <li><a href="blog.html">Diario</a></li>
                     <li><a href="services.html">Servicios</a></li>
+                    <li><a href="shop.html">Tienda</a></li>
                     <li><a href="contact.html">Contacto</a></li>
+                    <li><a href="donate.html" class="btn btn-donate">Donar</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+    <main>
 
     <!-- Hero Section -->
     <section class="hero hero--portfolio">
@@ -356,20 +361,21 @@
 
 
 
+    </main>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
+                    <span class="logo-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></span>
                     La Pluma, el Faro y la Llama
                 </div>
                 
                 <div class="footer-social">
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-goodreads"></i></a>
+                    <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#" class="social-icon" aria-label="Goodreads"><i class="fab fa-goodreads" aria-hidden="true"></i></a>
                 </div>
                 
                 <div class="footer-newsletter">
@@ -387,6 +393,7 @@
                         <li><a href="portfolio.html">Obras</a></li>
                         <li><a href="blog.html">Diario</a></li>
                         <li><a href="services.html">Servicios</a></li>
+                    <li><a href="shop.html">Tienda</a></li>
                         <li><a href="contact.html">Contacto</a></li>
                     </ul>
                 </div>
@@ -401,7 +408,7 @@
     <!-- Jesuita Modal -->
     <div class="modal" id="jesuita-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/jesuita-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/jesuita-left.webp"></div>
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
 
@@ -420,7 +427,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/jesuitadelvino.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/jesuitadelvino-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/jesuitadelvino-400.webp 400w,
+                            assets/images/responsive/oeuvres/jesuitadelvino-800.webp 800w,
+                            assets/images/responsive/oeuvres/jesuitadelvino-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de El Jesuita del Vino">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -449,20 +465,20 @@
                                 Año de escritura: 2024-2025<br>
                         </section>
                         <section class="obra-license">
-                            <p><a href="https://enemycrow.github.io/portfolio/jesuita-del-vino.html">Sinopsis de "El Jesuita del Vino"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                            <p><a href="https://enemycrow.github.io/portfolio/jesuita-del-vino.html">Sinopsis de "El Jesuita del Vino"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                         </section>
                     </div>
                 </div> 
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/jesuita-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/jesuita-right.webp"></div>
         </div>
     </div>
 
     <!-- Abismos Modal -->
     <div class="modal" id="abismos-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/abismos-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/abismos-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -477,7 +493,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/entreamoresabismos.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/entreamoresabismos-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/entreamoresabismos-400.webp 400w,
+                            assets/images/responsive/oeuvres/entreamoresabismos-800.webp 800w,
+                            assets/images/responsive/oeuvres/entreamoresabismos-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de Entre Amores y Abismos">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autora: <span>A.C. Elysia</span></p>
@@ -517,20 +542,20 @@
                                 Protección legal válida en Chile y reconocida por convenios internacionales sobre derechos de autor.</p>
                         </section>
                         <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Entre Amores y Abismos: El Ritual de la Transformación"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Entre Amores y Abismos: El Ritual de la Transformación"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/abismos-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/abismos-right.webp"></div>
         </div>
     </div>
 
     <!-- Galactique Modal -->
     <div class="modal" id="galactique-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/galactique-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/galactique-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -545,7 +570,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/galactique.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/galactique-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/galactique-400.webp 400w,
+                            assets/images/responsive/oeuvres/galactique-800.webp 800w,
+                            assets/images/responsive/oeuvres/galactique-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de El valeroso viaje de Galactique y Galactiquito">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Draco Sahir</span></p>
@@ -569,20 +603,20 @@
                                 Protección legal válida en Chile y reconocida por convenios internacionales sobre derechos de autor.</p>
                         </section>
                         <section class="obra-license">
-                            <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "El Valeroso viaje de Galactique y Galactiquito"</a> © 2025 by <a href="https://enemycrow.github.io/">Draco Sahir</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                            <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "El Valeroso viaje de Galactique y Galactiquito"</a> © 2025 by <a href="https://enemycrow.github.io/">Draco Sahir</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                         </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/galactique-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/galactique-right.webp"></div>
         </div>
     </div>
 
     <!-- Izel Modal -->
     <div class="modal" id="izel-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/izel-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/izel-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -597,7 +631,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/izelitzel.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/izelitzel-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/izelitzel-400.webp 400w,
+                            assets/images/responsive/oeuvres/izelitzel-800.webp 800w,
+                            assets/images/responsive/oeuvres/izelitzel-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de Izel Itzel">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -634,20 +677,20 @@
                         <p>© 2025 Lauren Cuervo. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                     </section>
                     <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Izel Itzel: La protectora inesperada"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Izel Itzel: La protectora inesperada"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/izel-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/izel-right.webp"></div>
         </div>
     </div>
 
     <!-- Martillo Modal -->
     <div class="modal" id="martillo-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/martillo-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/martillo-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -662,7 +705,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/hijasdelmartillo.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/hijasdelmartillo-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/hijasdelmartillo-400.webp 400w,
+                            assets/images/responsive/oeuvres/hijasdelmartillo-800.webp 800w,
+                            assets/images/responsive/oeuvres/hijasdelmartillo-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de Hijas del Martillo">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autora: <span>A.C. Elysia</span></p>
@@ -698,20 +750,20 @@
                         <p>© 2025 A.C. Elysia. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                     </section>
                     <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Hijas del Martillo"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Hijas del Martillo"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/martillo-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/martillo-right.webp"></div>
         </div>
     </div>
 
     <!-- Huevovolvio Modal -->
     <div class="modal" id="huevovolvio-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/huevovolvio-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/huevovolvio-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -726,7 +778,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/huevovolviocantar.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/huevovolviocantar-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/huevovolviocantar-400.webp 400w,
+                            assets/images/responsive/oeuvres/huevovolviocantar-800.webp 800w,
+                            assets/images/responsive/oeuvres/huevovolviocantar-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de El huevo que volvió a cantar">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Draco Sahir</span></p>
@@ -756,20 +817,20 @@
                         <p>© 2025 Draco Sahir. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                     </section>
                     <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "El huevo que volvió a cantar"</a> © 2025 by <a href="https://enemycrow.github.io/">Draco Sahir</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "El huevo que volvió a cantar"</a> © 2025 by <a href="https://enemycrow.github.io/">Draco Sahir</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/huevovolvio-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/huevovolvio-right.webp"></div>
         </div>
     </div>
 
     <!-- Dilacion Modal -->
     <div class="modal" id="dilacion-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/dilacion-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/dilacion-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -784,7 +845,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/efectodilaciontemporal.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/efectodilaciontemporal-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/efectodilaciontemporal-400.webp 400w,
+                            assets/images/responsive/oeuvres/efectodilaciontemporal-800.webp 800w,
+                            assets/images/responsive/oeuvres/efectodilaciontemporal-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de Efecto Dilación Temporal">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -828,20 +898,20 @@
                         <p>© 2012 - 2013, 2019, 2025 Lauren Cuervo. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                     </section>
                     <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Efecto Dilación Temporal"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Efecto Dilación Temporal"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/dilacion-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/dilacion-right.webp"></div>
         </div>
     </div>
 
     <!-- Fusión Modal -->
     <div class="modal" id="fusion-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/fusion-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/fusion-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -856,7 +926,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/librodelafusion.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/librodelafusion-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/librodelafusion-400.webp 400w,
+                            assets/images/responsive/oeuvres/librodelafusion-800.webp 800w,
+                            assets/images/responsive/oeuvres/librodelafusion-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de El Libro de la Fusión">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>A.C. Elysia</span></p>
@@ -885,20 +964,20 @@
                         <p>© 2025 A.C. Elysia. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                     </section>
                     <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "El Libro de la Fusión"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "El Libro de la Fusión"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/fusion-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/fusion-right.webp"></div>
         </div>
     </div>
 
     <!-- Cristalito Modal -->
     <div class="modal" id="cristalito-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/cristalito-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/cristalito-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -913,7 +992,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/cristalito.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/cristalito-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/cristalito-400.webp 400w,
+                            assets/images/responsive/oeuvres/cristalito-800.webp 800w,
+                            assets/images/responsive/oeuvres/cristalito-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de Cristalito: El potrillo de cristal">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Draco Sahir</span></p>
@@ -934,20 +1022,20 @@
                         <p>© 2025 Draco Sahir. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                     </section>
                     <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Cristalito, el potrillo de cristal"</a> © 2025 by <a href="https://enemycrow.github.io/">Draco Sahir</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Cristalito, el potrillo de cristal"</a> © 2025 by <a href="https://enemycrow.github.io/">Draco Sahir</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/cristalito-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/cristalito-right.webp"></div>
         </div>
     </div>
 
     <!-- Tarot Modal -->
     <div class="modal" id="tarot-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/tarot-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/tarot-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -962,7 +1050,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/tarotcuervoelysia.jpg" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/tarotcuervoelysia-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/tarotcuervoelysia-400.webp 400w,
+                            assets/images/responsive/oeuvres/tarotcuervoelysia-800.webp 800w,
+                            assets/images/responsive/oeuvres/tarotcuervoelysia-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de Tarot del Cuervo y Elysia">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo &amp; A.C. Elysia</span></p>
@@ -982,20 +1079,20 @@
                         <p>© 2025 Lauren Cuervo y A.C. Elysia. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                     </section>
                     <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Descripción de "Tarot del Cuervo y Elysia"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo y A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Descripción de "Tarot del Cuervo y Elysia"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo y A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/tarot-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/tarot-right.webp"></div>
         </div>
     </div>
 
     <!-- Traverso Modal -->
     <div class="modal" id="traverso-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/traverso-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/traverso-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -1010,7 +1107,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/traverso.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/traverso-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/traverso-400.webp 400w,
+                            assets/images/responsive/oeuvres/traverso-800.webp 800w,
+                            assets/images/responsive/oeuvres/traverso-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de Los Traverso">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -1057,20 +1163,20 @@
                         <p>© 2005, 2025 Lauren Cuervo. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                     </section>
                     <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Los Traverso"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Los Traverso"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/traverso-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/traverso-right.webp"></div>
         </div>
     </div>
 
     <!-- Veus Modal -->
     <div class="modal" id="veus-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/veus-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/veus-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -1085,7 +1191,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/mundodelosveus.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/mundodelosveus-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/mundodelosveus-400.webp 400w,
+                            assets/images/responsive/oeuvres/mundodelosveus-800.webp 800w,
+                            assets/images/responsive/oeuvres/mundodelosveus-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de El Mundo de los Véus">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autora: <span>A.C. Elysia</span></p>
@@ -1126,20 +1241,20 @@
                         <p>© 2025 A.C. Elysia. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                     </section>
                     <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "El Mundo de los Véus"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "El Mundo de los Véus"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/veus-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/veus-right.webp"></div>
         </div>
     </div>
 
     <!-- Divinity Modal -->
     <div class="modal" id="divinity-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/divinity-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/divinity-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -1154,7 +1269,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/reversiondelasdivinidades.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/reversiondelasdivinidades-400.webp 400w,
+                            assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp 800w,
+                            assets/images/responsive/oeuvres/reversiondelasdivinidades-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de La Reversión de las Divinidades">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -1186,19 +1310,19 @@
                         <p>© 2011 - 2012, 2025 Lauren Cuervo. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                     </section>
                     <section class="obra-license">
-                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "La Reversión de las Divinidades"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                        <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "La Reversión de las Divinidades"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                     </section>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/divinity-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/divinity-right.webp"></div>
         </div>
     </div>
 
     <!-- Circulo Modal -->
     <div class="modal" id="circulo-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/circulo-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/circulo-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -1213,7 +1337,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/circuloarena.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/circuloarena-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/circuloarena-400.webp 400w,
+                            assets/images/responsive/oeuvres/circuloarena-800.webp 800w,
+                            assets/images/responsive/oeuvres/circuloarena-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de Círculo en la Arena">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autora: <span>A.C. Elysia</span></p>
@@ -1252,20 +1385,20 @@
                                 Protección legal válida en Chile y reconocida por convenios internacionales sobre derechos de autor.</p>
                         </section>
                         <section class="obra-license">
-                            <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Círculo en la Arena. Conexiones en Cap D'Adge"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                            <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Círculo en la Arena. Conexiones en Cap D'Adge"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                         </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/circulo-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/circulo-right.webp"></div>
         </div>
     </div>
 
     <!-- Debacle Modal -->
     <div class="modal" id="debacle-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/debacle-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/debacle-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -1280,7 +1413,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/debacletriangular.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/debacletriangular-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/debacletriangular-400.webp 400w,
+                            assets/images/responsive/oeuvres/debacletriangular-800.webp 800w,
+                            assets/images/responsive/oeuvres/debacletriangular-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de Debacle Triangular">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -1323,20 +1465,20 @@
                                 <p>© 1999, 2021 - 2025 Lauren Cuervo. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                         </section>
                         <section class="obra-license">
-                            <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Debacle Triangular"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                            <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Debacle Triangular"</a> © 2025 by <a href="https://enemycrow.github.io/">Lauren Cuervo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                         </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/debacle-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/debacle-right.webp"></div>
         </div>
     </div>
 
     <!-- Bribones Modal-->
     <div class="modal" id="bribones-modal">
         <div class="modal-wrapper">
-            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/bribones-left.png"></div>
+            <div class="modal-banner modal-banner-left" data-image="assets/images/banners/bribones-left.webp"></div>
             <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--violeta-profundo) 100%); color: var(--blanco-brillante);">
@@ -1350,7 +1492,16 @@
             <article class="obra-entry obra-entry--modal">
                 <div class="container">
                     <figure class="obra-entry__cover">
-                        <img src="assets/images/reinadelosbribones.png" alt="Imagen de la obra" />
+                        <img
+                          loading="lazy"
+                          fetchpriority="low"
+                          src="assets/images/responsive/oeuvres/reinadelosbribones-800.webp"
+                          srcset="
+                            assets/images/responsive/oeuvres/reinadelosbribones-400.webp 400w,
+                            assets/images/responsive/oeuvres/reinadelosbribones-800.webp 800w,
+                            assets/images/responsive/oeuvres/reinadelosbribones-1200.webp 1200w"
+                          sizes="(max-width: 600px) 100vw, 800px"
+                          alt="Portada de La Reina de los Bribones">
                     </figure>
                     <div class="obra-entry__meta">
                         <p>Autor: <span>Lauren Cuervo</span></p>
@@ -1372,22 +1523,22 @@
                         <p>© 2025 Lauren Cuervo. Esta obra está protegida por derechos de autor desde el momento de su creación. Todos los derechos reservados.</p>
                         </section>
                         <section class="obra-license">
-                            <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Círculo en la Arena. Conexiones en Cap D'Adge"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
+                            <p><a href="https://enemycrow.github.io/portfolio.html">Sinopsis de "Círculo en la Arena. Conexiones en Cap D'Adge"</a> © 2025 by <a href="https://enemycrow.github.io/">A.C. Elysia</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"></p>
                         </section>
                     </div>
                 </div>
             </article>
             </div>
-            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/bribones-right.png"></div>
+            <div class="modal-banner modal-banner-right" data-image="assets/images/banners/bribones-right.webp"></div>
         </div>
     </div>
 
     <!-- JavaScript -->
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
-    <script src="js/firebase-init.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/portfolio.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
+    <script defer src="js/firebase-init.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/portfolio.js"></script>
 </body>
 </html>

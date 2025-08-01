@@ -49,11 +49,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (modal) {
                     const banners = modal.querySelectorAll('.modal-banner');
                     const baseName = modalId.replace('-modal', '');
+                    const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+                    const smallPortrait = isPortrait && window.matchMedia('(max-width: 600px)').matches;
+                    const smallLandscape = !isPortrait && window.matchMedia('(max-width: 500px)').matches;
+
                     banners.forEach(banner => {
                         const side = banner.classList.contains('modal-banner-left') ? 'left' : 'right';
-                        const img = banner.getAttribute('data-image') ||
-                            `assets/images/banners/${baseName}-${side}.png`;
-                        banner.style.backgroundImage = `url(${img})`;
+                        const dataImg = banner.getAttribute('data-image');
+                        const basePath = dataImg ? dataImg.replace(/\.[^/.]+$/, '') :
+                            `assets/images/banners/${baseName}-${side}`;
+
+                        let imgPath = `${basePath}.webp`;
+                        if (smallPortrait) {
+                            imgPath = `${basePath}-400.webp`;
+                        } else if (smallLandscape) {
+                            imgPath = `${basePath}-800.webp`;
+                        }
+
+                        banner.style.backgroundImage = `url(${imgPath})`;
                     });
 
                     modal.style.display = 'block';

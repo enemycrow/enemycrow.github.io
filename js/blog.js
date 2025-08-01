@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#blog-posts-grid');
   const featuredContainer = document.querySelector('#featured-posts-container');
-  const paginationContainer = document.querySelector('#pagination');
+  const paginationContainers = document.querySelectorAll('.pagination');
   const postsPerPage = 3;
   let currentPage = 1;
   let filteredPosts = [];
@@ -58,9 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
       categoryTag = `<span class="category-tag ${catClass}">${cat}</span>`;
     }
     const totalReactions = 0; // placeholder, se actualizará desde Firestore
+
+    const baseName = post.imagen.replace(/\.[^.]+$/, '');
+    const mobileImg = window.innerWidth <= 768 ?
+      `<img src="assets/images/responsive/blog/${baseName}-400.webp" srcset="assets/images/responsive/blog/${baseName}-400.webp 400w, assets/images/responsive/blog/${baseName}-800.webp 800w, assets/images/responsive/blog/${baseName}-1200.webp 1200w" sizes="(max-width: 600px) 100vw, 800px" loading="lazy" fetchpriority="low" alt="${post.titulo}">`
+      : '';
+
     return `
       <div class="featured-post-container">
         <div class="featured-post-image" style="background-image:url('assets/images/blog/${post.imagen}')">
+          ${mobileImg}
           <div class="featured-post-overlay">
             <div class="featured-post-date">
               <span class="day">${dayStr}</span>
@@ -179,16 +186,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updatePagination() {
-    if (!paginationContainer) return;
+    if (!paginationContainers || paginationContainers.length === 0) return;
     const totalPages = Math.ceil(filteredPosts.length / postsPerPage) || 1;
-    paginationContainer.innerHTML = '';
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.className = 'page-link' + (i === currentPage ? ' active' : '');
-      btn.textContent = i;
-      btn.addEventListener('click', () => renderPage(i));
-      paginationContainer.appendChild(btn);
-    }
+    paginationContainers.forEach(container => {
+      container.innerHTML = '';
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'page-link' + (i === currentPage ? ' active' : '');
+        btn.textContent = i;
+        btn.addEventListener('click', () => renderPage(i));
+        container.appendChild(btn);
+      }
+    });
   }
 
   function renderPage(page) {
