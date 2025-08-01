@@ -4686,6 +4686,26 @@ a:hover {
 }
 
 /* --- End of shop.css --- */
+
+/* Orientation-based hero images */
+@media screen and (orientation: portrait) and (max-width: 600px) {
+  .hero.hero--about { background-image: url("../assets/images/responsive/oeuvres/izelitzel-400.webp"); }
+  .hero.hero--blog { background-image: url("../assets/images/responsive/oeuvres/efectodilaciontemporal-400.webp"); }
+  .hero.hero--contact { background-image: url("../assets/images/responsive/oeuvres/mundodelosveus-400.webp"); }
+  .hero.hero--portfolio { background-image: url("../assets/images/responsive/oeuvres/librodelafusion-400.webp"); }
+  .hero.hero--services { background-image: url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-400.webp"); }
+  .hero.hero--shop { background-image: url("../assets/images/responsive/oeuvres/liralyrianimea-400.webp"); }
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .hero.hero--about { background-image: url("../assets/images/responsive/oeuvres/izelitzel-800.webp"); }
+  .hero.hero--blog { background-image: url("../assets/images/responsive/oeuvres/efectodilaciontemporal-800.webp"); }
+  .hero.hero--contact { background-image: url("../assets/images/responsive/oeuvres/mundodelosveus-800.webp"); }
+  .hero.hero--portfolio { background-image: url("../assets/images/responsive/oeuvres/librodelafusion-800.webp"); }
+  .hero.hero--services { background-image: url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp"); }
+  .hero.hero--shop { background-image: url("../assets/images/responsive/oeuvres/liralyrianimea-800.webp"); }
+}
+
 /* --- Start of style-elysia.css --- */
 /* Estilos específicos para A.C. Elysia */
 
