@@ -66,6 +66,7 @@ Cada entrada del archivo debe incluir los siguientes campos:
 
 Para agregar una nueva entrada basta con editar `posts.json` y colocar la imagen correspondiente en `assets/images/`.
 Las páginas `blog.html` y `blog-entry.html` cargan este archivo mediante JavaScript, por lo que no es necesario modificar el HTML.
+Además, el contenido se guarda en `localStorage` bajo la clave `postsData` para acelerar visitas posteriores.
 
 Si colocas `"destacado": true` en una entrada, aparecerá en la sección de entradas destacadas al inicio de `blog.html`.
 Si quieres probar los cambios localmente ejecuta:

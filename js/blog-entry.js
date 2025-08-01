@@ -7,8 +7,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!slug) return;
 
   try {
-    const res = await fetch('posts.json');
-    const posts = await res.json();
+    let posts;
+    const cached = localStorage.getItem('postsData');
+    if (cached) {
+      posts = JSON.parse(cached);
+    } else {
+      const res = await fetch('posts.json');
+      posts = await res.json();
+      try { localStorage.setItem('postsData', JSON.stringify(posts)); } catch(e) {}
+    }
     const entry = posts.find(p => p.slug === slug);
     if (!entry) return;
 
