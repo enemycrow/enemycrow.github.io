@@ -91,6 +91,11 @@ Los formularios de contacto y newsletter guardan los datos en colecciones de
 Firestore. Asegúrate de completar `js/firebase-init.js` con las credenciales de
 tu proyecto para que esta funcionalidad esté disponible.
 
+## Cache del sitio con Service Worker
+
+El sitio ahora registra un *service worker* (`sw.js`) que precarga las páginas principales, hojas de estilo y scripts para ofrecer una experiencia más rápida y con soporte básico sin conexión. Este service worker se registra desde `js/main.js`.
+
+
 ## Banners en los modales
 
 Cada elemento `<div class="modal-banner">` puede incluir el atributo `data-image` para especificar la imagen de fondo que se mostrará al abrir el modal. Por ejemplo:
