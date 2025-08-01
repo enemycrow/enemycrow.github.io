@@ -3934,7 +3934,7 @@ a:hover {
   
   .obra-entry .container {
     grid-template-columns: 1fr;
-    text-align: center;
+    text-align: left;
   }
   .obra-entry__cover {
     margin-bottom: 1.5rem;
