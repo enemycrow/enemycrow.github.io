@@ -242,6 +242,9 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('posts.json')
     .then(res => res.json())
     .then(data => {
+      try {
+        localStorage.setItem('postsData', JSON.stringify(data));
+      } catch(e) {}
       allPosts = data;
       filteredPosts = allPosts;
       if (featuredContainer) {
