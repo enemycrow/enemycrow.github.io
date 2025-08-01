@@ -52,7 +52,15 @@
   <!-- Entrada del Blog -->
   <article class="blog-entry blog-entry--individual">
     <div class="container">
-      <img loading="lazy" src="" alt="Imagen representativa de la entrada" id="entry-image" class="blog-entry__image" />
+      <img
+        id="entry-image"
+        class="blog-entry__image"
+        src=""
+        srcset=""
+        sizes="(max-width: 600px) 100vw, 800px"
+        alt="Imagen representativa de la entrada"
+        loading="lazy"
+        fetchpriority="low">
       <!-- Bloque de reacciones -->
       <div class="reactions-block">
         <div class="reactions-list">
