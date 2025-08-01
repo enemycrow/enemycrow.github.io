@@ -853,6 +853,10 @@ blockquote {
   position: relative;
 }
 
+.featured-post-image img {
+  display: none;
+}
+
 .featured-post-overlay {
   position: absolute;
   top: 0;
@@ -987,6 +991,13 @@ blockquote {
     flex: 0 0 auto;
     height: 250px; /* o lo que necesites para que se vea bien en móvil */
     background-size: cover;
+  }
+
+  .featured-post-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .featured-post-overlay {
@@ -1509,6 +1520,13 @@ blockquote {
   .featured-post-image {
     flex: 0 0 40%;
     height: 260px;
+  }
+
+  .featured-post-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .featured-post-content {
     flex: 1;
