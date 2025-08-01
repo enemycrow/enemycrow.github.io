@@ -853,6 +853,10 @@ blockquote {
   position: relative;
 }
 
+.featured-post-image img {
+  display: none;
+}
+
 .featured-post-overlay {
   position: absolute;
   top: 0;
@@ -987,6 +991,13 @@ blockquote {
     flex: 0 0 auto;
     height: 250px; /* o lo que necesites para que se vea bien en móvil */
     background-size: cover;
+  }
+
+  .featured-post-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .featured-post-overlay {
@@ -1509,6 +1520,13 @@ blockquote {
   .featured-post-image {
     flex: 0 0 40%;
     height: 260px;
+  }
+
+  .featured-post-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .featured-post-content {
     flex: 1;
@@ -4686,6 +4704,26 @@ a:hover {
 }
 
 /* --- End of shop.css --- */
+
+/* Orientation-based hero images */
+@media screen and (orientation: portrait) and (max-width: 600px) {
+  .hero.hero--about { background-image: url("../assets/images/responsive/oeuvres/izelitzel-400.webp"); }
+  .hero.hero--blog { background-image: url("../assets/images/responsive/oeuvres/efectodilaciontemporal-400.webp"); }
+  .hero.hero--contact { background-image: url("../assets/images/responsive/oeuvres/mundodelosveus-400.webp"); }
+  .hero.hero--portfolio { background-image: url("../assets/images/responsive/oeuvres/librodelafusion-400.webp"); }
+  .hero.hero--services { background-image: url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-400.webp"); }
+  .hero.hero--shop { background-image: url("../assets/images/responsive/oeuvres/liralyrianimea-400.webp"); }
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .hero.hero--about { background-image: url("../assets/images/responsive/oeuvres/izelitzel-800.webp"); }
+  .hero.hero--blog { background-image: url("../assets/images/responsive/oeuvres/efectodilaciontemporal-800.webp"); }
+  .hero.hero--contact { background-image: url("../assets/images/responsive/oeuvres/mundodelosveus-800.webp"); }
+  .hero.hero--portfolio { background-image: url("../assets/images/responsive/oeuvres/librodelafusion-800.webp"); }
+  .hero.hero--services { background-image: url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp"); }
+  .hero.hero--shop { background-image: url("../assets/images/responsive/oeuvres/liralyrianimea-800.webp"); }
+}
+
 /* --- Start of style-elysia.css --- */
 /* Estilos específicos para A.C. Elysia */
 
