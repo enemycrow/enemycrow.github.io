@@ -99,3 +99,13 @@
 
 /* === Blog Entradas === */
 
+@media screen and (orientation: portrait) and (max-width: 600px) {
+  .jesuita-img { background-image: url('../assets/images/responsive/oeuvres/jesuitadelvino-400.webp'); }
+  .entre-abismos-img { background-image: url('../assets/images/responsive/oeuvres/entreamoresabismos-400.webp'); }
+  /* continue for all portfolio classes */
+}
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .jesuita-img { background-image: url('../assets/images/responsive/oeuvres/jesuitadelvino-800.webp'); }
+  .entre-abismos-img { background-image: url('../assets/images/responsive/oeuvres/entreamoresabismos-800.webp'); }
+  /* continue for all portfolio classes */
+}
