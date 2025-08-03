@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const titleWork = `Entrada de blog: ${entry.titulo}`;
       licenseEl.innerHTML =
         `<a href="${link}">${titleWork}</a> © ${year} by ` +
-        `<a href="https://enemycrow.github.io">${entry.autor}</a> is licensed under ` +
+        `<a href="https://plumafarollama.com">${entry.autor}</a> is licensed under ` +
         `<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>` +
         `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
         `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +

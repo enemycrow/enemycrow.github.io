@@ -1,5 +1,5 @@
 {
-  "name": "enemycrow.github.io",
+  "name": "plumafarollama.com",
   "version": "1.0.0",
   "description": "Este repositorio contiene el sitio web de **La Pluma, el Faro y la Llama**, un proyecto colaborativo donde tres autores de habla hispana comparten sus historias, reflexiones y servicios creativos. El sitio incluye páginas de presentación, portafolio, blog, servicios y un formulario de contacto. Está construido como un sitio estático usando HTML, CSS y un poco de JavaScript, y se publica a través de [Firebase Hosting](https://firebase.google.com/docs/hosting).",
   "main": "index.js",
