@@ -4018,6 +4018,25 @@ a:hover {
 
 /* --- End of portfolio.css --- */
 
+/* --- Start of privacy.css --- */
+
+/* Hero Section */
+.hero.hero--privacy {
+  display: flex;
+  align-items: center;
+  background-image: url("../assets/images/oeuvres/reinadelosbribones.webp");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+  height: 720px;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+}
+
+/* --- End of privacy.css --- */
+
 /* --- Start of services.css --- */
 /* Estilos para la página de Servicios Creativos */
 
@@ -4649,7 +4668,7 @@ a:hover {
 /* Estilos para la página de Tienda */
 
 .hero.hero--shop {
-  background-image: url('../assets/images/oeuvres/liralyrianimea.webp');
+  background-image: url('../assets/images/oeuvres/jesuitadelvino.webp');
 }
 
 .products-grid {
@@ -4712,7 +4731,8 @@ a:hover {
   .hero.hero--contact { background-image: url("../assets/images/responsive/oeuvres/mundodelosveus-400.webp"); }
   .hero.hero--portfolio { background-image: url("../assets/images/responsive/oeuvres/librodelafusion-400.webp"); }
   .hero.hero--services { background-image: url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-400.webp"); }
-  .hero.hero--shop { background-image: url("../assets/images/responsive/oeuvres/liralyrianimea-400.webp"); }
+  .hero.hero--shop { background-image: url("../assets/images/responsive/oeuvres/jesuitadelvino-400.webp"); }
+  .hero.hero--privacy { background-image: url("../assets/images/responsive/oeuvres/reinadelosbribones-400.webp"); }
 }
 
 @media screen and (orientation: landscape) and (max-height: 500px) {
@@ -4721,7 +4741,8 @@ a:hover {
   .hero.hero--contact { background-image: url("../assets/images/responsive/oeuvres/mundodelosveus-800.webp"); }
   .hero.hero--portfolio { background-image: url("../assets/images/responsive/oeuvres/librodelafusion-800.webp"); }
   .hero.hero--services { background-image: url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp"); }
-  .hero.hero--shop { background-image: url("../assets/images/responsive/oeuvres/liralyrianimea-800.webp"); }
+  .hero.hero--shop { background-image: url("../assets/images/responsive/oeuvres/jesuitadelvino-800.webp"); }
+  .hero.hero--privacy { background-image: url("../assets/images/responsive/oeuvres/reinadelosbribones-800.webp"); }
 }
 
 /* --- Start of style-elysia.css --- */
@@ -5583,7 +5604,8 @@ a:hover {
 .contact-hero-overlay,
 .portfolio-hero-overlay,
 .services-hero-overlay,
-.shop-hero-overlay {
+.shop-hero-overlay,
+.privacy-hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -5601,7 +5623,8 @@ a:hover {
 .contact-hero-content,
 .portfolio-hero-content,
 .services-hero-content,
-.shop-hero-content {
+.shop-hero-content,
+.privacy-hero-content {
   position: relative;
   z-index: 2;
   max-width: 800px;

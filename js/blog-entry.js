@@ -52,12 +52,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       imgEl.sizes = "(max-width: 600px) 100vw, 800px";
       imgEl.alt = entry.titulo;
     }
-    if (catEl || catElBlock) {
+    if (catEl) {
       const catsHtml = entry.categoria_temas
         .map(c => `<span class="category-tag">${c}</span>`)
         .join(' ');
-      if (catEl) catEl.innerHTML = catsHtml;
-      if (catElBlock) catElBlock.innerHTML = catsHtml;
+      catEl.innerHTML = catsHtml;
+    }
+
+    if (catElBlock) {
+      const booksHtml = entry.categoria_libros
+        .map(c => `<span class="category-tag">${c}</span>`)
+        .join(' ');
+      catElBlock.innerHTML = booksHtml;
     }
 
     if (licenseEl) {
