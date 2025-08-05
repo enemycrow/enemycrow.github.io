@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 /* === Catálogo Completo === */
 .jesuita-img {
   background-image: url('../assets/images/oeuvres/jesuitadelvino.webp');
