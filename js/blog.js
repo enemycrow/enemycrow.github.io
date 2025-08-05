@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const postsPerPage = 3;
   let currentPage = 1;
   let filteredPosts = [];
+
+  function scrollToPosts() {
+    document.querySelector('#blog-posts-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
   function crearFeaturedPost(post) {
     // Formato destacado clásico
     const [year, month, day] = post.fecha.split('-').map(Number);
@@ -206,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const end = start + postsPerPage;
     renderPosts(filteredPosts.slice(start, end), container);
     updatePagination();
+    scrollToPosts();
   }
 
   function aplicarFiltro(filter) {
@@ -268,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         aplicarFiltro(this.getAttribute('data-filter'));
+        scrollToPosts();
       });
     });
   }
@@ -293,6 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
             aplicarFiltroTopico(h3.textContent.trim());
           }
         }
+        scrollToPosts();
       });
     });
   }
