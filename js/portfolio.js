@@ -63,15 +63,29 @@ document.addEventListener('DOMContentLoaded', function() {
                         const dataImg = banner.getAttribute('data-image');
                         const basePath = dataImg ? dataImg.replace(/\.[^/.]+$/, '') :
                             `assets/images/banners/${baseName}-${side}`;
+                        const dpr = window.devicePixelRatio || 1;
 
-                        let imgPath = `${basePath}.webp`;
+                        const img400 = `${basePath}-400.webp`;
+                        const img800 = `${basePath}-800.webp`;
+                        const img1200 = `${basePath}-1200.webp`;
+                        const imgOriginal = `${basePath}.webp`;
+
+                        let imgPath = imgOriginal;
+                        let imgSet = `image-set(url(${img400}) 1x, url(${img800}) 2x)`;
+
                         if (smallPortrait) {
-                            imgPath = `${basePath}-400.webp`;
+                            imgPath = dpr > 1 ? img800 : img400;
+                            imgSet = `image-set(url(${img400}) 1x, url(${img800}) 2x)`;
                         } else if (smallLandscape) {
-                            imgPath = `${basePath}-800.webp`;
+                            imgPath = dpr > 1 ? img1200 : img800;
+                            imgSet = `image-set(url(${img800}) 1x, url(${img1200}) 2x)`;
+                        } else {
+                            imgPath = dpr > 1 ? imgOriginal : img1200;
+                            imgSet = `image-set(url(${img1200}) 1x, url(${imgOriginal}) 2x)`;
                         }
 
-                        banner.style.backgroundImage = `url(${imgPath})`;
+                        const supportsImageSet = CSS.supports('background-image', imgSet);
+                        banner.style.backgroundImage = supportsImageSet ? imgSet : `url(${imgPath})`;
                     });
 
                     modal.style.display = 'block';
