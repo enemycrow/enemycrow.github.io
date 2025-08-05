@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const targetSection = document.getElementById(target);
                 if (targetSection) {
                     targetSection.classList.remove('hidden');
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
