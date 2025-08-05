@@ -3,7 +3,7 @@
     "id": 1,
     "nombre": "Galactique - Música Original",
     "descripcion": "Álbum de música ambient inspirada en la ciencia ficción.",
-    "precio": "8.99",
+    "precio": "CLP$ 10.890",
     "imagen": "assets/images/oeuvres/galactique.webp",
     "url": "https://bandcamp.com/"
   },
@@ -11,7 +11,7 @@
     "id": 2,
     "nombre": "Entre Amores y Abismos",
     "descripcion": "Novela corta publicada a través de Amazon KDP.",
-    "precio": "12.50",
+    "precio": "CLP$ 12.500",
     "imagen": "assets/images/oeuvres/entreamoresabismos.webp",
     "url": "https://amazon.com/"
   },
@@ -19,7 +19,7 @@
     "id": 3,
     "nombre": "Rompecabezas Hijas del Martillo",
     "descripcion": "Puzzle de 500 piezas con ilustraciones exclusivas.",
-    "precio": "15.00",
+    "precio": "CLP$ 15.000",
     "imagen": "assets/images/oeuvres/hijasdelmartillo.webp",
     "url": "assets/placeholder.html"
   }
