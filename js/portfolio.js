@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 });
+
+                const worksSection = document.querySelector('.featured-works');
+                if (worksSection) {
+                    worksSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             });
         });
     }
