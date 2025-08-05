@@ -22,7 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const targetSection = document.getElementById(target);
                 if (targetSection) {
                     targetSection.classList.remove('hidden');
-                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                    const y = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
                 }
             });
         });
