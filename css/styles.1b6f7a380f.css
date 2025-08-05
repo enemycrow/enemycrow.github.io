@@ -5,7 +5,11 @@
 .hero.hero--about {
   display: flex;
   align-items: center;
-  background-image: url("../assets/images/oeuvres/izelitzel.webp");
+  background-image: image-set(
+    url("../assets/images/responsive/oeuvres/izelitzel-400.webp") 1x,
+    url("../assets/images/responsive/oeuvres/izelitzel-800.webp") 2x,
+    url("../assets/images/responsive/oeuvres/izelitzel-1200.webp") 3x
+  );
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -826,7 +830,11 @@ blockquote {
 
 /* Hero Section */
 .hero.hero--blog {
-  background-image: url('../assets/images/oeuvres/efectodilaciontemporal.webp');
+  background-image: image-set(
+    url("../assets/images/responsive/oeuvres/efectodilaciontemporal-400.webp") 1x,
+    url("../assets/images/responsive/oeuvres/efectodilaciontemporal-800.webp") 2x,
+    url("../assets/images/responsive/oeuvres/efectodilaciontemporal-1200.webp") 3x
+  );
 }
 
 
@@ -1862,7 +1870,11 @@ input, textarea, select, input *, textarea *, select * {
 
 /* Hero Section */
 .hero.hero--contact {
-  background-image: url('../assets/images/oeuvres/mundodelosveus.webp');
+  background-image: image-set(
+    url("../assets/images/responsive/oeuvres/mundodelosveus-400.webp") 1x,
+    url("../assets/images/responsive/oeuvres/mundodelosveus-800.webp") 2x,
+    url("../assets/images/responsive/oeuvres/mundodelosveus-1200.webp") 3x
+  );
 }
 
 
@@ -3289,7 +3301,11 @@ a:hover {
 
 /* Hero Section */
 .hero.hero--portfolio {
-  background-image: url('../assets/images/oeuvres/librodelafusion.webp');
+  background-image: image-set(
+    url("../assets/images/responsive/oeuvres/librodelafusion-400.webp") 1x,
+    url("../assets/images/responsive/oeuvres/librodelafusion-800.webp") 2x,
+    url("../assets/images/responsive/oeuvres/librodelafusion-1200.webp") 3x
+  );
 }
 
 
@@ -4024,7 +4040,11 @@ a:hover {
 .hero.hero--privacy {
   display: flex;
   align-items: center;
-  background-image: url("../assets/images/oeuvres/reinadelosbribones.webp");
+  background-image: image-set(
+    url("../assets/images/responsive/oeuvres/reinadelosbribones-400.webp") 1x,
+    url("../assets/images/responsive/oeuvres/reinadelosbribones-800.webp") 2x,
+    url("../assets/images/responsive/oeuvres/reinadelosbribones-1200.webp") 3x
+  );
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -4042,7 +4062,11 @@ a:hover {
 
 /* Hero Section */
 .hero.hero--services {
-  background-image: url('../assets/images/oeuvres/reversiondelasdivinidades.webp');
+  background-image: image-set(
+    url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-400.webp") 1x,
+    url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp") 2x,
+    url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-1200.webp") 3x
+  );
 }
 
 
@@ -4668,7 +4692,11 @@ a:hover {
 /* Estilos para la página de Tienda */
 
 .hero.hero--shop {
-  background-image: url('../assets/images/oeuvres/jesuitadelvino.webp');
+  background-image: image-set(
+    url("../assets/images/responsive/oeuvres/jesuitadelvino-400.webp") 1x,
+    url("../assets/images/responsive/oeuvres/jesuitadelvino-800.webp") 2x,
+    url("../assets/images/responsive/oeuvres/jesuitadelvino-1200.webp") 3x
+  );
 }
 
 .products-grid {
@@ -4726,23 +4754,107 @@ a:hover {
 
 /* Orientation-based hero images */
 @media screen and (orientation: portrait) and (max-width: 600px) {
-  .hero.hero--about { background-image: url("../assets/images/responsive/oeuvres/izelitzel-400.webp"); }
-  .hero.hero--blog { background-image: url("../assets/images/responsive/oeuvres/efectodilaciontemporal-400.webp"); }
-  .hero.hero--contact { background-image: url("../assets/images/responsive/oeuvres/mundodelosveus-400.webp"); }
-  .hero.hero--portfolio { background-image: url("../assets/images/responsive/oeuvres/librodelafusion-400.webp"); }
-  .hero.hero--services { background-image: url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-400.webp"); }
-  .hero.hero--shop { background-image: url("../assets/images/responsive/oeuvres/jesuitadelvino-400.webp"); }
-  .hero.hero--privacy { background-image: url("../assets/images/responsive/oeuvres/reinadelosbribones-400.webp"); }
+  .hero.hero--about {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/izelitzel-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/izelitzel-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/izelitzel-1200.webp") 3x
+    );
+  }
+  .hero.hero--blog {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/efectodilaciontemporal-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/efectodilaciontemporal-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/efectodilaciontemporal-1200.webp") 3x
+    );
+  }
+  .hero.hero--contact {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/mundodelosveus-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/mundodelosveus-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/mundodelosveus-1200.webp") 3x
+    );
+  }
+  .hero.hero--portfolio {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/librodelafusion-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/librodelafusion-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/librodelafusion-1200.webp") 3x
+    );
+  }
+  .hero.hero--services {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-1200.webp") 3x
+    );
+  }
+  .hero.hero--shop {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/jesuitadelvino-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/jesuitadelvino-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/jesuitadelvino-1200.webp") 3x
+    );
+  }
+  .hero.hero--privacy {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/reinadelosbribones-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/reinadelosbribones-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/reinadelosbribones-1200.webp") 3x
+    );
+  }
 }
 
 @media screen and (orientation: landscape) and (max-height: 500px) {
-  .hero.hero--about { background-image: url("../assets/images/responsive/oeuvres/izelitzel-800.webp"); }
-  .hero.hero--blog { background-image: url("../assets/images/responsive/oeuvres/efectodilaciontemporal-800.webp"); }
-  .hero.hero--contact { background-image: url("../assets/images/responsive/oeuvres/mundodelosveus-800.webp"); }
-  .hero.hero--portfolio { background-image: url("../assets/images/responsive/oeuvres/librodelafusion-800.webp"); }
-  .hero.hero--services { background-image: url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp"); }
-  .hero.hero--shop { background-image: url("../assets/images/responsive/oeuvres/jesuitadelvino-800.webp"); }
-  .hero.hero--privacy { background-image: url("../assets/images/responsive/oeuvres/reinadelosbribones-800.webp"); }
+  .hero.hero--about {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/izelitzel-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/izelitzel-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/izelitzel-1200.webp") 3x
+    );
+  }
+  .hero.hero--blog {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/efectodilaciontemporal-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/efectodilaciontemporal-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/efectodilaciontemporal-1200.webp") 3x
+    );
+  }
+  .hero.hero--contact {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/mundodelosveus-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/mundodelosveus-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/mundodelosveus-1200.webp") 3x
+    );
+  }
+  .hero.hero--portfolio {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/librodelafusion-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/librodelafusion-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/librodelafusion-1200.webp") 3x
+    );
+  }
+  .hero.hero--services {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-1200.webp") 3x
+    );
+  }
+  .hero.hero--shop {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/jesuitadelvino-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/jesuitadelvino-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/jesuitadelvino-1200.webp") 3x
+    );
+  }
+  .hero.hero--privacy {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/reinadelosbribones-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/reinadelosbribones-800.webp") 2x,
+      url("../assets/images/responsive/oeuvres/reinadelosbribones-1200.webp") 3x
+    );
+  }
 }
 
 /* --- Start of style-elysia.css --- */
