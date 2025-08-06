@@ -8,7 +8,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     posts.forEach(post => {
       if (Array.isArray(post.topicos)) {
         post.topicos.forEach(topico => {
-          topicCounts[topico] = (topicCounts[topico] || 0) + 1;
+          topico
+            .split(',')
+            .map(t => t.trim())
+            .forEach(t => {
+              if (t) {
+                topicCounts[t] = (topicCounts[t] || 0) + 1;
+              }
+            });
         });
       }
     });
@@ -239,7 +246,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function aplicarFiltroTopico(topico) {
-    const filtered = allPosts.filter(post => Array.isArray(post.topicos) && post.topicos.includes(topico));
+    const filtro = topico.trim();
+    const filtered = allPosts.filter(post =>
+      Array.isArray(post.topicos) &&
+      post.topicos.some(t =>
+        t
+          .split(',')
+          .map(s => s.trim())
+          .includes(filtro)
+      )
+    );
     filteredPosts = filtered;
     renderPage(1);
   }
