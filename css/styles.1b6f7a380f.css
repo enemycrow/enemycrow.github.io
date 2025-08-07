@@ -20,6 +20,15 @@
   text-align: center;
 }
 
+@media (min-width: 1024px) {
+  .hero.hero--about {
+    background-image: image-set(
+      url("../assets/images/oeuvres/izelitzel-1600.webp") 1x,
+      url("../assets/images/oeuvres/izelitzel-3200.webp") 2x
+    );
+  }
+}
+
 .hero__container {
   display: flex;
   flex-direction: column;
@@ -835,6 +844,15 @@ blockquote {
     url("../assets/images/responsive/oeuvres/efectodilaciontemporal-800.webp") 2x,
     url("../assets/images/responsive/oeuvres/efectodilaciontemporal-1200.webp") 3x
   );
+}
+
+@media (min-width: 1024px) {
+  .hero.hero--blog {
+    background-image: image-set(
+      url("../assets/images/oeuvres/efectodilaciontemporal-1600.webp") 1x,
+      url("../assets/images/oeuvres/efectodilaciontemporal-3200.webp") 2x
+    );
+  }
 }
 
 
@@ -1875,6 +1893,15 @@ input, textarea, select, input *, textarea *, select * {
     url("../assets/images/responsive/oeuvres/mundodelosveus-800.webp") 2x,
     url("../assets/images/responsive/oeuvres/mundodelosveus-1200.webp") 3x
   );
+}
+
+@media (min-width: 1024px) {
+  .hero.hero--contact {
+    background-image: image-set(
+      url("../assets/images/oeuvres/mundodelosveus-1600.webp") 1x,
+      url("../assets/images/oeuvres/mundodelosveus-3200.webp") 2x
+    );
+  }
 }
 
 
@@ -3308,6 +3335,15 @@ a:hover {
   );
 }
 
+@media (min-width: 1024px) {
+  .hero.hero--portfolio {
+    background-image: image-set(
+      url("../assets/images/oeuvres/librodelafusion-1600.webp") 1x,
+      url("../assets/images/oeuvres/librodelafusion-3200.webp") 2x
+    );
+  }
+}
+
 
 /* Filtro de Obras */
 
@@ -4055,6 +4091,15 @@ a:hover {
   text-align: center;
 }
 
+@media (min-width: 1024px) {
+  .hero.hero--privacy {
+    background-image: image-set(
+      url("../assets/images/oeuvres/reinadelosbribones-1600.webp") 1x,
+      url("../assets/images/oeuvres/reinadelosbribones-3200.webp") 2x
+    );
+  }
+}
+
 /* --- End of privacy.css --- */
 
 /* --- Start of services.css --- */
@@ -4067,6 +4112,15 @@ a:hover {
     url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp") 2x,
     url("../assets/images/responsive/oeuvres/reversiondelasdivinidades-1200.webp") 3x
   );
+}
+
+@media (min-width: 1024px) {
+  .hero.hero--services {
+    background-image: image-set(
+      url("../assets/images/oeuvres/reversiondelasdivinidades-1600.webp") 1x,
+      url("../assets/images/oeuvres/reversiondelasdivinidades-3200.webp") 2x
+    );
+  }
 }
 
 
@@ -4697,6 +4751,15 @@ a:hover {
     url("../assets/images/responsive/oeuvres/jesuitadelvino-800.webp") 2x,
     url("../assets/images/responsive/oeuvres/jesuitadelvino-1200.webp") 3x
   );
+}
+
+@media (min-width: 1024px) {
+  .hero.hero--shop {
+    background-image: image-set(
+      url("../assets/images/oeuvres/jesuitadelvino-1600.webp") 1x,
+      url("../assets/images/oeuvres/jesuitadelvino-3200.webp") 2x
+    );
+  }
 }
 
 .products-grid {
