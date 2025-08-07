@@ -205,7 +205,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = document.createElement('button');
         btn.className = 'page-link' + (i === currentPage ? ' active' : '');
         btn.textContent = i;
-        btn.addEventListener('click', () => renderPage(i));
+        btn.addEventListener('click', () => {
+          renderPage(i);
+          scrollToPosts();
+        });
         container.appendChild(btn);
       }
     });
@@ -217,7 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const end = start + postsPerPage;
     renderPosts(filteredPosts.slice(start, end), container);
     updatePagination();
-    scrollToPosts();
   }
 
   function aplicarFiltro(filter) {
