@@ -20,14 +20,6 @@
   text-align: center;
 }
 
-@media (min-width: 1024px) {
-  .hero.hero--about {
-    background-image: image-set(
-      url("../assets/images/oeuvres/izelitzel-1600.webp") 1x,
-      url("../assets/images/oeuvres/izelitzel-3200.webp") 2x
-    );
-  }
-}
 
 .hero__container {
   display: flex;
@@ -846,14 +838,6 @@ blockquote {
   );
 }
 
-@media (min-width: 1024px) {
-  .hero.hero--blog {
-    background-image: image-set(
-      url("../assets/images/oeuvres/efectodilaciontemporal-1600.webp") 1x,
-      url("../assets/images/oeuvres/efectodilaciontemporal-3200.webp") 2x
-    );
-  }
-}
 
 
 /* Filtro de Blog */
@@ -1895,14 +1879,6 @@ input, textarea, select, input *, textarea *, select * {
   );
 }
 
-@media (min-width: 1024px) {
-  .hero.hero--contact {
-    background-image: image-set(
-      url("../assets/images/oeuvres/mundodelosveus-1600.webp") 1x,
-      url("../assets/images/oeuvres/mundodelosveus-3200.webp") 2x
-    );
-  }
-}
 
 
 /* Sección de Contacto Principal */
@@ -3335,14 +3311,6 @@ a:hover {
   );
 }
 
-@media (min-width: 1024px) {
-  .hero.hero--portfolio {
-    background-image: image-set(
-      url("../assets/images/oeuvres/librodelafusion-1600.webp") 1x,
-      url("../assets/images/oeuvres/librodelafusion-3200.webp") 2x
-    );
-  }
-}
 
 
 /* Filtro de Obras */
@@ -4091,14 +4059,6 @@ a:hover {
   text-align: center;
 }
 
-@media (min-width: 1024px) {
-  .hero.hero--privacy {
-    background-image: image-set(
-      url("../assets/images/oeuvres/reinadelosbribones-1600.webp") 1x,
-      url("../assets/images/oeuvres/reinadelosbribones-3200.webp") 2x
-    );
-  }
-}
 
 /* --- End of privacy.css --- */
 
@@ -4114,14 +4074,6 @@ a:hover {
   );
 }
 
-@media (min-width: 1024px) {
-  .hero.hero--services {
-    background-image: image-set(
-      url("../assets/images/oeuvres/reversiondelasdivinidades-1600.webp") 1x,
-      url("../assets/images/oeuvres/reversiondelasdivinidades-3200.webp") 2x
-    );
-  }
-}
 
 
 /* Introducción a Servicios */
@@ -4753,14 +4705,6 @@ a:hover {
   );
 }
 
-@media (min-width: 1024px) {
-  .hero.hero--shop {
-    background-image: image-set(
-      url("../assets/images/oeuvres/jesuitadelvino-1600.webp") 1x,
-      url("../assets/images/oeuvres/jesuitadelvino-3200.webp") 2x
-    );
-  }
-}
 
 .products-grid {
   display: grid;
