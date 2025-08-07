@@ -12,7 +12,7 @@ const urlsToCache = [
   '/shop.html',
   '/blog.html',
   '/blog-entry.html',
-  '/css/styles.1b6f7a380f.css',
+  '/css/styles.30765f8b9e.css',
   '/js/main.e45ab0842b.js',
   '/js/about.js',
   '/js/contact.js',

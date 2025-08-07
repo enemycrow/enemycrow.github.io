@@ -4864,6 +4864,16 @@ a:hover {
   }
 }
 
+@media (min-width: 1024px) {
+  .hero.hero--about { background-image: url("../assets/images/oeuvres/izelitzel.webp"); }
+  .hero.hero--blog { background-image: url("../assets/images/oeuvres/efectodilaciontemporal.webp"); }
+  .hero.hero--contact { background-image: url("../assets/images/oeuvres/mundodelosveus.webp"); }
+  .hero.hero--portfolio { background-image: url("../assets/images/oeuvres/librodelafusion.webp"); }
+  .hero.hero--services { background-image: url("../assets/images/oeuvres/reversiondelasdivinidades.webp"); }
+  .hero.hero--shop { background-image: url("../assets/images/oeuvres/jesuitadelvino.webp"); }
+  .hero.hero--privacy { background-image: url("../assets/images/oeuvres/reinadelosbribones.webp"); }
+}
+
 /* --- Start of style-elysia.css --- */
 /* Estilos específicos para A.C. Elysia */
 
