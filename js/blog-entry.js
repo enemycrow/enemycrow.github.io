@@ -44,12 +44,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (authorEl) authorEl.textContent = `— ${entry.autor}`;
     if (imgEl) {
       const base = entry.imagen.replace('.webp', '');
-      imgEl.src = `assets/images/responsive/blog/${base}-800.webp`;
+      imgEl.src = `assets/images/blog/${base}.webp`;
       imgEl.srcset = `
         assets/images/responsive/blog/${base}-400.webp 400w,
         assets/images/responsive/blog/${base}-800.webp 800w,
-        assets/images/responsive/blog/${base}-1200.webp 1200w`;
-      imgEl.sizes = "(max-width: 600px) 100vw, 800px";
+        assets/images/responsive/blog/${base}-1200.webp 1200w,
+        assets/images/blog/${base}.webp 1600w`;
+      imgEl.sizes = "(max-width: 600px) 100vw, 1200px";
       imgEl.alt = entry.titulo;
     }
     if (catEl) {
