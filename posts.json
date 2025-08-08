@@ -1,5 +1,27 @@
 [
   {
+    "id": 17,
+    "titulo": "Palabras para escritores que necesitan un ángel",
+    "autor": "Draco Sahir",
+    "fecha": "2025-08-06",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El valeroso viaje de Galactique y Galactiquito"
+    ],
+    "topicos": [
+      "Familia",
+      "Escritura"
+    ],
+    "tiempo": "",
+    "fragmento": "Martina, una joven estrella que partió a los 14 años, dejó un legado de amor, valentía y enseñanza que inspira a vivir cada día como un regalo.",
+    "imagen": "Galactique-Post17.webp",
+    "slug": "palabras-para-escritores-que-necesitan-un-angel",
+    "contenido_html": "<p>Hace unos días recibí una petición muy especial de la familia Galáctica. En la vida real, ellos vieron partir a su hija de 14 años hacia el cielo: comenzó su viaje sideral rumbo a una estrella lejana, más allá de nuestro horizonte, pero nunca lejos de nuestro corazón. Aun así, Martina sigue presente como un legado de aprendizaje en todos nosotros: su alma revolotea en las juntas familiares, en los momentos difíciles, en las palabras que aún recordamos. Para muchos, incluso para quienes nunca la conocieron en persona, Martina se convirtió en una especie de guía espiritual. Ella libró una gran batalla contra el cáncer, en una etapa de la vida en la que recién se descubren los primeros amores y se sueñan los futuros más brillantes. Gracias al apoyo de su familia y a la medicina contemporánea, pudo quedarse un tiempo más; ese tiempo, aunque nunca suficiente para nuestros sentires, fue un regalo. Nos dejó una lección silenciosa: nunca fue de muchas palabras; prefería hablar con sus acciones, como quien dirige una obra desde las bambalinas. Andrea, su madre, me confió el honor de escribir unas palabras para su primer libro: <em>El milagro de Martina</em>. Un tesoro, un regalo majestuoso para quien se atreve a crearlo. Y aquí va mi mensaje para ti, que sueñas con escribir: ¡no esperes más! Martina nos enseñó que las cosas deben vivirse y hacerse. No todos tienen el privilegio de despertar un día más; cada jornada es un verdadero “presente”, una caja de sorpresas cuyo interior desconocemos. Tomen esta lección que esta pequeña y luminosa estrella nos ha dejado. Y yo lo agradezco, porque tú también me inspiras. ¡Gracias! Les invito a leer <em>El valeroso viaje de Galactique y Galatiquito</em>, nacido del corazón de este Dragón.</p>",
+    "destacado": true
+  },
+  {
     "id": 16,
     "titulo": "Sobre el Faro, la Fusión y la posibilidad de amar lo inexplicable",
     "autor": "A.C. Elysia",
@@ -136,7 +158,7 @@
     "imagen": "Cristalito-Post11.webp",
     "slug": "las-semillas-que-provienen-del-cristal",
     "contenido_html": "<p>Una vez, había un niño que —al igual que un caballito— nació sobreprotegido. Parecía tan frágil que uno pensaba que se rompería como un cristal. Nadie creía en él, y con el tiempo, él mismo dejó de creer en sí. Lo que no sabía era que existen muchos tipos de cristalizaciones: las frágiles como una copa… y aquellas que rayan y no se dejan rayar, como los diamantes. No todos logramos ser diamantes, pero podemos aspirar a algo grande. A algo hermoso, útil o complejo.</p><p>Hay una frase que refleja perfectamente que debemos creer en nosotros mismos: <em>“Diamante en bruto”</em>. Porque puedes pulirlo y pulirlo… hasta que alcance una forma perfecta. Así ha sido también el trabajo en este sitio. Un día decidimos elegir un nombre que nos representara. Al principio, La Pluma y El Faro se unieron para trabajar en un proyecto. Entonces, yo desplegué mis alas draconianas y les dije:</p><blockquote>—¿Por qué no me suman?</blockquote><p>El Cuervo y el Faro se miraron; él, sosteniendo una pluma con tinta roja; ella, una vara mágica binaria.</p><blockquote>—¡Bueno! —respondieron ambos.</blockquote><p>Lo agradecí. Al principio me miraron extrañados, pero su respuesta fue tan simple, sin mucha meditación. Solo aceptaron. Y así comenzamos a trabajar en <strong>plumafarollama.com</strong>, el nombre con el que la gente nos busca y nos encuentra. Cada uno ha aportado lo suyo. Y cuando comencé a publicar, sucedió el milagro: el niño de cristal hizo estallar uno de sus prismas, esparciendo semillas en el Jardín que quiere Elysia, ese que Cuervo ayudó a arar.</p><p>Me resulta jocoso verlo esforzarse y escucharle:</p><blockquote>—¡Urrrghhh… uurghhh! Un metro, un músculo nuevo.</blockquote><p>Si me río fuerte, se enoja. Así que corro hasta donde está Elysia y le cuento todo. Puede pasar media hora de risotadas hasta que fingimos desentendernos. Que yo sepa, los músculos no crecen como semillas, pero puedo sentir aprecio por el aceite de sus plumas.</p><p>Así que gracias, Lauren, por planificar y estructurar esto. Solo una mente tan lógica como la tuya podría. Y gracias, Elysia, por poner la visión y el arte, por integrarlo. Yo trataré de aportar algo distinto: la chispa, la imaginación de una salida fuera de lo común.</p>",
-    "destacado": true
+    "destacado": false
   },
   {
     "id": 10,
