@@ -455,17 +455,14 @@ a:hover {
 .portfolio-hero-overlay,
 .services-hero-overlay,
 .shop-hero-overlay,
-.privacy-hero-overlay {
+.privacy-hero-overlay,
+.hero-gradient {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    31.25% 50% at 50% 50%,
-    rgba(26, 35, 126, 0.4) 0%,
-    rgba(10, 10, 10, 0.5) 75%
-  );
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(103, 58, 183, 0.45), transparent 60%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0) 50%);
+  pointer-events: none;
 }
 
 .about-hero-content,
