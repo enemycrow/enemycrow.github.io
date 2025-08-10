@@ -4756,6 +4756,44 @@ a:hover {
 
 /* --- End of shop.css --- */
 
+/* --- Start of donate.css --- */
+/* Estilos para la página de Donaciones */
+
+.hero.hero--donate {
+  height: 67.5vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--blanco-brillante);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-image: image-set(
+    url("../assets/images/responsive/oeuvres/galactique-400.webp") 1x,
+    url("../assets/images/responsive/oeuvres/galactique-800.webp") 2x,
+    url("../assets/images/oeuvres/galactique.webp") 3x
+  );
+}
+
+.donate-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(103, 58, 183, 0.45), transparent 60%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0) 50%);
+  pointer-events: none;
+}
+
+.donate-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+/* --- End of donate.css --- */
+
 /* Orientation-based hero images */
 @media screen and (orientation: portrait) and (max-width: 600px) {
   .hero.hero--about {
@@ -4798,6 +4836,13 @@ a:hover {
       url("../assets/images/responsive/oeuvres/jesuitadelvino-400.webp") 1x,
       url("../assets/images/responsive/oeuvres/jesuitadelvino-800.webp") 2x,
       url("../assets/images/responsive/oeuvres/jesuitadelvino-1200.webp") 3x
+    );
+  }
+  .hero.hero--donate {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/galactique-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/galactique-800.webp") 2x,
+      url("../assets/images/oeuvres/galactique.webp") 3x
     );
   }
   .hero.hero--privacy {
@@ -4852,6 +4897,13 @@ a:hover {
       url("../assets/images/responsive/oeuvres/jesuitadelvino-1200.webp") 3x
     );
   }
+  .hero.hero--donate {
+    background-image: image-set(
+      url("../assets/images/responsive/oeuvres/galactique-400.webp") 1x,
+      url("../assets/images/responsive/oeuvres/galactique-800.webp") 2x,
+      url("../assets/images/oeuvres/galactique.webp") 3x
+    );
+  }
   .hero.hero--privacy {
     background-image: image-set(
       url("../assets/images/responsive/oeuvres/reinadelosbribones-400.webp") 1x,
@@ -4868,6 +4920,7 @@ a:hover {
   .hero.hero--portfolio { background-image: url("../assets/images/oeuvres/librodelafusion.webp"); }
   .hero.hero--services { background-image: url("../assets/images/oeuvres/reversiondelasdivinidades.webp"); }
   .hero.hero--shop { background-image: url("../assets/images/oeuvres/jesuitadelvino.webp"); }
+  .hero.hero--donate { background-image: url("../assets/images/oeuvres/galactique.webp"); }
   .hero.hero--privacy { background-image: url("../assets/images/oeuvres/reinadelosbribones.webp"); }
 }
 
@@ -5710,6 +5763,7 @@ a:hover {
 .hero.hero--about,
 .hero.hero--blog,
 .hero.hero--contact,
+.hero.hero--donate,
 .hero.hero--portfolio,
 .hero.hero--services,
 .hero.hero--shop {
@@ -5728,6 +5782,7 @@ a:hover {
 .about-hero-overlay,
 .blog-hero-overlay,
 .contact-hero-overlay,
+.donate-hero-overlay,
 .portfolio-hero-overlay,
 .services-hero-overlay,
 .shop-hero-overlay,
@@ -5743,6 +5798,7 @@ a:hover {
 .about-hero-content,
 .blog-hero-content,
 .contact-hero-content,
+.donate-hero-content,
 .portfolio-hero-content,
 .services-hero-content,
 .shop-hero-content,

@@ -120,5 +120,6 @@ html {
   .debacle-img         { background-image: image-set(url('../assets/images/responsive/oeuvres/debacletriangular-400.webp') 1x, url('../assets/images/responsive/oeuvres/debacletriangular-800.webp') 2x); }
   .huevovolvio-img     { background-image: image-set(url('../assets/images/responsive/oeuvres/huevovolviocantar-400.webp') 1x, url('../assets/images/responsive/oeuvres/huevovolviocantar-800.webp') 2x); }
   .cristalito-img      { background-image: image-set(url('../assets/images/responsive/oeuvres/cristalito-400.webp') 1x, url('../assets/images/responsive/oeuvres/cristalito-800.webp') 2x); }
-  .bribones-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/reinadelosbribones-400.webp') 1x, url('../assets/images/responsive/oeuvres/reinadelosbribones-800.webp') 2x); }
+.bribones-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/reinadelosbribones-400.webp') 1x, url('../assets/images/responsive/oeuvres/reinadelosbribones-800.webp') 2x); }
 }
+
