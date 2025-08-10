@@ -9,8 +9,8 @@
     por página (`about.js`, `blog.js`, `contact.js`, `portfolio.js`,
     `services.js`). Por ahora no se utiliza sistema de módulos ni build
     system; se dejan como posibles mejoras futuras.
-- [ ] Compatibilizar README.md con el estado actual del proyecto
-- [ ] Deprecar y limpiar archivos que ya no se utilizan
+- [X] Compatibilizar README.md con el estado actual del proyecto
+- [X] Deprecar y limpiar archivos que ya no se utilizan
 
 ## Diseño y Estilo
 - [x] Definir paleta de colores (negros, grises, blancos brillantes, violeta pálido, azul noche)
@@ -18,7 +18,7 @@
 - [x] Diseñar elementos simbólicos (pluma, luz, faro, mar, sombra, estrellas)
 - [x] Crear hojas de estilo CSS base
 - [x] Diseñar transiciones entre las tres voces creativas
-- [ ] Mejorar responsividad móvil (el sitio se ve bien en escritorio, pero no en celular; buscar solución sin afectar el diseño de escritorio)
+- [x] Mejorar responsividad móvil (el sitio se ve bien en escritorio, pero no en celular; buscar solución sin afectar el diseño de escritorio)
 
 ## Páginas y Contenido
 - [x] Desarrollar página de inicio con manifiesto
@@ -28,13 +28,12 @@
 - [x] Crear sección de servicios creativos
 - [x] Implementar formulario de newsletter
 - [x] Diseñar página de contacto
-- [ ] Trabajar en el blog (mejorar contenido, estructura y dinamismo)
+- [X] Trabajar en el blog (mejorar contenido, estructura y dinamismo)
 
 ## Optimización y Despliegue
 - [ ] Realizar pruebas de responsividad
-- [ ] Optimizar imágenes y recursos
+- [X] Optimizar imágenes y recursos
 - [ ] Verificar compatibilidad con navegadores
-- [ ] Enlazar el proyecto a un CMS (Strapi) para dinamizar el contenido
-- [ ] Adquirir dominio y montar el sitio en el hosting
-- [ ] Desplegar sitio web
+- [X] Adquirir dominio y montar el sitio en el hosting
+- [X] Desplegar sitio web
 - [ ] Presentar al usuario
