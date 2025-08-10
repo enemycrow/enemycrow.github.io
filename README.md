@@ -22,7 +22,13 @@ Este comando sirve el contenido del repositorio según `firebase.json`, para que
 
 ## Despliegue
 
-Para publicar la versión más reciente del sitio en Firebase Hosting:
+Antes de publicar, ejecuta el script de versionado para regenerar los nombres con hash y actualizar las referencias en los archivos HTML y el service worker:
+
+```bash
+npm run version
+```
+
+Luego, publica la versión más reciente del sitio en Firebase Hosting:
 
 ```bash
 firebase deploy
