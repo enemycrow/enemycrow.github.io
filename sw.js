@@ -1,4 +1,4 @@
-const CACHE_NAME = 'site-cache-v2';
+const CACHE_NAME = 'site-cache-v3';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -22,8 +22,6 @@ const urlsToCache = [
   '/js/blog.js',
   '/js/blog-entry.js',
   '/js/firebase-init.js',
-  '/posts.json',
-  '/products.json'
 ];
 
 self.addEventListener('install', event => {
@@ -48,11 +46,12 @@ self.addEventListener('fetch', event => {
 
   const dest = event.request.destination;
   const url = event.request.url;
-  const isHTML = dest === 'document' || url.endsWith('.html');
+  const isDocument = dest === 'document';
+  const isJSON = url.endsWith('.json');
   const isCSS = dest === 'style' || url.endsWith('.css');
   const isJS = dest === 'script' || url.endsWith('.js');
 
-  if (isHTML || isCSS || isJS) {
+  if (isDocument || isCSS || isJS || isJSON) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
