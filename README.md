@@ -36,6 +36,13 @@ firebase deploy
 
 Las opciones de despliegue se encuentran en `.firebaserc` y `firebase.json`.
 
+### Publicación automática
+
+- Cada push a `main` ejecuta [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+- Las pruebas (`npm test`) y el build se ejecutan automáticamente.
+- El artefacto generado se publica en GitHub Pages.
+- Recuerda configurar el secreto `FIREBASE_TOKEN` si aplica.
+
 ## Plan del Proyecto
 
 El plan de trabajo (en español) se encuentra en el archivo [todo.md](todo.md).
