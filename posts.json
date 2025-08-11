@@ -1,5 +1,50 @@
 [
   {
+  "id": 21,
+  "titulo": "Manual para cuidar un fuego",
+  "autor": "Draco Sahir",
+  "fecha": "2025-08-10",
+  "categoria_temas": ["Procesos Creativos"],
+  "categoria_libros": ["La ardiente llama del dragón"],
+  "topicos": ["Simbolismo", "Aventuras", "Escritura"],
+  "tiempo": "3 min de lectura",
+  "fragmento": "Soy Sahir. Trabajo con fuego, pero no para quemar. Lo llevo como se lleva un corazón: con atención, con respeto y con alegría.",
+  "imagen": "Laardientellamadeldragon-Post21.webp",
+  "slug": "manual-para-cuidar-un-fuego",
+  "contenido_html": "<p>Soy Sahir. A veces digo que trabajo con fuego, pero no para quemar. El fuego también sirve para cuidar. Si lo miras de cerca, late. Parece una criatura pequeña que te entiende cuando le hablas bajito.</p><p>En un lugar oscuro donde otros ven solo tripas y miedo, yo veo una sala de máquinas. Allí se procesa energía: entra tosca, sale afinada. Muchas personas usan esa fuerza para empujar el odio. Yo aprendí otra cosa: se puede doblar como se dobla un río con piedras, para que riegue en vez de arrasar.</p><p>Tengo un método. Es simple, porque yo también lo soy:</p><ol><li>Escucho primero. El fuego habla con sonidos chiquitos. Si cruje triste, no lo apresuro.</li><li>Le doy forma. No con las manos, con el cuerpo entero. Me siento cerca hasta que mi respiración le enseña el ritmo.</li><li>Lo comparto. Si un mundo tiembla, acerco la llama y la dejo vibrar. La vibración es puente; del otro lado suele haber vida.</li></ol><p>La gente cree que proteger es tapar. A veces proteger es abrir paso. Mi llama guardiana no es un muro; es una canción que aprende el corazón hasta que ya no necesita la mía.</p>",
+  "destacado": false
+  },
+  {
+  "id": 20,
+  "titulo": "Liturgia en el muelle del faro",
+  "autor": "A.C. Elysia",
+  "fecha": "2025-08-09",
+  "categoria_temas": ["Procesos Creativos"],
+  "categoria_libros": ["La hechicera del Faro"],
+  "topicos": ["Eros", "Ágape", "Escritura"],
+  "tiempo": "4 min de lectura",
+  "fragmento": "Merci, poésie. En el muelle, una mujer alza su báculo y convierte la aspereza en música. Donde el lenguaje hiere, la palabra abre camino.",
+  "imagen": "Lahechiceradelfaro-Post20.webp",
+  "slug": "liturgia-en-el-muelle-del-faro",
+  "contenido_html": "<p>Merci, poésie. Hay días en que la palabra llega como barco a la hora exacta: ni antes ni después. En el muelle del faro, la mujer que espero toma su báculo con gesto sencillo y la madera recuerda su oficio antiguo: no es arma, es compás.</p><p>A su alrededor, viajeros traen lenguajes cansados. Palabras que se volvieron ásperas de tanto rozar el miedo. Entonces la liturgia empieza: la voz se afina, la sílaba respira, la frase se inclina hacia la escucha. Lo que parecía lujuria desnuda encuentra abrigo; lo que sonaba a obscenidad se vuelve ritmo que aprende a cuidar. Eros, educado por la paciencia, se hace Ágape.</p><p>Cuando escribo, a veces siento que la página es un muelle y el párrafo, una pasarela. No todas las frases suben a bordo; algunas necesitan quedarse un rato mirando el agua hasta comprender que también son puente. <em>La poésie ne ment pas, elle transforme.</em></p><p>Gracias por permitirme esta abundancia: convertir lo áspero en música sin borrar la verdad del deseo. Si te reconoces en alguno de estos viajeros, toma asiento a la luz del faro; la noche es larga, pero la brújula está encendida.</p>",
+  "destacado": false
+  },
+  {
+  "id": 19,
+  "titulo": "El hombre de cuervos",
+  "autor": "Lauren Cuervo",
+  "fecha": "2025-08-08",
+  "categoria_temas": ["Procesos Creativos"],
+  "categoria_libros": ["Plumas de la dinastía"],
+  "topicos": ["Pasado", "Ética", "Escritura"],
+  "tiempo": "4 min de lectura",
+  "fragmento": "Hoy me río de mí mismo: este post es más largo que el micro-relato. Aun así, era justo honrar la imagen del hombre de cuervos y convertirla en una brújula de regreso.",
+  "imagen": "Plumasdeladinastia-Post19.webp",
+  "slug": "el-hombre-de-cuervos",
+  "contenido_html": "<p>Confieso algo: este post es más largo que el micro-relato que lo inspira, y sí, me río de mí mismo. Hay días en que la escritura es una miniatura preciosa; otros, la miniatura pide un marco, un museo y una audioguía. Hoy tocó audioguía.</p><p>La imagen del hombre con tocado de plumas de cuervo me golpeó como una genealogía en movimiento. No era un adorno: era una tesis sobre pertenencia. Entre la hiedra y el cielo, el personaje se encomienda a los antiguos y, en ese gesto, recibe un contrato silencioso: si regresas, recuerda por qué te fuiste.</p><p>Gilgamesh se aparece aquí como espejo. El duelo transforma, pero no siempre con suavidad. Volver a la tierra natal no es romántico; es incómodo y, a veces, hermoso. El viento que susurra el nombre no absuelve: convoca a la responsabilidad.</p><p>Dejo tres flechas que me sirvieron mientras escribía:</p><ul><li><strong>Herencia no es peso</strong>: es <em>palanca</em> si sabes desde dónde moverla.</li><li><strong>Regresar no es retroceder</strong>: es recalibrar la brújula con nuevas coordenadas.</li><li><strong>Dolor no es enemigo</strong>: es materia prima cuando eliges darle forma.</li></ul><p>Así que sí, hoy la miniatura tuvo museo. El hombre de cuervos me recordó que hay viajes interiores que piden mapa y leyenda, aunque el trayecto siga siendo misterio.</p><p><em>PD: si esta pieza te acompañó un rato, deja una reacción. Las colecciono como quien colecciona rutas de regreso.</em></p>",
+  "destacado": true
+  },
+  {
     "id": 18,
     "titulo": "Una ópera escrita con sangre y opresión",
     "autor": "Lauren Cuervo",
@@ -135,7 +180,7 @@
     "imagen": "Reinadelosbribones-Post13.webp",
     "slug": "una-fuerza-de-piedra-un-misterio-en-el-corazon",
     "contenido_html": "<p>Cuando nació <em>La Reina de los Bribones</em>, una de las historias más nuevas, quise tener una protagonista fría y hostil. El arquetipo básico de la “tsundere” japonesa me parecía un buen punto de partida para invertir la balanza con un personaje femenino fuerte al frente. Pero luego pensé que sería muy simple. Quise algo que viniera de cerca, alguien… un ser muy querido.</p><p>Entremezclé la comedia ligera del estilo <em>brocon</em> con algo puro y sincero, tratando de dar una lógica a un fenómeno que me resulta tan difícil de comprender. Es, en otras palabras, mi teoría personal sobre ese fenómeno, tejida con el cariño y la dedicación que siento por esa persona, por su historia y su lucha en silencio. Una lucha que, al ver la verdad, se transformó en tormento y distancia. Para mí no fue así… pero sí golpeó como un duelo.</p><p>Marina —o ahora, Ini Marina— es una chica muy especial, con una historia tan secreta como intensa. Peleadora, justiciera, defensora de los débiles. Quizás porque encarnó la injusticia durante toda su vida, porque el mundo no comprendió que solo quería ser bella, que solo quería ser tierna. El mundo le enseñó a ser ruda, a ser fiera.</p><p>Solo alguien pudo ver, pese a sus miedos, la luz que llevaba dentro. Le enseñó a ver su pureza. La amó y la respetó como ella quiso. Ese fue su mejor pago. Su credo. Su ley.</p><p>Puede que tú también conozcas a alguien que atesore un gran secreto que compartes. O quizá seas tú quien lo guarda, y lo confías solo a una persona.</p><p>Valora a esa persona, porque esa entrega es de las que rara vez llegan a nuestras vidas, pero valen más que si todo el mundo nos escuchara. Y si la tienes cerca, cuídala, porque ese vínculo puede convertirse en el verdadero misterio en el corazón.</p>",
-    "destacado": true
+    "destacado": false
   },
   {
     "id": 12,

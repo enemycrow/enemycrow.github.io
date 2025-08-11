@@ -1,27 +1,105 @@
-// JavaScript para la página de donaciones
+document.addEventListener('DOMContentLoaded', () => {
+  // === 1) Historias ===
+  const stories = [
+    { title:'Plumas de la dinastía',
+      text:'Un hombre tribal, con un tocado de plumas negras de cuervo, se encomienda a sus ancestros entre la hiedra mientras mira al cielo. Invoca a los antiguos: a los poderosos, a los éticos y a los valientes. El viento susurra su nombre y le entrega una energía transformadora. Su viaje interior lo conduce de vuelta a su tierra natal, como a Gilgamesh tras el luto, con el Líder en su horizonte.',
+      imageBase:'pluma-de-la-dinastia', slug:'pluma-de-la-dinastia', cc:'by-nc-nd',
+      author:'Lauren Cuervo' },
+    { title:'La hechicera del Faro',
+      text:'En el muelle del faro, una mujer bella espera un crucero elegante. Entre los pasajeros—lectores, compositores, escritores y un sinfín de desconocidos—muchos buscan orientación. Ella sube a bordo con el báculo en la mano y, con delicadeza, obra su magia: convierte obscenidades en poesía, la lujuria en otra forma de amar. Eros en Ágape.',
+      imageBase:'la-hechicera-del-faro', slug:'la-hechicera-del-faro', cc:'by-nc-nd',
+      author:'A.C. Elysia' },
+    { title:'La ardiente Llama del Dragón',
+      text:'En la oscuridad de un estómago no se procesa alimento, sino energía. Ese elemento, que tantos usan para propagar el odio, el niño dragón lo emplea para proteger mundos. Cuando una fuerza destructiva cae en manos correctas, se vuelve fortaleza. Su guardiana es la llama: vibra y conmueve, y da vida como la noche da sentido a la luz.',
+      imageBase:'la-ardiente-llama-del-dragón', slug:'la-ardiente-llama-del-dragón', cc:'by-nc-nd',
+      author:'Draco Sahir' }
+  ];
 
-document.addEventListener('DOMContentLoaded', function() {
-    const stories = [
-        'El amanecer pintaba de dorado la ciudad cuando una pluma encontró el viento.',
-        'En la esquina del faro, un viejo marinero relataba secretos que sólo el mar conoce.',
-        'La llama danzaba silenciosa, guardando en su fuego los sueños de la noche.'
-    ];
+  // === 2) DOM ===
+  const el  = document.getElementById('random-story');
+  if (!el) return;
+  const img = document.getElementById('story-img');
+  const ttl = document.getElementById('story-title');
+  const txt = document.getElementById('story-text');
+  const lic = document.getElementById('story-license');
 
-    const container = document.getElementById('random-story');
-    if (container) {
-        const story = stories[Math.floor(Math.random() * stories.length)];
-        container.innerHTML = `
-            <article>
-                <p>${story}</p>
-                <p class="license">
-                    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">
-                        <img src="assets/cc/cc.svg" alt="Creative Commons" />
-                        <img src="assets/cc/by.svg" alt="Atribución" />
-                        <img src="assets/cc/nc.svg" alt="No comercial" />
-                        <img src="assets/cc/nd.svg" alt="Sin derivadas" />
-                        Esta obra está bajo una Licencia Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional
-                    </a>
-                </p>
-            </article>`;
-    }
+  // === 3) Licencia CC usando chooser (iconos externos) ===
+  const CC_ICONS_BASE = 'https://mirrors.creativecommons.org/presskit/icons';
+  const CC_NAME = {
+    'by':'CC BY 4.0','by-sa':'CC BY-SA 4.0','by-nd':'CC BY-ND 4.0',
+    'by-nc':'CC BY-NC 4.0','by-nc-sa':'CC BY-NC-SA 4.0','by-nc-nd':'CC BY-NC-ND 4.0'
+  };
+  const CC_ICONS = {
+    'by':['cc','by'],'by-sa':['cc','by','sa'],'by-nd':['cc','by','nd'],
+    'by-nc':['cc','by','nc'],'by-nc-sa':['cc','by','nc','sa'],'by-nc-nd':['cc','by','nc','nd']
+  };
+
+  function licenseHTML({ title, author, slug, cc='by-nc-nd' }){
+    const year = new Date().getFullYear();
+    const link = slug ? `${location.origin}/blog.html?slug=${encodeURIComponent(slug)}` : location.href;
+    const icons = (CC_ICONS[cc] || CC_ICONS['by-nc-nd'])
+      .map(i => `<img src="${CC_ICONS_BASE}/${i}.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;">`)
+      .join('');
+    return `<a href="${link}">${title}</a> © ${year} by ` +
+           `<a href="https://plumafarollama.com">${author || 'La Pluma, El Faro y La Llama'}</a> is licensed under ` +
+           `<a href="https://creativecommons.org/licenses/${cc}/4.0/" target="_blank" rel="noopener">${CC_NAME[cc] || CC_NAME['by-nc-nd']}</a>` +
+           icons;
+  }
+
+  // === 4) Imágenes responsivas (rutas absolutas desde la raíz) ===
+  function srcsetFor(base){
+    return [
+      `/assets/images/responsive/stories/${base}-400.webp 400w`,
+      `/assets/images/responsive/stories/${base}-800.webp 800w`,
+      `/assets/images/responsive/stories/${base}-1200.webp 1200w`,
+    ].join(', ');
+  }
+  const sizes = "(max-width: 600px) 100vw, 1200px";
+
+  // Precarga simple para evitar parpadeo
+  function preloadStoryImage(base){
+    return new Promise((resolve, reject) => {
+      const pre = new Image();
+      pre.onload = () => resolve();
+      pre.onerror = reject;
+      pre.src = `/assets/images/responsive/stories/${base}-800.webp`;
+      pre.decoding = 'async';
+      pre.loading  = 'eager';
+    });
+  }
+
+  // === 5) Rotación ===
+  const ms = Number(el.dataset.interval) || 10000;
+  let i = Math.floor(Math.random() * stories.length);
+
+  async function show(idx){
+    const s = stories[idx];
+    try { await preloadStoryImage(s.imageBase); } catch(e) {}
+
+    img.classList.add('fade-out');
+    txt.classList.add('fade-out');
+
+    setTimeout(() => {
+      ttl.textContent = s.title;
+      txt.textContent = s.text;
+
+      img.alt    = s.title;
+      img.src    = `/assets/images/stories/${s.imageBase}.webp`;
+      img.srcset = srcsetFor(s.imageBase);
+      img.sizes  = sizes;
+      lic.innerHTML = licenseHTML(s);
+
+      img.classList.remove('fade-out');
+      txt.classList.remove('fade-out');
+    }, 220);
+  }
+
+  show(i);
+
+  let timer = setInterval(() => { i = (i + 1) % stories.length; show(i); }, ms);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { clearInterval(timer); timer = null; }
+    else if (!timer) { timer = setInterval(() => { i = (i + 1) % stories.length; show(i); }, ms); }
+  });
 });

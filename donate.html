@@ -56,26 +56,38 @@
         </div>
     </header>
     <main>
+        <section class="donate-section">
+            <div class="container">
+                <h2>Apóyanos</h2>
+                <p>Tu aporte nos ayuda a seguir creando historias y contenido de calidad. ¡Gracias por tu apoyo! ¡Amamos las galletas!<br>
+                Lauren les gustan las galletas de vino 🍷 o de limón 🍋 remojadas en té<br>
+                A Elysia les gustan las galletas con chips de chocolate 🍪 o las de frutos secos 🥜<br>
+                A Sahir les gustan las galletas saladas con mermelada de frutas reales 🍓 y no "sabor idéntico al natural 🍬"</p>
+                <a href="buymeacoffee.com/plumafarollama" class="btn btn-donate" target="_blank" rel="noopener">Invítanos una galleta 🍪</a>
+            </div>
+        </section>
+        
         <section class="hero hero--donate">
             <div class="donate-hero-overlay"></div>
             <div class="container hero__container">
                 <div class="donate-hero-content fade-in">
                     <h1 class="hero__title">Apóyanos</h1>
                     <div class="hero__divider"></div>
-                    <p class="hero__subtitle">Tu apoyo mantiene viva la llama creativa</p>
+                    <p class="hero__subtitle">Tu apoyo mantiene viva la llama creativa. Abajo te dejamos un regalo. Sólo espera diez segundos.</p>
                 </div>
             </div>
         </section>
 
-        <section class="donate-section">
-            <div class="container">
-                <h2>Apóyanos</h2>
-                <p>Tu aporte nos ayuda a seguir creando historias y contenido de calidad. ¡Gracias por tu apoyo!</p>
-                <a href="https://www.paypal.com/donate" class="btn btn-donate" target="_blank" rel="noopener">Donar con PayPal</a>
-            </div>
+        <section id="random-story" class="story-rotator" data-interval="10000" aria-live="polite">
+            <figure class="story-media">
+                <img id="story-img" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+                <figcaption class="story-caption">
+                <h3 id="story-title" class="story-title"></h3>
+                <p id="story-text"  class="story-text"></p>
+                <p id="story-license" class="license"></p>
+                </figcaption>
+            </figure>
         </section>
-
-        <section id="random-story"></section>
     </main>
 
     <!-- Footer -->
