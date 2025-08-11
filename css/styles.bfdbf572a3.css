@@ -4783,6 +4783,7 @@ a:hover {
   background:
     radial-gradient(circle at 50% 40%, rgba(103, 58, 183, 0.45), transparent 60%),
     linear-gradient(to top, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0) 50%);
+  box-shadow: 0 0 25px rgba(103, 58, 183, 0.7) inset;
   pointer-events: none;
 }
 
@@ -5789,9 +5790,8 @@ a:hover {
 .privacy-hero-overlay {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(103, 58, 183, 0.45), transparent 60%),
-    linear-gradient(to top, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0) 50%);
+  background: rgba(103, 58, 183, 0.6);
+  box-shadow: 0 0 25px rgba(103, 58, 183, 0.7) inset;
   pointer-events: none;
 }
 
