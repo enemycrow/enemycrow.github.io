@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel del Blog</title>
+
+  <!-- estilos del sitio para la vista previa -->
+  <link rel="stylesheet" href="/css/styles.bfdbf572a3.css">
+
+  <!-- Quill -->
+  <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+  <style>
+    #editor { height: 300px; }
+    .preview { border:1px solid #ccc; padding:1rem; margin-top:1rem; }
+  </style>
+</head>
+<body>
+  <h1>Nuevo/Editar Post</h1>
+
+  <label>Seleccionar post:
+    <select id="postSelect">
+      <option value="">— Nuevo —</option>
+    </select>
+  </label><br><br>
+
+  <label>ID:<br><input id="id" type="number"></label><br><br>
+  <label>Título:<br><input id="titulo"></label><br><br>
+  <label>Autor:<br><input id="autor"></label><br><br>
+  <label>Fecha (YYYY-MM-DD):<br><input id="fecha"></label><br><br>
+  <label>Categoría Temas (coma):<br><input id="categoria_temas"></label><br><br>
+  <label>Categoría Libros (coma):<br><input id="categoria_libros"></label><br><br>
+  <label>Tópicos (coma):<br><input id="topicos"></label><br><br>
+  <label>Tiempo de lectura:<br><input id="tiempo"></label><br><br>
+  <label>Fragmento:<br><textarea id="fragmento"></textarea></label><br><br>
+  <label>Imagen:<br><input id="imagen"></label><br><br>
+  <label>Slug:<br><input id="slug"></label><br><br>
+  <label>Destacado:<input id="destacado" type="checkbox"></label><br><br>
+
+  <div id="editor"></div>
+  <button id="previewBtn">Vista previa</button>
+  <button id="saveBtn">Guardar</button>
+
+  <div class="preview" id="preview"></div>
+
+  <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+  <script>
+    const quill = new Quill('#editor', { theme: 'snow' });
+
+    // Carga posts existentes
+    let posts = [];
+    async function loadPosts() {
+      posts = await fetch('/posts').then(r => r.json());
+      const select = document.getElementById('postSelect');
+      posts.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = `${p.id} – ${p.titulo}`;
+        select.appendChild(opt);
+      });
+      select.onchange = () => {
+        const p = posts.find(x => x.id == select.value);
+        if (p) fillForm(p); else clearForm();
+      };
+    }
+
+    function fillForm(p) {
+      document.getElementById('id').value     = p.id;
+      document.getElementById('titulo').value = p.titulo;
+      document.getElementById('autor').value  = p.autor;
+      document.getElementById('fecha').value  = p.fecha;
+      document.getElementById('categoria_temas').value  = p.categoria_temas.join(', ');
+      document.getElementById('categoria_libros').value = p.categoria_libros.join(', ');
+      document.getElementById('topicos').value          = p.topicos.join(', ');
+      document.getElementById('tiempo').value    = p.tiempo;
+      document.getElementById('fragmento').value = p.fragmento;
+      document.getElementById('imagen').value    = p.imagen;
+      document.getElementById('slug').value      = p.slug;
+      document.getElementById('destacado').checked = p.destacado;
+      quill.root.innerHTML = p.contenido_html;
+    }
+
+    function clearForm() {
+      document.querySelectorAll('input, textarea').forEach(e => {
+        if (e.type === 'checkbox') e.checked = false;
+        else e.value = '';
+      });
+      quill.root.innerHTML = '';
+    }
+
+    document.getElementById('previewBtn').onclick =
+      () => document.getElementById('preview').innerHTML = quill.root.innerHTML;
+
+    document.getElementById('saveBtn').onclick = async () => {
+      const post = {
+        id: Number(document.getElementById('id').value || Date.now()),
+        titulo: document.getElementById('titulo').value,
+        autor:  document.getElementById('autor').value,
+        fecha:  document.getElementById('fecha').value,
+        categoria_temas:  document.getElementById('categoria_temas').value.split(',').map(s => s.trim()).filter(Boolean),
+        categoria_libros: document.getElementById('categoria_libros').value.split(',').map(s => s.trim()).filter(Boolean),
+        topicos:          document.getElementById('topicos').value.split(',').map(s => s.trim()).filter(Boolean),
+        tiempo:    document.getElementById('tiempo').value,
+        fragmento: document.getElementById('fragmento').value,
+        imagen:    document.getElementById('imagen').value,
+        slug:      document.getElementById('slug').value || document.getElementById('titulo').value.toLowerCase().replace(/\\s+/g, '-'),
+        contenido_html: quill.root.innerHTML,
+        destacado: document.getElementById('destacado').checked
+      };
+
+      await fetch('/save-post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+      });
+      alert('Post guardado');
+    };
+
+    loadPosts();
+  </script>
+</body>
+</html>
