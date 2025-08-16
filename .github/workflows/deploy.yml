@@ -1,31 +1,29 @@
-name: Deploy to GitHub Pages
+name: Deploy to Hostinger
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]  # Si tu rama principal se llama distinto, cámbialo aquí
   workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          # ajusta si tu sitio está en otra carpeta (ej. './docs' o './public')
-          path: .
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Upload via SFTP
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASS: ${{ secrets.SFTP_PASS }}
+          SFTP_DIR:  ${{ secrets.SFTP_DIR }}
+        run: |
+          lftp -u "$SFTP_USER","$SFTP_PASS" sftp://$SFTP_HOST -e "
+            set sftp:auto-confirm yes;
+            mirror -R --delete --parallel=4 ./ $SFTP_DIR/;
+            bye
+          "
