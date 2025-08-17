@@ -1,33 +1,24 @@
-name: Deploy to Hostinger via SFTP (SSH)
+name: 🚀 Deploy por SFTP
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Clonar el repositorio
-        uses: actions/checkout@v4
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v3
 
-      - name: Instalar lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
-
-      - name: Subir archivos por SFTP
-        env:
-          SFTP_HOST: ${{ secrets.SFTP_HOST }}
-          SFTP_PORT: ${{ secrets.SFTP_PORT }}
-          SFTP_USER: ${{ secrets.SFTP_USER }}
-          SFTP_PASS: ${{ secrets.SFTP_PASS }}
-          SFTP_REMOTE_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
-        run: |
-          echo "Conectando a $SFTP_HOST:$SFTP_PORT como $SFTP_USER..."
-          lftp -u "$SFTP_USER","$SFTP_PASS" sftp://$SFTP_HOST:$SFTP_PORT -e "
-            set sftp:auto-confirm yes;
-            set ssl:verify-certificate no;
-            mirror -R --delete --parallel=4 ./ $SFTP_REMOTE_PATH;
-            bye
-          "
+      - name: 🚀 Subir por SFTP
+        uses: pressidium/lftp-mirror-action@v1
+        with:
+          host: ${{ secrets.SFTP_HOST }}
+          port: ${{ secrets.SFTP_PORT }}
+          user: ${{ secrets.SFTP_USER }}
+          pass: ${{ secrets.SFTP_PASS }}
+          localDir: ./public_html
+          remoteDir: /
+          options: --delete --parallel=4
