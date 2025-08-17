@@ -41,10 +41,12 @@ jobs:
           user: ${{ secrets.SFTP_USER }}
           pass: ${{ secrets.SFTP_PASS }}
           # === RUTAS ===          
-          localDir: ${{ secrets.SFTP_LOCAL_PATH }}
-          remoteDir: ${{ secrets.SFTP_REMOTE_PATH }}
+          localDir: ./
+          remoteDir: public_html
           # === MODO SUBIDA ===
           reverse: true                # ¡importante! subir local -> remoto
           # === OPCIONES ===
           settings: 'sftp:auto-confirm=yes; ssl:verify-certificate=no'
-          options: '--delete --parallel=4 --verbose'
+          options: '--delete --parallel=2 --verbose'
+          forceSSL: false
+          verifyCertificate: false
