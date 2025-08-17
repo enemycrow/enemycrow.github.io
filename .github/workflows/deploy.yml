@@ -10,7 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Clonar repositorio
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      # (Opcional) Debug seguro: muestra host/puerto y ruta remota
+      - name: 🔎 Debug (no imprime secretos sensibles)
+        run: |
+          echo "Host: ${{ secrets.SFTP_HOST }}"
+          echo "Port: ${{ secrets.SFTP_PORT }}"
+          echo "Remote dir: ${{ secrets.SFTP_REMOTE_PATH }}"
+
+      - name: 🔐 Probar conexión y listar destino
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+          lftp -u "${{ secrets.SFTP_USER }},${{ secrets.SFTP_PASS }}" \
+               -p ${{ secrets.SFTP_PORT }} sftp://${{ secrets.SFTP_HOST }} -e "
+            set sftp:auto-confirm yes;
+            set ssl:verify-certificate no;
+            pwd;
+            ls -lah;
+            cd public_html;
+            pwd;
+            ls -lah;
+            bye"
 
       - name: 🚀 Subir por SFTP con SSH
         uses: pressidium/lftp-mirror-action@v1
@@ -19,6 +40,11 @@ jobs:
           port: ${{ secrets.SFTP_PORT }}
           user: ${{ secrets.SFTP_USER }}
           pass: ${{ secrets.SFTP_PASS }}
+          # === RUTAS ===          
           localDir: ${{ secrets.SFTP_LOCAL_PATH }}
           remoteDir: ${{ secrets.SFTP_REMOTE_PATH }}
-          options: --delete --parallel=4
+          # === MODO SUBIDA ===
+          reverse: true                # ¡importante! subir local -> remoto
+          # === OPCIONES ===
+          settings: 'sftp:auto-confirm=yes; ssl:verify-certificate=no'
+          options: '--delete --parallel=4 --verbose'
