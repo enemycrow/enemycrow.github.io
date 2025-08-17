@@ -199,18 +199,44 @@ document.addEventListener('DOMContentLoaded', () => {
   function updatePagination() {
     if (!paginationContainers || paginationContainers.length === 0) return;
     const totalPages = Math.ceil(filteredPosts.length / postsPerPage) || 1;
+
+    // Determina las páginas que deben mostrarse
+    const pageSet = new Set([1, totalPages, currentPage]);
+    if (currentPage > 1) pageSet.add(currentPage - 1);
+    if (currentPage < totalPages) pageSet.add(currentPage + 1);
+    const pages = Array.from(pageSet).sort((a, b) => a - b);
+
+    // Construye el arreglo final con puntos suspensivos cuando hay saltos
+    const visiblePages = [];
+    let prev = 0;
+    pages.forEach(p => {
+      if (p - prev > 1) {
+        visiblePages.push('...');
+      }
+      visiblePages.push(p);
+      prev = p;
+    });
+
+    // Renderiza los botones y los puntos suspensivos
     paginationContainers.forEach(container => {
       container.innerHTML = '';
-      for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement('button');
-        btn.className = 'page-link' + (i === currentPage ? ' active' : '');
-        btn.textContent = i;
-        btn.addEventListener('click', () => {
-          renderPage(i);
-          scrollToPosts();
-        });
-        container.appendChild(btn);
-      }
+      visiblePages.forEach(item => {
+        if (item === '...') {
+          const span = document.createElement('span');
+          span.className = 'ellipsis';
+          span.textContent = '...';
+          container.appendChild(span);
+        } else {
+          const btn = document.createElement('button');
+          btn.className = 'page-link' + (item === currentPage ? ' active' : '');
+          btn.textContent = item;
+          btn.addEventListener('click', () => {
+            renderPage(item);
+            scrollToPosts();
+          });
+          container.appendChild(btn);
+        }
+      });
     });
   }
 
