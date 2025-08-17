@@ -12,7 +12,7 @@ jobs:
       - name: 📥 Clonar repositorio
         uses: actions/checkout@v3
 
-      - name: 🚀 Subir por SFTP
+      - name: 🚀 Subir por SFTP con SSH
         uses: pressidium/lftp-mirror-action@v1
         with:
           host: ${{ secrets.SFTP_HOST }}
