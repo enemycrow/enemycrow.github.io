@@ -1230,6 +1230,7 @@ blockquote {
   justify-content: center;
   align-items: center;
   padding-top: 2rem;
+  flex-wrap: wrap;
 }
 
 .page-link, .page-dots, .page-next {
@@ -1266,6 +1267,15 @@ blockquote {
 .page-next {
   background-color: var(--gris-oscuro);
   color: var(--blanco-etereo);
+}
+
+@media (max-width: 600px) {
+  .page-link,
+  .page-dots,
+  .page-next {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 /* Sección de Suscripción */
