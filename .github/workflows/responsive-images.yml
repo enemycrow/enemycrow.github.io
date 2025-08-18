@@ -1,0 +1,30 @@
+name: Responsive Images
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'assets/images/**'
+      - 'tools/responsive-images.js'
+      - 'package.json'
+      - 'package-lock.json'
+  push:
+    paths:
+      - 'assets/images/**'
+      - 'tools/responsive-images.js'
+      - 'package.json'
+      - 'package-lock.json'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - name: Generate responsive images
+        run: npm run responsive
+      - name: Ensure no generated changes
+        run: git diff --exit-code
