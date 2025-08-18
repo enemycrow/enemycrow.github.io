@@ -14,9 +14,18 @@
   "type": "commonjs",
   "devDependencies": {
     "htmlhint": "^1.1.4",
-    "sharp": "^0.33.2"
+    "sharp": "^0.33.2",
+    "lint-staged": "^15.2.7"
   },
   "dependencies": {
     "express": "^5.1.0"
+  },
+  "lint-staged": {
+    "assets/images/**/*.webp": "node tools/responsive-images.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged"
+    }
   }
 }
