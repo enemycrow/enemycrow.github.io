@@ -5,14 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "htmlhint \"**/*.html\"",
-    "version": "node version-assets.js"
+    "version": "node version-assets.js",
+    "responsive": "node tools/responsive-images.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "htmlhint": "^1.1.4"
+    "htmlhint": "^1.1.4",
+    "sharp": "^0.33.2"
   },
   "dependencies": {
     "express": "^5.1.0"
