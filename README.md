@@ -131,3 +131,36 @@ Para verificar de forma simple los archivos HTML del sitio se utiliza [HTMLHint]
    ```bash
    npm test
    ```
+
+## Módulo interno de edición
+
+Este módulo te permite editar entradas del blog de forma local, sin necesidad de exponer un panel de administración al público.
+
+### 🛠️ Configuración
+
+1. Crea una carpeta `admin/` en la raíz del proyecto con los siguientes archivos:
+   - `admin/server.js` – Servidor Express que sirve el panel y guarda entradas en `posts.json`.
+   - `admin/index.html` – Panel con editor WYSIWYG (por ejemplo, [Quill](https://quilljs.com/)) que utiliza tu CSS para previsualizar.
+
+2. Instala y ejecuta el servidor con:
+
+   ```bash
+   npm install express
+   node admin/server.js
+   ```
+
+3. Abre [http://localhost:3000](http://localhost:3000) para acceder al panel.
+
+4. Desde ahí puedes completar los campos del post (título, autor, fecha, etc.).  
+   El editor convierte el contenido enriquecido a HTML y lo guarda automáticamente en `posts.json`.
+
+### 🧹 Buenas prácticas
+
+- Asegúrate de que `.gitignore` incluya las siguientes rutas para evitar publicar el panel:
+
+   ```
+   /admin/
+   /node_modules/
+   ```
+
+Con este flujo, puedes verificar la apariencia final de las entradas con tus propios estilos antes de hacer commit y publicar.
