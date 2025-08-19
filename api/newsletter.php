@@ -144,7 +144,7 @@ try {
 
 // ====== CARGAR PHPMailer (autodetección de ruta) ======
 $phCandidates = [
-    __DIR__ . '/../vendor/phpmailer/phpmailer/src', // composer-like (manual)
+    __DIR__ . '/../vendor/PHPmailer/PHPmailer/src', // composer-like (manual)
     __DIR__ . '/../vendor/PHPMailer/src',           // zip manual (PHPMailer/src)
 ];
 $phSrc = null;

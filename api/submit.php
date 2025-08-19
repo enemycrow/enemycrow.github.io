@@ -64,9 +64,9 @@ try {
 // Send email via PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require __DIR__ . '/../vendor/phpmailer/src/PHPMailer.php';
-require __DIR__ . '/../vendor/phpmailer/src/SMTP.php';
-require __DIR__ . '/../vendor/phpmailer/src/Exception.php';
+require __DIR__ . '/../vendor/PHPmailer/src/PHPMailer.php';
+require __DIR__ . '/../vendor/PHPmailer/src/SMTP.php';
+require __DIR__ . '/../vendor/PHPmailer/src/Exception.php';
 
 $mail = new PHPMailer(true);
 
