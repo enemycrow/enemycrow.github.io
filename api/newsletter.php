@@ -35,20 +35,39 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
 
 // ====== CARGAR CONFIG FUERA DE public_html ======
 $cfgCandidates = [
-    dirname(__DIR__, 2) . '/config.php', // /home/usuario/config.php  (recomendado)
-    dirname(__DIR__) . '/config.php',    // /home/usuario/config.php  (si public_html está 1 nivel abajo)
-    __DIR__ . '/config.php',             // fallback (no recomendado, dentro de public_html/api/)
+    dirname(__DIR__, 2) . '/config.php', // /home/usuario/config.php (recomendado)
+    dirname(__DIR__) . '/config.php',    // si public_html está 1 nivel abajo
+    __DIR__ . '/config.php',             // fallback (no recomendado)
 ];
+
 $config = null;
+$cfgPathUsed = null;
+
 foreach ($cfgCandidates as $cfgPath) {
     if (is_file($cfgPath)) {
-        $config = require $cfgPath;
+        $cfgPathUsed = $cfgPath;
+        try {
+            $config = require $cfgPath;
+        } catch (Throwable $e) {
+            http_response_code(500);
+            echo json_encode([
+                'ok' => false,
+                'error' => 'Error en config.php: ' . $e->getMessage(),
+                'path' => $cfgPathUsed
+            ]);
+            exit;
+        }
         break;
     }
 }
+
 if (!$config) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Config no encontrada (mueve config.php fuera de public_html)']);
+    echo json_encode([
+        'ok' => false,
+        'error' => 'Config no encontrada',
+        'buscado_en' => $cfgCandidates
+    ]);
     exit;
 }
 
