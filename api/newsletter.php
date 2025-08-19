@@ -4,12 +4,6 @@ declare(strict_types=1);
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
 
-// ====== LOG DE ERRORES (DIAGNÓSTICO TEMPORAL) ======
-error_reporting(E_ALL);
-ini_set('display_errors', '0');                      // no mostrar en pantalla
-ini_set('log_errors', '1');
-@ini_set('error_log', __DIR__ . '/../php_error.log'); // escribe en public_html/php_error.log
-
 header('Content-Type: application/json');
 
 // ====== CORS ======
@@ -23,26 +17,21 @@ header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, X-Requested-With');
 header('Access-Control-Max-Age: 86400');
 
-if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
-    http_response_code(204);
-    exit;
-}
-if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+$method = $_SERVER['REQUEST_METHOD'] ?? '';
+if ($method === 'OPTIONS') { http_response_code(204); exit; }
+if ($method !== 'POST') {
     http_response_code(405);
     echo json_encode(['ok' => false, 'error' => 'Método no permitido']);
     exit;
 }
 
-// ====== CARGAR CONFIG FUERA DE public_html ======
+// ====== CARGAR CONFIG (fuera de public_html si es posible) ======
 $cfgCandidates = [
     dirname(__DIR__, 2) . '/config.php', // /home/usuario/config.php (recomendado)
     dirname(__DIR__) . '/config.php',    // si public_html está 1 nivel abajo
     __DIR__ . '/config.php',             // fallback (no recomendado)
 ];
-
-$config = null;
-$cfgPathUsed = null;
-
+$config = null; $cfgPathUsed = null;
 foreach ($cfgCandidates as $cfgPath) {
     if (is_file($cfgPath)) {
         $cfgPathUsed = $cfgPath;
@@ -50,24 +39,15 @@ foreach ($cfgCandidates as $cfgPath) {
             $config = require $cfgPath;
         } catch (Throwable $e) {
             http_response_code(500);
-            echo json_encode([
-                'ok' => false,
-                'error' => 'Error en config.php: ' . $e->getMessage(),
-                'path' => $cfgPathUsed
-            ]);
+            echo json_encode(['ok'=>false,'error'=>'Error en config.php: '.$e->getMessage(),'path'=>$cfgPathUsed]);
             exit;
         }
         break;
     }
 }
-
 if (!$config) {
     http_response_code(500);
-    echo json_encode([
-        'ok' => false,
-        'error' => 'Config no encontrada',
-        'buscado_en' => $cfgCandidates
-    ]);
+    echo json_encode(['ok'=>false,'error'=>'Config no encontrada','buscado_en'=>$cfgCandidates]);
     exit;
 }
 
@@ -77,6 +57,7 @@ $email  = '';
 $lauren = 0;
 $elysia = 0;
 $sahir  = 0;
+$privacyAccepted = 0;
 
 $ctype = $_SERVER['CONTENT_TYPE'] ?? '';
 if (stripos($ctype, 'application/json') !== false) {
@@ -134,19 +115,24 @@ try {
     $stmt->execute([$nombre, $email, $lauren, $elysia, $sahir, $ip, $ua]);
 
 } catch (PDOException $e) {
-    // Duplicado (email UNIQUE) => consideramos idempotente y seguimos ok
+    // Duplicado (email UNIQUE) => idempotente
     if ($e->getCode() !== '23000') {
+        error_log('DB error: ' . $e->getMessage());
         http_response_code(500);
         echo json_encode(['ok' => false, 'error' => 'Error al guardar en DB']);
         exit;
     }
 }
 
-// ====== CARGAR PHPMailer (autodetección de ruta) ======
+// ====== AVISO INTERNO (solo para ti) ======
+// Cargamos PHPMailer si existe en alguna de estas rutas:
 $phCandidates = [
-    __DIR__ . '/../vendor/PHPmailer/PHPmailer/src', // composer-like (manual)
-    __DIR__ . '/../vendor/PHPMailer/src',           // zip manual (PHPMailer/src)
+    __DIR__ . '/../vendor/PHPMailer/src',           // tu caso actual (carpeta con mayúsculas)
+    __DIR__ . '/../vendor/phpmailer/phpmailer/src', // convención composer
+    __DIR__ . '/../vendor/PHPmailer/src',           // por si quedó con m minúscula
+    __DIR__ . '/../PHPMailer/src',                  // por si lo subiste en la raíz pública
 ];
+
 $phSrc = null;
 foreach ($phCandidates as $p) {
     if (is_file($p . '/PHPMailer.php') && is_file($p . '/SMTP.php') && is_file($p . '/Exception.php')) {
@@ -154,90 +140,51 @@ foreach ($phCandidates as $p) {
         break;
     }
 }
-if (!$phSrc) {
-    // No frenamos el flujo si no está PHPMailer; ya se guardó en DB.
-    echo json_encode(['ok' => true, 'warn' => 'PHPMailer no encontrado (no se enviaron correos)']);
-    exit;
-}
-require_once $phSrc . '/PHPMailer.php';
-require_once $phSrc . '/SMTP.php';
-require_once $phSrc . '/Exception.php';
 
-// ====== EMAILS ======
-$smtp = $config['smtp'];
+$noticeSent = false;
+if ($phSrc) {
+    require_once $phSrc . '/PHPMailer.php';
+    require_once $phSrc . '/SMTP.php';
+    require_once $phSrc . '/Exception.php';
 
-try {
-    $mail = new PHPMailer(true);
-    $mail->CharSet    = 'UTF-8';
-    $mail->isSMTP();
-    $mail->Host       = (string)$smtp['host'];
-    $mail->Port       = (int)$smtp['port'];
-    $mail->SMTPAuth   = true;
-    $mail->Username   = (string)$smtp['username'];
-    $mail->Password   = (string)$smtp['password'];
-    $mail->SMTPSecure = $smtp['encryption'] ?? PHPMailer::ENCRYPTION_STARTTLS;
+    $smtp = $config['smtp'];
 
-    // ---- Aviso para ti
-    $mail->setFrom((string)$smtp['username'], 'Newsletter');
-    $mail->addAddress((string)$smtp['username']);
-    $mail->addReplyTo($email, $nombre);
+    try {
+        $mail = new PHPMailer(true);
+        $mail->CharSet    = 'UTF-8';
+        $mail->isSMTP();
+        $mail->Host       = (string)$smtp['host'];
+        $mail->Port       = (int)$smtp['port'];
+        $mail->SMTPAuth   = true;
+        $mail->Username   = (string)$smtp['username'];
+        $mail->Password   = (string)$smtp['password'];
+        $mail->SMTPSecure = $smtp['encryption'] ?? PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->SMTPAutoTLS = true;
 
-    $mail->Subject = 'Nuevo suscriptor: ' . $nombre;
-    $mail->isHTML(false);
-    $mail->Body = "Se ha registrado $nombre ($email) con preferencias:\n" .
-                  "Lauren: $lauren\nElysia: $elysia\nSahir: $sahir\n" .
-                  "IP: " . ($ip ?? '-') . "\nUA: " . ($ua ?? '-') . "\n";
+        // El remitente DEBE ser tu propio buzón o alias verificado
+        $mail->setFrom((string)$smtp['username'], 'Newsletter');
+        $mail->addAddress((string)$smtp['username']); // te lo envía a ti
+        $mail->addReplyTo($email, $nombre);           // si respondes, va al suscriptor
 
-    $mail->send();
-} catch (PHPMailerException $e) {
-    // No cortamos el flujo si falla el aviso interno
-}
+        $mail->Subject = 'Nuevo suscriptor: ' . $nombre;
+        $mail->isHTML(false);
+        $mail->Body =
+            "Nuevo registro en la newsletter:\n\n" .
+            "Nombre: $nombre\n" .
+            "Email: $email\n" .
+            "Preferencias: Lauren=$lauren, Elysia=$elysia, Sahir=$sahir\n" .
+            "IP: " . ($ip ?? '-') . "\n" .
+            "UA: " . ($ua ?? '-') . "\n";
 
-// ---- Bienvenida al suscriptor
-try {
-    $mail->clearAllRecipients();
-    $mail->clearReplyTos();
-
-    $siteName = 'La Pluma, El Faro y La Llama';
-    $unsubscribeUrl = 'https://plumafarollama.com/unsubscribe?email=' . urlencode($email); // opcional
-
-    $mail->setFrom((string)$smtp['username'], $siteName);
-    $mail->addAddress($email, $nombre);
-    $mail->addReplyTo((string)$smtp['username'], 'Equipo');
-
-    $mail->Subject = '¡Bienvenido(a) a la newsletter!';
-    $mail->isHTML(true);
-    $mail->Body = '
-        <div style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.5;">
-            <h2>¡Hola, ' . htmlspecialchars($nombre, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '!</h2>
-            <p>Gracias por suscribirte a <strong>' . htmlspecialchars($siteName, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</strong>. Pronto recibirás noticias, relatos y artículos seleccionados.</p>
-            <ul>
-                <li><strong>Lauren</strong>: ' . ($lauren ? 'sí' : 'no') . '</li>
-                <li><strong>Elysia</strong>: ' . ($elysia ? 'sí' : 'no') . '</li>
-                <li><strong>Sahir</strong>: ' . ($sahir ? 'sí' : 'no') . '</li>
-            </ul>
-            <p>Si este mensaje no era para ti, o prefieres dejar de recibir correos,
-            puedes <a href="' . htmlspecialchars($unsubscribeUrl, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">darte de baja aquí</a>.</p>
-            <p>Con cariño,<br>El equipo de ' . htmlspecialchars($siteName, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</p>
-        </div>
-    ';
-    $mail->AltBody =
-        "Hola, {$nombre}!\n\n" .
-        "Gracias por suscribirte a {$siteName}. Pronto recibirás noticias.\n\n" .
-        "Preferencias:\n" .
-        " - Lauren: " . ($lauren ? 'sí' : 'no') . "\n" .
-        " - Elysia: " . ($elysia ? 'sí' : 'no') . "\n" .
-        " - Sahir: " . ($sahir ? 'sí' : 'no') . "\n\n" .
-        "Darse de baja: {$unsubscribeUrl}\n";
-
-    // Cabeceras recomendadas
-    $mail->addCustomHeader('List-Unsubscribe', "<{$unsubscribeUrl}>");
-    $mail->addCustomHeader('X-Entity-Ref-ID', bin2hex(random_bytes(8)));
-
-    $mail->send();
-} catch (PHPMailerException $e) {
-    // No interrumpimos el flujo si falla la bienvenida
+        $mail->send();
+        $noticeSent = true;
+    } catch (PHPMailerException $e) {
+        // No rompemos el flujo si no se puede enviar (por políticas SMTP, etc.)
+        error_log('Aviso interno no enviado: ' . $e->getMessage() . ' / ' . ($mail->ErrorInfo ?? ''));
+    }
+} else {
+    error_log('PHPMailer no encontrado: no se envió aviso interno.');
 }
 
-// ====== OK FINAL ======
-echo json_encode(['ok' => true]);
+// ====== RESPUESTA ======
+echo json_encode(['ok' => true, 'notice_sent' => $noticeSent]);

@@ -64,3 +64,8 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+# Configuración de la API
+api/config.php
+config.php
+php_error.log
