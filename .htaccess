@@ -1,0 +1,10 @@
+SetEnv DB_HOST "localhost"
+SetEnv DB_NAME "u671757462_forms"
+SetEnv DB_USER "u671757462_otonielIV"
+SetEnv DB_PASS "y=4AeJa]qcR"
+
+SetEnv SMTP_HOST "smtppro.zoho.com
+SetEnv SMTP_PORT "587"
+SetEnv SMTP_USER "gerencia@plumafarollama.com"
+SetEnv SMTP_PASS "ynE75yUS7sCC"   # usa password de app
+SetEnv SMTP_ENCRYPT "tls"
