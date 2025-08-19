@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Cargar config
-$config = require __DIR__ . '/config.php';
+$config = require dirname(__DIR__, 2) . '/config.php';
 
 // Leer datos: JSON o x-www-form-urlencoded
 $nombre = '';
@@ -205,4 +205,3 @@ try {
 }
 
 echo json_encode(['ok' => true]);
-?>
