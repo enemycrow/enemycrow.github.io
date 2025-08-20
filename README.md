@@ -132,6 +132,20 @@ Para verificar de forma simple los archivos HTML del sitio se utiliza [HTMLHint]
    npm test
    ```
 
+### Pruebas de responsividad
+
+Para comprobar el diseño en distintos tamaños de pantalla se usa [Playwright](https://playwright.dev/).
+
+1. Instala las dependencias y los navegadores de prueba:
+   ```bash
+   npm install --save-dev @playwright/test
+   npx playwright install
+   ```
+2. Inicia el servidor local (por ejemplo `firebase serve`) y ejecuta las pruebas:
+   ```bash
+   npx playwright test tests/responsive.spec.ts
+   ```
+
 ## Módulo interno de edición
 
 Este módulo te permite editar entradas del blog de forma local, sin necesidad de exponer un panel de administración al público.

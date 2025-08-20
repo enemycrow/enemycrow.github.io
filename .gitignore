@@ -47,6 +47,10 @@ build/Release
 # Dependency directories
 node_modules/
 
+# Playwright reports
+playwright-report/
+test-results/
+
 # Optional npm cache directory
 .npm
 
