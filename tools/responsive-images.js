@@ -6,57 +6,65 @@ const inputDir = path.join(__dirname, '..', 'assets', 'images');
 const outputDir = path.join(inputDir, 'responsive');
 const sizes = [400, 800, 1200];
 
-// flags CLI
-const OVERWRITE = process.argv.includes('--overwrite');
-const VERBOSE   = process.argv.includes('--verbose');
+// ---- CLI flags
+const argv = Object.fromEntries(
+  process.argv.slice(2).map(a => {
+    const m = a.match(/^--([^=]+)(?:=(.*))?$/);
+    return m ? [m[1], m[2] ?? true] : [a, true];
+  })
+);
+const OVERWRITE = !!argv.overwrite;
+const VERBOSE   = !!argv.verbose;
+const PRESET    = (argv.preset || 'photo').toString(); // 'photo' | 'illustration'
 
-// util: existe archivo?
-async function exists(p) {
-  try {
-    await fs.stat(p);
-    return true;
-  } catch {
-    return false;
+// ---- presets de calidad
+function webpOptionsForPreset(preset) {
+  if (preset === 'illustration') {
+    // Ideal para arte/dibujo/lineart: muy alta fidelidad
+    return {
+      nearLossless: true,  // usa compresor near-lossless
+      quality: 90,         // controla la cuantización previa
+      effort: 4,
+      smartSubsample: true
+    };
   }
+  // preset 'photo' ≈ tu Python (Pillow) quality=85
+  return {
+    quality: 85,
+    effort: 4,
+    smartSubsample: true
+  };
 }
 
-async function ensureDir(p) {
-  await fs.mkdir(p, { recursive: true });
-}
+// utils
+async function exists(p) { try { await fs.stat(p); return true; } catch { return false; } }
+async function ensureDir(p) { await fs.mkdir(p, { recursive: true }); }
 
 async function processFile(fullPath) {
   const relPath = path.relative(inputDir, fullPath);
   const parsed = path.parse(relPath);
+  const webpOpts = webpOptionsForPreset(PRESET);
 
   for (const size of sizes) {
     const outDir  = path.join(outputDir, parsed.dir);
-    const outPath = path.join(outDir, `${parsed.name}-${size}${parsed.ext}`);
+    const outPath = path.join(outDir, `${parsed.name}-${size}.webp`);
 
     await ensureDir(outDir);
 
-    // ⛔ no sobrescribir si ya existe (a menos que --overwrite)
     if (!OVERWRITE && await exists(outPath)) {
       if (VERBOSE) console.log(`[skip] ${outPath} (ya existe)`);
       continue;
     }
 
-    if (VERBOSE) console.log(`[make] ${outPath}`);
+    if (VERBOSE) console.log(`[make] ${outPath} ← ${relPath} (${size}w, preset=${PRESET})`);
 
-    // parámetros deterministas (ajusta a tu gusto)
-    // Si la extensión de salida es .webp aplicamos opciones WebP:
-    const isWebp = /\.webp$/i.test(parsed.ext);
+    let pipeline = sharp(fullPath)
+      .resize({ width: size, fit: 'inside', withoutEnlargement: true, kernel: 'lanczos3' })
+      .webp(webpOpts);
 
-    const pipeline = sharp(fullPath).resize({ width: size });
-
-    if (isWebp) {
-      pipeline.webp({
-        quality: 90,   // usa tu curva de calidad
-        effort: 4,     // costo de compresión 0-6
-        // lossless: false, // descomenta si hace falta
-        // nearLossless: false
-      });
-    }
-    // Nota: si también generas .jpg/.png, puedes setear .jpeg({quality:…}) / .png({…})
+    // Evita metadatos para binarios más deterministas
+    // (sharp no añade metadata por defecto; dejamos explícito por claridad)
+    // pipeline = pipeline.withMetadata({ }); // no usar para no insertar perfiles
 
     await pipeline.toFile(outPath);
   }
@@ -67,7 +75,7 @@ async function processDirectory(dir) {
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name === 'responsive') continue; // no re-entrar en la salida
+      if (entry.name === 'responsive') continue;
       await processDirectory(fullPath);
     } else if (/\.(jpe?g|png|webp)$/i.test(entry.name)) {
       await processFile(fullPath);
@@ -76,19 +84,15 @@ async function processDirectory(dir) {
 }
 
 async function run() {
-  const files = process.argv.filter(a => !a.startsWith('--')).slice(2);
+  const files = Object.keys(argv).filter(k => !k.startsWith('--'));
   if (files.length) {
     for (const file of files) {
       if (!/\.(jpe?g|png|webp)$/i.test(file)) continue;
-      const fullPath = path.resolve(file);
-      await processFile(fullPath);
+      await processFile(path.resolve(file));
     }
   } else {
     await processDirectory(inputDir);
   }
 }
 
-run().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+run().catch(err => { console.error(err); process.exit(1); });
