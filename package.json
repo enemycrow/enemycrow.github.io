@@ -1,24 +1,24 @@
 {
   "name": "plumafarollama.com",
   "version": "1.0.0",
-  "description": "Este repositorio contiene el sitio web de **La Pluma, el Faro y la Llama**, un proyecto colaborativo donde tres autores de habla hispana comparten sus historias, reflexiones y servicios creativos. El sitio incluye páginas de presentación, portafolio, blog, servicios y un formulario de contacto. Está construido como un sitio estático usando HTML, CSS y un poco de JavaScript, y se publica a través de [Firebase Hosting](https://firebase.google.com/docs/hosting).",
+  "description": "Este repositorio contiene el sitio web de **La Pluma, el Faro y la Llama**...",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
+    "build": "npm run responsive && npm run test",
+    "responsive": "node tools/responsive-images.js",
     "test": "htmlhint \"**/*.html\"",
-    "version": "node version-assets.js",
-    "responsive": "node tools/responsive-images.js"
+    "version": "node version-assets.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "dependencies": {
+    "sharp": "^0.33.5"
+  },
   "devDependencies": {
     "htmlhint": "^1.1.4",
-    "sharp": "^0.33.2",
-    "lint-staged": "^15.2.7"
-  },
-  "dependencies": {
-    "express": "^5.1.0"
+    "lint-staged": "^15.5.2"
   },
   "lint-staged": {
     "assets/images/**/*.webp": "node tools/responsive-images.js"
