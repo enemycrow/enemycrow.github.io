@@ -120,9 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function fetchTotalReactions(slug) {
     try {
-      const snap = await db.collection('reactions').doc(slug).get();
-      const data = snap.exists ? snap.data() : {};
-      return reactionFields.reduce((sum, key) => sum + (data[key] || 0), 0);
+      const res = await fetch(`/api/reactions.php?slug=${encodeURIComponent(slug)}`, { cache: 'no-store' });
+      const json = await res.json();
+      if (!json.ok) return 0;
+      const t = json.totals || {};
+      return reactionFields.reduce((sum, k) => sum + (t[k] || 0), 0);
     } catch (err) {
       console.error('Error al obtener reacciones', err);
       return 0;

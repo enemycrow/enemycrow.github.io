@@ -69,3 +69,6 @@ node_modules/
 api/config.php
 config.php
 php_error.log
+
+# Credenciales de servicio de Firebase
+serviceAccount.json

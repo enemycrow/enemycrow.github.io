@@ -1,12 +1,38 @@
-// Utiliza la instancia global `db` expuesta en firebase-init.js
-const { FieldValue } = firebase.firestore;
+// SIN Firestore: usa tu API PHP para reacciones
 
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug');
   if (!slug) return;
 
+  // utilidades
+  const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
+  const votedKey = `voted_${slug}`;
+
+  async function fetchTotals(slug) {
+    try {
+      const res = await fetch(`/api/reactions.php?slug=${encodeURIComponent(slug)}`, { cache: 'no-store' });
+      const json = await res.json();
+      if (!json.ok) throw new Error('API error');
+      return json.totals || { toco:0, sumergirme:0, personajes:0, mundo:0, lugares:0 };
+    } catch (e) {
+      return { toco:0, sumergirme:0, personajes:0, mundo:0, lugares:0 };
+    }
+  }
+
+  async function sendReaction(slug, reaction, add) {
+    const fd = new FormData();
+    fd.append('slug', slug);
+    fd.append('reaction', reaction);
+    fd.append('action', add ? 'add' : 'remove');
+    const res = await fetch('/api/react.php', { method: 'POST', body: fd });
+    const json = await res.json();
+    if (!json.ok) throw new Error('API error');
+    return json.totals || {};
+  }
+
   try {
+    // ---- Cargar datos del post
     let posts;
     const cached = localStorage.getItem('postsData');
     if (cached) {
@@ -26,22 +52,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       year: 'numeric'
     });
 
-    const titleEl = document.getElementById('entry-title');
-    const dateEl = document.getElementById('entry-date');
+    const titleEl   = document.getElementById('entry-title');
+    const dateEl    = document.getElementById('entry-date');
     const contentEl = document.getElementById('entry-content');
-    const authorEl = document.getElementById('entry-author');
+    const authorEl  = document.getElementById('entry-author');
     const licenseEl = document.getElementById('entry-license');
-    const imgEl = document.getElementById('entry-image');
-    const timeEl = document.getElementById('entry-time');
-    const commentsEl = document.getElementById('entry-comments');
-    const catEl = document.getElementById('entry-categories');
-    const catElBlock = document.getElementById('entry-categories-block');
+    const imgEl     = document.getElementById('entry-image');
+    const timeEl    = document.getElementById('entry-time');
+    const commentsEl= document.getElementById('entry-comments');
+    const catEl     = document.getElementById('entry-categories');
+    const catElBlock= document.getElementById('entry-categories-block');
 
     if (titleEl) titleEl.textContent = entry.titulo;
-    if (dateEl) dateEl.textContent = fechaTexto;
-    if (timeEl) timeEl.textContent = entry.tiempo;
+    if (dateEl)  dateEl.textContent  = fechaTexto;
+    if (timeEl)  timeEl.textContent  = entry.tiempo;
     if (contentEl) contentEl.innerHTML = entry.contenido_html;
-    if (authorEl) authorEl.textContent = `— ${entry.autor}`;
+    if (authorEl)  authorEl.textContent = `— ${entry.autor}`;
+
     if (imgEl) {
       const base = entry.imagen.replace('.webp', '');
       imgEl.src = `assets/images/blog/${base}.webp`;
@@ -53,15 +80,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       imgEl.sizes = "(max-width: 600px) 100vw, 1200px";
       imgEl.alt = entry.titulo;
     }
+
     if (catEl) {
-      const catsHtml = entry.categoria_temas
+      const catsHtml = (entry.categoria_temas || [])
         .map(c => `<span class="category-tag">${c}</span>`)
         .join(' ');
       catEl.innerHTML = catsHtml;
     }
 
     if (catElBlock) {
-      const booksHtml = entry.categoria_libros
+      const booksHtml = (entry.categoria_libros || [])
         .map(c => `<span class="category-tag">${c}</span>`)
         .join(' ');
       catElBlock.innerHTML = booksHtml;
@@ -81,42 +109,50 @@ document.addEventListener('DOMContentLoaded', async () => {
         `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">`;
     }
 
-    const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
-    const docRef = db.collection('reactions').doc(slug);
-    let snap = await docRef.get();
-    if (!snap.exists) {
-      const initData = {};
-      reactionKeys.forEach(k => initData[k] = 0);
-      await docRef.set(initData);
-      snap = await docRef.get();
-    }
-    let data = snap.data() || {};
-
+    // ---- Reacciones (API propia)
+    // Pinta contadores iniciales
+    const totals = await fetchTotals(slug);
     reactionKeys.forEach(key => {
       const el = document.getElementById(`reaction-${key}-count`);
-      if (el) el.textContent = data[key] || 0;
+      if (el) el.textContent = totals[key] || 0;
     });
 
-    const votedKey = `voted_${slug}`;
-    const voted = JSON.parse(localStorage.getItem(votedKey) || '{}');
+    // Estado local (por IP lo limita el backend; aquí marcamos UI)
+    let voted = {};
+    try { voted = JSON.parse(localStorage.getItem(votedKey) || '{}'); } catch (e) { voted = {}; }
 
+    // Marcar UI desde localStorage
     document.querySelectorAll('.reaction').forEach(reactionEl => {
       const key = reactionEl.getAttribute('data-reaction');
+      if (key && voted[key]) reactionEl.classList.add('reacted');
+    });
+
+    // Handlers de click (toggle add/remove)
+    document.querySelectorAll('.reaction').forEach(reactionEl => {
+      const key = reactionEl.getAttribute('data-reaction');
+      if (!key || !reactionKeys.includes(key)) return;
+
       reactionEl.addEventListener('click', async () => {
-        if (voted[key]) return;
+        const add = !voted[key]; // si no votó, sumamos; si ya votó, quitamos
         try {
-          await docRef.update({ [key]: FieldValue.increment(1) });
-          const snap = await docRef.get();
-          const countEl = reactionEl.querySelector('.reaction-count');
-          if (countEl) countEl.textContent = snap.data()[key] || 0;
-          voted[key] = true;
+          const updated = await sendReaction(slug, key, add);
+
+          // Actualiza contadores en la UI
+          reactionKeys.forEach(k => {
+            const el = document.getElementById(`reaction-${k}-count`);
+            if (el) el.textContent = updated[k] ?? 0;
+          });
+
+          // Actualiza estado local y clase
+          voted[key] = add ? true : undefined;
+          if (!add) delete voted[key];
           localStorage.setItem(votedKey, JSON.stringify(voted));
-          reactionEl.classList.add('reacted');
+
+          reactionEl.classList.toggle('reacted', !!voted[key]);
         } catch (err) {
-          console.error('Error al actualizar la reacción', err);
+          console.error('Error al enviar reacción', err);
         }
       });
-      if (voted[key]) reactionEl.classList.add('reacted');
     });
 
     if (commentsEl) commentsEl.style.display = 'none';
