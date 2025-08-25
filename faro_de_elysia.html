@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Faro de Elysia — Mini Juego Relax</title>
+<style>
+  :root{
+    --bg-night:#061424;    /* cielo noche */
+    --bg-day:#bfe7ff;      /* cielo día */
+    --sea-night:#0a2740;
+    --sea-day:#9ad1ff;
+    --sand-night:#3a2c1b;  /* arena noche */
+    --sand-day:#f2d8a7;    /* arena día */
+    --sand-hl-night:#5a4430;
+    --sand-hl-day:#ffe7bd;
+    --beam:#fff9cc;
+    --accent:#ffd76d;
+    --ui:#ffffffee;
+    --text:#0b1220;
+  }
+  html,body{height:100%;margin:0;}
+  body{display:grid;place-items:center;background:var(--bg-night);transition:background 800ms ease;}
+  .wrap{position:relative;width:min(960px, 96vw);height:min(600px, 70vh);aspect-ratio:16/10;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+  canvas{width:100%;height:100%;display:block;background:linear-gradient(#021220 35%, var(--sea-night) 36%);
+          transition:background 800ms ease;}
+  .hud{position:absolute;inset:0;pointer-events:none;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;}
+  .row{position:absolute;top:12px;left:12px;right:12px;display:flex;gap:8px;align-items:center;justify-content:space-between;}
+  .pill{pointer-events:auto;display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .8rem;border-radius:999px;background:var(--ui);backdrop-filter:blur(6px);box-shadow:0 6px 16px rgba(0,0,0,.15);color:var(--text);font-weight:600}
+  .controls{display:flex;gap:8px;}
+  button, .btn{pointer-events:auto;border:none;border-radius:999px;padding:.5rem .85rem;background:var(--ui);color:var(--text);font-weight:600;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  button:hover{filter:brightness(.98)}
+  .score{min-width:7ch;justify-content:center}
+  .hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:var(--ui);padding:.5rem .9rem;border-radius:12px;font-size:.9rem;color:var(--text);pointer-events:none}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+</head>
+<body>
+<div class="wrap" role="application" aria-label="Faro de Elysia, juego de relajación">
+  <canvas id="game" aria-hidden="true"></canvas>
+  <div class="hud" aria-live="polite">
+    <div class="row">
+      <div class="pill score" id="score">0 ✨</div>
+      <div class="controls">
+        <button id="toggleMode" aria-pressed="false" title="Cambiar Día/Noche">🌙 Noche</button>
+        <button id="style" aria-pressed="false" title="Cambiar estilo visual">🎨 Estilo</button>
+        <button id="mute" aria-pressed="false" title="Silenciar sonidos">🔊 Audio</button>
+        <button id="motion" aria-pressed="false" title="Reducir movimiento">🜁 Movimiento</button>
+      </div>
+    </div>
+    <div class="hint" id="hint">Toca / arrastra para girar el haz del faro • Relájate y respira</div>
+  </div>
+</div>
+<div class="sr-only" id="live">Cargado</div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  const scoreEl = document.getElementById('score');
+  const toggleBtn = document.getElementById('toggleMode');
+  const styleBtn = document.getElementById('style');
+  const muteBtn = document.getElementById('mute');
+  const motionBtn = document.getElementById('motion');
+  const hintEl = document.getElementById('hint');
+
+  // 👉 Rutas sugeridas para artes de marca
+  const ASSETS = {
+    lighthouse: '/assets/pll/faro.svg',
+    firefly: '/assets/pll/firefly.png',
+    ray: '/assets/pll/ray.png'
+  };
+
+  function loadImage(src){ return new Promise((res)=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=()=>res(null); im.src=src; }); }
+  const SPRITES = { lighthouse:null, firefly:null, ray:null };
+  Promise.all([loadImage(ASSETS.lighthouse), loadImage(ASSETS.firefly), loadImage(ASSETS.ray)])
+    .then(([lh, ff, ry])=>{ SPRITES.lighthouse=lh; SPRITES.firefly=ff; SPRITES.ray=ry; });
+
+  let W=0,H=0,SEA_Y=0, dpr = Math.max(1, Math.min(2, window.devicePixelRatio||1));
+  const state = {
+    mode: 'night',       // 'day' | 'night'
+    angle: -Math.PI/8,
+    targetAngle: -Math.PI/8,
+    score: 0,
+    reduceMotion: false,
+    audioOn: false,
+    style: 'minimal',     // 'minimal' | 'brand'
+    scaleIndex: 0        // índice en el círculo de quintas (0 = C)
+  };
+
+  function themeVars(){
+    if(state.mode==='night'){
+      canvas.style.background = `linear-gradient(#021220 35%, var(--sea-night) 36%)`;
+      document.body.style.background = 'var(--bg-night)';
+      toggleBtn.textContent = '🌙 Noche'; toggleBtn.setAttribute('aria-pressed','true');
+    } else {
+      canvas.style.background = `linear-gradient(#cfeefe 35%, var(--sea-day) 36%)`;
+      document.body.style.background = 'var(--bg-day)';
+      toggleBtn.textContent = '☀️ Día'; toggleBtn.setAttribute('aria-pressed','false');
+    }
+    styleBtn.textContent = state.style==='brand' ? '🖼️ Arte PLL' : '🎨 Minimal';
+  }
+
+  function resize(){
+    const rect = canvas.getBoundingClientRect();
+    W = Math.floor(rect.width * dpr);
+    H = Math.floor(rect.height * dpr);
+    canvas.width = W; canvas.height = H;
+    SEA_Y = Math.floor(H * 0.60); // un poco más de mar visible
+  }
+  window.addEventListener('resize', resize); resize(); themeVars();
+
+  const rand = (a=1)=>Math.random()*a; const lerp = (a,b,t)=>a+(b-a)*t;
+
+  // Entidades
+  const fireflies = []; // noche
+  const rays = [];      // día
+
+  function spawnFirefly(){
+    const y = lerp(SEA_Y*0.18, SEA_Y*0.95, Math.random());
+    fireflies.push({x: rand(W), y, r: 2+rand(2), t: rand(1000), caught:false});
+  }
+  function spawnRay(){
+    const x = lerp(W*0.28, W*0.98, Math.random()); // caen sobre el mar y borde
+    rays.push({x, y: -20, v: 20+rand(30), w: 6+rand(10), h: 30+rand(30), hue: Math.floor(rand(360)), caught:false});
+  }
+  for(let i=0;i<40;i++) spawnFirefly();
+
+  // Faro (sobre duna)
+  function drawLighthouse(){
+    const x = W*0.18, base = SEA_Y, h = H*0.55;
+    if(state.style==='brand' && SPRITES.lighthouse){
+      const im = SPRITES.lighthouse; const ratio = (im.width||1)/(im.height||1);
+      const drawH = h*0.9; const drawW = drawH*ratio*0.55;
+      ctx.drawImage(im, x - drawW/2, base - drawH*0.92, drawW, drawH);
+      return;
+    }
+    // Minimal
+    ctx.save(); ctx.translate(x, base);
+    ctx.fillStyle = '#d9dde5'; ctx.strokeStyle = '#6f7a8c'; ctx.lineWidth = 4*dpr;
+    ctx.beginPath(); ctx.moveTo(-24*dpr,0); ctx.lineTo(24*dpr,0); ctx.lineTo(16*dpr,-h*0.82); ctx.lineTo(-16*dpr,-h*0.82); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#f7f8fb'; ctx.strokeStyle = '#5b6578';
+    ctx.beginPath(); ctx.rect(-22*dpr,-h*0.86,44*dpr,18*dpr); ctx.fill(); ctx.stroke(); ctx.restore();
+  }
+
+  // Haz del faro
+  function drawBeam(){
+    const origin = {x: W*0.18, y: SEA_Y - H*0.45};
+    const len = W*0.9; const spread = Math.PI/14;
+    ctx.save(); ctx.translate(origin.x, origin.y); ctx.rotate(state.angle);
+    const g = ctx.createRadialGradient(0,0,0, 0,0, len);
+    g.addColorStop(0, 'rgba(255,245,200,0.70)'); g.addColorStop(0.35, 'rgba(255,245,200,0.20)'); g.addColorStop(1, 'rgba(255,245,200,0.0)');
+    ctx.fillStyle = g; ctx.globalCompositeOperation = 'lighter';
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.arc(0,0,len,-spread,spread); ctx.closePath(); ctx.fill();
+    ctx.globalCompositeOperation = 'source-over'; ctx.restore();
+  }
+
+  // Mar (fondo)
+  let tSea = 0;
+  function drawSea(){
+    ctx.save();
+    // banda del mar
+    ctx.beginPath(); ctx.rect(0,SEA_Y, W, H-SEA_Y);
+    ctx.fillStyle = state.mode==='night' ? 'rgba(10,39,64,1)' : 'rgba(154,209,255,1)'; ctx.fill();
+    // leves olas
+    ctx.strokeStyle = state.mode==='night' ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.18)';
+    ctx.lineWidth = 2*dpr; const waves = 5;
+    for(let i=0;i<waves;i++){
+      const y = SEA_Y + 10*dpr + i*12*dpr + Math.sin((tSea*0.002)+(i*0.8))*2*dpr;
+      ctx.beginPath();
+      for(let x=0;x<=W;x+=16*dpr){ const yy = y + Math.sin((x*0.01)+(tSea*0.005)+i)*2*dpr; ctx.lineTo(x,yy); }
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  // Cielo estrellado (noche)
+  function drawSky(){
+    if(state.mode!=='night') return; ctx.save();
+    for(let i=0;i<120;i++){
+      const x = (i*83 % W), y = (i*211 % (SEA_Y-10));
+      const a = 0.3 + 0.7 * Math.abs(Math.sin((tSea*0.001)+(i*0.3)));
+      ctx.fillStyle = `rgba(255,255,255,${a*0.45})`; ctx.fillRect(x, y, 1.5*dpr, 1.5*dpr);
+    }
+    ctx.restore();
+  }
+
+  // Desierto (primer plano) con dunas
+  function drawDesert(){
+    const sand = state.mode==='night' ? getCSS('--sand-night') : getCSS('--sand-day');
+    const hl   = state.mode==='night' ? getCSS('--sand-hl-night') : getCSS('--sand-hl-day');
+
+    // Duna grande derecha (primer plano)
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(W*0.35, SEA_Y+18*dpr);
+    ctx.quadraticCurveTo(W*0.62, SEA_Y-40*dpr, W*1.02, SEA_Y+30*dpr);
+    ctx.lineTo(W, H); ctx.lineTo(W*0.28, H); ctx.closePath();
+    const g1 = ctx.createLinearGradient(W*0.6, SEA_Y-40, W*0.95, H);
+    g1.addColorStop(0, sand); g1.addColorStop(1, hl);
+    ctx.fillStyle = g1; ctx.fill();
+
+    // Duna pequeña izquierda (donde se asienta el faro)
+    ctx.beginPath();
+    ctx.moveTo(-20, SEA_Y+8*dpr);
+    ctx.quadraticCurveTo(W*0.12, SEA_Y-22*dpr, W*0.34, SEA_Y+14*dpr);
+    ctx.lineTo(W*0.34, H); ctx.lineTo(-20, H); ctx.closePath();
+    const g2 = ctx.createLinearGradient(0, SEA_Y-22, W*0.34, H);
+    g2.addColorStop(0, hl); g2.addColorStop(1, sand);
+    ctx.fillStyle = g2; ctx.fill();
+
+    // Orilla brillante donde el mar toca la arena
+    ctx.strokeStyle = state.mode==='night' ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.55)';
+    ctx.lineWidth = 3*dpr;
+    ctx.beginPath();
+    for(let x=0;x<=W;x+=14*dpr){
+      const y = SEA_Y + 6*dpr + Math.sin((x*0.02)+(tSea*0.01))*2*dpr;
+      ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+
+    // Textura sutil de arena (puntitos suaves)
+    ctx.globalAlpha = 0.08;
+    for(let i=0;i<220;i++){
+      const x = (i*73) % W; const y = SEA_Y + 12*dpr + ((i*137)% (H-SEA_Y-12));
+      ctx.fillStyle = '#000'; ctx.fillRect(x, y, 1*dpr, 1*dpr);
+    }
+    ctx.globalAlpha = 1;
+    ctx.restore();
+  }
+
+  // Utilidad: leer variable CSS
+  function getCSS(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  // Luciérnagas (noche)
+  function updateFireflies(dt){
+    const origin = {x: W*0.18, y: SEA_Y - H*0.45}; const spread = Math.PI/14; const len = W*0.9;
+    fireflies.forEach(f => {
+      f.t += dt; if(!state.reduceMotion){ f.x += Math.sin(f.t*0.002)*0.2*dpr; f.y += Math.cos(f.t*0.003)*0.2*dpr; }
+      const dx = f.x - origin.x, dy = f.y - origin.y; const dist = Math.hypot(dx,dy); const ang = Math.atan2(dy,dx);
+      const within = Math.abs(ang - state.angle) < spread && dist < len;
+      if(within){ const pull = 0.05 * (1 - dist/len); f.x -= dx * pull * (dt/16); f.y -= dy * pull * (dt/16); }
+      if(within && dist < 60*dpr && !f.caught){ f.caught = true; addScore(1); playNote(); setTimeout(()=>{ const i=fireflies.indexOf(f); if(i>-1){ fireflies.splice(i,1); spawnFirefly(); } },0); }
+    });
+    fireflies.forEach(f => {
+      if(state.style==='brand' && SPRITES.firefly){ const s = (12 + Math.sin(f.t*0.01)*3) * dpr; ctx.save(); ctx.translate(f.x, f.y); ctx.drawImage(SPRITES.firefly, -s/2, -s/2, s, s); ctx.restore(); }
+      else { const glow = ctx.createRadialGradient(f.x,f.y,0, f.x,f.y, 18*dpr); glow.addColorStop(0, 'rgba(255,255,180,0.9)'); glow.addColorStop(1, 'rgba(255,255,180,0)'); ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(f.x,f.y, 18*dpr, 0, Math.PI*2); ctx.fill(); ctx.fillStyle = 'rgba(255,255,220,0.95)'; ctx.beginPath(); ctx.arc(f.x,f.y, f.r*dpr, 0, Math.PI*2); ctx.fill(); }
+    });
+  }
+
+  // Rayos (día)
+  let raySpawnTimer = 0;
+  function updateRays(dt){
+    raySpawnTimer += dt; if(raySpawnTimer > 900){ raySpawnTimer = 0; spawnRay(); }
+    const origin = {x: W*0.18, y: SEA_Y - H*0.45}; const spread = Math.PI/14; const len = W*0.9;
+    rays.forEach(r => {
+      r.y += (r.v * dpr) * (dt/1000);
+      const dx = r.x - origin.x, dy = r.y - origin.y; const dist = Math.hypot(dx,dy); const ang = Math.atan2(dy,dx);
+      const within = Math.abs(ang - state.angle) < spread && dist < len;
+      if(within && !r.caught){ r.caught = true; addScore(1); playNote(); }
+    });
+    for(let i=rays.length-1;i>=0;i--){
+      const r = rays[i]; if(r.y > H+40) { rays.splice(i,1); continue; }
+      if(state.style==='brand' && SPRITES.ray){ const w = Math.max(16, r.w*2); const h = Math.max(40, r.h*3); ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.drawImage(SPRITES.ray, r.x - w/2, r.y, w, h); ctx.globalCompositeOperation = 'source-over'; ctx.restore(); }
+      else { ctx.save(); ctx.globalCompositeOperation = 'lighter'; const g = ctx.createLinearGradient(r.x, r.y, r.x, r.y+r.h); g.addColorStop(0, `hsla(${r.hue}, 90%, 70%, 0.85)`); g.addColorStop(1, `hsla(${(r.hue+50)%360}, 90%, 70%, 0.0)`); ctx.fillStyle = g; ctx.fillRect(r.x - r.w/2, r.y, r.w, r.h); ctx.globalCompositeOperation = 'source-over'; ctx.restore(); }
+    }
+  }
+
+  // Input
+  function toLocal(e){ const rect = canvas.getBoundingClientRect(); const x = (e.touches?e.touches[0].clientX:e.clientX) - rect.left; const y = (e.touches?e.touches[0].clientY:e.clientY) - rect.top; return {x:x*dpr, y:y*dpr}; }
+  function pointToAngle(pt){ const origin = {x: W*0.18, y: SEA_Y - H*0.45}; return Math.atan2(pt.y-origin.y, pt.x-origin.x); }
+  function handleMove(e){ const p = toLocal(e); state.targetAngle = pointToAngle(p); }
+  canvas.addEventListener('mousemove', handleMove, {passive:true});
+  canvas.addEventListener('touchstart', handleMove, {passive:true});
+  canvas.addEventListener('touchmove', handleMove, {passive:true});
+
+  // UI
+  toggleBtn.addEventListener('click', () => { state.mode = state.mode==='night' ? 'day' : 'night'; themeVars(); if(state.mode==='night'){ rays.length = 0; for(let i=0;i<30;i++) spawnFirefly(); } else { fireflies.length = 0; } });
+  styleBtn.addEventListener('click', () => { state.style = state.style==='minimal' ? 'brand' : 'minimal'; styleBtn.setAttribute('aria-pressed', state.style==='brand'); themeVars(); });
+  muteBtn.addEventListener('click', () => { state.audioOn = !state.audioOn; muteBtn.textContent = state.audioOn ? '🔊 Audio' : '🔇 Silencio'; muteBtn.setAttribute('aria-pressed', state.audioOn?'true':'false'); if(state.audioOn) ensureAudio(); });
+  motionBtn.addEventListener('click', () => { state.reduceMotion = !state.reduceMotion; motionBtn.setAttribute('aria-pressed', state.reduceMotion?'true':'false'); });
+  
+  // Puntaje
+  function addScore(v){
+    const prev = state.score;
+    state.score += v; 
+    scoreEl.textContent = `${state.score} ✨`;
+    // Avanza cada 100 puntos según día/noche
+    if (Math.floor(prev/100) !== Math.floor(state.score/100)) {
+      advanceScale(state.mode==='day' ? +1 : -1);
+    }
+  }
+
+  // Audio — mar con oleaje + notas en círculo de quintas
+  let AC=null, seaNode=null, seaGain=null, swellTimer=null;
+  function ensureAudio(){
+    if(AC) return;
+    AC = new (window.AudioContext||window.webkitAudioContext)();
+    // Ruido rosa del mar
+    const bufferSize = 2**12;
+    const node = AC.createScriptProcessor(bufferSize,1,1);
+    let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+    node.onaudioprocess = (e)=>{
+      const out = e.outputBuffer.getChannelData(0);
+      for(let i=0;i<out.length;i++){
+        const white = Math.random()*2-1;
+        b0 = 0.99886*b0 + white*0.0555179;
+        b1 = 0.99332*b1 + white*0.0750759;
+        b2 = 0.96900*b2 + white*0.1538520;
+        b3 = 0.86650*b3 + white*0.3104856;
+        b4 = 0.55000*b4 + white*0.5329522;
+        b5 = -0.7616*b5 - white*0.0168980;
+        let pink = b0+b1+b2+b3+b4+b5+b6 + white*0.5362;
+        pink *= 0.08; // nivel base del mar (no se cambia)
+        out[i] = pink;
+      }
+    };
+    seaNode = node;
+    seaGain = AC.createGain();
+    seaGain.gain.value = 0.15; // pico actual (sin cambio)
+    node.connect(seaGain).connect(AC.destination);
+    startSwell();
+  }
+  function startSwell(){
+    // Oleaje: del ~0.02 al 0.15 en un ciclo suave
+    const min = 0.02, max = 0.15, period = 12; // segundos
+    const start = AC.currentTime;
+    if(swellTimer) clearInterval(swellTimer);
+    swellTimer = setInterval(()=>{
+      const t = AC.currentTime - start;
+      const phase = (t % period)/period; // 0..1
+      const v = min + (max-min)*0.5*(1 - Math.cos(2*Math.PI*phase)); // coseno suave
+      if(seaGain) seaGain.gain.setTargetAtTime(v, AC.currentTime, 0.4);
+    }, 150);
+  }
+
+  // Música generativa: círculo de quintas y escala mayor
+  const FIFTHS = ['C','G','D','A','E','B','F#','C#','G#','D#','A#','F'];
+  const NOTE_TO_SEMI = { 'C':0,'C#':1,'D':2,'D#':3,'E':4,'F':5,'F#':6,'G':7,'G#':8,'A':9,'A#':10,'B':11 };
+  function advanceScale(dir){
+    // dir: +1 (día, sube a la quinta) | -1 (noche, baja a la cuarta)
+    const N = FIFTHS.length;
+    state.scaleIndex = (state.scaleIndex + dir + N) % N;
+  }
+  function currentRoot(){ return FIFTHS[state.scaleIndex]; }
+  function majorScaleSemis(root){
+    const base = NOTE_TO_SEMI[root] ?? 0; // relativo a C
+    const steps = [0,2,4,5,7,9,11,12];
+    return steps.map(s=>base+s);
+  }
+  function semiToFreq(semi, baseMidi=60){ // C4=60
+    const midi = baseMidi + ((semi%12)+12)%12; // envuelve a una octava
+    return 440 * Math.pow(2, (midi-69)/12);
+  }
+  function playNote(){
+    if(!state.audioOn) return; ensureAudio();
+    const now = AC.currentTime;
+    const root = currentRoot();
+    const semis = majorScaleSemis(root);
+    // Elige grado al azar y octava C4..C5
+    const s = semis[Math.floor(Math.random()*semis.length)];
+    const freq = semiToFreq(s, 60 + (Math.random()<0.5?0:12));
+    // Seno + triángulo para timbre dulce
+    const o1 = AC.createOscillator(); o1.type='sine';     o1.frequency.value=freq;
+    const o2 = AC.createOscillator(); o2.type='triangle'; o2.frequency.value=freq*2;
+    const g = AC.createGain(); g.gain.setValueAtTime(0.0001, now);
+    g.gain.linearRampToValueAtTime(0.18, now+0.04);
+    g.gain.exponentialRampToValueAtTime(0.0001, now+1.2);
+    o1.connect(g); o2.connect(g); g.connect(AC.destination);
+    o1.start(now); o2.start(now);
+    o1.stop(now+1.25); o2.stop(now+1.25);
+  }
+
+  // Día/Noche automático
+  const hours = new Date().getHours(); if(hours>=7 && hours<=18){ state.mode='day'; themeVars(); }
+
+  // Bucle principal (orden de dibujo: cielo → mar → desierto → haz → faro → criaturas)
+  let last = performance.now();
+  function loop(now){
+    const dt = Math.min(50, now-last); last = now; tSea += dt; ctx.clearRect(0,0,W,H);
+    drawSky(); drawSea(); drawDesert(); drawBeam(); drawLighthouse();
+    state.angle = lerp(state.angle, state.targetAngle, 0.08);
+    if(state.mode==='night') updateFireflies(dt); else updateRays(dt);
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  // Desvanece hint
+  setTimeout(()=>{ hintEl.style.opacity = .0; hintEl.style.transition='opacity 1.4s ease'; }, 3000);
+})();
+</script>
+</body>
+</html>
