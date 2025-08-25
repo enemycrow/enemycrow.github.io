@@ -1,5 +1,3 @@
-// SIN Firestore: usa tu API PHP para reacciones
-
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug');
@@ -11,7 +9,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   async function fetchTotals(slug) {
     try {
-      const res = await fetch(`/api/reactions.php?slug=${encodeURIComponent(slug)}`, { cache: 'no-store' });
+      const res = await fetch(`/api/reactions.php?slug=${encodeURIComponent(slug)}`, {
+        cache: 'no-store',
+        credentials: 'same-origin'   // 👈 agregado
+      });
       const json = await res.json();
       if (!json.ok) throw new Error('API error');
       return json.totals || { toco:0, sumergirme:0, personajes:0, mundo:0, lugares:0 };
@@ -25,12 +26,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     fd.append('slug', slug);
     fd.append('reaction', reaction);
     fd.append('action', add ? 'add' : 'remove');
-    const res = await fetch('/api/react.php', { method: 'POST', body: fd });
+    const res = await fetch('/api/react.php', {
+      method: 'POST',
+      body: fd,
+      credentials: 'same-origin',
+      cache: 'no-store'
+    });
     const json = await res.json();
     if (!json.ok) throw new Error('API error');
     return json.totals || {};
   }
-
   try {
     // ---- Cargar datos del post
     let posts;
@@ -59,7 +64,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const licenseEl = document.getElementById('entry-license');
     const imgEl     = document.getElementById('entry-image');
     const timeEl    = document.getElementById('entry-time');
-    const commentsEl= document.getElementById('entry-comments');
     const catEl     = document.getElementById('entry-categories');
     const catElBlock= document.getElementById('entry-categories-block');
 
@@ -132,9 +136,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       const key = reactionEl.getAttribute('data-reaction');
       if (!key || !reactionKeys.includes(key)) return;
 
+      let busy = false;
+
       reactionEl.addEventListener('click', async () => {
-        const add = !voted[key]; // si no votó, sumamos; si ya votó, quitamos
+        if (busy) return;
+        busy = true;
+        reactionEl.classList.add('is-loading'); // opcional, para CSS animación
+
         try {
+          const add = !voted[key];
           const updated = await sendReaction(slug, key, add);
 
           // Actualiza contadores en la UI
@@ -143,7 +153,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (el) el.textContent = updated[k] ?? 0;
           });
 
-          // Actualiza estado local y clase
+          // Actualiza estado local
           voted[key] = add ? true : undefined;
           if (!add) delete voted[key];
           localStorage.setItem(votedKey, JSON.stringify(voted));
@@ -151,12 +161,13 @@ document.addEventListener('DOMContentLoaded', async () => {
           reactionEl.classList.toggle('reacted', !!voted[key]);
         } catch (err) {
           console.error('Error al enviar reacción', err);
+        } finally {
+          busy = false;                      // 👈 libera el flag
+          reactionEl.classList.remove('is-loading'); // opcional
         }
       });
-    });
-
-    if (commentsEl) commentsEl.style.display = 'none';
+    }); // ← cierra el segundo forEach
   } catch (err) {
     console.error('Error al cargar la entrada', err);
   }
-});
+}); // ← cierra el DOMContentLoaded

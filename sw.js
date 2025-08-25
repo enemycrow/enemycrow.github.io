@@ -1,4 +1,4 @@
-const CACHE_NAME = 'site-cache-v3';
+const CACHE_NAME = 'site-cache-v6'; // ⬅️ súbelo para forzar actualización
 const urlsToCache = [
   '/',
   '/index.html',
@@ -34,23 +34,30 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(
-        keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
-      )
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
     ).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', event => {
+  // No tocamos nada que no sea GET
   if (event.request.method !== 'GET') return;
 
-  const dest = event.request.destination;
-  const url = event.request.url;
-  const isDocument = dest === 'document';
-  const isJSON = url.endsWith('.json');
-  const isCSS = dest === 'style' || url.endsWith('.css');
-  const isJS = dest === 'script' || url.endsWith('.js');
+  // ⬅️ Evita cachear/servir desde cache para la API
+  const url = new URL(event.request.url);
+  if (url.pathname.startsWith('/api/')) {
+    // API: siempre desde red y sin cache
+    event.respondWith(fetch(event.request));
+    return;
+  }
 
+  const dest = event.request.destination;
+  const isDocument = dest === 'document';
+  const isJSON     = url.pathname.endsWith('.json');
+  const isCSS      = dest === 'style'  || url.pathname.endsWith('.css');
+  const isJS       = dest === 'script' || url.pathname.endsWith('.js');
+
+  // Estrategia network-first con fallback a cache (como ya hacías)
   if (isDocument || isCSS || isJS || isJSON) {
     event.respondWith(
       fetch(event.request)
@@ -64,6 +71,7 @@ self.addEventListener('fetch', event => {
         .catch(() => caches.match(event.request))
     );
   } else {
+    // Otros assets: cache-first con actualización
     event.respondWith(
       caches.match(event.request).then(cached => {
         if (cached) return cached;
