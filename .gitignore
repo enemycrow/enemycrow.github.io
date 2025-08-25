@@ -45,7 +45,9 @@ bower_components
 build/Release
 
 # Dependency directories
+/vendor/
 node_modules/
+/fs-export/
 
 # Optional npm cache directory
 .npm
@@ -75,3 +77,9 @@ serviceAccount.json
 
 # Archivos de configuración de Apache
 .htaccess
+
+# Configuración sensible
+/firebase.json
+/firestore.indexes.json
+/firebase.rule
+.firebaserc
