@@ -72,3 +72,6 @@ php_error.log
 
 # Credenciales de servicio de Firebase
 serviceAccount.json
+
+# Archivos de configuración de Apache
+.htaccess
