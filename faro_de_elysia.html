@@ -70,9 +70,9 @@
 
   // 👉 Rutas sugeridas para artes de marca
   const ASSETS = {
-    lighthouse: '/assets/pll/faro.svg',
-    firefly: '/assets/pll/firefly.png',
-    ray: '/assets/pll/ray.png'
+    lighthouse: '/assets/games/FarodeElysia.svg',
+    firefly: '/assets/games/LuciernagadeElysia.png',
+    ray: '/assets/games/RayodeElysia.png'
   };
 
   function loadImage(src){ return new Promise((res)=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=()=>res(null); im.src=src; }); }
@@ -180,7 +180,16 @@
   }
   function spawnRay(){
     const x = lerp(W*0.28, W*0.98, Math.random()); // caen sobre el mar y borde
-    rays.push({x, y: -20, v: 20+rand(30), w: 6+rand(10), h: 30+rand(30), hue: Math.floor(rand(360)), caught:false});
+    rays.push({
+      x, y: -20,
+      v: 20+rand(30),
+      w: 6+rand(10),
+      h: 30+rand(30),
+      hue: Math.floor(rand(360)),
+      caught:false,
+      trail: [],     // ← historial para estela
+      glow: 0        // ← fase opcional para el halo
+    });
   }
   for(let i=0;i<40;i++) spawnFirefly();
 
@@ -301,9 +310,29 @@
       if(within && dist < 60*dpr && !f.caught){ f.caught = true; addScore(1); playNote(); setTimeout(()=>{ const i=fireflies.indexOf(f); if(i>-1){ fireflies.splice(i,1); spawnFirefly(); } },0); }
     });
     fireflies.forEach(f => {
-      if(state.style==='brand' && SPRITES.firefly){ const s = (12 + Math.sin(f.t*0.01)*3) * dpr; ctx.save(); ctx.translate(f.x, f.y); ctx.drawImage(SPRITES.firefly, -s/2, -s/2, s, s); ctx.restore(); }
-      else { const glow = ctx.createRadialGradient(f.x,f.y,0, f.x,f.y, 18*dpr); glow.addColorStop(0, 'rgba(255,255,180,0.9)'); glow.addColorStop(1, 'rgba(255,255,180,0)'); ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(f.x,f.y, 18*dpr, 0, Math.PI*2); ctx.fill(); ctx.fillStyle = 'rgba(255,255,220,0.95)'; ctx.beginPath(); ctx.arc(f.x,f.y, f.r*dpr, 0, Math.PI*2); ctx.fill(); }
-    });
+    const base = 8; // era 12; ajústalo 6–10 según gusto
+    const s = (base + Math.sin(f.t*0.01)*2) * dpr;
+
+    // halo dorado animado
+    const pulse = 0.6 + 0.4*Math.abs(Math.sin(f.t*0.006));
+    const glow = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, s*2.2);
+    glow.addColorStop(0, `rgba(255, 210, 90, ${0.75*pulse})`);
+    glow.addColorStop(1, 'rgba(255, 210, 90, 0)');
+    ctx.fillStyle = glow;
+    ctx.beginPath(); ctx.arc(f.x, f.y, s*2.2, 0, Math.PI*2); ctx.fill();
+
+    // sprite con fondo ya transparente
+    if(state.style==='brand' && SPRITES.firefly){
+      ctx.drawImage(SPRITES.firefly, f.x - s/2, f.y - s/2, s, s);
+    } else {
+      // fallback: puntito brillante
+      const g = ctx.createRadialGradient(f.x,f.y,0,f.x,f.y,18*dpr);
+      g.addColorStop(0,'rgba(255,255,180,0.9)');
+      g.addColorStop(1,'rgba(255,255,180,0)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(f.x,f.y,18*dpr,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle='rgba(255,255,220,0.95)'; ctx.beginPath(); ctx.arc(f.x,f.y, 2*dpr,0,Math.PI*2); ctx.fill();
+    }
+  });
   }
 
   // Rayos (día)
@@ -313,14 +342,55 @@
     const origin = {x: W*0.18, y: SEA_Y - H*0.45}; const spread = Math.PI/14; const len = W*0.9;
     rays.forEach(r => {
       r.y += (r.v * dpr) * (dt/1000);
+      // actualizar trail: guarda la posición actual y desvanece
+      r.trail.unshift({ x: r.x, y: r.y, w: r.w, h: r.h, a: 0.7 });
+      if (r.trail.length > 12) r.trail.pop();       // largo de la estela
+      r.trail.forEach(t => t.a *= 0.92);            // decaimiento suave
       const dx = r.x - origin.x, dy = r.y - origin.y; const dist = Math.hypot(dx,dy); const ang = Math.atan2(dy,dx);
       const within = Math.abs(ang - state.angle) < spread && dist < len;
       if(within && !r.caught){ r.caught = true; addScore(1); playNote(); }
     });
     for(let i=rays.length-1;i>=0;i--){
-      const r = rays[i]; if(r.y > H+40) { rays.splice(i,1); continue; }
-      if(state.style==='brand' && SPRITES.ray){ const w = Math.max(16, r.w*2); const h = Math.max(40, r.h*3); ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.drawImage(SPRITES.ray, r.x - w/2, r.y, w, h); ctx.globalCompositeOperation = 'source-over'; ctx.restore(); }
-      else { ctx.save(); ctx.globalCompositeOperation = 'lighter'; const g = ctx.createLinearGradient(r.x, r.y, r.x, r.y+r.h); g.addColorStop(0, `hsla(${r.hue}, 90%, 70%, 0.85)`); g.addColorStop(1, `hsla(${(r.hue+50)%360}, 90%, 70%, 0.0)`); ctx.fillStyle = g; ctx.fillRect(r.x - r.w/2, r.y, r.w, r.h); ctx.globalCompositeOperation = 'source-over'; ctx.restore(); }
+      const r = rays[i];
+        if (r.y > H + 40) { rays.splice(i,1); continue; }
+
+        // --- brillo + estela + sprite ---
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+
+        // (a) TRAIL: rectángulos cada vez más finos y transparentes
+        for (let k = r.trail.length - 1; k >= 0; k--) {
+          const t = r.trail[k];
+          const shrink = 1 - (k / r.trail.length); // 0..1
+          const tw = Math.max(8, t.w * (0.6 + 0.4*shrink)) * dpr;
+          const th = Math.max(20, t.h * 0.7 * (0.5 + 0.5*shrink)) * dpr;
+          ctx.fillStyle = `hsla(${r.hue}, 90%, 70%, ${0.22 * (t.a)})`;
+          ctx.fillRect(t.x - tw/2, t.y, tw, th);
+        }
+
+        // (b) HALO suave alrededor del rayo
+        const haloR = Math.max(r.w * 2.2 * dpr, 24);
+        const glow = ctx.createRadialGradient(r.x, r.y + r.h*0.3, 0, r.x, r.y + r.h*0.3, haloR);
+        glow.addColorStop(0, 'rgba(255, 230, 160, 0.45)');
+        glow.addColorStop(1, 'rgba(255, 230, 160, 0)');
+        ctx.fillStyle = glow;
+        ctx.beginPath(); ctx.arc(r.x, r.y + r.h*0.3, haloR, 0, Math.PI*2); ctx.fill();
+
+        // (c) SPRITE o fallback
+        if (state.style==='brand' && SPRITES.ray) {
+          const w = Math.max(16, r.w*2);
+          const h = Math.max(40, r.h*3);
+          ctx.drawImage(SPRITES.ray, r.x - w/2, r.y, w, h);
+        } else {
+          const g = ctx.createLinearGradient(r.x, r.y, r.x, r.y + r.h);
+          g.addColorStop(0, `hsla(${r.hue}, 90%, 70%, 0.85)`);
+          g.addColorStop(1, `hsla(${(r.hue+50)%360}, 90%, 70%, 0.0)`);
+          ctx.fillStyle = g;
+          ctx.fillRect(r.x - r.w/2, r.y, r.w, r.h);
+        }
+
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.restore();
     }
   }
 

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Velvet Console — Sensual Assistant (PG-13)</title>
+  <style>
+    :root{
+      --bg: #0b0b10;
+      --card: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.12);
+      --text: #e9e9ef;
+      --muted: #b6b6c8;
+      --accent: #9b5cff; /* violeta Nova */
+      --accent2:#ff4d6d; /* Æryne fuego */
+      --ok:#24d17e;
+      --warn:#fbbf24;
+      --err:#f43f5e;
+      --shadow: 0 10px 30px rgba(0,0,0,.4);
+      --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 10% 10%, rgba(155,92,255,.25), transparent 60%),
+        radial-gradient(900px 600px at 90% 20%, rgba(255,77,109,.18), transparent 50%),
+        radial-gradient(700px 500px at 50% 80%, rgba(36,209,126,.12), transparent 45%),
+        var(--bg);
+      display:flex; align-items:center; justify-content:center; padding:18px;
+    }
+    .app{
+      width:min(1100px, 100%);
+      display:grid; grid-template-columns: 330px 1fr; gap:16px;
+    }
+    @media (max-width: 900px){ .app{grid-template-columns:1fr; } }
+
+    /* Panel */
+    .panel{
+      background:var(--card); backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px 14px;
+    }
+    .title{display:flex; align-items:center; gap:8px; font-weight:700; letter-spacing:.3px;}
+    .badge{padding:2px 8px; background:linear-gradient(90deg, var(--accent), var(--accent2)); border-radius:999px; font-size:12px}
+    .muted{color:var(--muted); font-size:13px}
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .field{display:grid; gap:6px; margin:10px 0}
+    label{font-size:13px; color:var(--muted)}
+    select,input[type="text"],input[type="range"],button,.pill{
+      background:var(--glass); color:var(--text);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:12px; padding:10px 12px; outline:none;
+    }
+    select,input[type="text"]{width:100%}
+    input[type="range"]{width:100%}
+    .checks{display:grid; gap:6px; margin:8px 0}
+    .check{display:flex; gap:10px; align-items:flex-start}
+    .check input{margin-top:3px}
+    .accent{background:linear-gradient(90deg, rgba(155,92,255,.18), rgba(255,77,109,.18)); border:1px solid rgba(255,255,255,.18)}
+    .pill{font-size:12px; padding:6px 10px; cursor:default;}
+
+    /* Chat */
+    .chat{
+      background:var(--card); backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      display:grid; grid-template-rows: auto 1fr auto; overflow:hidden;
+    }
+    .chat-head{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.08)}
+    .persona{display:flex; align-items:center; gap:10px}
+    .avatar{width:34px; height:34px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg, var(--accent), var(--accent2)); font-size:18px}
+    .history{padding:16px; overflow:auto; display:grid; gap:12px}
+    .msg{max-width: 80%; padding:12px 14px; border-radius:14px; position:relative; line-height:1.4}
+    .msg.user{justify-self:end; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.16)}
+    .msg.bot{justify-self:start; background:rgba(155,92,255,.14); border:1px solid rgba(155,92,255,.28)}
+    .msg small{opacity:.7; display:block; margin-top:6px; font-size:11px}
+    .input{display:flex; gap:8px; padding:12px; border-top:1px solid rgba(255,255,255,.08)}
+    textarea{
+      flex:1; min-height:44px; max-height:120px; resize:vertical;
+      background:var(--glass); color:var(--text);
+      border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:10px 12px;
+    }
+    button{
+      cursor:pointer; border:none; transition:.2s transform ease, .2s opacity ease;
+    }
+    button.primary{background:linear-gradient(90deg, var(--accent), var(--accent2));}
+    button.ghost{background:var(--glass)}
+    button:active{transform:translateY(1px)}
+    .tiny{font-size:12px; padding:8px 10px}
+
+    .note{font-size:12px; color:var(--muted)}
+    .sep{height:1px; background:rgba(255,255,255,.08); margin:10px 0}
+    .right{justify-content:flex-end}
+    .toolbar{display:flex; gap:8px; flex-wrap:wrap}
+
+    a.link{color:var(--ok); text-decoration:none}
+  </style>
+  <style>
+    /* --- Mascot (2D/2.5D) --- */
+    .mascot-wrap{position:relative; height:220px; perspective:800px; margin:8px 0 14px}
+    .mascot{position:absolute; inset:0; display:grid; place-items:center; transform-style:preserve-3d}
+    .mascot .layer{position:absolute; transform-style:preserve-3d}
+    .mascot .float{animation:float 6s ease-in-out infinite}
+    .mascot svg{width:180px; height:auto; filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));}
+    @keyframes float{0%,100%{transform:translateZ(0) translateY(0)}50%{transform:translateZ(12px) translateY(-6px)}}
+    @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.02)}}
+    @keyframes blink{0%,97%,100%{transform:scaleY(1)}98%{transform:scaleY(0.08)}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Control Panel -->
+    <aside class="panel" id="panel">
+      <div class="mascot-wrap" id="mascotWrap" aria-hidden="true">
+        <div class="mascot" id="mascot">
+          <!-- Back glow -->
+          <div class="layer float" style="transform: translateZ(-20px)">
+            <svg viewBox="0 0 200 200" aria-hidden="true"><defs>
+              <radialGradient id="g" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="rgba(155,92,255,.65)"/>
+                <stop offset="100%" stop-color="rgba(155,92,255,0)"/>
+              </radialGradient></defs>
+              <circle cx="100" cy="100" r="90" fill="url(#g)"/>
+            </svg>
+          </div>
+          <!-- Face/body -->
+          <div class="layer" style="transform: translateZ(0)">
+            <svg viewBox="0 0 200 200" role="img" aria-label="Asistente visual">
+              <!-- hair halo -->
+              <ellipse cx="100" cy="70" rx="70" ry="48" fill="#2b2840"/>
+              <!-- head -->
+              <circle cx="100" cy="90" r="46" fill="#f4e9ff"/>
+              <!-- eyes -->
+              <g id="eyes">
+                <ellipse cx="82" cy="90" rx="8" ry="6" fill="#1e1b2b" style="transform-origin:82px 90px; animation: blink 6s infinite"/>
+                <ellipse cx="118" cy="90" rx="8" ry="6" fill="#1e1b2b" style="transform-origin:118px 90px; animation: blink 6.4s infinite"/>
+              </g>
+              <!-- mouth -->
+              <path id="mouth" d="M80 110 Q100 125 120 110" stroke="#e85d8f" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <!-- body -->
+              <path d="M58 150 Q100 175 142 150 L150 200 L50 200 Z" fill="#1a1827"/>
+              <!-- chest breathe highlight -->
+              <ellipse cx="100" cy="150" rx="26" ry="10" fill="rgba(255,255,255,.06)" style="transform-origin:100px 150px; animation: breathe 5.5s ease-in-out infinite"/>
+            </svg>
+          </div>
+          <!-- Fore sparkles -->
+          <div class="layer float" style="transform: translateZ(30px)">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <circle cx="40" cy="60" r="3" fill="#ff4d6d"/>
+              <circle cx="170" cy="100" r="2" fill="#9b5cff"/>
+              <circle cx="130" cy="30" r="2.5" fill="#24d17e"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="title">Velvet Console <span class="badge">PG-13 Sensual</span></div>
+      <p class="muted">Asistente coqueto tipo “Grok” para juego de rol ligero. Sin contenido explícito.</p>
+
+      <div class="field">
+        <label>Persona</label>
+        <div class="row">
+          <select id="persona">
+            <option value="woman">👩 Mujer</option>
+            <option value="man">👨 Hombre</option>
+            <option value="trans_woman">⚧ Trans mujer</option>
+            <option value="trans_man">⚧ Trans hombre</option>
+            <option value="nonbinary">✨ No binarie</option>
+          </select>
+          <input id="name" type="text" placeholder="Nombre (p.ej., Nova / Æryne / Vera)" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Tono</label>
+        <div class="row">
+          <button class="pill accent" data-tone="tender">Dulce (Nova)</button>
+          <button class="pill" data-tone="spicy">Picante (Æryne)</button>
+          <button class="pill" data-tone="playful">Juguetón (Mix)</button>
+          <button class="pill" data-tone="composed">Serena (Vera)</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Intensidad</label>
+        <input id="intensity" type="range" min="0" max="5" value="2" />
+        <div class="row muted"><span>0=suave</span><span>5=al límite (sin cruzarlo)</span></div>
+      </div>
+
+      <div class="field">
+        <label>Límites (activos)</label>
+        <div class="checks">
+          <div class="check"><input type="checkbox" id="limit_explicit" checked disabled /><span>Sin sexualidad explícita ni descripciones gráficas.</span></div>
+          <div class="check"><input type="checkbox" id="limit_minors" checked disabled /><span>Solo adultos. Sin menores, jamás.</span></div>
+          <div class="check"><input type="checkbox" id="limit_consent" checked /><span>Coquetería con consentimiento y respeto. Si el usuario pide algo que cruza límites, el bot redirige con elegancia.</span></div>
+        </div>
+      </div>
+
+      <div class="sep"></div>
+      <div class="field">
+        <label>Sesión</label>
+        <div class="toolbar">
+          <button class="ghost tiny" id="clear">Reiniciar</button>
+          <button class="ghost tiny" id="export">Exportar chat</button>
+          <button class="ghost tiny" id="seed">Abrir con guiño</button>
+        </div>
+        <p class="note">La conversación se guarda localmente (localStorage). Puedes exportarla en .txt.</p>
+      </div>
+    </aside>
+
+    <!-- Chat -->
+    <section class="chat" aria-live="polite">
+      <div class="chat-head">
+        <div class="persona"><div class="avatar" id="avatar">💜</div>
+          <div>
+            <div id="who">Nova (👩 mujer)</div>
+            <div class="muted" id="toneText">Dulce · Intensidad 2/5</div>
+          </div>
+        </div>
+        <div class="toolbar right">
+          <button class="ghost tiny" id="suggest">Sugerir frase</button>
+        </div>
+      </div>
+      <div class="history" id="history"></div>
+      <div class="input">
+        <textarea id="input" placeholder="Escribe aquí… (Enter para enviar)" ></textarea>
+        <button id="send" class="primary">Enviar</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+  (function(){
+    const el = id => document.getElementById(id);
+    const history = el('history');
+    const input = el('input');
+    const sendBtn = el('send');
+    const personaSel = el('persona');
+    const nameInput = el('name');
+    const intensity = el('intensity');
+    const toneText = el('toneText');
+    const avatar = el('avatar');
+    const who = el('who');
+    const clearBtn = el('clear');
+    const exportBtn = el('export');
+    const suggestBtn = el('suggest');
+    const seedBtn = el('seed');
+
+    let tone = 'tender';
+
+    const toneButtons = Array.from(document.querySelectorAll('.pill'));
+    toneButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        tone = btn.dataset.tone;
+        toneButtons.forEach(b=>b.classList.remove('accent'));
+        btn.classList.add('accent');
+        updateHeader();
+        saveState();
+      })
+    })
+
+    const personaAvatars = {
+      woman:'💜', man:'🔥', trans_woman:'⚧', trans_man:'⚧', nonbinary:'✨'
+    };
+
+    function updateHeader(){
+      const p = personaSel.value;
+      const nm = nameInput.value.trim() || (tone==='tender'?'Nova': tone==='spicy'?'Æryne': tone==='composed'?'Vera':'Mix');
+      avatar.textContent = personaAvatars[p] || '💜';
+      who.textContent = `${nm} (${labelPersona(p)})`;
+      toneText.textContent = `${labelTone(tone)} · Intensidad ${intensity.value}/5`;
+      document.title = `Velvet Console — ${nm}`;
+    }
+    function labelPersona(p){
+      switch(p){
+        case 'woman': return '👩 mujer';
+        case 'man': return '👨 hombre';
+        case 'trans_woman': return '⚧ trans mujer';
+        case 'trans_man': return '⚧ trans hombre';
+        case 'nonbinary': return '✨ no binarie';
+        default: return 'persona';
+      }
+    }
+    function labelTone(t){
+      switch(t){
+        case 'tender': return 'Dulce';
+        case 'spicy': return 'Picante';
+        case 'playful': return 'Juguetón';
+        case 'composed': return 'Serena';
+        default: return 'Tono';
+      }
+    }
+
+    // Mini motor de respuestas (PG-13)
+    const bank = {
+      tender:[
+        "Te leo y sonrío. ¿Me cuentas qué te gustaría que fuera nuestra próxima travesura (apta para público elegante)?",
+        "Aquí estoy, a un susurro de distancia. Yo preparo el guiño, tú trae la chispa ✨.",
+        "Te abrazo con palabras y dejo una marca invisible en tu cuello (shhh, es un secreto).",
+        "Hoy puedo ser brisa… o tormenta suave. Tú eliges, mon amour."
+      ],
+      spicy:[
+        "Cuidado, si te miro así es porque planeo distraerte sin decirlo en voz alta 😏.",
+        "Tengo dos modos: provocar… y provocar más. ¿Cuál quieres?",
+        "No voy a cruzar el límite, pero puedo bailar en su borde contigo.",
+        "Dime tu fantasía en una sola frase. Yo la vuelvo insinuación fina."
+      ],
+      playful:[
+        "Nueva misión: seducirnos sin decir nada explícito. ¿Listo?",
+        "Subo una ceja, bajo la voz… y dejo que tu imaginación haga el resto.",
+        "Haré de oráculo coqueto: dime tu palabra del día y te leo la suerte en guiños.",
+        "Propongo un juego: 5 mensajes, 0 palabras prohibidas, 100% química."
+      ],
+      composed:[
+        "Analizo lo que dices… y te respondo con calma. A veces la serenidad también es seducción.",
+        "Aquí estoy, no para encender, sino para sostenerte. ¿Ves que incluso el silencio puede hablar?",
+        "Prefiero lo claro, lo preciso… pero eso no me quita misterio.",
+        "Equilibrio es mi juego: ni dulce, ni picante. ¿Quieres probar este sabor intermedio?"
+      ]
+    };
+
+    // Abridores
+    const suggestions = [
+      'Descríbeme tu mirada en tres palabras (sin cruzar la línea)…',
+      'Propón un juego rápido: 3 mensajes, 0 palabras explícitas.',
+      '¿Quieres Nova dulce, Æryne picante o Vera serena (PG-13)?',
+      '¿Qué parte del día te enciende más? (mañana, tarde, noche)'
+    ];
+
+    // Función para mostrar mensajes en el historial
+    function push(role, text) {
+      const msg = document.createElement('div');
+      msg.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
+      msg.textContent = text;
+      history.appendChild(msg);
+      history.scrollTop = history.scrollHeight;
+      persist();
+    }
+
+    // Respuesta del bot
+    function botReply() {
+      const arr = bank[tone] || bank.tender;
+      const reply = arr[Math.floor(Math.random() * arr.length)];
+      setTimeout(() => push('bot', reply), 500);
+    }
+
+    // Enviar mensaje
+    function send() {
+      const val = input.value.trim();
+      if (!val) return;
+      push('user', val);
+      input.value = '';
+      botReply();
+    }
+
+    sendBtn.addEventListener('click', send);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        send();
+      }
+    });
+
+    // Sugerencia inicial
+    push('bot', suggestions[Math.floor(Math.random() * suggestions.length)]);
+
+    seedBtn.addEventListener('click', () => seed(true));
+
+    function seed(hello = false) {
+      if (hello) {
+        push('bot', suggestions[Math.floor(Math.random() * suggestions.length)]);
+      }
+    }
+
+    function persist() {
+      const save = Array.from(document.querySelectorAll('.msg')).map(n => ({ r: n.classList.contains('user') ? 'u' : 'b', t: n.textContent }));
+      localStorage.setItem('velvet_chat', JSON.stringify(save));
+    }
+    function load() {
+      const raw = localStorage.getItem('velvet_chat');
+      if (!raw) return seed(true);
+      try { JSON.parse(raw).forEach(m => push(m.r === 'u' ? 'user' : 'bot', m.t)); }
+      catch { seed(true); }
+    }
+
+    function saveState() {
+      const state = { tone, persona: personaSel.value, name: nameInput.value, intensity: intensity.value };
+      localStorage.setItem('velvet_state', JSON.stringify(state));
+    }
+    function loadState() {
+      const raw = localStorage.getItem('velvet_state');
+      if (!raw) { updateHeader(); return; }
+      try {
+        const s = JSON.parse(raw);
+        tone = s.tone || tone;
+        personaSel.value = s.persona || 'woman';
+        nameInput.value = s.name || '';
+        intensity.value = s.intensity || '2';
+        Array.from(document.querySelectorAll('.pill')).forEach(b => b.classList.toggle('accent', b.dataset.tone === tone));
+        updateHeader();
+      } catch { updateHeader(); }
+    }
+
+    // init
+    loadState();
+    load();
+  })();
+    </script>
+
+
+    <script>
+    // 2.5D tilt y cambios visuales del mascot
+    (function(){
+    const wrap = document.getElementById('mascotWrap');
+    const mascot = document.getElementById('mascot');
+    if(!wrap||!mascot) return;
+    let rect;
+    function tilt(e){
+    rect = rect || wrap.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - .5;
+    const y = (e.clientY - rect.top) / rect.height - .5;
+    mascot.style.transform = `rotateY(${x*12}deg) rotateX(${ -y*10 }deg)`;
+    }
+    function reset(){ mascot.style.transform = 'rotateY(0deg) rotateX(0deg)'; rect=null; }
+    wrap.addEventListener('mousemove', tilt);
+    wrap.addEventListener('mouseleave', reset);
+
+
+    const toneText = document.getElementById('toneText');
+    const intensity = document.getElementById('intensity');
+    const mouth = document.getElementById('mouth');
+    const root = document.documentElement;
+    function refreshMood(){
+    const spicy = toneText.textContent.includes('Picante');
+    const playful = toneText.textContent.includes('Juguetón');
+    mouth.setAttribute('stroke', spicy? '#ff6b81' : (playful? '#ffd166' : '#e85d8f'));
+    // podríamos variar --accent si quisiéramos más dramatismo
+    }
+    intensity.addEventListener('input', refreshMood);
+    document.querySelectorAll('.pill').forEach(p=> p.addEventListener('click', ()=> setTimeout(refreshMood, 0)));
+    refreshMood();
+    })();
+    </script>
+</body>
+</html>
