@@ -137,3 +137,11 @@ html {
   .bribones-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/reinadelosbribones-400.webp') 1x, url('../assets/images/responsive/oeuvres/reinadelosbribones-800.webp') 2x); }
 }
 
+/* Faro de Elysia – instrucciones */
+.lab-instructions {
+  margin-top: 1rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--text);
+}
+
