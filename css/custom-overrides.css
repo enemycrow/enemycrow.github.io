@@ -112,6 +112,11 @@ html {
   color: var(--azul-noche);
 }
 
+.laboratorio-tag {
+  background-color: #7fffd4; /* verde agua */
+  color: var(--azul-noche);
+}
+
 /* === Catálogo Completo === */
 
 /* === Blog Entradas === */
