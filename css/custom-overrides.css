@@ -112,6 +112,11 @@ html {
   color: var(--azul-noche);
 }
 
+.laboratorio-tag {
+  background-color: #7fffd4; /* verde agua */
+  color: var(--azul-noche);
+}
+
 /* === Catálogo Completo === */
 
 /* === Blog Entradas === */
@@ -135,5 +140,13 @@ html {
   .cristalito-img      { background-image: image-set(url('../assets/images/responsive/oeuvres/cristalito-400.webp') 1x, url('../assets/images/responsive/oeuvres/cristalito-800.webp') 2x); }
   .faro-lab-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/faro-elysia-400.webp') 1x, url('../assets/images/responsive/oeuvres/faro-elysia-800.webp') 2x); }
   .bribones-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/reinadelosbribones-400.webp') 1x, url('../assets/images/responsive/oeuvres/reinadelosbribones-800.webp') 2x); }
+}
+
+/* Faro de Elysia – instrucciones */
+.lab-instructions {
+  margin-top: 1rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--text);
 }
 
