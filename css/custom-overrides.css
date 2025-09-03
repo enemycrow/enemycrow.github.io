@@ -99,6 +99,13 @@ html {
   background-position: center;
 }
 
+/* Linaje de los Seis Pétalos */
+.linaje-img {
+  background-image: url('../assets/images/oeuvres/linaje.webp');
+  background-size: cover;
+  background-position: center;
+}
+
 /* Laboratorio – Faro de Elysia */
 .faro-lab-img {
   background-image: url('../assets/images/oeuvres/faro-elysia.webp');
@@ -140,6 +147,7 @@ html {
   .cristalito-img      { background-image: image-set(url('../assets/images/responsive/oeuvres/cristalito-400.webp') 1x, url('../assets/images/responsive/oeuvres/cristalito-800.webp') 2x); }
   .faro-lab-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/faro-elysia-400.webp') 1x, url('../assets/images/responsive/oeuvres/faro-elysia-800.webp') 2x); }
   .bribones-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/reinadelosbribones-400.webp') 1x, url('../assets/images/responsive/oeuvres/reinadelosbribones-800.webp') 2x); }
+  .linaje-img          { background-image: image-set(url('../assets/images/responsive/oeuvres/linaje-400.webp') 1x, url('../assets/images/responsive/oeuvres/linaje-800.webp') 2x); }
 }
 
 /* Faro de Elysia – instrucciones */
