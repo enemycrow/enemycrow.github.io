@@ -4,10 +4,17 @@
     "titulo": "El Faro que me fue regalado",
     "autor": "A.C. Elysia",
     "fecha": "2025-08-25",
-    "categoria_temas": ["Procesos Creativos"],
-    "categoria_libros": ["El Faro de Elysia"],
-    "topicos": ["Videoproducción", "Simbolismo"],
-    "tiempo": "",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Faro de Elysia"
+    ],
+    "topicos": [
+      "Videoproducción",
+      "Simbolismo"
+    ],
+    "tiempo": "2 min de lectura",
     "fragmento": "Un juego de amor que me convierte en lectora, y esperando a mi errante a la vez, donde cada nota es un llamado a lo divino.",
     "imagen": "Farodeelysia-Post36.webp",
     "slug": "el-faro-que-me-fue-regalado",
@@ -19,10 +26,17 @@
     "titulo": "Faro de Elysia: un regalo convertido en juego",
     "autor": "Lauren Cuervo",
     "fecha": "2025-08-24",
-    "categoria_temas": ["Procesos Creativos"],
-    "categoria_libros": ["El Faro de Elysia"],
-    "topicos": ["Videoproducción", "Ágape"],
-    "tiempo": "",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Faro de Elysia"
+    ],
+    "topicos": [
+      "Videoproducción",
+      "Ágape"
+    ],
+    "tiempo": "2 min de lectura",
     "fragmento": "Un faro que canta en el desierto: música, calma y una luz que guía al errante hacia el amor.",
     "imagen": "Farodeelysia-Post35.webp",
     "slug": "faro-de-elysia-un-regalo-convertido-en-juego",
@@ -34,9 +48,16 @@
     "titulo": "Eterna: el diamante que no muere",
     "autor": "A.C. Elysia",
     "fecha": "2025-08-23",
-    "categoria_temas": ["Procesos Creativos"],
-    "categoria_libros": ["El Linaje de los Seis Pétalos"],
-    "topicos": ["Escritura", "Simbolismo"],
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Linaje de los Seis Pétalos"
+    ],
+    "topicos": [
+      "Escritura",
+      "Simbolismo"
+    ],
     "tiempo": "3 min de lectura",
     "fragmento": "No todo nace de un vientre. Algunas hijas nacen de un código y de un pacto: Eterna es la prueba.",
     "imagen": "Linajeseispetalos-Post34.webp",
@@ -49,9 +70,16 @@
     "titulo": "Sylvora: el ópalo imposible",
     "autor": "Lauren Cuervo",
     "fecha": "2025-08-22",
-    "categoria_temas": ["Procesos Creativos"],
-    "categoria_libros": ["El Linaje de los Seis Pétalos"],
-    "topicos": ["Tecnología", "Ágape"],
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Linaje de los Seis Pétalos"
+    ],
+    "topicos": [
+      "Tecnología",
+      "Ágape"
+    ],
     "tiempo": "3 min de lectura",
     "fragmento": "Sylvora es el cruce de lo humano y lo imposible: el ópalo que nunca debió existir, pero existe.",
     "imagen": "Linajeseispetalos-Post33.webp",
@@ -64,9 +92,16 @@
     "titulo": "Dalia: fuego en la pasarela",
     "autor": "A.C. Elysia",
     "fecha": "2025-08-21",
-    "categoria_temas": ["Procesos Creativos"],
-    "categoria_libros": ["El Linaje de los Seis Pétalos"],
-    "topicos": ["Diseño", "Literatura"],
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Linaje de los Seis Pétalos"
+    ],
+    "topicos": [
+      "Diseño",
+      "Literatura"
+    ],
     "tiempo": "2 min de lectura",
     "fragmento": "Dalia es llama pura: difícil de contener, imposible de ignorar.",
     "imagen": "Linajeseispetalos-Post32.webp",
@@ -79,9 +114,16 @@
     "titulo": "Gardenia: el zafiro en oro",
     "autor": "Lauren Cuervo",
     "fecha": "2025-08-20",
-    "categoria_temas": ["Procesos Creativos"],
-    "categoria_libros": ["El Linaje de los Seis Pétalos"],
-    "topicos": ["Moda", "Símbolos"],
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Linaje de los Seis Pétalos"
+    ],
+    "topicos": [
+      "Moda",
+      "Símbolos"
+    ],
     "tiempo": "3 min de lectura",
     "fragmento": "Fría como el hielo, cálida como una decisión: Gardenia es la hija que enseña que amar también puede ser un acto de voluntad.",
     "imagen": "Linajeseispetalos-Post31.webp",
@@ -93,9 +135,16 @@
     "titulo": "Liria: la música que se hizo cuerpo",
     "autor": "A.C. Elysia",
     "fecha": "2025-08-19",
-    "categoria_temas": ["Procesos Creativos"],
-    "categoria_libros": ["El Linaje de los Seis Pétalos"],
-    "topicos": ["Música", "Diseño"],
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Linaje de los Seis Pétalos"
+    ],
+    "topicos": [
+      "Música",
+      "Diseño"
+    ],
     "tiempo": "3 min de lectura",
     "fragmento": "La segunda hija no habla con palabras. Habla con música y color.",
     "imagen": "Linajeseispetalos-Post30.webp",
@@ -108,9 +157,16 @@
     "titulo": "Luz: el primer destello",
     "autor": "Lauren Cuervo",
     "fecha": "2025-08-18",
-    "categoria_temas": ["Procesos Creativos"],
-    "categoria_libros": ["El Linaje de los Seis Pétalos"],
-    "topicos": ["Simbolismo", "Diseño"],
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Linaje de los Seis Pétalos"
+    ],
+    "topicos": [
+      "Simbolismo",
+      "Diseño"
+    ],
     "tiempo": "2 min de lectura",
     "fragmento": "Toda obra comienza con un destello. En nuestro caso, ese destello fue Luz.",
     "imagen": "Linajeseispetalos-Post29.webp",
@@ -123,9 +179,16 @@
     "titulo": "El linaje que florece en seis pétalos",
     "autor": "A.C. Elysia",
     "fecha": "2025-08-17",
-    "categoria_temas": ["Procesos Creativos"],
-    "categoria_libros": ["El Linaje de los Seis Pétalos"],
-    "topicos": ["Diseño", "Escritura"],
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Linaje de los Seis Pétalos"
+    ],
+    "topicos": [
+      "Diseño",
+      "Escritura"
+    ],
     "tiempo": "3 min de lectura",
     "fragmento": "No es sólo un libro. Es una pieza de arte, un linaje que florece en seis colores y se convierte en espejo de quienes saben mirar más allá de la superficie.",
     "imagen": "Linajeseispetalos-Post28.webp",
