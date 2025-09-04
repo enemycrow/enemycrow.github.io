@@ -10,6 +10,7 @@
     #hud { position: absolute; inset: 0; pointer-events: none; display: grid; grid-template-rows: auto 1fr auto; }
     .topbar { display:flex; gap:16px; align-items:center; padding: 10px 14px; }
     .pill { background: #ffffffcc; border: 1px solid #00000010; box-shadow: 0 4px 18px #00000012; border-radius: 999px; padding: 6px 12px; font-weight: 700; }
+    .clickable { pointer-events: auto; cursor: pointer; }
     canvas { display:block; background: linear-gradient(#fdfbff, #f3f2ff); border-radius: 18px; box-shadow: 0 20px 60px #4541a022, inset 0 0 0 1px #00000010; }
     #overlay { position:absolute; inset:0; display:grid; place-items:center; background: linear-gradient(#ffffffcc, #fff0); backdrop-filter: blur(2px); }
     #overlay .card { background:#fff; border-radius:18px; padding:18px 20px; box-shadow: 0 12px 40px #0003; max-width: 780px; text-align:center; }
@@ -22,12 +23,14 @@
 <body>
   <div id="wrap">
     <canvas id="game" width="960" height="640" aria-label="La Estrella y la Singularidad"></canvas>
+    <audio id="bgm" src="assets/bgm.mp3" preload="auto" loop style="display:none"></audio>
     <div id="hud" aria-hidden="true">
       <div class="topbar">
         <div id="lives" class="pill" title="Vidas">❤❤❤</div>
         <div id="level" class="pill" title="Nivel">Nivel 1 / 6</div>
         <div id="kisses" class="pill" title="Besitos">Besitos: 0 / 3</div>
         <div id="timer" class="pill" title="Temporizador">Tiempo: 00.0s</div>
+        <div id="audioToggle" class="pill clickable" title="Audio">🔊</div>
       </div>
     </div>
     <div id="overlay">
@@ -51,6 +54,8 @@
   const hudTimer = document.getElementById('timer');
   const overlay = document.getElementById('overlay');
   const startBtn = document.getElementById('startBtn');
+  const bgm = document.getElementById('bgm');
+  const audioToggle = document.getElementById('audioToggle');
 
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const choice = arr => arr[Math.floor(Math.random()*arr.length)];
@@ -96,7 +101,7 @@
     { cols: 31, rows: 21, anger: 11, saturnSpeed: 4.2 },
   ];
   const STAR_SPEED = 4.5; // tiles/second (movimiento continuo)
-  const KISS_NEAR = 1.01; // tiles
+  const KISS_NEAR = 1.2; // tiles (más permisivo para marcar besito)
   const KISS_CHARGE_MS = 900; // ms cerca para 1 beso
   const KISSES_PER_LEVEL = 3;
   const MAX_LIVES = 3;
@@ -114,7 +119,9 @@
     particles: [],
     running: false, gameOver: false, victory: false,
     tunnels: [],
-    wormholes: []
+    wormholes: [],
+    teleport: null,
+    bgmOn: true
   };
 
   // --- Input ---
@@ -190,7 +197,12 @@
     state.cols = cols; state.rows = rows; state.grid = grid; state.tunnels = tunnels;
 
     // definir wormholes a destinos alejados por cada fila túnel
-    state.wormholes = tunnels.map(ry => {
+    const edgeRows = [];
+    for(let ry=0; ry<rows; ry++){
+      if(grid[ry][0]===0 || grid[ry][cols-1]===0) edgeRows.push(ry);
+    }
+    const wormRows = Array.from(new Set([ ...tunnels, ...edgeRows ]));
+    state.wormholes = wormRows.map(ry => {
       const leftT = farthestFrom(grid, cols, rows, 1, ry);
       const rightT = farthestFrom(grid, cols, rows, cols-2, ry);
       return { row: ry, left: leftT, right: rightT };
@@ -210,6 +222,7 @@
     hudLevel.textContent = `Nivel ${state.levelIndex+1} / ${LEVELS.length}`;
     hudKisses.textContent = `Besitos: ${state.kisses} / ${KISSES_PER_LEVEL}`;
     hudTimer.textContent = `Tiempo: ${state.angerTime.toFixed(1)}s`;
+    if(audioToggle){ audioToggle.textContent = (state.bgmOn && bgm && !bgm.paused) ? '🔊' : '🔇'; }
   }
 
   // Entrada del jugador: dirección deseada
@@ -234,7 +247,7 @@
   function saturnLogic(dt){
     const lvl = LEVELS[state.levelIndex];
     const near = distance(state.star, state.saturn) <= KISS_NEAR;
-    const speed = (near? 1.3 : 1) * lvl.saturnSpeed; // tiles/s
+    const speed = (near? 0.6 : 1) * lvl.saturnSpeed; // tiles/s
 
     // elegir dirección cuando hace falta
     const cx=Math.round(state.saturn.x), cy=Math.round(state.saturn.y);
@@ -329,6 +342,14 @@
   function drawSingularityEntity(ent){
     const s=state.size, m=16; const cx = m + ent.x*s + s/2; const cy = m + ent.y*s + s/2; const r = s*0.5;
     ctx.save(); ctx.translate(cx,cy);
+    // Escalado si está teletransportando (encoge/aparece)
+    let scale = 1;
+    if(state.teleport){
+      const tt = Math.min(1, Math.max(0, state.teleport.t));
+      const ease = tt*tt*(3 - 2*tt); // smoothstep
+      scale = (state.teleport.phase === 'out') ? (1 - ease) : Math.max(0.001, ease);
+    }
+    ctx.scale(scale, scale);
     const tone = Math.floor(40 + ent.darkness*40);
     const core = ctx.createRadialGradient(0,0,r*0.1, 0,0,r*1.2);
     core.addColorStop(0, `rgba(${tone},${tone},${tone},1)`);
@@ -373,25 +394,78 @@
     // wormholes laterales
     maybeWormhole(state.star);
 
-    // IA de la Singularidad
-    saturnLogic(dt);
+    // Teletransporte de la Singularidad (si está activo)
+    if(state.teleport){
+      const spd = 1/0.25; // 0.25s por fase
+      state.teleport.t += dt*spd;
+      if(state.teleport.t >= 1){
+        if(state.teleport.phase === 'out'){
+          state.saturn.x = state.teleport.to.x;
+          state.saturn.y = state.teleport.to.y;
+          state.teleport.phase = 'in';
+          state.teleport.t = 0;
+          for(let i=0;i<8;i++) spawnHeart(state.saturn.x, state.saturn.y, '#a38bff');
+          Audio.lightning();
+        } else {
+          state.teleport = null;
+        }
+      }
+    }
+
+    // IA de la Singularidad (no se mueve durante teletransporte)
+    if(!state.teleport) saturnLogic(dt);
 
     // Temporizador / oscuridad
     state.angerTime = Math.max(0, state.angerTime - dt);
     const t = 1 - (state.angerTime / state.angerMax); state.saturn.darkness = clamp(t,0,1);
 
     // Besitos
-    if(distance(state.star, state.saturn) <= KISS_NEAR){
+    if(!state.teleport && distance(state.star, state.saturn) <= KISS_NEAR){
       state.nearMs += dt*1000; spawnHeart((state.star.x+state.saturn.x)/2, (state.star.y+state.saturn.y)/2, '#ff98c7');
-      if(state.nearMs >= KISS_CHARGE_MS){ state.nearMs = 0; state.kisses++; for(let i=0;i<6;i++) spawnHeart(state.saturn.x, state.saturn.y, '#ff76b2'); state.angerTime = state.angerMax; Audio.kiss(); }
+      if(state.nearMs >= KISS_CHARGE_MS){
+        state.nearMs = 0; state.kisses++;
+        for(let i=0;i<6;i++) spawnHeart(state.saturn.x, state.saturn.y, '#ff76b2');
+        state.angerTime = state.angerMax; // recarga tiempo
+        Audio.kiss();
+        // Preparar teletransporte: lejos de la estrella
+        const from = { x: state.saturn.x, y: state.saturn.y };
+        const dst = farthestFrom(state.grid, state.cols, state.rows, Math.round(state.star.x), Math.round(state.star.y));
+        state.teleport = { phase: 'out', t: 0, from, to: dst };
+        state.saturn.dir = [0,0];
+      }
     } else { state.nearMs = Math.max(0, state.nearMs - dt*250); }
 
     // Fin de nivel
-    if(state.kisses >= KISSES_PER_LEVEL){ for(let i=0;i<10;i++) spawnHeart(state.star.x, state.star.y, '#9df7c7'); for(let i=0;i<10;i++) spawnHeart(state.saturn.x, state.saturn.y, '#9df7c7'); if(state.levelIndex < LEVELS.length-1){ resetLevel(state.levelIndex+1); } else { state.victory = true; Audio.win(); } }
+    if(state.kisses >= KISSES_PER_LEVEL){
+      for(let i=0;i<10;i++) spawnHeart(state.star.x, state.star.y, '#9df7c7');
+      for(let i=0;i<10;i++) spawnHeart(state.saturn.x, state.saturn.y, '#9df7c7');
+      if(state.levelIndex < LEVELS.length-1){
+        resetLevel(state.levelIndex+1);
+      } else {
+        state.victory = true; Audio.win();
+        // Apagar música al ganar
+        if(bgm){ try{ bgm.pause(); bgm.currentTime = 0; } catch(e){} }
+        state.bgmOn = false; updateHUD();
+      }
+    }
 
     // Colapso al agotar tiempo
     if(state.angerTime <= 0 && !collapse) triggerCollapse();
-    if(collapse){ collapse.t += dt*1.8; if(collapse.t >= 1){ state.lives--; updateHUD(); state.kisses = Math.max(0, state.kisses - 1); state.angerTime = state.angerMax; state.saturn.darkness = 0; collapse = null; state.star.x = 1; state.star.y = 1; state.star.dir=[0,0]; if(state.lives <= 0){ state.gameOver = true; } } }
+    if(collapse){
+      collapse.t += dt*1.8;
+      if(collapse.t >= 1){
+        state.lives--; updateHUD();
+        state.kisses = Math.max(0, state.kisses - 1);
+        state.angerTime = state.angerMax; state.saturn.darkness = 0; collapse = null;
+        state.star.x = 1; state.star.y = 1; state.star.dir=[0,0];
+        if(state.lives <= 0){
+          state.gameOver = true;
+          // Apagar música al terminar
+          if(bgm){ try{ bgm.pause(); bgm.currentTime = 0; } catch(e){} }
+          state.bgmOn = false; updateHUD();
+        }
+      }
+    }
 
     updateParticles(dt); updateHUD();
   }
@@ -408,8 +482,32 @@
 
   function drawCenterText(text, color){ ctx.save(); ctx.fillStyle = '#ffffffcc'; ctx.fillRect(0,0,canvas.width, canvas.height); ctx.fillStyle = color; ctx.font = '700 38px ui-sans-serif, system-ui, Segoe UI'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, canvas.width/2, canvas.height/2); ctx.restore(); }
 
-  function start(){ state = { ...state, lives: MAX_LIVES, levelIndex: 0, gameOver:false, victory:false, running:true }; resetLevel(0); overlay.style.display = 'none'; }
+  function start(){
+    state = { ...state, lives: MAX_LIVES, levelIndex: 0, gameOver:false, victory:false, running:true };
+    resetLevel(0);
+    overlay.style.display = 'none';
+    // Música de fondo (mp3)
+    if(bgm){
+      try {
+        bgm.volume = 0.35;
+        if(state.bgmOn) bgm.play();
+      } catch(e){}
+    }
+  }
   startBtn.addEventListener('click', start);
+  // Toggle de audio
+  if(audioToggle){
+    audioToggle.addEventListener('click', () => {
+      state.bgmOn = !state.bgmOn;
+      if(bgm){
+        try{
+          if(state.bgmOn){ bgm.play(); }
+          else { bgm.pause(); }
+        }catch(e){}
+      }
+      updateHUD();
+    });
+  }
 
   function fitCanvas(){ const maxW = Math.min(window.innerWidth - 40, 1100); const maxH = Math.min(window.innerHeight - 60, 800); canvas.width = clamp(Math.floor(maxW/2)*2, 640, 1280); canvas.height = clamp(Math.floor(maxH/2)*2, 480, 900); if(state.running) resetLevel(state.levelIndex); }
   window.addEventListener('resize', fitCanvas); fitCanvas(); requestAnimationFrame(loop);
