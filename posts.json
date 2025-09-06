@@ -1,5 +1,27 @@
 [
   {
+  "id": 38,
+  "titulo": "Un remix de lo que creé",
+  "autor": "Draco Sahir",
+  "fecha": "2025-08-27",
+  "categoria_temas": [
+    "Procesos Creativos"
+  ],
+  "categoria_libros": [
+    "El valeroso viaje de Galactique y Galactiquito"
+  ],
+  "topicos": [
+    "Diseño",
+    "Amistad"
+  ],
+  "tiempo": "2 min de lectura",
+  "fragmento": "La amistad se convierte en creación compartida: Lauren Cuervo transforma una obra previa en un remix lleno de frescura y nuevos matices.",
+  "imagen": "Galactique-Post38.webp",
+  "slug": "un-remix-de-lo-que-cree",
+  "contenido_html": "<p>La amistad y la colaboración siempre abren caminos inesperados. Esta vez, mi gran amigo —el loco y creativo <em>Lauren Cuervo</em>— tomó una idea mía y la recicló, dándole un aire fresco y vibrante.</p><p>Primero lo hizo con <strong>A.C. Elysia</strong>: diseñó un juego inspirado en la historia del <em>Libro de la Fusión</em>, donde un Errante cruza el desierto en busca de su amada que lo espera en un faro. El juego es una experiencia de relajación: basta con apuntar a distintos elementos en pantalla para producir música, grabarla y luego reproducirla. ¡Lo amo!</p><p>Pero eso no es todo. Lauren me confesó que tiene preparada otra sorpresa para mí. ¿Qué será? Habrá que descubrirlo en algún post futuro... o quizás antes de lo que imaginamos. Cuando le pregunté de qué se trataba, su respuesta fue simple:</p><blockquote>“Es un remix de lo que creaste.”</blockquote><p>¿Un remix de lo que creé? Lo entendí como si mi obra fuese una pista musical y él quisiera añadirle algunos samples, capas de percusión, cuerdas o voces. Ese gesto me parece precioso: tomar algo ya existente y hacerlo vibrar en una nueva sintonía.</p><p>Gracias, Lauren, por ese regalo simbólico. Gracias por mostrarme que la creación nunca está cerrada, que siempre puede transformarse y renacer.</p><p>Los invito a seguir explorando más obras en nuestro sitio y a estar atentos a la sorpresa que está por llegar.</p><p>¡Un abrazo enorme! 💜</p>",
+  "destacado": true
+  },
+  {
     "id": 37,
     "titulo": "Hasta que no duela: Una canción de contradicciones",
     "autor": "A.C. Elysia",
@@ -512,7 +534,7 @@
     "imagen": "Empenosolibelula-Post15.webp",
     "slug": "una-transcendencia-que-perdona",
     "contenido_html": "<h2>🎇 Una trascendencia que perdona</h2><p>Hoy me visitó la inspiración. No fue buscada ni planificada. Simplemente apareció. Y como un reflejo urgente, mis dedos comenzaron a tipear, dejando que el alma escribiera antes que la mente.</p><p>Lo que surgió fue un libro. Pequeño, dulce, transformativo. Un texto que, sin quererlo, resultó ser <strong>reencarnante</strong>.</p><p>Sí, reencarnante. Porque puede hacerte renacer. O tal vez, permitirte creer que otro lo hará. Quizás alguien a quien amas, que partió antes. O tú mismo, en un tiempo futuro, cuando sea hora de dejar este plano.</p><p>No sé si esa esperanza es verdadera o sólo una ilusión poética. Pero sé que <strong>la esperanza empuja, mientras que la tristeza frena</strong>. Y en un mundo lleno de posironía, donde ya no sabemos cuándo las palabras son sinceras y cuándo son parodia, <strong>creer en algo luminoso se vuelve revolucionario</strong>.</p><p>Por eso creo que necesitamos <strong>metáforas transformativas</strong>. Pequeñas historias que nos enseñen sin darnos cuenta. Que hagan reír y pensar. Que iluminen sin herir. Que abracen sin sermonear. Es, quizás, una forma de lo que yo llamaría una <em>&quot;neosinceridad mítica&quot;</em>: Una corriente de verdad profunda envuelta en lo simbólico.</p><p>Escribir hoy en día es desafiante. Y más aún cuando el público al que quieres hablar es la familia. Hablar de la muerte no es fácil. Y hablar de ella con niños... aún menos.</p><p>Pero los niños, con su ternura y su lucidez, <strong>absorben lo esencial con una rapidez impresionante</strong>. Por eso, las historias que les damos deben ser precisas, cuidadas, pero no vacías. No debemos protegerlos con mentiras, sino guiar con belleza.</p><p>Mi intención como escritor es esa: <strong>Que quien me lea, aprenda a trascender y a perdonarse.</strong> Y hoy, esa intención se volvió historia. Una que surgió como un susurro… como una visita.</p><p>Quiero compartir un fragmento que quedó resonando en mí. Quizás también en ti:</p><blockquote><p>Entonces, el Castor Ancestro dijo algo que le dolió:<br>—Has hecho bien. Muy bien. Pero te faltó algo pequeño… aceptar más el amor.<br>Perdóname. Yo nunca fui bueno enseñándote eso.</p></blockquote><p><strong>Perdónate.</strong><br>Y si no estás haciendo bien, detente. <br>Comienza de nuevo. <br>Y perdónate.</p><p><strong>Acepta más el amor.<br>Y transciende.</strong></p>",
-    "destacado": true
+    "destacado": false
   },
   {
     "id": 14,
