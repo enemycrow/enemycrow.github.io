@@ -23,7 +23,7 @@
 <body>
   <div id="wrap">
     <canvas id="game" width="960" height="640" aria-label="La Estrella y la Singularidad"></canvas>
-    <audio id="bgm" src="assets/bgm.mp3" preload="auto" loop style="display:none"></audio>
+    <div aria-hidden="true" style="display:none"><audio id="bgm" src="assets/audios/The Star and The Singularity.mp3" preload="auto" loop></audio></div>
     <div id="hud" aria-hidden="true">
       <div class="topbar">
         <div id="lives" class="pill" title="Vidas">❤❤❤</div>
@@ -48,6 +48,12 @@
 (() => {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
+  // Offscreen buffer for visual effects (lens distortion)
+  const lensCanvas = document.createElement('canvas');
+  const lensCtx = lensCanvas.getContext('2d');
+  // Offscreen scene buffer (background only)
+  const sceneCanvas = document.createElement('canvas');
+  const sceneCtx = sceneCanvas.getContext('2d');
   const hudLives = document.getElementById('lives');
   const hudLevel = document.getElementById('level');
   const hudKisses = document.getElementById('kisses');
@@ -84,10 +90,31 @@
       const t0=ac.currentTime; g.gain.setValueAtTime(vol, t0); g.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
       src.connect(g).connect(ac.destination); src.start(t0);
     }
+    function distort(variant='near'){
+      const ac = ensure();
+      const t0 = ac.currentTime;
+      const o = ac.createOscillator();
+      const lfo = ac.createOscillator();
+      const lfoGain = ac.createGain();
+      const g = ac.createGain();
+      const cfg = variant==='boom'
+        ? { base: 140, vibHz: 9, depth: 80, dur: 0.6, vol: 0.22, type:'triangle' }
+        : { base: 260, vibHz: 14, depth: 30, dur: 0.25, vol: 0.15, type:'sawtooth' };
+      o.type = cfg.type; o.frequency.setValueAtTime(cfg.base, t0);
+      lfo.frequency.setValueAtTime(cfg.vibHz, t0); lfoGain.gain.setValueAtTime(cfg.depth, t0);
+      lfo.connect(lfoGain).connect(o.frequency);
+      g.gain.setValueAtTime(0, t0);
+      g.gain.linearRampToValueAtTime(cfg.vol, t0+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0+cfg.dur);
+      o.connect(g).connect(ac.destination);
+      o.start(t0); lfo.start(t0);
+      o.stop(t0+cfg.dur); lfo.stop(t0+cfg.dur);
+    }
     return {
       kiss(){ sweep(700,1100,0.18,'triangle',0.22); tone(1400,0.06,'sine',0.12); },
       lightning(){ noise(0.18,0.35); sweep(200,80,0.2,'square',0.18); },
-      win(){ tone(523.25,0.12,'triangle',0.18); tone(659.25,0.12,'triangle',0.18); tone(783.99,0.18,'triangle',0.22); }
+      win(){ tone(523.25,0.12,'triangle',0.18); tone(659.25,0.12,'triangle',0.18); tone(783.99,0.18,'triangle',0.22); },
+      distort
     };
   })();
 
@@ -164,19 +191,32 @@
     else if(ent.dir[1] !== 0){ const tx = Math.round(ent.x); ent.x += clamp((tx - ent.x), -rate*dt, rate*dt); }
   }
 
-  // Wormholes (laterales con destino no simétrico)
+  // Wormholes (laterales y verticales con destino no simétrico)
   function maybeWormhole(ent){
     if(!state.wormholes.length) return;
+    const leftEdge = 0.5, rightEdge = state.cols - 1.5;
+    const topEdge = 0.5, bottomEdge = state.rows - 1.5;
     for(const wh of state.wormholes){
-      if(Math.round(ent.y) !== wh.row) continue;
-      const leftEdge = 0.5, rightEdge = state.cols - 1.5;
-      if(ent.x <= leftEdge && ent.dir[0] <= 0){
-        for(let i=0;i<5;i++) spawnHeart(ent.x, ent.y, '#a38bff');
-        ent.x = wh.left.x; ent.y = wh.left.y; Audio.lightning(); return;
-      }
-      if(ent.x >= rightEdge && ent.dir[0] >= 0){
-        for(let i=0;i<5;i++) spawnHeart(ent.x, ent.y, '#a38bff');
-        ent.x = wh.right.x; ent.y = wh.right.y; Audio.lightning(); return;
+      if(wh.type === 'row'){
+        if(Math.round(ent.y) !== wh.row) continue;
+        if(ent.x <= leftEdge && ent.dir[0] <= 0){
+          for(let i=0;i<5;i++) spawnHeart(ent.x, ent.y, '#a38bff');
+          ent.x = wh.left.x; ent.y = wh.left.y; Audio.lightning(); return;
+        }
+        if(ent.x >= rightEdge && ent.dir[0] >= 0){
+          for(let i=0;i<5;i++) spawnHeart(ent.x, ent.y, '#a38bff');
+          ent.x = wh.right.x; ent.y = wh.right.y; Audio.lightning(); return;
+        }
+      } else if(wh.type === 'col'){
+        if(Math.round(ent.x) !== wh.col) continue;
+        if(ent.y <= topEdge && ent.dir[1] <= 0){
+          for(let i=0;i<5;i++) spawnHeart(ent.x, ent.y, '#a38bff');
+          ent.x = wh.top.x; ent.y = wh.top.y; Audio.lightning(); return;
+        }
+        if(ent.y >= bottomEdge && ent.dir[1] >= 0){
+          for(let i=0;i<5;i++) spawnHeart(ent.x, ent.y, '#a38bff');
+          ent.x = wh.bottom.x; ent.y = wh.bottom.y; Audio.lightning(); return;
+        }
       }
     }
   }
@@ -196,23 +236,60 @@
     state.size = Math.max(18, Math.min(maxTileW, maxTileH));
     state.cols = cols; state.rows = rows; state.grid = grid; state.tunnels = tunnels;
 
-    // definir wormholes a destinos alejados por cada fila túnel
+    // Cerrar aperturas huérfanas en bordes laterales (sin par de wormhole)
+    // Evita cul‑de‑sacs en el borde donde la Singularidad se atasca.
+    for(let ry=0; ry<rows; ry++){
+      const leftOpen = grid[ry][0]===0;
+      const rightOpen = grid[ry][cols-1]===0;
+      if(leftOpen ^ rightOpen){ // sólo uno de los lados está abierto
+        if(leftOpen) grid[ry][0] = 1; else grid[ry][cols-1] = 1;
+      }
+    }
+
+    // definir wormholes: sólo en filas verdaderamente transitables en ambos bordes
+    // y siempre con destinos en celdas abiertas alcanzables
+    function findOpenOnRow(row, fromLeft){
+      if(fromLeft){
+        for(let x=1; x<cols-1; x++){ if(grid[row][x]===0) return x; }
+      } else {
+        for(let x=cols-2; x>0; x--){ if(grid[row][x]===0) return x; }
+      }
+      return null;
+    }
     const edgeRows = [];
     for(let ry=0; ry<rows; ry++){
-      if(grid[ry][0]===0 || grid[ry][cols-1]===0) edgeRows.push(ry);
+      // exigir paso en ambos extremos para que sean usables
+      if(grid[ry][0]===0 && grid[ry][cols-1]===0) edgeRows.push(ry);
     }
-    const wormRows = Array.from(new Set([ ...tunnels, ...edgeRows ]));
-    state.wormholes = wormRows.map(ry => {
-      const leftT = farthestFrom(grid, cols, rows, 1, ry);
-      const rightT = farthestFrom(grid, cols, rows, cols-2, ry);
-      return { row: ry, left: leftT, right: rightT };
-    });
+    const candidateRows = Array.from(new Set([ ...tunnels, ...edgeRows ]));
+    const holes = [];
+    for(const ry of candidateRows){
+      const sxL = findOpenOnRow(ry, true);
+      const sxR = findOpenOnRow(ry, false);
+      if(sxL==null || sxR==null) continue; // saltar filas sin paso claro
+      const leftT = farthestFrom(grid, cols, rows, sxL, ry);
+      const rightT = farthestFrom(grid, cols, rows, sxR, ry);
+      holes.push({ type:'row', row: ry, left: leftT, right: rightT });
+    }
+    // Wormholes verticales: convertir aperturas top/bottom en portales enlazados
+    const colSet = new Set();
+    for(let x=0; x<cols; x++){
+      if(grid[0][x]===0 || grid[rows-1][x]===0) colSet.add(x);
+    }
+    for(const cx of colSet){
+      // asegurar apertura en ambos bordes
+      grid[0][cx] = 0; grid[rows-1][cx] = 0;
+      const topT = farthestFrom(grid, cols, rows, cx, 1);
+      const botT = farthestFrom(grid, cols, rows, cx, rows-2);
+      holes.push({ type:'col', col: cx, top: topT, bottom: botT });
+    }
+    state.wormholes = holes;
 
     state.star = {x:1, y:1, dir:[0,0], next:[0,0]};
     const far = farthestFrom(grid, cols, rows, 1, 1);
-    state.saturn = {x: far.x, y: far.y, dir:[0,0], darkness:0};
+    state.saturn = {x: far.x, y: far.y, dir:[0,0], darkness:0, stall:0};
 
-    state.kisses = 0; state.nearMs = 0; state.angerMax = cfg.anger; state.angerTime = cfg.anger;
+    state.kisses = 0; state.nearMs = 0; state.angerMax = cfg.anger; state.angerTime = cfg.anger; state.nearLens = false;
     state.levelIndex = index; state.particles.length = 0;
     updateHUD();
   }
@@ -281,6 +358,17 @@
       autoCenter(state.saturn, dt);
     }
     maybeWormhole(state.saturn);
+
+    // Anti-campeo: si se mantiene casi inmóvil, forzar elección de escape
+    const moved = Math.hypot(state.saturn.x - prevX, state.saturn.y - prevY);
+    if(moved < 0.005) state.saturn.stall = (state.saturn.stall||0) + dt; else state.saturn.stall = 0;
+    if(state.saturn.stall > 1.3){
+      const opts=[]; const cx2=Math.round(state.saturn.x), cy2=Math.round(state.saturn.y);
+      const dirs2=[[1,0],[-1,0],[0,1],[0,-1]];
+      for(const d of dirs2){ const nx2=cx2+d[0], ny2=cy2+d[1]; if(open(nx2,ny2)) opts.push({d, score: Math.hypot(nx2 - state.star.x, ny2 - state.star.y) + Math.random()*0.2}); }
+      if(opts.length){ opts.sort((a,b)=>b.score-a.score); state.saturn.dir = opts[0].d; }
+      state.saturn.stall = 0;
+    }
   }
 
   // Partículas
@@ -299,32 +387,38 @@
 
   // Colapso gravitacional (sustituye al rayo)
   let collapse = null;
-  function triggerCollapse(){ collapse = {t:0}; Audio.lightning(); }
+  function triggerCollapse(){ collapse = {t:0}; Audio.lightning(); try{ Audio.distort('boom'); }catch(e){} }
   function drawCollapse(){ if(!collapse) return; const s=state.size, m=16; const cx = m + state.saturn.x*s + s/2; const cy = m + state.saturn.y*s + s/2; const rMax = Math.hypot(state.cols*s, state.rows*s)*0.7; const r = Math.max(0, Math.min(rMax, rMax*collapse.t)); ctx.save(); const g = ctx.createRadialGradient(cx, cy, Math.max(2, r*0.15), cx, cy, r); g.addColorStop(0, 'rgba(10,10,20,0.85)'); g.addColorStop(0.6, 'rgba(30,20,50,0.35)'); g.addColorStop(1, 'rgba(30,20,50,0.0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.fill(); ctx.restore(); }
 
   // Render helpers
   function roundRect(ctx, x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r, y); ctx.arcTo(x+w, y, x+w, y+h, r); ctx.arcTo(x+w, y+h, x, y+h, r); ctx.arcTo(x, y+h, x, y, r); ctx.arcTo(x, y, x+w, y, r); ctx.closePath(); }
 
-  function drawMaze(){
-    const s = state.size, m = 16; ctx.save();
-    ctx.fillStyle = '#f9f7ff'; ctx.fillRect(m-8, m-8, state.cols*s+16, state.rows*s+16);
+  function drawMaze(target=ctx){
+    const s = state.size, m = 16; target.save();
+    target.fillStyle = '#f9f7ff'; target.fillRect(m-8, m-8, state.cols*s+16, state.rows*s+16);
     for(let y=0;y<state.rows;y++){
       for(let x=0;x<state.cols;x++){
-        if(state.grid[y][x]===1){ const px=m+x*s, py=m+y*s; ctx.fillStyle='#b9b4ff'; roundRect(ctx, px+2, py+2, s-4, s-4, Math.min(10, s*0.22)); ctx.fill(); }
+        if(state.grid[y][x]===1){ const px=m+x*s, py=m+y*s; target.fillStyle='#b9b4ff'; roundRect(target, px+2, py+2, s-4, s-4, Math.min(10, s*0.22)); target.fill(); }
       }
     }
-    ctx.restore();
+    target.restore();
   }
 
-  function drawWormholes(){
-    if(!state.wormholes.length) return; const s=state.size, m=16; ctx.save();
-    ctx.strokeStyle='#7c6aff'; ctx.lineWidth = Math.max(2, s*0.12); ctx.globalAlpha=0.85;
+  function drawWormholes(target=ctx){
+    if(!state.wormholes.length) return; const s=state.size, m=16; target.save();
+    target.strokeStyle='#7c6aff'; target.lineWidth = Math.max(2, s*0.12); target.globalAlpha=0.85;
     for(const wh of state.wormholes){
-      const y = m + wh.row*s + s/2;
-      ctx.beginPath(); ctx.arc(m-4, y, s*0.45, 0, Math.PI*2); ctx.stroke();
-      ctx.beginPath(); ctx.arc(m + state.cols*s + 4, y, s*0.45, 0, Math.PI*2); ctx.stroke();
+      if(wh.type==='row'){
+        const y = m + wh.row*s + s/2;
+        target.beginPath(); target.arc(m-4, y, s*0.45, 0, Math.PI*2); target.stroke();
+        target.beginPath(); target.arc(m + state.cols*s + 4, y, s*0.45, 0, Math.PI*2); target.stroke();
+      } else if(wh.type==='col'){
+        const x = m + wh.col*s + s/2;
+        target.beginPath(); target.arc(x, m-4, s*0.45, 0, Math.PI*2); target.stroke();
+        target.beginPath(); target.arc(x, m + state.rows*s + 4, s*0.45, 0, Math.PI*2); target.stroke();
+      }
     }
-    ctx.globalAlpha=1; ctx.restore();
+    target.globalAlpha=1; target.restore();
   }
 
   function drawBigEye(x,y,rad, irisColor){
@@ -446,6 +540,7 @@
         // Apagar música al ganar
         if(bgm){ try{ bgm.pause(); bgm.currentTime = 0; } catch(e){} }
         state.bgmOn = false; updateHUD();
+        showEndCard('¡Ganaste! Amor por siempre');
       }
     }
 
@@ -463,6 +558,7 @@
           // Apagar música al terminar
           if(bgm){ try{ bgm.pause(); bgm.currentTime = 0; } catch(e){} }
           state.bgmOn = false; updateHUD();
+          showEndCard('Juego terminado');
         }
       }
     }
@@ -472,8 +568,45 @@
 
   function render(){
     ctx.clearRect(0,0,canvas.width, canvas.height);
-    drawMaze(); drawWormholes(); drawParticles(); drawStarEntity(state.star); drawSingularityEntity(state.saturn);
-    const m=16, s=state.size; const w = state.cols*s, x=m, y = m + state.rows*s + 8; const pct = state.angerTime / state.angerMax; const barW = clamp(pct, 0, 1)*w;
+    drawMaze(); drawWormholes();
+
+    // Efecto de lente alrededor de la Singularidad cuando la estrella pasa cerca
+    (function drawSingularityLens(){
+      if(!state.cols || !state.rows) return;
+      const d = distance(state.star, state.saturn);
+      const proximity = clamp(1 - d / (KISS_NEAR*1.8), 0, 1);
+      if(proximity > 0 && !state.nearLens){ try{ Audio.distort('near'); }catch(e){} state.nearLens = true; }
+      if(proximity <= 0){ state.nearLens = false; return; }
+      const s = state.size, m = 16;
+      const cx = m + state.saturn.x*s + s/2;
+      const cy = m + state.saturn.y*s + s/2;
+      const r = s * (2.0 + 3.0*proximity);
+      const k = 1 + (0.06 + 0.08*proximity); // fuerza de lente (magnificación suave)
+
+      const sx = Math.max(0, Math.floor(cx - r));
+      const sy = Math.max(0, Math.floor(cy - r));
+      const sw = Math.min(canvas.width - sx, Math.ceil(r*2));
+      const sh = Math.min(canvas.height - sy, Math.ceil(r*2));
+      if(sw<=0 || sh<=0) return;
+
+      lensCanvas.width = sw; lensCanvas.height = sh;
+      lensCtx.clearRect(0,0,sw,sh);
+      // copiar región circular a buffer
+      lensCtx.save();
+      lensCtx.beginPath(); lensCtx.arc(sw/2, sh/2, Math.min(sw,sh)/2, 0, Math.PI*2); lensCtx.clip();
+      lensCtx.drawImage(canvas, sx, sy, sw, sh, 0, 0, sw, sh);
+      lensCtx.restore();
+
+      // dibujarla de vuelta con ligera magnificación dentro de un recorte circular
+      ctx.save();
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.clip();
+      const dw = sw * k, dh = sh * k;
+      ctx.drawImage(lensCanvas, cx - dw/2, cy - dh/2, dw, dh);
+      ctx.restore();
+    })();
+    // Entidades y partículas por encima (no distorsionadas)
+    drawParticles(); drawStarEntity(state.star); drawSingularityEntity(state.saturn);
+    const m=16, s=state.size; const w = state.cols*s, x=m, y = m + state.rows*s + 2; const pct = state.angerTime / state.angerMax; const barW = clamp(pct, 0, 1)*w;
     ctx.fillStyle = '#ffffffaa'; ctx.fillRect(x, y, w, 10); ctx.fillStyle = pct>0.5? '#9ef5d3' : (pct>0.25? '#ffd87a' : '#ff8aa3'); ctx.fillRect(x, y, barW, 10);
     drawCollapse();
     if(state.gameOver){ drawCenterText('Juego terminado 😵', '#ff6b9d'); }
@@ -481,6 +614,13 @@
   }
 
   function drawCenterText(text, color){ ctx.save(); ctx.fillStyle = '#ffffffcc'; ctx.fillRect(0,0,canvas.width, canvas.height); ctx.fillStyle = color; ctx.font = '700 38px ui-sans-serif, system-ui, Segoe UI'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, canvas.width/2, canvas.height/2); ctx.restore(); }
+  function showEndCard(message){
+    if(!overlay) return;
+    overlay.style.display = 'grid';
+    overlay.innerHTML = '<div class="card"><h2>'+message+'</h2><p class="legend">Pulsa R o clic para reiniciar</p><div class="btn" id="restartBtn">Reiniciar</div></div>';
+    const rb = document.getElementById('restartBtn');
+    if(rb) rb.addEventListener('click', start);
+  }
 
   function start(){
     state = { ...state, lives: MAX_LIVES, levelIndex: 0, gameOver:false, victory:false, running:true };
@@ -508,6 +648,15 @@
       updateHUD();
     });
   }
+
+  // Reinicio rápido con tecla R o clic en el canvas
+  window.addEventListener('keydown', (e) => {
+    const k = (e.key||'').toLowerCase();
+    if((state.gameOver||state.victory) && k==='r'){
+      e.preventDefault(); start();
+    }
+  });
+  canvas.addEventListener('click', () => { if(state.gameOver||state.victory) start(); });
 
   function fitCanvas(){ const maxW = Math.min(window.innerWidth - 40, 1100); const maxH = Math.min(window.innerHeight - 60, 800); canvas.width = clamp(Math.floor(maxW/2)*2, 640, 1280); canvas.height = clamp(Math.floor(maxH/2)*2, 480, 900); if(state.running) resetLevel(state.levelIndex); }
   window.addEventListener('resize', fitCanvas); fitCanvas(); requestAnimationFrame(loop);
