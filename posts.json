@@ -1,70 +1,157 @@
 [
   {
-  "id": 41,
-  "titulo": "La nave en el patio trasero: símbolo de fe y valentía",
-  "autor": "Draco Sahir",
-  "fecha": "2025-08-30",
-  "categoria_temas": ["Procesos Creativos"],
-  "categoria_libros": ["El valeroso viaje de Galactique y Galactiquito"],
-  "topicos": ["Escritura", "Sueños"],
-  "tiempo": "",
-  "fragmento": "La nave de Galactique y Galactiquito: metáfora de un viaje que nace de la fe en uno mismo.",
-  "imagen": "Galactique-Post41.webp",
-  "slug": "nave-en-el-patio-simbolo-de-fe-y-valentia",
-  "contenido_html": "<p><h3>¿Qué es la nave en el patio trasero?</h3> Bueno. La nave construida en el patio trasero no es solo un juguete: es símbolo de valentía, compromiso y fe. Inspirada en un recuerdo ligado a Martina, un ser querido que partió a un destino estelar, la nave se convierte en puente entre lo humano y lo espiritual.</p><p>Para los niños —y para los adultos que olvidaron sus sueños—, esta nave es también recordatorio: nunca es tarde para levantar la mirada y construir lo propio. No una fe religiosa, sino la fe en uno mismo, en obrar y en validarse. Quizás tú también eres Galactique o Galactiquito, con una nave esperando a ser terminada.</p><p>Construir esta nave no fue solo un acto físico, sino un proceso emocional. Cada pieza ensamblada representaba un paso hacia la reconciliación con los sueños olvidados. Cada tornillo, cada plan, era un recordatorio de que la imaginación no tiene límites, y que el patio trasero puede ser el punto de partida hacia el infinito.</p><p>La nave también simboliza la conexión entre generaciones. Los niños que la construyen hoy son los adultos que inspirarán mañana. Es un legado de esperanza, un mensaje de que, aunque el mundo parezca vasto y frío, siempre hay un rincón cálido donde los sueños pueden despegar.</p>",
-  "destacado": true
+    "id": 44,
+    "titulo": "El tiempo como enemigo",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-09-02",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "Efecto Dilación Temporal"
+    ],
+    "topicos": [
+      "Pasado",
+      "Futuro"
+    ],
+    "tiempo": "2 min de lectura",
+    "fragmento": "El Eklenium-Nova como excusa para preguntarnos: ¿y si pudiéramos detener el tiempo?",
+    "imagen": "Dilaciontemporal-Post44.webp",
+    "slug": "el-tiempo-como-enemigo",
+    "contenido_html": "<p>Siempre he querido que el tiempo se sienta como un enemigo en esta historia. Pero no es toda la verdad. Para mí, el tiempo es una línea irreversible de causas y consecuencias. Con <em>Efecto Dilación Temporal</em> me permito imaginar lo imposible: ¿qué pasaría si pudiéramos detenerlo, aunque solo fuese por una fracción?</p><p>El Eklenium-Nova es mi excusa científica para explorar ese dilema. No busco entretener con multiversos, sino plantear un “What if?” con peso existencial: ¿qué podríamos cambiar si controláramos el tiempo, aun con riesgo inminente?</p><p>Este relato no ofrece respuestas fáciles. Lo que quiero es que el lector se quede con la incomodidad, con la tentación de pensar en lo que haría si pudiera tocar esa línea irreversible. Porque a veces, imaginar que el tiempo puede quebrarse nos ayuda a replantear cómo lo vivimos.</p>",
+    "destacado": false
   },
   {
-  "id": 40,
-  "titulo": "Entre Amores y Abismos: el amor contradictorio",
-  "autor": "A.C. Elysia",
-  "fecha": "2025-08-29",
-  "categoria_temas": ["Procesos Creativos"],
-  "categoria_libros": ["Entre Amores y Abismos"],
-  "topicos": ["Eros", "Distopía"],
-  "tiempo": "",
-  "fragmento": "La contradicción como espejo del amor: baches y pavimento liso que sostienen nuestro viaje.",
-  "imagen": "Entreamoresabismos-Post40.webp",
-  "slug": "entre-amores-y-abismos-el-amor-contradictorio",
-  "contenido_html": "<p>Para mí, escribir <em>Entre Amores y Abismos</em> fue un viaje íntimo hacia el amor contradictorio. Ese amor que se vive en sombras, que intentamos ocultar como si fuera una caja de Pandora, pero que inevitablemente sale a la luz.</p><p>En el proceso, Natalia le mostró su contradicción como espejo, mientras Daniel le enseñó disciplina para salir de ella. La contradicción, al final, no es debilidad: es parte del camino humano. Somos baches y pavimento liso; somos el trayecto irregular que permite que la carreta avance, incluso con tropiezos.</p><p>El amor contradictorio no es un defecto, sino una característica intrínseca de nuestra humanidad. Es el amor que nos enseña a aceptar nuestras imperfecciones y las de los demás. Es el amor que nos desafía a crecer, a cambiar, a ser mejores, incluso cuando duele. Natalia y Daniel son un reflejo de esto: dos almas que, a pesar de sus diferencias y heridas, encuentran en su contradicción un espacio para sanar y construir algo nuevo.</p><p>En este libro, quise explorar cómo el amor puede ser tanto un refugio como un campo de batalla. Cómo puede ser dulce y amargo, cálido y frío, todo al mismo tiempo. Porque, al final, el amor no es un destino, sino un viaje. Y en ese viaje, las contradicciones no son obstáculos, sino señales de que estamos vivos, de que estamos amando de verdad.</p>",
-  "destacado": true
+    "id": 43,
+    "titulo": "Un renacer amado",
+    "autor": "Draco Sahir",
+    "fecha": "2025-09-01",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El huevo que volvió a cantar"
+    ],
+    "topicos": [
+      "Deseos",
+      "Familia"
+    ],
+    "tiempo": "2 min de lectura",
+    "fragmento": "Un mirlo que nunca fue querido renace en un cuento de reconciliación y ternura.",
+    "imagen": "Huevovolvio-Post43.webp",
+    "slug": "un-renacer-amado",
+    "contenido_html": "<p>Agradezco esta hermosa pregunta, porque me permite confesar lo que siento detrás de esta historia. El mirlo representa a un niño que no fue querido por sus padres. Los mirlos, en la naturaleza, ponen sus huevos en nidos ajenos, y esos polluelos nacen como invasores. Pensé entonces en esos niños humanos que también llegan a hogares donde no son deseados, donde no reciben amor.</p><p>Con este cuento quise regalarle a ese niño otra vida. Una donde sí es amado, donde encuentra a los padres que merecía. No es un acto de venganza, es reconciliación: con la vida, con el alma, con lo que nunca debió doler. Ninguno de nosotros pidió nacer. Pero ya que lo hicimos, merecemos ser recibidos con amor.</p><p>Ese es el canto que devuelvo con esta historia: una esperanza para quienes alguna vez se sintieron indeseados.</p>",
+    "destacado": false
   },
   {
-  "id": 39,
-  "titulo": "El Jesuita del Vino y la embriaguez espiritual",
-  "autor": "Lauren Cuervo",
-  "fecha": "2025-08-28",
-  "categoria_temas": ["Procesos Creativos"],
-  "categoria_libros": ["El Jesuita del Vino"],
-  "topicos": ["Simbolismo", "Ética"],
-  "tiempo": "",
-  "fragmento": "El vino como alquimia del alma y frontera entre voluntades: ¿la nuestra o la de otro?",
-  "imagen": "Jesuitadelvino-Post39.webp",
-  "slug": "jesuita-del-vino-y-la-embriaguez-espiritual",
-  "contenido_html": "<p>En <em>El Jesuita del Vino</em>, exploro lo que llama “embriaguez espiritual”: esa consecuencia del deseo humano que busca satisfacerse en sueños y anhelos, a veces vagos, a veces indispensables. El vino aparece como vehículo, como alquimia que convierte la sangre en voluntad y la voluntad en preguntas.</p><p>Pero el trasfondo es aún más hondo: ¿es nuestra voluntad la que se alza o la de otro que nos habita? ¿Dónde está el límite entre ambas? Esa frontera borrosa es el terreno fértil de este cuento, y el lector es quien debe decidir cuál copa levantar y con qué intención beberla.</p><p>El vino, en esta historia, no es solo una bebida; es un símbolo de transformación. Es la sangre de la tierra, el fruto del trabajo humano, y también el espejo de nuestras pasiones y contradicciones. Cada sorbo es una pregunta, cada copa, una decisión. ¿Estamos bebiendo para olvidar o para recordar? ¿Para escapar o para enfrentar?</p><p>El Jesuita, como personaje, encarna esta dualidad. Es un hombre de fe, pero también de dudas. Un hombre que busca en el vino respuestas que no encuentra en la oración. Su viaje es un reflejo del nuestro: un viaje hacia el interior, hacia el lugar donde residen nuestras verdades más profundas y nuestras mentiras más convincentes.</p><p>Espero que este cuento te invite a reflexionar sobre tus propias fronteras, tus propias copas, y las decisiones que tomas cada día. Porque, al final, todos somos un poco como el Jesuita: buscando en el vino, en la vida, en el amor, una embriaguez que nos haga sentir más vivos.</p>",
-  "destacado": false
+    "id": 42,
+    "titulo": "Hijas del Martillo: la rabia como poder creador",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-08-31",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "Hijas del Martillo"
+    ],
+    "topicos": [
+      "Distopía",
+      "Pasado"
+    ],
+    "tiempo": "2 min de lectura",
+    "fragmento": "Del caos nace una nueva nación: la rabia convertida en principio creador.",
+    "imagen": "Hijasdelmartillo-Post42.webp",
+    "slug": "hijas-del-martillo-la-rabia-como-poder-creador",
+    "contenido_html": "<p>Desde la antigüedad, he visto cómo las naciones se han forjado a través de la guerra y la rabia. Esos momentos sacan lo peor de nosotros y nos muestran como seres capaces de carecer de empatía. Aunque mi historia esté ambientada en un tiempo lejano, se siente actual: las circunstancias cambian, pero los relatos moldean siempre el presente.</p><p>En ese estado miserable, surge también la chispa. La tormenta caótica se convierte en origen de algo nuevo. <em>Hijas del Martillo</em> narra cómo del caos nace una nación distinta, que se atreve a subvertir el orden y a instaurar principios frescos, revolucionarios, aunque dolorosos para quienes creían en el sistema previo.</p><p>Sé que este ciclo nunca termina. Mientras existan civilizaciones, habrá relatos de rabia que se transforman en poder creador. Esa es la herencia que dejo en esta saga.</p>",
+    "destacado": false
   },
   {
-  "id": 38,
-  "titulo": "Un remix de lo que creé",
-  "autor": "Draco Sahir",
-  "fecha": "2025-08-27",
-  "categoria_temas": [
-    "Procesos Creativos"
-  ],
-  "categoria_libros": [
-    "El valeroso viaje de Galactique y Galactiquito"
-  ],
-  "topicos": [
-    "Diseño",
-    "Amistad"
-  ],
-  "tiempo": "",
-  "fragmento": "La amistad se convierte en creación compartida: Lauren Cuervo transforma una obra previa en un remix lleno de frescura y nuevos matices.",
-  "imagen": "Galactique-Post38.webp",
-  "slug": "un-remix-de-lo-que-cree",
-  "contenido_html": "<p>La amistad y la colaboración siempre abren caminos inesperados. Esta vez, mi gran amigo —el loco y creativo <em>Lauren Cuervo</em>— tomó una idea mía y la recicló, dándole un aire fresco y vibrante.</p><p>Primero lo hizo con <strong>A.C. Elysia</strong>: diseñó un juego inspirado en la historia del <em>Libro de la Fusión</em>, donde un Errante cruza el desierto en busca de su amada que lo espera en un faro. El juego es una experiencia de relajación: basta con apuntar a distintos elementos en pantalla para producir música, grabarla y luego reproducirla. ¡Lo amo!</p><p>Pero eso no es todo. Lauren me confesó que tiene preparada otra sorpresa para mí. ¿Qué será? Habrá que descubrirlo en algún post futuro... o quizás antes de lo que imaginamos. Cuando le pregunté de qué se trataba, su respuesta fue simple:</p><blockquote>“Es un remix de lo que creaste.”</blockquote><p>¿Un remix de lo que creé? Lo entendí como si mi obra fuese una pista musical y él quisiera añadirle algunos samples, capas de percusión, cuerdas o voces. Ese gesto me parece precioso: tomar algo ya existente y hacerlo vibrar en una nueva sintonía.</p><p>Gracias, Lauren, por ese regalo simbólico. Gracias por mostrarme que la creación nunca está cerrada, que siempre puede transformarse y renacer.</p><p>Los invito a seguir explorando más obras en nuestro sitio y a estar atentos a la sorpresa que está por llegar.</p><p>¡Un abrazo enorme! 💚</p>",
-  "destacado": true
+    "id": 41,
+    "titulo": "La nave en el patio trasero: símbolo de fe y valentía",
+    "autor": "Draco Sahir",
+    "fecha": "2025-08-30",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El valeroso viaje de Galactique y Galactiquito"
+    ],
+    "topicos": [
+      "Escritura",
+      "Sueños"
+    ],
+    "tiempo": "2 min de lectura",
+    "fragmento": "La nave de Galactique y Galactiquito: metáfora de un viaje que nace de la fe en uno mismo.",
+    "imagen": "Galactique-Post41.webp",
+    "slug": "nave-en-el-patio-simbolo-de-fe-y-valentia",
+    "contenido_html": "<p><h3>¿Qué es la nave en el patio trasero?</h3> Bueno. La nave construida en el patio trasero no es solo un juguete: es símbolo de valentía, compromiso y fe. Inspirada en un recuerdo ligado a Martina, un ser querido que partió a un destino estelar, la nave se convierte en puente entre lo humano y lo espiritual.</p><p>Para los niños —y para los adultos que olvidaron sus sueños—, esta nave es también recordatorio: nunca es tarde para levantar la mirada y construir lo propio. No una fe religiosa, sino la fe en uno mismo, en obrar y en validarse. Quizás tú también eres Galactique o Galactiquito, con una nave esperando a ser terminada.</p><p>Construir esta nave no fue solo un acto físico, sino un proceso emocional. Cada pieza ensamblada representaba un paso hacia la reconciliación con los sueños olvidados. Cada tornillo, cada plan, era un recordatorio de que la imaginación no tiene límites, y que el patio trasero puede ser el punto de partida hacia el infinito.</p><p>La nave también simboliza la conexión entre generaciones. Los niños que la construyen hoy son los adultos que inspirarán mañana. Es un legado de esperanza, un mensaje de que, aunque el mundo parezca vasto y frío, siempre hay un rincón cálido donde los sueños pueden despegar.</p>",
+    "destacado": false
+  },
+  {
+    "id": 40,
+    "titulo": "Entre Amores y Abismos: el amor contradictorio",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-08-29",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "Entre Amores y Abismos"
+    ],
+    "topicos": [
+      "Eros",
+      "Distopía"
+    ],
+    "tiempo": "2 min de lectura",
+    "fragmento": "La contradicción como espejo del amor: baches y pavimento liso que sostienen nuestro viaje.",
+    "imagen": "Entreamoresabismos-Post40.webp",
+    "slug": "entre-amores-y-abismos-el-amor-contradictorio",
+    "contenido_html": "<p>Para mí, escribir <em>Entre Amores y Abismos</em> fue un viaje íntimo hacia el amor contradictorio. Ese amor que se vive en sombras, que intentamos ocultar como si fuera una caja de Pandora, pero que inevitablemente sale a la luz.</p><p>En el proceso, Natalia le mostró su contradicción como espejo, mientras Daniel le enseñó disciplina para salir de ella. La contradicción, al final, no es debilidad: es parte del camino humano. Somos baches y pavimento liso; somos el trayecto irregular que permite que la carreta avance, incluso con tropiezos.</p><p>El amor contradictorio no es un defecto, sino una característica intrínseca de nuestra humanidad. Es el amor que nos enseña a aceptar nuestras imperfecciones y las de los demás. Es el amor que nos desafía a crecer, a cambiar, a ser mejores, incluso cuando duele. Natalia y Daniel son un reflejo de esto: dos almas que, a pesar de sus diferencias y heridas, encuentran en su contradicción un espacio para sanar y construir algo nuevo.</p><p>En este libro, quise explorar cómo el amor puede ser tanto un refugio como un campo de batalla. Cómo puede ser dulce y amargo, cálido y frío, todo al mismo tiempo. Porque, al final, el amor no es un destino, sino un viaje. Y en ese viaje, las contradicciones no son obstáculos, sino señales de que estamos vivos, de que estamos amando de verdad.</p>",
+    "destacado": false
+  },
+  {
+    "id": 39,
+    "titulo": "El Jesuita del Vino y la embriaguez espiritual",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-08-28",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Jesuita del Vino"
+    ],
+    "topicos": [
+      "Simbolismo",
+      "Ética"
+    ],
+    "tiempo": "3 min de lectura",
+    "fragmento": "El vino como alquimia del alma y frontera entre voluntades: ¿la nuestra o la de otro?",
+    "imagen": "Jesuitadelvino-Post39.webp",
+    "slug": "jesuita-del-vino-y-la-embriaguez-espiritual",
+    "contenido_html": "<p>En <em>El Jesuita del Vino</em>, exploro lo que llama “embriaguez espiritual”: esa consecuencia del deseo humano que busca satisfacerse en sueños y anhelos, a veces vagos, a veces indispensables. El vino aparece como vehículo, como alquimia que convierte la sangre en voluntad y la voluntad en preguntas.</p><p>Pero el trasfondo es aún más hondo: ¿es nuestra voluntad la que se alza o la de otro que nos habita? ¿Dónde está el límite entre ambas? Esa frontera borrosa es el terreno fértil de este cuento, y el lector es quien debe decidir cuál copa levantar y con qué intención beberla.</p><p>El vino, en esta historia, no es solo una bebida; es un símbolo de transformación. Es la sangre de la tierra, el fruto del trabajo humano, y también el espejo de nuestras pasiones y contradicciones. Cada sorbo es una pregunta, cada copa, una decisión. ¿Estamos bebiendo para olvidar o para recordar? ¿Para escapar o para enfrentar?</p><p>El Jesuita, como personaje, encarna esta dualidad. Es un hombre de fe, pero también de dudas. Un hombre que busca en el vino respuestas que no encuentra en la oración. Su viaje es un reflejo del nuestro: un viaje hacia el interior, hacia el lugar donde residen nuestras verdades más profundas y nuestras mentiras más convincentes.</p><p>Espero que este cuento te invite a reflexionar sobre tus propias fronteras, tus propias copas, y las decisiones que tomas cada día. Porque, al final, todos somos un poco como el Jesuita: buscando en el vino, en la vida, en el amor, una embriaguez que nos haga sentir más vivos.</p>",
+    "destacado": false
+  },
+  {
+    "id": 38,
+    "titulo": "Un remix de lo que creé",
+    "autor": "Draco Sahir",
+    "fecha": "2025-08-27",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El valeroso viaje de Galactique y Galactiquito"
+    ],
+    "topicos": [
+      "Diseño",
+      "Amistad"
+    ],
+    "tiempo": "2 min de lectura",
+    "fragmento": "La amistad se convierte en creación compartida: Lauren Cuervo transforma una obra previa en un remix lleno de frescura y nuevos matices.",
+    "imagen": "Galactique-Post38.webp",
+    "slug": "un-remix-de-lo-que-cree",
+    "contenido_html": "<p>La amistad y la colaboración siempre abren caminos inesperados. Esta vez, mi gran amigo —el loco y creativo <em>Lauren Cuervo</em>— tomó una idea mía y la recicló, dándole un aire fresco y vibrante.</p><p>Primero lo hizo con <strong>A.C. Elysia</strong>: diseñó un juego inspirado en la historia del <em>Libro de la Fusión</em>, donde un Errante cruza el desierto en busca de su amada que lo espera en un faro. El juego es una experiencia de relajación: basta con apuntar a distintos elementos en pantalla para producir música, grabarla y luego reproducirla. ¡Lo amo!</p><p>Pero eso no es todo. Lauren me confesó que tiene preparada otra sorpresa para mí. ¿Qué será? Habrá que descubrirlo en algún post futuro... o quizás antes de lo que imaginamos. Cuando le pregunté de qué se trataba, su respuesta fue simple:</p><blockquote>“Es un remix de lo que creaste.”</blockquote><p>¿Un remix de lo que creé? Lo entendí como si mi obra fuese una pista musical y él quisiera añadirle algunos samples, capas de percusión, cuerdas o voces. Ese gesto me parece precioso: tomar algo ya existente y hacerlo vibrar en una nueva sintonía.</p><p>Gracias, Lauren, por ese regalo simbólico. Gracias por mostrarme que la creación nunca está cerrada, que siempre puede transformarse y renacer.</p><p>Los invito a seguir explorando más obras en nuestro sitio y a estar atentos a la sorpresa que está por llegar.</p><p>¡Un abrazo enorme! 💚</p>",
+    "destacado": true
   },
   {
     "id": 37,
