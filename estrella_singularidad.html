@@ -232,7 +232,9 @@
   function resetLevel(index){
     const cfg = LEVELS[index];
     const {grid, cols, rows, tunnels} = generateMaze(cfg.cols, cfg.rows);
-    const margin = 16; const maxTileW = Math.floor((canvas.width - margin*2) / cols); const maxTileH = Math.floor((canvas.height - margin*2) / rows);
+    const margin = 16; const BAR_SPACE = 24; // reserva espacio para la barra de tiempo
+    const maxTileW = Math.floor((canvas.width - margin*2) / cols);
+    const maxTileH = Math.floor((canvas.height - margin*2 - BAR_SPACE) / rows);
     state.size = Math.max(18, Math.min(maxTileW, maxTileH));
     state.cols = cols; state.rows = rows; state.grid = grid; state.tunnels = tunnels;
 
@@ -606,7 +608,7 @@
     })();
     // Entidades y partículas por encima (no distorsionadas)
     drawParticles(); drawStarEntity(state.star); drawSingularityEntity(state.saturn);
-    const m=16, s=state.size; const w = state.cols*s, x=m, y = m + state.rows*s + 2; const pct = state.angerTime / state.angerMax; const barW = clamp(pct, 0, 1)*w;
+    const m=16, s=state.size; const w = state.cols*s, x=m, y = canvas.height - 14; const pct = state.angerTime / state.angerMax; const barW = clamp(pct, 0, 1)*w;
     ctx.fillStyle = '#ffffffaa'; ctx.fillRect(x, y, w, 10); ctx.fillStyle = pct>0.5? '#9ef5d3' : (pct>0.25? '#ffd87a' : '#ff8aa3'); ctx.fillRect(x, y, barW, 10);
     drawCollapse();
     if(state.gameOver){ drawCenterText('Juego terminado 😵', '#ff6b9d'); }

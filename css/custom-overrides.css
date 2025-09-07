@@ -63,7 +63,7 @@ html {
   background-position: center;
 }
 
-.divinity-img {
+.divinity-img, .divinidades-img {
   background-image: url('../assets/images/oeuvres/reversiondelasdivinidades.webp');
   background-size: cover;
   background-position: center;
@@ -140,7 +140,7 @@ html {
   .tarotcuervoelysia-img { background-image: image-set(url('../assets/images/responsive/oeuvres/tarotcuervoelysia-400.webp') 1x, url('../assets/images/responsive/oeuvres/tarotcuervoelysia-800.webp') 2x); }
   .traverso-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/traverso-400.webp') 1x, url('../assets/images/responsive/oeuvres/traverso-800.webp') 2x); }
   .veus-img            { background-image: image-set(url('../assets/images/responsive/oeuvres/mundodelosveus-400.webp') 1x, url('../assets/images/responsive/oeuvres/mundodelosveus-800.webp') 2x); }
-  .divinity-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/reversiondelasdivinidades-400.webp') 1x, url('../assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp') 2x); }
+  .divinity-img, .divinidades-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/reversiondelasdivinidades-400.webp') 1x, url('../assets/images/responsive/oeuvres/reversiondelasdivinidades-800.webp') 2x); }
   .circulo-img         { background-image: image-set(url('../assets/images/responsive/oeuvres/circuloarena-400.webp') 1x, url('../assets/images/responsive/oeuvres/circuloarena-800.webp') 2x); }
   .debacle-img         { background-image: image-set(url('../assets/images/responsive/oeuvres/debacletriangular-400.webp') 1x, url('../assets/images/responsive/oeuvres/debacletriangular-800.webp') 2x); }
   .huevovolvio-img     { background-image: image-set(url('../assets/images/responsive/oeuvres/huevovolviocantar-400.webp') 1x, url('../assets/images/responsive/oeuvres/huevovolviocantar-800.webp') 2x); }
