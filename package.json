@@ -8,7 +8,8 @@
     "build": "npm run responsive && npm run test",
     "responsive": "node tools/responsive-images.js",
     "test": "htmlhint \"**/*.html\"",
-    "version": "node version-assets.js"
+    "version": "node version-assets.js",
+    "portfolio:generate": "node tools/generate-portfolio-pages.js"
   },
   "keywords": [],
   "author": "",

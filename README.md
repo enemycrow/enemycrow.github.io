@@ -78,6 +78,28 @@ Las páginas `blog.html` y `blog-entry.html` cargan este archivo mediante JavaSc
 Además, el contenido se guarda en `localStorage` bajo la clave `postsData` para acelerar visitas posteriores.
 
 Si colocas `"destacado": true` en una entrada, aparecerá en la sección de entradas destacadas al inicio de `blog.html`.
+
+## Páginas individuales de obras (SEO)
+
+Para que Google indexe cada obra por separado, el repositorio incluye un generador que crea una página HTML por cada modal definido en `portfolio.html`.
+
+- Generar todas las páginas de obra:
+  ```bash
+  npm run portfolio:generate
+  ```
+
+- Generar una sola obra (por id base del modal, sin `-modal`):
+  ```bash
+  node tools/generate-portfolio-pages.js galactique
+  ```
+
+El generador produce archivos en `portfolio/<slug>.html` con:
+- Metadatos únicos (`<title>`, `<meta name="description">`, canonicals)
+- Etiquetas Open Graph y JSON‑LD (`CreativeWork`)
+- El mismo CSS/JS del sitio principal y auto‑apertura del modal correspondiente
+- Un enlace “Volver a Obras” hacia `../portfolio.html`
+
+Si una página ya existe, el generador la omite (idempotente). Los slugs por defecto se derivan del título (kebab‑case). Si quieres fijar un slug distinto, ejecuta el script con el id base del modal.
 Si quieres probar los cambios localmente ejecuta:
 
 ```bash
