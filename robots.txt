@@ -1,3 +1,15 @@
+# robots.txt para plumafarollama.com
+# Política por defecto: permitir todo el contenido público
 User-agent: *
 Allow: /
+
+# Directorios internos (no indexables)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /tools/
+Disallow: /node_modules/
+Disallow: /vendor/
+Disallow: /fs-export/
+
+# Mapa del sitio
 Sitemap: https://plumafarollama.com/sitemap.xml

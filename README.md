@@ -95,11 +95,52 @@ Para que Google indexe cada obra por separado, el repositorio incluye un generad
 
 El generador produce archivos en `portfolio/<slug>.html` con:
 - Metadatos únicos (`<title>`, `<meta name="description">`, canonicals)
-- Etiquetas Open Graph y JSON‑LD (`CreativeWork`)
+- Etiquetas Open Graph y JSON‑LD (`CreativeWork`) con conjunto de imágenes responsive (400/800/1200) cuando existan
 - El mismo CSS/JS del sitio principal y auto‑apertura del modal correspondiente
 - Un enlace “Volver a Obras” hacia `../portfolio.html`
 
-Si una página ya existe, el generador la omite (idempotente). Los slugs por defecto se derivan del título (kebab‑case). Si quieres fijar un slug distinto, ejecuta el script con el id base del modal.
+Si una página ya existe, el generador la omite (idempotente). Para regenerarlas, usa `--force`:
+```bash
+node tools/generate-portfolio-pages.js --force
+```
+Los slugs por defecto se derivan del título (kebab‑case).
+
+### Sitemap automático
+
+Para incluir automáticamente las nuevas páginas en el sitemap:
+
+- Generar portfolio + sitemap en un solo paso:
+  ```bash
+  npm run seo
+  ```
+
+El script `js/generate-sitemap.js` recorre el proyecto (incluyendo `portfolio/`) y crea `sitemap.xml` con `lastmod`, `changefreq` y `priority`. Ejecuta esto tras publicar cambios para mantener el SEO al día.
+
+### X (Twitter) Cards
+
+Las páginas individuales de obras incluyen metaetiquetas para X (antes Twitter):
+- `twitter:card = summary_large_image`
+- `twitter:title`, `twitter:description`
+- `twitter:image` apunta a la variante 1200px cuando existe en `assets/images/responsive/…-1200.webp`
+- `twitter:image:alt` con el título de la obra
+
+Además, se agregan `og:image` múltiples (400/800/1200) con `og:image:alt` (título) para las tarjetas Open Graph.
+
+### Validación SEO automática
+
+Para verificar que las páginas tengan los metadatos mínimos:
+- Ejecuta:
+  ```bash
+  npm test
+  ```
+- Este comando corre `htmlhint` y un validador simple (`tools/seo-validate.js`) que revisa por cada página:
+  - `<title>`, `meta description`, `link rel="canonical"`
+  - `og:title`, `og:description`, `og:type=book`, `og:url`, al menos un `og:image`
+  - `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
+  - Presencia de JSON‑LD (`application/ld+json`)
+Si falta algo, el comando falla e indica el archivo y las etiquetas ausentes.
+
+Estas etiquetas se generan automáticamente desde el mismo script que crea las páginas (`tools/generate-portfolio-pages.js`).
 Si quieres probar los cambios localmente ejecuta:
 
 ```bash

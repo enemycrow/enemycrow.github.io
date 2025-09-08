@@ -75,6 +75,24 @@ function extractMeta(modal){
 }
 
 function buildPage({ id, slug, modalHtml, meta }){
+  // Ajuste de rutas relativas: al mover el modal a /portfolio/, los recursos
+  // que referencian "assets/..." deben anteponer "../" para resolver.
+  function fixAssetPaths(html){
+    // src y data-image
+    html = html.replace(/\b(src|data-image)\s*=\s*"(.*?)"/g, (m, attr, url) => {
+      if(/^https?:|^data:|^\//.test(url)) return m; // absoluto o data URI
+      if(url.startsWith('../') || url.startsWith('#')) return m;
+      if(url.startsWith('assets/')) return `${attr}="../${url}"`;
+      return m;
+    });
+    // srcset: corregir ocurrencias de assets/
+    html = html.replace(/\bsrcset\s*=\s*"([^"]+)"/g, (m, list) => {
+      const fixed = list.replace(/(?:^|\s)(assets\/)\b/g, (mm, a)=> mm.replace(a, '../assets/'));
+      return `srcset="${fixed}"`;
+    });
+    return html;
+  }
+  modalHtml = fixAssetPaths(modalHtml);
   const canonical = `https://plumafarollama.com/portfolio/${slug}.html`;
   const ogImage = meta.image ? (meta.image.startsWith('http')? meta.image : ('../' + meta.image)) : undefined;
   const jsonLd = {
@@ -85,7 +103,13 @@ function buildPage({ id, slug, modalHtml, meta }){
     inLanguage: 'es',
     url: canonical,
   };
-  if(ogImage) jsonLd.image = canonical.replace(/\/portfolio\/.*$/, '/') + meta.image.replace(/^\.*\/?/, '');
+  if(meta.image){
+    const SITE='https://plumafarollama.com';
+    const toAbs=(u)=> u? (u.startsWith('http')? u : `${SITE}/${u.replace(/^\.?\/?/, '')}`) : undefined;
+    const m = meta.image.match(/^(.*?)(?:-([0-9]{3,4}))((?:\.[a-zA-Z]+))$/);
+    const imgs = m ? [400,800,1200].map(sz=>`${m[1]}-${sz}${m[3]}`) : [meta.image];
+    jsonLd.image = imgs.map(toAbs);
+  }
   if(meta.author) jsonLd.author = { '@type': 'Person', name: meta.author };
   if(meta.datePublished) jsonLd.datePublished = meta.datePublished;
 
@@ -100,8 +124,23 @@ function buildPage({ id, slug, modalHtml, meta }){
   <meta property="og:title" content="${meta.title}">
   <meta property="og:description" content="${meta.description.replace(/"/g,'&quot;')}">
   <meta property="og:type" content="book">
-  ${ogImage?`<meta property="og:image" content="${ogImage}">`:''}
+  ${ (function(){
+        const SITE='https://plumafarollama.com';
+        const toAbs=(u)=> u? (u.startsWith('http')? u : `${SITE}/${u.replace(/^\.?\/?/, '')}`) : '';
+        const m = (meta.image||'').match(/^(.*?)(?:-([0-9]{3,4}))((?:\.[a-zA-Z]+))$/);
+        const imgs = m ? [400,800,1200].map(sz=>`${m[1]}-${sz}${m[3]}`) : (meta.image?[meta.image]:[]);
+        return imgs.map(u=>`<meta property=\"og:image\" content=\"${toAbs(u)}\">\n  <meta property=\"og:image:alt\" content=\"${meta.title.replace(/\"/g,'&quot;')}\">`).join('\n  ');
+      })() }
   <meta property="og:url" content="${canonical}">
+  ${ (function(){
+        const SITE='https://plumafarollama.com';
+        const toAbs=(u)=> u? (u.startsWith('http')? u : `${SITE}/${u.replace(/^\.?\/?/, '')}`) : '';
+        const m=(meta.image||'').match(/^(.*?)(?:-([0-9]{3,4}))((?:\.[a-zA-Z]+))$/);
+        const best=m? `${m[1]}-1200${m[3]}` : (meta.image||'');
+        if(!best) return '';
+        const abs=toAbs(best);
+        return `<meta name=\"twitter:card\" content=\"summary_large_image\">\n  <meta name=\"twitter:title\" content=\"${meta.title}\">\n  <meta name=\"twitter:description\" content=\"${meta.description.replace(/\"/g,'&quot;')}\">\n  <meta name=\"twitter:image\" content=\"${abs}\">\n  <meta name=\"twitter:image:alt\" content=\"${meta.title.replace(/\"/g,'&quot;')}\">`;
+      })() }
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -142,7 +181,9 @@ function run(target){
       if(tSlug) slug = tSlug;
     }
     const out = path.join(OUT_DIR, `${slug}.html`);
-    if(fs.existsSync(out)){
+    const args = process.argv.slice(2);
+    const force = args.includes('--force') || args.includes('-f');
+    if(fs.existsSync(out) && !force){
       console.log(`Omitiendo (ya existe): ${out}`);
       continue;
     }
@@ -152,5 +193,6 @@ function run(target){
   }
 }
 
-const arg = process.argv[2];
+const _args = process.argv.slice(2);
+const arg = _args.find(a => !a.startsWith('-'));
 run(arg);
