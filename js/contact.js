@@ -1,7 +1,24 @@
 // JavaScript para la página de Contacto y Newsletter sin Firebase
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
-  const RECAPTCHA_SITE_KEY = 'SITE_KEY';
+  let siteKey = '';
+  try {
+    const resp = await fetch('api/recaptcha-site-key.php');
+    const data = await resp.json();
+    siteKey = data.siteKey;
+
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  } catch (err) {
+    console.error('Error loading reCAPTCHA site key', err);
+    return;
+  }
+
   const contactForm = document.getElementById('contactForm');
 
   if (contactForm) {
@@ -25,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       grecaptcha.ready(async () => {
         try {
-          const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
+          const token = await grecaptcha.execute(siteKey, { action: 'submit' });
           formData.append('token', token);
 
           const resp = await fetch('api/submit.php', {
