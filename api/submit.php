@@ -98,11 +98,11 @@ try {
     $mail->isHTML(true);
     $mail->Subject = '📬 Nuevo mensaje de ' . $nombre;
     $mail->Body    = "<h2>Nuevo mensaje recibido</h2>" .
-        "<p><b>Nombre:</b> $nombre</p>" .
-        "<p><b>Email:</b> $email</p>" .
-        "<p><b>Asunto:</b> $asunto</p>" .
+        "<p><b>Nombre:</b> " . htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8') . "</p>" .
+        "<p><b>Email:</b> " . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . "</p>" .
+        "<p><b>Asunto:</b> " . htmlspecialchars($asunto, ENT_QUOTES, 'UTF-8') . "</p>" .
         "<p><b>Mensaje:</b><br>" . nl2br(htmlspecialchars($mensaje)) . "</p>" .
-        "<p><b>Voice:</b> $voice</p>" .
+        "<p><b>Voice:</b> " . htmlspecialchars($voice, ENT_QUOTES, 'UTF-8') . "</p>" .
         "<p><b>Newsletter:</b> " . ($wants ? 'Sí' : 'No') . "</p>";
     $mail->AltBody = "$nombre <$email>\nAsunto: $asunto\nMensaje:\n$mensaje";
 
