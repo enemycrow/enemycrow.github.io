@@ -1,5 +1,12 @@
 <?php
+require __DIR__ . '/bootstrap.php';
+
 header('Content-Type: application/json');
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('Referrer-Policy: no-referrer');
+header('Permissions-Policy: interest-cohort=()');
+header('Strict-Transport-Security: max-age=63072000; includeSubDomains; preload');
 header('Vary: Origin');
 
 // Allow requests from production domain
@@ -29,27 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Load configuration
-$configPath = __DIR__ . '/config.php';
-try {
-    if (!file_exists($configPath)) {
-        throw new Exception('Config file not found');
-    }
-    $config = require $configPath;
-} catch (Throwable $e) {
-    http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
-    error_log('Config load failed: ' . $e->getMessage());
-    exit;
-}
-
 // Connect to database and apply rate limiting
 try {
-    $db = $config['db'];
     $pdo = new PDO(
-        "mysql:host={$db['host']};dbname={$db['name']};charset=utf8mb4",
-        $db['user'],
-        $db['pass'],
+        "mysql:host=" . ($_ENV['DB_HOST'] ?? 'localhost') . ";dbname=" . ($_ENV['DB_NAME'] ?? '') . ";charset=utf8mb4",
+        $_ENV['DB_USER'] ?? '',
+        $_ENV['DB_PASS'] ?? '',
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
 } catch (Throwable $e) {
@@ -96,7 +88,7 @@ try {
 
 // Verify reCAPTCHA token
 $token = trim($_POST['token'] ?? '');
-$secret = $config['recaptcha_secret'] ?? '';
+$secret = $_ENV['RECAPTCHA_SECRET'] ?? '';
 
 try {
     $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, stream_context_create([
@@ -175,22 +167,20 @@ try {
 // Send email via PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require __DIR__ . '/../vendor/autoload.php';
 
 $mail = new PHPMailer(true);
 
 try {
-    $smtp = $config['smtp'];
     $mail->isSMTP();
-    $mail->Host       = $smtp['host'];
-    $mail->Port       = $smtp['port'];
+    $mail->Host       = $_ENV['SMTP_HOST'] ?? 'smtppro.zoho.com';
+    $mail->Port       = (int)($_ENV['SMTP_PORT'] ?? 587);
     $mail->SMTPAuth   = true;
-    $mail->Username   = $smtp['username'];
-    $mail->Password   = $smtp['password'];
-    $mail->SMTPSecure = $smtp['encryption'];
+    $mail->Username   = $_ENV['SMTP_USER'] ?? '';
+    $mail->Password   = $_ENV['SMTP_PASS'] ?? '';
+    $mail->SMTPSecure = $_ENV['SMTP_ENCRYPT'] ?? 'tls';
 
-    $mail->setFrom($smtp['username'], 'Formulario Web');
-    $mail->addAddress($smtp['username']);
+    $mail->setFrom($_ENV['SMTP_USER'] ?? '', 'Formulario Web');
+    $mail->addAddress($_ENV['SMTP_USER'] ?? '');
     $mail->addReplyTo($email, $nombre);
 
     $mail->isHTML(true);

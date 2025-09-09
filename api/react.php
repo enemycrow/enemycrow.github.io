@@ -1,5 +1,7 @@
 <?php
 declare(strict_types=1);
+
+require __DIR__ . '/bootstrap.php';
 header('Content-Type: application/json; charset=UTF-8');
 
 // CORS
@@ -43,21 +45,11 @@ $xff = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
 $ip  = $xff ? trim(explode(',', $xff)[0]) : ($_SERVER['REMOTE_ADDR'] ?? '0.0.0.0');
 $ip_hash = hash('sha256', $ip);
 
-// Cargar config
-$cfgCandidates = [
-    dirname(__DIR__, 2) . '/config.php',
-    dirname(__DIR__) . '/config.php',
-    __DIR__ . '/config.php',
-];
-$config = null;
-foreach ($cfgCandidates as $p) { if (is_file($p)) { $config = require $p; break; } }
-if (!$config) { http_response_code(500); echo json_encode(['ok'=>false,'error'=>'config no encontrada']); exit; }
-
 try {
     $pdo = new PDO(
-        "mysql:host={$config['db']['host']};dbname={$config['db']['name']};charset=utf8mb4",
-        $config['db']['user'],
-        $config['db']['pass'],
+        'mysql:host=' . ($_ENV['DB_HOST'] ?? 'localhost') . ';dbname=' . ($_ENV['DB_NAME'] ?? '') . ';charset=utf8mb4',
+        $_ENV['DB_USER'] ?? '',
+        $_ENV['DB_PASS'] ?? '',
         [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]
     );
 

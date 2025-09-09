@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+require __DIR__ . '/bootstrap.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
 
@@ -22,33 +24,6 @@ if ($method === 'OPTIONS') { http_response_code(204); exit; }
 if ($method !== 'POST') {
     http_response_code(405);
     echo json_encode(['ok' => false, 'error' => 'Método no permitido']);
-    exit;
-}
-
-// ====== CARGAR CONFIG (fuera de public_html si es posible) ======
-$cfgCandidates = [
-    dirname(__DIR__, 2) . '/config.php', // /home/usuario/config.php (recomendado)
-    dirname(__DIR__) . '/config.php',    // si public_html está 1 nivel abajo
-    __DIR__ . '/config.php',             // fallback (no recomendado)
-];
-$config = null; $cfgPathUsed = null;
-foreach ($cfgCandidates as $cfgPath) {
-    if (is_file($cfgPath)) {
-        $cfgPathUsed = $cfgPath;
-        try {
-            $config = require $cfgPath;
-        } catch (Throwable $e) {
-            http_response_code(500);
-            echo json_encode(['ok'=>false,'error'=>'Error en config.php','path'=>$cfgPathUsed]);
-            error_log($e->getMessage());
-            exit;
-        }
-        break;
-    }
-}
-if (!$config) {
-    http_response_code(500);
-    echo json_encode(['ok'=>false,'error'=>'Config no encontrada','buscado_en'=>$cfgCandidates]);
     exit;
 }
 
@@ -103,11 +78,10 @@ $ua = $_SERVER['HTTP_USER_AGENT'] ?? null;
 
 // ====== DB: INSERTAR ======
 try {
-    $db  = $config['db'];
     $pdo = new PDO(
-        "mysql:host={$db['host']};dbname={$db['name']};charset=utf8mb4",
-        (string)$db['user'],
-        (string)$db['pass'],
+        'mysql:host=' . ($_ENV['DB_HOST'] ?? 'localhost') . ';dbname=' . ($_ENV['DB_NAME'] ?? '') . ';charset=utf8mb4',
+        (string)($_ENV['DB_USER'] ?? ''),
+        (string)($_ENV['DB_PASS'] ?? ''),
         [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -131,65 +105,39 @@ try {
 }
 
 // ====== AVISO INTERNO (solo para ti) ======
-// Cargamos PHPMailer si existe en alguna de estas rutas:
-$phCandidates = [
-    __DIR__ . '/../vendor/PHPMailer/src',           // tu caso actual (carpeta con mayúsculas)
-    __DIR__ . '/../vendor/phpmailer/phpmailer/src', // convención composer
-    __DIR__ . '/../vendor/PHPmailer/src',           // por si quedó con m minúscula
-    __DIR__ . '/../PHPMailer/src',                  // por si lo subiste en la raíz pública
-];
-
-$phSrc = null;
-foreach ($phCandidates as $p) {
-    if (is_file($p . '/PHPMailer.php') && is_file($p . '/SMTP.php') && is_file($p . '/Exception.php')) {
-        $phSrc = $p;
-        break;
-    }
-}
-
 $noticeSent = false;
-if ($phSrc) {
-    require_once $phSrc . '/PHPMailer.php';
-    require_once $phSrc . '/SMTP.php';
-    require_once $phSrc . '/Exception.php';
+try {
+    $mail = new PHPMailer(true);
+    $mail->CharSet    = 'UTF-8';
+    $mail->isSMTP();
+    $mail->Host       = (string)($_ENV['SMTP_HOST'] ?? 'smtppro.zoho.com');
+    $mail->Port       = (int)($_ENV['SMTP_PORT'] ?? 587);
+    $mail->SMTPAuth   = true;
+    $mail->Username   = (string)($_ENV['SMTP_USER'] ?? '');
+    $mail->Password   = (string)($_ENV['SMTP_PASS'] ?? '');
+    $mail->SMTPSecure = $_ENV['SMTP_ENCRYPT'] ?? PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->SMTPAutoTLS = true;
 
-    $smtp = $config['smtp'];
+    // El remitente DEBE ser tu propio buzón o alias verificado
+    $mail->setFrom((string)($_ENV['SMTP_USER'] ?? ''), 'Newsletter');
+    $mail->addAddress((string)($_ENV['SMTP_USER'] ?? '')); // te lo envía a ti
+    $mail->addReplyTo($email, $nombre);           // si respondes, va al suscriptor
 
-    try {
-        $mail = new PHPMailer(true);
-        $mail->CharSet    = 'UTF-8';
-        $mail->isSMTP();
-        $mail->Host       = (string)$smtp['host'];
-        $mail->Port       = (int)$smtp['port'];
-        $mail->SMTPAuth   = true;
-        $mail->Username   = (string)$smtp['username'];
-        $mail->Password   = (string)$smtp['password'];
-        $mail->SMTPSecure = $smtp['encryption'] ?? PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->SMTPAutoTLS = true;
+    $mail->Subject = 'Nuevo suscriptor: ' . $nombre;
+    $mail->isHTML(false);
+    $mail->Body =
+        "Nuevo registro en la newsletter:\n\n" .
+        "Nombre: $nombre\n" .
+        "Email: $email\n" .
+        "Preferencias: Lauren=$lauren, Elysia=$elysia, Sahir=$sahir\n" .
+        "IP: " . ($ip ?? '-') . "\n" .
+        "UA: " . ($ua ?? '-') . "\n";
 
-        // El remitente DEBE ser tu propio buzón o alias verificado
-        $mail->setFrom((string)$smtp['username'], 'Newsletter');
-        $mail->addAddress((string)$smtp['username']); // te lo envía a ti
-        $mail->addReplyTo($email, $nombre);           // si respondes, va al suscriptor
-
-        $mail->Subject = 'Nuevo suscriptor: ' . $nombre;
-        $mail->isHTML(false);
-        $mail->Body =
-            "Nuevo registro en la newsletter:\n\n" .
-            "Nombre: $nombre\n" .
-            "Email: $email\n" .
-            "Preferencias: Lauren=$lauren, Elysia=$elysia, Sahir=$sahir\n" .
-            "IP: " . ($ip ?? '-') . "\n" .
-            "UA: " . ($ua ?? '-') . "\n";
-
-        $mail->send();
-        $noticeSent = true;
-    } catch (PHPMailerException $e) {
-        // No rompemos el flujo si no se puede enviar (por políticas SMTP, etc.)
-        error_log('Aviso interno no enviado: ' . $e->getMessage() . ' / ' . ($mail->ErrorInfo ?? ''));
-    }
-} else {
-    error_log('PHPMailer no encontrado: no se envió aviso interno.');
+    $mail->send();
+    $noticeSent = true;
+} catch (PHPMailerException $e) {
+    // No rompemos el flujo si no se puede enviar (por políticas SMTP, etc.)
+    error_log('Aviso interno no enviado: ' . $e->getMessage() . ' / ' . ($mail->ErrorInfo ?? ''));
 }
 
 // ====== RESPUESTA ======
