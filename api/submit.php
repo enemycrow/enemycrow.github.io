@@ -43,7 +43,18 @@ if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $mensaje ===
 }
 
 // Load configuration
-$config = require __DIR__ . '/config.php';
+$configPath = __DIR__ . '/config.php';
+try {
+    if (!file_exists($configPath)) {
+        throw new Exception('Config file not found');
+    }
+    $config = require $configPath;
+} catch (Throwable $e) {
+    error_log('Config load failed: ' . $e->getMessage());
+    http_response_code(500);
+    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
+    exit;
+}
 
 // Store in database
 try {
