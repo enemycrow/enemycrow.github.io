@@ -9,6 +9,17 @@ if ($origin === 'https://plumafarollama.com' || $origin === 'https://www.plumafa
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    if ($origin === 'https://plumafarollama.com' || $origin === 'https://www.plumafarollama.com') {
+        header("Access-Control-Allow-Origin: $origin");
+    }
+    header('Access-Control-Allow-Methods: POST');
+    header('Access-Control-Allow-Headers: Content-Type');
+    http_response_code(204);
+    exit;
+}
+
 // Only accept POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
