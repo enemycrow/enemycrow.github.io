@@ -24,4 +24,5 @@ return [
         'password'   => env('SMTP_PASS', '', true),
         'encryption' => env('SMTP_ENCRYPT', 'tls'),
     ],
+    'recaptcha_secret' => env('RECAPTCHA_SECRET', '', true),
 ];
