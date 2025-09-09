@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: application/json');
+header('Vary: Origin');
 
 // Allow requests from production domain
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
@@ -16,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     }
     header('Access-Control-Allow-Methods: POST');
     header('Access-Control-Allow-Headers: Content-Type');
+    header('Vary: Origin');
     http_response_code(204);
     exit;
 }
