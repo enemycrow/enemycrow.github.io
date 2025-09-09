@@ -50,9 +50,9 @@ try {
     }
     $config = require $configPath;
 } catch (Throwable $e) {
-    error_log('Config load failed: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
+    error_log('Config load failed: ' . $e->getMessage());
     exit;
 }
 
@@ -80,6 +80,7 @@ try {
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'Error al guardar en DB']);
+    error_log($e->getMessage());
     exit;
 }
 
@@ -122,4 +123,5 @@ try {
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'No se pudo enviar el correo']);
+    error_log($e->getMessage());
 }
