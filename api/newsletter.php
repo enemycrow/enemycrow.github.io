@@ -80,6 +80,11 @@ if (stripos($ctype, 'application/json') !== false) {
 
 // ====== VALIDACIONES ======
 $email = mb_strtolower($email);
+if (mb_strlen($nombre) > 100 || mb_strlen($email) > 255) {
+    http_response_code(422);
+    echo json_encode(['ok' => false, 'error' => 'Datos demasiado largos']);
+    exit;
+}
 if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(422);
     echo json_encode(['ok' => false, 'error' => 'Datos inválidos']);

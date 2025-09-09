@@ -35,6 +35,19 @@ $mensaje = trim($_POST['message'] ?? '');
 $voice   = trim($_POST['voice'] ?? '');
 $wants   = !empty($_POST['wantsNewsletter']) ? 1 : 0;
 
+// Length validation
+if (
+    mb_strlen($nombre) > 100 ||
+    mb_strlen($asunto) > 100 ||
+    mb_strlen($email) > 255 ||
+    mb_strlen($mensaje) > 2000 ||
+    mb_strlen($voice) > 255
+) {
+    http_response_code(422);
+    echo json_encode(['ok' => false, 'error' => 'Datos demasiado largos']);
+    exit;
+}
+
 // Basic validation
 if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $mensaje === '') {
     http_response_code(422);
