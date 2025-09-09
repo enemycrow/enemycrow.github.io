@@ -39,7 +39,8 @@ foreach ($cfgCandidates as $cfgPath) {
             $config = require $cfgPath;
         } catch (Throwable $e) {
             http_response_code(500);
-            echo json_encode(['ok'=>false,'error'=>'Error en config.php: '.$e->getMessage(),'path'=>$cfgPathUsed]);
+            echo json_encode(['ok'=>false,'error'=>'Error en config.php','path'=>$cfgPathUsed]);
+            error_log($e->getMessage());
             exit;
         }
         break;
@@ -79,6 +80,11 @@ if (stripos($ctype, 'application/json') !== false) {
 
 // ====== VALIDACIONES ======
 $email = mb_strtolower($email);
+if (mb_strlen($nombre) > 100 || mb_strlen($email) > 255) {
+    http_response_code(422);
+    echo json_encode(['ok' => false, 'error' => 'Datos demasiado largos']);
+    exit;
+}
 if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(422);
     echo json_encode(['ok' => false, 'error' => 'Datos inválidos']);
@@ -117,9 +123,9 @@ try {
 } catch (PDOException $e) {
     // Duplicado (email UNIQUE) => idempotente
     if ($e->getCode() !== '23000') {
-        error_log('DB error: ' . $e->getMessage());
         http_response_code(500);
         echo json_encode(['ok' => false, 'error' => 'Error al guardar en DB']);
+        error_log('DB error: ' . $e->getMessage());
         exit;
     }
 }

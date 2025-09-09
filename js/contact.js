@@ -1,10 +1,28 @@
 // JavaScript para la página de Contacto y Newsletter sin Firebase
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+  let siteKey = '';
+  try {
+    const resp = await fetch('api/recaptcha-site-key.php');
+    const data = await resp.json();
+    siteKey = data.siteKey;
+
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  } catch (err) {
+    console.error('Error loading reCAPTCHA site key', err);
+    return;
+  }
 
   const contactForm = document.getElementById('contactForm');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
+    contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
       if (!validateForm(contactForm)) {
@@ -22,39 +40,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const formData = new FormData(contactForm);
 
-      try {
-        const resp = await fetch('api/submit.php', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await resp.json();
+      grecaptcha.ready(async () => {
+        try {
+          const token = await grecaptcha.execute(siteKey, { action: 'submit' });
+          formData.append('token', token);
 
-        if (data.ok) {
-          const successMessage = document.createElement('div');
-          successMessage.className = 'contact-form__message contact-form__message--success';
-          successMessage.textContent = '¡Mensaje enviado con éxito! Te responderemos lo antes posible.';
-          contactForm.parentNode.insertBefore(successMessage, contactForm);
-          successMessage.style.display = 'block';
-          contactForm.reset();
+          const resp = await fetch('api/submit.php', {
+            method: 'POST',
+            body: formData
+          });
+          const data = await resp.json();
+
+          if (data.ok) {
+            const successMessage = document.createElement('div');
+            successMessage.className = 'contact-form__message contact-form__message--success';
+            successMessage.textContent = '¡Mensaje enviado con éxito! Te responderemos lo antes posible.';
+            contactForm.parentNode.insertBefore(successMessage, contactForm);
+            successMessage.style.display = 'block';
+            contactForm.reset();
+            setTimeout(() => {
+              successMessage.style.display = 'none';
+              setTimeout(() => successMessage.remove(), 500);
+            }, 5000);
+          } else {
+            throw new Error(data.error || 'Error desconocido');
+          }
+        } catch (err) {
+          console.error('Error al enviar el mensaje', err);
+          const errorMessage = document.createElement('div');
+          errorMessage.className = 'contact-form__message contact-form__message--error';
+          errorMessage.textContent = 'Ha ocurrido un error. Intenta nuevamente más tarde.';
+          contactForm.parentNode.insertBefore(errorMessage, contactForm);
+          errorMessage.style.display = 'block';
           setTimeout(() => {
-            successMessage.style.display = 'none';
-            setTimeout(() => successMessage.remove(), 500);
+            errorMessage.style.display = 'none';
+            setTimeout(() => errorMessage.remove(), 500);
           }, 5000);
-        } else {
-          throw new Error(data.error || 'Error desconocido');
         }
-      } catch (err) {
-        console.error('Error al enviar el mensaje', err);
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'contact-form__message contact-form__message--error';
-        errorMessage.textContent = 'Ha ocurrido un error. Intenta nuevamente más tarde.';
-        contactForm.parentNode.insertBefore(errorMessage, contactForm);
-        errorMessage.style.display = 'block';
-        setTimeout(() => {
-          errorMessage.style.display = 'none';
-          setTimeout(() => errorMessage.remove(), 500);
-        }, 5000);
-      }
+      });
     });
   }
 
