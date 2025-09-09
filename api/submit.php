@@ -43,6 +43,57 @@ try {
     exit;
 }
 
+// Connect to database and apply rate limiting
+try {
+    $db = $config['db'];
+    $pdo = new PDO(
+        "mysql:host={$db['host']};dbname={$db['name']};charset=utf8mb4",
+        $db['user'],
+        $db['pass'],
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    );
+} catch (Throwable $e) {
+    http_response_code(500);
+    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
+    error_log('DB connection failed: ' . $e->getMessage());
+    exit;
+}
+
+$ip = $_SERVER['REMOTE_ADDR'] ?? '';
+$limit = 5;
+$windowMinutes = 10;
+
+try {
+    $now = new DateTimeImmutable();
+    $stmt = $pdo->prepare('SELECT last_request, attempts FROM rate_limits WHERE ip = ?');
+    $stmt->execute([$ip]);
+    $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($record) {
+        $lastRequest = new DateTimeImmutable($record['last_request']);
+        if ($now->getTimestamp() - $lastRequest->getTimestamp() > $windowMinutes * 60) {
+            $stmt = $pdo->prepare('UPDATE rate_limits SET last_request = ?, attempts = 1 WHERE ip = ?');
+            $stmt->execute([$now->format('Y-m-d H:i:s'), $ip]);
+        } else {
+            if ($record['attempts'] >= $limit) {
+                http_response_code(429);
+                echo json_encode(['ok' => false, 'error' => 'Demasiadas solicitudes']);
+                exit;
+            }
+            $stmt = $pdo->prepare('UPDATE rate_limits SET last_request = ?, attempts = attempts + 1 WHERE ip = ?');
+            $stmt->execute([$now->format('Y-m-d H:i:s'), $ip]);
+        }
+    } else {
+        $stmt = $pdo->prepare('INSERT INTO rate_limits (ip, last_request, attempts) VALUES (?, ?, 1)');
+        $stmt->execute([$ip, $now->format('Y-m-d H:i:s')]);
+    }
+} catch (Throwable $e) {
+    http_response_code(500);
+    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
+    error_log('Rate limit failed: ' . $e->getMessage());
+    exit;
+}
+
 // Verify reCAPTCHA token
 $token = trim($_POST['token'] ?? '');
 $secret = $config['recaptcha_secret'] ?? '';
@@ -103,14 +154,6 @@ if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $mensaje ===
 
 // Store in database
 try {
-    $db = $config['db'];
-    $pdo = new PDO(
-        "mysql:host={$db['host']};dbname={$db['name']};charset=utf8mb4",
-        $db['user'],
-        $db['pass'],
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
-
     $stmt = $pdo->prepare('INSERT INTO contactos (nombre, email, asunto, mensaje, voice, wants_newsletter, ip, user_agent) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute([
         $nombre,
