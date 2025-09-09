@@ -29,6 +29,50 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Load configuration
+$configPath = __DIR__ . '/config.php';
+try {
+    if (!file_exists($configPath)) {
+        throw new Exception('Config file not found');
+    }
+    $config = require $configPath;
+} catch (Throwable $e) {
+    http_response_code(500);
+    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
+    error_log('Config load failed: ' . $e->getMessage());
+    exit;
+}
+
+// Verify reCAPTCHA token
+$token = trim($_POST['token'] ?? '');
+$secret = $config['recaptcha_secret'] ?? '';
+
+try {
+    $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, stream_context_create([
+        'http' => [
+            'method' => 'POST',
+            'header' => 'Content-type: application/x-www-form-urlencoded',
+            'content' => http_build_query([
+                'secret' => $secret,
+                'response' => $token,
+            ]),
+            'timeout' => 10,
+        ]
+    ]));
+
+    $captcha = json_decode($response, true);
+    if (empty($captcha['success']) || ($captcha['score'] ?? 0) < 0.5) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido']);
+        exit;
+    }
+} catch (Throwable $e) {
+    http_response_code(500);
+    echo json_encode(['ok' => false, 'error' => 'Error al verificar reCAPTCHA']);
+    error_log('reCAPTCHA verification failed: ' . $e->getMessage());
+    exit;
+}
+
 // Sanitize incoming data
 $nombre  = trim($_POST['name'] ?? '');
 $email   = trim($_POST['email'] ?? '');
@@ -54,20 +98,6 @@ if (
 if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $mensaje === '') {
     http_response_code(422);
     echo json_encode(['ok' => false, 'error' => 'Datos inválidos']);
-    exit;
-}
-
-// Load configuration
-$configPath = __DIR__ . '/config.php';
-try {
-    if (!file_exists($configPath)) {
-        throw new Exception('Config file not found');
-    }
-    $config = require $configPath;
-} catch (Throwable $e) {
-    http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
-    error_log('Config load failed: ' . $e->getMessage());
     exit;
 }
 
