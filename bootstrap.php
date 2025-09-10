@@ -1,5 +1,9 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
+$autoloadPath = __DIR__ . '/vendor/autoload.php';
+if (!file_exists($autoloadPath)) {
+    die('Error: no se encontró el autoloader. Ejecuta "composer install".');
+}
+require $autoloadPath;
 
 use Monolog\Logger;
 use Monolog\Handler\RotatingFileHandler;
