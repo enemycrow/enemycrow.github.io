@@ -49,7 +49,7 @@
     // Carga posts existentes
     let posts = [];
     async function loadPosts() {
-      posts = await fetch('/posts').then(r => r.json());
+      posts = await fetch('/posts', { credentials: 'include' }).then(r => r.json());
       const select = document.getElementById('postSelect');
       posts.forEach(p => {
         const opt = document.createElement('option');
@@ -110,7 +110,8 @@
       await fetch('/save-post', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(post)
+        body: JSON.stringify(post),
+        credentials: 'include'
       });
       alert('Post guardado');
     };
