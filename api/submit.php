@@ -62,8 +62,8 @@ try {
     }
 } catch (Throwable $e) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
-    error_log('Rate limit failed: ' . $e->getMessage());
+    echo json_encode(['ok' => false, 'error' => 'Error del servidor', 'code' => 'DB_RATE_LIMIT']);
+    error_log('DB error: ' . $e->getMessage() . ' / ' . implode(' | ', $stmt->errorInfo()));
     exit;
 }
 
@@ -140,8 +140,8 @@ try {
     ]);
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Error al guardar en DB']);
-    error_log($e->getMessage());
+    echo json_encode(['ok' => false, 'error' => 'Error al guardar en DB', 'code' => 'DB_SUBMIT']);
+    error_log('DB error: ' . $e->getMessage() . ' / ' . implode(' | ', $stmt->errorInfo()));
     exit;
 }
 
