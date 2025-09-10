@@ -21,6 +21,7 @@ function http(array $methods): void {
 
     $reqHeaders = $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']
         ?? 'Content-Type, X-Requested-With, Authorization';
+    header('Vary: Access-Control-Request-Headers', false);
     header("Access-Control-Allow-Headers: $reqHeaders");
     header('Access-Control-Max-Age: 86400');
 
