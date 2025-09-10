@@ -1,33 +1,6 @@
 <?php
-header('Content-Type: application/json');
-header('Vary: Origin');
-
-// Allow requests from production domain
-$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-if ($origin === 'https://plumafarollama.com' || $origin === 'https://www.plumafarollama.com') {
-    header("Access-Control-Allow-Origin: $origin");
-}
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
-
-// Handle preflight requests
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    if ($origin === 'https://plumafarollama.com' || $origin === 'https://www.plumafarollama.com') {
-        header("Access-Control-Allow-Origin: $origin");
-    }
-    header('Access-Control-Allow-Methods: POST');
-    header('Access-Control-Allow-Headers: Content-Type');
-    header('Vary: Origin');
-    http_response_code(204);
-    exit;
-}
-
-// Only accept POST requests
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['ok' => false, 'error' => 'Método no permitido']);
-    exit;
-}
+require __DIR__ . '/http.php';
+http(['POST']);
 
 // Load configuration
 $configPath = __DIR__ . '/config.php';

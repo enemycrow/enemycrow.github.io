@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-header('Content-Type: application/json');
+require __DIR__ . '/http.php';
+http(['GET']);
 
 try {
     $config = require __DIR__ . '/config.php';
