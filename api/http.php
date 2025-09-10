@@ -10,7 +10,7 @@ function http(array $methods): void {
     header('Content-Type: application/json; charset=UTF-8');
 
     $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-    $allowedOrigins = ['https://plumafarollama.com', 'https://www.plumafarollama.com'];
+    $allowedOrigins = ['https://plumafarollama.com', 'https://www.plumafarollama.com', 'https://enemycrow.github.io'];
     if (in_array($origin, $allowedOrigins, true)) {
         header("Access-Control-Allow-Origin: $origin");
         header('Vary: Origin');
