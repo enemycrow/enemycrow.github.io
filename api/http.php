@@ -14,6 +14,7 @@ function http(array $methods): void {
     if (in_array($origin, $allowedOrigins, true)) {
         header("Access-Control-Allow-Origin: $origin");
         header('Vary: Origin');
+        header('Access-Control-Allow-Credentials: true');
     }
 
     $allowMethods = array_unique(array_merge($methods, ['OPTIONS']));
