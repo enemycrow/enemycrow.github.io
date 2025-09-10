@@ -1,21 +1,8 @@
 <?php
 declare(strict_types=1);
-header('Content-Type: application/json; charset=UTF-8');
 
-// CORS
-$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-$allowed_origins = ['https://plumafarollama.com', 'https://www.plumafarollama.com'];
-if (in_array($origin, $allowed_origins, true)) {
-    header("Access-Control-Allow-Origin: $origin");
-    header('Vary: Origin');
-}
-header('Access-Control-Allow-Methods: GET, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, X-Requested-With');
-header('Access-Control-Max-Age: 86400');
-
-$method = $_SERVER['REQUEST_METHOD'] ?? '';
-if ($method === 'OPTIONS') { http_response_code(204); exit; }
-if ($method !== 'GET') { http_response_code(405); echo json_encode(['ok'=>false,'error'=>'Método no permitido']); exit; }
+require __DIR__ . '/http.php';
+http(['GET']);
 
 $slug = trim((string)($_GET['slug'] ?? ''));
 if ($slug === '') { http_response_code(400); echo json_encode(['ok'=>false,'error'=>'slug requerido']); exit; }
