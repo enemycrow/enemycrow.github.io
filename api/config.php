@@ -1,34 +1,40 @@
-    <?php
-    declare(strict_types=1);
+<?php
+declare(strict_types=1);
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-Dotenv\Dotenv::createImmutable(dirname(__DIR__))->safeLoad();
+$dotenvPath = dirname(__DIR__);
+if (!file_exists($dotenvPath . '/.env')) {
+    die("No se encontró el archivo .env en $dotenvPath");
+}
+Dotenv\Dotenv::createImmutable($dotenvPath)->safeLoad();
 
-// Helper para leer variables de entorno y lanzar error si faltan
+// Debug temporal: mostrar qué variables existen
+if (php_sapi_name() !== 'cli') {
+    echo "<pre>";
+    var_dump($_ENV);
+    echo "</pre>";
+    exit;
+}
+
 if (!function_exists('env')) {
     function env(string $key, $default = null, bool $required = false) {
-        // Buscar en $_ENV
         if (isset($_ENV[$key]) && $_ENV[$key] !== '') {
             return $_ENV[$key];
         }
-
-        // Buscar en $_SERVER
         if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') {
             return $_SERVER[$key];
         }
-
-        // Usar getenv como último recurso
         $value = getenv($key);
         if ($value !== false && $value !== '') {
             return $value;
         }
-
-        // Si es requerida y no existe, lanzar error
         if ($required) {
             throw new RuntimeException("Falta la variable de entorno requerida: {$key}");
         }
-
         return $default;
     }
 }
