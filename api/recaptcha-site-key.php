@@ -14,6 +14,8 @@ $config = null;
 foreach ($configPaths as $path) {
     if (is_readable($path)) {
         $config = require $path;
+        var_dump($path, $config);
+        exit;
         break;
     }
 }
