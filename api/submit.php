@@ -62,8 +62,8 @@ try {
     }
 } catch (Throwable $e) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
-    error_log('Rate limit failed: ' . $e->getMessage());
+    echo json_encode(['ok' => false, 'error' => 'Error del servidor', 'code' => 'DB_RATE_LIMIT']);
+    error_log('DB error: ' . $e->getMessage() . ' / ' . implode(' | ', $stmt->errorInfo()));
     exit;
 }
 
@@ -103,7 +103,7 @@ $email   = trim($_POST['email'] ?? '');
 $asunto  = trim($_POST['subject'] ?? 'Nuevo mensaje');
 $mensaje = trim($_POST['message'] ?? '');
 $voice   = trim($_POST['voice'] ?? '');
-$wants   = !empty($_POST['wantsNewsletter']) ? 1 : 0;
+$newsletter = !empty($_POST['newsletter']) ? 1 : 0;
 
 // Length validation
 if (
@@ -134,14 +134,14 @@ try {
         $asunto,
         $mensaje,
         $voice ?: null,
-        $wants,
+        $newsletter,
         $_SERVER['REMOTE_ADDR'] ?? null,
         $_SERVER['HTTP_USER_AGENT'] ?? null
     ]);
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Error al guardar en DB']);
-    error_log($e->getMessage());
+    echo json_encode(['ok' => false, 'error' => 'Error al guardar en DB', 'code' => 'DB_SUBMIT']);
+    error_log('DB error: ' . $e->getMessage() . ' / ' . implode(' | ', $stmt->errorInfo()));
     exit;
 }
 
@@ -174,7 +174,7 @@ try {
         "<p><b>Asunto:</b> " . htmlspecialchars($asunto, ENT_QUOTES, 'UTF-8') . "</p>" .
         "<p><b>Mensaje:</b><br>" . nl2br(htmlspecialchars($mensaje)) . "</p>" .
         "<p><b>Voice:</b> " . htmlspecialchars($voice, ENT_QUOTES, 'UTF-8') . "</p>" .
-        "<p><b>Newsletter:</b> " . ($wants ? 'Sí' : 'No') . "</p>";
+        "<p><b>Newsletter:</b> " . ($newsletter ? 'Sí' : 'No') . "</p>";
     $mail->AltBody = "$nombre <$email>\nAsunto: $asunto\nMensaje:\n$mensaje";
 
     $mail->send();

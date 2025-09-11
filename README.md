@@ -10,6 +10,11 @@ Este repositorio contiene el sitio web de **La Pluma, el Faro y la Llama**, un p
   npm install -g firebase-tools
   ```
 
+- Instalar las dependencias de PHP con [Composer](https://getcomposer.org/):
+  ```bash
+  composer install
+  ```
+
 ## Desarrollo Local
 
 Para iniciar un servidor local con Firebase, ejecuta:

@@ -10,15 +10,20 @@ function http(array $methods): void {
     header('Content-Type: application/json; charset=UTF-8');
 
     $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-    $allowedOrigins = ['https://plumafarollama.com', 'https://www.plumafarollama.com'];
+    $allowedOrigins = ['https://plumafarollama.com', 'https://www.plumafarollama.com', 'https://enemycrow.github.io'];
     if (in_array($origin, $allowedOrigins, true)) {
         header("Access-Control-Allow-Origin: $origin");
         header('Vary: Origin');
+        header('Access-Control-Allow-Credentials: true');
     }
 
     $allowMethods = array_unique(array_merge($methods, ['OPTIONS']));
     header('Access-Control-Allow-Methods: ' . implode(', ', $allowMethods));
-    header('Access-Control-Allow-Headers: Content-Type, X-Requested-With');
+
+    $reqHeaders = $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']
+        ?? 'Content-Type, X-Requested-With, Authorization';
+    header('Vary: Access-Control-Request-Headers', false);
+    header("Access-Control-Allow-Headers: $reqHeaders");
     header('Access-Control-Max-Age: 86400');
 
     $method = $_SERVER['REQUEST_METHOD'] ?? '';
