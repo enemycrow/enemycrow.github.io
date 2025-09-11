@@ -1,30 +1,36 @@
 <?php
 declare(strict_types=1);
 
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+Dotenv\Dotenv::createImmutable(dirname(__DIR__, 2))->safeLoad();
+
 // Helper para leer variables de entorno y lanzar error si faltan
-function env(string $key, $default = null, bool $required = false) {
-    // Buscar en $_ENV
-    if (isset($_ENV[$key]) && $_ENV[$key] !== '') {
-        return $_ENV[$key];
-    }
+if (!function_exists('env')) {
+    function env(string $key, $default = null, bool $required = false) {
+        // Buscar en $_ENV
+        if (isset($_ENV[$key]) && $_ENV[$key] !== '') {
+            return $_ENV[$key];
+        }
 
-    // Buscar en $_SERVER
-    if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') {
-        return $_SERVER[$key];
-    }
+        // Buscar en $_SERVER
+        if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') {
+            return $_SERVER[$key];
+        }
 
-    // Usar getenv como último recurso
-    $value = getenv($key);
-    if ($value !== false && $value !== '') {
-        return $value;
-    }
+        // Usar getenv como último recurso
+        $value = getenv($key);
+        if ($value !== false && $value !== '') {
+            return $value;
+        }
 
-    // Si es requerida y no existe, lanzar error
-    if ($required) {
-        throw new RuntimeException("Falta la variable de entorno requerida: {$key}");
-    }
+        // Si es requerida y no existe, lanzar error
+        if ($required) {
+            throw new RuntimeException("Falta la variable de entorno requerida: {$key}");
+        }
 
-    return $default;
+        return $default;
+    }
 }
 
 return [
