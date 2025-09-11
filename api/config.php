@@ -1,24 +1,11 @@
 <?php
 declare(strict_types=1);
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+// Apuntar a la raíz del dominio (fuera de public_html) donde está el .env
 $dotenvPath = dirname(__DIR__, 2);
-if (!file_exists($dotenvPath . '/.env')) {
-    die("No se encontró el archivo .env en $dotenvPath");
-}
 Dotenv\Dotenv::createImmutable($dotenvPath)->safeLoad();
-
-// Debug temporal: mostrar qué variables existen
-if (php_sapi_name() !== 'cli') {
-    echo "<pre>";
-    var_dump($_ENV);
-    echo "</pre>";
-    exit;
-}
 
 if (!function_exists('env')) {
     function env(string $key, $default = null, bool $required = false) {
