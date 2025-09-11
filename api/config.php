@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-Dotenv\Dotenv::createImmutable(dirname(__DIR__, 2))->safeLoad();
+Dotenv\Dotenv::createImmutable(dirname(__DIR__))->safeLoad();
 
 // Helper para leer variables de entorno y lanzar error si faltan
 if (!function_exists('env')) {
