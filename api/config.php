@@ -6,7 +6,7 @@ ini_set('display_errors', '1');
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-$dotenvPath = dirname(__DIR__);
+$dotenvPath = dirname(__DIR__, 2);
 if (!file_exists($dotenvPath . '/.env')) {
     die("No se encontró el archivo .env en $dotenvPath");
 }
