@@ -5,9 +5,12 @@ if (!file_exists($autoloadPath)) {
 }
 require $autoloadPath;
 
+use Dotenv\Dotenv;
 use Monolog\Logger;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\ErrorHandler;
+
+Dotenv::createImmutable(__DIR__)->safeLoad();
 
 $logDir = __DIR__ . '/logs';
 if (!is_dir($logDir)) {

@@ -1,4 +1,5 @@
 <?php
+require dirname(__DIR__) . '/bootstrap.php';
 require __DIR__ . '/http.php';
 http(['POST']);
 
