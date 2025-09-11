@@ -10,7 +10,9 @@ use Monolog\Logger;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\ErrorHandler;
 
-Dotenv::createImmutable(__DIR__)->safeLoad();
+if (class_exists(Dotenv::class)) {
+    Dotenv::createImmutable(__DIR__)->safeLoad();
+}
 
 $logDir = __DIR__ . '/logs';
 if (!is_dir($logDir)) {
