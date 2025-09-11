@@ -1,22 +1,22 @@
-{
-    "name": "enemycrow/la-pluma-el-faro-y-la-llama",
-    "description": "Sitio oficial de La Pluma, el Faro y la Llama: arte, literatura y amor eterno. Tres voces, tres escritores, un solo corazón.",
-    "type": "project",
-    "license": "proprietary",
-    "autoload": {
-        "psr-4": {
-            "Enemycrow\\LaPlumaElFaroYLaLlama\\": "src/"
-        }
-    },
-    "authors": [
         {
-            "name": "enemycrow"
+            "name": "enemycrow/la-pluma-el-faro-y-la-llama",
+            "description": "Sitio oficial de La Pluma, el Faro y la Llama: arte, literatura y amor eterno. Tres voces, tres escritores, un solo corazón.",
+            "type": "project",
+            "license": "proprietary",
+            "autoload": {
+                "psr-4": {
+                    "Enemycrow\\LaPlumaElFaroYLaLlama\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "enemycrow"
+                }
+            ],
+            "minimum-stability": "stable",
+            "require": {
+                "phpmailer/phpmailer": "^6.10",
+                "monolog/monolog": "^3.9",
+                "vlucas/phpdotenv": "^5.6"
+            }
         }
-    ],
-    "minimum-stability": "stable",
-    "require": {
-        "phpmailer/phpmailer": "^6.10",
-        "monolog/monolog": "^3.9",
-        "vlucas/phpdotenv": "^5.6"
-    }
-}
