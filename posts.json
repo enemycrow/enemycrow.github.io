@@ -1,5 +1,27 @@
 [
   {
+    "id": 49,
+    "titulo": "La batalla en la Caída del Cielo",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-09-07",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "La Reversión de las Divinidades"
+    ],
+    "topicos": [
+      "Ética",
+      "Simbolismo"
+    ],
+    "tiempo": "2 min de lectura",
+    "fragmento": "¿Y si los dioses también fueran susceptibles a la corrupción, la ambición y la redención?",
+    "imagen": "Lareversiondelasdivinidades-Post49.webp",
+    "slug": "la-batalla-en-la-caida-del-cielo",
+    "contenido_html": "<p>Cuando comencé a escribir con verdadera pasión, mi primer antagonista fue el mismísimo Diablo. En ese entonces, todavía era una figura temida en muchos hogares cristianos, y yo mismo llegué a fantasear con que vendría a buscarme un día. ¡Fantasías de niños!</p><p>Con el tiempo, empecé a preguntarme si lo que realmente importaba era el nombre del antagonista o el rol que desempeñaba: sus acciones, sus contradicciones, sus deseos. Ya más adulto, pensé: ¿y si los dioses fueran los villanos? No todos, sino los más ambiciosos, los que se dejan arrastrar por sus propios excesos. Al principio era casi un juego infantil —el bueno convertido en malo sin motivo—, pero pronto busqué darles un trasfondo. Una explicación. Una historia de transformación que los volviera más humanos.</p><p>Porque si, como se dice, Dios hizo al hombre a su semejanza, ¿no sería lógico que también compartiera sus debilidades? La posibilidad de corromperse... pero también de redimirse.</p><p>Así nació la idea de <em>La Reversión de las Divinidades</em>, donde el Cielo mismo se vuelve escenario de conflicto y misterio. Un mundo mucho más complejo que el relato común.</p><p>Te invito a seguir recorriendo este universo y descubrir qué otros secretos esconde más allá de lo evidente.</p>",
+    "destacado": false
+  },
+  {
     "id": 48,
     "titulo": "Arrancar el velo de la realidad",
     "autor": "A.C. Elysia",
