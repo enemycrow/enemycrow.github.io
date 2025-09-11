@@ -35,29 +35,47 @@ if (!$config) {
 }
 
 // ====== LEER INPUT (JSON o form-data) ======
-$nombre = '';
-$email  = '';
-$lauren = 0;
-$elysia = 0;
-$sahir  = 0;
-$privacyAccepted = 0;
-
 $ctype = $_SERVER['CONTENT_TYPE'] ?? '';
 if (stripos($ctype, 'application/json') !== false) {
-    $input  = json_decode(file_get_contents('php://input'), true) ?: [];
-    $nombre = trim((string)($input['nl-name']  ?? ''));
-    $email  = trim((string)($input['nl-email'] ?? ''));
-    $lauren = !empty($input['nl-lauren']) ? 1 : 0;
-    $elysia = !empty($input['nl-elysia']) ? 1 : 0;
-    $sahir  = !empty($input['nl-sahir'])  ? 1 : 0;
-    $privacyAccepted = !empty($input['nl-privacy']) ? 1 : 0;
+    $input = json_decode(file_get_contents('php://input'), true) ?: [];
 } else {
-    $nombre = trim((string)($_POST['nl-name']  ?? ''));
-    $email  = trim((string)($_POST['nl-email'] ?? ''));
-    $lauren = !empty($_POST['nl-lauren']) ? 1 : 0;
-    $elysia = !empty($_POST['nl-elysia']) ? 1 : 0;
-    $sahir  = !empty($_POST['nl-sahir'])  ? 1 : 0;
-    $privacyAccepted = isset($_POST['nl-privacy']) ? 1 : 0; // checkbox "on"
+    $input = $_POST;
+}
+
+$nombre = trim((string)($input['nl-name'] ?? ''));
+$email  = trim((string)($input['nl-email'] ?? ''));
+$lauren = !empty($input['nl-lauren']) ? 1 : 0;
+$elysia = !empty($input['nl-elysia']) ? 1 : 0;
+$sahir  = !empty($input['nl-sahir']) ? 1 : 0;
+$privacyAccepted = !empty($input['nl-privacy']) ? 1 : 0;
+$token  = trim((string)($input['token'] ?? ''));
+
+// ====== VERIFICAR reCAPTCHA ======
+$secret = $config['recaptcha_secret'] ?? '';
+try {
+    $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, stream_context_create([
+        'http' => [
+            'method' => 'POST',
+            'header' => 'Content-type: application/x-www-form-urlencoded',
+            'content' => http_build_query([
+                'secret'   => $secret,
+                'response' => $token,
+            ]),
+            'timeout' => 10,
+        ],
+    ]));
+
+    $captcha = json_decode($response, true);
+    if (empty($captcha['success']) || ($captcha['score'] ?? 0) < 0.5) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido']);
+        exit;
+    }
+} catch (Throwable $e) {
+    http_response_code(400);
+    echo json_encode(['ok' => false, 'error' => 'Error al verificar reCAPTCHA']);
+    error_log('reCAPTCHA verification failed: ' . $e->getMessage());
+    exit;
 }
 
 // ====== VALIDACIONES ======
