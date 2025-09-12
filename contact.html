@@ -136,6 +136,7 @@
                 <div class="contact-form-container">
                     <h2>Envía un Mensaje</h2>
                     <form id="contactForm" class="contact-form">
+                        <input type="hidden" name="token" id="g-recaptcha-token-contact">
                         <div class="contact-form__group">
                             <label for="name">Nombre Completo</label>
                             <input type="text" id="name" name="name" required>
@@ -227,6 +228,7 @@
                 <div class="newsletter__form-container">
                     <h3>Únete a la Comunidad</h3>
                     <form id="newsletterForm" class="newsletter__form">
+                        <input type="hidden" name="token" id="g-recaptcha-token-newsletter">
                         <div class="contact-form__group">
                             <label for="nl-name">Nombre</label>
                             <input type="text" id="nl-name" name="nl-name" required>
