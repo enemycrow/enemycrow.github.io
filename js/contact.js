@@ -19,26 +19,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  const contactForm = document.getElementById('contactForm');
+  grecaptcha.ready(() => {
+    const contactForm = document.getElementById('contactForm');
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-      if (!validateForm(contactForm)) {
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'contact-form__message contact-form__message--error';
-        errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
-        contactForm.parentNode.insertBefore(errorMessage, contactForm);
-        errorMessage.style.display = 'block';
-        setTimeout(() => {
-          errorMessage.style.display = 'none';
-          setTimeout(() => errorMessage.remove(), 500);
-        }, 5000);
-        return;
-      }
+        if (!validateForm(contactForm)) {
+          const errorMessage = document.createElement('div');
+          errorMessage.className = 'contact-form__message contact-form__message--error';
+          errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
+          contactForm.parentNode.insertBefore(errorMessage, contactForm);
+          errorMessage.style.display = 'block';
+          setTimeout(() => {
+            errorMessage.style.display = 'none';
+            setTimeout(() => errorMessage.remove(), 500);
+          }, 5000);
+          return;
+        }
 
-      grecaptcha.ready(async () => {
         try {
           const token = await grecaptcha.execute(siteKey, { action: 'submit' });
           const tokenField = document.getElementById('g-recaptcha-token-contact');
@@ -81,71 +81,71 @@ document.addEventListener('DOMContentLoaded', async () => {
           }, 5000);
         }
       });
-    });
-  }
+    }
 
-  const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterForm = document.getElementById('newsletterForm');
 
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-      if (!validateForm(newsletterForm)) {
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'newsletter__message newsletter__message--error';
-        errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
-        newsletterForm.parentNode.insertBefore(errorMessage, newsletterForm);
-        errorMessage.style.display = 'block';
-        setTimeout(() => {
-          errorMessage.style.display = 'none';
-          setTimeout(() => errorMessage.remove(), 500);
-        }, 5000);
-        return;
-      }
-
-      try {
-        const token = await grecaptcha.execute(siteKey, { action: 'submit' });
-        const tokenField = document.getElementById('g-recaptcha-token-newsletter');
-        if (tokenField) {
-          tokenField.value = token;
-        }
-
-        const formData = new FormData(newsletterForm);
-
-        const resp = await fetch('api/newsletter.php', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await resp.json();
-
-        if (data.ok) {
-          const successMessage = document.createElement('div');
-          successMessage.className = 'newsletter__message newsletter__message-success';
-          successMessage.textContent = '¡Gracias por suscribirte! Pronto recibirás tu primer newsletter.';
-          newsletterForm.parentNode.insertBefore(successMessage, newsletterForm);
-          successMessage.style.display = 'block';
-          newsletterForm.reset();
+        if (!validateForm(newsletterForm)) {
+          const errorMessage = document.createElement('div');
+          errorMessage.className = 'newsletter__message newsletter__message--error';
+          errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
+          newsletterForm.parentNode.insertBefore(errorMessage, newsletterForm);
+          errorMessage.style.display = 'block';
           setTimeout(() => {
-            successMessage.style.display = 'none';
-            setTimeout(() => successMessage.remove(), 500);
+            errorMessage.style.display = 'none';
+            setTimeout(() => errorMessage.remove(), 500);
           }, 5000);
-        } else {
-          throw new Error(data.error || 'Error desconocido');
+          return;
         }
-      } catch (err) {
-        console.error('Error al guardar la suscripción', err);
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'newsletter__message newsletter__message--error';
-        errorMessage.textContent = 'Ha ocurrido un error. Intenta nuevamente más tarde.';
-        newsletterForm.parentNode.insertBefore(errorMessage, newsletterForm);
-        errorMessage.style.display = 'block';
-        setTimeout(() => {
-          errorMessage.style.display = 'none';
-          setTimeout(() => errorMessage.remove(), 500);
-        }, 5000);
-      }
-    });
-  }
+
+        try {
+          const token = await grecaptcha.execute(siteKey, { action: 'submit' });
+          const tokenField = document.getElementById('g-recaptcha-token-newsletter');
+          if (tokenField) {
+            tokenField.value = token;
+          }
+
+          const formData = new FormData(newsletterForm);
+
+          const resp = await fetch('api/newsletter.php', {
+            method: 'POST',
+            body: formData
+          });
+          const data = await resp.json();
+
+          if (data.ok) {
+            const successMessage = document.createElement('div');
+            successMessage.className = 'newsletter__message newsletter__message-success';
+            successMessage.textContent = '¡Gracias por suscribirte! Pronto recibirás tu primer newsletter.';
+            newsletterForm.parentNode.insertBefore(successMessage, newsletterForm);
+            successMessage.style.display = 'block';
+            newsletterForm.reset();
+            setTimeout(() => {
+              successMessage.style.display = 'none';
+              setTimeout(() => successMessage.remove(), 500);
+            }, 5000);
+          } else {
+            throw new Error(data.error || 'Error desconocido');
+          }
+        } catch (err) {
+          console.error('Error al guardar la suscripción', err);
+          const errorMessage = document.createElement('div');
+          errorMessage.className = 'newsletter__message newsletter__message--error';
+          errorMessage.textContent = 'Ha ocurrido un error. Intenta nuevamente más tarde.';
+          newsletterForm.parentNode.insertBefore(errorMessage, newsletterForm);
+          errorMessage.style.display = 'block';
+          setTimeout(() => {
+            errorMessage.style.display = 'none';
+            setTimeout(() => errorMessage.remove(), 500);
+          }, 5000);
+        }
+      });
+    }
+  });
 
   // Acordeón de FAQ
   const faqQuestions = document.querySelectorAll('.faq__question');
