@@ -45,6 +45,10 @@ self.addEventListener('fetch', event => {
 
   // ⬅️ Evita cachear/servir desde cache para la API
   const url = new URL(event.request.url);
+  // Ignorar esquemas no soportados por Cache Storage (ej. chrome-extension:)
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+    return;
+  }
   if (url.pathname.startsWith('/api/')) {
     // API: siempre desde red y sin cache
     event.respondWith(fetch(event.request));

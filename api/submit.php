@@ -2,13 +2,18 @@
 require __DIR__ . '/http.php';
 http(['POST']);
 
-// Load configuration
-$configPath = __DIR__ . '/config.php';
+// Load configuration (try several locations)
+$cfgCandidates = [
+    dirname(__DIR__, 2) . '/config.php',
+    dirname(__DIR__) . '/config.php',
+    __DIR__ . '/config.php',
+];
 try {
-    if (!file_exists($configPath)) {
-        throw new Exception('Config file not found');
+    $config = null;
+    foreach ($cfgCandidates as $p) {
+        if (is_file($p)) { $config = require $p; break; }
     }
-    $config = require $configPath;
+    if (!$config) { throw new Exception('Config file not found'); }
 } catch (Throwable $e) {
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
@@ -148,6 +153,12 @@ try {
 // Send email via PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+// Si no está instalado Composer/vendor, no fallar el flujo del usuario
+if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    error_log('PHPMailer autoload no encontrado; se omite el envío de correo.');
+    echo json_encode(['ok' => true, 'mail' => false]);
+    exit;
+}
 require __DIR__ . '/../vendor/autoload.php';
 
 $mail = new PHPMailer(true);

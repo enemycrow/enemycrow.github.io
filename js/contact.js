@@ -102,39 +102,45 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const formData = new FormData(newsletterForm);
 
-      try {
-        const resp = await fetch('api/newsletter.php', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await resp.json();
+      // Ejecutar reCAPTCHA también para newsletter (el backend lo exige)
+      grecaptcha.ready(async () => {
+        try {
+          const token = await grecaptcha.execute(siteKey, { action: 'newsletter' });
+          formData.append('token', token);
 
-        if (data.ok) {
-          const successMessage = document.createElement('div');
-          successMessage.className = 'newsletter__message newsletter__message-success';
-          successMessage.textContent = '¡Gracias por suscribirte! Pronto recibirás tu primer newsletter.';
-          newsletterForm.parentNode.insertBefore(successMessage, newsletterForm);
-          successMessage.style.display = 'block';
-          newsletterForm.reset();
+          const resp = await fetch('api/newsletter.php', {
+            method: 'POST',
+            body: formData
+          });
+          const data = await resp.json();
+
+          if (data.ok) {
+            const successMessage = document.createElement('div');
+            successMessage.className = 'newsletter__message newsletter__message-success';
+            successMessage.textContent = '¡Gracias por suscribirte! Pronto recibirás tu primer newsletter.';
+            newsletterForm.parentNode.insertBefore(successMessage, newsletterForm);
+            successMessage.style.display = 'block';
+            newsletterForm.reset();
+            setTimeout(() => {
+              successMessage.style.display = 'none';
+              setTimeout(() => successMessage.remove(), 500);
+            }, 5000);
+          } else {
+            throw new Error(data.error || 'Error desconocido');
+          }
+        } catch (err) {
+          console.error('Error al guardar la suscripción', err);
+          const errorMessage = document.createElement('div');
+          errorMessage.className = 'newsletter__message newsletter__message--error';
+          errorMessage.textContent = 'Ha ocurrido un error. Intenta nuevamente más tarde.';
+          newsletterForm.parentNode.insertBefore(errorMessage, newsletterForm);
+          errorMessage.style.display = 'block';
           setTimeout(() => {
-            successMessage.style.display = 'none';
-            setTimeout(() => successMessage.remove(), 500);
+            errorMessage.style.display = 'none';
+            setTimeout(() => errorMessage.remove(), 500);
           }, 5000);
-        } else {
-          throw new Error(data.error || 'Error desconocido');
         }
-      } catch (err) {
-        console.error('Error al guardar la suscripción', err);
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'newsletter__message newsletter__message--error';
-        errorMessage.textContent = 'Ha ocurrido un error. Intenta nuevamente más tarde.';
-        newsletterForm.parentNode.insertBefore(errorMessage, newsletterForm);
-        errorMessage.style.display = 'block';
-        setTimeout(() => {
-          errorMessage.style.display = 'none';
-          setTimeout(() => errorMessage.remove(), 500);
-        }, 5000);
-      }
+      });
     });
   }
 
