@@ -103,6 +103,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       const formData = new FormData(newsletterForm);
 
       try {
+        const token = await grecaptcha.execute(siteKey, { action: 'submit' });
+        formData.append('token', token);
+
         const resp = await fetch('api/newsletter.php', {
           method: 'POST',
           body: formData
