@@ -18,15 +18,19 @@ foreach ($configPaths as $path) {
     }
 }
 
+// Extraer solo la clave que necesitas
 $siteKey = '';
 if (is_array($config)) {
     $siteKey = $config['recaptcha_site_key'] ?? '';
 }
 
+header('Content-Type: application/json; charset=utf-8');
+
 if ($siteKey === '') {
     http_response_code(500);
     echo json_encode(['error' => 'Could not load reCAPTCHA site key']);
-    return;
+    exit;
 }
 
+// Ahora solo devuelve la clave, no el array completo
 echo json_encode(['siteKey' => $siteKey]);
