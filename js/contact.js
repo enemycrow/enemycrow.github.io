@@ -38,12 +38,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
       }
 
-      const formData = new FormData(contactForm);
-
       grecaptcha.ready(async () => {
         try {
           const token = await grecaptcha.execute(siteKey, { action: 'submit' });
-          formData.append('token', token);
+          const tokenField = document.getElementById('g-recaptcha-token-contact');
+          if (tokenField) {
+            tokenField.value = token;
+          }
+
+          const formData = new FormData(contactForm);
 
           const resp = await fetch('api/submit.php', {
             method: 'POST',
@@ -100,11 +103,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
       }
 
-      const formData = new FormData(newsletterForm);
-
       try {
         const token = await grecaptcha.execute(siteKey, { action: 'submit' });
-        formData.append('token', token);
+        const tokenField = document.getElementById('g-recaptcha-token-newsletter');
+        if (tokenField) {
+          tokenField.value = token;
+        }
+
+        const formData = new FormData(newsletterForm);
 
         const resp = await fetch('api/newsletter.php', {
           method: 'POST',
