@@ -2,22 +2,40 @@
 require __DIR__ . '/http.php';
 http(['POST']);
 
-// Load configuration (try several locations)
+// ====== CARGAR CONFIG (fuera de public_html si es posible) ======
 $cfgCandidates = [
-    dirname(__DIR__, 2) . '/config.php',
-    dirname(__DIR__) . '/config.php',
-    __DIR__ . '/config.php',
+    dirname(__DIR__, 2) . '/config.php', // /home/usuario/config.php (recomendado)
+    dirname(__DIR__) . '/config.php',    // si public_html está 1 nivel abajo
+    __DIR__ . '/config.php',             // fallback (no recomendado)
 ];
-try {
-    $config = null;
-    foreach ($cfgCandidates as $p) {
-        if (is_file($p)) { $config = require $p; break; }
+$config = null; $cfgPathUsed = null;
+foreach ($cfgCandidates as $cfgPath) {
+    if (is_file($cfgPath)) {
+        $cfgPathUsed = $cfgPath;
+        try {
+            $config = require $cfgPath;
+        } catch (Throwable $e) {
+            http_response_code(500);
+            echo json_encode([
+                'ok'    => false,
+                'error' => 'Error en config.php',
+                'path'  => $cfgPathUsed,
+                'code'  => 'CONFIG_ERROR'
+            ]);
+            error_log((string)$e);
+            exit;
+        }
+        break;
     }
-    if (!$config) { throw new Exception('Config file not found'); }
-} catch (Throwable $e) {
+}
+if (!$config) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
-    error_log('Config load failed: ' . $e->getMessage());
+    echo json_encode([
+        'ok'         => false,
+        'error'      => 'Config no encontrada',
+        'buscado_en' => $cfgCandidates,
+        'code'       => 'CONFIG_NOT_FOUND'
+    ]);
     exit;
 }
 
@@ -32,8 +50,8 @@ try {
     );
 } catch (Throwable $e) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
-    error_log('DB connection failed: ' . $e->getMessage());
+    echo json_encode(['ok' => false, 'error' => 'Error del servidor', 'code' => 'DB_CONNECT']);
+    error_log('DB connection failed: ' . (string)$e);
     exit;
 }
 
@@ -55,7 +73,7 @@ try {
         } else {
             if ($record['attempts'] >= $limit) {
                 http_response_code(429);
-                echo json_encode(['ok' => false, 'error' => 'Demasiadas solicitudes']);
+                echo json_encode(['ok' => false, 'error' => 'Demasiadas solicitudes', 'code' => 'RATE_LIMIT']);
                 exit;
             }
             $stmt = $pdo->prepare('UPDATE rate_limits SET last_request = ?, attempts = attempts + 1 WHERE ip = ?');
@@ -68,7 +86,7 @@ try {
 } catch (Throwable $e) {
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'Error del servidor', 'code' => 'DB_RATE_LIMIT']);
-    error_log('DB error: ' . $e->getMessage() . ' / ' . implode(' | ', $stmt->errorInfo()));
+    error_log('DB error: ' . (string)$e . ' / ' . implode(' | ', $stmt->errorInfo()));
     exit;
 }
 
@@ -92,13 +110,13 @@ try {
     $captcha = json_decode($response, true);
     if (empty($captcha['success']) || ($captcha['score'] ?? 0) < 0.5) {
         http_response_code(400);
-        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido']);
+        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido', 'code' => 'RECAPTCHA_INVALID']);
         exit;
     }
 } catch (Throwable $e) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Error al verificar reCAPTCHA']);
-    error_log('reCAPTCHA verification failed: ' . $e->getMessage());
+    echo json_encode(['ok' => false, 'error' => 'Error al verificar reCAPTCHA', 'code' => 'RECAPTCHA_ERROR']);
+    error_log('reCAPTCHA verification failed: ' . (string)$e);
     exit;
 }
 
@@ -119,14 +137,14 @@ if (
     mb_strlen($voice) > 255
 ) {
     http_response_code(422);
-    echo json_encode(['ok' => false, 'error' => 'Datos demasiado largos']);
+    echo json_encode(['ok' => false, 'error' => 'Datos demasiado largos', 'code' => 'DATA_TOO_LONG']);
     exit;
 }
 
 // Basic validation
 if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $mensaje === '') {
     http_response_code(422);
-    echo json_encode(['ok' => false, 'error' => 'Datos inválidos']);
+    echo json_encode(['ok' => false, 'error' => 'Datos inválidos', 'code' => 'DATA_INVALID']);
     exit;
 }
 
@@ -146,7 +164,7 @@ try {
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'Error al guardar en DB', 'code' => 'DB_SUBMIT']);
-    error_log('DB error: ' . $e->getMessage() . ' / ' . implode(' | ', $stmt->errorInfo()));
+    error_log('DB error: ' . (string)$e . ' / ' . implode(' | ', $stmt->errorInfo()));
     exit;
 }
 
@@ -192,6 +210,6 @@ try {
     echo json_encode(['ok' => true]);
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'No se pudo enviar el correo']);
-    error_log($e->getMessage());
+    echo json_encode(['ok' => false, 'error' => 'No se pudo enviar el correo', 'code' => 'EMAIL_SEND']);
+    error_log((string)$e);
 }

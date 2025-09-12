@@ -21,8 +21,13 @@ foreach ($cfgCandidates as $cfgPath) {
             $config = require $cfgPath;
         } catch (Throwable $e) {
             http_response_code(500);
-            echo json_encode(['ok'=>false,'error'=>'Error en config.php','path'=>$cfgPathUsed]);
-            error_log($e->getMessage());
+            echo json_encode([
+                'ok'    => false,
+                'error' => 'Error en config.php',
+                'path'  => $cfgPathUsed,
+                'code'  => 'CONFIG_ERROR'
+            ]);
+            error_log((string)$e);
             exit;
         }
         break;
@@ -30,7 +35,12 @@ foreach ($cfgCandidates as $cfgPath) {
 }
 if (!$config) {
     http_response_code(500);
-    echo json_encode(['ok'=>false,'error'=>'Config no encontrada','buscado_en'=>$cfgCandidates]);
+    echo json_encode([
+        'ok'         => false,
+        'error'      => 'Config no encontrada',
+        'buscado_en' => $cfgCandidates,
+        'code'       => 'CONFIG_NOT_FOUND'
+    ]);
     exit;
 }
 
@@ -68,13 +78,13 @@ try {
     $captcha = json_decode($response, true);
     if (empty($captcha['success']) || ($captcha['score'] ?? 0) < 0.5) {
         http_response_code(400);
-        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido']);
+        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido', 'code' => 'RECAPTCHA_INVALID']);
         exit;
     }
 } catch (Throwable $e) {
     http_response_code(400);
-    echo json_encode(['ok' => false, 'error' => 'Error al verificar reCAPTCHA']);
-    error_log('reCAPTCHA verification failed: ' . $e->getMessage());
+    echo json_encode(['ok' => false, 'error' => 'Error al verificar reCAPTCHA', 'code' => 'RECAPTCHA_ERROR']);
+    error_log('reCAPTCHA verification failed: ' . (string)$e);
     exit;
 }
 
@@ -82,17 +92,17 @@ try {
 $email = mb_strtolower($email);
 if (mb_strlen($nombre) > 100 || mb_strlen($email) > 255) {
     http_response_code(422);
-    echo json_encode(['ok' => false, 'error' => 'Datos demasiado largos']);
+    echo json_encode(['ok' => false, 'error' => 'Datos demasiado largos', 'code' => 'DATA_TOO_LONG']);
     exit;
 }
 if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(422);
-    echo json_encode(['ok' => false, 'error' => 'Datos inválidos']);
+    echo json_encode(['ok' => false, 'error' => 'Datos inválidos', 'code' => 'DATA_INVALID']);
     exit;
 }
 if (!$privacyAccepted) {
     http_response_code(422);
-    echo json_encode(['ok' => false, 'error' => 'Debes aceptar la política de privacidad']);
+    echo json_encode(['ok' => false, 'error' => 'Debes aceptar la política de privacidad', 'code' => 'PRIVACY_REQUIRED']);
     exit;
 }
 
@@ -125,7 +135,7 @@ try {
     if ($e->getCode() !== '23000') {
         http_response_code(500);
         echo json_encode(['ok' => false, 'error' => 'Error al guardar en DB', 'code' => 'DB_NEWSLETTER']);
-        error_log('DB error: ' . $e->getMessage() . ' / ' . implode(' | ', $stmt->errorInfo()));
+        error_log('DB error: ' . (string)$e . ' / ' . implode(' | ', $stmt->errorInfo()));
         exit;
     }
 }
@@ -186,7 +196,7 @@ if ($phSrc) {
         $noticeSent = true;
     } catch (PHPMailerException $e) {
         // No rompemos el flujo si no se puede enviar (por políticas SMTP, etc.)
-        error_log('Aviso interno no enviado: ' . $e->getMessage() . ' / ' . ($mail->ErrorInfo ?? ''));
+        error_log('Aviso interno no enviado: ' . (string)$e . ' / ' . ($mail->ErrorInfo ?? ''));
     }
 } else {
     error_log('PHPMailer no encontrado: no se envió aviso interno.');
