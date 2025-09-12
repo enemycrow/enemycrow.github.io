@@ -4,10 +4,23 @@ declare(strict_types=1);
 require __DIR__ . '/http.php';
 http(['GET']);
 
-// Cargar SIEMPRE el config de public_html
-$config = require dirname(__DIR__) . '/config.php';
+$configPaths = [
+    dirname(__DIR__, 2) . '/config.php',
+    dirname(__DIR__) . '/config.php',
+    __DIR__ . '/config.php',
+];
 
-// Extraer solo la clave necesaria
+$config = null;
+foreach ($configPaths as $path) {
+    if (is_readable($path)) {
+        $config = require $path;
+        var_dump($path, $config);
+        exit;
+        break;
+    }
+}
+
+// Extraer solo la clave que necesitas
 $siteKey = '';
 if (is_array($config)) {
     $siteKey = $config['recaptcha_site_key'] ?? '';
@@ -21,4 +34,5 @@ if ($siteKey === '') {
     exit;
 }
 
+// Ahora solo devuelve la clave, no el array completo
 echo json_encode(['siteKey' => $siteKey]);
