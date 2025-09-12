@@ -200,6 +200,24 @@ Para verificar de forma simple los archivos HTML del sitio se utiliza [HTMLHint]
    npm test
    ```
 
+## Códigos de error de la API
+
+Los endpoints PHP (`api/submit.php` y `api/newsletter.php`) incluyen un campo `code` en las respuestas de error para que el front‑end pueda actuar según el caso:
+
+- `CONFIG_ERROR` – error al cargar `config.php`.
+- `CONFIG_NOT_FOUND` – no se encontró la configuración.
+- `DB_CONNECT` – la conexión a la base de datos falló.
+- `DB_RATE_LIMIT` – error al aplicar el límite de solicitudes.
+- `RATE_LIMIT` – se excedió el número de solicitudes permitidas.
+- `RECAPTCHA_INVALID` – el token de reCAPTCHA fue rechazado.
+- `RECAPTCHA_ERROR` – no se pudo validar reCAPTCHA.
+- `DATA_TOO_LONG` – alguno de los campos supera el tamaño permitido.
+- `DATA_INVALID` – los datos no cumplen el formato esperado.
+- `PRIVACY_REQUIRED` – falta aceptar la política de privacidad (solo newsletter).
+- `DB_NEWSLETTER` – falló el guardado de la suscripción.
+- `DB_SUBMIT` – falló el guardado del mensaje de contacto.
+- `EMAIL_SEND` – no se pudo enviar el correo de notificación.
+
 ## Módulo interno de edición
 
 Este módulo te permite editar entradas del blog de forma local, sin necesidad de exponer un panel de administración al público.
