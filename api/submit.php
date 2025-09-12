@@ -2,17 +2,30 @@
 require __DIR__ . '/http.php';
 http(['POST']);
 
-// Load configuration
-$configPath = __DIR__ . '/config.php';
-try {
-    if (!file_exists($configPath)) {
-        throw new Exception('Config file not found');
+// ====== CARGAR CONFIG (fuera de public_html si es posible) ======
+$cfgCandidates = [
+    dirname(__DIR__, 2) . '/config.php', // /home/usuario/config.php (recomendado)
+    dirname(__DIR__) . '/config.php',    // si public_html está 1 nivel abajo
+    __DIR__ . '/config.php',             // fallback (no recomendado)
+];
+$config = null; $cfgPathUsed = null;
+foreach ($cfgCandidates as $cfgPath) {
+    if (is_file($cfgPath)) {
+        $cfgPathUsed = $cfgPath;
+        try {
+            $config = require $cfgPath;
+        } catch (Throwable $e) {
+            http_response_code(500);
+            echo json_encode(['ok'=>false,'error'=>'Error en config.php','path'=>$cfgPathUsed]);
+            error_log($e->getMessage());
+            exit;
+        }
+        break;
     }
-    $config = require $configPath;
-} catch (Throwable $e) {
+}
+if (!$config) {
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Error del servidor']);
-    error_log('Config load failed: ' . $e->getMessage());
+    echo json_encode(['ok'=>false,'error'=>'Config no encontrada','buscado_en'=>$cfgCandidates]);
     exit;
 }
 
