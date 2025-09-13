@@ -55,6 +55,7 @@ try {
     exit;
 }
 
+/*
 $ip = $_SERVER['REMOTE_ADDR'] ?? '';
 $limit = 5;
 $windowMinutes = 10;
@@ -89,6 +90,7 @@ try {
     error_log('DB error: ' . (string)$e . ' / ' . implode(' | ', $stmt->errorInfo()));
     exit;
 }
+*/
 
 // Verify reCAPTCHA token
 $token = trim($_POST['token'] ?? '');
