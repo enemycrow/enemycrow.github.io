@@ -78,7 +78,7 @@ try {
     $captcha = json_decode($response, true);
     if (empty($captcha['success']) || ($captcha['score'] ?? 0) < 0.5) {
         http_response_code(400);
-        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido', 'code' => 'RECAPTCHA_INVALID', 'debug' => ['score' => $captcha['score'] ?? null, 'error-codes' => $captcha['error-codes'] ?? null]]);
+        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido', 'code' => 'RECAPTCHA_INVALID']);
         exit;
     }
 } catch (Throwable $e) {
@@ -141,65 +141,64 @@ try {
 }
 
 // ====== AVISO INTERNO (solo para ti) ======
-// Cargamos PHPMailer si existe en alguna de estas rutas:
-$phCandidates = [
-    __DIR__ . '/../vendor/PHPMailer/src',           // tu caso actual (carpeta con mayúsculas)
-    __DIR__ . '/../vendor/phpmailer/phpmailer/src', // convención composer
-    __DIR__ . '/../vendor/PHPmailer/src',           // por si quedó con m minúscula
-    __DIR__ . '/../PHPMailer/src',                  // por si lo subiste en la raíz pública
-];
-
-$phSrc = null;
-foreach ($phCandidates as $p) {
-    if (is_file($p . '/PHPMailer.php') && is_file($p . '/SMTP.php') && is_file($p . '/Exception.php')) {
-        $phSrc = $p;
-        break;
-    }
+if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    error_log('PHPMailer autoload no encontrado; se omite el envío de correo.');
+    // Aunque no se envíe el correo, la suscripción fue exitosa.
+    echo json_encode(['ok' => true, 'notice_sent' => false]);
+    exit;
 }
+require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/email_template.php'; // Incluir la nueva plantilla
 
 $noticeSent = false;
-if ($phSrc) {
-    require_once $phSrc . '/PHPMailer.php';
-    require_once $phSrc . '/SMTP.php';
-    require_once $phSrc . '/Exception.php';
+$mail = new PHPMailer(true);
 
+try {
     $smtp = $config['smtp'];
+    $mail->CharSet = 'UTF-8';
+    $mail->isSMTP();
+    $mail->Host       = (string)$smtp['host'];
+    $mail->Port       = (int)$smtp['port'];
+    $mail->SMTPAuth   = true;
+    $mail->Username   = (string)$smtp['username'];
+    $mail->Password   = (string)$smtp['password'];
+    $mail->SMTPSecure = $smtp['encryption'] ?? PHPMailer::ENCRYPTION_STARTTLS;
+    
+    $mail->setFrom((string)$smtp['username'], 'Newsletter');
+    $mail->addAddress((string)$smtp['username']);
+    $mail->addReplyTo($email, $nombre);
 
-    try {
-        $mail = new PHPMailer(true);
-        $mail->CharSet    = 'UTF-8';
-        $mail->isSMTP();
-        $mail->Host       = (string)$smtp['host'];
-        $mail->Port       = (int)$smtp['port'];
-        $mail->SMTPAuth   = true;
-        $mail->Username   = (string)$smtp['username'];
-        $mail->Password   = (string)$smtp['password'];
-        $mail->SMTPSecure = $smtp['encryption'] ?? PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->SMTPAutoTLS = true;
+    $mail->isHTML(true);
+    $mail->Subject = '✨ Nuevo suscriptor: ' . $nombre;
 
-        // El remitente DEBE ser tu propio buzón o alias verificado
-        $mail->setFrom((string)$smtp['username'], 'Newsletter');
-        $mail->addAddress((string)$smtp['username']); // te lo envía a ti
-        $mail->addReplyTo($email, $nombre);           // si respondes, va al suscriptor
+    // Datos para la plantilla
+    $emailData = [
+        'Nombre' => $nombre,
+        'Email' => $email,
+        'Preferencia Lauren' => (bool)$lauren,
+        'Preferencia Elysia' => (bool)$elysia,
+        'Preferencia Sahir' => (bool)$sahir,
+        'IP' => $ip,
+        'User Agent' => $ua
+    ];
+    
+    // TODO: Reemplazar con la URL de tu logo
+    $logoUrl = ''; // Por ejemplo: 'https://plumafarollama.com/img/logo.png'
 
-        $mail->Subject = 'Nuevo suscriptor: ' . $nombre;
-        $mail->isHTML(false);
-        $mail->Body =
-            "Nuevo registro en la newsletter:\n\n" .
-            "Nombre: $nombre\n" .
-            "Email: $email\n" .
-            "Preferencias: Lauren=$lauren, Elysia=$elysia, Sahir=$sahir\n" .
-            "IP: " . ($ip ?? '-') . "\n" .
-            "UA: " . ($ua ?? '-') . "\n";
-
-        $mail->send();
-        $noticeSent = true;
-    } catch (PHPMailerException $e) {
-        // No rompemos el flujo si no se puede enviar (por políticas SMTP, etc.)
-        error_log('Aviso interno no enviado: ' . (string)$e . ' / ' . ($mail->ErrorInfo ?? ''));
+    $mail->Body = getEmailHtml('Nuevo Suscriptor a la Newsletter', $emailData, $logoUrl);
+    
+    // Cuerpo alternativo de texto plano
+    $altBody = "Nuevo registro en la newsletter:\n";
+    foreach($emailData as $key => $value) {
+        $altBody .= "$key: " . (is_bool($value) ? ($value ? 'Sí' : 'No') : $value) . "\n";
     }
-} else {
-    error_log('PHPMailer no encontrado: no se envió aviso interno.');
+    $mail->AltBody = $altBody;
+
+    $mail->send();
+    $noticeSent = true;
+
+} catch (PHPMailerException $e) {
+    error_log('Aviso interno no enviado: ' . (string)$e . ' / ' . ($mail->ErrorInfo ?? ''));
 }
 
 // ====== RESPUESTA ======

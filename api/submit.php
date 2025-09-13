@@ -55,7 +55,6 @@ try {
     exit;
 }
 
-/*
 $ip = $_SERVER['REMOTE_ADDR'] ?? '';
 $limit = 5;
 $windowMinutes = 10;
@@ -90,7 +89,6 @@ try {
     error_log('DB error: ' . (string)$e . ' / ' . implode(' | ', $stmt->errorInfo()));
     exit;
 }
-*/
 
 // Verify reCAPTCHA token
 $token = trim($_POST['token'] ?? '');
@@ -112,15 +110,7 @@ try {
     $captcha = json_decode($response, true);
     if (empty($captcha['success']) || ($captcha['score'] ?? 0) < 0.5) {
         http_response_code(400);
-        echo json_encode([
-            'ok' => false,
-            'error' => 'reCAPTCHA inválido',
-            'code' => 'RECAPTCHA_INVALID',
-            'debug' => [
-                'score' => $captcha['score'] ?? null,
-                'error-codes' => $captcha['error-codes'] ?? null,
-            ]
-        ]);
+        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido', 'code' => 'RECAPTCHA_INVALID']);
         exit;
     }
 } catch (Throwable $e) {
@@ -188,11 +178,13 @@ if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
     exit;
 }
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/email_template.php'; // Incluir la nueva plantilla
 
 $mail = new PHPMailer(true);
 
 try {
     $smtp = $config['smtp'];
+    $mail->CharSet = 'UTF-8';
     $mail->isSMTP();
     $mail->Host       = $smtp['host'];
     $mail->Port       = $smtp['port'];
@@ -207,14 +199,28 @@ try {
 
     $mail->isHTML(true);
     $mail->Subject = '📬 Nuevo mensaje de ' . $nombre;
-    $mail->Body    = "<h2>Nuevo mensaje recibido</h2>" .
-        "<p><b>Nombre:</b> " . htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8') . "</p>" .
-        "<p><b>Email:</b> " . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . "</p>" .
-        "<p><b>Asunto:</b> " . htmlspecialchars($asunto, ENT_QUOTES, 'UTF-8') . "</p>" .
-        "<p><b>Mensaje:</b><br>" . nl2br(htmlspecialchars($mensaje)) . "</p>" .
-        "<p><b>Voice:</b> " . htmlspecialchars($voice, ENT_QUOTES, 'UTF-8') . "</p>" .
-        "<p><b>Newsletter:</b> " . ($newsletter ? 'Sí' : 'No') . "</p>";
-    $mail->AltBody = "$nombre <$email>\nAsunto: $asunto\nMensaje:\n$mensaje";
+
+    // Datos para la plantilla
+    $emailData = [
+        'Nombre' => $nombre,
+        'Email' => $email,
+        'Asunto' => $asunto,
+        'Voz de Preferencia' => $voice,
+        'Mensaje' => nl2br(htmlspecialchars($mensaje)),
+        'Suscribirse al Newsletter' => $newsletter ? 'Sí' : 'No'
+    ];
+    
+    // TODO: Reemplazar con la URL de tu logo
+    $logoUrl = ''; // Por ejemplo: 'https://plumafarollama.com/img/logo.png'
+
+    $mail->Body = getEmailHtml('Nuevo Mensaje del Formulario', $emailData, $logoUrl);
+    
+    // Cuerpo alternativo de texto plano
+    $altBody = "Nuevo mensaje de $nombre <$email>\n";
+    foreach($emailData as $key => $value) {
+        $altBody .= "$key: " . (is_bool($value) ? ($value ? 'Sí' : 'No') : $value) . "\n";
+    }
+    $mail->AltBody = $altBody;
 
     $mail->send();
     echo json_encode(['ok' => true]);
