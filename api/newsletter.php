@@ -78,7 +78,7 @@ try {
     $captcha = json_decode($response, true);
     if (empty($captcha['success']) || ($captcha['score'] ?? 0) < 0.5) {
         http_response_code(400);
-        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido', 'code' => 'RECAPTCHA_INVALID']);
+        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido', 'code' => 'RECAPTCHA_INVALID', 'debug' => ['score' => $captcha['score'] ?? null, 'error-codes' => $captcha['error-codes'] ?? null]]);
         exit;
     }
 } catch (Throwable $e) {
