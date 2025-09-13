@@ -1,107 +1,101 @@
 // JavaScript para la página de Obras y Portafolio
 
-function initializeModals() {
-    const modalLinks = document.querySelectorAll('.open-modal');
+function setupModalBanners(modal) {
+    const banners = modal.querySelectorAll('.modal-banner');
+    const baseName = modal.id.replace('-modal', '');
+    const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+    const smallPortrait = isPortrait && window.matchMedia('(max-width: 600px)').matches;
+    const smallLandscape = !isPortrait && window.matchMedia('(max-width: 500px)').matches;
 
-    if (modalLinks.length > 0) {
-        modalLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
+    banners.forEach(banner => {
+        const side = banner.classList.contains('modal-banner-left') ? 'left' : 'right';
+        const dataImg = banner.getAttribute('data-image');
+        const basePath = dataImg ? dataImg.replace(/\.[^/.]+$/, '') :
+            `assets/images/banners/${baseName}-${side}`;
+        const responsiveBase = basePath.replace('/banners/', '/responsive/banners/');
+        const dpr = window.devicePixelRatio || 1;
 
-                // Obtener el ID del modal
-                const modalId = this.getAttribute('href').substring(1);
+        const img400 = `${responsiveBase}-400.webp`;
+        const img800 = `${responsiveBase}-800.webp`;
+        const img1200 = `${responsiveBase}-1200.webp`;
+        const imgOriginal = `${basePath}.webp`;
 
-                // Mostrar el modal y configurar banners
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    const banners = modal.querySelectorAll('.modal-banner');
-                    const baseName = modalId.replace('-modal', '');
-                    const isPortrait = window.matchMedia('(orientation: portrait)').matches;
-                    const smallPortrait = isPortrait && window.matchMedia('(max-width: 600px)').matches;
-                    const smallLandscape = !isPortrait && window.matchMedia('(max-width: 500px)').matches;
+        let imgPath = imgOriginal;
+        let imgSet = `image-set(url(${img400}) 1x, url(${img800}) 2x)`;
 
-                    banners.forEach(banner => {
-                        const side = banner.classList.contains('modal-banner-left') ? 'left' : 'right';
-                        const dataImg = banner.getAttribute('data-image');
-                        const basePath = dataImg ? dataImg.replace(/\.[^/.]+$/, '') :
-                            `assets/images/banners/${baseName}-${side}`;
-                        const responsiveBase = basePath.replace('/banners/', '/responsive/banners/');
-                        const dpr = window.devicePixelRatio || 1;
+        if (smallPortrait) {
+            imgPath = dpr > 1 ? img800 : img400;
+            imgSet = `image-set(url(${img400}) 1x, url(${img800}) 2x)`;
+        } else if (smallLandscape) {
+            imgPath = dpr > 1 ? img1200 : img800;
+            imgSet = `image-set(url(${img800}) 1x, url(${img1200}) 2x)`;
+        } else {
+            imgPath = dpr > 1 ? imgOriginal : img1200;
+            imgSet = `image-set(url(${img1200}) 1x, url(${imgOriginal}) 2x)`;
+        }
 
-                        const img400 = `${responsiveBase}-400.webp`;
-                        const img800 = `${responsiveBase}-800.webp`;
-                        const img1200 = `${responsiveBase}-1200.webp`;
-                        const imgOriginal = `${basePath}.webp`;
+        const testImg = new Image();
+        testImg.src = imgPath;
+        testImg.onload = () => {
+            const supportsImageSet = CSS.supports('background-image', imgSet);
+            banner.style.backgroundImage = supportsImageSet ? imgSet : `url(${imgPath})`;
+        };
+        testImg.onerror = () => {
+            banner.style.backgroundImage = `url(${imgOriginal})`;
+        };
+    });
+}
 
-                        let imgPath = imgOriginal;
-                        let imgSet = `image-set(url(${img400}) 1x, url(${img800}) 2x)`;
+async function loadModal(id) {
+    try {
+        const response = await fetch(`/portfolio/${id}.html`);
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const modal = doc.getElementById(`${id}-modal`) || doc.querySelector('.modal');
+        if (!modal) return;
 
-                        if (smallPortrait) {
-                            imgPath = dpr > 1 ? img800 : img400;
-                            imgSet = `image-set(url(${img400}) 1x, url(${img800}) 2x)`;
-                        } else if (smallLandscape) {
-                            imgPath = dpr > 1 ? img1200 : img800;
-                            imgSet = `image-set(url(${img800}) 1x, url(${img1200}) 2x)`;
-                        } else {
-                            imgPath = dpr > 1 ? imgOriginal : img1200;
-                            imgSet = `image-set(url(${img1200}) 1x, url(${imgOriginal}) 2x)`;
-                        }
+        const existing = document.getElementById(modal.id);
+        if (existing) existing.remove();
 
-                        const testImg = new Image();
-                        testImg.src = imgPath;
-                        testImg.onload = () => {
-                            const supportsImageSet = CSS.supports('background-image', imgSet);
-                            banner.style.backgroundImage = supportsImageSet ? imgSet : `url(${imgPath})`;
-                        };
-                        testImg.onerror = () => {
-                            banner.style.backgroundImage = `url(${imgOriginal})`;
-                        };
-                    });
+        document.body.appendChild(modal);
+        setupModalBanners(modal);
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
 
-                    modal.style.display = 'block';
-                    document.body.style.overflow = 'hidden'; // Prevenir scroll
-                }
-            });
-        });
+        const closeModal = () => {
+            modal.remove();
+            document.body.style.overflow = 'auto';
+            document.removeEventListener('keydown', escHandler);
+        };
 
-        // Cerrar modales
-        const closeButtons = document.querySelectorAll('.close-modal');
-
-        closeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const modal = this.closest('.modal');
-                if (modal) {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto'; // Restaurar scroll
-                }
-            });
-        });
-
-        // Cerrar modal al hacer clic fuera del contenido
-        const modals = document.querySelectorAll('.modal');
-
-        modals.forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.style.display = 'none';
-                    document.body.style.overflow = 'auto'; // Restaurar scroll
-                }
-            });
-        });
-
-        // Cerrar modal con tecla ESC
-        document.addEventListener('keydown', function(e) {
+        const escHandler = (e) => {
             if (e.key === 'Escape') {
-                modals.forEach(modal => {
-                    if (modal.style.display === 'block') {
-                        modal.style.display = 'none';
-                        document.body.style.overflow = 'auto'; // Restaurar scroll
-                    }
-                });
+                closeModal();
+            }
+        };
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.closest('.close-modal')) {
+                closeModal();
             }
         });
+
+        document.addEventListener('keydown', escHandler);
+    } catch (err) {
+        console.error('Error loading modal', err);
     }
 }
+
+document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.open-modal');
+    if (trigger) {
+        e.preventDefault();
+        const modalId = trigger.getAttribute('href').replace('#', '');
+        const id = modalId.replace('-modal', '');
+        loadModal(id);
+    }
+});
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -141,9 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-
-    // Inicializar modales
-    initializeModals();
 
     // Animación para elementos al hacer scroll
     const animateOnScroll = function() {
