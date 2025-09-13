@@ -16,6 +16,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   } catch (err) {
     console.error('Error loading reCAPTCHA site key', err);
+    // Mostrar un error al usuario en la UI si no carga reCAPTCHA
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'contact-form__message contact-form__message--error';
+        errorMessage.textContent = 'No se pudo cargar reCAPTCHA. Refresca la página.';
+        contactForm.parentNode.insertBefore(errorMessage, contactForm);
+        errorMessage.style.display = 'block';
+    }
     return;
   }
 
@@ -27,26 +36,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         e.preventDefault();
 
         if (!validateForm(contactForm)) {
-          const errorMessage = document.createElement('div');
-          errorMessage.className = 'contact-form__message contact-form__message--error';
-          errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
-          contactForm.parentNode.insertBefore(errorMessage, contactForm);
-          errorMessage.style.display = 'block';
-          setTimeout(() => {
-            errorMessage.style.display = 'none';
-            setTimeout(() => errorMessage.remove(), 500);
-          }, 5000);
+          displayTemporaryMessage(contactForm, 'Por favor, completa todos los campos requeridos correctamente.', 'error');
           return;
         }
 
         try {
           const token = await grecaptcha.execute(siteKey, { action: 'submit' });
-          const tokenField = document.getElementById('g-recaptcha-token-contact');
-          if (tokenField) {
-            tokenField.value = token;
-          }
-
           const formData = new FormData(contactForm);
+          formData.append('token', token);
 
           const resp = await fetch('api/submit.php', {
             method: 'POST',
@@ -55,30 +52,15 @@ document.addEventListener('DOMContentLoaded', async () => {
           const data = await resp.json();
 
           if (data.ok) {
-            const successMessage = document.createElement('div');
-            successMessage.className = 'contact-form__message contact-form__message--success';
-            successMessage.textContent = '¡Mensaje enviado con éxito! Te responderemos lo antes posible.';
-            contactForm.parentNode.insertBefore(successMessage, contactForm);
-            successMessage.style.display = 'block';
+            displayTemporaryMessage(contactForm, '¡Mensaje enviado con éxito! Te responderemos lo antes posible.', 'success');
             contactForm.reset();
-            setTimeout(() => {
-              successMessage.style.display = 'none';
-              setTimeout(() => successMessage.remove(), 500);
-            }, 5000);
           } else {
+            console.error('Error del servidor (contacto):', data);
             throw new Error(data.error || 'Error desconocido');
           }
         } catch (err) {
-          console.error('Error al enviar el mensaje', err);
-          const errorMessage = document.createElement('div');
-          errorMessage.className = 'contact-form__message contact-form__message--error';
-          errorMessage.textContent = 'Ha ocurrido un error. Intenta nuevamente más tarde.';
-          contactForm.parentNode.insertBefore(errorMessage, contactForm);
-          errorMessage.style.display = 'block';
-          setTimeout(() => {
-            errorMessage.style.display = 'none';
-            setTimeout(() => errorMessage.remove(), 500);
-          }, 5000);
+          console.error('Error al enviar el mensaje:', err);
+          displayTemporaryMessage(contactForm, 'Ha ocurrido un error. Intenta nuevamente más tarde.', 'error');
         }
       });
     }
@@ -90,31 +72,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         e.preventDefault();
 
         if (!validateForm(newsletterForm)) {
-          const errorMessage = document.createElement('div');
-          errorMessage.className = 'newsletter__message newsletter__message--error';
-          errorMessage.textContent = 'Por favor, completa todos los campos requeridos correctamente.';
-          newsletterForm.parentNode.insertBefore(errorMessage, newsletterForm);
-          errorMessage.style.display = 'block';
-          setTimeout(() => {
-            errorMessage.style.display = 'none';
-            setTimeout(() => errorMessage.remove(), 500);
-          }, 5000);
+          displayTemporaryMessage(newsletterForm, 'Por favor, completa todos los campos requeridos correctamente.', 'error');
           return;
         }
 
         try {
-          const token = await grecaptcha.execute(siteKey, { action: 'submit' });
-          const tokenField = document.getElementById('g-recaptcha-token-newsletter');
-          if (tokenField) {
-            tokenField.value = token;
-          }
-
-          const formData = new FormData(newsletterForm);
-
-      // Ejecutar reCAPTCHA también para newsletter (el backend lo exige)
-      grecaptcha.ready(async () => {
-        try {
           const token = await grecaptcha.execute(siteKey, { action: 'newsletter' });
+          const formData = new FormData(newsletterForm);
           formData.append('token', token);
 
           const resp = await fetch('api/newsletter.php', {
@@ -124,47 +88,44 @@ document.addEventListener('DOMContentLoaded', async () => {
           const data = await resp.json();
 
           if (data.ok) {
-            const successMessage = document.createElement('div');
-            successMessage.className = 'newsletter__message newsletter__message-success';
-            successMessage.textContent = '¡Gracias por suscribirte! Pronto recibirás tu primer newsletter.';
-            newsletterForm.parentNode.insertBefore(successMessage, newsletterForm);
-            successMessage.style.display = 'block';
+            displayTemporaryMessage(newsletterForm, '¡Gracias por suscribirte! Pronto recibirás tu primer newsletter.', 'success', 'newsletter');
             newsletterForm.reset();
-            setTimeout(() => {
-              successMessage.style.display = 'none';
-              setTimeout(() => successMessage.remove(), 500);
-            }, 5000);
           } else {
+            console.error('Error del servidor (newsletter):', data);
             throw new Error(data.error || 'Error desconocido');
           }
         } catch (err) {
-          console.error('Error al guardar la suscripción', err);
-          const errorMessage = document.createElement('div');
-          errorMessage.className = 'newsletter__message newsletter__message--error';
-          errorMessage.textContent = 'Ha ocurrido un error. Intenta nuevamente más tarde.';
-          newsletterForm.parentNode.insertBefore(errorMessage, newsletterForm);
-          errorMessage.style.display = 'block';
-          setTimeout(() => {
-            errorMessage.style.display = 'none';
-            setTimeout(() => errorMessage.remove(), 500);
-          }, 5000);
+          console.error('Error al guardar la suscripción:', err);
+          displayTemporaryMessage(newsletterForm, 'Ha ocurrido un error. Intenta nuevamente más tarde.', 'error', 'newsletter');
         }
       });
-    });
-  }
+    }
+  });
 
-  // Acordeón de FAQ
+  // --- Helper para mostrar mensajes ---
+  const displayTemporaryMessage = (formElement, text, type, formType = 'contact') => {
+      const message = document.createElement('div');
+      const baseClass = formType === 'newsletter' ? 'newsletter__message' : 'contact-form__message';
+      message.className = `${baseClass} ${baseClass}--${type}`;
+      message.textContent = text;
+      
+      formElement.parentNode.insertBefore(message, formElement);
+      message.style.display = 'block';
+
+      setTimeout(() => {
+          message.style.display = 'none';
+          setTimeout(() => message.remove(), 500);
+      }, 5000);
+  };
+  
+  // --- Acordeón de FAQ ---
   const faqQuestions = document.querySelectorAll('.faq__question');
 
   if (faqQuestions.length > 0) {
     faqQuestions.forEach(question => {
       question.addEventListener('click', function () {
         const faqItem = this.parentElement;
-
-        // Toggle clase active en el item actual
         faqItem.classList.toggle('faq__item--active');
-
-        // Cerrar otros items si están abiertos
         document.querySelectorAll('.faq__item').forEach(item => {
           if (item !== faqItem && item.classList.contains('faq__item--active')) {
             item.classList.remove('faq__item--active');
@@ -174,40 +135,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Animación para elementos al hacer scroll
+  // --- Animación para elementos al hacer scroll ---
   const animateOnScroll = function () {
     const elements = document.querySelectorAll('.contact-method, .newsletter__feature, .faq__item');
-
     elements.forEach(element => {
       const elementPosition = element.getBoundingClientRect().top;
       const screenPosition = window.innerHeight / 1.2;
-
       if (elementPosition < screenPosition) {
         element.classList.add('fade-in');
       }
     });
   };
-
-  // Ejecutar animación al cargar la página
   animateOnScroll();
-
-  // Ejecutar animación al hacer scroll
   window.addEventListener('scroll', animateOnScroll);
 
-  // Validación de formularios
+  // --- Validación de formularios ---
   const validateForm = (form) => {
     let isValid = true;
     const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
-
     inputs.forEach(input => {
+      input.classList.remove('error');
       if (!input.value.trim()) {
         isValid = false;
         input.classList.add('error');
-      } else {
-        input.classList.remove('error');
       }
-
-      // Validación específica para email
       if (input.type === 'email' && input.value.trim()) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(input.value.trim())) {
@@ -216,9 +167,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       }
     });
-
+    // Validar checkbox de privacidad
+    const privacyCheckbox = form.querySelector('input[type="checkbox"][name$="privacy"]');
+    if (privacyCheckbox && !privacyCheckbox.checked) {
+        isValid = false;
+        // Podrías añadir una clase de error al label del checkbox si quieres
+    }
     return isValid;
   };
 
 });
-
