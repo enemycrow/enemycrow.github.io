@@ -66,6 +66,28 @@ const MODAL_SLUGS = {
     bribones: 'la-reina-de-los-bribones'
 };
 
+let currentModal = null;
+
+function closeModal(modal) {
+    if (!modal) return;
+    modal.remove();
+    currentModal = null;
+    document.body.style.overflow = 'auto';
+}
+
+document.addEventListener('click', (e) => {
+    const modal = e.target.closest('.modal');
+    if (modal && (e.target === modal || e.target.closest('.close-modal'))) {
+        closeModal(modal);
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && currentModal) {
+        closeModal(currentModal);
+    }
+});
+
 async function loadModal(slug, id = slug) {
     try {
         const response = await fetch(`/portfolio/${slug}.html`);
@@ -82,26 +104,7 @@ async function loadModal(slug, id = slug) {
         setupModalBanners(modal);
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
-
-        const closeModal = () => {
-            modal.remove();
-            document.body.style.overflow = 'auto';
-            document.removeEventListener('keydown', escHandler);
-        };
-
-        const escHandler = (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        };
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal || e.target.closest('.close-modal')) {
-                closeModal();
-            }
-        });
-
-        document.addEventListener('keydown', escHandler);
+        currentModal = modal;
     } catch (err) {
         console.error('Error loading modal', err);
     }
