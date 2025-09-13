@@ -46,9 +46,29 @@ function setupModalBanners(modal) {
     });
 }
 
-async function loadModal(id) {
+const MODAL_SLUGS = {
+    jesuita: 'el-jesuita-del-vino',
+    abismos: 'entre-amores-y-abismos',
+    galactique: 'galactique',
+    martillo: 'hijas-del-martillo',
+    izel: 'izel-itzel',
+    huevovolvio: 'el-huevo-que-volvio-a-cantar',
+    dilacion: 'efecto-dilacion-temporal',
+    fusion: 'el-libro-de-la-fusion',
+    cristalito: 'cristalito-el-potrillo-de-cristal',
+    tarot: 'tarot-del-cuervo-y-elysia',
+    linaje: 'el-linaje-de-los-seis-petalos',
+    traverso: 'los-traverso',
+    veus: 'el-mundo-de-los-veus',
+    divinidades: 'la-reversion-de-las-divinidades',
+    circulo: 'circulo-en-la-arena',
+    debacle: 'debacle-triangular',
+    bribones: 'la-reina-de-los-bribones'
+};
+
+async function loadModal(slug, id = slug) {
     try {
-        const response = await fetch(`/portfolio/${id}.html`);
+        const response = await fetch(`/portfolio/${slug}.html`);
         const html = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
@@ -93,7 +113,8 @@ document.addEventListener('click', (e) => {
         e.preventDefault();
         const modalId = trigger.getAttribute('href').replace('#', '');
         const id = modalId.replace('-modal', '');
-        loadModal(id);
+        const slug = MODAL_SLUGS[id] || id;
+        loadModal(slug, id);
     }
 });
 
