@@ -35,7 +35,6 @@ function setupModalBanners(modal) {
         }
 
         const testImg = new Image();
-        testImg.src = imgPath;
         testImg.onload = () => {
             const supportsImageSet = CSS.supports('background-image', imgSet);
             banner.style.backgroundImage = supportsImageSet ? imgSet : `url(${imgPath})`;
@@ -43,6 +42,7 @@ function setupModalBanners(modal) {
         testImg.onerror = () => {
             banner.style.backgroundImage = `url(${imgOriginal})`;
         };
+        testImg.src = imgPath;
     });
 }
 
