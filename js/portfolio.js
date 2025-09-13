@@ -1,51 +1,13 @@
 // JavaScript para la página de Obras y Portafolio
-document.addEventListener('DOMContentLoaded', function() {
 
-    // Filtrado de obras
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item--featured, .portfolio-item--catalog');
-    
-    if (filterBtns.length > 0 && portfolioItems.length > 0) {
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remover clase active de todos los botones
-                filterBtns.forEach(b => b.classList.remove('active'));
-                
-                // Añadir clase active al botón clickeado
-                this.classList.add('active');
-                
-                // Obtener el filtro
-                const filter = this.getAttribute('data-filter');
-                
-                // Filtrar los elementos
-                portfolioItems.forEach(item => {
-                    if (filter === 'all') {
-                        item.style.display = 'block';
-                    } else {
-                        if (item.classList.contains(filter)) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    }
-                });
-
-                const worksSection = document.querySelector('.featured-works');
-                if (worksSection) {
-                    worksSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    }
-
-    // Modales
+function initializeModals() {
     const modalLinks = document.querySelectorAll('.open-modal');
-    
+
     if (modalLinks.length > 0) {
         modalLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                
+
                 // Obtener el ID del modal
                 const modalId = this.getAttribute('href').substring(1);
 
@@ -101,10 +63,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        
+
         // Cerrar modales
         const closeButtons = document.querySelectorAll('.close-modal');
-        
+
         closeButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const modal = this.closest('.modal');
@@ -114,10 +76,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        
+
         // Cerrar modal al hacer clic fuera del contenido
         const modals = document.querySelectorAll('.modal');
-        
+
         modals.forEach(modal => {
             modal.addEventListener('click', function(e) {
                 if (e.target === this) {
@@ -126,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        
+
         // Cerrar modal con tecla ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
@@ -139,6 +101,49 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Filtrado de obras
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item--featured, .portfolio-item--catalog');
+    
+    if (filterBtns.length > 0 && portfolioItems.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remover clase active de todos los botones
+                filterBtns.forEach(b => b.classList.remove('active'));
+                
+                // Añadir clase active al botón clickeado
+                this.classList.add('active');
+                
+                // Obtener el filtro
+                const filter = this.getAttribute('data-filter');
+                
+                // Filtrar los elementos
+                portfolioItems.forEach(item => {
+                    if (filter === 'all') {
+                        item.style.display = 'block';
+                    } else {
+                        if (item.classList.contains(filter)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+
+                const worksSection = document.querySelector('.featured-works');
+                if (worksSection) {
+                    worksSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    }
+
+    // Inicializar modales
+    initializeModals();
 
     // Animación para elementos al hacer scroll
     const animateOnScroll = function() {
