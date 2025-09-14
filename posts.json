@@ -1,5 +1,27 @@
 [
   {
+    "id": 50,
+    "titulo": "Los tres vértices del conflicto",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-09-08",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "Debacle Triangular"
+    ],
+    "topicos": [
+      "Ética",
+      "Distopía"
+    ],
+    "tiempo": "2 min de lectura",
+    "fragmento": "En un mundo sin aliados ni enemigos absolutos, lo que pesa es el contexto que transforma cada relación.",
+    "imagen": "Debacletriangular-Post50.webp",
+    "slug": "los-tres-vertices-del-conflicto",
+    "contenido_html": "<p><em>Debacle Triangular</em> no fue una historia fácil de concebir ni de planificar. Crear un universo donde nadie es totalmente aliado ni enemigo significa adentrarse en un terreno plenamente humano.</p><p>Muchos de los elementos que nutren esta obra provienen tanto de la narrativa como de experiencias personales. La historia fue evolucionando conmigo: pasé de una mirada idealista, binomial —bien contra mal, cielo contra infierno— a una visión de múltiples capas, más fiel a la realidad. Porque el mundo es así: lo que parece fantasía a veces se acerca más a lo real que a lo ficticio.</p><p>En <em>Debacle Triangular</em>, un personaje puede ser antagonista en un momento y, bajo nuevas circunstancias, convertirse en aliado. Todo depende del contexto, de cómo las fuerzas externas moldean sus elecciones.</p><p>Piensa, por ejemplo, en alguien habitualmente amable y sutil. Basta con que un día no haya desayunado ni almorzado para que su conducta cambie radicalmente. Un aliado puede volverse un adversario por un detalle mínimo. Ese mismo principio, amplificado, sirve como motor narrativo.</p><p>Al final, lo esencial es cómo el contexto tensiona a los personajes y los obliga a surfear situaciones inesperadas. La personalidad de cada uno dictará si emergen fortalecidos o quebrados en el vértice del conflicto.</p><p>Te invito a seguir explorando esta historia donde las lealtades se quiebran y se reconstruyen, y donde lo humano se muestra en su forma más cruda y compleja.</p>",
+    "destacado": false
+  },
+  {
     "id": 49,
     "titulo": "La batalla en la Caída del Cielo",
     "autor": "Lauren Cuervo",
