@@ -1,25 +1,25 @@
 [
   {
-  "id": 52,
-  "titulo": "La Ciudad del Espejismo en el mundo de los Véus",
-  "autor": "A.C. Elysia",
-  "fecha": "2025-09-10",
-  "categoria_temas": [
-    "Procesos Creativos"
-  ],
-  "categoria_libros": [
-    "El Mundo de los Véus"
-  ],
-  "topicos": [
-    "Distopía",
-    "Simbolismo"
-  ],
-  "tiempo": "",
-  "fragmento": "La Ciudad del Espejismo es un lugar donde la ignorancia dicta las reglas y la ilusión se convierte en prisión.",
-  "imagen": "veus-Post52.webp",
-  "slug": "la-ciudad-del-espejismo-en-el-mundo-de-los-veus",
-  "contenido_html": "<p>La Ciudad del Espejismo es uno de los escenarios más inquietantes de <em>El Mundo de los Véus</em>. Allí, las calles se extienden como laberintos vacíos, y lo que gobierna no son los hombres ni los sistemas políticos, sino la ignorancia misma.</p><p>En este espacio, los Véus —velos digitales que recubren los sentidos— proyectan realidades manipuladas. No muestran lo que existe, sino lo que conviene que se vea. El cielo puede ser tormentoso aunque el aire esté calmo; la multitud puede parecer feliz mientras, detrás del velo, reina la desolación. La gente vive atrapada en esa narrativa artificial sin cuestionarla.</p><p>El verdadero verdugo de la Ciudad no es un tirano visible, sino la incapacidad de distinguir lo real de lo fabricado. La ignorancia se vuelve un arma de control, un enemigo silencioso que devora la voluntad. Así, el espejismo se transforma en prisión.</p><p>Este escenario nació de una pregunta creativa: ¿qué pasaría si la ignorancia fuera tan palpable como un muro, tan densa como una niebla? En la Ciudad del Espejismo, esa idea se convierte en paisaje y destino.</p><p>Te invito a recorrer este universo y preguntarte: ¿cuántos de nuestros propios espejismos seguimos sin cuestionar?</p>",
-  "destacado": false
+    "id": 52,
+    "titulo": "La Ciudad del Espejismo en el mundo de los Véus",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-09-10",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Mundo de los Véus"
+    ],
+    "topicos": [
+      "Distopía",
+      "Simbolismo"
+    ],
+    "tiempo": "2 min de lectura",
+    "fragmento": "La Ciudad del Espejismo es un lugar donde la ignorancia dicta las reglas y la ilusión se convierte en prisión.",
+    "imagen": "veus-Post52.webp",
+    "slug": "la-ciudad-del-espejismo-en-el-mundo-de-los-veus",
+    "contenido_html": "<p>La Ciudad del Espejismo es uno de los escenarios más inquietantes de <em>El Mundo de los Véus</em>. Allí, las calles se extienden como laberintos vacíos, y lo que gobierna no son los hombres ni los sistemas políticos, sino la ignorancia misma.</p><p>En este espacio, los Véus —velos digitales que recubren los sentidos— proyectan realidades manipuladas. No muestran lo que existe, sino lo que conviene que se vea. El cielo puede ser tormentoso aunque el aire esté calmo; la multitud puede parecer feliz mientras, detrás del velo, reina la desolación. La gente vive atrapada en esa narrativa artificial sin cuestionarla.</p><p>El verdadero verdugo de la Ciudad no es un tirano visible, sino la incapacidad de distinguir lo real de lo fabricado. La ignorancia se vuelve un arma de control, un enemigo silencioso que devora la voluntad. Así, el espejismo se transforma en prisión.</p><p>Este escenario nació de una pregunta creativa: ¿qué pasaría si la ignorancia fuera tan palpable como un muro, tan densa como una niebla? En la Ciudad del Espejismo, esa idea se convierte en paisaje y destino.</p><p>Te invito a recorrer este universo y preguntarte: ¿cuántos de nuestros propios espejismos seguimos sin cuestionar?</p>",
+    "destacado": false
   },
   {
     "id": 51,
