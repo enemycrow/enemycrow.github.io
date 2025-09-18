@@ -1,5 +1,27 @@
 [
   {
+    "id": 60,
+    "titulo": "La voluntad prestada en el alcohol",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-09-16",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Jesuita del Vino"
+    ],
+    "topicos": [
+      "Ética",
+      "Simbolismo"
+    ],
+    "tiempo": "3 min de lectura",
+    "fragmento": "En El Jesuita del Vino, la voluntad se presenta como servidumbre, rendición o esclavitud, siempre entremezcladas como matices de un mismo vino.",
+    "imagen": "Jesuitadelvino-Post58.webp",
+    "slug": "la-voluntad-prestada-en-el-alcohol",
+    "contenido_html": "<p>Es una pregunta sucia y maravillosa: ¿qué significa que la voluntad pueda no ser nuestra, sino de otro? Para alguien que siempre ha soñado con la libertad, entregar la propia voluntad tiene matices profundos.</p><p><strong>1. Servidumbre:</strong> cuando ponemos nuestras acciones, fuerzas y pensamientos a disposición de un tercero, por amor, amistad o fe. No es necesariamente algo negativo; es una entrega voluntaria que a veces nos enriquece tanto como al otro.</p><p><strong>2. Rendición:</strong> cuando actuamos en contra de nuestra voluntad, pero lo hacemos conscientemente, por haber comprometido el bienestar de alguien más. Es un acto de responsabilidad, aunque duela.</p><p><strong>3. Esclavitud:</strong> cuando se fuerza a alguien, consciente o inconscientemente, a servir al beneficio de otro. Aquí la entrega deja de ser elección y se convierte en destino impuesto.</p><p>En <em>El Jesuita del Vino</em>, estas tres formas se entrelazan. Como en el vino, no hay tintos ni blancos absolutos, sino mezclas, fermentaciones, transformaciones. Lo que parece esclavitud puede mutar en servidumbre; lo que nace como rendición puede revelarse como un acto de amor. Todo depende de la perspectiva del personaje y de la mirada del lector.</p><p><em>A.C. Elysia añade:</em> «La voluntad prestada es como el vino: nunca se bebe sola. Siempre es mezcla, siempre es matiz. En esa ambigüedad está su belleza, porque nos recuerda que amar, rendirse o servir son gestos inseparables de nuestra condición humana.»</p><p>Te invito a adentrarte en esta obra y degustar su complejidad: un brindis a la voluntad, en todos sus sabores.</p>",
+    "destacado": false
+  },
+  {
     "id": 57,
     "titulo": "La contradicción entre Natalia y Daniel: ¿Qué enseñan sus contradicciones sobre la pareja como reflejo de la realidad?",
     "autor": "A.C. Elysia",
