@@ -1,6 +1,28 @@
 [
   {
-    "id": 60,
+    "id": 59,
+    "titulo": "La similtud entre la fe y la inocencia de la infancia",
+    "autor": "Draco Sahir",
+    "fecha": "2025-09-17",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El valeroso viaje de Galactique y Galactiquito"
+    ],
+    "topicos": [
+      "Deseos",
+      "Sueños"
+    ],
+    "tiempo": "3 min de lectura",
+    "fragmento": "Mientras más niños somos, menos miedo existe. La fe en uno mismo es la inocencia de creer que todo es posible.",
+    "imagen": "Galactique-Post59.webp",
+    "slug": "la-similitud-entre-la-fe-y-la-inocencia-de-la-infancia",
+    "contenido_html": "<p>¿Por qué la fe en uno mismo se parece tanto a la inocencia de un niño? Porque mientras más niños somos, menos miedo existe. El mundo aún no ha tenido tiempo de enseñarnos a temer o a dudar. Los escepticismos, las inseguridades, los ponen otros en nuestra vida: quienes no lograron completar sus sueños o quizás nunca los alcanzaron. A ellos solo puedo decirles: no le roben los sueños a nadie. Vuelvan a creer en los suyos propios. Con bondad. Con cariño. La oportunidad se acaba únicamente cuando el cuerpo o la mente ya no nos acompañan.</p><p>¿Y si en otra vida hubiese una nueva oportunidad? A veces pienso que sí, que uno puede recordar lo que fue incluso más allá de esta vida. Tal vez por eso los sueños nunca se extinguen del todo.</p><p>Cuando pienses en Galactique y Galactiquito construyendo su nave, cierra los ojos y obsérvate a ti mismo construyendo aquello que siempre quisiste de niño. ¿Ya lo hiciste? Entonces dime: ¿qué quieres construir ahora? Piénsalo con calma. Y si el tiempo se vuelve escaso, siempre podemos pedir a alguien más que crea en nosotros y continúe nuestra obra, nuestro legado.</p><p>Yo mismo conocí a un familiar a través de una obra póstuma. Alguien tomó sus sueños y decidió compartirlos, darles una segunda vida. Eso me pareció maravilloso. Porque las obras nos sobreviven, nos recuerdan, nos devuelven a la vida aún cuando ya hemos partido a otro mundo.</p><p><em>Galactique y Galactiquito</em> nos enseñan que la fe en uno mismo es un acto infantil y sagrado a la vez: creer que lo imposible se puede construir con las manos y con la esperanza. Y que ese acto, por pequeño que parezca, puede convertirse en nuestro verdadero legado.</p>",
+    "destacado": false
+  },
+  {
+    "id": 58,
     "titulo": "La voluntad prestada en el alcohol",
     "autor": "Lauren Cuervo",
     "fecha": "2025-09-16",
