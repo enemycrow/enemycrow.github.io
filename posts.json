@@ -1,25 +1,25 @@
 [
   {
-    "id": 60,
-    "titulo": "Los más gallardos",
-    "autor": "Lauren Cuervo",
-    "fecha": "2025-09-18",
-    "categoria_temas": [
-      "Fragmentos Inéditos"
-    ],
-    "categoria_libros": [
-      "El Conquistador del Vino"
-    ],
-    "topicos": [
-      "Música",
-      "Simbolismo"
-    ],
-    "tiempo": "3 min de lectura",
-    "fragmento": "De la voz vulgar de los marineros nació una saloma grotesca, pero bajo la guía de Bartolomeo se transformó en un himno solemne y mesiánico.",
-    "imagen": "Conquistadordelvino-Post60.webp",
-    "slug": "los-mas-gallardos",
-    "contenido_html": "<p>En una nueva historia en desarrollo, la continuación de \"El Jesuita del Vino\" llamada <em>El Conquistador del Vino</em>, la tripulación inicia cantando una saloma primitiva, torpe y vulgar. Los marineros presumen de amantes, de su pestilencia y de su orgullo crudo. Esta canción inicial refleja su falta de educación y su condición errante: hombres sin patria, sin horizonte.</p><p>Pero Bartolomeo, con su severidad y visión mesiánica, reemplaza esas letras con un himno en latín. Allí no sólo se le exalta a él como apóstol, sino que los marineros se reconocen como hombres de bien, con aspiraciones y humildad. La música, que antes sonaba cómica, se torna solemne y altiva.</p><blockquote><p><strong>Versión en castellano (inicial):</strong><br/>Somos los huérfanos de nación y viajes<br/>Poderosos y desafiantes<br/>Cada uno quiere tener tres amantes<br/>Somos marineros sin perdón (¡¡Eh Eh Oh!!)</p></blockquote><blockquote><p><strong>Versión en latín (transformada):</strong><br/>Bartholomaeus, apostolus Domini,<br/>Lux in fluctibus, spes in mari.<br/>Nos, viri boni, humiles et fortes,<br/>Deus nos ducit, vincemus mortem.<br/>Gloria, gloria,<br/>Bartholomaeo gloria!</p></blockquote><p>El contraste entre ambas canciones se convierte en un símbolo narrativo de la transformación: de lo grotesco y vulgar hacia lo solemne y mesiánico. La tripulación, que comenzó riéndose de sí misma, termina cantando como un coro de iglesia en medio del océano embravecido.</p><p>Este pasaje no sólo ilustra la disciplina de Bartolomeo, sino también la fuerza de la música como motor de cambio: una voz común que, según quién la guíe, puede levantar una taberna o levantar un imperio.</p>",
-    "destacado": false
+  "id": 60,
+  "titulo": "Los más gallardos",
+  "autor": "Lauren Cuervo",
+  "fecha": "2025-09-18",
+  "categoria_temas": [
+    "Fragmentos Inéditos"
+  ],
+  "categoria_libros": [
+    "El Conquistador del Vino"
+  ],
+  "topicos": [
+    "Música",
+    "Simbolismo"
+  ],
+  "tiempo": "3 min de lectura",
+  "fragmento": "De la voz vulgar de los marineros nació una saloma grotesca, pero bajo la guía de Bartolomeo se transformó en un himno solemne y altivo.",
+  "imagen": "Conquistadordelvino-Post60.webp",
+  "slug": "los-mas-gallardos",
+  "contenido_html": "<p>En la historia de <em>El Conquistador del Vino</em>, la tripulación inicia cantando una saloma primitiva, torpe y vulgar. Los marineros presumen de amantes, de su pestilencia y de su orgullo crudo. Esta canción inicial refleja su falta de educación y su condición errante: hombres sin patria, sin horizonte.</p><p>Pero Bartolomeo, con su severidad y visión mesiánica, toma esas voces y las disciplina. La melodía cambia de carácter: lo que antes sonaba cómico se torna solemne, y lo que era burla se convierte en himno. Los marineros, que comenzaron riéndose de sí mismos, terminan cantando como si fueran parte de una ceremonia.</p><blockquote><p><strong>Versión en castellano (inicial):</strong><br/>Somos los huérfanos de nación y viajes<br/>Poderosos y desafiantes<br/>Cada uno quiere tener tres amantes<br/>Somos marineros sin perdón (¡¡Eh Eh Oh!!)</p></blockquote><p>El contraste entre ambas canciones se convierte en un símbolo narrativo de la transformación: de lo grotesco hacia lo solemne, de lo vulgar hacia lo mesiánico. La tripulación encuentra en el canto no solo entretenimiento, sino también la forma de elevarse por encima de sí misma.</p><p>Este pasaje no sólo ilustra la disciplina de Bartolomeo, sino también la fuerza de la música como motor de cambio: una voz común que, según quién la guíe, puede levantar una taberna o levantar un imperio.</p>",
+  "destacado": false
   },
   {
     "id": 59,
