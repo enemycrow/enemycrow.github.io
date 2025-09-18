@@ -1,26 +1,10 @@
 [
   {
     "id": 1,
-    "nombre": "Galactique - Música Original",
-    "descripcion": "Álbum de música ambient inspirada en la ciencia ficción.",
-    "precio": "CLP 10.890",
+    "nombre": "El valeroso viaje de Galactique y Galactiquito - Libro Infantil Ilustrado versión Digital",
+    "descripcion": "Hermoso libro ilustrado para niños sobre un viaje inspirador a partir de un sueño. Para niños y no tan niños con muchos sueños.",
+    "precio": "5.00 USD",
     "imagen": "assets/images/oeuvres/galactique.webp",
-    "url": "https://bandcamp.com/"
-  },
-  {
-    "id": 2,
-    "nombre": "Entre Amores y Abismos",
-    "descripcion": "Novela corta publicada a través de Amazon KDP.",
-    "precio": "CLP 12.500",
-    "imagen": "assets/images/oeuvres/entreamoresabismos.webp",
-    "url": "https://amazon.com/"
-  },
-  {
-    "id": 3,
-    "nombre": "Rompecabezas Hijas del Martillo",
-    "descripcion": "Puzzle de 500 piezas con ilustraciones exclusivas.",
-    "precio": "CLP 15.000",
-    "imagen": "assets/images/oeuvres/hijasdelmartillo.webp",
-    "url": "assets/placeholder.html"
+    "url": "https://buymeacoffee.com/plumafarollama/e/458803"
   }
 ]
