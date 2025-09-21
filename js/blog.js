@@ -65,8 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let categoryTag = '';
     if (post.categoria_temas && post.categoria_temas[0]) {
       const cat = post.categoria_temas[0];
-      const catClass = cat.toLowerCase().includes('proceso') ? 'process' : (cat.toLowerCase().includes('fragmento') ? 'fragments' : '');
-      categoryTag = `<span class="category-tag ${catClass}">${cat}</span>`;
+      const catLower = cat.toLowerCase();
+      let catClass = '';
+      if (catLower.includes('proceso')) catClass = 'process';
+      else if (catLower.includes('fragmento')) catClass = 'fragments';
+      else if (catLower.includes('anuncio')) catClass = 'announcements';
+      const categoryClass = catClass ? `category-tag ${catClass}` : 'category-tag';
+      categoryTag = `<span class="${categoryClass}">${cat}</span>`;
     }
     const totalReactions = 0; // placeholder, se actualizará desde Firestore
 
@@ -160,12 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       authorSlug = slugify(post.autor.split(' ')[0]);
     }
-    const catRaw = post.categoria_temas[0] || '';
-    const themeSlug = slugify(catRaw);
+    const catRaw = Array.isArray(post.categoria_temas) && post.categoria_temas.length ? post.categoria_temas[0] : '';
+    const themeSlug = catRaw ? slugify(catRaw) : 'general';
     const catClass =
       themeSlug.includes('procesos-creativos') ? 'process' :
       themeSlug.includes('fragmentos-ineditos') ? 'fragments' :
+      themeSlug.includes('anuncios') ? 'announcements' :
       '';
+    const categoryClass = catClass ? `category-tag ${catClass}` : 'category-tag';
     const article = document.createElement('article');
     article.className = `blog-post blog-entry blog-entry--${authorSlug} ${authorSlug} ${themeSlug} ${catClass}`;
     article.setAttribute('data-category', `${authorSlug} ${themeSlug}`);
@@ -177,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
       <div class="blog-post__meta">
-        <span class="category-tag">${post.categoria_temas[0] || ''}</span>
+        <span class="${categoryClass}">${catRaw}</span>
         <span class="author-tag ${authorSlug}-tag">${post.autor}</span>
       </div>
       <h2 class="blog-post__title">${post.titulo}</h2>

@@ -158,3 +158,9 @@ html {
   color: var(--text);
 }
 
+
+/* Etiqueta de anuncios */
+.category-tag.announcements {
+  background-color: #2de2c3;
+  color: var(--azul-noche);
+}
