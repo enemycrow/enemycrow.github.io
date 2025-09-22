@@ -50,22 +50,45 @@ document.addEventListener('DOMContentLoaded', async () => {
     const entry = posts.find(p => p.slug === slug);
     if (!entry) return;
 
-    const fecha = new Date(entry.fecha);
+    const titleEl    = document.getElementById('entry-title');
+    const dateEl     = document.getElementById('entry-date');
+    const contentEl  = document.getElementById('entry-content');
+    const authorEl   = document.getElementById('entry-author');
+    const licenseEl  = document.getElementById('entry-license');
+    const imgEl      = document.getElementById('entry-image');
+    const timeEl     = document.getElementById('entry-time');
+    const catEl      = document.getElementById('entry-categories');
+    const catElBlock = document.getElementById('entry-categories-block');
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const publishDate = new Date(entry.fecha);
+    publishDate.setHours(0, 0, 0, 0);
+
+    if (!isNaN(publishDate) && publishDate > today) {
+      [titleEl, dateEl, authorEl, licenseEl, timeEl].forEach(el => {
+        if (el) el.textContent = '';
+      });
+      if (contentEl) {
+        contentEl.innerHTML = '<p>Esta entrada estará disponible pronto. Puedes explorar otras publicaciones en <a href="blog.html">el blog</a>.</p>';
+      }
+      if (imgEl) {
+        imgEl.removeAttribute('src');
+        imgEl.removeAttribute('srcset');
+        imgEl.removeAttribute('sizes');
+        imgEl.alt = '';
+      }
+      if (catEl) catEl.innerHTML = '';
+      if (catElBlock) catElBlock.innerHTML = '';
+      return;
+    }
+
+    const fecha = publishDate;
     const fechaTexto = fecha.toLocaleDateString('es-ES', {
       day: '2-digit',
       month: 'long',
       year: 'numeric'
     });
-
-    const titleEl   = document.getElementById('entry-title');
-    const dateEl    = document.getElementById('entry-date');
-    const contentEl = document.getElementById('entry-content');
-    const authorEl  = document.getElementById('entry-author');
-    const licenseEl = document.getElementById('entry-license');
-    const imgEl     = document.getElementById('entry-image');
-    const timeEl    = document.getElementById('entry-time');
-    const catEl     = document.getElementById('entry-categories');
-    const catElBlock= document.getElementById('entry-categories-block');
 
     if (titleEl) titleEl.textContent = entry.titulo;
     if (dateEl)  dateEl.textContent  = fechaTexto;
