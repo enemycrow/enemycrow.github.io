@@ -302,14 +302,27 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
+      const parseLocalDate = (value) => {
+        if (!value) return null;
+        const normalized = String(value).trim();
+        if (!normalized) return null;
+        const match = normalized.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+        if (match) {
+          const [, year, month, day] = match;
+          const date = new Date(Number(year), Number(month) - 1, Number(day));
+          date.setHours(0, 0, 0, 0);
+          return date;
+        }
+        const parsed = new Date(normalized);
+        if (Number.isNaN(parsed.getTime())) return null;
+        parsed.setHours(0, 0, 0, 0);
+        return parsed;
+      };
       const filteredData = data
-        .filter(post => {
-          const postDate = new Date(post.fecha);
-          if (Number.isNaN(postDate.getTime())) return false;
-          postDate.setHours(0, 0, 0, 0);
-          return postDate <= today;
-        })
-        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+        .map(post => ({ post, parsedDate: parseLocalDate(post.fecha) }))
+        .filter(({ parsedDate }) => parsedDate && parsedDate <= today)
+        .sort((a, b) => b.parsedDate - a.parsedDate)
+        .map(({ post }) => post);
       try {
         localStorage.setItem('postsData', JSON.stringify(filteredData));
       } catch(e) {}
