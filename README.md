@@ -84,6 +84,74 @@ Además, el contenido se guarda en `localStorage` bajo la clave `postsData` para
 
 Si colocas `"destacado": true` en una entrada, aparecerá en la sección de entradas destacadas al inicio de `blog.html`.
 
+### Publicación programada
+
+Para manejar publicaciones futuras sin exponerlas todavía en el blog, utiliza un archivo de _staging_ (por ejemplo `posts-pendientes.json`). Este archivo mantiene el mismo esquema que `posts.json`, pero solo contiene entradas cuya `fecha` es mayor a la fecha actual. Cada día, verifica si alguna entrada en `posts-pendientes.json` tiene `fecha` menor o igual a hoy; cuando se cumpla la condición, mueve la entrada a `posts.json` y elimínala de la lista pendiente. Con este flujo, `posts.json` siempre representa el contenido público y `posts-pendientes.json` conserva el calendario editorial.
+
+#### Automatización con cron en Hostinger
+
+1. Inicia sesión en el panel de Hostinger y abre **Avanzado → Cron Jobs**.
+2. Crea un nuevo _cron job_ con frecuencia **Diario** (`0 2 * * *` como ejemplo para ejecutarlo a las 02:00 UTC).
+3. Define el comando que moverá las entradas publicables y actualizará los metadatos. Un ejemplo en Node.js sería:
+   ```bash
+   node tools/publish-scheduled-posts.js && node js/generate-sitemap.js
+   ```
+   - El primer script procesa `posts-pendientes.json`, mueve las entradas cuya `fecha` ≤ hoy a `posts.json` y actualiza los campos `lastmod` cuando corresponda.
+   - El segundo comando regenera `sitemap.xml` para reflejar las publicaciones recién expuestas.
+4. Guarda el _cron job_ y verifica en el panel que la próxima ejecución quede programada. Opcionalmente activa las notificaciones por correo para recibir el registro de salida del comando.
+
+> **Nota:** Si prefieres usar PHP o Bash en lugar de Node.js, asegúrate de que el comando finalice con código de salida `0` para que Hostinger lo considere exitoso.
+
+#### Scripts de apoyo
+
+Puedes implementar el flujo automatizado con un script sencillo. El siguiente ejemplo en Node.js asume que los archivos residen en la raíz del repositorio:
+
+```js
+// tools/publish-scheduled-posts.js
+import { readFileSync, writeFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const root = join(__dirname, "..");
+const pendingPath = join(root, "posts-pendientes.json");
+const livePath = join(root, "posts.json");
+
+const today = new Date().toISOString().slice(0, 10);
+const pending = JSON.parse(readFileSync(pendingPath, "utf8"));
+const live = JSON.parse(readFileSync(livePath, "utf8"));
+
+const { publicar, mantener } = pending.reduce(
+  (acum, post) => {
+    if (post.fecha <= today) {
+      acum.publicar.push(post);
+    } else {
+      acum.mantener.push(post);
+    }
+    return acum;
+  },
+  { publicar: [], mantener: [] }
+);
+
+if (publicar.length > 0) {
+  const actualizados = [...live, ...publicar].sort((a, b) => (a.fecha < b.fecha ? 1 : -1));
+  writeFileSync(livePath, JSON.stringify(actualizados, null, 2) + "\n");
+  writeFileSync(pendingPath, JSON.stringify(mantener, null, 2) + "\n");
+  console.log(`Publicados ${publicar.length} posts programados hasta ${today}.`);
+} else {
+  console.log("No hay posts programados para publicar hoy.");
+}
+```
+
+Este script puede ejecutarse manualmente (`node tools/publish-scheduled-posts.js`) o dentro del cron diario en Hostinger.
+
+#### Comportamiento del frontend
+
+- **blog.html** filtra los datos por `fecha` y únicamente muestra las entradas cuya fecha es menor o igual a la fecha actual. Las entradas futuras permanecen ocultas incluso si llegaron a `posts.json` por error.
+- **blog-entry.html** consume primero los datos de `localStorage.postsData`, que provienen del listado ya filtrado; si se accede directamente, realiza una lectura de respaldo de `posts.json`, por lo que es fundamental que solo contenga entradas publicadas. Cuando no encuentra un `slug` (por ejemplo, porque la entrada sigue en `posts-pendientes.json`), la página queda vacía y el visitante no ve contenido.
+
 ### Endpoint de detalle de posts
 
 Puedes obtener la información completa de una entrada desde el backend con una petición GET a `api/post.php`, por ejemplo:
