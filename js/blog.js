@@ -302,18 +302,16 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      const filteredData = data
-        .filter(post => {
-          const postDate = new Date(post.fecha);
-          if (Number.isNaN(postDate.getTime())) return false;
-          postDate.setHours(0, 0, 0, 0);
-          return postDate <= today;
-        })
-        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+      const availablePosts = data.filter(post => {
+        const postDate = new Date(post.fecha);
+        postDate.setHours(0, 0, 0, 0);
+        return !isNaN(postDate) && postDate <= today;
+      });
+      availablePosts.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
       try {
-        localStorage.setItem('postsData', JSON.stringify(filteredData));
+        localStorage.setItem('postsData', JSON.stringify(availablePosts));
       } catch(e) {}
-      allPosts = filteredData;
+      allPosts = availablePosts;
       filteredPosts = allPosts;
       if (featuredContainer) {
         const featuredPosts = allPosts.filter(p => p.destacado);
