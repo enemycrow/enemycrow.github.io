@@ -36,10 +36,16 @@ foreach ($data as $post) {
     $postId = isset($post['id']) ? (string) $post['id'] : '';
     $postSlug = isset($post['slug']) ? (string) $post['slug'] : '';
 
-    if ($postId === $idParam || ($slugParam !== '' && $postSlug === $slugParam)) {
-        echo json_encode(['ok' => true, 'post' => $post]);
-        return;
+    if ($postId !== $idParam) {
+        continue;
     }
+
+    if ($slugParam !== '' && $postSlug !== $slugParam) {
+        continue;
+    }
+
+    echo json_encode(['ok' => true, 'post' => $post]);
+    return;
 }
 
 http_response_code(404);
