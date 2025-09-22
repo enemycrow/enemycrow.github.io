@@ -84,6 +84,25 @@ Además, el contenido se guarda en `localStorage` bajo la clave `postsData` para
 
 Si colocas `"destacado": true` en una entrada, aparecerá en la sección de entradas destacadas al inicio de `blog.html`.
 
+### Endpoint de detalle de posts
+
+Puedes obtener la información completa de una entrada desde el backend con una petición GET a `api/post.php`, por ejemplo:
+
+```bash
+curl "https://plumafarollama.com/api/post.php?id=63"
+```
+
+El parámetro `id` es obligatorio y debe corresponder al campo `id` dentro de `posts.json`. Opcionalmente puedes añadir `slug` para validar que la entrada también coincida con dicho identificador. La respuesta exitosa tiene la forma:
+
+```json
+{
+  "ok": true,
+  "post": { /* datos completos del post */ }
+}
+```
+
+Si el post no existe o el archivo `posts.json` no puede leerse, el endpoint devuelve un mensaje de error y el código HTTP correspondiente.
+
 ## Páginas individuales de obras (SEO)
 
 Para que Google indexe cada obra por separado, el repositorio incluye un generador que crea una página HTML por cada modal definido en `portfolio.html`.
