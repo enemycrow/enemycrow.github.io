@@ -300,10 +300,18 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('posts.json')
     .then(res => res.json())
     .then(data => {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const availablePosts = data.filter(post => {
+        const postDate = new Date(post.fecha);
+        postDate.setHours(0, 0, 0, 0);
+        return !isNaN(postDate) && postDate <= today;
+      });
+      availablePosts.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
       try {
-        localStorage.setItem('postsData', JSON.stringify(data));
+        localStorage.setItem('postsData', JSON.stringify(availablePosts));
       } catch(e) {}
-      allPosts = data;
+      allPosts = availablePosts;
       filteredPosts = allPosts;
       if (featuredContainer) {
         const featuredPosts = allPosts.filter(p => p.destacado);
