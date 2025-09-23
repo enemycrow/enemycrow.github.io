@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const timeEl     = document.getElementById('entry-time');
     const catEl      = document.getElementById('entry-categories');
     const catElBlock = document.getElementById('entry-categories-block');
+    const imageBaseName = entry.imagenBase ?? (typeof entry.imagen === 'string' ? entry.imagen.replace(/\.webp$/i, '') : null);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -97,15 +98,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (authorEl)  authorEl.textContent = `— ${entry.autor}`;
 
     if (imgEl) {
-      const base = entry.imagen.replace('.webp', '');
-      imgEl.src = `assets/images/blog/${base}.webp`;
-      imgEl.srcset = `
-        assets/images/responsive/blog/${base}-400.webp 400w,
-        assets/images/responsive/blog/${base}-800.webp 800w,
-        assets/images/responsive/blog/${base}-1200.webp 1200w,
-        assets/images/blog/${base}.webp 1600w`;
-      imgEl.sizes = "(max-width: 600px) 100vw, 1200px";
-      imgEl.alt = entry.titulo;
+      if (imageBaseName) {
+        imgEl.src = `assets/images/blog/${imageBaseName}.webp`;
+        imgEl.srcset = `
+        assets/images/responsive/blog/${imageBaseName}-400.webp 400w,
+        assets/images/responsive/blog/${imageBaseName}-800.webp 800w,
+        assets/images/responsive/blog/${imageBaseName}-1200.webp 1200w,
+        assets/images/blog/${imageBaseName}.webp 1600w`;
+        imgEl.sizes = "(max-width: 600px) 100vw, 1200px";
+      } else {
+        imgEl.removeAttribute('srcset');
+        imgEl.removeAttribute('sizes');
+      }
+      imgEl.alt = entry.titulo || imgEl.alt || '';
     }
 
     if (catEl) {
@@ -120,6 +125,51 @@ document.addEventListener('DOMContentLoaded', async () => {
         .map(c => `<span class="category-tag">${c}</span>`)
         .join(' ');
       catElBlock.innerHTML = booksHtml;
+    }
+
+    const siteName = 'La Pluma, el Faro y la Llama';
+    const plainHtml = typeof entry.contenido_html === 'string' ? entry.contenido_html : '';
+    const generatedDescription = plainHtml
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    const description = (typeof entry.fragmento === 'string' && entry.fragmento.trim())
+      ? entry.fragmento.trim()
+      : (generatedDescription || entry.titulo || '');
+    const canonicalUrl = entry.slug
+      ? new URL(`blog-entry.html?slug=${entry.slug}`, window.location.origin).href
+      : window.location.href;
+    if (entry.titulo) {
+      document.title = `${entry.titulo} | ${siteName}`;
+    }
+
+    const setMetaContent = (selector, value) => {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      el.setAttribute('content', value || '');
+    };
+
+    setMetaContent('meta[name="description"]', description);
+    setMetaContent('meta[property="og:title"]', entry.titulo || '');
+    setMetaContent('meta[property="og:description"]', description);
+    setMetaContent('meta[property="og:type"]', 'article');
+    setMetaContent('meta[property="og:url"]', canonicalUrl);
+
+    let socialImageUrl = '';
+    if (imageBaseName) {
+      socialImageUrl = new URL(`assets/images/responsive/blog/${imageBaseName}-1200.webp`, window.location.origin).href;
+    }
+    setMetaContent('meta[property="og:image"]', socialImageUrl);
+    setMetaContent('meta[property="og:image:alt"]', entry.titulo || '');
+    setMetaContent('meta[name="twitter:card"]', 'summary_large_image');
+    setMetaContent('meta[name="twitter:title"]', entry.titulo || '');
+    setMetaContent('meta[name="twitter:description"]', description);
+    setMetaContent('meta[name="twitter:image"]', socialImageUrl);
+    setMetaContent('meta[name="twitter:image:alt"]', entry.titulo || '');
+
+    const canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (canonicalEl) {
+      canonicalEl.setAttribute('href', canonicalUrl);
     }
 
     if (licenseEl) {
