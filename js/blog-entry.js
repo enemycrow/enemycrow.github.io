@@ -133,9 +133,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       .replace(/<[^>]*>/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
-    const description = (typeof entry.fragmento === 'string' && entry.fragmento.trim())
+    const socialSnippet = (typeof entry.fragmento_social === 'string' && entry.fragmento_social.trim())
+      ? entry.fragmento_social.trim()
+      : '';
+    const fallbackSnippet = (typeof entry.fragmento === 'string' && entry.fragmento.trim())
       ? entry.fragmento.trim()
-      : (generatedDescription || entry.titulo || '');
+      : '';
+    const description = socialSnippet
+      || fallbackSnippet
+      || generatedDescription
+      || entry.titulo
+      || '';
     const canonicalUrl = entry.slug
       ? new URL(`blog-entry.html?slug=${entry.slug}`, window.location.origin).href
       : window.location.href;
