@@ -1,5 +1,27 @@
 [
   {
+  "id": 64,
+  "titulo": "Terminando el proyecto",
+  "autor": "Draco Sahir",
+  "fecha": "2025-09-22",
+  "categoria_temas": [
+    "Anuncios"
+  ],
+  "categoria_libros": [
+    "El huevo que volvió a cantar"
+  ],
+  "topicos": [
+    "Familia",
+    "Deseos"
+  ],
+  "tiempo": "4 min",
+  "fragmento": "Terminar algo a veces duele más que empezarlo, pero también trae la dicha de un logro. Así despido 'El Huevo que volvió a cantar', con la esperanza de un nuevo renacer.",
+  "imagen": "Huevovolvio-Post64.webp",
+  "slug": "terminando-el-proyecto",
+  "contenido_html": "<p>En la vida creo que cuesta más terminar las cosas que iniciarlas. Es más fácil decir 'Hola' que 'Adiós'. A veces, cuando hay un compromiso de largo plazo, se viven duelos. A muchos nos cuesta superarlos.</p><p>Cuando se trata de escribir algo y terminarlo ocurren dos sensaciones. Una es ese duelo: quieres que acabe, pero no. Porque es lindo estar escribiendo algo. Pero, también, extrañas mucho tras haberlo terminado. Es como para algunos cuando se les acaba su serie favorita de Netflix.</p><p>Hay que dar vuelta la página. Seguir evolucionando.</p><p>La segunda sensación es la placentera: ¡lo lograste! Fue muy difícil, pero ahí estás. Diste la cara y terminaste un capítulo más en tu vida. ¿Por qué es tan difícil 'lograr el logro'? Eso exclamo a las estrellas. Pero quiero que me acompañen, porque algún día el viaje de todos termina en un punto. Y... bueno, puede que haya una continuación en un plano distinto.</p><p>Hay que luchar. Hay que seguir.</p><p>Por este proyecto que ya tengo escrito y que tiene todas sus imágenes: <em>El Huevo que volvió a cantar</em>, inspirado en aquel infante que vivió una vida cruda. Merece una segunda con amor. Espero, a ti —que lamentablemente no conozco siquiera tu nombre— que seas muy feliz. Que tu tristeza acabe.</p><p>Que lo mejor venga para ti.</p>",
+  "destacado": false
+  },
+  {
     "id": 63,
     "titulo": "La Pluma, El Faro y La Llama llegan a Bluesky",
     "autor": "Draco Sahir",
