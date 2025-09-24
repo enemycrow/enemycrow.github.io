@@ -1,4 +1,4 @@
-const CACHE_NAME = 'site-cache-v8'; // ⬅️ súbelo para forzar actualización
+const CACHE_NAME = 'site-cache-v9'; // ⬅️ súbelo para forzar actualización
 const urlsToCache = [
   '/',
   '/index.html',
@@ -12,6 +12,7 @@ const urlsToCache = [
   '/shop.html',
   '/blog.html',
   '/blog-entry.html',
+  '/posts.json',
   '/css/styles.889d2a038d.css',
   '/js/main.d9fb968dc8.js',
   '/js/about.js',
@@ -26,9 +27,27 @@ const urlsToCache = [
 
 self.addEventListener('install', event => {
   self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
-  );
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.addAll(urlsToCache);
+    try {
+      const response = await fetch('/posts.json', { cache: 'no-store' });
+      if (!response || !response.ok) {
+        return;
+      }
+      const posts = await response.json();
+      const blogPages = Array.isArray(posts)
+        ? posts
+            .map(post => (post && post.slug ? `/blog/${post.slug}.html` : null))
+            .filter(Boolean)
+        : [];
+      if (blogPages.length) {
+        await cache.addAll(blogPages);
+      }
+    } catch (error) {
+      console.warn('SW: No se pudieron precachear las páginas del blog', error);
+    }
+  })());
 });
 
 self.addEventListener('activate', event => {

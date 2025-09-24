@@ -3,134 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entrada | La Pluma, el Faro y la Llama</title>
-
-    <!-- Fuentes de Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.7.2/css/all.css" />
-
-    <!-- Tabler Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-    
-    <!-- Estilos CSS -->
-    <link rel="stylesheet" href="css/styles.889d2a038d.css">
-    <link rel="stylesheet" href="css/custom-overrides.css" />
-    <!-- <link rel="stylesheet" href="css/blog.css"> -->
-    <link rel="canonical" href="https://plumafarollama.com/blog-entry.html" />
-    <meta name="description" content="" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:image:alt" content="" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="" />
-    <meta name="twitter:description" content="" />
-    <meta name="twitter:image" content="" />
-    <meta name="twitter:image:alt" content="" />
-    <meta name="robots" content="index, follow" />
+  <title>Entrada del diario | La Pluma, el Faro y la Llama</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="stylesheet" href="css/styles.889d2a038d.css">
+  <link rel="stylesheet" href="css/custom-overrides.css">
 </head>
-<body>
-
-  <!-- Header / Navegación -->
-  <header>
-    <div class="container">
-      <nav class="navbar">
-        <a href="index.html" class="logo" data-sylvora-latido="true">
-          <span class="logo-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></span>
-          La Pluma, el Faro y la Llama
-        </a>
-        <ul class="nav-links">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="about.html">Sobre Nosotros</a></li>
-          <li><a href="portfolio.html">Obras</a></li>
-          <li><a href="blog.html" class="active">Diario</a></li>
-          <li><a href="services.html">Servicios</a></li>
-          <li><a href="shop.html">Tienda</a></li>
-          <li><a href="contact.html">Contacto</a></li>
-          <li><a href="donate.html" class="btn btn-donate">Donar</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main>
-
-  <!-- Entrada del Blog -->
-  <article class="blog-entry blog-entry--individual">
-    <div class="container">
-      <img
-        id="entry-image"
-        class="blog-entry__image"
-        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-        sizes="(max-width: 600px) 100vw, 1200px"
-        alt="Imagen representativa de la entrada"
-        loading="lazy"
-        fetchpriority="low" />
-      <!-- Bloque de reacciones -->
-      <div class="reactions-block">
-        <div class="reactions-list">
-          <div class="reaction" data-reaction="toco" role="button">
-            <span class="reaction-icon"><i class="fas fa-heart" aria-hidden="true"></i></span>
-            <span class="reaction-count" id="reaction-toco-count">0</span>
-            <span class="reaction-tooltip">Esta historia me tocó</span>
-          </div>
-          <div class="reaction" data-reaction="sumergirme" role="button">
-            <span class="reaction-icon"><i class="fas fa-water" aria-hidden="true"></i></span>
-            <span class="reaction-count" id="reaction-sumergirme-count">0</span>
-            <span class="reaction-tooltip">Quiero sumergirme en la trama</span>
-          </div>
-          <div class="reaction" data-reaction="personajes" role="button">
-            <span class="reaction-icon"><i class="fas fa-users" aria-hidden="true"></i></span>
-            <span class="reaction-count" id="reaction-personajes-count">0</span>
-            <span class="reaction-tooltip">Quiero conocer a fondo a sus personajes</span>
-          </div>
-          <div class="reaction" data-reaction="mundo" role="button">
-            <span class="reaction-icon"><i class="fas fa-globe" aria-hidden="true"></i></span>
-            <span class="reaction-count" id="reaction-mundo-count">0</span>
-            <span class="reaction-tooltip">Me intriga el mundo que han creado</span>
-          </div>
-          <div class="reaction" data-reaction="lugares" role="button">
-            <span class="reaction-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></span>
-            <span class="reaction-count" id="reaction-lugares-count">0</span>
-            <span class="reaction-tooltip">Llévame a esos lugares</span>
-          </div>
-        </div>
-        <div class="entry-category-block centered-block">
-          <span class="category-icon">🏷️</span>
-          <span id="entry-categories-block"></span>
-        </div>
-      </div>
-      <div class="post-category" id="entry-categories"></div>
-      <h1 class="blog-entry__title" id="entry-title">Cargando...</h1>
-      <span class="blog-entry__date" id="entry-date"></span>
-      <div class="blog-entry__meta">
-        <span class="meta-item" id="entry-time"></span>
-        <span class="meta-item" id="entry-comments"></span>
-      </div>
-
-      <div class="blog-entry__content" id="entry-content">
-        <!-- Contenido dinámico -->
-      </div>
-
-      <p class="blog-entry__signature" id="entry-author"></p>
-      <p class="blog-entry__license" id="entry-license"></p>
-    </div>
-  </article>
+<body class="blog-entry-fallback">
+  <main class="blog-entry-fallback__content">
+    <h1>Estamos redirigiendo esta entrada</h1>
+    <p>
+      Si no eres redirigido automáticamente, visita la versión pre-renderizada del artículo aquí:
+      <a id="fallback-link" href="blog.html">blog.html</a>.
+    </p>
+    <p>
+      También puedes volver al <a href="blog.html">Diario de Creación</a> para explorar todas las entradas.
+    </p>
+    <noscript>
+      <p>Activa JavaScript para ver la nueva versión de esta entrada o utiliza el enlace anterior.</p>
+    </noscript>
   </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 La Pluma, el Faro y la Llama. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-
-  <script defer src="js/blog-entry.js"></script>
+  <script>
+    (function () {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get('slug');
+        if (!slug) {
+          return;
+        }
+        const trimmedSlug = slug.trim();
+        if (!trimmedSlug) {
+          return;
+        }
+        const encodedSlug = encodeURIComponent(trimmedSlug);
+        const targetPath = `/blog/${encodedSlug}.html`;
+        const linkEl = document.getElementById('fallback-link');
+        if (linkEl) {
+          linkEl.href = targetPath;
+          linkEl.textContent = decodeURI(targetPath);
+        }
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) {
+          canonical.setAttribute('href', `https://plumafarollama.com${targetPath}`);
+        } else {
+          const link = document.createElement('link');
+          link.rel = 'canonical';
+          link.href = `https://plumafarollama.com${targetPath}`;
+          document.head.appendChild(link);
+        }
+        window.location.replace(targetPath);
+      } catch (error) {
+        console.error('No se pudo redirigir a la versión pre-renderizada', error);
+      }
+    })();
+  </script>
 </body>
 </html>
