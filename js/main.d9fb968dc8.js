@@ -33,13 +33,35 @@ activarLatidoDeSylvora();
 
     function setupPreloader() {
         const preloader = document.querySelector('.preloader');
-        if (preloader) {
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 500);
-            }, 1500);
+        if (!preloader) {
+            return;
+        }
+
+        const hidePreloader = () => {
+            if (preloader.classList.contains('preloader--hidden')) {
+                return;
+            }
+            preloader.classList.add('preloader--hidden');
+        };
+
+        const handleTransitionEnd = event => {
+            if (event.target === preloader && preloader.classList.contains('preloader--hidden')) {
+                preloader.style.display = 'none';
+                preloader.removeEventListener('transitionend', handleTransitionEnd);
+            }
+        };
+
+        const handleAnimationEnd = () => {
+            hidePreloader();
+        };
+
+        preloader.addEventListener('transitionend', handleTransitionEnd);
+        preloader.addEventListener('animationend', handleAnimationEnd, { once: true });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', hidePreloader, { once: true });
+        } else {
+            hidePreloader();
         }
     }
 

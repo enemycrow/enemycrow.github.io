@@ -3064,7 +3064,7 @@ input, textarea, select, input *, textarea *, select * {
   animation: fadeInOut 2s infinite 0.6s;
 }
 
-.preloader.hide {
+.preloader--hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
