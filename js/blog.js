@@ -41,6 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPage = 1;
   let filteredPosts = [];
 
+  function resolvePostUrl(post) {
+    const raw = typeof post?.url === 'string' ? post.url.trim() : '';
+    if (raw) {
+      if (raw.startsWith('http://') || raw.startsWith('https://')) return raw;
+      if (raw.startsWith('/')) return raw;
+      return `/${raw}`;
+    }
+    const fallbackSlug = typeof post?.slug === 'string' ? post.slug.trim() : '';
+    return fallbackSlug ? `/blog/${fallbackSlug}.html` : '#';
+  }
+
   function scrollToPosts() {
     document.querySelector('#blog-posts-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -74,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
       categoryTag = `<span class="${categoryClass}">${cat}</span>`;
     }
     const totalReactions = 0; // placeholder, se actualizará desde Firestore
+    const postLink = resolvePostUrl(post);
 
     const baseName = post.imagen.replace(/\.[^.]+$/, '');
     const mobileImg = window.innerWidth <= 768 ?
@@ -103,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="meta-item"><i class="fas fa-clock"></i> ${post.tiempo}</span>
             <span class="meta-item"><i class="fas fa-bolt"></i> <span class="reactions-count" data-slug="${post.slug}">${totalReactions}</span> reacciones</span>
           </div>
-          <a href="blog-entry.html?slug=${post.slug}" class="btn btn-featured">Leer Entrada Completa</a>
+          <a href="${postLink}" class="btn btn-featured">Leer Entrada Completa</a>
         </div>
       </div>
     `;
@@ -177,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     article.className = `blog-post blog-entry blog-entry--${authorSlug} ${authorSlug} ${themeSlug} ${catClass}`;
     article.setAttribute('data-category', `${authorSlug} ${themeSlug}`);
     const totalReactions = 0; // se actualizará desde Firestore
+    const postLink = resolvePostUrl(post);
     article.innerHTML = `
       <div class="blog-post__image" style="background-image:url('assets/images/blog/${post.imagen}')">
         <div class="blog-post__date">
@@ -193,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="meta-item"><i class="far fa-clock"></i> ${post.tiempo}</span>
         <span class="meta-item"><i class="fas fa-bolt"></i> <span class="reactions-count" data-slug="${post.slug}">${totalReactions}</span> reacciones</span>
       </div>
-      <a href="blog-entry.html?slug=${post.slug}" class="blog-post__link">Leer más <span class="arrow">→</span></a>
+      <a href="${postLink}" class="blog-post__link">Leer más <span class="arrow">→</span></a>
     `;
     target.appendChild(article);
   }
