@@ -1,4 +1,4 @@
-const CACHE_NAME = 'site-cache-v6'; // ⬅️ súbelo para forzar actualización
+const CACHE_NAME = 'site-cache-v8'; // ⬅️ súbelo para forzar actualización
 const urlsToCache = [
   '/',
   '/index.html',
@@ -12,8 +12,8 @@ const urlsToCache = [
   '/shop.html',
   '/blog.html',
   '/blog-entry.html',
-  '/css/styles.15c06c305d.css',
-  '/js/main.46134422b8.js',
+  '/css/styles.bd24d94cad.css',
+  '/js/main.4921ca9c07.js',
   '/js/about.js',
   '/js/contact.js',
   '/js/portfolio.js',
