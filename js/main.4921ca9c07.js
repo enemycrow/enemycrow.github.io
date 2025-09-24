@@ -19,7 +19,7 @@ activarLatidoDeSylvora();
 
         return () => {
             if (!loadPromise) {
-                loadPromise = import('./firebase-init.js')
+                loadPromise = import('/js/firebase-init.js')
                     .then(module => module.initializeFirebase())
                     .catch(error => {
                         loadPromise = null;
