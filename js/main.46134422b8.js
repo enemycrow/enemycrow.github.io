@@ -14,23 +14,6 @@ activarLatidoDeSylvora();
 
 // JavaScript principal para todas las páginas
 (function (window, document) {
-    const getFirebaseServices = (() => {
-        let loadPromise = null;
-
-        return () => {
-            if (!loadPromise) {
-                loadPromise = import('./firebase-init.js')
-                    .then(module => module.initializeFirebase())
-                    .catch(error => {
-                        loadPromise = null;
-                        throw error;
-                    });
-            }
-
-            return loadPromise;
-        };
-    })();
-
     function setupPreloader() {
         const preloader = document.querySelector('.preloader');
         if (preloader) {
@@ -92,58 +75,50 @@ activarLatidoDeSylvora();
     }
 
     function setupFooterNewsletterForm() {
-        const footerNewsletterForms = document.querySelectorAll('.footer .newsletter-form');
+        const footerNewsletterForm = document.querySelector('.footer .newsletter-form');
 
-        if (!footerNewsletterForms.length) {
-            return;
-        }
-
-        footerNewsletterForms.forEach(form => {
-            form.addEventListener('submit', async function (e) {
+        if (footerNewsletterForm) {
+            footerNewsletterForm.addEventListener('submit', async function (e) {
                 e.preventDefault();
 
                 const emailInput = this.querySelector('input[type="email"]');
-                const email = emailInput && emailInput.value.trim();
 
-                if (!email) {
-                    return;
-                }
-
-                try {
-                    const { firebase, db } = await getFirebaseServices();
+                if (emailInput && emailInput.value.trim()) {
                     const data = {
-                        email,
+                        email: emailInput.value.trim(),
                         timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     };
 
-                    await db.collection('newsletter_subscribers').add(data);
+                    try {
+                        await db.collection('newsletter_subscribers').add(data);
 
-                    const successMessage = document.createElement('div');
-                    successMessage.className = 'newsletter-success';
-                    successMessage.textContent = '¡Gracias por suscribirte!';
-                    successMessage.style.color = '#2ecc71';
-                    successMessage.style.marginTop = '0.5rem';
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'newsletter-success';
+                        successMessage.textContent = '¡Gracias por suscribirte!';
+                        successMessage.style.color = '#2ecc71';
+                        successMessage.style.marginTop = '0.5rem';
 
-                    this.appendChild(successMessage);
-                    this.reset();
+                        this.appendChild(successMessage);
+                        this.reset();
 
-                    setTimeout(() => {
-                        successMessage.remove();
-                    }, 3000);
-                } catch (err) {
-                    console.error('Error al guardar la suscripción', err);
-                    const errorMessage = document.createElement('div');
-                    errorMessage.className = 'newsletter-error';
-                    errorMessage.textContent = 'Hubo un problema. Intenta más tarde.';
-                    errorMessage.style.color = '#e74c3c';
-                    errorMessage.style.marginTop = '0.5rem';
-                    this.appendChild(errorMessage);
-                    setTimeout(() => {
-                        errorMessage.remove();
-                    }, 3000);
+                        setTimeout(() => {
+                            successMessage.remove();
+                        }, 3000);
+                    } catch (err) {
+                        console.error('Error al guardar la suscripción', err);
+                        const errorMessage = document.createElement('div');
+                        errorMessage.className = 'newsletter-error';
+                        errorMessage.textContent = 'Hubo un problema. Intenta más tarde.';
+                        errorMessage.style.color = '#e74c3c';
+                        errorMessage.style.marginTop = '0.5rem';
+                        this.appendChild(errorMessage);
+                        setTimeout(() => {
+                            errorMessage.remove();
+                        }, 3000);
+                    }
                 }
             });
-        });
+        }
     }
 
     function setupSmoothScroll() {
