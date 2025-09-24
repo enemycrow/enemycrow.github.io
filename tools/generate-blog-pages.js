@@ -23,6 +23,21 @@ function readPosts() {
   }
 }
 
+function isFuturePost(post, referenceDate = new Date()) {
+  if (!post || !post.fecha) return false;
+  const match = /^\s*(\d{4})-(\d{2})-(\d{2})/.exec(post.fecha);
+  if (!match) return false;
+  const [, year, month, day] = match.map(Number);
+  if (!year || !month || !day) return false;
+  const postTime = Date.UTC(year, month - 1, day);
+  const referenceTime = Date.UTC(
+    referenceDate.getUTCFullYear(),
+    referenceDate.getUTCMonth(),
+    referenceDate.getUTCDate()
+  );
+  return postTime > referenceTime;
+}
+
 function escapeHtml(value) {
   if (value === null || value === undefined) return '';
   return String(value)
@@ -458,7 +473,14 @@ function updatePostsFile(posts) {
 function main() {
   const posts = readPosts();
   const updatedPosts = updatePostsFile(posts);
-  writePostPages(updatedPosts);
+  const filteredPosts = updatedPosts.filter(post => {
+    const future = isFuturePost(post);
+    if (future) {
+      console.log(`Saltando publicación futura: ${post.slug || post.id || post.titulo}`);
+    }
+    return !future;
+  });
+  writePostPages(filteredPosts);
 }
 
 main();
