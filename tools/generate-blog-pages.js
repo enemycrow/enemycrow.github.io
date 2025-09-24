@@ -11,6 +11,51 @@ const SECTION_NAME = 'Diario de Creación';
 const BASE_URL = 'https://plumafarollama.com';
 const SELF_CLOSING_TAGS = new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
 
+function formatDateParts(year, month, day) {
+  const mm = String(month).padStart(2, '0');
+  const dd = String(day).padStart(2, '0');
+  return `${year}-${mm}-${dd}`;
+}
+
+function toDateOnlyString(value) {
+  if (!value) return null;
+  if (value instanceof Date) {
+    return formatDateParts(value.getFullYear(), value.getMonth() + 1, value.getDate());
+  }
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (!trimmed) return null;
+    const match = trimmed.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (match) {
+      return `${match[1]}-${match[2]}-${match[3]}`;
+    }
+    const parsed = new Date(trimmed);
+    if (Number.isNaN(parsed.getTime())) return null;
+    return formatDateParts(parsed.getFullYear(), parsed.getMonth() + 1, parsed.getDate());
+  }
+  return null;
+}
+
+function getTodayDateString() {
+  return toDateOnlyString(new Date());
+}
+
+function isScheduledPost(post, todayString) {
+  if (!post) return false;
+  const dateString = toDateOnlyString(post.fecha);
+  if (!dateString) return false;
+  return dateString > todayString;
+}
+
+function buildFallbackUrl(post) {
+  if (!post) return '';
+  const slug = typeof post.slug === 'string' ? post.slug.trim() : '';
+  if (!slug) {
+    return typeof post.url === 'string' ? post.url : '';
+  }
+  return `blog-entry.html?slug=${encodeURIComponent(slug)}`;
+}
+
 function readPosts() {
   if (!fs.existsSync(POSTS_PATH)) {
     throw new Error(`No se encontró posts.json en ${POSTS_PATH}`);
@@ -420,10 +465,14 @@ function writePostPages(posts) {
   console.log(`Generadas ${posts.length} páginas en ${OUTPUT_DIR}`);
 }
 
-function updatePostsFile(posts) {
+function updatePostsFile(posts, todayString) {
   let changed = false;
   const updated = posts.map(post => {
-    const expectedUrl = `blog/${post.slug}.html`;
+    const scheduled = isScheduledPost(post, todayString);
+    let expectedUrl = typeof post.url === 'string' ? post.url : '';
+    if (post.slug) {
+      expectedUrl = scheduled ? buildFallbackUrl(post) : `blog/${post.slug}.html`;
+    }
     if (post.url !== expectedUrl) {
       changed = true;
     }
@@ -457,8 +506,14 @@ function updatePostsFile(posts) {
 
 function main() {
   const posts = readPosts();
-  const updatedPosts = updatePostsFile(posts);
-  writePostPages(updatedPosts);
+  const todayString = getTodayDateString();
+  const updatedPosts = updatePostsFile(posts, todayString);
+  const publishedPosts = updatedPosts.filter(post => !isScheduledPost(post, todayString));
+  writePostPages(publishedPosts);
+  const skippedCount = updatedPosts.length - publishedPosts.length;
+  if (skippedCount > 0) {
+    console.log(`Omitidas ${skippedCount} entradas programadas (fecha posterior a ${todayString}).`);
+  }
 }
 
 main();
