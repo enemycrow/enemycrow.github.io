@@ -10,7 +10,8 @@
     "test": "htmlhint \"**/*.html\" && node tools/seo-validate.js",
     "version": "node version-assets.js",
     "portfolio:generate": "node tools/generate-portfolio-pages.js",
-    "seo": "npm run portfolio:generate && node js/generate-sitemap.js"
+    "blog:generate": "node tools/generate-blog-pages.js",
+    "seo": "npm run portfolio:generate && npm run blog:generate && node js/generate-sitemap.js"
   },
   "keywords": [],
   "author": "",

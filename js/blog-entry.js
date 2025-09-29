@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug');
+  const bodyEl = document.body;
+  const slugFromDataset = bodyEl?.dataset?.postSlug;
+  const slugFromQuery = params.get('slug');
+  const slug = slugFromDataset || slugFromQuery;
   if (!slug) return;
+
+  const isPrerendered = bodyEl?.dataset?.prerendered === 'true';
 
   // utilidades
   const reactionKeys = ['toco','sumergirme','personajes','mundo','lugares'];
@@ -43,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (cached) {
       posts = JSON.parse(cached);
     } else {
-      const res = await fetch('posts.json');
+      const res = await fetch('/posts.json');
       posts = await res.json();
       try { localStorage.setItem('postsData', JSON.stringify(posts)); } catch(e) {}
     }
@@ -94,17 +99,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (titleEl) titleEl.textContent = entry.titulo;
     if (dateEl)  dateEl.textContent  = fechaTexto;
     if (timeEl)  timeEl.textContent  = entry.tiempo;
-    if (contentEl) contentEl.innerHTML = entry.contenido_html;
-    if (authorEl)  authorEl.textContent = `— ${entry.autor}`;
+    if (contentEl && !isPrerendered) contentEl.innerHTML = entry.contenido_html;
+    if (authorEl && !isPrerendered)  authorEl.textContent = `— ${entry.autor}`;
 
     if (imgEl) {
       if (imageBaseName) {
-        imgEl.src = `assets/images/blog/${imageBaseName}.webp`;
+        imgEl.src = `/assets/images/blog/${imageBaseName}.webp`;
         imgEl.srcset = `
-        assets/images/responsive/blog/${imageBaseName}-400.webp 400w,
-        assets/images/responsive/blog/${imageBaseName}-800.webp 800w,
-        assets/images/responsive/blog/${imageBaseName}-1200.webp 1200w,
-        assets/images/blog/${imageBaseName}.webp 1600w`;
+        /assets/images/responsive/blog/${imageBaseName}-400.webp 400w,
+        /assets/images/responsive/blog/${imageBaseName}-800.webp 800w,
+        /assets/images/responsive/blog/${imageBaseName}-1200.webp 1200w,
+        /assets/images/blog/${imageBaseName}.webp 1600w`;
         imgEl.sizes = "(max-width: 600px) 100vw, 1200px";
       } else {
         imgEl.removeAttribute('srcset');
@@ -145,7 +150,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       || entry.titulo
       || '';
     const canonicalUrl = entry.slug
-      ? new URL(`blog-entry.html?slug=${entry.slug}`, window.location.origin).href
+      ? new URL(`blog/${entry.slug}.html`, window.location.origin).href
       : window.location.href;
     if (entry.titulo) {
       document.title = `${entry.titulo} | ${siteName}`;
