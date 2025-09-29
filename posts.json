@@ -1,4 +1,50 @@
 [
+    {
+    "id": 68,
+    "titulo": "Draco habla de un amor espiritual",
+    "autor": "Draco Sahir",
+    "fecha": "2025-09-26",
+    "categoria_temas": [
+      "Fragmentos Inéditos"
+    ],
+    "categoria_libros": [
+      "Allí donde no hay piel"
+    ],
+    "topicos": [
+      "Ágape",
+      "Simbolismo"
+    ],
+    "tiempo": "2 min lectura",
+    "fragmento": "Un poema que habla de un amor que ve más allá de lo material para existir, contado desde la mirada inocente de Draco Sahir.",
+    "fragmento_social": "Un amor más allá de lo material, contado desde los ojos curiosos de Draco.",
+    "imagen": "Allidondenohaypiel-Post68.webp",
+    "slug": "draco-habla-de-un-amor-espiritual",
+    "contenido_html": "<p>Draco Sahir dice: \"Me parece bonito pensar que hay amores que no necesitan piel. Como cuando uno abraza con palabras, o cuando un dibujo te hace sentir acompañado aunque nadie esté contigo. Elysia inventa nombres con su poema, como si creara un mundo nuevo solo para nosotros.\"</p><p>Este post nos recuerda que a veces el cariño vive en lo invisible, en las palabras y en los gestos pequeños. Ven a descubrir más en nuestras páginas y sigue explorando con nosotros.</p>",
+    "destacado": false
+  },
+  {
+    "id": 67,
+    "titulo": "Draco imagina conjuros de amor",
+    "autor": "Draco Sahir",
+    "fecha": "2025-09-25",
+    "categoria_temas": [
+      "Fragmentos Inéditos"
+    ],
+    "categoria_libros": [
+      "Guardando versículos como conjuros"
+    ],
+    "topicos": [
+      "Eros",
+      "Simbolismo"
+    ],
+    "tiempo": "2 min lectura",
+    "fragmento": "Un poema donde el amor se siente como un conjuro, relatado desde la voz soñadora de Draco Sahir.",
+    "fragmento_social": "El amor como conjuro, con la mirada tierna de Draco.",
+    "imagen": "Guardandoversiculoscomoconjuros-Post67.webp",
+    "slug": "draco-imagina-conjuros-de-amor",
+    "contenido_html": "<p>Draco Sahir dice: \"Cuando leí este poema, pensé en libros mágicos que brillan en la oscuridad. Como si el amor fuera un hechizo que se aprende de a poquito, en cada beso o en cada lágrima. Es como tener un grimorio secreto donde guardamos todo lo que sentimos para que nunca se pierda.\"</p><p>Este post nos invita a pensar el amor como algo sagrado y mágico, que se escribe en los recuerdos y en la esperanza. Acompáñanos en este viaje de palabras y conjuros.</p>",
+    "destacado": false
+  },
   {
     "id": 66,
     "titulo": "Producir un ciclo, cerrar un viaje",
@@ -11,7 +57,7 @@
       "Entre Amores y Abismos"
     ],
     "topicos": [
-      "Producción",
+      "Música",
       "Aventuras"
     ],
     "tiempo": "2 min de lectura",
@@ -43,7 +89,7 @@
     "imagen": "Entreamoresyabismos-65.webp",
     "slug": "el-amor-no-lo-es-todo-el-cierre-de-un-ciclo",
     "contenido_html": "<p>En esta nueva canción, nace una confesión: <strong>“El amor no lo es todo”</strong>. Natalia le canta a esa dualidad que tanto duele como fascina. Al amor que parece ambrosía, pero que también exige reconciliación. Al amor que inspira poetas, pero que se construye en los gestos pequeños, en el sostenerse cada día.</p><p>El estribillo es un relicario:</p><blockquote><p>“Conserva mi amor en tu relicario,<br/>atesórame en la entrada de tu diario,<br/>márcame ya con fuego en el santuario…”</p></blockquote><p>Aquí, lo erótico se mezcla con lo espiritual. No es solo un cuerpo, ni solo un recuerdo: es el deseo de ser guardada en lo más íntimo, como algo que trasciende.</p><p>De <em>Entre Amores y Abismos</em> aprendimos que el amor verdadero no se mide por la intensidad del inicio, sino por la fuerza de sostenerlo en el tiempo. Esta canción es la última pieza del álbum, el eco de todo lo aprendido: amar no basta con sentir, también hay que cuidar, perdonar, y a veces dejar ir.</p><p>Con ella cierro un ciclo. Un disco que es también un libro, y un libro que es también la vida de una historia.</p>",
-    "destacado": true
+    "destacado": false
   },
   {
     "id": 64,

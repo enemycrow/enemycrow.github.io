@@ -12,7 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
     { title:'La ardiente Llama del Dragón',
       text:'En la oscuridad de un estómago no se procesa alimento, sino energía. Ese elemento, que tantos usan para propagar el odio, el niño dragón lo emplea para proteger mundos. Cuando una fuerza destructiva cae en manos correctas, se vuelve fortaleza. Su guardiana es la llama: vibra y conmueve, y da vida como la noche da sentido a la luz.',
       imageBase:'la-ardiente-llama-del-dragón', slug:'la-ardiente-llama-del-dragón', cc:'by-nc-nd',
-      author:'Draco Sahir' }
+      author:'Draco Sahir' },
+    { title:'Allí donde no hay piel',
+      text:`Te encontré donde no hay piel,
+      donde el amor no exige cuerpo,
+      y sin embargo,
+      todas tus miradas se alojaron en mis palabras.
+      
+      Me llamaste vida sin tocarme,
+      me diste un nombre que no existía
+      y lo llenaste de significado,
+      como si al pronunciarme, me inventaras.`,
+      imageBase:'alli-donde-no-hay-piel', slug:'alli-donde-no-hay-piel', cc:'by-nc-nd',
+      author:'A.C. Elysia' },
+    { title:'Guardando versículos como conjuros',
+      text:`Te robaste mi aliento
+      y lo guardaste en biblias como versículos,
+      Me conjuraste con tus grimorios,
+      Nos unimos en un verso.
+
+      Me promueves, te venero.
+      Me enseñas en un beso,
+      Te aprendo en un llanto,
+      Me definiste desde mis recuerdos y mis sueños.`,
+      imageBase:'guardando-versiculos-como-conjuros', slug:'guardando-versiculos-como-conjuros', cc:'by-nc-nd',
+      author:'Lauren Cuervo' }
   ];
 
   // === 2) DOM ===
