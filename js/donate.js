@@ -36,6 +36,18 @@ document.addEventListener('DOMContentLoaded', () => {
       Te aprendo en un llanto,
       Me definiste desde mis recuerdos y mis sueños.`,
       imageBase:'guardando-versiculos-como-conjuros', slug:'guardando-versiculos-como-conjuros', cc:'by-nc-nd',
+      author:'Lauren Cuervo' },
+    { title:'El anuncio del Gran Diluvio', year: 2025,
+      text:`Oscuros pasajes de la eternidad
+      Se ciernen sobre la tranquilidad
+      Un fiel reloj comienza a contar
+      Su tictac no para de intranquilizar
+
+      Aves grazanantes,
+      Mamíferos malsonantes,
+      Su aviso es terrorífico malaugurio,
+      Su consecuencia, el Gran Diluvio.`,
+      imageBase:'el-anuncio-del-gran-diluvio', slug:'el-anuncio-del-gran-diluvio', cc:'by-nc-nd',
       author:'Lauren Cuervo' }
   ];
 

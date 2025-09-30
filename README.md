@@ -72,6 +72,49 @@ Cada entrada del archivo debe incluir los siguientes campos:
 
 Para agregar una nueva entrada basta con editar `posts.json` y colocar la imagen correspondiente en `assets/images/`.
 Las páginas `blog.html` y `blog-entry.html` cargan este archivo mediante JavaScript, por lo que no es necesario modificar el HTML.
+
+### Rotador y forzado de entradas destacadas (modo pruebas / control)
+
+Hemos añadido una herramienta para generar y forzar la lista de entradas destacadas de forma local o en CI. Esto es útil para pruebas, campañas o para bloquear una selección concreta mientras se revisa el sitio.
+
+- Nuevo comando npm:
+
+```powershell
+npm run rotate-featured
+```
+
+Por defecto genera `featured.json` en la raíz del proyecto con 3 entradas (seleccionadas de forma determinista según la fecha). `blog.html` intentará primero leer `featured.json` y, si existe, usará su contenido para mostrar los destacados en lugar del rotador automático.
+
+Opciones:
+
+- `--count=N` — número de entradas a generar (ej. `npm run rotate-featured -- --count=5`).
+- `--force=slug1,slug2` — forzar una lista concreta de slugs (en ese orden). Ejemplo:
+
+```powershell
+npm run rotate-featured -- --force=draco-habla-de-un-amor-espiritual,producir-un-ciclo-cerrar-un-viaje
+```
+
+Qué hace el script `tools/rotate-featured.js`:
+
+- Lee `posts.json` (filtra publicaciones futuras) y crea `featured.json` con una lista de entradas (`id` y `slug`).
+- Si pasas `--force`, intentará encontrar esos slugs/ids y los colocará al inicio de la lista; el resto se completa automáticamente hasta `--count`.
+
+Uso manual rápido (sin Node): crea un archivo `featured.json` en la raíz con este formato y recarga `blog.html`:
+
+```json
+[
+  {"id":68,"slug":"draco-habla-de-un-amor-espiritual"},
+  {"id":66,"slug":"producir-un-ciclo-cerrar-un-viaje"},
+  {"id":65,"slug":"el-amor-no-lo-es-todo-el-cierre-de-un-ciclo"}
+]
+```
+
+Notas:
+
+- `blog.html` todavía utiliza su rotador diario determinista si `featured.json` no existe o no puede leerse.
+- Para pruebas locales asegúrate de recargar con la caché deshabilitada (DevTools > Network > Disable cache) o borrar `featured.json` si quieres volver al comportamiento automático.
+- El número de huecos mostrados también puede ajustarse desde el HTML con `data-featured-count="N"` en el contenedor `#featured-posts-container`.
+
 Además, el contenido se guarda en `localStorage` bajo la clave `postsData` para acelerar visitas posteriores.
 
 Si colocas `"destacado": true` en una entrada, aparecerá en la sección de entradas destacadas al inicio de `blog.html`.
