@@ -478,35 +478,49 @@ function writePostPages(posts) {
 }
 
 function updatePostsFile(posts) {
+  // Preserve unknown/custom fields from the existing posts.json while
+  // updating canonical fields (notably `url`) so we don't clobber metadata.
   let changed = false;
+  let original = [];
+  try {
+    const raw = fs.readFileSync(POSTS_PATH, 'utf8');
+    original = JSON.parse(raw);
+  } catch (err) {
+    // If posts.json is missing or invalid, fall back to empty original.
+    original = [];
+  }
+
+  // Build lookup by id (preferred) and by slug as fallback
+  const byId = new Map();
+  const bySlug = new Map();
+  for (const p of original) {
+    if (!p) continue;
+    if (p.id !== undefined && p.id !== null) byId.set(String(p.id), p);
+    if (p.slug) bySlug.set(String(p.slug), p);
+  }
+
   const updated = posts.map(post => {
     const expectedUrl = `blog/${post.slug}.html`;
-    if (post.url !== expectedUrl) {
+    const keyId = post.id !== undefined && post.id !== null ? String(post.id) : null;
+    const originalEntry = keyId && byId.has(keyId) ? byId.get(keyId) : bySlug.get(String(post.slug)) || {};
+
+    // Merge original entry with the new values, but ensure canonical fields
+    // from the generator (like url) are set/updated.
+    const merged = Object.assign({}, originalEntry, post, { url: expectedUrl });
+
+    // We consider the posts.json changed if the URL differs from the original
+    // (the generator is mainly responsible for ensuring correct urls).
+    if (!originalEntry || originalEntry.url !== expectedUrl) {
       changed = true;
     }
-    return {
-      id: post.id,
-      titulo: post.titulo,
-      autor: post.autor,
-      fecha: post.fecha,
-      categoria_temas: post.categoria_temas,
-      categoria_libros: post.categoria_libros,
-      topicos: post.topicos,
-      tiempo: post.tiempo,
-      fragmento: post.fragmento,
-      fragmento_social: post.fragmento_social,
-      imagen: post.imagen,
-      slug: post.slug,
-      url: expectedUrl,
-      contenido_html: post.contenido_html,
-      destacado: post.destacado
-    };
+
+    return merged;
   });
 
   if (changed) {
     const json = JSON.stringify(updated, null, 2);
     fs.writeFileSync(POSTS_PATH, `${json}\n`, 'utf8');
-    console.log('posts.json actualizado con URLs de las páginas pre-renderizadas.');
+    console.log('posts.json actualizado con URLs de las páginas pre-renderizadas (campos extra preservados).');
   }
 
   return updated;
