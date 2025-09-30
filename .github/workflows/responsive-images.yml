@@ -27,8 +27,13 @@ jobs:
 
       - run: npm ci --no-audit --no-fund
 
+      # 👇 Aquí forzamos la recompilación de sharp en linux
+      - name: Rebuild sharp for linux
+        run: npm install --include=optional sharp
+
       - name: Generate responsive images
         run: npm run responsive
 
       - name: Ensure no generated changes
         run: git diff --exit-code
+
