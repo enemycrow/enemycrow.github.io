@@ -9,10 +9,10 @@
     "responsive": "node tools/responsive-images.js",
     "test": "htmlhint \"**/*.html\" && node tools/seo-validate.js",
     "version": "node version-assets.js",
-  "portfolio:generate": "node tools/generate-portfolio-pages.js",
-  "blog:generate": "node tools/generate-blog-pages.js",
-  "blog:generate:inc": "node tools/generate-blog-pages.js --incremental",
-  "blog:generate:staged": "node tools/generate-blog-pages.js --staged",
+    "portfolio:generate": "node tools/generate-portfolio-pages.js",
+    "blog:generate": "node tools/generate-blog-pages.js",
+    "blog:generate:inc": "node tools/generate-blog-pages.js --incremental",
+    "blog:generate:staged": "node tools/generate-blog-pages.js --staged",
     "seo": "npm run portfolio:generate && npm run blog:generate && node js/generate-sitemap.js"
   },
   "keywords": [],
@@ -22,9 +22,9 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "htmlhint": "^1.1.4",
-    "lint-staged": "^15.5.2",
-    "husky": "^8.0.0"
+    "htmlhint": "^1.7.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.5.2"
   },
   "lint-staged": {
     "assets/images/**/*.webp": "node tools/responsive-images.js",
