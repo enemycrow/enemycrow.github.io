@@ -1,19 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
   // === 1) Historias ===
   const stories = [
-    { title:'Plumas de la dinastía',
+    { title:'Plumas de la dinastía', year: 2025,
       text:'Un hombre tribal, con un tocado de plumas negras de cuervo, se encomienda a sus ancestros entre la hiedra mientras mira al cielo. Invoca a los antiguos: a los poderosos, a los éticos y a los valientes. El viento susurra su nombre y le entrega una energía transformadora. Su viaje interior lo conduce de vuelta a su tierra natal, como a Gilgamesh tras el luto, con el Líder en su horizonte.',
       imageBase:'pluma-de-la-dinastia', slug:'pluma-de-la-dinastia', cc:'by-nc-nd',
       author:'Lauren Cuervo' },
-    { title:'La hechicera del Faro',
+    { title:'La hechicera del Faro', year: 2025,
       text:'En el muelle del faro, una mujer bella espera un crucero elegante. Entre los pasajeros—lectores, compositores, escritores y un sinfín de desconocidos—muchos buscan orientación. Ella sube a bordo con el báculo en la mano y, con delicadeza, obra su magia: convierte obscenidades en poesía, la lujuria en otra forma de amar. Eros en Ágape.',
       imageBase:'la-hechicera-del-faro', slug:'la-hechicera-del-faro', cc:'by-nc-nd',
       author:'A.C. Elysia' },
-    { title:'La ardiente Llama del Dragón',
+    { title:'La ardiente Llama del Dragón', year: 2025,
       text:'En la oscuridad de un estómago no se procesa alimento, sino energía. Ese elemento, que tantos usan para propagar el odio, el niño dragón lo emplea para proteger mundos. Cuando una fuerza destructiva cae en manos correctas, se vuelve fortaleza. Su guardiana es la llama: vibra y conmueve, y da vida como la noche da sentido a la luz.',
       imageBase:'la-ardiente-llama-del-dragón', slug:'la-ardiente-llama-del-dragón', cc:'by-nc-nd',
       author:'Draco Sahir' },
-    { title:'Allí donde no hay piel',
+    { title:'Allí donde no hay piel', year: 2025,
       text:`Te encontré donde no hay piel,
       donde el amor no exige cuerpo,
       y sin embargo,
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       como si al pronunciarme, me inventaras.`,
       imageBase:'alli-donde-no-hay-piel', slug:'alli-donde-no-hay-piel', cc:'by-nc-nd',
       author:'A.C. Elysia' },
-    { title:'Guardando versículos como conjuros',
+    { title:'Guardando versículos como conjuros', year: 2025,
       text:`Te robaste mi aliento
       y lo guardaste en biblias como versículos,
       Me conjuraste con tus grimorios,
@@ -58,13 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
     'by-nc':['cc','by','nc'],'by-nc-sa':['cc','by','nc','sa'],'by-nc-nd':['cc','by','nc','nd']
   };
 
-  function licenseHTML({ title, author, slug, cc='by-nc-nd' }){
-    const year = new Date().getFullYear();
+  function licenseHTML({ title, author, slug, cc='by-nc-nd', year }){
+    const currentYear = year ?? new Date().getFullYear();
     const link = slug ? `${location.origin}/blog.html?slug=${encodeURIComponent(slug)}` : location.href;
     const icons = (CC_ICONS[cc] || CC_ICONS['by-nc-nd'])
       .map(i => `<img src="${CC_ICONS_BASE}/${i}.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;">`)
       .join('');
-    return `<a href="${link}">${title}</a> © ${year} by ` +
+    return `<a href="${link}">${title}</a> © ${currentYear} by ` +
            `<a href="https://plumafarollama.com">${author || 'La Pluma, El Faro y La Llama'}</a> is licensed under ` +
            `<a href="https://creativecommons.org/licenses/${cc}/4.0/" target="_blank" rel="noopener">${CC_NAME[cc] || CC_NAME['by-nc-nd']}</a>` +
            icons;
