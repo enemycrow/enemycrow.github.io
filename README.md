@@ -369,3 +369,41 @@ El proyecto incluye un script para generar páginas estáticas de blogs a partir
 ### Errores comunes
 - Si el archivo `posts.json` no está presente o tiene errores de formato, el script mostrará un mensaje de error.
 - Asegúrate de que las publicaciones tengan un campo `slug` único, ya que este se utiliza para nombrar los archivos HTML.
+
+## Automatizar generación incremental del blog (pre-commit)
+
+Si quieres que las páginas estáticas del blog se actualicen automáticamente cuando edits `posts.json`, el proyecto ya incluye una opción incremental y un helper para integrarlo en hooks de pre-commit.
+
+Resumen rápido:
+- `npm run blog:generate` — genera todas las páginas (modo completo).
+- `npm run blog:generate:inc` — genera solo las páginas que cambian (modo incremental).
+- `npm run blog:generate:staged` — atajo para ejecutar en modo "staged" (útil en hooks).
+
+Cómo funciona el modo incremental
+- Cuando ejecutas `node tools/generate-blog-pages.js --incremental`, el script comparará cada archivo HTML existente en `blog/` con la salida nueva. Solo sobrescribe los archivos cuyo contenido cambió. Esto mantiene los commits pequeños porque no reescribe páginas idénticas.
+- El modo por defecto (sin `--incremental`) vacía la carpeta `blog/` y genera todo de nuevo.
+
+Pre-commit (mini flujo recomendado)
+- El repositorio está preparado para usar `lint-staged` y `husky` (si los instalas) para ejecutar el generador antes de cada commit. La configuración actual ejecuta `tools/precommit-generate-blog.js` cuando `posts.json` cambia.
+
+Instalación (una vez por máquina de desarrollo)
+```powershell
+npm install
+npx husky install
+npx husky add .husky/pre-commit "npx lint-staged"
+```
+
+Notas importantes
+- `blog/` es una carpeta generada. Evita poner archivos manuales ahí porque el script podría sobrescribirlos (o borrarlos en modo completo).
+- `generate-blog-pages.js` re-escribe `posts.json` con un subconjunto de campos para asegurar consistencia. Haz backup si tienes campos extras que no quieras perder.
+
+Ejemplo de uso local
+```powershell
+# Generar todas las páginas
+npm run blog:generate
+
+# Generar solo cambios (rápido)
+npm run blog:generate:inc
+```
+
+Si quieres que cree automáticamente commits con los HTML generados en CI (por ejemplo GitHub Actions), puedo añadir un workflow de ejemplo que haga esto y empuje los cambios de vuelta. Dime si lo quieres y lo creo.

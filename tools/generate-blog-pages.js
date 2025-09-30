@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const PROJECT_ROOT = process.cwd();
 const POSTS_PATH = path.join(PROJECT_ROOT, 'posts.json');
@@ -22,6 +23,11 @@ function readPosts() {
     throw new Error(`No se pudo analizar posts.json: ${error.message}`);
   }
 }
+
+// Simple CLI flags handling
+const CLI_ARGS = process.argv.slice(2);
+const MODE_INCREMENTAL = CLI_ARGS.includes('--incremental') || CLI_ARGS.includes('--staged');
+const MODE_STAGED = CLI_ARGS.includes('--staged');
 
 function isFuturePost(post, referenceDate = new Date()) {
   if (!post || !post.fecha) return false;
@@ -426,6 +432,25 @@ ${contentHtml}
 }
 
 function writePostPages(posts) {
+  if (MODE_INCREMENTAL) {
+    if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+    let written = 0;
+    for (const post of posts) {
+      const html = buildHtml(post) + '\n';
+      const outPath = path.join(OUTPUT_DIR, `${post.slug}.html`);
+      if (fs.existsSync(outPath)) {
+        const existing = fs.readFileSync(outPath, 'utf8');
+        if (existing === html) continue; // no change
+      }
+      fs.writeFileSync(outPath, html, 'utf8');
+      written += 1;
+      console.log(`Escrito: ${outPath}`);
+    }
+    console.log(`Generadas/actualizadas ${written} páginas en ${OUTPUT_DIR} (modo incremental)`);
+    return;
+  }
+
+  // Default: clean and write all
   cleanOutputDir();
   for (const post of posts) {
     const html = buildHtml(post);
