@@ -23,14 +23,9 @@
   },
   "devDependencies": {
     "htmlhint": "^1.7.1",
-    "husky": "^8.0.3",
     "lint-staged": "^15.5.2"
   },
   "lint-staged": {
-    "assets/images/**/*.webp": "node tools/responsive-images.js",
-    "posts.json": [
-      "node tools/precommit-generate-blog.js",
-      "git add blog/ posts.json || true"
-    ]
+    "assets/images/**/*.webp": "node tools/responsive-images.js"
   }
 }

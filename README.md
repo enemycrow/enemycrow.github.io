@@ -9,22 +9,14 @@ Este repositorio contiene el sitio web de **La Pluma, el Faro y la Llama**, un p
   ```bash
   npm install -g firebase-tools
   ```
-
+  Si prefieres ejecutar el generador automáticamente antes de hacer commit tienes varias opciones:
 - Instalar las dependencias de PHP con [Composer](https://getcomposer.org/):
   ```bash
   composer install
   ```
 
 ## Desarrollo Local
-
-Para iniciar un servidor local con Firebase, ejecuta:
-
-```bash
-firebase serve
-```
-
-Este comando sirve el contenido del repositorio según `firebase.json`, para que puedas revisar los cambios antes de publicar.
-
+  Automatizar en CI (recomendado para equipos): crear un workflow que, al hacer push sobre `posts.json`, ejecute la generación y opcionalmente haga commit/push de `blog/` o despliegue.
 ## Despliegue
 
 Antes de publicar, ejecuta el script de versionado para regenerar los nombres con hash y actualizar las referencias en los archivos HTML y el service worker:
