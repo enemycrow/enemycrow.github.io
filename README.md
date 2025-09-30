@@ -376,13 +376,11 @@ Cómo funciona el modo incremental
 - El modo por defecto (sin `--incremental`) vacía la carpeta `blog/` y genera todo de nuevo.
 
 Pre-commit (mini flujo recomendado)
-- El repositorio está preparado para usar `lint-staged` y `husky` (si los instalas) para ejecutar el generador antes de cada commit. La configuración actual ejecuta `tools/precommit-generate-blog.js` cuando `posts.json` cambia.
+You can integrate lint-staged or other local git hooks if you want to run scripts before committing.
 
-Instalación (una vez por máquina de desarrollo)
+Instalación (opcional — sin hooks)
 ```powershell
 npm install
-npx husky install
-npx husky add .husky/pre-commit "npx lint-staged"
 ```
 
 Notas importantes
