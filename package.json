@@ -30,7 +30,7 @@
     "assets/images/**/*.webp": "node tools/responsive-images.js",
     "posts.json": [
       "node tools/precommit-generate-blog.js",
-      "git add blog/ posts.json || true"
+      "git add --all blog posts.json || true"
     ]
   }
 }
