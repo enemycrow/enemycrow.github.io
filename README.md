@@ -337,3 +337,35 @@ Este módulo te permite editar entradas del blog de forma local, sin necesidad d
    ```
 
 Con este flujo, puedes verificar la apariencia final de las entradas con tus propios estilos antes de hacer commit y publicar.
+
+## Generar páginas estáticas de blogs
+
+El proyecto incluye un script para generar páginas estáticas de blogs a partir del archivo `posts.json`. Sigue estos pasos para usarlo:
+
+### Requisitos previos
+- Asegúrate de tener Node.js instalado en tu sistema.
+- El archivo `posts.json` debe estar en la raíz del proyecto y contener los datos de las publicaciones del blog.
+
+### Pasos para generar las páginas
+1. Abre una terminal en la raíz del proyecto.
+2. Ejecuta el siguiente comando:
+   ```bash
+   node tools/generate-blog-pages.js
+   ```
+
+### Qué hace el script
+- Lee el archivo `posts.json`.
+- Filtra las publicaciones futuras (basadas en la fecha).
+- Genera archivos HTML estáticos para cada publicación en la carpeta `blog/`.
+- Actualiza el archivo `posts.json` con las URLs de las páginas generadas.
+
+### Salida esperada
+- Las páginas HTML se generarán en la carpeta `blog/`.
+- Verás un mensaje en la terminal indicando cuántas páginas se generaron, por ejemplo:
+  ```
+  Generadas 10 páginas en blog/
+  ```
+
+### Errores comunes
+- Si el archivo `posts.json` no está presente o tiene errores de formato, el script mostrará un mensaje de error.
+- Asegúrate de que las publicaciones tengan un campo `slug` único, ya que este se utiliza para nombrar los archivos HTML.
