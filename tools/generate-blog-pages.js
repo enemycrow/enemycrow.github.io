@@ -434,6 +434,11 @@ ${contentHtml}
 function writePostPages(posts) {
   if (MODE_INCREMENTAL) {
     if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+    const expectedFiles = new Set(
+      posts
+        .map(post => (post && post.slug ? `${post.slug}.html` : null))
+        .filter(Boolean)
+    );
     let written = 0;
     for (const post of posts) {
       const html = buildHtml(post) + '\n';
@@ -445,6 +450,18 @@ function writePostPages(posts) {
       fs.writeFileSync(outPath, html, 'utf8');
       written += 1;
       console.log(`Escrito: ${outPath}`);
+    }
+    const filesInOutput = fs.readdirSync(OUTPUT_DIR, { withFileTypes: true });
+    for (const entry of filesInOutput) {
+      if (!entry.isFile()) continue;
+      const { name } = entry;
+      if (!name.endsWith('.html')) continue;
+      if (expectedFiles.has(name)) continue;
+      const filePath = path.join(OUTPUT_DIR, name);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+        console.log(`Eliminado: ${filePath}`);
+      }
     }
     console.log(`Generadas/actualizadas ${written} páginas en ${OUTPUT_DIR} (modo incremental)`);
     return;
