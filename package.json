@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "htmlhint": "^1.7.1",
-    "husky": "^8.0.0",
+    "husky": "^8.0.3",
     "lint-staged": "^15.5.2"
   },
   "lint-staged": {
