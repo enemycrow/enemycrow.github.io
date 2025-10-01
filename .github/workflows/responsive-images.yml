@@ -7,12 +7,14 @@ on:
       - 'tools/responsive-images.js'
       - 'package.json'
       - 'package-lock.json'
+      - '.github/workflows/responsive-images.yml'
   push:
     paths:
       - 'assets/images/**'
       - 'tools/responsive-images.js'
       - 'package.json'
       - 'package-lock.json'
+      - '.github/workflows/responsive-images.yml'
 
 jobs:
   verify:
