@@ -36,8 +36,17 @@ jobs:
 
       - name: Ensure sharp native binaries for runner
         run: |
+          set -eo pipefail
           echo "Ensuring sharp native binaries are available for this runner..."
-          npm rebuild sharp --update-binary || npm rebuild sharp --build-from-source || npm install --include=optional sharp || true
+          if ! npm rebuild sharp --update-binary; then
+            echo "Prebuilt binary not found, installing linux x64 prebuilt packages..."
+            npm install --no-save @img/sharp-linux-x64 @img/sharp-libvips-linux-x64
+          fi
+          if ! node -e "require('sharp')"; then
+            echo "Falling back to building sharp from source..."
+            npm rebuild sharp --build-from-source
+          fi
+          node -e "require('sharp')"
 
       - name: Generate responsive images
         run: npm run responsive
