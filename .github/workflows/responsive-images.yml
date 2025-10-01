@@ -26,7 +26,18 @@ jobs:
           cache: 'npm'
 
       # Instala dependencias incluyendo las opcionales (como sharp en linux)
-      - run: npm ci --include=optional --no-audit --no-fund
+      - name: Install OS packages required to build sharp
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential pkg-config libvips-dev python3 ca-certificates
+
+      - name: Install node deps (including optional)
+        run: npm ci --include=optional --no-audit --no-fund
+
+      - name: Ensure sharp native binaries for runner
+        run: |
+          echo "Ensuring sharp native binaries are available for this runner..."
+          npm rebuild sharp --update-binary || npm rebuild sharp --build-from-source || npm install --include=optional sharp || true
 
       - name: Generate responsive images
         run: npm run responsive
