@@ -13,8 +13,8 @@
     "blog:generate": "node tools/generate-blog-pages.js",
     "blog:generate:inc": "node tools/generate-blog-pages.js --incremental",
     "blog:generate:staged": "node tools/generate-blog-pages.js --staged",
-    "seo": "npm run portfolio:generate && npm run blog:generate && node js/generate-sitemap.js"
-    ,"rotate-featured": "node tools/rotate-featured.js"
+    "seo": "npm run portfolio:generate && npm run blog:generate && node js/generate-sitemap.js",
+    "rotate-featured": "node tools/rotate-featured.js"
   },
   "keywords": [],
   "author": "",
