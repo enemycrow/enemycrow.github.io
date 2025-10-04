@@ -83,3 +83,6 @@ serviceAccount.json
 /firestore.indexes.json
 /firebase.rule
 .firebaserc
+
+# Configuración del editor
+.vscode/mcp.json
