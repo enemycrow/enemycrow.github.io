@@ -135,6 +135,14 @@ Para manejar publicaciones futuras sin exponerlas todavía en el blog, utiliza u
    - El segundo comando regenera `sitemap.xml` para reflejar las publicaciones recién expuestas.
 4. Guarda el _cron job_ y verifica en el panel que la próxima ejecución quede programada. Opcionalmente activa las notificaciones por correo para recibir el registro de salida del comando.
 
+##### Reporte semanal de reacciones
+
+- Programa un segundo _cron job_ semanal para enviar el resumen de reacciones recolectadas. El comando a ejecutar es:
+  ```bash
+  php tools/send-weekly-reactions-report.php
+  ```
+- Ejecuta el cron los viernes a las 20:00 (GMT-3) utilizando la expresión `0 20 * * 5`. De esta forma se calcula automáticamente el intervalo `[viernes anterior 20:00, viernes actual 20:00)` y el correo se envía al administrador configurado en SMTP.
+
 > **Nota:** Si prefieres usar PHP o Bash en lugar de Node.js, asegúrate de que el comando finalice con código de salida `0` para que Hostinger lo considere exitoso.
 
 #### Scripts de apoyo
