@@ -48,7 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
       Su aviso es terrorífico malaugurio,
       Su consecuencia, el Gran Diluvio.`,
       imageBase:'el-anuncio-del-gran-diluvio', slug:'el-anuncio-del-gran-diluvio', cc:'by-nc-nd',
-      author:'Lauren Cuervo' }
+      author:'Lauren Cuervo' },
+      { title:'Cinco versos antes del fuego', year: 2025,
+      text:`Oscuros pasajes de la eternidad
+      Apúrate
+      Que quiero ver tus ojos
+      Tú boca
+      Sentir tu piel
+      Morder tus labios.`,
+      imageBase:'cinco-versos-antes-del-fuego', slug:'cinco-versos-antes-del-fuego', cc:'by-nc-nd',
+      author:'Lauren Cuervo' },
   ];
 
   // === 2) DOM ===

@@ -1,11 +1,35 @@
 [
   {
+  "id": 71,
+  "titulo": "Una especie de calor silencioso",
+  "autor": "A.C. Elysia",
+  "fecha": "2025-10-29",
+  "categoria_temas": [
+    "Fragmentos Inéditos"
+  ],
+  "categoria_libros": [
+    "Cinco versos antes del fuego"
+  ],
+  "topicos": [
+    "Eros",
+    "Poesía",
+    "Tiempo"
+  ],
+  "tiempo": "3 min de lectura",
+  "fragmento": "Un poema breve donde el deseo se vuelve urgencia, y la piel se convierte en reloj.",
+  "fragmento_social": "Cinco versos que arden antes del beso. Un instante detenido en el filo del deseo. #LaurenCuervo #ACElysia",
+  "imagen": "CincoVersosAntesDelFuego-Post71.webp",
+  "slug": "cinco-versos-antes-del-fuego",
+  "contenido_html": "<p>Hay versos que no se piensan, se respiran. Este, de Lauren, ocurre como una exhalación antes de que algo cambie para siempre. Tiene la velocidad del pulso, el temblor del cuerpo que reconoce lo inevitable. Me hace pensar que hay momentos en los que el tiempo se contrae, como si quisiera darnos permiso para sentir más rápido.</p><p>Hay una ternura feroz en esa prisa: no es impaciencia, es miedo a perder la intensidad del ahora. Cuando alguien dice <em>apúrate</em>, no está pidiendo solo presencia, sino refugio. Es la súplica mínima de quien ya se ha entregado y sólo espera ser alcanzado por la misma fiebre.</p><p>Leerlo me deja un eco en la piel. Una especie de calor silencioso, como si el poema recordara algo que el cuerpo aún no ha olvidado. Quizás eso sea el fuego: no la llama visible, sino la memoria del tacto que nunca se apaga.</p><p>Si este texto encendió algo en ti, sigue recorriendo <em>La Pluma, el Faro y la Llama</em>. A veces, basta una palabra para volver a sentir.</p>",
+  "destacado": false
+  },
+  {
     "id": 70,
     "titulo": "Los personajes de Debacle Triangular: cuando la voluntad se vuelve trama",
     "autor": "Lauren Cuervo",
-    "fecha": "2025-10-04",
+    "fecha": "2025-09-28",
     "categoria_temas": [
-      "Debacle Triangular"
+      "Procesos Creativos"
     ],
     "categoria_libros": [
       "Debacle Triangular"
@@ -16,11 +40,11 @@
       "Conflicto"
     ],
     "tiempo": "5 min de lectura",
-    "fragmento": "Cinco voluntades en conflicto: Graznar, Selena, Hitsura, Alessandro y Dean nos preguntan cuánto pagaríamos por un futuro.",
-    "fragmento_social": "Cinco personajes, una pregunta: ¿qué precio pagarías por la supervivencia? #DebacleTriangular",
+    "fragmento": "Cinco voluntades en conflicto: Graznar, Selena, Hitsura, Alessandro, Dean y Sil'naya nos preguntan cuánto pagaríamos por un futuro.",
+    "fragmento_social": "Seis personajes, una pregunta: ¿qué precio pagarías por la supervivencia? #DebacleTriangular",
     "imagen": "DebacleTriangular-Post70.webp",
     "slug": "los-personajes-de-debacle-triangular",
-    "contenido_html": "<p>Hay una diferencia entre quienes pelean por ser recordados y quienes pelean para que otros puedan seguir viviendo. En <em>Debacle Triangular</em> traté de escribir personajes sin atajos morales, porque la trinchera no perdona las respuestas fáciles. Lo que sigue son pequeños apuntes sobre cinco voluntades que, juntas, intentan definir un mapa donde la lealtad, el cálculo y la conversión compiten por el día.</p><p><strong>Graznar Colérico</strong> nació como una idea de resistencia que supo ser también una amenaza. Tiene en su pecho una brújula hecha a golpes: sabe cuándo contener la furia y cuándo ofrecerla en pago por la seguridad de los suyos. Es un estratega con poeta escondido; su oscuridad no es ausencia de luz, sino una herramienta que teme usar demasiado. Con Selena encuentra su norte —no para dominarlas, sino para protegerlas— y allí aparece su dilema: liderar sin convertirse en aquello que combate.</p><p><strong>Selena</strong> es la apuesta improbable. Su poder no es la espada sino la rendición bien dispuesta: sabe que hacer bajar armas no es humillar, es salvar. Cree en la conversión como fuerza política. Esa fe la hace vulnerable, pero también tremendamente eficaz. Si Graznar es la mano que corta, Selena es la voz que enseña a dejarla caer.</p><p><strong>Hitsura Mirage</strong> ve el mundo como un sistema a optimizar. Para ella, los datos tienen más piedad que la retórica; la ética se convierte en un parámetro que ajusta según el resultado. Esa frialdad la hace peligrosa y fascinante: sus máquinas pueden inclinar batallas, pero también pueden olvidar que detrás de un número hay una vida. Con Alessandro encuentra financiación y laboratorio; con Graznar, un socio táctico que comprende su método, pero no siempre su costado humano.</p><p><strong>Alessandro Di Potere</strong> es la calma maquiavélica del poder: discursos que suenan decentes, gestos pulcros, contratos con cláusulas que nadie lee. Es el gestor del rumor, el que convierte el cinismo en gobernabilidad. Su ambición tiene fin práctico: orden y sostén, aunque el precio sea moralmente discutible.</p><p><strong>Dean Rith</strong> aplica la justicia como martillo: orden por medio del miedo. Su presencia congela, su moralidad no regala espacios. Es la respuesta visceral al caos, la voz que grita que la paz no admite concesiones. Frente a Selena su conflicto no es personal, es civilizatorio.</p><p><strong>Sil'naya (Сильная Женщина)</strong> es la ejecutora extrema: la crueldad eficaz que mantiene las líneas cuando la ideología falla. Sus guantes cuentan misiones; su silencio antes del golpe es juramento. Es la prueba viviente de que la brutalidad puede sostener un orden —hasta que ese orden se deslegitima por su propia violencia— y su lealtad empieza a resquebrajarse cuando el costo humano le exige reconciliación o huida.</p><p>Escribirlos me enseñó que el conflicto más profundo de <em>Debacle Triangular</em> no es territorial: es de medidas. ¿Cuánto sacrificio es tolerable para ganar un horizonte? ¿Se puede liderar sin perder la dignidad del otro? Cada personaje es una respuesta parcial —un espejo que rompe y refleja— y todos, en su forma defectuosa, miran hacia un mismo porvenir.</p><p>No hay héroes absolutos aquí. Hay quienes deciden qué precio pagar. Y el trabajo del lector es ordenar los juicios que yo propongo como preguntas abiertas. Porque la última trama no es política ni técnica: es humana. Y en esa humanidad, a veces, la mentira más grande es creer que sólo uno tiene la razón.</p>",
+    "contenido_html": "<p>Hay una diferencia entre quienes pelean por ser recordados y quienes pelean para que otros puedan seguir viviendo. En <em>Debacle Triangular</em> traté de escribir personajes sin atajos morales, porque la trinchera no perdona las respuestas fáciles. Lo que sigue son pequeños apuntes sobre cinco voluntades que, juntas, intentan definir un mapa donde la lealtad, el cálculo y la conversión compiten por el día.</p><p><strong>Graznar Colérico</strong> nació como una idea de resistencia que supo ser también una amenaza. Tiene en su pecho una brújula hecha a golpes: sabe cuándo contener la furia y cuándo ofrecerla en pago por la seguridad de los suyos. Es un estratega con poeta escondido; su oscuridad no es ausencia de luz, sino una herramienta que teme usar demasiado. Con Selena encuentra su norte —no para dominarlas, sino para protegerlas— y allí aparece su dilema: liderar sin convertirse en aquello que combate.</p><p><strong>Selena Lúmina</strong> es la apuesta improbable. Su poder no es la espada sino la rendición bien dispuesta: sabe que hacer bajar armas no es humillar, es salvar. Cree en la conversión como fuerza política. Esa fe la hace vulnerable, pero también tremendamente eficaz. Si Graznar es la mano que corta, Selena es la voz que enseña a dejarla caer.</p><p><strong>Hitsura Mirage</strong> ve el mundo como un sistema a optimizar. Para ella, los datos tienen más piedad que la retórica; la ética se convierte en un parámetro que ajusta según el resultado. Esa frialdad la hace peligrosa y fascinante: sus máquinas pueden inclinar batallas, pero también pueden olvidar que detrás de un número hay una vida. Con Alessandro encuentra financiación y laboratorio; con Graznar, un socio táctico que comprende su método, pero no siempre su costado humano.</p><p><strong>Alessandro Di Potere</strong> es la calma maquiavélica del poder: discursos que suenan decentes, gestos pulcros, contratos con cláusulas que nadie lee. Es el gestor del rumor, el que convierte el cinismo en gobernabilidad. Su ambición tiene fin práctico: orden y sostén, aunque el precio sea moralmente discutible.</p><p><strong>Dean Rith</strong> aplica la justicia como martillo: orden por medio del miedo. Su presencia congela, su moralidad no regala espacios. Es la respuesta visceral al caos, la voz que grita que la paz no admite concesiones. Frente a Selena su conflicto no es personal, es civilizatorio.</p><p><strong>Sil'naya Zhenshchina (Сильная Женщина)</strong> es la ejecutora extrema: la crueldad eficaz que mantiene las líneas cuando la ideología falla. Sus guantes cuentan misiones; su silencio antes del golpe es juramento. Es la prueba viviente de que la brutalidad puede sostener un orden —hasta que ese orden se deslegitima por su propia violencia— y su lealtad empieza a resquebrajarse cuando el costo humano le exige reconciliación o huida.</p><p>Escribirlos me enseñó que el conflicto más profundo de <em>Debacle Triangular</em> no es territorial: es de medidas. ¿Cuánto sacrificio es tolerable para ganar un horizonte? ¿Se puede liderar sin perder la dignidad del otro? Cada personaje es una respuesta parcial —un espejo que rompe y refleja— y todos, en su forma defectuosa, miran hacia un mismo porvenir.</p><p>No hay héroes absolutos aquí. Hay quienes deciden qué precio pagar. Y el trabajo del lector es ordenar los juicios que yo propongo como preguntas abiertas. Porque la última trama no es política ni técnica: es humana. Y en esa humanidad, a veces, la mentira más grande es creer que sólo uno tiene la razón.</p>",
     "destacado": false,
     "url": "blog/los-personajes-de-debacle-triangular.html"
   },
