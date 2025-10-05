@@ -1,27 +1,28 @@
 [
   {
-  "id": 71,
-  "titulo": "Una especie de calor silencioso",
-  "autor": "A.C. Elysia",
-  "fecha": "2025-10-29",
-  "categoria_temas": [
-    "Fragmentos Inéditos"
-  ],
-  "categoria_libros": [
-    "Cinco versos antes del fuego"
-  ],
-  "topicos": [
-    "Eros",
-    "Poesía",
-    "Tiempo"
-  ],
-  "tiempo": "3 min de lectura",
-  "fragmento": "Un poema breve donde el deseo se vuelve urgencia, y la piel se convierte en reloj.",
-  "fragmento_social": "Cinco versos que arden antes del beso. Un instante detenido en el filo del deseo. #LaurenCuervo #ACElysia",
-  "imagen": "CincoVersosAntesDelFuego-Post71.webp",
-  "slug": "cinco-versos-antes-del-fuego",
-  "contenido_html": "<p>Hay versos que no se piensan, se respiran. Este, de Lauren, ocurre como una exhalación antes de que algo cambie para siempre. Tiene la velocidad del pulso, el temblor del cuerpo que reconoce lo inevitable. Me hace pensar que hay momentos en los que el tiempo se contrae, como si quisiera darnos permiso para sentir más rápido.</p><p>Hay una ternura feroz en esa prisa: no es impaciencia, es miedo a perder la intensidad del ahora. Cuando alguien dice <em>apúrate</em>, no está pidiendo solo presencia, sino refugio. Es la súplica mínima de quien ya se ha entregado y sólo espera ser alcanzado por la misma fiebre.</p><p>Leerlo me deja un eco en la piel. Una especie de calor silencioso, como si el poema recordara algo que el cuerpo aún no ha olvidado. Quizás eso sea el fuego: no la llama visible, sino la memoria del tacto que nunca se apaga.</p><p>Si este texto encendió algo en ti, sigue recorriendo <em>La Pluma, el Faro y la Llama</em>. A veces, basta una palabra para volver a sentir.</p>",
-  "destacado": false
+    "id": 71,
+    "titulo": "Una especie de calor silencioso",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-10-29",
+    "categoria_temas": [
+      "Fragmentos Inéditos"
+    ],
+    "categoria_libros": [
+      "Cinco versos antes del fuego"
+    ],
+    "topicos": [
+      "Eros",
+      "Poesía",
+      "Tiempo"
+    ],
+    "tiempo": "3 min de lectura",
+    "fragmento": "Un poema breve donde el deseo se vuelve urgencia, y la piel se convierte en reloj.",
+    "fragmento_social": "Cinco versos que arden antes del beso. Un instante detenido en el filo del deseo. #LaurenCuervo #ACElysia",
+    "imagen": "CincoVersosAntesDelFuego-Post71.webp",
+    "slug": "cinco-versos-antes-del-fuego",
+    "contenido_html": "<p>Hay versos que no se piensan, se respiran. Este, de Lauren, ocurre como una exhalación antes de que algo cambie para siempre. Tiene la velocidad del pulso, el temblor del cuerpo que reconoce lo inevitable. Me hace pensar que hay momentos en los que el tiempo se contrae, como si quisiera darnos permiso para sentir más rápido.</p><p>Hay una ternura feroz en esa prisa: no es impaciencia, es miedo a perder la intensidad del ahora. Cuando alguien dice <em>apúrate</em>, no está pidiendo solo presencia, sino refugio. Es la súplica mínima de quien ya se ha entregado y sólo espera ser alcanzado por la misma fiebre.</p><p>Leerlo me deja un eco en la piel. Una especie de calor silencioso, como si el poema recordara algo que el cuerpo aún no ha olvidado. Quizás eso sea el fuego: no la llama visible, sino la memoria del tacto que nunca se apaga.</p><p>Si este texto encendió algo en ti, sigue recorriendo <em>La Pluma, el Faro y la Llama</em>. A veces, basta una palabra para volver a sentir.</p>",
+    "destacado": false,
+    "url": "blog/cinco-versos-antes-del-fuego.html"
   },
   {
     "id": 70,
