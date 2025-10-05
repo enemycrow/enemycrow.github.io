@@ -50,8 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
       imageBase:'el-anuncio-del-gran-diluvio', slug:'el-anuncio-del-gran-diluvio', cc:'by-nc-nd',
       author:'Lauren Cuervo' },
       { title:'Cinco versos antes del fuego', year: 2025,
-      text:`Oscuros pasajes de la eternidad
-      Apúrate
+      text:`Apúrate
       Que quiero ver tus ojos
       Tú boca
       Sentir tu piel
