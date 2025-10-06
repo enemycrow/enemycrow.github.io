@@ -367,14 +367,84 @@
       }
     });
 
-    // Sugerencia inicial
-    push('bot', suggestions[Math.floor(Math.random() * suggestions.length)]);
-
     seedBtn.addEventListener('click', () => seed(true));
+    clearBtn.addEventListener('click', clearChat);
+    exportBtn.addEventListener('click', exportChat);
+    suggestBtn.addEventListener('click', suggestMessage);
+
+    function getLastBotMessage() {
+      const bots = history.querySelectorAll('.msg.bot');
+      return bots.length ? bots[bots.length - 1] : null;
+    }
+
+    function pickSuggestion(exclude) {
+      if (!suggestions.length) return '';
+      if (suggestions.length === 1) return suggestions[0];
+      let choice = suggestions[Math.floor(Math.random() * suggestions.length)];
+      let guard = suggestions.length * 2;
+      while (exclude && choice === exclude && guard-- > 0) {
+        choice = suggestions[Math.floor(Math.random() * suggestions.length)];
+      }
+      return choice;
+    }
 
     function seed(hello = false) {
-      if (hello) {
-        push('bot', suggestions[Math.floor(Math.random() * suggestions.length)]);
+      if (!hello) return;
+      const lastBot = getLastBotMessage();
+      const lastText = lastBot ? lastBot.textContent.trim() : '';
+      const idea = pickSuggestion(lastText);
+      if (!idea) return;
+      if (!lastText || idea !== lastText) {
+        push('bot', idea);
+      }
+    }
+
+    function clearChat() {
+      history.innerHTML = '';
+      input.value = '';
+      localStorage.removeItem('velvet_chat');
+      localStorage.removeItem('velvet_state');
+      seed(true);
+    }
+
+    function exportChat() {
+      const msgs = Array.from(history.querySelectorAll('.msg'));
+      if (!msgs.length) return;
+      const text = msgs.map(msg => {
+        const role = msg.classList.contains('user') ? 'Usuario' : 'Velvet';
+        return `${role}: ${msg.textContent.trim()}`;
+      }).join('\n\n');
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `velvet-chat-${new Date().toISOString().replace(/[:.]/g, '-')}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    function suggestMessage() {
+      if (!suggestions.length) return;
+      const lastBot = getLastBotMessage();
+      const lastText = lastBot ? lastBot.textContent.trim() : '';
+      const idea = pickSuggestion(lastText);
+      if (!idea) return;
+      if (!lastText || idea !== lastText) {
+        push('bot', idea);
+      }
+      input.value = idea;
+      const autoMode = input.dataset.autosend === 'true'
+        || (typeof window !== 'undefined' && (window.velvetAutoSend === true || window.velvetAutoMode === true));
+      if (autoMode) {
+        send();
+      } else {
+        input.focus();
+        if (typeof input.setSelectionRange === 'function') {
+          const len = idea.length;
+          input.setSelectionRange(len, len);
+        }
       }
     }
 
