@@ -120,9 +120,49 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
   }
-  const filterBtns = document.querySelectorAll('.blog-filter__button');
+  const worksDropdownRoot = document.querySelector('#blog-filter-works');
+  const topicsDropdownRoot = document.querySelector('#blog-filter-topics');
   const topicItems = document.querySelectorAll('.topics-grid .topic-item');
+  const topicItemsMap = new Map();
+  topicItems.forEach(item => {
+    const title = item.querySelector('h3');
+    if (!title) return;
+    const name = title.textContent.trim();
+    const normalized = normalizeText(name);
+    if (normalized) {
+      topicItemsMap.set(normalized, item);
+    }
+  });
+  const filterState = { work: null, topic: null };
   let allPosts = [];
+  let worksDropdown;
+  let topicsDropdown;
+  let openDropdownInstance = null;
+
+  function closeOpenDropdown(targetInstance) {
+    if (openDropdownInstance && (!targetInstance || openDropdownInstance !== targetInstance)) {
+      const instanceToClose = openDropdownInstance;
+      openDropdownInstance = null;
+      instanceToClose.close();
+    }
+  }
+
+  document.addEventListener('click', event => {
+    if (!openDropdownInstance) return;
+    if (!openDropdownInstance.root.contains(event.target)) {
+      closeOpenDropdown();
+    }
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && openDropdownInstance) {
+      const { toggle } = openDropdownInstance;
+      closeOpenDropdown();
+      if (toggle) {
+        toggle.focus();
+      }
+    }
+  });
 
   function slugify(text) {
     return text
@@ -132,6 +172,360 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
   }
+
+  function normalizeText(text) {
+    if (typeof text !== 'string') return '';
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .trim();
+  }
+
+  function getTopicIcon(topic) {
+    const key = normalizeText(topic);
+    if (!key) return '';
+    if (key.startsWith('poesi')) return 'fa-pen-nib';
+    if (key.startsWith('juego')) return 'fa-dice';
+    if (key.includes('dramaturg')) return 'fa-masks-theater';
+    if (key.includes('poema')) return 'fa-pen-nib';
+    return '';
+  }
+
+  function collectUniqueWorks(posts) {
+    const works = new Map();
+    posts.forEach(post => {
+      if (!Array.isArray(post.categoria_libros)) return;
+      post.categoria_libros.forEach(libro => {
+        if (typeof libro !== 'string') return;
+        const trimmed = libro.trim();
+        if (!trimmed) return;
+        const key = normalizeText(trimmed);
+        if (!works.has(key)) {
+          works.set(key, trimmed);
+        }
+      });
+    });
+    return Array.from(works.values()).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
+  }
+
+  function collectUniqueTopics(posts) {
+    const topics = new Map();
+    posts.forEach(post => {
+      if (!Array.isArray(post.topicos)) return;
+      post.topicos.forEach(raw => {
+        if (typeof raw !== 'string') return;
+        raw
+          .split(',')
+          .map(t => t.trim())
+          .filter(Boolean)
+          .forEach(topic => {
+            const key = normalizeText(topic);
+            if (key && !topics.has(key)) {
+              topics.set(key, topic);
+            }
+          });
+      });
+    });
+    return Array.from(topics.values()).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
+  }
+
+  function syncTopicItems(activeTopic, fallbackItem) {
+    const normalized = activeTopic ? normalizeText(activeTopic) : null;
+    topicItems.forEach(item => item.classList.remove('active'));
+    if (normalized && topicItemsMap.has(normalized)) {
+      topicItemsMap.get(normalized).classList.add('active');
+    } else if (normalized && fallbackItem) {
+      fallbackItem.classList.add('active');
+    }
+  }
+
+  function applyFilters() {
+    let posts = allPosts.slice();
+    if (filterState.work) {
+      const normalizedWork = normalizeText(filterState.work);
+      posts = posts.filter(post => Array.isArray(post.categoria_libros) && post.categoria_libros.some(libro => normalizeText(libro) === normalizedWork));
+    }
+    if (filterState.topic) {
+      const normalizedTopic = normalizeText(filterState.topic);
+      posts = posts.filter(post =>
+        Array.isArray(post.topicos) &&
+        post.topicos.some(raw =>
+          typeof raw === 'string' &&
+          raw
+            .split(',')
+            .map(t => normalizeText(t.trim()))
+            .some(t => t === normalizedTopic)
+        )
+      );
+    }
+    filteredPosts = posts;
+    renderPage(1);
+  }
+
+  function resetFilters() {
+    filterState.work = null;
+    filterState.topic = null;
+    if (worksDropdown) {
+      worksDropdown.setValue(null);
+    }
+    if (topicsDropdown) {
+      topicsDropdown.setValue(null);
+    }
+    syncTopicItems(null);
+    applyFilters();
+  }
+
+  let dropdownIdCounter = 0;
+
+  function createFilterDropdown(rootEl, { placeholder, allLabel, onSelect, getFallbackOption }) {
+    if (!rootEl) return null;
+    const toggle = rootEl.querySelector('.filter-dropdown__toggle');
+    const menu = rootEl.querySelector('.filter-dropdown__menu');
+    if (!toggle || !menu) return null;
+
+    let options = [];
+    let currentValue = null;
+    let labelNode = toggle.querySelector('.filter-dropdown__label') || toggle.querySelector('.filter-dropdown__placeholder');
+    const caretNode = toggle.querySelector('.filter-dropdown__caret');
+    const resolveFallback = typeof getFallbackOption === 'function' ? getFallbackOption : null;
+
+    dropdownIdCounter += 1;
+    if (!toggle.id) {
+      toggle.id = `${rootEl.id || 'filter-dropdown'}-toggle-${dropdownIdCounter}`;
+    }
+    if (!menu.id) {
+      menu.id = `${rootEl.id || 'filter-dropdown'}-menu-${dropdownIdCounter}`;
+    }
+
+    toggle.setAttribute('aria-controls', menu.id);
+    menu.setAttribute('aria-labelledby', toggle.id);
+    menu.hidden = true;
+
+    function resolveOption(value) {
+      if (value === null || value === undefined || value === '') {
+        return null;
+      }
+      const found = options.find(opt => opt.value === value);
+      if (found) {
+        return found;
+      }
+      if (resolveFallback) {
+        const fallback = resolveFallback(value);
+        if (fallback && typeof fallback.label === 'string') {
+          return {
+            value: fallback.value || value,
+            label: fallback.label,
+            icon: fallback.icon || ''
+          };
+        }
+      }
+      return { value, label: value, icon: '' };
+    }
+
+    function ensureLabelNode(useLabel) {
+      const desiredClass = useLabel ? 'filter-dropdown__label' : 'filter-dropdown__placeholder';
+      if (!labelNode || !labelNode.classList.contains(desiredClass)) {
+        if (labelNode) {
+          labelNode.remove();
+        }
+        labelNode = document.createElement('span');
+        labelNode.className = desiredClass;
+        toggle.insertBefore(labelNode, caretNode || null);
+      } else {
+        labelNode.className = desiredClass;
+      }
+      labelNode.innerHTML = '';
+      return labelNode;
+    }
+
+    function updateToggle(option) {
+      const node = ensureLabelNode(!!option);
+      if (option && option.icon) {
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'filter-dropdown__icon';
+        iconSpan.setAttribute('aria-hidden', 'true');
+        iconSpan.innerHTML = `<i class="fas ${option.icon}"></i>`;
+        node.appendChild(iconSpan);
+      }
+      const textSpan = document.createElement('span');
+      textSpan.textContent = option ? option.label : placeholder;
+      node.appendChild(textSpan);
+      toggle.classList.toggle('has-value', !!option);
+    }
+
+    function updateMenuSelection() {
+      const buttons = menu.querySelectorAll('.filter-dropdown__option');
+      buttons.forEach(btn => {
+        const value = btn.dataset.value || '';
+        const isSelected = currentValue ? value === currentValue : value === '';
+        btn.classList.toggle('is-selected', isSelected);
+        btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+      });
+    }
+
+    function updateSelection(value, { emit = false } = {}) {
+      const normalizedValue = value === undefined || value === '' ? null : value;
+      currentValue = normalizedValue;
+      const option = resolveOption(normalizedValue);
+      updateToggle(option);
+      updateMenuSelection();
+      if (emit && typeof onSelect === 'function') {
+        onSelect(currentValue, option ? option.label : null, option);
+      }
+    }
+
+    function renderOption(option, isAllOption = false) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'filter-dropdown__option';
+      if (isAllOption) {
+        button.classList.add('filter-dropdown__option--all');
+        button.dataset.value = '';
+      } else {
+        button.dataset.value = option.value;
+      }
+      button.setAttribute('role', 'option');
+
+      const labelSpan = document.createElement('span');
+      labelSpan.className = 'filter-dropdown__label';
+
+      if (!isAllOption && option.icon) {
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'filter-dropdown__icon';
+        iconSpan.setAttribute('aria-hidden', 'true');
+        iconSpan.innerHTML = `<i class="fas ${option.icon}"></i>`;
+        labelSpan.appendChild(iconSpan);
+      }
+
+      const textSpan = document.createElement('span');
+      textSpan.textContent = isAllOption ? allLabel : option.label;
+      labelSpan.appendChild(textSpan);
+
+      button.appendChild(labelSpan);
+
+      button.addEventListener('click', () => {
+        if (isAllOption) {
+          updateSelection(null, { emit: true });
+        } else {
+          updateSelection(option.value, { emit: true });
+        }
+        closeOpenDropdown();
+        toggle.focus();
+      });
+
+      return button;
+    }
+
+    function renderOptions() {
+      menu.innerHTML = '';
+      menu.appendChild(renderOption({ value: '', label: allLabel }, true));
+      options.forEach(option => {
+        menu.appendChild(renderOption(option, false));
+      });
+      updateMenuSelection();
+    }
+
+    function setOptions(newOptions) {
+      options = Array.isArray(newOptions)
+        ? newOptions.map(opt => ({
+            value: opt.value,
+            label: opt.label,
+            icon: opt.icon || ''
+          }))
+        : [];
+      renderOptions();
+      const option = resolveOption(currentValue);
+      updateToggle(option);
+    }
+
+    function open() {
+      if (openDropdownInstance && openDropdownInstance !== api) {
+        closeOpenDropdown();
+      }
+      rootEl.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      menu.hidden = false;
+      openDropdownInstance = api;
+    }
+
+    function close() {
+      if (!rootEl.classList.contains('is-open')) {
+        return;
+      }
+      rootEl.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.hidden = true;
+      if (openDropdownInstance === api) {
+        openDropdownInstance = null;
+      }
+    }
+
+    toggle.addEventListener('click', event => {
+      event.preventDefault();
+      if (rootEl.classList.contains('is-open')) {
+        close();
+      } else {
+        open();
+      }
+    });
+
+    toggle.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        close();
+      }
+    });
+
+    const api = {
+      root: rootEl,
+      toggle,
+      setOptions,
+      setValue: value => updateSelection(value, { emit: false }),
+      getValue: () => currentValue,
+      close
+    };
+
+    updateToggle(null);
+    renderOptions();
+
+    return api;
+  }
+
+  function buildFilterDropdowns(posts) {
+    const works = collectUniqueWorks(posts).map(work => ({ value: work, label: work }));
+    const topics = collectUniqueTopics(posts).map(topic => ({ value: topic, label: topic, icon: getTopicIcon(topic) }));
+
+    if (worksDropdown) {
+      worksDropdown.setOptions(works);
+    }
+
+    if (topicsDropdown) {
+      topicsDropdown.setOptions(topics);
+    }
+  }
+
+  worksDropdown = createFilterDropdown(worksDropdownRoot, {
+    placeholder: 'Todas las obras',
+    allLabel: 'Todas las obras',
+    getFallbackOption: value => ({ value, label: value }),
+    onSelect(value, label) {
+      filterState.work = label || null;
+      applyFilters();
+      scrollToPosts();
+    }
+  });
+
+  topicsDropdown = createFilterDropdown(topicsDropdownRoot, {
+    placeholder: 'Todos los tópicos',
+    allLabel: 'Todos los tópicos',
+    getFallbackOption: value => ({ value, label: value, icon: getTopicIcon(value) }),
+    onSelect(value, label) {
+      filterState.topic = label || null;
+      syncTopicItems(filterState.topic);
+      applyFilters();
+      scrollToPosts();
+    }
+  });
 
   const reactionFields = ['toco','sumergirme','personajes','mundo','lugares'];
 
@@ -352,46 +746,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePagination();
   }
 
-  function aplicarFiltro(filter) {
-    if (filter === 'all') {
-      filteredPosts = allPosts;
-      renderPage(1);
-      return;
-    }
-    // Filtro por autor/categoría (clase)
-    const filtered = allPosts.filter(post => {
-      let authorSlug;
-      if (post.autor === 'A.C. Elysia') authorSlug = 'elysia';
-      else if (post.autor === 'Lauren Cuervo') authorSlug = 'lauren';
-      else if (post.autor === 'Draco Sahir') authorSlug = 'sahir';
-      else authorSlug = slugify(post.autor.split(' ')[0]);
-      const themeSlug = post.categoria_temas[0] ? slugify(post.categoria_temas[0]) : 'general';
-      return post && (
-        authorSlug === filter ||
-        themeSlug === filter ||
-        (themeSlug.includes('procesos-creativos') && filter === 'process') ||
-        (themeSlug.includes('fragmentos-ineditos') && filter === 'fragments')
-      );
-    });
-    filteredPosts = filtered;
-    renderPage(1);
-  }
-
-  function aplicarFiltroTopico(topico) {
-    const filtro = topico.trim();
-    const filtered = allPosts.filter(post =>
-      Array.isArray(post.topicos) &&
-      post.topicos.some(t =>
-        t
-          .split(',')
-          .map(s => s.trim())
-          .includes(filtro)
-      )
-    );
-    filteredPosts = filtered;
-    renderPage(1);
-  }
-
   fetch('posts.json')
     .then(res => res.json())
     .then(data => {
@@ -408,6 +762,14 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch(e) {}
       allPosts = availablePosts;
       filteredPosts = allPosts;
+      buildFilterDropdowns(allPosts);
+      if (worksDropdown) {
+        worksDropdown.setValue(filterState.work);
+      }
+      if (topicsDropdown) {
+        topicsDropdown.setValue(filterState.topic);
+      }
+      syncTopicItems(filterState.topic);
       if (featuredContainer) {
         (async () => {
           // Decide how many featured slots to show. Default to 3, but can be
@@ -444,44 +806,35 @@ document.addEventListener('DOMContentLoaded', () => {
           updateReactionCounts();
         })();
       }
-      renderPage(1);
-      const active = document.querySelector('.blog-filter__button.active');
-      if (active) aplicarFiltro(active.getAttribute('data-filter'));
+      applyFilters();
     })
     .catch(err => console.error('Error al cargar posts.json', err));
-
-  if (filterBtns.length > 0) {
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', function () {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        aplicarFiltro(this.getAttribute('data-filter'));
-        scrollToPosts();
-      });
-    });
-  }
 
   // Filtro por tópico al hacer clic en un topic-item
   if (topicItems.length > 0) {
     topicItems.forEach(item => {
       item.addEventListener('click', function (e) {
         e.preventDefault();
-        const isActive = this.classList.contains('active');
-        // Quitar selección previa
-        topicItems.forEach(i => i.classList.remove('active'));
-        // Quitar selección de los filtros de arriba
-        filterBtns.forEach(b => b.classList.remove('active'));
-        if (isActive) {
-          // Si ya estaba activo, quitar filtro y mostrar todos
-          filteredPosts = allPosts;
-          renderPage(1);
+        const h3 = this.querySelector('h3');
+        if (!h3) return;
+        const label = h3.textContent.trim();
+        const normalized = normalizeText(label);
+        const currentlyActive = filterState.topic && normalizeText(filterState.topic) === normalized;
+        closeOpenDropdown();
+        if (currentlyActive) {
+          filterState.topic = null;
+          syncTopicItems(null);
+          if (topicsDropdown) {
+            topicsDropdown.setValue(null);
+          }
         } else {
-          this.classList.add('active');
-          const h3 = this.querySelector('h3');
-          if (h3) {
-            aplicarFiltroTopico(h3.textContent.trim());
+          filterState.topic = label;
+          syncTopicItems(label, this);
+          if (topicsDropdown) {
+            topicsDropdown.setValue(label);
           }
         }
+        applyFilters();
         scrollToPosts();
       });
     });
