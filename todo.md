@@ -37,3 +37,18 @@
 - [X] Adquirir dominio y montar el sitio en el hosting
 - [X] Desplegar sitio web
 - [ ] Presentar al usuario
+
+## Velvet Console (juego/agente IA)
+- [ ] Conectar los botones de sesión:
+  - Reiniciar debe vaciar el historial y limpiar `localStorage`.
+  - Exportar tiene que generar y descargar un `.txt` con la charla.
+  - "Abrir con guiño" debe inyectar un mensaje inicial sin duplicar entradas previas.
+  - Sugerir frase debe colocar la sugerencia en el textarea (o enviarla al chat) según el modo definido.
+- [ ] Hacer que la intensidad afecte las respuestas (p.ej., elegir banco de frases o matices) en lugar de solo mostrarse en el encabezado.
+- [ ] Personalizar los bancos de respuestas según la persona elegida, no únicamente por tono.
+- [ ] Añadir detección de peticiones fuera de los límites y respuestas de redirección elegantes.
+- [ ] Implementar integración con un backend/LLM real para reemplazar las réplicas estáticas cuando sea posible.
+- [ ] Completar el sistema de animaciones y retroalimentación visual:
+  - Definir estados de la mascota (expresiones, intensidad, persona) y transiciones entre ellos.
+  - Sincronizar la animación de aparición de mensajes y cambios de intensidad/persona.
+  - Añadir microinteracciones (hover, pulsaciones, loaders) acordes a la estética actual.
