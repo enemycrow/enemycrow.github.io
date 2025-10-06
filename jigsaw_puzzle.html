@@ -1,467 +1,948 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Rompecabezas — La Pluma, el Faro y la Llama</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>El Puzzle en el Faro | La Pluma, el Faro y la Llama</title>
+<meta name="description" content="Rompecabezas deslizante inspirado en el Faro de Elysia. Mezcla piezas y explora las fotografías del Diario para crear tu propio reto." />
+
+<!-- Fuentes de Google -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+<!-- Font Awesome para iconos -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.7.2/css/all.css" />
+
+<!-- Tabler Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+<!-- Estilos CSS -->
+<link rel="stylesheet" href="css/styles.889d2a038d.css" />
+<link rel="stylesheet" href="css/custom-overrides.css" />
+
+<link rel="canonical" href="https://plumafarollama.com/jigsaw_puzzle.html" />
+<meta name="robots" content="index, follow" />
+
 <style>
-  :root{
-    --bg:#f6f7fb;
-    --card:#ffffff;
-    --accent:#6b21a8;
-    --muted:#6b7280;
-    --size:480px;
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --accent: #6b21a8;
+    --muted: #6b7280;
+    --size: 480px;
   }
-  *{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
-  body{margin:0;background:linear-gradient(180deg,#fbfbff,var(--bg));color:#111;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:28px;}
-  .app{width:100%;max-width:1100px;}
-  header{display:flex;gap:16px;align-items:center;margin-bottom:18px}
-  .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#fef3c7,#fed7aa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#7c3aed}
-  h1{font-size:20px;margin:0}
-  .layout{display:grid;grid-template-columns:1fr 320px;gap:18px}
-  .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 20px rgba(16,24,40,0.06)}
-  /* board */
-  .board-wrap{display:flex;flex-direction:column;gap:12px;align-items:center}
-  .board{width:var(--size);height:var(--size);position:relative;border-radius:10px;overflow:hidden;background:#ddd;touch-action:manipulation}
-  .tile{position:absolute;box-shadow:inset 0 -2px 0 rgba(0,0,0,0.06);border-radius:6px;border:1px solid rgba(255,255,255,0.08);cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:600}
-  .tile.blank{background:transparent;cursor:default}
-  .controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .btn{padding:8px 12px;border-radius:8px;border:0;cursor:pointer;background:var(--accent);color:#fff;font-weight:600}
-  .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(107,33,168,0.12)}
-  .small{font-size:13px;padding:6px 8px}
-  .meta{display:flex;gap:12px;align-items:center;color:var(--muted);font-size:14px}
-  label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-  input[type="text"], select, input[type="file"]{width:100%;padding:8px;border-radius:8px;border:1px solid #e6e6f0;background:#fff}
-  .help{font-size:12px;color:#7b7b88}
-  .win{padding:10px 12px;border-radius:10px;background:linear-gradient(90deg,#ecfccb,#bbf7d0);color:#064e3b;font-weight:700;display:inline-block}
-  footer{margin-top:14px;text-align:center;color:#8b8b96;font-size:12px}
-  @media (max-width:980px){ .layout{grid-template-columns:1fr} :root{--size:360px} .board{width:var(--size);height:var(--size)} }
+
+  * {
+    box-sizing: border-box;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, #fbfbff, var(--bg));
+    color: #0b1220;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  }
+
+  header .logo,
+  header .logo:visited,
+  header .nav-links a,
+  header .nav-links a:visited,
+  header .mobile-menu,
+  header .mobile-menu i {
+    color: #f8fafc;
+  }
+
+  header .nav-links a:hover,
+  header .nav-links a:focus {
+    color: #e0e7ff;
+  }
+
+  header .nav-links a::after {
+    background-color: rgba(224, 231, 255, 0.6);
+  }
+
+  header .nav-links a.active {
+    color: #c4b5fd;
+  }
+
+  main.lab-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+    position: relative;
+  }
+
+  .puzzle-lab__container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .puzzle-lab__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .puzzle-lab__header h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
+    margin: 0 0 0.5rem;
+  }
+
+  .puzzle-lab__header p {
+    margin: 0 auto;
+    max-width: 620px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .app {
+    width: 100%;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 18px;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 16px 45px rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(6px);
+  }
+
+  .board-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .board {
+    width: var(--size);
+    height: var(--size);
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #d1d5db;
+    touch-action: manipulation;
+  }
+
+  .tile {
+    position: absolute;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.06);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .tile.blank {
+    background: transparent;
+    cursor: default;
+  }
+
+  .controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 0;
+    cursor: pointer;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(107, 33, 168, 0.22);
+  }
+
+  .btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .btn.ghost {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid rgba(107, 33, 168, 0.18);
+    box-shadow: none;
+  }
+
+  .btn.small {
+    font-size: 0.88rem;
+    padding: 8px 12px;
+  }
+
+  .meta {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .meta strong {
+    color: #111827;
+  }
+
+  label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  select,
+  input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #e6e6f0;
+    background: #f8f9fb;
+  }
+
+  .help {
+    font-size: 0.85rem;
+    color: #6b7280;
+  }
+
+  .win {
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #ecfccb, #bbf7d0);
+    color: #064e3b;
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  .puzzle-note {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.9rem;
+  }
+
+  .puzzle-blog-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  #blogImageInfo {
+    min-height: 1.5em;
+  }
+
+  .obra-license {
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  .obra-license a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .obra-license img {
+    max-width: 1.1em;
+    max-height: 1.1em;
+    margin-left: 0.2em;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 1100px) {
+    :root {
+      --size: 420px;
+    }
+  }
+
+  @media (max-width: 980px) {
+    :root {
+      --size: 360px;
+    }
+
+    .layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .card {
+      padding: 18px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    :root {
+      --size: 320px;
+    }
+
+    main.lab-main {
+      padding: 3rem 1rem;
+    }
+
+    .puzzle-lab__header p {
+      font-size: 0.95rem;
+    }
+  }
 </style>
 </head>
 <body>
-  <div class="app">
-    <header>
-      <div class="logo">♣️</div>
-      <div>
-        <h1>Rompecabezas — La Pluma, el Faro y la Llama</h1>
-        <div class="help">Sube una imagen o pega una URL, elige dificultad y juega. 💜</div>
+<!-- Preloader con animación -->
+<div class="preloader">
+  <div class="preloader-icon">
+    <i class="fas fa-feather-alt" aria-hidden="true"></i>
+  </div>
+</div>
+
+<!-- Navegación -->
+<header>
+  <div class="container">
+    <nav class="navbar">
+      <a href="index.html" class="logo" data-sylvora-latido="true">
+        <span class="logo-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></span>
+        La Pluma, el Faro y la Llama
+      </a>
+      <div class="mobile-menu" role="button" aria-label="Abrir menú">
+        <i class="fas fa-bars" aria-hidden="true"></i>
       </div>
-    </header>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="about.html">Sobre Nosotros</a></li>
+        <li><a href="portfolio.html" class="active">Obras</a></li>
+        <li><a href="blog.html">Diario</a></li>
+        <li><a href="services.html">Servicios</a></li>
+        <li><a href="shop.html">Tienda</a></li>
+        <li><a href="contact.html">Contacto</a></li>
+        <li><a href="donate.html" class="btn btn-donate">Donar</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-    <div class="layout">
-      <div class="card">
-        <div class="board-wrap">
-          <div style="display:flex;gap:10px;align-items:center;width:100%;justify-content:space-between;margin-bottom:4px">
-            <div class="meta">
-              <div>Tiempo: <strong id="time">00:00</strong></div>
-              <div>Movimientos: <strong id="moves">0</strong></div>
+<main class="lab-main puzzle-lab">
+  <div class="puzzle-lab__container">
+    <div class="puzzle-lab__header">
+      <h1>El Puzzle en el Faro</h1>
+      <p>
+        Un rompecabezas deslizante que toma sus imágenes directamente del Diario de Creación. 
+        Cambia de fotografía, elige la dificultad y deja que el Faro guíe tus manos pieza a pieza.
+      </p>
+    </div>
+
+    <div class="app" role="application" aria-label="El Puzzle en el Faro, rompecabezas deslizante">
+      <div class="layout">
+        <section class="card" aria-label="Tablero del rompecabezas">
+          <div class="board-wrap">
+            <div style="display:flex;gap:10px;align-items:center;width:100%;justify-content:space-between;margin-bottom:4px">
+              <div class="meta">
+                <div>Tiempo: <strong id="time">00:00</strong></div>
+                <div>Movimientos: <strong id="moves">0</strong></div>
+              </div>
+              <div id="status" class="" aria-live="polite"></div>
             </div>
-            <div id="status" class=""></div>
-          </div>
 
-          <div id="board" class="board" aria-label="Tablero del rompecabezas"></div>
+            <div id="board" class="board"></div>
 
-          <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-            <button id="shuffleBtn" class="btn small">Mezclar</button>
-            <button id="resetBtn" class="btn ghost small">Colocar orden</button>
-            <select id="sizeSelect" style="width:120px;padding:8px;border-radius:8px;border:1px solid #e6e6f0">
-              <option value="3">3 × 3 (fácil)</option>
-              <option value="4" selected>4 × 4 (medio)</option>
-              <option value="5">5 × 5 (difícil)</option>
-              <option value="6">6 × 6 (experto)</option>
-            </select>
-            <button id="solvePreview" class="btn ghost small" title="Puesta en orden visual (sin resolverlo paso a paso)">Mostrar solución</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div>
-            <label for="imgUrl">Pegar URL de imagen</label>
-            <input id="imgUrl" type="text" placeholder="https://...jpg (recomiendo cuadrada)">
-          </div>
-
-          <div>
-            <label for="imgFile">O subir imagen</label>
-            <input id="imgFile" type="file" accept="image/*">
-            <div class="help">Sugerencia: usa imágenes cuadradas o personajes centrados.</div>
-          </div>
-
-          <div>
-            <label>Opciones</label>
-            <div style="display:flex;gap:8px">
-              <button id="useDefault" class="btn small">Imagen por defecto</button>
-              <button id="shareBtn" class="btn ghost small" title="Copia URL con tamaño y estado (local)">Compartir/Guardar</button>
+            <div class="controls" style="margin-top: 8px;">
+              <button id="shuffleBtn" class="btn small" type="button">Mezclar</button>
+              <button id="resetBtn" class="btn ghost small" type="button">Colocar orden</button>
+              <select id="sizeSelect" aria-label="Elegir dificultad">
+                <option value="3">3 × 3 (fácil)</option>
+                <option value="4" selected>4 × 4 (medio)</option>
+                <option value="5">5 × 5 (difícil)</option>
+                <option value="6">6 × 6 (experto)</option>
+              </select>
+              <button id="solvePreview" class="btn ghost small" type="button" title="Puesta en orden visual (sin resolverlo paso a paso)">Mostrar solución</button>
             </div>
           </div>
+        </section>
 
-          <div>
-            <label>Records (local)</label>
-            <div id="records" class="help">Aún no hay records.</div>
-          </div>
+        <section class="card" aria-label="Controles adicionales del rompecabezas">
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div>
+              <label for="blogImageBtn">Fotos del Diario</label>
+              <div class="puzzle-blog-controls">
+                <button id="blogImageBtn" class="btn small" type="button" disabled>Siguiente foto del diario</button>
+                <span id="blogImageInfo" class="help" aria-live="polite">Cargando fotos del diario…</span>
+              </div>
+            </div>
 
-          <div style="border-top:1px dashed #eee;padding-top:8px">
-            <div class="help">Características: mezcla siempre resoluble, compatible mobile (tap) y escritorio (click).</div>
+            <div>
+              <label for="imgUrl">Pegar URL de imagen</label>
+              <input id="imgUrl" type="text" placeholder="https://...jpg (recomiendo cuadrada)" />
+            </div>
+
+            <div>
+              <label for="imgFile">O subir imagen</label>
+              <input id="imgFile" type="file" accept="image/*" />
+              <div class="help">Sugerencia: usa imágenes cuadradas o personajes centrados.</div>
+            </div>
+
+            <div>
+              <label>Opciones</label>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button id="useDefault" class="btn small" type="button">Imagen por defecto</button>
+                <button id="shareBtn" class="btn ghost small" type="button" title="Copia URL con tamaño y estado (local)">Compartir/Guardar</button>
+              </div>
+            </div>
+
+            <div>
+              <label>Records (local)</label>
+              <div id="records" class="help">Aún no hay records.</div>
+            </div>
+
+            <div style="border-top:1px dashed #eee;padding-top:8px">
+              <div class="help">Características: mezcla siempre resoluble, compatible móvil y escritorio, y sincronizada con el Diario.</div>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
 
-    <footer class="help">Hecho con ❤ para Corbeau — Nova Estelle Carminé</footer>
+    <p class="puzzle-note">Hecho con ❤ para Corbeau — Nova Estelle Carminé.</p>
+
+    <section class="obra-license">
+      <p>
+        “El Puzzle en el Faro” por <a href="https://plumafarollama.com/">Lauren Cuervo</a> se distribuye bajo 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+        <img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" />
+        <img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" />
+        <img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" />
+        <img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" />
+      </p>
+    </section>
   </div>
+</main>
 
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <span class="logo-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></span>
+        La Pluma, el Faro y la Llama
+      </div>
+
+      <div class="footer-social">
+        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+        <a href="#" class="social-icon" aria-label="Goodreads"><i class="fab fa-goodreads" aria-hidden="true"></i></a>
+      </div>
+
+      <div class="footer-newsletter">
+        <h3>Suscríbete al newsletter</h3>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Tu correo electrónico" required />
+          <button type="submit" class="btn btn-lauren">Suscribir</button>
+        </form>
+      </div>
+
+      <div class="footer-nav">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="about.html">Sobre Nosotros</a></li>
+          <li><a href="portfolio.html">Obras</a></li>
+          <li><a href="blog.html">Diario</a></li>
+          <li><a href="services.html">Servicios</a></li>
+          <li><a href="shop.html">Tienda</a></li>
+          <li><a href="contact.html">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-copyright">
+        <p>&copy; 2025 La Pluma, el Faro y la Llama. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts generales -->
+<script defer src="js/main.d9fb968dc8.js"></script>
 <script>
-/* Rompecabezas deslizante en un archivo.
-   Características: tamaño dinámico, mezcla resoluble, imagen por URL o archivo, contador tiempo/movimientos, aviso al ganar.
-*/
+(() => {
+  /* ---------- Helper utils ---------- */
+  function range(n){ return Array.from({length:n},(_,i)=>i); }
 
-/* ---------- Helper utils ---------- */
-function range(n){ return Array.from({length:n},(_,i)=>i); }
-
-function isSolvable(tiles, size){
-  const arr = tiles.filter(v=>v!==null);
-  let inv=0;
-  for(let i=0;i<arr.length;i++){
-    for(let j=i+1;j<arr.length;j++){
-      if(arr[i] > arr[j]) inv++;
-    }
-  }
-  if(size % 2 === 1) return inv % 2 === 0;
-  const blankIndex = tiles.indexOf(null);
-  const blankRowFromBottom = size - Math.floor(blankIndex / size);
-  return (blankRowFromBottom % 2 === 0) ? (inv % 2 === 1) : (inv % 2 === 0);
-}
-
-function shuffleSolvable(size){
-  const total = size*size;
-  let tiles = range(total-1).concat([null]);
-  do {
-    // Fisher-Yates
-    for(let i=tiles.length-1;i>0;i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [tiles[i],tiles[j]]=[tiles[j],tiles[i]];
-    }
-  } while(!isSolvable(tiles,size) || isSolved(tiles));
-  return tiles;
-}
-
-function isSolved(tiles){
-  for(let i=0;i<tiles.length;i++){
-    const last = tiles.length-1;
-    if(i===last && tiles[i]===null) continue;
-    if(tiles[i] !== i) return false;
-  }
-  return true;
-}
-
-/* ---------- DOM references ---------- */
-const boardEl = document.getElementById('board');
-const timeEl = document.getElementById('time');
-const movesEl = document.getElementById('moves');
-const statusEl = document.getElementById('status');
-const sizeSelect = document.getElementById('sizeSelect');
-const shuffleBtn = document.getElementById('shuffleBtn');
-const resetBtn = document.getElementById('resetBtn');
-const imgUrlInput = document.getElementById('imgUrl');
-const imgFileInput = document.getElementById('imgFile');
-const useDefaultBtn = document.getElementById('useDefault');
-const recordsEl = document.getElementById('records');
-const shareBtn = document.getElementById('shareBtn');
-const solvePreviewBtn = document.getElementById('solvePreview');
-
-/* ---------- State ---------- */
-let size = parseInt(sizeSelect.value,10);
-let tiles = [];
-let moves = 0;
-let timer = null;
-let seconds = 0;
-let running = false;
-let boardPixelSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--size')) || 480;
-let imgSrc = 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80&auto=format&fit=crop';
-
-/* ---------- Timer ---------- */
-function startTimer(){
-  if(running) return;
-  running = true;
-  timer = setInterval(()=> {
-    seconds++;
-    updateTime();
-  },1000);
-}
-function stopTimer(){
-  running = false;
-  if(timer) clearInterval(timer);
-  timer = null;
-}
-function resetTimer(){
-  stopTimer();
-  seconds = 0;
-  updateTime();
-}
-function updateTime(){
-  const mm = String(Math.floor(seconds/60)).padStart(2,'0');
-  const ss = String(seconds%60).padStart(2,'0');
-  timeEl.textContent = mm + ":" + ss;
-}
-
-/* ---------- Board rendering ---------- */
-function calcTileDimensions(){
-  // responsive: board width equals CSS var --size or computed width
-  const style = getComputedStyle(boardEl);
-  const w = boardEl.clientWidth;
-  return Math.floor(w / size);
-}
-
-function renderBoard(){
-  boardEl.innerHTML = '';
-  const tilePx = calcTileDimensions();
-  boardEl.style.height = boardEl.style.width = (tilePx * size) + 'px';
-  const total = size * size;
-  // background sizing uses the total board pixel dimension
-  const bgW = tilePx * size;
-  tiles.forEach((val,i) => {
-    const r = Math.floor(i / size);
-    const c = i % size;
-    const left = c * tilePx;
-    const top = r * tilePx;
-    const el = document.createElement('button');
-    el.className = 'tile';
-    el.style.width = tilePx + 'px';
-    el.style.height = tilePx + 'px';
-    el.style.left = left + 'px';
-    el.style.top = top + 'px';
-    el.setAttribute('data-index', i);
-    if(val === null){
-      el.classList.add('blank');
-      el.innerHTML = '';
-    } else {
-      // background-position so piece shows correct fragment
-      const pieceRow = Math.floor(val / size);
-      const pieceCol = val % size;
-      el.style.backgroundImage = `url("${imgSrc}")`;
-      el.style.backgroundSize = `${bgW}px ${bgW}px`;
-      const posX = - pieceCol * tilePx;
-      const posY = - pieceRow * tilePx;
-      el.style.backgroundPosition = `${posX}px ${posY}px`;
-      el.style.border = '1px solid rgba(255,255,255,0.06)';
-      el.title = 'Pieza ' + (val + 1);
-      // optional label for debugging: el.textContent = (val+1);
-    }
-    el.addEventListener('click', onTileClick);
-    boardEl.appendChild(el);
-  });
-}
-
-function onTileClick(e){
-  const idx = parseInt(e.currentTarget.getAttribute('data-index'),10);
-  if(tiles[idx] === null) return;
-  const blank = tiles.indexOf(null);
-  const r = Math.floor(idx/size), c = idx % size;
-  const br = Math.floor(blank/size), bc = blank % size;
-  const isNeighbor = (r === br && Math.abs(c - bc) === 1) || (c === bc && Math.abs(r - br) === 1);
-  if(!isNeighbor) return;
-  // swap
-  [tiles[idx], tiles[blank]] = [tiles[blank], tiles[idx]];
-  moves++;
-  movesEl.textContent = moves;
-  if(!running) startTimer();
-  renderBoard();
-  if(isSolved(tiles)){
-    stopTimer();
-    statusEl.innerHTML = '<span class="win">¡Resuelto! 🎉</span>';
-    trySaveRecord();
-  } else {
-    statusEl.innerHTML = '';
-  }
-}
-
-/* ---------- Controls ---------- */
-function resetToOrdered(){
-  tiles = range(size*size - 1).concat([null]);
-  moves = 0;
-  movesEl.textContent = moves;
-  resetTimer();
-  statusEl.innerHTML = '';
-  renderBoard();
-}
-
-function shuffleAndStart(){
-  tiles = shuffleSolvable(size);
-  moves = 0;
-  movesEl.textContent = moves;
-  resetTimer();
-  startTimer();
-  statusEl.innerHTML = '';
-  renderBoard();
-}
-
-sizeSelect.addEventListener('change', ()=>{
-  size = parseInt(sizeSelect.value,10);
-  resetToOrdered();
-});
-
-shuffleBtn.addEventListener('click', ()=> shuffleAndStart());
-resetBtn.addEventListener('click', ()=> resetToOrdered());
-
-imgUrlInput.addEventListener('change', ()=>{
-  const v = imgUrlInput.value.trim();
-  if(!v) return;
-  loadImage(v, (ok) => {
-    if(ok){
-      imgSrc = v;
-      renderBoard();
-    } else alert('No se pudo cargar la imagen. Verifica la URL.');
-  });
-});
-
-imgFileInput.addEventListener('change', (ev)=>{
-  const file = ev.target.files?.[0];
-  if(!file) return;
-  const url = URL.createObjectURL(file);
-  imgSrc = url;
-  // slight delay to ensure it's usable as background
-  setTimeout(()=> renderBoard(), 60);
-});
-
-useDefaultBtn.addEventListener('click', ()=> {
-  imgSrc = 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80&auto=format&fit=crop';
-  imgUrlInput.value = imgSrc;
-  renderBoard();
-});
-
-shareBtn.addEventListener('click', ()=>{
-  // simple state string (size + moves + seconds + encoded tiles)
-  const payload = {
-    size, moves, seconds, tiles
-  };
-  const s = encodeURIComponent(btoa(JSON.stringify(payload)));
-  const shareUrl = location.href.split('#')[0] + '#p=' + s;
-  navigator.clipboard?.writeText(shareUrl).then(()=> {
-    alert('URL copiada al portapapeles. Puedes pegarla para compartir o guardar.');
-  }).catch(()=> {
-    prompt('Copia esta URL:', shareUrl);
-  });
-});
-
-solvePreviewBtn.addEventListener('click', ()=>{
-  // show ordered board for 1.8s as preview (no solving steps)
-  const prev = tiles.slice();
-  tiles = range(size*size - 1).concat([null]);
-  renderBoard();
-  setTimeout(()=> {
-    tiles = prev;
-    renderBoard();
-  },1800);
-});
-
-/* ---------- Persistence records (localStorage) ---------- */
-function tryLoadRecords(){
-  const k = localStorage.getItem('puzzle_records');
-  if(!k) return [];
-  try { return JSON.parse(k) } catch(e){ return []; }
-}
-function trySaveRecord(){
-  if(!isSolved(tiles)) return;
-  const rec = tryLoadRecords();
-  const entry = {size, moves, time: seconds, when: new Date().toISOString()};
-  rec.push(entry);
-  // keep best per size by time (asc)
-  const best = rec.filter(r=>r.size===size).sort((a,b)=> (a.time - b.time))[0];
-  localStorage.setItem('puzzle_records', JSON.stringify(rec));
-  updateRecordsUI();
-  // friendly alert
-  setTimeout(()=> alert(`¡Felicidades! Rompecabezas resuelto en ${moves} movimientos — ${timeEl.textContent}`), 120);
-}
-function updateRecordsUI(){
-  const rec = tryLoadRecords();
-  if(rec.length===0){ recordsEl.textContent = 'Aún no hay records.'; return; }
-  // show best per size
-  const grouped = {};
-  rec.forEach(r => {
-    if(!grouped[r.size]) grouped[r.size]=[];
-    grouped[r.size].push(r);
-  });
-  let html = '';
-  for(const s in grouped){
-    const best = grouped[s].sort((a,b)=> a.time - b.time)[0];
-    html += `Mejor (${s}×${s}): ${formatSec(best.time)} — ${best.moves} mov — ${new Date(best.when).toLocaleDateString()}<br>`;
-  }
-  recordsEl.innerHTML = html;
-}
-function formatSec(sec){
-  const mm = String(Math.floor(sec/60)).padStart(2,'0');
-  const ss = String(sec%60).padStart(2,'0');
-  return mm + ':' + ss;
-}
-
-/* ---------- Image loader check ---------- */
-function loadImage(url, cb){
-  const img = new Image();
-  img.crossOrigin = "anonymous";
-  img.onload = ()=> cb(true);
-  img.onerror = ()=> cb(false);
-  img.src = url;
-}
-
-/* ---------- Resize handling ---------- */
-let resizeTimer;
-window.addEventListener('resize', ()=> {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(()=> renderBoard(), 120);
-});
-
-/* ---------- Init ---------- */
-function init(){
-  size = parseInt(sizeSelect.value,10);
-  imgSrc = imgUrlInput.value.trim() || imgSrc;
-  resetToOrdered();
-  updateRecordsUI();
-  // if hash with state present, try restore
-  if(location.hash.startsWith('#p=')){
-    try{
-      const payload = JSON.parse(atob(decodeURIComponent(location.hash.slice(3))));
-      if(payload && payload.size){
-        sizeSelect.value = String(payload.size);
-        size = payload.size;
-        tiles = payload.tiles;
-        moves = payload.moves || 0;
-        seconds = payload.seconds || 0;
-        movesEl.textContent = moves;
-        updateTime();
-        renderBoard();
+  function isSolvable(tiles, size){
+    const arr = tiles.filter(v=>v!==null);
+    let inv=0;
+    for(let i=0;i<arr.length;i++){
+      for(let j=i+1;j<arr.length;j++){
+        if(arr[i] > arr[j]) inv++;
       }
-    }catch(e){}
+    }
+    if(size % 2 === 1) return inv % 2 === 0;
+    const blankIndex = tiles.indexOf(null);
+    const blankRowFromBottom = size - Math.floor(blankIndex / size);
+    return (blankRowFromBottom % 2 === 0) ? (inv % 2 === 1) : (inv % 2 === 0);
   }
-}
 
-init();
+  function shuffleSolvable(size){
+    const total = size*size;
+    let tiles = range(total-1).concat([null]);
+    do {
+      for(let i=tiles.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [tiles[i],tiles[j]]=[tiles[j],tiles[i]];
+      }
+    } while(!isSolvable(tiles,size) || isSolved(tiles));
+    return tiles;
+  }
 
-/* ---------- accessibility: keyboard arrows to move blank ---------- */
-document.addEventListener('keydown',(e)=>{
-  if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)) return;
-  const blank = tiles.indexOf(null);
-  const br = Math.floor(blank/size), bc = blank % size;
-  let target = null;
-  if(e.key === 'ArrowUp'){ // move tile down into blank (blank up => swap with below tile)
-    const rr = br + 1;
-    if(rr < size) target = rr * size + bc;
-  } else if(e.key === 'ArrowDown'){
-    const rr = br - 1;
-    if(rr >= 0) target = rr * size + bc;
-  } else if(e.key === 'ArrowLeft'){
-    const cc = bc + 1;
-    if(cc < size) target = br * size + cc;
-  } else if(e.key === 'ArrowRight'){
-    const cc = bc - 1;
-    if(cc >= 0) target = br * size + cc;
+  function isSolved(tiles){
+    for(let i=0;i<tiles.length;i++){
+      const last = tiles.length-1;
+      if(i===last && tiles[i]===null) continue;
+      if(tiles[i] !== i) return false;
+    }
+    return true;
   }
-  if(target !== null){
-    // simulate click on tile index target
-    const node = boardEl.querySelector(`[data-index="${target}"]`);
-    if(node) node.click();
+
+  const boardEl = document.getElementById('board');
+  const timeEl = document.getElementById('time');
+  const movesEl = document.getElementById('moves');
+  const statusEl = document.getElementById('status');
+  const sizeSelect = document.getElementById('sizeSelect');
+  const shuffleBtn = document.getElementById('shuffleBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const imgUrlInput = document.getElementById('imgUrl');
+  const imgFileInput = document.getElementById('imgFile');
+  const useDefaultBtn = document.getElementById('useDefault');
+  const recordsEl = document.getElementById('records');
+  const shareBtn = document.getElementById('shareBtn');
+  const solvePreviewBtn = document.getElementById('solvePreview');
+  const blogImageBtn = document.getElementById('blogImageBtn');
+  const blogImageInfo = document.getElementById('blogImageInfo');
+
+  let size = parseInt(sizeSelect.value,10);
+  let tiles = [];
+  let moves = 0;
+  let timer = null;
+  let seconds = 0;
+  let running = false;
+  let imgSrc = 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80&auto=format&fit=crop';
+  let blogImages = [];
+  let blogIndex = -1;
+
+  function startTimer(){
+    if(running) return;
+    running = true;
+    timer = setInterval(()=> {
+      seconds++;
+      updateTime();
+    },1000);
   }
-});
+
+  function stopTimer(){
+    running = false;
+    if(timer) clearInterval(timer);
+    timer = null;
+  }
+
+  function resetTimer(){
+    stopTimer();
+    seconds = 0;
+    updateTime();
+  }
+
+  function updateTime(){
+    const mm = String(Math.floor(seconds/60)).padStart(2,'0');
+    const ss = String(seconds%60).padStart(2,'0');
+    timeEl.textContent = mm + ":" + ss;
+  }
+
+  function calcTileDimensions(){
+    const tileSize = Math.floor(boardEl.clientWidth / size);
+    return tileSize > 0 ? tileSize : Math.floor(parseInt(getComputedStyle(document.documentElement).getPropertyValue('--size'),10)/size);
+  }
+
+  function renderBoard(){
+    boardEl.innerHTML = '';
+    const tilePx = calcTileDimensions();
+    const boardPixels = tilePx * size;
+    boardEl.style.width = boardPixels + 'px';
+    boardEl.style.height = boardPixels + 'px';
+
+    tiles.forEach((val,i) => {
+      const r = Math.floor(i / size);
+      const c = i % size;
+      const left = c * tilePx;
+      const top = r * tilePx;
+      const el = document.createElement('button');
+      el.className = 'tile';
+      el.style.width = tilePx + 'px';
+      el.style.height = tilePx + 'px';
+      el.style.left = left + 'px';
+      el.style.top = top + 'px';
+      el.setAttribute('data-index', i);
+      el.type = 'button';
+      if(val === null){
+        el.classList.add('blank');
+        el.setAttribute('aria-hidden','true');
+      } else {
+        const pieceRow = Math.floor(val / size);
+        const pieceCol = val % size;
+        el.style.backgroundImage = `url("${imgSrc}")`;
+        el.style.backgroundSize = `${boardPixels}px ${boardPixels}px`;
+        el.style.backgroundPosition = `${-pieceCol * tilePx}px ${-pieceRow * tilePx}px`;
+        el.title = 'Pieza ' + (val + 1);
+      }
+      el.addEventListener('click', onTileClick);
+      boardEl.appendChild(el);
+    });
+  }
+
+  function onTileClick(e){
+    const idx = parseInt(e.currentTarget.getAttribute('data-index'),10);
+    if(tiles[idx] === null) return;
+    const blank = tiles.indexOf(null);
+    const r = Math.floor(idx/size), c = idx % size;
+    const br = Math.floor(blank/size), bc = blank % size;
+    const isNeighbor = (r === br && Math.abs(c - bc) === 1) || (c === bc && Math.abs(r - br) === 1);
+    if(!isNeighbor) return;
+    [tiles[idx], tiles[blank]] = [tiles[blank], tiles[idx]];
+    moves++;
+    movesEl.textContent = moves;
+    if(!running) startTimer();
+    renderBoard();
+    if(isSolved(tiles)){
+      stopTimer();
+      statusEl.innerHTML = '<span class="win">¡Resuelto! 🎉</span>';
+      trySaveRecord();
+    } else {
+      statusEl.innerHTML = '';
+    }
+  }
+
+  function resetToOrdered(){
+    tiles = range(size*size - 1).concat([null]);
+    moves = 0;
+    movesEl.textContent = moves;
+    resetTimer();
+    statusEl.innerHTML = '';
+    renderBoard();
+  }
+
+  function shuffleAndStart(){
+    tiles = shuffleSolvable(size);
+    moves = 0;
+    movesEl.textContent = moves;
+    resetTimer();
+    startTimer();
+    statusEl.innerHTML = '';
+    renderBoard();
+  }
+
+  sizeSelect.addEventListener('change', ()=>{
+    size = parseInt(sizeSelect.value,10);
+    resetToOrdered();
+  });
+
+  shuffleBtn.addEventListener('click', ()=> shuffleAndStart());
+  resetBtn.addEventListener('click', ()=> resetToOrdered());
+
+  imgUrlInput.addEventListener('change', ()=>{
+    const v = imgUrlInput.value.trim();
+    if(!v) return;
+    loadImage(v, (ok) => {
+      if(ok){
+        imgSrc = v;
+        resetToOrdered();
+      } else {
+        alert('No se pudo cargar la imagen. Verifica la URL.');
+      }
+    });
+  });
+
+  imgFileInput.addEventListener('change', (ev)=>{
+    const file = ev.target.files?.[0];
+    if(!file) return;
+    const url = URL.createObjectURL(file);
+    imgSrc = url;
+    setTimeout(()=> resetToOrdered(), 60);
+  });
+
+  useDefaultBtn.addEventListener('click', ()=> {
+    imgSrc = 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80&auto=format&fit=crop';
+    imgUrlInput.value = imgSrc;
+    resetToOrdered();
+  });
+
+  shareBtn.addEventListener('click', ()=>{
+    const payload = { size, moves, seconds, tiles, imgSrc };
+    const s = encodeURIComponent(btoa(JSON.stringify(payload)));
+    const shareUrl = location.href.split('#')[0] + '#p=' + s;
+    navigator.clipboard?.writeText(shareUrl).then(()=> {
+      alert('URL copiada al portapapeles. Puedes pegarla para compartir o guardar.');
+    }).catch(()=> {
+      prompt('Copia esta URL:', shareUrl);
+    });
+  });
+
+  solvePreviewBtn.addEventListener('click', ()=>{
+    const prev = tiles.slice();
+    tiles = range(size*size - 1).concat([null]);
+    renderBoard();
+    setTimeout(()=> {
+      tiles = prev;
+      renderBoard();
+    },1800);
+  });
+
+  function tryLoadRecords(){
+    const k = localStorage.getItem('puzzle_records');
+    if(!k) return [];
+    try { return JSON.parse(k); } catch(e){ return []; }
+  }
+
+  function trySaveRecord(){
+    if(!isSolved(tiles)) return;
+    const rec = tryLoadRecords();
+    const entry = {size, moves, time: seconds, when: new Date().toISOString()};
+    rec.push(entry);
+    const best = rec.filter(r=>r.size===size).sort((a,b)=> (a.time - b.time))[0];
+    localStorage.setItem('puzzle_records', JSON.stringify(rec));
+    updateRecordsUI();
+    setTimeout(()=> alert(`¡Felicidades! Rompecabezas resuelto en ${moves} movimientos — ${timeEl.textContent}`), 120);
+  }
+
+  function updateRecordsUI(){
+    const rec = tryLoadRecords();
+    if(rec.length===0){ recordsEl.textContent = 'Aún no hay records.'; return; }
+    const grouped = {};
+    rec.forEach(r => {
+      if(!grouped[r.size]) grouped[r.size]=[];
+      grouped[r.size].push(r);
+    });
+    let html = '';
+    for(const s in grouped){
+      const best = grouped[s].sort((a,b)=> a.time - b.time)[0];
+      html += `Mejor (${s}×${s}): ${formatSec(best.time)} — ${best.moves} mov — ${new Date(best.when).toLocaleDateString()}<br>`;
+    }
+    recordsEl.innerHTML = html;
+  }
+
+  function formatSec(sec){
+    const mm = String(Math.floor(sec/60)).padStart(2,'0');
+    const ss = String(sec%60).padStart(2,'0');
+    return mm + ':' + ss;
+  }
+
+  function loadImage(url, cb){
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = ()=> cb(true);
+    img.onerror = ()=> cb(false);
+    img.src = url;
+  }
+
+  function setBlogImage(index){
+    const entry = blogImages[index];
+    if(!entry){
+      return;
+    }
+    if(blogImageBtn){
+      blogImageBtn.disabled = true;
+    }
+    if(blogImageInfo){
+      blogImageInfo.textContent = 'Cargando foto…';
+    }
+    loadImage(entry.src, (ok)=>{
+      if(blogImageBtn){
+        blogImageBtn.disabled = false;
+      }
+      if(!ok){
+        if(blogImageInfo){
+          blogImageInfo.textContent = 'No se pudo cargar la foto del diario.';
+        }
+        return;
+      }
+      blogIndex = index;
+      imgSrc = entry.src;
+      imgUrlInput.value = entry.src;
+      resetToOrdered();
+      updateBlogInfo(blogIndex);
+    });
+  }
+
+  function updateBlogInfo(index){
+    if(!blogImageInfo) return;
+    const entry = blogImages[index];
+    if(!entry){
+      blogImageInfo.textContent = 'Pulsa el botón para cargar una foto del Diario.';
+      return;
+    }
+    const total = blogImages.length;
+    const meta = [];
+    if(entry.title) meta.push(entry.title);
+    if(entry.author) meta.push(entry.author);
+    blogImageInfo.textContent = `Foto ${index+1}/${total}${meta.length ? ': ' + meta.join(' — ') : ''}`;
+  }
+
+  async function loadBlogImages({ autoApply = true } = {}){
+    if(!blogImageInfo) return;
+    try {
+      blogImageInfo.textContent = 'Cargando fotos del diario…';
+      const res = await fetch('posts.json', { cache: 'no-store' });
+      if(!res.ok) throw new Error('Respuesta inválida');
+      const data = await res.json();
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      const seen = new Set();
+      blogImages = (Array.isArray(data) ? data : [])
+        .filter(post => post && post.imagen)
+        .filter(post => {
+          if(!post.fecha) return true;
+          const d = new Date(post.fecha);
+          if(Number.isNaN(d.getTime())) return true;
+          d.setHours(0,0,0,0);
+          return d <= today;
+        })
+        .map(post => {
+          const raw = String(post.imagen).trim();
+          const src = raw.startsWith('http') ? raw : `assets/images/blog/${raw}`;
+          return {
+            src,
+            title: post.titulo || '',
+            author: post.autor || ''
+          };
+        })
+        .filter(entry => {
+          if(seen.has(entry.src)) return false;
+          seen.add(entry.src);
+          return true;
+        });
+      if(blogImages.length === 0){
+        blogImageInfo.textContent = 'No se encontraron fotos disponibles en el Diario.';
+        if(blogImageBtn){
+          blogImageBtn.disabled = true;
+        }
+        return;
+      }
+      if(blogImageBtn){
+        blogImageBtn.disabled = false;
+      }
+      if(autoApply){
+        setBlogImage(0);
+      } else {
+        const match = blogImages.findIndex(entry => entry.src === imgSrc);
+        if(match >= 0){
+          blogIndex = match;
+          updateBlogInfo(match);
+        } else {
+          blogIndex = -1;
+          blogImageInfo.textContent = 'Pulsa el botón para sincronizar con una foto del Diario.';
+        }
+      }
+    } catch (err) {
+      console.error('Error al cargar posts.json', err);
+      blogImageInfo.textContent = 'No se pudieron cargar las fotos del Diario.';
+      if(blogImageBtn){
+        blogImageBtn.disabled = true;
+      }
+    }
+  }
+
+  if(blogImageBtn){
+    blogImageBtn.addEventListener('click', ()=>{
+      if(!blogImages.length) return;
+      const nextIndex = (blogIndex + 1) % blogImages.length;
+      setBlogImage(nextIndex);
+    });
+  }
+
+  let resizeTimer;
+  window.addEventListener('resize', ()=> {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(()=> renderBoard(), 120);
+  });
+
+  function init(){
+    size = parseInt(sizeSelect.value,10);
+    imgSrc = imgUrlInput.value.trim() || imgSrc;
+    resetToOrdered();
+    updateRecordsUI();
+    let restored = false;
+    if(location.hash.startsWith('#p=')){
+      try{
+        const payload = JSON.parse(atob(decodeURIComponent(location.hash.slice(3))));
+        if(payload && payload.size){
+          sizeSelect.value = String(payload.size);
+          size = payload.size;
+          tiles = payload.tiles;
+          moves = payload.moves || 0;
+          seconds = payload.seconds || 0;
+          if(payload.imgSrc) imgSrc = payload.imgSrc;
+          movesEl.textContent = moves;
+          updateTime();
+          renderBoard();
+          restored = true;
+        }
+      }catch(e){/* ignore */}
+    }
+
+    loadBlogImages({ autoApply: !restored });
+  }
+
+  init();
+
+  document.addEventListener('keydown',(e)=>{
+    if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)) return;
+    const blank = tiles.indexOf(null);
+    const br = Math.floor(blank/size), bc = blank % size;
+    let target = null;
+    if(e.key === 'ArrowUp'){
+      const rr = br + 1;
+      if(rr < size) target = rr * size + bc;
+    } else if(e.key === 'ArrowDown'){
+      const rr = br - 1;
+      if(rr >= 0) target = rr * size + bc;
+    } else if(e.key === 'ArrowLeft'){
+      const cc = bc + 1;
+      if(cc < size) target = br * size + cc;
+    } else if(e.key === 'ArrowRight'){
+      const cc = bc - 1;
+      if(cc >= 0) target = br * size + cc;
+    }
+    if(target !== null){
+      const node = boardEl.querySelector(`[data-index="${target}"]`);
+      if(node) node.click();
+    }
+  });
+})();
 </script>
 </body>
 </html>

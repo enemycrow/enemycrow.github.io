@@ -113,6 +113,13 @@ html {
   background-position: center;
 }
 
+/* Laboratorio – El Puzzle en el Faro */
+.puzzle-lab-img {
+  background-image: url('../assets/images/games/LuciernagadeElysia.webp');
+  background-size: cover;
+  background-position: center;
+}
+
 /* Estilo del tag "Laboratorio" */
 .lab-tag {
   background-color: var(--dorado-etereo);
@@ -146,6 +153,7 @@ html {
   .huevovolvio-img     { background-image: image-set(url('../assets/images/responsive/oeuvres/huevovolviocantar-400.webp') 1x, url('../assets/images/responsive/oeuvres/huevovolviocantar-800.webp') 2x); }
   .cristalito-img      { background-image: image-set(url('../assets/images/responsive/oeuvres/cristalito-400.webp') 1x, url('../assets/images/responsive/oeuvres/cristalito-800.webp') 2x); }
   .faro-lab-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/faro-elysia-400.webp') 1x, url('../assets/images/responsive/oeuvres/faro-elysia-800.webp') 2x); }
+  .puzzle-lab-img      { background-image: url('../assets/images/games/LuciernagadeElysia.webp'); }
   .bribones-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/reinadelosbribones-400.webp') 1x, url('../assets/images/responsive/oeuvres/reinadelosbribones-800.webp') 2x); }
   .linaje-img          { background-image: image-set(url('../assets/images/responsive/oeuvres/linaje-400.webp') 1x, url('../assets/images/responsive/oeuvres/linaje-800.webp') 2x); }
 }
