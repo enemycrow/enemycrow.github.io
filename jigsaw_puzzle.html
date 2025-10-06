@@ -521,7 +521,7 @@
     } while(!isSolvable(tiles,size) || isSolved(tiles));
     return tiles;
   }
-
+  
   function isSolved(tiles){
     for(let i=0;i<tiles.length;i++){
       const last = tiles.length-1;
@@ -761,10 +761,35 @@
     return mm + ':' + ss;
   }
 
-  function loadImage(url, cb){
+  function loadImage(url, cb, { square = false } = {}){
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.onload = ()=> cb(true);
+    img.onload = ()=> {
+      if(!square){
+        cb(true, url);
+        return;
+      }
+      try {
+        const nativeWidth = img.naturalWidth || img.width;
+        const nativeHeight = img.naturalHeight || img.height;
+        const size = Math.min(nativeWidth, nativeHeight);
+        if(!size){
+          throw new Error('Dimensiones inválidas para recorte');
+        }
+        const offsetX = (nativeWidth - size) / 2;
+        const offsetY = (nativeHeight - size) / 2;
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, offsetX, offsetY, size, size, 0, 0, size, size);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+        cb(true, dataUrl);
+      } catch (err) {
+        console.warn('No se pudo generar recorte cuadrado. Se usará la imagen original.', err);
+        cb(true, url);
+      }
+    };
     img.onerror = ()=> cb(false);
     img.src = url;
   }
@@ -774,13 +799,21 @@
     if(!entry){
       return;
     }
+    if(entry.cropped){
+      blogIndex = index;
+      imgSrc = entry.cropped;
+      imgUrlInput.value = entry.src;
+      resetToOrdered();
+      updateBlogInfo(blogIndex);
+      return;
+    }
     if(blogImageBtn){
       blogImageBtn.disabled = true;
     }
     if(blogImageInfo){
       blogImageInfo.textContent = 'Cargando foto…';
     }
-    loadImage(entry.src, (ok)=>{
+    loadImage(entry.src, (ok, processedSrc)=>{
       if(blogImageBtn){
         blogImageBtn.disabled = false;
       }
@@ -791,11 +824,13 @@
         return;
       }
       blogIndex = index;
-      imgSrc = entry.src;
+      const finalSrc = processedSrc || entry.src;
+      entry.cropped = finalSrc;
+      imgSrc = finalSrc;
       imgUrlInput.value = entry.src;
       resetToOrdered();
       updateBlogInfo(blogIndex);
-    });
+    }, { square: true });
   }
 
   function updateBlogInfo(index){
@@ -837,7 +872,8 @@
           return {
             src,
             title: post.titulo || '',
-            author: post.autor || ''
+            author: post.autor || '',
+            cropped: null
           };
         })
         .filter(entry => {
