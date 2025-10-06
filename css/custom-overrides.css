@@ -135,6 +135,216 @@ html {
 
 /* === Blog Entradas === */
 
+.blog-filter {
+  margin: 2rem 0 2.5rem;
+}
+
+.blog-filter__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.blog-filter__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1 1 260px;
+}
+
+.blog-filter__group--topics {
+  align-items: flex-end;
+}
+
+.blog-filter__title {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blanco-etereo);
+  font-weight: 600;
+  text-shadow: 0 0 18px rgba(74, 95, 193, 0.35);
+}
+
+.filter-dropdown {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+}
+
+.blog-filter__group--topics .filter-dropdown {
+  align-self: flex-end;
+}
+
+.filter-dropdown__toggle {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid rgba(154, 111, 255, 0.45);
+  background: linear-gradient(135deg, rgba(10, 17, 40, 0.92), rgba(107, 79, 158, 0.88));
+  color: var(--blanco-etereo);
+  font-size: 0.96rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 16px 32px rgba(10, 17, 40, 0.45);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, transform 0.2s ease;
+}
+
+.filter-dropdown__toggle:hover,
+.filter-dropdown__toggle:focus-visible {
+  border-color: rgba(154, 111, 255, 0.75);
+  background: linear-gradient(135deg, rgba(26, 35, 126, 0.92), rgba(154, 111, 255, 0.9));
+  box-shadow: 0 22px 40px rgba(74, 95, 193, 0.42);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.filter-dropdown__toggle .filter-dropdown__icon,
+.filter-dropdown__toggle .filter-dropdown__label,
+.filter-dropdown__toggle .filter-dropdown__placeholder {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.filter-dropdown__toggle .filter-dropdown__caret {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--violeta-pálido);
+  transition: transform 0.2s ease;
+}
+
+.filter-dropdown__toggle.has-value {
+  background: linear-gradient(135deg, rgba(107, 79, 158, 0.95), rgba(74, 95, 193, 0.95));
+  border-color: rgba(210, 173, 100, 0.45);
+}
+
+.filter-dropdown.is-open .filter-dropdown__caret {
+  transform: rotate(180deg);
+}
+
+.filter-dropdown__menu {
+  position: absolute;
+  inset: calc(100% + 0.5rem) 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(154, 111, 255, 0.35);
+  background: linear-gradient(145deg, rgba(10, 10, 10, 0.96), rgba(35, 21, 66, 0.96));
+  box-shadow: 0 28px 48px rgba(10, 10, 10, 0.6);
+  max-height: 18rem;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 30;
+}
+
+.filter-dropdown.is-open .filter-dropdown__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.filter-dropdown__option {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--blanco-etereo);
+  font-size: 0.94rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.18s ease;
+}
+
+.filter-dropdown__option:hover,
+.filter-dropdown__option:focus-visible {
+  background: rgba(154, 111, 255, 0.22);
+  color: var(--blanco-brillante);
+  transform: translateX(4px);
+  outline: none;
+}
+
+.filter-dropdown__option.is-selected {
+  background: rgba(154, 111, 255, 0.35);
+  color: var(--blanco-brillante);
+  font-weight: 600;
+}
+
+.filter-dropdown__option .filter-dropdown__icon {
+  width: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--violeta-pálido);
+}
+
+.filter-dropdown__option--all {
+  border-bottom: 1px solid rgba(154, 111, 255, 0.2);
+  margin-bottom: 0.25rem;
+  padding-bottom: 0.65rem;
+}
+
+.filter-dropdown__option--all + .filter-dropdown__option {
+  margin-top: 0.25rem;
+}
+
+.filter-dropdown__menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.filter-dropdown__menu::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(154, 111, 255, 0.75), rgba(74, 95, 193, 0.75));
+  border-radius: 999px;
+}
+
+.filter-dropdown__menu::-webkit-scrollbar-track {
+  background: rgba(10, 10, 10, 0.35);
+  border-radius: 999px;
+}
+
+@media (max-width: 768px) {
+  .blog-filter {
+    margin: 1.5rem 0 2rem;
+  }
+
+  .blog-filter__container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .blog-filter__group {
+    width: 100%;
+  }
+
+  .blog-filter__group--topics {
+    align-items: flex-start;
+  }
+
+  .blog-filter__group--topics .filter-dropdown {
+    align-self: stretch;
+  }
+
+  .filter-dropdown {
+    max-width: 100%;
+  }
+}
+
 @media screen and (orientation: portrait) and (max-width: 600px),
        screen and (orientation: landscape) and (max-height: 500px) {
   .jesuita-img         { background-image: image-set(url('../assets/images/responsive/oeuvres/jesuitadelvino-400.webp') 1x, url('../assets/images/responsive/oeuvres/jesuitadelvino-800.webp') 2x); }
