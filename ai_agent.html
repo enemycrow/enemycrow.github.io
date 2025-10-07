@@ -71,7 +71,7 @@
       border:1px solid rgba(255,255,255,.14);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      display:grid; grid-template-rows: auto 1fr auto; overflow:hidden;
+      display:grid; grid-template-rows: auto 1fr auto auto; overflow:hidden;
     }
     .chat-head{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.08)}
     .persona{display:flex; align-items:center; gap:10px}
@@ -81,6 +81,13 @@
     .msg.user{justify-self:end; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.16)}
     .msg.bot{justify-self:start; background:rgba(155,92,255,.14); border:1px solid rgba(155,92,255,.28)}
     .msg small{opacity:.7; display:block; margin-top:6px; font-size:11px}
+    .status{padding:8px 16px; border-top:1px solid rgba(255,255,255,.08); font-size:13px; color:var(--muted); display:flex; align-items:center; gap:8px; min-height:32px}
+    .status[hidden]{display:none}
+    .status::before{content:''; width:14px; height:14px; border-radius:50%; border:2px solid transparent; display:none}
+    .status[data-state="loading"]{color:var(--text)}
+    .status[data-state="loading"]::before{display:inline-block; border-color:rgba(255,255,255,.25); border-top-color:var(--accent2); animation:spin .8s linear infinite}
+    .status[data-state="error"]{color:var(--warn)}
+    .status[data-state="error"]::before{display:none}
     .input{display:flex; gap:8px; padding:12px; border-top:1px solid rgba(255,255,255,.08)}
     textarea{
       flex:1; min-height:44px; max-height:120px; resize:vertical;
@@ -112,6 +119,7 @@
     @keyframes float{0%,100%{transform:translateZ(0) translateY(0)}50%{transform:translateZ(12px) translateY(-6px)}}
     @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.02)}}
     @keyframes blink{0%,97%,100%{transform:scaleY(1)}98%{transform:scaleY(0.08)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
@@ -228,6 +236,7 @@
         </div>
       </div>
       <div class="history" id="history"></div>
+      <div class="status" id="status" aria-live="polite" hidden></div>
       <div class="input">
         <textarea id="input" placeholder="Escribe aquí… (Enter para enviar)" ></textarea>
         <button id="send" class="primary">Enviar</button>
@@ -251,8 +260,13 @@
     const exportBtn = el('export');
     const suggestBtn = el('suggest');
     const seedBtn = el('seed');
+    const status = el('status');
 
     let tone = 'tender';
+
+    const REMOTE_TIMEOUT_MS = 7000;
+    let statusClearHandle = null;
+    let replyQueue = Promise.resolve();
 
     const toneButtons = Array.from(document.querySelectorAll('.pill'));
     toneButtons.forEach(btn=>{
@@ -575,6 +589,38 @@
       return SAFE_REDIRECT_RESPONSES[index];
     }
 
+    function setStatus(message, state = '', autoClearMs) {
+      if (!status) return;
+      if (statusClearHandle) {
+        clearTimeout(statusClearHandle);
+        statusClearHandle = null;
+      }
+      if (!message) {
+        status.textContent = '';
+        delete status.dataset.state;
+        status.setAttribute('hidden', '');
+        if (history) {
+          history.setAttribute('aria-busy', 'false');
+        }
+        return;
+      }
+      status.textContent = message;
+      if (state) {
+        status.dataset.state = state;
+      } else {
+        delete status.dataset.state;
+      }
+      status.removeAttribute('hidden');
+      if (history) {
+        history.setAttribute('aria-busy', state === 'loading' ? 'true' : 'false');
+      }
+      if (typeof autoClearMs === 'number' && autoClearMs > 0) {
+        statusClearHandle = setTimeout(() => {
+          setStatus('', '');
+        }, autoClearMs);
+      }
+    }
+
     // Función para mostrar mensajes en el historial
     function push(role, text) {
       const msg = document.createElement('div');
@@ -583,6 +629,24 @@
       history.appendChild(msg);
       history.scrollTop = history.scrollHeight;
       persist();
+    }
+
+    function pushBotDelayed(text, delay = 0) {
+      if (!text) return Promise.resolve();
+      return new Promise(resolve => {
+        setTimeout(() => {
+          push('bot', text);
+          resolve();
+        }, Math.max(0, delay));
+      });
+    }
+
+    function getChatHistoryForRequest() {
+      if (!history) return [];
+      return Array.from(history.querySelectorAll('.msg')).map(node => ({
+        role: node.classList.contains('user') ? 'user' : 'bot',
+        text: (node.textContent || '').trim()
+      }));
     }
 
     // Respuesta del bot
@@ -608,7 +672,7 @@
       return [];
     }
 
-    function botReply() {
+    function pickLocalReply() {
       const personaKey = personaSel.value;
       const personaTone = getToneBank(personaKey, tone);
       const genericTone = getToneBank('generic', tone);
@@ -629,9 +693,92 @@
       const tenderDefault = tenderTone && Number.isInteger(tenderTone.defaultLevel) ? tenderTone.defaultLevel : 2;
       const fallback = selectResponses(tenderTone, tenderDefault);
       const arr = responses.length ? responses : fallback;
-      if (!arr.length) return;
-      const reply = arr[Math.floor(Math.random() * arr.length)];
-      setTimeout(() => push('bot', reply), 500);
+      if (!arr.length) return '';
+      const lastBot = getLastBotMessage();
+      const lastText = lastBot ? lastBot.textContent.trim() : '';
+      const filtered = arr.filter(text => text && text !== lastText);
+      const pool = filtered.length ? filtered : arr;
+      if (!pool.length) return '';
+      const index = Math.floor(Math.random() * pool.length);
+      return pool[index];
+    }
+
+    async function requestRemoteReply(payload) {
+      const supportsAbort = typeof AbortController === 'function';
+      const controller = supportsAbort ? new AbortController() : null;
+      let timeoutId;
+      try {
+        const fetchPromise = fetch('/api/velvet.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller ? controller.signal : undefined
+        }).then(response => {
+          if (!response.ok) {
+            throw new Error(`bad_status_${response.status}`);
+          }
+          return response;
+        });
+        const timeoutPromise = new Promise((_, reject) => {
+          timeoutId = setTimeout(() => {
+            if (controller) {
+              try { controller.abort(); }
+              catch { /* noop */ }
+            }
+            reject(new Error('timeout'));
+          }, REMOTE_TIMEOUT_MS);
+        });
+        const response = await Promise.race([fetchPromise, timeoutPromise]);
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+          timeoutId = null;
+        }
+        if (!response || typeof response.json !== 'function') {
+          throw new Error('invalid_response');
+        }
+        const data = await response.json().catch(() => null);
+        if (!data || typeof data.reply !== 'string') {
+          throw new Error('invalid_payload');
+        }
+        return data.reply;
+      } finally {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+      }
+    }
+
+    function botReply() {
+      replyQueue = replyQueue.then(() => processBotReply());
+      return replyQueue;
+    }
+
+    async function processBotReply() {
+      const payload = {
+        history: getChatHistoryForRequest(),
+        persona: personaSel.value,
+        tone,
+        intensity: intensity.value,
+        name: nameInput.value.trim()
+      };
+      setStatus('Velvet está pensando…', 'loading');
+      try {
+        const remoteReply = await requestRemoteReply(payload);
+        const trimmed = typeof remoteReply === 'string' ? remoteReply.trim() : '';
+        if (trimmed) {
+          await pushBotDelayed(trimmed, 500);
+          setStatus('', '');
+          return;
+        }
+        throw new Error('empty_reply');
+      } catch (error) {
+        console.error('No se pudo obtener la respuesta remota:', error);
+        const fallback = pickLocalReply();
+        if (fallback) {
+          await pushBotDelayed(fallback, 500);
+        }
+        setStatus('No logré contactar con el oráculo remoto, así que improviso con mi repertorio local 💜.', 'error', 6000);
+      }
     }
 
     // Enviar mensaje
@@ -652,7 +799,9 @@
         return;
       }
 
-      botReply();
+      botReply().catch(err => {
+        console.error('Error procesando la respuesta del bot:', err);
+      });
     }
 
     sendBtn.addEventListener('click', send);
@@ -696,6 +845,7 @@
     }
 
     function clearChat() {
+      setStatus('', '');
       history.innerHTML = '';
       input.value = '';
       localStorage.removeItem('velvet_chat');
