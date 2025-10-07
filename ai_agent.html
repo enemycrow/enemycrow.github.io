@@ -254,6 +254,12 @@
       </div>
 
       <div class="field">
+        <label>API externa (opcional)</label>
+        <input id="apiKey" type="password" placeholder="Introduce tu API key temporal" autocomplete="off" spellcheck="false" />
+        <p class="note">Se envía solo en la llamada actual (cabecera <code>X-API-Key</code>). No se guarda en localStorage ni en el servidor.</p>
+      </div>
+
+      <div class="field">
         <label>Límites (activos)</label>
         <div class="checks">
           <div class="check"><input type="checkbox" id="limit_explicit" checked disabled /><span>Sin sexualidad explícita ni descripciones gráficas.</span></div>
@@ -322,6 +328,7 @@
     const sparkOne = document.getElementById('sparkOne');
     const sparkTwo = document.getElementById('sparkTwo');
     const sparkThree = document.getElementById('sparkThree');
+    const apiKeyInput = el('apiKey');
     const root = document.documentElement;
 
     let tone = 'tender';
@@ -329,6 +336,13 @@
     const REMOTE_TIMEOUT_MS = 7000;
     let statusClearHandle = null;
     let replyQueue = Promise.resolve();
+
+    function getApiKeyValue() {
+      if (!apiKeyInput || typeof apiKeyInput.value !== 'string') {
+        return '';
+      }
+      return apiKeyInput.value.trim();
+    }
 
     const tonePalettes = {
       tender: [
@@ -981,9 +995,14 @@
       const controller = supportsAbort ? new AbortController() : null;
       let timeoutId;
       try {
+        const headers = { 'Content-Type': 'application/json' };
+        const apiKey = getApiKeyValue();
+        if (apiKey) {
+          headers['X-API-Key'] = apiKey;
+        }
         const fetchPromise = fetch('/api/velvet.php', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers,
           body: JSON.stringify(payload),
           signal: controller ? controller.signal : undefined
         }).then(response => {
@@ -1034,7 +1053,13 @@
         intensity: intensity.value,
         name: nameInput.value.trim()
       };
-      setStatus('Velvet está pensando…', 'loading');
+      const usingApiKey = Boolean(getApiKeyValue());
+      setStatus(
+        usingApiKey
+          ? 'Velvet consulta el servicio externo con tu API key temporal…'
+          : 'Velvet está pensando…',
+        'loading'
+      );
       try {
         const remoteReply = await requestRemoteReply(payload);
         const trimmed = typeof remoteReply === 'string' ? remoteReply.trim() : '';
@@ -1050,7 +1075,16 @@
         if (fallback) {
           await pushBotDelayed(fallback, 500);
         }
-        setStatus('No logré contactar con el oráculo remoto, así que improviso con mi repertorio local 💜.', 'error', 6000);
+        let message = 'No logré contactar con el oráculo remoto, así que improviso con mi repertorio local 💜.';
+        const code = error && typeof error.message === 'string' ? error.message : '';
+        if (code === 'timeout') {
+          message = 'El servicio externo tardó demasiado en responder. Continuaré con mi repertorio local 💜.';
+        } else if (code === 'bad_status_401' || code === 'bad_status_403') {
+          message = 'Tu API key fue rechazada por el servicio externo, así que seguiré con mi repertorio local 💜.';
+        } else if (usingApiKey && code === 'bad_status_404') {
+          message = 'No encontré el endpoint remoto indicado. Revisaré la URL y mientras tanto sigo con mi repertorio local 💜.';
+        }
+        setStatus(message, 'error', 6000);
       }
     }
 
