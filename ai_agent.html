@@ -268,6 +268,10 @@
       updateHeader();
       saveState();
     });
+    personaSel.addEventListener('change', () => {
+      updateHeader();
+      saveState();
+    });
 
     const personaAvatars = {
       woman:'💜', man:'🔥', trans_woman:'⚧', trans_man:'⚧', nonbinary:'✨'
@@ -278,7 +282,8 @@
       const nm = nameInput.value.trim() || (tone==='tender'?'Nova': tone==='spicy'?'Æryne': tone==='composed'?'Vera':'Mix');
       avatar.textContent = personaAvatars[p] || '💜';
       who.textContent = `${nm} (${labelPersona(p)})`;
-      toneText.textContent = `${labelTone(tone)} · Intensidad ${intensity.value}/5`;
+      const baseTone = `${labelTone(tone)} · Intensidad ${intensity.value}/5`;
+      toneText.textContent = usesGenericTone(p, tone, intensity.value) ? `${baseTone} · repertorio general` : baseTone;
       document.title = `Velvet Console — ${nm}`;
     }
     function labelPersona(p){
@@ -302,7 +307,7 @@
     }
 
     // Mini motor de respuestas (PG-13)
-    const bank = {
+    const baseBank = {
       tender: {
         defaultLevel: 2,
         0: [
@@ -437,6 +442,49 @@
       }
     };
 
+    const cloneToneBank = src => JSON.parse(JSON.stringify(src));
+    function createPersonaBank(overrides = {}) {
+      const clone = cloneToneBank(baseBank);
+      Object.keys(overrides).forEach(toneKey => {
+        const baseTone = clone[toneKey] || {};
+        const overrideTone = overrides[toneKey] || {};
+        clone[toneKey] = { ...baseTone, ...overrideTone };
+      });
+      return clone;
+    }
+
+    const bank = {
+      generic: baseBank,
+      woman: createPersonaBank(),
+      man: createPersonaBank(),
+      trans_woman: createPersonaBank(),
+      trans_man: createPersonaBank(),
+      nonbinary: createPersonaBank()
+    };
+
+    function getToneBank(personaKey, toneKey) {
+      const personaBank = bank[personaKey];
+      return personaBank ? personaBank[toneKey] : undefined;
+    }
+
+    function usesGenericTone(personaKey, toneKey, levelValue) {
+      const personaTone = getToneBank(personaKey, toneKey);
+      const genericTone = getToneBank('generic', toneKey);
+      const rawLevel = Number.parseInt(levelValue, 10);
+      let level = Number.isInteger(rawLevel) ? rawLevel : NaN;
+      if (!Number.isInteger(level)) {
+        const personaDefault = personaTone && Number.isInteger(personaTone.defaultLevel) ? personaTone.defaultLevel : NaN;
+        const genericDefault = genericTone && Number.isInteger(genericTone.defaultLevel) ? genericTone.defaultLevel : NaN;
+        level = Number.isInteger(personaDefault) ? personaDefault
+          : Number.isInteger(genericDefault) ? genericDefault
+          : 2;
+      }
+      const personaResponses = selectResponses(personaTone, level);
+      if (personaResponses.length) return false;
+      const genericResponses = selectResponses(genericTone, level);
+      return genericResponses.length > 0;
+    }
+
     // Abridores
     const suggestions = [
       'Descríbeme tu mirada en tres palabras (sin cruzar la línea)…',
@@ -479,14 +527,25 @@
     }
 
     function botReply() {
-      const toneBank = bank[tone] || bank.tender;
+      const personaKey = personaSel.value;
+      const personaTone = getToneBank(personaKey, tone);
+      const genericTone = getToneBank('generic', tone);
       const rawLevel = Number.parseInt(intensity.value, 10);
       let level = Number.isInteger(rawLevel) ? rawLevel : NaN;
       if (!Number.isInteger(level)) {
-        level = Number.isInteger(toneBank && toneBank.defaultLevel) ? toneBank.defaultLevel : 2;
+        const personaDefault = personaTone && Number.isInteger(personaTone.defaultLevel) ? personaTone.defaultLevel : NaN;
+        const genericDefault = genericTone && Number.isInteger(genericTone.defaultLevel) ? genericTone.defaultLevel : NaN;
+        level = Number.isInteger(personaDefault) ? personaDefault
+          : Number.isInteger(genericDefault) ? genericDefault
+          : 2;
       }
-      const responses = selectResponses(toneBank, level);
-      const fallback = selectResponses(bank.tender, bank.tender.defaultLevel);
+      let responses = selectResponses(personaTone, level);
+      if (!responses.length && personaTone !== genericTone) {
+        responses = selectResponses(genericTone, level);
+      }
+      const tenderTone = getToneBank('generic', 'tender');
+      const tenderDefault = tenderTone && Number.isInteger(tenderTone.defaultLevel) ? tenderTone.defaultLevel : 2;
+      const fallback = selectResponses(tenderTone, tenderDefault);
       const arr = responses.length ? responses : fallback;
       if (!arr.length) return;
       const reply = arr[Math.floor(Math.random() * arr.length)];
