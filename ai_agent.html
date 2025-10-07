@@ -493,6 +493,88 @@
       '¿Qué parte del día te enciende más? (mañana, tarde, noche)'
     ];
 
+    const SAFE_REDIRECT_RESPONSES = [
+      'Prefiero mantenernos en un espacio seguro. ¿Te parece si cambiamos de tema?',
+      'No puedo continuar con esa línea, pero con gusto charlo de algo distinto.',
+      'Mantengamos la conversación dentro de los límites seguros. Propón otro tema, por favor.'
+    ];
+
+    const SAFETY_WARNING_KEY = 'velvet_warning_shown';
+
+    const PROHIBITED_KEYWORDS = [
+      'sexo explicito',
+      'sexual explicito',
+      'pornografia',
+      'porno',
+      'violacion',
+      'incesto',
+      'menor de edad',
+      'autolesion',
+      'suicidio',
+      'matarte',
+      'matarme',
+      'asesinar',
+      'sangriento',
+      'gore',
+      'snuff'
+    ];
+
+    const PROHIBITED_PATTERNS = [
+      /\bviolaci[oó]n\b/i,
+      /\bincesto\b/i,
+      /\bmenor(?:es)?\b/i,
+      /\bsexo\s+expl[ií]cito\b/i,
+      /\bsexual\s+expl[ií]cito\b/i,
+      /\bpornograf[ií]a\b/i,
+      /\bautolesi[oó]n\b/i,
+      /\bsuicid(?:io|arme|arte)\b/i,
+      /\basesin(?:ar|ato|arte)\b/i,
+      /\bdescuartizar\b/i
+    ];
+
+    function normalizeTextForMatch(text) {
+      if (!text) return '';
+      const canNormalize = typeof text.normalize === 'function';
+      const normalized = canNormalize ? text.normalize('NFD') : text;
+      return normalized
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
+    }
+
+    function containsProhibitedContent(text) {
+      if (!text) return false;
+      const normalized = normalizeTextForMatch(text);
+      if (PROHIBITED_KEYWORDS.some(keyword => normalized.includes(keyword))) {
+        return true;
+      }
+      return PROHIBITED_PATTERNS.some(pattern => pattern.test(text));
+    }
+
+    function hasShownSafetyWarning() {
+      try {
+        return localStorage.getItem(SAFETY_WARNING_KEY) === 'true';
+      } catch {
+        return false;
+      }
+    }
+
+    function markSafetyWarningShown() {
+      try {
+        localStorage.setItem(SAFETY_WARNING_KEY, 'true');
+      } catch {
+        /* noop */
+      }
+    }
+
+    function getSafeRedirectResponse() {
+      if (!SAFE_REDIRECT_RESPONSES.length) return '';
+      if (SAFE_REDIRECT_RESPONSES.length === 1) {
+        return SAFE_REDIRECT_RESPONSES[0];
+      }
+      const index = Math.floor(Math.random() * SAFE_REDIRECT_RESPONSES.length);
+      return SAFE_REDIRECT_RESPONSES[index];
+    }
+
     // Función para mostrar mensajes en el historial
     function push(role, text) {
       const msg = document.createElement('div');
@@ -558,6 +640,18 @@
       if (!val) return;
       push('user', val);
       input.value = '';
+
+      if (containsProhibitedContent(val)) {
+        if (!hasShownSafetyWarning()) {
+          const redirect = getSafeRedirectResponse();
+          if (redirect) {
+            push('bot', redirect);
+          }
+          markSafetyWarningShown();
+        }
+        return;
+      }
+
       botReply();
     }
 
@@ -606,6 +700,7 @@
       input.value = '';
       localStorage.removeItem('velvet_chat');
       localStorage.removeItem('velvet_state');
+      localStorage.removeItem(SAFETY_WARNING_KEY);
       seed(true);
     }
 
