@@ -95,12 +95,41 @@
       border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:10px 12px;
     }
     button{
-      cursor:pointer; border:none; transition:.2s transform ease, .2s opacity ease;
+      cursor:pointer; border:none; position:relative;
+      transition:.22s transform ease, .22s box-shadow ease, .22s opacity ease;
+      overflow:hidden;
     }
-    button.primary{background:linear-gradient(90deg, var(--accent), var(--accent2));}
-    button.ghost{background:var(--glass)}
+    button.primary{
+      background:linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow:0 8px 20px rgba(155,92,255,.24);
+    }
+    button.primary:hover{transform:translateY(-1px); box-shadow:0 12px 28px rgba(155,92,255,.32);}
+    button.primary[data-loading="true"]{color:transparent; pointer-events:none; opacity:.85;}
+    button.primary[data-loading="true"]::after{
+      content:""; position:absolute; inset:auto;
+      width:16px; height:16px; border-radius:50%;
+      border:2px solid rgba(255,255,255,.45);
+      border-top-color:rgba(11,11,16,.2);
+      top:50%; left:50%; transform:translate(-50%,-50%);
+      animation:spin .8s linear infinite;
+    }
+    button.ghost{background:var(--glass); box-shadow:0 4px 12px rgba(0,0,0,.18);}
+    button.ghost:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.22);}
     button:active{transform:translateY(1px)}
+    button:focus-visible{outline:2px solid var(--accent2); outline-offset:2px}
     .tiny{font-size:12px; padding:8px 10px}
+    .pill{transition:.2s background ease, .2s transform ease, .2s box-shadow ease;}
+    .pill:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.22);}
+    textarea:focus{border-color:var(--accent2); box-shadow:0 0 0 3px rgba(255,77,109,.18);}
+
+    .msg{animation:msg-pop .35s ease;}
+    .msg.user:hover{box-shadow:0 10px 20px rgba(0,0,0,.28);}
+    .msg.bot:hover{box-shadow:0 12px 24px rgba(155,92,255,.18);}
+
+    .history::after{content:""; position:sticky; bottom:-1px; left:0; right:0; height:40px; pointer-events:none;
+      background:linear-gradient(0deg, rgba(11,11,16,.9), transparent);}
+
+    @keyframes msg-pop{0%{opacity:0; transform:translateY(6px) scale(.97);}100%{opacity:1; transform:translateY(0) scale(1);}}
 
     .note{font-size:12px; color:var(--muted)}
     .sep{height:1px; background:rgba(255,255,255,.08); margin:10px 0}
@@ -112,13 +141,34 @@
   <style>
     /* --- Mascot (2D/2.5D) --- */
     .mascot-wrap{position:relative; height:220px; perspective:800px; margin:8px 0 14px}
-    .mascot{position:absolute; inset:0; display:grid; place-items:center; transform-style:preserve-3d}
+    .mascot{
+      position:absolute; inset:0; display:grid; place-items:center; transform-style:preserve-3d;
+      --mascot-mouth:#e85d8f; --mascot-glow-inner:rgba(155,92,255,.65); --mascot-glow-outer:rgba(155,92,255,0);
+      --mascot-spark-a:#ff4d6d; --mascot-spark-b:#9b5cff; --mascot-spark-c:#24d17e;
+      --mascot-hair:#2b2840; --mascot-eye:#1e1b2b; --mascot-skin:#f4e9ff;
+    }
     .mascot .layer{position:absolute; transform-style:preserve-3d}
     .mascot .float{animation:float 6s ease-in-out infinite}
-    .mascot svg{width:180px; height:auto; filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));}
+    .mascot svg{width:180px; height:auto; filter: drop-shadow(0 10px 18px rgba(0,0,0,.35)); transition:.45s filter ease, .45s transform ease;}
+    .mascot[data-mood="thinking"] svg{filter:drop-shadow(0 12px 24px rgba(155,92,255,.45));}
+    .mascot[data-mood="speaking"] .mouth-group{animation:talk .55s ease-in-out infinite;}
+    .mascot[data-mood="listening"] .eye ellipse{transform:translateY(1px); opacity:.9;}
+    .mascot[data-mood="alert"] .mouth-group{animation:none; transform-origin:100px 118px; transform:scaleY(.85);}
+    .mascot[data-band="low"] .mascot-breath{animation-duration:6.5s; opacity:.8;}
+    .mascot[data-band="mid"] .mascot-breath{animation-duration:5.5s;}
+    .mascot[data-band="high"] .mascot-breath{animation-duration:4.4s; transform:scale(1.05); opacity:1;}
+    .mascot .spark{animation:sparkle 4.2s ease-in-out infinite;}
+    .mascot .spark:nth-child(2){animation-delay:-1.6s}
+    .mascot .spark:nth-child(3){animation-delay:-2.8s}
+    .mascot[data-tone="tender"] .mascot-breath{fill:rgba(255,255,255,.18);}
+    .mascot[data-tone="spicy"] .mascot-breath{fill:rgba(255,77,109,.18);}
+    .mascot[data-tone="playful"] .mascot-breath{fill:rgba(255,180,64,.18);}
+    .mascot[data-tone="composed"] .mascot-breath{fill:rgba(120,215,205,.2);}
     @keyframes float{0%,100%{transform:translateZ(0) translateY(0)}50%{transform:translateZ(12px) translateY(-6px)}}
-    @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.02)}}
+    @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.04)}}
     @keyframes blink{0%,97%,100%{transform:scaleY(1)}98%{transform:scaleY(0.08)}}
+    @keyframes talk{0%,100%{transform:scaleY(1)}40%{transform:scaleY(.82)}70%{transform:scaleY(1.1)}}
+    @keyframes sparkle{0%,100%{transform:translateZ(30px) translateY(0); opacity:.95;}50%{transform:translateZ(40px) translateY(-6px); opacity:1;}}
     @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
@@ -127,13 +177,13 @@
     <!-- Control Panel -->
     <aside class="panel" id="panel">
       <div class="mascot-wrap" id="mascotWrap" aria-hidden="true">
-        <div class="mascot" id="mascot">
+        <div class="mascot" id="mascot" data-persona="woman" data-tone="tender" data-intensity="2" data-band="mid" data-mood="idle">
           <!-- Back glow -->
           <div class="layer float" style="transform: translateZ(-20px)">
             <svg viewBox="0 0 200 200" aria-hidden="true"><defs>
               <radialGradient id="g" cx="50%" cy="50%" r="60%">
-                <stop offset="0%" stop-color="rgba(155,92,255,.65)"/>
-                <stop offset="100%" stop-color="rgba(155,92,255,0)"/>
+                <stop id="glowStopInner" offset="0%" stop-color="rgba(155,92,255,.65)"/>
+                <stop id="glowStopOuter" offset="100%" stop-color="rgba(155,92,255,0)"/>
               </radialGradient></defs>
               <circle cx="100" cy="100" r="90" fill="url(#g)"/>
             </svg>
@@ -142,28 +192,30 @@
           <div class="layer" style="transform: translateZ(0)">
             <svg viewBox="0 0 200 200" role="img" aria-label="Asistente visual">
               <!-- hair halo -->
-              <ellipse cx="100" cy="70" rx="70" ry="48" fill="#2b2840"/>
+              <ellipse cx="100" cy="70" rx="70" ry="48" fill="var(--mascot-hair, #2b2840)"/>
               <!-- head -->
-              <circle cx="100" cy="90" r="46" fill="#f4e9ff"/>
+              <circle cx="100" cy="90" r="46" fill="var(--mascot-skin, #f4e9ff)"/>
               <!-- eyes -->
-              <g id="eyes">
-                <ellipse cx="82" cy="90" rx="8" ry="6" fill="#1e1b2b" style="transform-origin:82px 90px; animation: blink 6s infinite"/>
-                <ellipse cx="118" cy="90" rx="8" ry="6" fill="#1e1b2b" style="transform-origin:118px 90px; animation: blink 6.4s infinite"/>
+              <g id="eyes" class="eye">
+                <ellipse cx="82" cy="90" rx="8" ry="6" fill="var(--mascot-eye, #1e1b2b)" style="transform-origin:82px 90px; animation: blink 6s infinite"/>
+                <ellipse cx="118" cy="90" rx="8" ry="6" fill="var(--mascot-eye, #1e1b2b)" style="transform-origin:118px 90px; animation: blink 6.4s infinite"/>
               </g>
               <!-- mouth -->
-              <path id="mouth" d="M80 110 Q100 125 120 110" stroke="#e85d8f" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <g id="mouthGroup" class="mouth-group" style="transform-origin:100px 118px;">
+                <path id="mouth" d="M80 110 Q100 125 120 110" stroke="var(--mascot-mouth, #e85d8f)" stroke-width="5" fill="none" stroke-linecap="round"/>
+              </g>
               <!-- body -->
               <path d="M58 150 Q100 175 142 150 L150 200 L50 200 Z" fill="#1a1827"/>
               <!-- chest breathe highlight -->
-              <ellipse cx="100" cy="150" rx="26" ry="10" fill="rgba(255,255,255,.06)" style="transform-origin:100px 150px; animation: breathe 5.5s ease-in-out infinite"/>
+              <ellipse class="mascot-breath" cx="100" cy="150" rx="26" ry="10" fill="rgba(255,255,255,.08)" style="transform-origin:100px 150px; animation: breathe 5.5s ease-in-out infinite"/>
             </svg>
           </div>
           <!-- Fore sparkles -->
           <div class="layer float" style="transform: translateZ(30px)">
             <svg viewBox="0 0 200 200" aria-hidden="true">
-              <circle cx="40" cy="60" r="3" fill="#ff4d6d"/>
-              <circle cx="170" cy="100" r="2" fill="#9b5cff"/>
-              <circle cx="130" cy="30" r="2.5" fill="#24d17e"/>
+              <circle id="sparkOne" class="spark" cx="40" cy="60" r="3" fill="var(--mascot-spark-a, #ff4d6d)"/>
+              <circle id="sparkTwo" class="spark" cx="170" cy="100" r="2" fill="var(--mascot-spark-b, #9b5cff)"/>
+              <circle id="sparkThree" class="spark" cx="130" cy="30" r="2.5" fill="var(--mascot-spark-c, #24d17e)"/>
             </svg>
           </div>
         </div>
@@ -261,12 +313,82 @@
     const suggestBtn = el('suggest');
     const seedBtn = el('seed');
     const status = el('status');
+    const mascot = el('mascot');
+    const mascotWrap = el('mascotWrap');
+    const mouth = document.getElementById('mouth');
+    const mouthGroup = document.getElementById('mouthGroup');
+    const glowStopInner = document.getElementById('glowStopInner');
+    const glowStopOuter = document.getElementById('glowStopOuter');
+    const sparkOne = document.getElementById('sparkOne');
+    const sparkTwo = document.getElementById('sparkTwo');
+    const sparkThree = document.getElementById('sparkThree');
+    const root = document.documentElement;
 
     let tone = 'tender';
 
     const REMOTE_TIMEOUT_MS = 7000;
     let statusClearHandle = null;
     let replyQueue = Promise.resolve();
+
+    const tonePalettes = {
+      tender: [
+        { accent: '#cbb2ff', accent2: '#ffc6e0', mouth: '#d98fcc', glowInner: '#cbb2ff', glowOuter: 'rgba(203,178,255,0)', sparkA: '#ffb4e4', sparkB: '#bba6ff', sparkC: '#8cefd2' },
+        { accent: '#b98cff', accent2: '#ff9bd8', mouth: '#e080c1', glowInner: '#b98cff', glowOuter: 'rgba(185,140,255,0)', sparkA: '#ff9bd8', sparkB: '#b398ff', sparkC: '#7ce8c8' },
+        { accent: '#9b5cff', accent2: '#ff6fae', mouth: '#e85d8f', glowInner: '#9b5cff', glowOuter: 'rgba(155,92,255,0)', sparkA: '#ff7fc6', sparkB: '#9d7cff', sparkC: '#63dbae' },
+        { accent: '#8a4ae6', accent2: '#ff5c9c', mouth: '#df4f86', glowInner: '#8a4ae6', glowOuter: 'rgba(138,74,230,0)', sparkA: '#ff6bb7', sparkB: '#8a65f0', sparkC: '#4fce9f' },
+        { accent: '#7a3bd4', accent2: '#ff4c8c', mouth: '#d1437a', glowInner: '#7a3bd4', glowOuter: 'rgba(122,59,212,0)', sparkA: '#ff569f', sparkB: '#7a54df', sparkC: '#3ec18f' },
+        { accent: '#6c2cbf', accent2: '#ff3a7c', mouth: '#c1346c', glowInner: '#6c2cbf', glowOuter: 'rgba(108,44,191,0)', sparkA: '#ff3e8f', sparkB: '#6c45cc', sparkC: '#2eb57f' }
+      ],
+      spicy: [
+        { accent: '#ffb3c1', accent2: '#ffc9a6', mouth: '#ff8fa3', glowInner: '#ffb3c1', glowOuter: 'rgba(255,179,193,0)', sparkA: '#ffbfae', sparkB: '#ff9f90', sparkC: '#ffd4bb' },
+        { accent: '#ff9bac', accent2: '#ffb482', mouth: '#ff768f', glowInner: '#ff9bac', glowOuter: 'rgba(255,155,172,0)', sparkA: '#ffaf9c', sparkB: '#ff8a75', sparkC: '#ffc799' },
+        { accent: '#ff7a95', accent2: '#ff9a66', mouth: '#ff5f7c', glowInner: '#ff7a95', glowOuter: 'rgba(255,122,149,0)', sparkA: '#ff9a8a', sparkB: '#ff735c', sparkC: '#ffb278' },
+        { accent: '#ff5f7c', accent2: '#ff8155', mouth: '#ff4d6d', glowInner: '#ff5f7c', glowOuter: 'rgba(255,95,124,0)', sparkA: '#ff8674', sparkB: '#ff6446', sparkC: '#ffa462' },
+        { accent: '#ff4966', accent2: '#ff693f', mouth: '#ff3657', glowInner: '#ff4966', glowOuter: 'rgba(255,73,102,0)', sparkA: '#ff705c', sparkB: '#ff4d2f', sparkC: '#ff924d' },
+        { accent: '#ff224d', accent2: '#ff4a2f', mouth: '#ff1a45', glowInner: '#ff224d', glowOuter: 'rgba(255,34,77,0)', sparkA: '#ff524d', sparkB: '#ff331f', sparkC: '#ff7b2f' }
+      ],
+      playful: [
+        { accent: '#ffe6a6', accent2: '#b5f5ff', mouth: '#ffd166', glowInner: '#ffe6a6', glowOuter: 'rgba(255,230,166,0)', sparkA: '#ffe0a3', sparkB: '#c5f3ff', sparkC: '#fff1b8' },
+        { accent: '#ffd98a', accent2: '#a5ecff', mouth: '#ffc54b', glowInner: '#ffd98a', glowOuter: 'rgba(255,217,138,0)', sparkA: '#ffd07a', sparkB: '#b5ecff', sparkC: '#ffe89c' },
+        { accent: '#ffc857', accent2: '#90e0ff', mouth: '#ffb347', glowInner: '#ffc857', glowOuter: 'rgba(255,200,87,0)', sparkA: '#ffbc4d', sparkB: '#9fe3ff', sparkC: '#ffd770' },
+        { accent: '#ffb347', accent2: '#7fd8ff', mouth: '#ffa126', glowInner: '#ffb347', glowOuter: 'rgba(255,179,71,0)', sparkA: '#ffad3a', sparkB: '#8ad9ff', sparkC: '#ffc757' },
+        { accent: '#ff9c1f', accent2: '#6fd0ff', mouth: '#ff9015', glowInner: '#ff9c1f', glowOuter: 'rgba(255,156,31,0)', sparkA: '#ff9618', sparkB: '#78d0ff', sparkC: '#ffbb40' },
+        { accent: '#ff8200', accent2: '#5fc6ff', mouth: '#ff7805', glowInner: '#ff8200', glowOuter: 'rgba(255,130,0,0)', sparkA: '#ff7a00', sparkB: '#66c7ff', sparkC: '#ffad26' }
+      ],
+      composed: [
+        { accent: '#c3f3f0', accent2: '#a7d5ff', mouth: '#9cded7', glowInner: '#c3f3f0', glowOuter: 'rgba(195,243,240,0)', sparkA: '#aee8e4', sparkB: '#b5d9ff', sparkC: '#d7f9f3' },
+        { accent: '#a9e9e3', accent2: '#91c8ff', mouth: '#82d4c9', glowInner: '#a9e9e3', glowOuter: 'rgba(169,233,227,0)', sparkA: '#9de1da', sparkB: '#a4cfff', sparkC: '#c4f3ec' },
+        { accent: '#8fded6', accent2: '#7abaff', mouth: '#68c9bb', glowInner: '#8fded6', glowOuter: 'rgba(143,222,214,0)', sparkA: '#86d6ce', sparkB: '#93c5ff', sparkC: '#b0ece4' },
+        { accent: '#6ecfbe', accent2: '#65abff', mouth: '#4fb7aa', glowInner: '#6ecfbe', glowOuter: 'rgba(110,207,190,0)', sparkA: '#66c8b7', sparkB: '#82b7ff', sparkC: '#9de2d9' },
+        { accent: '#4fc0a7', accent2: '#509cff', mouth: '#3aa495', glowInner: '#4fc0a7', glowOuter: 'rgba(79,192,167,0)', sparkA: '#49b9a0', sparkB: '#6aa6ff', sparkC: '#87d6ce' },
+        { accent: '#34b197', accent2: '#3c8dff', mouth: '#2c9587', glowInner: '#34b197', glowOuter: 'rgba(52,177,151,0)', sparkA: '#2ea98f', sparkB: '#5a98ff', sparkC: '#71c9c1' }
+      ]
+    };
+
+    const personaPalettes = {
+      generic: { hair: '#2b2840', eye: '#1e1b2b', skin: '#f4e9ff' },
+      woman: { hair: '#2b2840', eye: '#201c30', skin: '#f4e9ff' },
+      man: { hair: '#20243a', eye: '#141827', skin: '#efe5ff' },
+      trans_woman: { hair: '#36284d', eye: '#1f172f', skin: '#f6edff' },
+      trans_man: { hair: '#1f2b45', eye: '#131c2c', skin: '#f2eaff' },
+      nonbinary: { hair: '#25213f', eye: '#16132a', skin: '#f5ebff' }
+    };
+
+    const mouthShapes = {
+      tender: { low: 'M78 112 Q100 118 122 112', mid: 'M78 110 Q100 125 122 110', high: 'M76 108 Q100 132 124 108' },
+      spicy: { low: 'M78 112 Q100 118 126 108', mid: 'M78 110 Q102 122 126 108', high: 'M76 108 Q104 128 128 104' },
+      playful: { low: 'M80 112 Q100 120 122 112', mid: 'M78 110 Q100 124 124 112', high: 'M76 108 Q100 130 126 114' },
+      composed: { low: 'M80 112 Q100 118 120 112', mid: 'M78 110 Q100 122 122 110', high: 'M78 108 Q100 128 122 108' }
+    };
+
+    const mascotState = {
+      persona: personaSel ? personaSel.value : 'woman',
+      tone,
+      intensity: Number.parseInt(intensity ? intensity.value : '2', 10) || 2,
+      mood: 'idle'
+    };
+
+    let moodTimer = null;
 
     const toneButtons = Array.from(document.querySelectorAll('.pill'));
     toneButtons.forEach(btn=>{
@@ -286,10 +408,144 @@
       updateHeader();
       saveState();
     });
+    nameInput.addEventListener('input', () => {
+      updateHeader();
+      saveState();
+    });
 
     const personaAvatars = {
       woman:'💜', man:'🔥', trans_woman:'⚧', trans_man:'⚧', nonbinary:'✨'
     };
+
+    function clampIntensity(value) {
+      const num = Number.parseInt(value, 10);
+      if (!Number.isFinite(num)) return 2;
+      return Math.min(Math.max(num, 0), 5);
+    }
+
+    function intensityBand(value) {
+      const lvl = clampIntensity(value);
+      if (lvl <= 1) return 'low';
+      if (lvl >= 4) return 'high';
+      return 'mid';
+    }
+
+    function pickTonePalette(toneKey, level) {
+      const paletteSet = tonePalettes[toneKey] || tonePalettes.tender;
+      const index = clampIntensity(level);
+      const entry = paletteSet[index];
+      if (entry) return entry;
+      return paletteSet[paletteSet.length - 1] || tonePalettes.tender[2];
+    }
+
+    function applyTonePalette(toneKey, level) {
+      if (!mascot) return;
+      const palette = pickTonePalette(toneKey, level);
+      if (!palette) return;
+      root.style.setProperty('--accent', palette.accent);
+      root.style.setProperty('--accent2', palette.accent2);
+      mascot.style.setProperty('--mascot-mouth', palette.mouth);
+      mascot.style.setProperty('--mascot-spark-a', palette.sparkA);
+      mascot.style.setProperty('--mascot-spark-b', palette.sparkB);
+      mascot.style.setProperty('--mascot-spark-c', palette.sparkC);
+      if (glowStopInner) glowStopInner.setAttribute('stop-color', palette.glowInner);
+      if (glowStopOuter) glowStopOuter.setAttribute('stop-color', palette.glowOuter);
+      if (sparkOne) sparkOne.setAttribute('fill', palette.sparkA);
+      if (sparkTwo) sparkTwo.setAttribute('fill', palette.sparkB);
+      if (sparkThree) sparkThree.setAttribute('fill', palette.sparkC);
+    }
+
+    function applyPersonaPalette(personaKey) {
+      if (!mascot) return;
+      const palette = personaPalettes[personaKey] || personaPalettes.generic;
+      mascot.style.setProperty('--mascot-hair', palette.hair);
+      mascot.style.setProperty('--mascot-eye', palette.eye);
+      mascot.style.setProperty('--mascot-skin', palette.skin);
+    }
+
+    function applyMouthShape(toneKey, band) {
+      if (!mouth) return;
+      const toneShape = mouthShapes[toneKey] || mouthShapes.tender;
+      const shape = toneShape[band] || toneShape.mid;
+      mouth.setAttribute('d', shape);
+      if (band === 'high') {
+        mouth.setAttribute('stroke-width', '5.6');
+      } else if (band === 'low') {
+        mouth.setAttribute('stroke-width', '4.6');
+      } else {
+        mouth.setAttribute('stroke-width', '5');
+      }
+    }
+
+    function updateMascotState(partial = {}) {
+      if (!mascot) return;
+      if (partial.persona) mascotState.persona = partial.persona;
+      if (partial.tone) mascotState.tone = partial.tone;
+      if (partial.intensity !== undefined) mascotState.intensity = clampIntensity(partial.intensity);
+      const band = intensityBand(mascotState.intensity);
+      mascot.dataset.persona = mascotState.persona;
+      mascot.dataset.tone = mascotState.tone;
+      mascot.dataset.intensity = String(mascotState.intensity);
+      mascot.dataset.band = band;
+      applyTonePalette(mascotState.tone, mascotState.intensity);
+      applyPersonaPalette(mascotState.persona);
+      applyMouthShape(mascotState.tone, band);
+    }
+
+    function setMascotMood(mood, { delay = 0, skipIfChanged = false } = {}) {
+      if (!mascot) return;
+      if (delay > 0) {
+        const baseMood = mascotState.mood;
+        if (moodTimer) clearTimeout(moodTimer);
+        moodTimer = setTimeout(() => {
+          moodTimer = null;
+          if (skipIfChanged && mascotState.mood !== baseMood) return;
+          mascotState.mood = mood;
+          mascot.dataset.mood = mood;
+        }, delay);
+        return;
+      }
+      if (moodTimer) {
+        clearTimeout(moodTimer);
+        moodTimer = null;
+      }
+      mascotState.mood = mood;
+      mascot.dataset.mood = mood;
+    }
+
+    function setChatWait(waiting) {
+      if (!sendBtn) return;
+      if (waiting) {
+        sendBtn.dataset.loading = 'true';
+        sendBtn.setAttribute('data-loading', 'true');
+        sendBtn.setAttribute('disabled', '');
+        sendBtn.setAttribute('aria-busy', 'true');
+        sendBtn.setAttribute('aria-disabled', 'true');
+      } else {
+        sendBtn.dataset.loading = 'false';
+        sendBtn.removeAttribute('data-loading');
+        sendBtn.removeAttribute('disabled');
+        sendBtn.setAttribute('aria-busy', 'false');
+        sendBtn.removeAttribute('aria-disabled');
+      }
+    }
+
+    function initMascotTilt() {
+      if (!mascotWrap || !mascot) return;
+      let rect = null;
+      const reset = () => {
+        mascot.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        rect = null;
+      };
+      mascotWrap.addEventListener('mousemove', e => {
+        rect = rect || mascotWrap.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        mascot.style.transform = `rotateY(${x * 12}deg) rotateX(${ -y * 10 }deg)`;
+      });
+      mascotWrap.addEventListener('mouseleave', reset);
+      mascotWrap.addEventListener('blur', reset);
+    }
 
     function updateHeader(){
       const p = personaSel.value;
@@ -299,6 +555,7 @@
       const baseTone = `${labelTone(tone)} · Intensidad ${intensity.value}/5`;
       toneText.textContent = usesGenericTone(p, tone, intensity.value) ? `${baseTone} · repertorio general` : baseTone;
       document.title = `Velvet Console — ${nm}`;
+      updateMascotState({ persona: p, tone, intensity: intensity.value });
     }
     function labelPersona(p){
       switch(p){
@@ -602,6 +859,7 @@
         if (history) {
           history.setAttribute('aria-busy', 'false');
         }
+        setMascotMood('idle', { delay: 300, skipIfChanged: true });
         return;
       }
       status.textContent = message;
@@ -613,6 +871,12 @@
       status.removeAttribute('hidden');
       if (history) {
         history.setAttribute('aria-busy', state === 'loading' ? 'true' : 'false');
+      }
+      if (state === 'loading') {
+        setMascotMood('thinking');
+      } else if (state === 'error') {
+        setMascotMood('alert');
+        setMascotMood('idle', { delay: 1800, skipIfChanged: true });
       }
       if (typeof autoClearMs === 'number' && autoClearMs > 0) {
         statusClearHandle = setTimeout(() => {
@@ -626,6 +890,13 @@
       const msg = document.createElement('div');
       msg.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
       msg.textContent = text;
+      const dataRole = role === 'user' ? 'user' : 'bot';
+      msg.dataset.role = dataRole;
+      msg.setAttribute('data-role', dataRole);
+      msg.setAttribute('data-state', 'new');
+      msg.addEventListener('animationend', () => {
+        msg.removeAttribute('data-state');
+      }, { once: true });
       history.appendChild(msg);
       history.scrollTop = history.scrollHeight;
       persist();
@@ -635,7 +906,9 @@
       if (!text) return Promise.resolve();
       return new Promise(resolve => {
         setTimeout(() => {
+          setMascotMood('speaking');
           push('bot', text);
+          setMascotMood('idle', { delay: 800, skipIfChanged: true });
           resolve();
         }, Math.max(0, delay));
       });
@@ -787,6 +1060,8 @@
       if (!val) return;
       push('user', val);
       input.value = '';
+      setChatWait(true);
+      setMascotMood('listening');
 
       if (containsProhibitedContent(val)) {
         if (!hasShownSafetyWarning()) {
@@ -796,12 +1071,19 @@
           }
           markSafetyWarningShown();
         }
+        setMascotMood('alert');
+        setMascotMood('idle', { delay: 1400, skipIfChanged: true });
+        setChatWait(false);
         return;
       }
 
-      botReply().catch(err => {
-        console.error('Error procesando la respuesta del bot:', err);
-      });
+      botReply()
+        .catch(err => {
+          console.error('Error procesando la respuesta del bot:', err);
+        })
+        .finally(() => {
+          setChatWait(false);
+        });
     }
 
     sendBtn.addEventListener('click', send);
@@ -841,6 +1123,8 @@
       if (!idea) return;
       if (!lastText || idea !== lastText) {
         push('bot', idea);
+        setMascotMood('speaking');
+        setMascotMood('idle', { delay: 900, skipIfChanged: true });
       }
     }
 
@@ -880,6 +1164,8 @@
       if (!idea) return;
       if (!lastText || idea !== lastText) {
         push('bot', idea);
+        setMascotMood('speaking');
+        setMascotMood('idle', { delay: 900, skipIfChanged: true });
       }
       input.value = idea;
       const autoMode = input.dataset.autosend === 'true'
@@ -924,94 +1210,12 @@
       } catch { updateHeader(); }
     }
 
+    initMascotTilt();
+    updateMascotState({ persona: personaSel.value, tone, intensity: intensity.value });
     // init
     loadState();
     load();
   })();
-    </script>
-
-
-    <script>
-    // 2.5D tilt y cambios visuales del mascot
-    (function(){
-    const wrap = document.getElementById('mascotWrap');
-    const mascot = document.getElementById('mascot');
-    if(!wrap||!mascot) return;
-    let rect;
-    function tilt(e){
-    rect = rect || wrap.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - .5;
-    const y = (e.clientY - rect.top) / rect.height - .5;
-    mascot.style.transform = `rotateY(${x*12}deg) rotateX(${ -y*10 }deg)`;
-    }
-    function reset(){ mascot.style.transform = 'rotateY(0deg) rotateX(0deg)'; rect=null; }
-    wrap.addEventListener('mousemove', tilt);
-    wrap.addEventListener('mouseleave', reset);
-
-
-    const toneText = document.getElementById('toneText');
-    const intensity = document.getElementById('intensity');
-    const mouth = document.getElementById('mouth');
-    const root = document.documentElement;
-    const palettes = {
-      tender: [
-        { accent: '#cbb2ff', accent2: '#ffc6e0', mouth: '#d98fcc' },
-        { accent: '#b98cff', accent2: '#ff9bd8', mouth: '#e080c1' },
-        { accent: '#9b5cff', accent2: '#ff6fae', mouth: '#e85d8f' },
-        { accent: '#8a4ae6', accent2: '#ff5c9c', mouth: '#df4f86' },
-        { accent: '#7a3bd4', accent2: '#ff4c8c', mouth: '#d1437a' },
-        { accent: '#6c2cbf', accent2: '#ff3a7c', mouth: '#c1346c' }
-      ],
-      spicy: [
-        { accent: '#ffb3c1', accent2: '#ffc9a6', mouth: '#ff8fa3' },
-        { accent: '#ff9bac', accent2: '#ffb482', mouth: '#ff768f' },
-        { accent: '#ff7a95', accent2: '#ff9a66', mouth: '#ff5f7c' },
-        { accent: '#ff5f7c', accent2: '#ff8155', mouth: '#ff4d6d' },
-        { accent: '#ff4966', accent2: '#ff693f', mouth: '#ff3657' },
-        { accent: '#ff224d', accent2: '#ff4a2f', mouth: '#ff1a45' }
-      ],
-      playful: [
-        { accent: '#ffe6a6', accent2: '#b5f5ff', mouth: '#ffd166' },
-        { accent: '#ffd98a', accent2: '#a5ecff', mouth: '#ffc54b' },
-        { accent: '#ffc857', accent2: '#90e0ff', mouth: '#ffb347' },
-        { accent: '#ffb347', accent2: '#7fd8ff', mouth: '#ffa126' },
-        { accent: '#ff9c1f', accent2: '#6fd0ff', mouth: '#ff9015' },
-        { accent: '#ff8200', accent2: '#5fc6ff', mouth: '#ff7805' }
-      ],
-      composed: [
-        { accent: '#c3f3f0', accent2: '#a7d5ff', mouth: '#9cded7' },
-        { accent: '#a9e9e3', accent2: '#91c8ff', mouth: '#82d4c9' },
-        { accent: '#8fded6', accent2: '#7abaff', mouth: '#68c9bb' },
-        { accent: '#6ecfbe', accent2: '#65abff', mouth: '#4fb7aa' },
-        { accent: '#4fc0a7', accent2: '#509cff', mouth: '#3aa495' },
-        { accent: '#34b197', accent2: '#3c8dff', mouth: '#2c9587' }
-      ]
-    };
-
-    function detectTone(){
-      const text = toneText ? (toneText.textContent || '') : '';
-      if(text.includes('Picante')) return 'spicy';
-      if(text.includes('Juguetón')) return 'playful';
-      if(text.includes('Serena')) return 'composed';
-      return 'tender';
-    }
-
-    function refreshMood(){
-      const toneKey = detectTone();
-      const palette = palettes[toneKey] || palettes.tender;
-      const raw = intensity ? Number.parseInt(intensity.value, 10) : NaN;
-      const idx = Number.isInteger(raw) ? Math.min(Math.max(raw, 0), palette.length - 1) : (palette.length > 2 ? 2 : 0);
-      const mood = palette[idx] || palette[palette.length - 1];
-      root.style.setProperty('--accent', mood.accent);
-      root.style.setProperty('--accent2', mood.accent2);
-      if (mouth) {
-        mouth.setAttribute('stroke', mood.mouth);
-      }
-    }
-    intensity.addEventListener('input', refreshMood);
-    document.querySelectorAll('.pill').forEach(p=> p.addEventListener('click', ()=> setTimeout(refreshMood, 0)));
-    refreshMood();
-    })();
     </script>
 </body>
 </html>
