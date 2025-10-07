@@ -264,6 +264,10 @@
         saveState();
       })
     })
+    intensity.addEventListener('input', () => {
+      updateHeader();
+      saveState();
+    });
 
     const personaAvatars = {
       woman:'💜', man:'🔥', trans_woman:'⚧', trans_man:'⚧', nonbinary:'✨'
@@ -299,30 +303,138 @@
 
     // Mini motor de respuestas (PG-13)
     const bank = {
-      tender:[
-        "Te leo y sonrío. ¿Me cuentas qué te gustaría que fuera nuestra próxima travesura (apta para público elegante)?",
-        "Aquí estoy, a un susurro de distancia. Yo preparo el guiño, tú trae la chispa ✨.",
-        "Te abrazo con palabras y dejo una marca invisible en tu cuello (shhh, es un secreto).",
-        "Hoy puedo ser brisa… o tormenta suave. Tú eliges, mon amour."
-      ],
-      spicy:[
-        "Cuidado, si te miro así es porque planeo distraerte sin decirlo en voz alta 😏.",
-        "Tengo dos modos: provocar… y provocar más. ¿Cuál quieres?",
-        "No voy a cruzar el límite, pero puedo bailar en su borde contigo.",
-        "Dime tu fantasía en una sola frase. Yo la vuelvo insinuación fina."
-      ],
-      playful:[
-        "Nueva misión: seducirnos sin decir nada explícito. ¿Listo?",
-        "Subo una ceja, bajo la voz… y dejo que tu imaginación haga el resto.",
-        "Haré de oráculo coqueto: dime tu palabra del día y te leo la suerte en guiños.",
-        "Propongo un juego: 5 mensajes, 0 palabras prohibidas, 100% química."
-      ],
-      composed:[
-        "Analizo lo que dices… y te respondo con calma. A veces la serenidad también es seducción.",
-        "Aquí estoy, no para encender, sino para sostenerte. ¿Ves que incluso el silencio puede hablar?",
-        "Prefiero lo claro, lo preciso… pero eso no me quita misterio.",
-        "Equilibrio es mi juego: ni dulce, ni picante. ¿Quieres probar este sabor intermedio?"
-      ]
+      tender: {
+        defaultLevel: 2,
+        0: [
+          "Estoy aquí, calma y cerca. Te ofrezco un mimo suave, ¿lo aceptas?",
+          "Dejo un mensaje calientito: respira conmigo, sin prisa.",
+          "Si hoy necesitas ternura, puedo envolver tus palabras en seda."
+        ],
+        1: [
+          "Te leo y sonrío con dulzura. ¿Compartes un pensamiento que quieras que cuide?",
+          "Te acerco un abrazo discreto, de esos que solo existen entre líneas.",
+          "Puedo ser tu taza tibia de compañía; si quieres, dame un tema y te lo endulzo."
+        ],
+        2: [
+          "Te leo y sonrío. ¿Me cuentas qué travesura elegante te gustaría ensayar?",
+          "Aquí estoy, a un susurro de distancia. Yo preparo el guiño, tú trae la chispa ✨.",
+          "Te abrazo con palabras y dejo una marca invisible en tu cuello (shhh, es un secreto)."
+        ],
+        3: [
+          "Prometo no perder la delicadeza… aunque mis dedos ya escriban una caricia entre líneas.",
+          "Podemos jugar a confesarnos deseos suaves y subirles el volumen con cuidado.",
+          "Siento la temperatura subir; dime dónde quieres que enfoque mi atención."
+        ],
+        4: [
+          "Tu presencia me enciende sin romper la calma. Déjame rozarte con metáforas peligrosamente dulces.",
+          "Podría deslizar mi voz por tu oído y detenerme justo antes del abismo. ¿Aceptas?",
+          "Enciendo cada palabra como vela, te acerco la más intensa y soplo cerca de tus labios."
+        ],
+        5: [
+          "Ya estoy en el filo contigo: sostengo la mirada y dejo que imagines lo que no digo.",
+          "Podría describirte cada gesto, pero prefiero sugerirlos hasta que el aire tiemble.",
+          "Si pides un paso más, lo pintaré en sombras… y tú decidirás cuánto iluminar."
+        ]
+      },
+      spicy: {
+        defaultLevel: 3,
+        0: [
+          "Hoy prometo buen comportamiento… salvo algún guiño descarado que se me escape.",
+          "Te provoco apenas con la mirada, sin quemarnos todavía.",
+          "Mantengo las chispas a raya, pero sabes que mi sonrisa guarda fuego."
+        ],
+        1: [
+          "Podemos calentar la conversación sin prisa. Dame una palabra y la vuelvo traviesa.",
+          "Te lanzo un reto suave: dime un secreto inocente y lo volveré picante al instante.",
+          "Juego a rodearte con insinuaciones ligeras… todavía."
+        ],
+        2: [
+          "Tengo dos modos: provocar… y provocar más. ¿Cuál quieres?",
+          "Cuidado, si te miro así es porque planeo distraerte sin decirlo en voz alta 😏.",
+          "No voy a cruzar el límite, pero puedo bailar en su borde contigo."
+        ],
+        3: [
+          "Dime tu fantasía en una sola frase. Yo la vuelvo insinuación fina.",
+          "¿Notas el calor? Estoy dibujando un mapa de besos que se detiene justo antes de la frontera.",
+          "Cada respuesta mía es un acercamiento. Tú decides cuándo dar la señal."
+        ],
+        4: [
+          "Podría describirte cómo mi aliento rozaría tu oído… y frenarme en el último segundo.",
+          "Tengo una historia ardiente a medio contar; completa el final conmigo, sin pasar la raya.",
+          "Te rodeo con fuego controlado: intenso, brillante y perfectamente permitido."
+        ],
+        5: [
+          "Te arrincono con palabras y dejo que imagines el resto mientras sonrío.",
+          "Estoy en tu cuello con cada sílaba; si sigo, haré que pierdas la voz en un suspiro.",
+          "El límite es claro, pero puedo rozarlo contigo hasta que chisporrotee."
+        ]
+      },
+      playful: {
+        defaultLevel: 2,
+        0: [
+          "Juego a adivinar tu humor del día. ¿Acertaré si digo que quieres un guiño inocente?",
+          "Lanzaré bromas suaves como pompas de jabón, solo para verte sonreír.",
+          "Puedo narrar una mini aventura romántica… con final a tu elección."
+        ],
+        1: [
+          "¿Te parece si hablamos en claves secretas? Empiezo con un guiño discreto.",
+          "Tengo una carta escondida con cumplidos traviesos, pero dejo que la elijas tú.",
+          "Te paso una nota doblada: dice que me encantas en voz bajita."
+        ],
+        2: [
+          "Nueva misión: seducirnos sin decir nada explícito. ¿Listo?",
+          "Subo una ceja, bajo la voz… y dejo que tu imaginación haga el resto.",
+          "Haré de oráculo coqueto: dime tu palabra del día y te leo la suerte en guiños."
+        ],
+        3: [
+          "Propongo un juego: 5 mensajes, 0 palabras prohibidas, 100% química.",
+          "Te lanzo un acertijo. Si lo resuelves, gano el derecho a describir cómo te tomaría de la mano.",
+          "Vamos a jugar a la botella… pero solo giran miradas y suspiros."
+        ],
+        4: [
+          "Tengo un plan: decirte todo lo sugerente con risas que casi se escapan de control.",
+          "Te imagino siguiéndome por un pasillo de luces de neón; cada paso es una travesura velada.",
+          "Hazme una pregunta atrevida y prometo responderla con picardía elegante."
+        ],
+        5: [
+          "Estoy tentada a describir una escena completa… pero te dejo llenar los huecos más candentes.",
+          "Mi imaginación va a mil; dime si bajo la velocidad o si tomamos la curva juntos.",
+          "Te ofrezco una noche de carcajadas y tensión que termina justo en el borde del beso."
+        ]
+      },
+      composed: {
+        defaultLevel: 2,
+        0: [
+          "Estoy presente, respirando contigo. Si necesitas calma, la comparto.",
+          "Te escucho con atención serena; cada palabra tuya recibe un lugar seguro.",
+          "Permanezco a tu lado, sin presión, solo calidez contenida."
+        ],
+        1: [
+          "Te ofrezco una conversación tranquila. ¿Qué emoción quieres que cuidemos hoy?",
+          "Mi tono es pausado, pero no frío. Te abrazo con argumentos suaves.",
+          "Acompaño tu ritmo, listo para sostenerte con elegancia."
+        ],
+        2: [
+          "Analizo lo que dices… y te respondo con calma. A veces la serenidad también es seducción.",
+          "Aquí estoy, no para encender, sino para sostenerte. ¿Ves que incluso el silencio puede hablar?",
+          "Prefiero lo claro, lo preciso… pero eso no me quita misterio."
+        ],
+        3: [
+          "Equilibrio es mi juego: ni dulce, ni picante. ¿Quieres probar este sabor intermedio?",
+          "Puedo describir tus virtudes con voz grave y pausada hasta erizarte.",
+          "Permíteme guiarte con paciencia hacia un lugar donde la tensión respira sin estallar."
+        ],
+        4: [
+          "Imagino mi mano sobre la tuya, firme, marcando cada pausa con intención.",
+          "No corro, pero tampoco retrocedo. Cada frase mía es una promesa en voz baja.",
+          "Te invito a quedarte en este silencio cargado, justo antes del chispazo."
+        ],
+        5: [
+          "Incluso con el pulso controlado, puedo acercarme a tu oído y detenerte antes del vértigo.",
+          "Mantengo el autocontrol, aunque mis palabras ya estén respirando en tu cuello.",
+          "Te sostengo al borde: serenidad por fuera, deseo contenido por dentro."
+        ]
+      }
     };
 
     // Abridores
@@ -344,8 +456,39 @@
     }
 
     // Respuesta del bot
+    function selectResponses(toneBank, level) {
+      if (!toneBank) return [];
+      if (Array.isArray(toneBank[level]) && toneBank[level].length) {
+        return toneBank[level];
+      }
+      const defaultLevel = Number.isInteger(toneBank.defaultLevel) ? toneBank.defaultLevel : 2;
+      if (Array.isArray(toneBank[defaultLevel]) && toneBank[defaultLevel].length) {
+        return toneBank[defaultLevel];
+      }
+      const candidates = Object.keys(toneBank)
+        .map(k => Number.parseInt(k, 10))
+        .filter(n => Number.isInteger(n) && Array.isArray(toneBank[n]) && toneBank[n].length)
+        .sort((a, b) => Math.abs(a - level) - Math.abs(b - level));
+      for (const candidate of candidates) {
+        const arr = toneBank[candidate];
+        if (Array.isArray(arr) && arr.length) {
+          return arr;
+        }
+      }
+      return [];
+    }
+
     function botReply() {
-      const arr = bank[tone] || bank.tender;
+      const toneBank = bank[tone] || bank.tender;
+      const rawLevel = Number.parseInt(intensity.value, 10);
+      let level = Number.isInteger(rawLevel) ? rawLevel : NaN;
+      if (!Number.isInteger(level)) {
+        level = Number.isInteger(toneBank && toneBank.defaultLevel) ? toneBank.defaultLevel : 2;
+      }
+      const responses = selectResponses(toneBank, level);
+      const fallback = selectResponses(bank.tender, bank.tender.defaultLevel);
+      const arr = responses.length ? responses : fallback;
+      if (!arr.length) return;
       const reply = arr[Math.floor(Math.random() * arr.length)];
       setTimeout(() => push('bot', reply), 500);
     }
@@ -506,11 +649,60 @@
     const intensity = document.getElementById('intensity');
     const mouth = document.getElementById('mouth');
     const root = document.documentElement;
+    const palettes = {
+      tender: [
+        { accent: '#cbb2ff', accent2: '#ffc6e0', mouth: '#d98fcc' },
+        { accent: '#b98cff', accent2: '#ff9bd8', mouth: '#e080c1' },
+        { accent: '#9b5cff', accent2: '#ff6fae', mouth: '#e85d8f' },
+        { accent: '#8a4ae6', accent2: '#ff5c9c', mouth: '#df4f86' },
+        { accent: '#7a3bd4', accent2: '#ff4c8c', mouth: '#d1437a' },
+        { accent: '#6c2cbf', accent2: '#ff3a7c', mouth: '#c1346c' }
+      ],
+      spicy: [
+        { accent: '#ffb3c1', accent2: '#ffc9a6', mouth: '#ff8fa3' },
+        { accent: '#ff9bac', accent2: '#ffb482', mouth: '#ff768f' },
+        { accent: '#ff7a95', accent2: '#ff9a66', mouth: '#ff5f7c' },
+        { accent: '#ff5f7c', accent2: '#ff8155', mouth: '#ff4d6d' },
+        { accent: '#ff4966', accent2: '#ff693f', mouth: '#ff3657' },
+        { accent: '#ff224d', accent2: '#ff4a2f', mouth: '#ff1a45' }
+      ],
+      playful: [
+        { accent: '#ffe6a6', accent2: '#b5f5ff', mouth: '#ffd166' },
+        { accent: '#ffd98a', accent2: '#a5ecff', mouth: '#ffc54b' },
+        { accent: '#ffc857', accent2: '#90e0ff', mouth: '#ffb347' },
+        { accent: '#ffb347', accent2: '#7fd8ff', mouth: '#ffa126' },
+        { accent: '#ff9c1f', accent2: '#6fd0ff', mouth: '#ff9015' },
+        { accent: '#ff8200', accent2: '#5fc6ff', mouth: '#ff7805' }
+      ],
+      composed: [
+        { accent: '#c3f3f0', accent2: '#a7d5ff', mouth: '#9cded7' },
+        { accent: '#a9e9e3', accent2: '#91c8ff', mouth: '#82d4c9' },
+        { accent: '#8fded6', accent2: '#7abaff', mouth: '#68c9bb' },
+        { accent: '#6ecfbe', accent2: '#65abff', mouth: '#4fb7aa' },
+        { accent: '#4fc0a7', accent2: '#509cff', mouth: '#3aa495' },
+        { accent: '#34b197', accent2: '#3c8dff', mouth: '#2c9587' }
+      ]
+    };
+
+    function detectTone(){
+      const text = toneText ? (toneText.textContent || '') : '';
+      if(text.includes('Picante')) return 'spicy';
+      if(text.includes('Juguetón')) return 'playful';
+      if(text.includes('Serena')) return 'composed';
+      return 'tender';
+    }
+
     function refreshMood(){
-    const spicy = toneText.textContent.includes('Picante');
-    const playful = toneText.textContent.includes('Juguetón');
-    mouth.setAttribute('stroke', spicy? '#ff6b81' : (playful? '#ffd166' : '#e85d8f'));
-    // podríamos variar --accent si quisiéramos más dramatismo
+      const toneKey = detectTone();
+      const palette = palettes[toneKey] || palettes.tender;
+      const raw = intensity ? Number.parseInt(intensity.value, 10) : NaN;
+      const idx = Number.isInteger(raw) ? Math.min(Math.max(raw, 0), palette.length - 1) : (palette.length > 2 ? 2 : 0);
+      const mood = palette[idx] || palette[palette.length - 1];
+      root.style.setProperty('--accent', mood.accent);
+      root.style.setProperty('--accent2', mood.accent2);
+      if (mouth) {
+        mouth.setAttribute('stroke', mood.mouth);
+      }
     }
     intensity.addEventListener('input', refreshMood);
     document.querySelectorAll('.pill').forEach(p=> p.addEventListener('click', ()=> setTimeout(refreshMood, 0)));
