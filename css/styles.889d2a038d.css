@@ -5861,10 +5861,16 @@ a:hover {
 .portfolio-filter {
   background-color: var(--negro-sombra);
   padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (min-width: 769px) {
+  .blog-filter,
+  .portfolio-filter {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .filter-container,
@@ -5903,16 +5909,52 @@ a:hover {
 }
 
 @media screen and (max-width: 768px) {
-  .filter-container,
+  .portfolio-filter {
+    position: static;
+    padding: 0.5rem 0;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .portfolio-filter .filter-container {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.75rem;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+
+  .portfolio-filter .filter-btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 0.55rem 1rem;
+    font-size: 0.9rem;
+    scroll-snap-align: center;
+  }
+
   .blog-filter__container {
     flex-direction: column;
     align-items: center;
   }
 
-  .filter-btn,
   .blog-filter__button {
     width: 80%;
     margin: 0.3rem 0;
+  }
+
+  .portfolio-filter .filter-container::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .portfolio-filter .filter-container::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+  }
+
+  .portfolio-filter .filter-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
   }
 }
 
