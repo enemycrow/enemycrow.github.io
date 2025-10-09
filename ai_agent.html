@@ -30,7 +30,8 @@
         radial-gradient(900px 600px at 90% 20%, rgba(255,77,109,.18), transparent 50%),
         radial-gradient(700px 500px at 50% 80%, rgba(36,209,126,.12), transparent 45%),
         var(--bg);
-      display:flex; align-items:center; justify-content:center; padding:18px;
+      display:flex; align-items:flex-start; justify-content:center; padding:18px;
+      min-height:100vh; overflow-y:auto;
     }
     .app{
       width:min(1100px, 100%);
@@ -170,6 +171,15 @@
     @keyframes talk{0%,100%{transform:scaleY(1)}40%{transform:scaleY(.82)}70%{transform:scaleY(1.1)}}
     @keyframes sparkle{0%,100%{transform:translateZ(30px) translateY(0); opacity:.95;}50%{transform:translateZ(40px) translateY(-6px); opacity:1;}}
     @keyframes spin{to{transform:rotate(360deg)}}
+    
+    /* Responsive tweaks: make mascot smaller and reduce padding on narrow viewports */
+    @media (max-width: 600px) {
+      .mascot-wrap{height:140px}
+      .app{padding:12px}
+      .history{padding:12px}
+      .panel{padding:12px}
+      .chat .input{padding:10px}
+    }
   </style>
 </head>
 <body>
