@@ -86,25 +86,30 @@
         <div class="container">
             <h2 class="section-title">Todas las Entradas</h2>
             <div class="blog-filter">
-                <div class="blog-filter__container">
-                    <div class="blog-filter__group blog-filter__group--works">
-                        <h3 class="blog-filter__title">Por obra</h3>
-                        <div class="filter-dropdown" id="blog-filter-works">
-                            <button class="filter-dropdown__toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
-                                <span class="filter-dropdown__placeholder">Todas las obras</span>
-                                <span class="filter-dropdown__caret" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
-                            </button>
-                            <div class="filter-dropdown__menu" role="listbox"></div>
+                <button class="blog-filter__toggle" type="button" aria-expanded="false" aria-controls="blog-filter-panel">
+                    Filtrar entradas
+                </button>
+                <div class="blog-filter__panel" id="blog-filter-panel">
+                    <div class="blog-filter__container">
+                        <div class="blog-filter__group blog-filter__group--works">
+                            <h3 class="blog-filter__title">Por obra</h3>
+                            <div class="filter-dropdown" id="blog-filter-works">
+                                <button class="filter-dropdown__toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                                    <span class="filter-dropdown__placeholder">Todas las obras</span>
+                                    <span class="filter-dropdown__caret" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                                </button>
+                                <div class="filter-dropdown__menu" role="listbox"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="blog-filter__group blog-filter__group--topics">
-                        <h3 class="blog-filter__title">Por tópico</h3>
-                        <div class="filter-dropdown" id="blog-filter-topics">
-                            <button class="filter-dropdown__toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
-                                <span class="filter-dropdown__placeholder">Todos los tópicos</span>
-                                <span class="filter-dropdown__caret" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
-                            </button>
-                            <div class="filter-dropdown__menu" role="listbox"></div>
+                        <div class="blog-filter__group blog-filter__group--topics">
+                            <h3 class="blog-filter__title">Por tópico</h3>
+                            <div class="filter-dropdown" id="blog-filter-topics">
+                                <button class="filter-dropdown__toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                                    <span class="filter-dropdown__placeholder">Todos los tópicos</span>
+                                    <span class="filter-dropdown__caret" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                                </button>
+                                <div class="filter-dropdown__menu" role="listbox"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

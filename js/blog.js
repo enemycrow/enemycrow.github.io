@@ -527,6 +527,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  const filterRoot = document.querySelector('.blog-filter');
+  const filterToggle = filterRoot ? filterRoot.querySelector('.blog-filter__toggle') : null;
+  if (filterRoot && filterToggle) {
+    const updateExpanded = () => {
+      const isOpen = filterRoot.classList.contains('is-open');
+      filterToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    };
+
+    updateExpanded();
+
+    filterToggle.addEventListener('click', () => {
+      const isNowOpen = filterRoot.classList.toggle('is-open');
+      filterToggle.setAttribute('aria-expanded', isNowOpen ? 'true' : 'false');
+      if (isNowOpen) {
+        const firstDropdownToggle = filterRoot.querySelector('.filter-dropdown__toggle');
+        if (firstDropdownToggle) {
+          firstDropdownToggle.focus();
+        }
+      }
+    });
+  }
+
   const reactionFields = ['toco','sumergirme','personajes','mundo','lugares'];
 
   async function fetchTotalReactions(slug) {
