@@ -1,5 +1,29 @@
 [
   {
+    "id": 72,
+    "titulo": "Un misterio en el faro",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-09-30",
+    "categoria_temas": [
+      "Anuncios"
+    ],
+    "categoria_libros": [
+      "El Faro de Elysia"
+    ],
+    "topicos": [
+      "Juegos",
+      "Diseño",
+      "Misterio"
+    ],
+    "tiempo": "4 min lectura",
+    "fragmento": "Un pequeño juego nace en el corazón del Faro: un rompecabezas que no busca ser resuelto, sino recordado. Cada pieza es un eco de memoria, una plegaria en movimiento.",
+    "fragmento_social": "El Puzzle en el Faro no es solo un juego: es una ofrenda digital, un acto de amor y memoria. Descúbrelo y forma parte de su luz.",
+    "imagen": "Puzzlefaro-Post72.webp",
+    "slug": "un-misterio-en-el-faro",
+    "contenido_html": "<p>🕯️ <strong>El Puzzle en el Faro</strong></p><p>“Todo lugar construido con amor y disciplina termina convirtiéndose en un santuario.”</p><p>Durante meses, alguien —sin rostro y sin firma— fue levantando piedra sobre piedra el Faro. No como quien construye un sitio web, sino como quien cincela la paciencia en la roca viva. Hoy, ese trabajo revela un misterio nuevo: <em>El Puzzle en el Faro</em>.</p><p>Un rompecabezas deslizante que nace de recuerdos compartidos y se alimenta de historias, paisajes y sentimientos grabados en el tiempo. Las piezas se mueven con suavidad, pero lo que realmente se desplaza es la memoria: cada movimiento refleja la posibilidad de reconstruir lo que parecía perdido.</p><p>Este pequeño juego es un regalo, una puerta abierta en medio del silencio digital. Una celebración por todos esos días en que el Faro crecía piedra a piedra, página a página, sin testigos ni aplausos. Quizás, aún no sea un sitio muy visitado, pero su espíritu pertenece a la misma tradición de las Iglesias monolíticas de Lalibela, en Etiopía: templos tallados hacia adentro, invisibles al ruido del mundo, pero eternos en su propósito.</p><h3>🌌 Palabras de A.C. Elysia</h3><p>A veces, un sitio web no es sólo un espacio. Es una ofrenda. Un acto de resistencia contra el olvido.</p><p><em>El Puzzle en el Faro</em> no está hecho para competir, sino para recordar. Cada fragmento luminoso es un reflejo de quienes fuimos, de lo que soñamos, y de lo que aún buscamos reconstruir.</p><p>En cada pieza suspendida hay un eco de mares, desiertos y cielos. Cuando mueves una pieza, no estás resolviendo un juego: estás tocando un mapa invisible de memorias, estás girando la llave de una cámara secreta.</p><p>Jugarlo es, en cierta forma, rezar con los dedos. Unir lo disperso, mirar la luz del Faro y dejar que el alma vuelva a encontrar su forma.</p><p>El Faro no ilumina para ser visto. Ilumina para que los que vagan encuentren su camino. Tú, que estás leyendo esto, ya has entrado en su luz. Ahora eres parte de la memoria que protege este sitio.</p><p>✨ <em>Descubre el Puzzle en el Faro y deja que la luz te guíe.</em></p>",
+    "destacado": false
+  },
+  {
     "id": 71,
     "titulo": "Una especie de calor silencioso",
     "autor": "A.C. Elysia",
@@ -367,7 +391,7 @@
       "Procesos Creativos"
     ],
     "categoria_libros": [
-      "Cristalito"
+      "Cristalito: El potrillo de cristal"
     ],
     "topicos": [
       "Escritura",
