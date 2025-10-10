@@ -199,27 +199,39 @@
             </svg>
           </div>
           <!-- Face/body -->
-          <div class="layer" style="transform: translateZ(0)">
-            <svg viewBox="0 0 200 200" role="img" aria-label="Asistente visual">
-              <!-- hair halo -->
-              <ellipse cx="100" cy="70" rx="70" ry="48" fill="var(--mascot-hair, #2b2840)"/>
-              <!-- head -->
-              <circle cx="100" cy="90" r="46" fill="var(--mascot-skin, #f4e9ff)"/>
-              <!-- eyes -->
-              <g id="eyes" class="eye">
-                <ellipse cx="82" cy="90" rx="8" ry="6" fill="var(--mascot-eye, #1e1b2b)" style="transform-origin:82px 90px; animation: blink 6s infinite"/>
-                <ellipse cx="118" cy="90" rx="8" ry="6" fill="var(--mascot-eye, #1e1b2b)" style="transform-origin:118px 90px; animation: blink 6.4s infinite"/>
-              </g>
-              <!-- mouth -->
-              <g id="mouthGroup" class="mouth-group" style="transform-origin:100px 118px;">
-                <path id="mouth" d="M80 110 Q100 125 120 110" stroke="var(--mascot-mouth, #e85d8f)" stroke-width="5" fill="none" stroke-linecap="round"/>
-              </g>
-              <!-- body -->
-              <path d="M58 150 Q100 175 142 150 L150 200 L50 200 Z" fill="#1a1827"/>
-              <!-- chest breathe highlight -->
-              <ellipse class="mascot-breath" cx="100" cy="150" rx="26" ry="10" fill="rgba(255,255,255,.08)" style="transform-origin:100px 150px; animation: breathe 5.5s ease-in-out infinite"/>
-            </svg>
-          </div>
+              <div class="layer" style="transform: translateZ(0)" id="mascotSvgLayer">
+                <!-- Default inline SVG (used if no external SVG is found) -->
+                <svg viewBox="0 0 200 200" role="img" aria-label="Asistente visual" id="mascotInlineSvg">
+                  <!-- hair halo -->
+                  <ellipse cx="100" cy="70" rx="70" ry="48" fill="var(--mascot-hair, #2b2840)"/>
+                  <!-- head -->
+                  <circle cx="100" cy="90" r="46" fill="var(--mascot-skin, #f4e9ff)"/>
+                  <!-- eyes -->
+                  <g id="eyes" class="eye">
+                    <ellipse cx="82" cy="90" rx="8" ry="6" fill="var(--mascot-eye, #1e1b2b)" style="transform-origin:82px 90px; animation: blink 6s infinite"/>
+                    <ellipse cx="118" cy="90" rx="8" ry="6" fill="var(--mascot-eye, #1e1b2b)" style="transform-origin:118px 90px; animation: blink 6.4s infinite"/>
+                  </g>
+                  <!-- mouth -->
+                  <g id="mouthGroup" class="mouth-group" style="transform-origin:100px 118px;">
+                    <path id="mouth" d="M80 110 Q100 125 120 110" stroke="var(--mascot-mouth, #e85d8f)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                  </g>
+                  <!-- body -->
+                  <path d="M58 150 Q100 175 142 150 L150 200 L50 200 Z" fill="#1a1827"/>
+                  <!-- chest breathe highlight -->
+                  <ellipse class="mascot-breath" cx="100" cy="150" rx="26" ry="10" fill="rgba(255,255,255,.08)" style="transform-origin:100px 150px; animation: breathe 5.5s ease-in-out infinite"/>
+                </svg>
+                <!-- External SVG loader: if you put an SVG at assets/images/mascot/monita.svg, the script will try to fetch it and replace the inline SVG.
+                     Expected element IDs inside your external SVG (optional but recommended for full compatibility):
+                     - mouth (path)
+                     - mouthGroup (group containing mouth)
+                     - eyes (group or elements for eyes)
+                     - glowStopInner (stop element id for glow gradient inner color)
+                     - glowStopOuter (stop element id for glow gradient outer color)
+                     - sparkOne, sparkTwo, sparkThree (spark elements)
+                     - mascot-breath (element for chest breathe highlight)
+                     If these IDs exist the JS will map them automatically so functions like applyTonePalette and applyMouthShape keep working.
+                -->
+              </div>
           <!-- Fore sparkles -->
           <div class="layer float" style="transform: translateZ(30px)">
             <svg viewBox="0 0 200 200" aria-hidden="true">
@@ -314,6 +326,43 @@
 
   <script>
   (function(){
+    // Attempt to load an external SVG mascot if present.
+    // The file to place: assets/images/mascot/monita.svg
+    (function tryLoadExternalMascot(){
+      const url = '/assets/images/mascot/monita.svg';
+      fetch(url).then(res => {
+        if (!res.ok) throw new Error('no-svg');
+        return res.text();
+      }).then(text => {
+        try {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, 'image/svg+xml');
+          const svg = doc.querySelector('svg');
+          if (!svg) return;
+          const layer = document.getElementById('mascotSvgLayer');
+          if (!layer) return;
+          // Remove the inline default svg and inject the external one
+          const inline = document.getElementById('mascotInlineSvg');
+          if (inline) inline.remove();
+          svg.setAttribute('role', 'img');
+          svg.setAttribute('aria-label', 'Asistente visual');
+          svg.style.width = '180px';
+          svg.style.height = 'auto';
+          layer.appendChild(svg);
+          // Expose convenience mapping: attach to window so the later init code can find elements
+          window._externalMascot = window._externalMascot || {};
+          const ids = ['mouth','mouthGroup','glowStopInner','glowStopOuter','sparkOne','sparkTwo','sparkThree','eyes','mascot-breath','mascotBreath','mascot_breath','mascot-hair','mascot-eye','mascot-eye-left','mascot-eye-right','mascot-skin'];
+          ids.forEach(id => {
+            const found = svg.getElementById ? svg.getElementById(id) : svg.querySelector('#' + id);
+            if (found) window._externalMascot[id] = found;
+          });
+        } catch (err) {
+          // ignore parsing errors
+        }
+      }).catch(() => {
+        // no external svg — that's fine, keep inline svg
+      });
+    })();
     const el = id => document.getElementById(id);
     const history = el('history');
     const input = el('input');
@@ -331,13 +380,14 @@
     const status = el('status');
     const mascot = el('mascot');
     const mascotWrap = el('mascotWrap');
-    const mouth = document.getElementById('mouth');
-    const mouthGroup = document.getElementById('mouthGroup');
-    const glowStopInner = document.getElementById('glowStopInner');
-    const glowStopOuter = document.getElementById('glowStopOuter');
-    const sparkOne = document.getElementById('sparkOne');
-    const sparkTwo = document.getElementById('sparkTwo');
-    const sparkThree = document.getElementById('sparkThree');
+  const _ext = (window._externalMascot || {});
+  const mouth = _ext.mouth || document.getElementById('mouth');
+  const mouthGroup = _ext.mouthGroup || document.getElementById('mouthGroup');
+  const glowStopInner = _ext.glowStopInner || document.getElementById('glowStopInner');
+  const glowStopOuter = _ext.glowStopOuter || document.getElementById('glowStopOuter');
+  const sparkOne = _ext.sparkOne || document.getElementById('sparkOne');
+  const sparkTwo = _ext.sparkTwo || document.getElementById('sparkTwo');
+  const sparkThree = _ext.sparkThree || document.getElementById('sparkThree');
     const apiKeyInput = el('apiKey');
     const root = document.documentElement;
 
@@ -485,6 +535,17 @@
       mascot.style.setProperty('--mascot-hair', palette.hair);
       mascot.style.setProperty('--mascot-eye', palette.eye);
       mascot.style.setProperty('--mascot-skin', palette.skin);
+      // If an external SVG was loaded and exposes parts, set their fills directly
+      const ext = (window._externalMascot || {});
+      try {
+        if (ext['mascot-hair']) ext['mascot-hair'].setAttribute('fill', palette.hair);
+        if (ext['mascot-eye']) ext['mascot-eye'].setAttribute('fill', palette.eye);
+        if (ext['mascot-eye-left']) ext['mascot-eye-left'].setAttribute('fill', palette.eye);
+        if (ext['mascot-eye-right']) ext['mascot-eye-right'].setAttribute('fill', palette.eye);
+        if (ext['mascot-skin']) ext['mascot-skin'].setAttribute('fill', palette.skin);
+      } catch (err) {
+        // fail silently if external SVG elements are not standard SVG DOM nodes
+      }
     }
 
     function applyMouthShape(toneKey, band) {

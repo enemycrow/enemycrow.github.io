@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="360" height="360" aria-label="Monita placeholder" role="img">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="40%" r="60%">
+      <stop id="glowStopInner" offset="0%" stop-color="#cbb2ff"/>
+      <stop id="glowStopOuter" offset="100%" stop-color="rgba(203,178,255,0)"/>
+    </radialGradient>
+  </defs>
+  <!-- back glow -->
+  <circle cx="100" cy="80" r="70" fill="url(#g)" />
+
+  <!-- hair -->
+  <path id="mascot-hair" d="M30 80 Q100 10 170 80 Q150 40 100 40 Q50 40 30 80 Z" fill="#2b2840" />
+
+  <!-- head/skin -->
+  <circle id="mascot-skin" cx="100" cy="100" r="46" fill="#f4e9ff" />
+
+  <!-- eyes group -->
+  <g id="eyes">
+    <ellipse id="mascot-eye-left" cx="82" cy="98" rx="8" ry="6" fill="#1e1b2b" />
+    <ellipse id="mascot-eye-right" cx="118" cy="98" rx="8" ry="6" fill="#1e1b2b" />
+  </g>
+
+  <!-- mouth group -->
+  <g id="mouthGroup" transform="translate(0,0)">
+    <path id="mouth" d="M78 112 Q100 125 122 112" stroke="#e85d8f" stroke-width="5" fill="none" stroke-linecap="round" />
+  </g>
+
+  <!-- body/torso -->
+  <path d="M58 150 Q100 175 142 150 L150 200 L50 200 Z" fill="#1a1827" />
+
+  <!-- chest breathe highlight -->
+  <ellipse id="mascot-breath" cx="100" cy="150" rx="26" ry="10" fill="rgba(255,255,255,0.08)" />
+
+  <!-- sparkles -->
+  <circle id="sparkOne" cx="40" cy="60" r="3" fill="#ff4d6d" />
+  <circle id="sparkTwo" cx="170" cy="100" r="2" fill="#9b5cff" />
+  <circle id="sparkThree" cx="130" cy="30" r="2.5" fill="#24d17e" />
+
+</svg>
