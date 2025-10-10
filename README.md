@@ -362,12 +362,15 @@ Este módulo te permite editar entradas del blog de forma local, sin necesidad d
 
    ```bash
    npm install express
+   export ADMIN_TOKEN="pon_aqui_un_token_largo_y_unico"
    node admin/server.js
    ```
 
 3. Abre [http://localhost:3000](http://localhost:3000) para acceder al panel.
+   El servidor escucha únicamente en `127.0.0.1` para que solo pueda accederse desde la misma máquina.
+   El navegador solicitará el token la primera vez que intentes cargar o guardar entradas.
 
-4. Desde ahí puedes completar los campos del post (título, autor, fecha, etc.).  
+4. Desde ahí puedes completar los campos del post (título, autor, fecha, etc.).
    El editor convierte el contenido enriquecido a HTML y lo guarda automáticamente en `posts.json`.
 
 ### 🧹 Buenas prácticas
@@ -378,6 +381,9 @@ Este módulo te permite editar entradas del blog de forma local, sin necesidad d
    /admin/
    /node_modules/
    ```
+
+- Mantén el valor de `ADMIN_TOKEN` fuera del repositorio (usa variables de entorno o `.env` ignorado).
+- Cambia el token periódicamente y evita reutilizarlo en otros servicios.
 
 Con este flujo, puedes verificar la apariencia final de las entradas con tus propios estilos antes de hacer commit y publicar.
 
