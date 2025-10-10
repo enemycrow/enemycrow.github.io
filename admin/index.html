@@ -52,10 +52,44 @@
   <script>
     const quill = new Quill('#editor', { theme: 'snow' });
 
+    const TOKEN_KEY = 'adminToken';
+
+    function getToken() {
+      let token = sessionStorage.getItem(TOKEN_KEY);
+      if (!token) {
+        token = prompt('Ingresa el token de administrador');
+        if (token) sessionStorage.setItem(TOKEN_KEY, token.trim());
+      }
+      return token;
+    }
+
+    async function fetchWithAuth(url, options = {}) {
+      const token = getToken();
+      if (!token) throw new Error('No se proporcionó token de administrador');
+
+      const opts = { ...options };
+      const headers = new Headers(opts.headers || {});
+      headers.set('x-admin-token', token);
+      opts.headers = headers;
+
+      const response = await fetch(url, opts);
+      if (response.status === 401) {
+        sessionStorage.removeItem(TOKEN_KEY);
+        alert('Token inválido o falta autorización. Intenta nuevamente.');
+        throw new Error('Unauthorized');
+      }
+      return response;
+    }
+
     // Carga posts existentes
     let posts = [];
     async function loadPosts() {
-      posts = await fetch('/posts', { credentials: 'include' }).then(r => r.json());
+      try {
+        posts = await fetchWithAuth('/posts', { credentials: 'include' }).then(r => r.json());
+      } catch (err) {
+        console.error(err);
+        return;
+      }
       const select = document.getElementById('postSelect');
       posts.forEach(p => {
         const opt = document.createElement('option');
@@ -153,13 +187,17 @@
         destacado: document.getElementById('destacado').checked
       };
 
-      await fetch('/save-post', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(post),
-        credentials: 'include'
-      });
-      alert('Post guardado');
+      try {
+        await fetchWithAuth('/save-post', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(post),
+          credentials: 'include'
+        });
+        alert('Post guardado');
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     loadPosts();

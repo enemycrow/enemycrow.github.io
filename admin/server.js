@@ -2,10 +2,40 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const app = express();
 const PORT = 3000;
+const HOST = "127.0.0.1";
 
 const POSTS_FILE = path.join(__dirname, "..", "posts.json");
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
+
+if (!ADMIN_TOKEN) {
+  console.warn(
+    "[admin] ADMIN_TOKEN no está definido. Establece ADMIN_TOKEN en el entorno para proteger el panel."
+  );
+}
+
+function isAuthorized(token) {
+  if (!ADMIN_TOKEN) return true;
+  if (!token) return false;
+
+  const expected = Buffer.from(ADMIN_TOKEN, "utf8");
+  const received = Buffer.from(token, "utf8");
+
+  if (expected.length !== received.length) return false;
+
+  return crypto.timingSafeEqual(expected, received);
+}
+
+function requireAuth(req, res, next) {
+  if (isAuthorized(req.get("x-admin-token"))) {
+    next();
+    return;
+  }
+
+  res.status(401).json({ error: "Acceso no autorizado" });
+}
 
 app.use(express.json());
 
@@ -14,13 +44,13 @@ app.use("/css",    express.static(path.join(__dirname, "..", "css")));
 app.use("/assets", express.static(path.join(__dirname, "..", "assets")));
 
 // Devuelve todos los posts para cargarlos en el panel (edición)
-app.get("/posts", (_req, res) => {
+app.get("/posts", requireAuth, (_req, res) => {
   const posts = JSON.parse(fs.readFileSync(POSTS_FILE, "utf8"));
   res.json(posts);
 });
 
 // Crea/actualiza un post
-app.post("/save-post", (req, res) => {
+app.post("/save-post", requireAuth, (req, res) => {
   const post  = req.body;
   const posts = JSON.parse(fs.readFileSync(POSTS_FILE, "utf8"));
 
@@ -35,6 +65,6 @@ app.post("/save-post", (req, res) => {
 // Sirve la interfaz del panel
 app.use(express.static(__dirname));
 
-app.listen(PORT, () =>
-  console.log(`Panel de administración en http://localhost:${PORT}`)
+app.listen(PORT, HOST, () =>
+  console.log(`Panel de administración en http://${HOST}:${PORT}`)
 );
