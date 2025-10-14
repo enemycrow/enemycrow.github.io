@@ -57,6 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
       Morder tus labios.`,
       imageBase:'cinco-versos-antes-del-fuego', slug:'cinco-versos-antes-del-fuego', cc:'by-nc-nd',
       author:'Lauren Cuervo' },
+      { title:'Carta desde el río hacia el mar', year: 2025,
+      text:`... Y sus palabras contestaban a una carta cálida con una respuesta deleitosa, profunda:
+
+      Se le ama como se le ama a un río que recorre su viaje desde la montaña, desde su ápice y que se convierte en mar.
+      Que su sonido puede dejarte dormir en la noche. Con quietud. Con pasión y sin ella.
+      Con contemplación, cercanía y distancia.
+      Se le ama en la oscuridad, en silencio, en el paso que das cuando estás cerca, en la preocupación y en el agotamiento. En la desesperación de no sentir, en el término y en el fin. En el recuerdo de tu vestido blanco o en nuestras memorias viendo un atardecer cerca de un lago.
+      Se le ama sin palabras, sin sentir, sin estar, sin pensar.
+      Se le ama cuando se le cree odiar y cuando se le desea lejos.
+      Se le ama cuando el cuerpo y el alma empiezan a conversar.`,
+      imageBase:'carta-desde-el-rio-hacia-el-mar', slug:'carta-desde-el-rio-hacia-el-mar', cc:'by-nc-nd',
+      author:'A.C. Elysia' }
   ];
 
   // === 2) DOM ===
