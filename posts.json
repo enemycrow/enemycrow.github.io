@@ -1,5 +1,5 @@
 [
-    {
+  {
     "id": 78,
     "titulo": "La docencia como arte de inspirar escritores",
     "autor": "Lauren Cuervo",
@@ -21,7 +21,8 @@
     "imagen": "ElFarodeElysia-Post78.webp",
     "slug": "la-docencia-como-arte-de-inspirar-escritores",
     "contenido_html": "<p>Enseñar no es corregir. Es iluminar un faro para que otros aprendan a mirar cómo se hace. Cuando comenzamos a construir <em>El Faro de Elysia</em>, no lo hicimos con un manual o una fórmula, sino con una intención: crear un espacio donde la curiosidad guiara la experiencia, donde la música avanza o retrocede en quintas.</p><p>Este proceso podríamos compararlo con la docencia que nace del alma. No se trata de dictar lo que otros deben hacer, sino de ofrecerles un lugar donde puedan descubrirlo por sí mismos. En nuestro caso, ese lugar fue digital, un juego, un experimento entre código y emoción. Cada elemento de la pantalla podía tocarse, generar música, activar una imagen o una idea. Era como ver cómo un alumno o jugador despierta al contacto con el conocimiento.</p><p>Construimos ese faro con la ayuda de una inteligencia artificial. Pero más allá del algoritmo, lo que verdaderamente lo encendió fue la intención humana detrás: <strong>enseñar sin imponer</strong>, guiar sin dominar. Esa es la lección que toda docencia debería aprender de la creatividad.</p><p>Un maestro no transmite certezas: <em>transmite posibilidades</em>. No forma copias, sino caminos. En cada clic del juego, en cada movimiento del mouse que permitía que los objetos fueran tocado por el haz de luz, había un recordatorio silencioso de que enseñar y crear son actos hermanos. Ambos requieren paciencia, escucha y humildad.</p><p>Porque al final, el verdadero arte de enseñar consiste en desaparecer poco a poco, hasta que el otro brille por sí mismo. Como un faro que ilumina y luego deja que los navegantes encuentren su propio rumbo.</p><p>Explora <em>El Faro de Elysia</em> y enciende tu propia luz. 🌙</p>",
-    "destacado": false
+    "destacado": false,
+    "url": "blog/la-docencia-como-arte-de-inspirar-escritores.html"
   },
   {
     "id": 77,
