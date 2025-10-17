@@ -1,0 +1,19 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Galleta de la fortuna cerrada</title>
+  <desc id="desc">Ilustración kawaii de una galleta de la fortuna cerrada.</desc>
+  <defs>
+    <linearGradient id="shell" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f9c78a"/>
+      <stop offset="100%" stop-color="#f2a86b"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <path d="M40 96c0-42 32-74 60-74s60 32 60 74c0 42-26 74-60 74S40 138 40 96z" fill="url(#shell)"/>
+    <path d="M62 86c10-12 26-20 38-20s28 8 38 20c-8 16-24 26-38 26s-30-10-38-26z" fill="#fbe1b8" opacity="0.8"/>
+    <path d="M90 130c0 6-5 10-10 10s-10-4-10-10" stroke="#5b3b57" stroke-width="4" stroke-linecap="round"/>
+    <path d="M130 130c0 6-5 10-10 10s-10-4-10-10" stroke="#5b3b57" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="82" cy="104" r="6" fill="#5b3b57"/>
+    <circle cx="118" cy="104" r="6" fill="#5b3b57"/>
+    <path d="M66 70c10-20 60-22 74-2" stroke="#f7b880" stroke-width="6" stroke-linecap="round" opacity="0.45"/>
+  </g>
+</svg>
