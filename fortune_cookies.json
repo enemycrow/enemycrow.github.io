@@ -1,0 +1,702 @@
+[
+  {
+    "id": 50,
+    "personaje": "Sunfelicity",
+    "mensaje": "La felicidad no se busca: se cultiva como una semilla.",
+    "imagen": "Sunfelicity-fortune50°.webp",
+    "slug": "sunfelicity-fortune50",
+    "tags": [
+      "gratitud",
+      "esperanza",
+      "alegría",
+      "resiliencia"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 49,
+    "personaje": "Sunfelicity",
+    "mensaje": "Sobrevivir también es una forma hermosa de florecer.",
+    "imagen": "Sunfelicity-fortune49°.webp",
+    "slug": "sunfelicity-fortune49",
+    "tags": [
+      "gratitud",
+      "esperanza",
+      "alegría",
+      "resiliencia"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 48,
+    "personaje": "Sunfelicity",
+    "mensaje": "Lo que brilla en ti no depende del clima.",
+    "imagen": "Sunfelicity-fortune48°.webp",
+    "slug": "sunfelicity-fortune48",
+    "tags": [
+      "gratitud",
+      "esperanza",
+      "alegría",
+      "resiliencia"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 47,
+    "personaje": "Sunfelicity",
+    "mensaje": "Agradecer lo pequeño es un acto de grandeza.",
+    "imagen": "Sunfelicity-fortune47°.webp",
+    "slug": "sunfelicity-fortune47",
+    "tags": [
+      "gratitud",
+      "esperanza",
+      "alegría",
+      "resiliencia"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 46,
+    "personaje": "Sunfelicity",
+    "mensaje": "El sol siempre regresa, incluso cuando tú dudas.",
+    "imagen": "Sunfelicity-fortune46°.webp",
+    "slug": "sunfelicity-fortune46",
+    "tags": [
+      "gratitud",
+      "esperanza",
+      "alegría",
+      "resiliencia"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 45,
+    "personaje": "Tulipretty",
+    "mensaje": "Cada herida que sanas deja una flor en su lugar.",
+    "imagen": "Tulipretty-fortune45°.webp",
+    "slug": "tulipretty-fortune45",
+    "tags": [
+      "autoestima",
+      "autoaceptación",
+      "sanación",
+      "ternura"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 44,
+    "personaje": "Tulipretty",
+    "mensaje": "El alma también tiene estaciones: abrázalas todas.",
+    "imagen": "Tulipretty-fortune44°.webp",
+    "slug": "tulipretty-fortune44",
+    "tags": [
+      "autoestima",
+      "autoaceptación",
+      "sanación",
+      "ternura"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 43,
+    "personaje": "Tulipretty",
+    "mensaje": "No necesitas ser perfecta para florecer.",
+    "imagen": "Tulipretty-fortune43°.webp",
+    "slug": "tulipretty-fortune43",
+    "tags": [
+      "autoestima",
+      "autoaceptación",
+      "sanación",
+      "ternura"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 42,
+    "personaje": "Tulipretty",
+    "mensaje": "El brillo más tierno nace del perdón hacia ti misma.",
+    "imagen": "Tulipretty-fortune42°.webp",
+    "slug": "tulipretty-fortune42",
+    "tags": [
+      "autoestima",
+      "autoaceptación",
+      "sanación",
+      "ternura"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 41,
+    "personaje": "Tulipretty",
+    "mensaje": "No escondas tus manchas; son la firma de tu historia.",
+    "imagen": "Tulipretty-fortune41°.webp",
+    "slug": "tulipretty-fortune41",
+    "tags": [
+      "autoestima",
+      "autoaceptación",
+      "sanación",
+      "ternura"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 40,
+    "personaje": "Rubberic",
+    "mensaje": "La calma construye más que la prisa.",
+    "imagen": "Rubberic-fortune40°.webp",
+    "slug": "rubberic-fortune40",
+    "tags": [
+      "calma",
+      "equilibrio",
+      "paciencia",
+      "resiliencia"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 39,
+    "personaje": "Rubberic",
+    "mensaje": "Incluso bajo la lluvia, el árbol sigue creciendo.",
+    "imagen": "Rubberic-fortune39°.webp",
+    "slug": "rubberic-fortune39",
+    "tags": [
+      "calma",
+      "equilibrio",
+      "paciencia",
+      "resiliencia"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 38,
+    "personaje": "Rubberic",
+    "mensaje": "Ser tranquilo no significa no tener fuerza.",
+    "imagen": "Rubberic-fortune38°.webp",
+    "slug": "rubberic-fortune38",
+    "tags": [
+      "calma",
+      "equilibrio",
+      "paciencia",
+      "resiliencia"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 37,
+    "personaje": "Rubberic",
+    "mensaje": "La flexibilidad no te rompe, te enseña a fluir.",
+    "imagen": "Rubberic-fortune37°.webp",
+    "slug": "rubberic-fortune37",
+    "tags": [
+      "calma",
+      "equilibrio",
+      "paciencia",
+      "resiliencia"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 36,
+    "personaje": "Rubberic",
+    "mensaje": "Doblarte ante el viento no es rendirte, es confiar.",
+    "imagen": "Rubberic-fortune36°.webp",
+    "slug": "rubberic-fortune36",
+    "tags": [
+      "calma",
+      "equilibrio",
+      "paciencia",
+      "resiliencia"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 35,
+    "personaje": "Deliciosa",
+    "mensaje": "Cada palabra amable es un pétalo que sana.",
+    "imagen": "Deliciosa-fortune35°.webp",
+    "slug": "deliciosa-fortune35",
+    "tags": [
+      "comunicación",
+      "vulnerabilidad",
+      "asertividad",
+      "amor propio"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 34,
+    "personaje": "Deliciosa",
+    "mensaje": "La belleza más grande es saber expresarte sin miedo.",
+    "imagen": "Deliciosa-fortune34°.webp",
+    "slug": "deliciosa-fortune34",
+    "tags": [
+      "comunicación",
+      "vulnerabilidad",
+      "asertividad",
+      "amor propio"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 33,
+    "personaje": "Deliciosa",
+    "mensaje": "No temas sentir bonito, aunque te hayan herido.",
+    "imagen": "Deliciosa-fortune33°.webp",
+    "slug": "deliciosa-fortune33",
+    "tags": [
+      "comunicación",
+      "vulnerabilidad",
+      "asertividad",
+      "amor propio"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 32,
+    "personaje": "Deliciosa",
+    "mensaje": "Lo que no dices también florece, si lo cuidas con honestidad.",
+    "imagen": "Deliciosa-fortune32°.webp",
+    "slug": "deliciosa-fortune32",
+    "tags": [
+      "comunicación",
+      "vulnerabilidad",
+      "asertividad",
+      "amor propio"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 31,
+    "personaje": "Deliciosa",
+    "mensaje": "Amar no siempre es entender, a veces es aprender.",
+    "imagen": "Deliciosa-fortune31°.webp",
+    "slug": "deliciosa-fortune31",
+    "tags": [
+      "comunicación",
+      "vulnerabilidad",
+      "asertividad",
+      "amor propio"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 30,
+    "personaje": "Fowsymph",
+    "mensaje": "Sé quien eres, incluso si tu voz tiembla.",
+    "imagen": "Fowsymph-fortune30°.webp",
+    "slug": "fowsymph-fortune30",
+    "tags": [
+      "autenticidad",
+      "valentía",
+      "límites sanos",
+      "autoestima"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 29,
+    "personaje": "Fowsymph",
+    "mensaje": "Las dudas no te hacen débil, te hacen real.",
+    "imagen": "Fowsymph-fortune29°.webp",
+    "slug": "fowsymph-fortune29",
+    "tags": [
+      "autenticidad",
+      "valentía",
+      "límites sanos",
+      "autoestima"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 28,
+    "personaje": "Fowsymph",
+    "mensaje": "Aprender a decir no también es una forma de quererte.",
+    "imagen": "Fowsymph-fortune28°.webp",
+    "slug": "fowsymph-fortune28",
+    "tags": [
+      "autenticidad",
+      "valentía",
+      "límites sanos",
+      "autoestima"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 27,
+    "personaje": "Fowsymph",
+    "mensaje": "No tienes que gustarle a todos, solo a quien te abraza sin miedo.",
+    "imagen": "Fowsymph-fortune27°.webp",
+    "slug": "fowsymph-fortune27",
+    "tags": [
+      "autenticidad",
+      "valentía",
+      "límites sanos",
+      "autoestima"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 26,
+    "personaje": "Fowsymph",
+    "mensaje": "Ser amable contigo es la raíz de toda autenticidad.",
+    "imagen": "Fowsymph-fortune26°.webp",
+    "slug": "fowsymph-fortune26",
+    "tags": [
+      "autenticidad",
+      "valentía",
+      "límites sanos",
+      "autoestima"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 25,
+    "personaje": "Panthmeow",
+    "mensaje": "Cada etapa de ti es una versión que te enseña a amar mejor.",
+    "imagen": "Panthmeow-fortune25°.webp",
+    "slug": "panthmeow-fortune25",
+    "tags": [
+      "identidad",
+      "rebeldía",
+      "sombra",
+      "crecimiento"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 24,
+    "personaje": "Panthmeow",
+    "mensaje": "Cuando el mundo no te entienda, acaricia tu propia sombra.",
+    "imagen": "Panthmeow-fortune24°.webp",
+    "slug": "panthmeow-fortune24",
+    "tags": [
+      "identidad",
+      "rebeldía",
+      "sombra",
+      "crecimiento"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 23,
+    "personaje": "Panthmeow",
+    "mensaje": "La rebeldía también protege lo que el alma valora.",
+    "imagen": "Panthmeow-fortune23°.webp",
+    "slug": "panthmeow-fortune23",
+    "tags": [
+      "identidad",
+      "rebeldía",
+      "sombra",
+      "crecimiento"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 22,
+    "personaje": "Panthmeow",
+    "mensaje": "No corras por ser comprendida, brilla por ser tú.",
+    "imagen": "Panthmeow-fortune22°.webp",
+    "slug": "panthmeow-fortune22",
+    "tags": [
+      "identidad",
+      "rebeldía",
+      "sombra",
+      "crecimiento"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 21,
+    "personaje": "Panthmeow",
+    "mensaje": "Ser distinta no es un error, es tu hechizo más puro.",
+    "imagen": "Panthmeow-fortune21°.webp",
+    "slug": "panthmeow-fortune21",
+    "tags": [
+      "identidad",
+      "rebeldía",
+      "sombra",
+      "crecimiento"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 20,
+    "personaje": "Axolittle",
+    "mensaje": "A veces, lo que callas también necesita ternura.",
+    "imagen": "Axolittle-fortune20°.webp",
+    "slug": "axolittle-fortune20",
+    "tags": [
+      "empatía",
+      "escucha",
+      "ternura",
+      "comunicación"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 19,
+    "personaje": "Axolittle",
+    "mensaje": "Escuchar también es una forma de hablar con amor.",
+    "imagen": "Axolittle-fortune19°.webp",
+    "slug": "axolittle-fortune19",
+    "tags": [
+      "empatía",
+      "escucha",
+      "ternura",
+      "comunicación"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 18,
+    "personaje": "Axolittle",
+    "mensaje": "Las burbujas de la verdad siempre flotan hacia la luz.",
+    "imagen": "Axolittle-fortune18°.webp",
+    "slug": "axolittle-fortune18",
+    "tags": [
+      "empatía",
+      "escucha",
+      "ternura",
+      "comunicación"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 17,
+    "personaje": "Axolittle",
+    "mensaje": "Hablar de lo que sientes no te debilita, te aligera.",
+    "imagen": "Axolittle-fortune17°.webp",
+    "slug": "axolittle-fortune17",
+    "tags": [
+      "empatía",
+      "escucha",
+      "ternura",
+      "comunicación"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 16,
+    "personaje": "Axolittle",
+    "mensaje": "Las palabras dulces pueden sanar heridas invisibles.",
+    "imagen": "Axolittle-fortune16°.webp",
+    "slug": "axolittle-fortune16",
+    "tags": [
+      "empatía",
+      "escucha",
+      "ternura",
+      "comunicación"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 15,
+    "personaje": "Pangolike",
+    "mensaje": "Nadie se va vacío del corazón cuando comparte un plato.",
+    "imagen": "Pangolike-fortune15°.webp",
+    "slug": "pangolike-fortune15",
+    "tags": [
+      "familia",
+      "hospitalidad",
+      "amistad",
+      "compartir"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 14,
+    "personaje": "Pangolike",
+    "mensaje": "El alma también se alimenta de conversaciones buenas.",
+    "imagen": "Pangolike-fortune14°.webp",
+    "slug": "pangolike-fortune14",
+    "tags": [
+      "familia",
+      "hospitalidad",
+      "amistad",
+      "compartir"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 13,
+    "personaje": "Pangolike",
+    "mensaje": "En la mesa, todos somos familia.",
+    "imagen": "Pangolike-fortune13°.webp",
+    "slug": "pangolike-fortune13",
+    "tags": [
+      "familia",
+      "hospitalidad",
+      "amistad",
+      "compartir"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 12,
+    "personaje": "Pangolike",
+    "mensaje": "La amistad se cocina a fuego lento.",
+    "imagen": "Pangolike-fortune12°.webp",
+    "slug": "pangolike-fortune12",
+    "tags": [
+      "familia",
+      "hospitalidad",
+      "amistad",
+      "compartir"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 11,
+    "personaje": "Pangolike",
+    "mensaje": "Cocinar para otros es decir: te amo, pero con sabor.",
+    "imagen": "Pangolike-fortune11°.webp",
+    "slug": "pangolike-fortune11",
+    "tags": [
+      "familia",
+      "hospitalidad",
+      "amistad",
+      "compartir"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 10,
+    "personaje": "Sharkody",
+    "mensaje": "La calma no es debilidad, es dirección.",
+    "imagen": "Sharkody-fortune10°.webp",
+    "slug": "sharkody-fortune10",
+    "tags": [
+      "humor",
+      "calma",
+      "fortaleza emocional",
+      "silencio"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 9,
+    "personaje": "Sharkody",
+    "mensaje": "El silencio también puede ser amor cuando se comparte.",
+    "imagen": "Sharkody-fortune9°.webp",
+    "slug": "sharkody-fortune9",
+    "tags": [
+      "humor",
+      "calma",
+      "fortaleza emocional",
+      "silencio"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 8,
+    "personaje": "Sharkody",
+    "mensaje": "No temas mostrar tus cicatrices; son marcas de coraje.",
+    "imagen": "Sharkody-fortune8°.webp",
+    "slug": "sharkody-fortune8",
+    "tags": [
+      "humor",
+      "calma",
+      "fortaleza emocional",
+      "silencio"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 7,
+    "personaje": "Sharkody",
+    "mensaje": "Reír es morderle al miedo con los dientes de la alegría.",
+    "imagen": "Sharkody-fortune7°.webp",
+    "slug": "sharkody-fortune7",
+    "tags": [
+      "humor",
+      "calma",
+      "fortaleza emocional",
+      "silencio"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 6,
+    "personaje": "Sharkody",
+    "mensaje": "Incluso los mares más fuertes descansan al atardecer.",
+    "imagen": "Sharkody-fortune6°.webp",
+    "slug": "sharkody-fortune6",
+    "tags": [
+      "humor",
+      "calma",
+      "fortaleza emocional",
+      "silencio"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 5,
+    "personaje": "Marsheeall",
+    "mensaje": "La paciencia es el idioma que hablan los corazones sabios.",
+    "imagen": "Marsheeall-fortune5°.webp",
+    "slug": "marsheeall-fortune5",
+    "tags": [
+      "cuidado",
+      "paciencia",
+      "hogar",
+      "amor tierno"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 4,
+    "personaje": "Marsheeall",
+    "mensaje": "No todo lo perfecto brilla; a veces la armonía vive en el desorden.",
+    "imagen": "Marsheeall-fortune4°.webp",
+    "slug": "marsheeall-fortune4",
+    "tags": [
+      "cuidado",
+      "paciencia",
+      "hogar",
+      "amor tierno"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 3,
+    "personaje": "Marsheeall",
+    "mensaje": "Tu hogar comienza en el gesto más pequeño de cuidado.",
+    "imagen": "Marsheeall-fortune3°.webp",
+    "slug": "marsheeall-fortune3",
+    "tags": [
+      "cuidado",
+      "paciencia",
+      "hogar",
+      "amor tierno"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 2,
+    "personaje": "Marsheeall",
+    "mensaje": "El amor no se impone, se ofrece con ternura.",
+    "imagen": "Marsheeall-fortune2°.webp",
+    "slug": "marsheeall-fortune2",
+    "tags": [
+      "cuidado",
+      "paciencia",
+      "hogar",
+      "amor tierno"
+    ],
+    "fecha": "2025-10-17"
+  },
+  {
+    "id": 1,
+    "personaje": "Marsheeall",
+    "mensaje": "La calma también es una forma de valentía.",
+    "imagen": "Marsheeall-fortune1°.webp",
+    "slug": "marsheeall-fortune1",
+    "tags": [
+      "cuidado",
+      "paciencia",
+      "hogar",
+      "amor tierno"
+    ],
+    "fecha": "2025-10-17"
+  }
+]
