@@ -1,0 +1,323 @@
+:root {
+  color-scheme: light;
+  font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #fff6f8;
+  --shadow-soft: 0 12px 24px rgba(255, 173, 206, 0.25);
+  --accent: #ff9eb5;
+  --accent-strong: #ff6b92;
+  --text: #5b3b57;
+  --chip-bg: rgba(255, 158, 181, 0.18);
+  --panel-bg: rgba(255, 255, 255, 0.88);
+  --border-radius: 28px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #ffeef3 0%, #fff6f8 45%, #fffafc 100%);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.fortune-app {
+  width: min(640px, 100%);
+  text-align: center;
+}
+
+.cookie-stage {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.cookie-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 220ms ease;
+}
+
+.cookie-button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 6px;
+  border-radius: 50%;
+}
+
+.cookie-button:hover {
+  transform: scale(1.03);
+}
+
+.cookie {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+
+.cookie--open {
+  opacity: 0;
+  transform: scale(0.96) translateY(8px);
+}
+
+.cookie-button.is-open .cookie--closed {
+  opacity: 0;
+  transform: scale(0.9) translateY(-10px);
+}
+
+.cookie-button.is-open .cookie--open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.fortune-panel {
+  background: var(--panel-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-soft);
+  padding: 2.5rem 2rem 2rem;
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 420ms ease, transform 420ms ease;
+  pointer-events: none;
+}
+
+.fortune-panel.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.fortune-paper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto 2rem;
+}
+
+.paper-art {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 14px rgba(255, 158, 181, 0.25));
+}
+
+.fortune-text {
+  position: absolute;
+  inset: 15% 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  transition: opacity 480ms ease 180ms, transform 480ms ease 180ms;
+}
+
+.fortune-panel.is-visible .fortune-text {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.fortune-message {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.fortune-message p {
+  margin: 0 0 0.5rem;
+}
+
+.fortune-message cite {
+  display: block;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+.fortune-details {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.fortune-author {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-strong), #ffd4de);
+  box-shadow: var(--shadow-soft);
+}
+
+.fortune-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #ffe3eb;
+  padding: 1.2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.fortune-image img {
+  width: 100%;
+  border-radius: 22px;
+  display: block;
+  background: #ffeef3;
+}
+
+.fortune-image.is-fallback {
+  background: linear-gradient(135deg, #ffe9f1, #fff7fb);
+  padding: 2rem 1.5rem;
+}
+
+.fortune-image.is-fallback::before {
+  content: '💌';
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.fortune-image.is-fallback img {
+  display: none;
+}
+
+.fortune-image .fallback-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.fortune-stamp {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(91, 59, 87, 0.6);
+}
+
+.fortune-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.fortune-chip {
+  background: var(--chip-bg);
+  padding: 0.45rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-strong);
+  box-shadow: inset 0 0 0 1px rgba(255, 158, 181, 0.45);
+}
+
+.fortune-date {
+  font-size: 0.85rem;
+  color: rgba(91, 59, 87, 0.7);
+}
+
+.fortune-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pill-button {
+  border: none;
+  border-radius: 9999px;
+  padding: 0.9rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #fff;
+  box-shadow: var(--shadow-soft);
+}
+
+.pill-button--secondary {
+  background: #fff;
+  color: var(--accent-strong);
+  box-shadow: inset 0 0 0 2px rgba(255, 158, 181, 0.5);
+}
+
+.pill-button:hover {
+  transform: translateY(-2px);
+}
+
+.pill-button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.fortune-error {
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+
+  .cookie-button {
+    width: 150px;
+    height: 150px;
+  }
+
+  .fortune-paper {
+    max-width: 360px;
+  }
+}

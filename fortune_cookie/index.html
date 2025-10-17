@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fortune Cookie – Plumafarollama / Marsheeall, Sharkody &amp; Co.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fortune.css">
+</head>
+<body>
+  <main class="fortune-app">
+    <div class="cookie-stage" aria-live="polite">
+      <button id="cookieButton" class="cookie-button" aria-expanded="false" aria-controls="fortune-panel">
+        <span class="sr-only">Abrir galleta de la fortuna</span>
+        <img src="assets/cookie-closed.svg" alt="Galleta cerrada" class="cookie cookie--closed">
+        <img src="assets/cookie-open.svg" alt="Galleta abierta" class="cookie cookie--open" aria-hidden="true">
+      </button>
+    </div>
+
+    <section id="fortune-panel" class="fortune-panel" aria-hidden="true">
+      <div class="fortune-paper" role="presentation">
+        <img src="assets/paper.svg" alt="" aria-hidden="true" class="paper-art">
+        <div class="fortune-text">
+          <blockquote id="fortuneMessage" class="fortune-message">
+            <p></p>
+            <cite id="fortuneAuthor"></cite>
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="fortune-details">
+        <div class="fortune-author" id="fortuneAvatar" aria-label="Autor"></div>
+        <div class="fortune-image" id="fortuneImageWrapper">
+          <img id="fortuneImage" alt="Ilustración de la fortuna" loading="lazy">
+          <p class="fortune-stamp">El Tucán que come lápices</p>
+        </div>
+        <div class="fortune-tags" id="fortuneTags" aria-label="Etiquetas"></div>
+        <time id="fortuneDate" class="fortune-date" datetime=""></time>
+      </div>
+
+      <div class="fortune-actions">
+        <button id="anotherFortune" class="pill-button" type="button">✨ Otra fortuna</button>
+        <button id="shareFortune" class="pill-button pill-button--secondary" type="button">🔗 Compartir</button>
+      </div>
+    </section>
+
+    <section class="fortune-error" id="fortuneError" hidden>
+      <p>Ups, no pudimos cargar las galletitas ahora mismo. ¿Intentamos de nuevo?</p>
+      <button id="retryLoad" class="pill-button" type="button">Reintentar</button>
+    </section>
+  </main>
+
+  <template id="tagTemplate">
+    <span class="fortune-chip"></span>
+  </template>
+
+  <script src="fortune.js" type="module"></script>
+</body>
+</html>

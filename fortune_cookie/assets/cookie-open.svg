@@ -1,0 +1,25 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Galleta de la fortuna abierta</title>
+  <desc id="desc">Galleta abierta con trozos y una expresión alegre.</desc>
+  <defs>
+    <linearGradient id="shellA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7b36e"/>
+      <stop offset="100%" stop-color="#ed8d4a"/>
+    </linearGradient>
+    <linearGradient id="shellB" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fbd59b"/>
+      <stop offset="100%" stop-color="#f29a57"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <path d="M42 112c2-36 30-62 52-66l12 36c-8 18-28 34-64 30z" fill="url(#shellA)"/>
+    <path d="M158 112c-2-36-30-62-52-66l-12 36c8 18 28 34 64 30z" fill="url(#shellB)"/>
+    <path d="M80 134c0 8-6 14-14 14s-14-6-14-14" stroke="#5b3b57" stroke-width="4" stroke-linecap="round"/>
+    <path d="M148 134c0 8-6 14-14 14s-14-6-14-14" stroke="#5b3b57" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="74" cy="110" r="6" fill="#5b3b57"/>
+    <circle cx="126" cy="110" r="6" fill="#5b3b57"/>
+    <path d="M100 70l6-20" stroke="#f7c485" stroke-width="6" stroke-linecap="round"/>
+    <path d="M54 72l-12-12" stroke="#f9c78a" stroke-width="6" stroke-linecap="round"/>
+    <path d="M146 72l12-12" stroke="#f9c78a" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>
