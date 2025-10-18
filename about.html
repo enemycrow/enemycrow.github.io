@@ -52,7 +52,16 @@
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="about.html" class="active">Sobre Nosotros</a></li>
                     <li><a href="portfolio.html">Obras</a></li>
-                    <li><a href="blog.html">Diario</a></li>
+                    <li class="nav-item nav-item--has-submenu">
+                      <button class="nav-link nav-link--toggle" type="button" aria-expanded="false">
+                        Diario
+                        <span class="nav-link__icon" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                      </button>
+                      <ul class="nav-submenu" aria-label="Secciones del Diario">
+                        <li><a href="blog.html">Entradas del Diario</a></li>
+                        <li><a href="fortune_cookie/index.html">Galletas de la Fortuna</a></li>
+                      </ul>
+                    </li>
                     <li><a href="services.html">Servicios</a></li>
                     <li><a href="shop.html">Tienda</a></li>
                     <li><a href="contact.html">Contacto</a></li>

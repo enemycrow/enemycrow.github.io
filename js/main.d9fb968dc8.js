@@ -72,6 +72,10 @@ activarLatidoDeSylvora();
         if (mobileMenu && navLinks) {
             mobileMenu.addEventListener('click', function () {
                 navLinks.classList.toggle('active');
+
+                if (!navLinks.classList.contains('active')) {
+                    document.dispatchEvent(new CustomEvent('closeNavSubmenus'));
+                }
             });
 
             const navItems = navLinks.querySelectorAll('a');
@@ -81,6 +85,7 @@ activarLatidoDeSylvora();
                     item.addEventListener('click', function () {
                         if (window.innerWidth <= 768) {
                             navLinks.classList.remove('active');
+                            document.dispatchEvent(new CustomEvent('closeNavSubmenus'));
                         }
                     });
                 });
@@ -89,9 +94,92 @@ activarLatidoDeSylvora();
             window.addEventListener('resize', function () {
                 if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
+                    document.dispatchEvent(new CustomEvent('closeNavSubmenus'));
                 }
             });
         }
+    }
+
+    function setupNavigationSubmenus() {
+        const navItems = document.querySelectorAll('.nav-item--has-submenu');
+
+        if (!navItems.length) {
+            return;
+        }
+
+        const closeAll = (exception = null) => {
+            navItems.forEach(item => {
+                if (exception && item === exception) {
+                    return;
+                }
+
+                const toggle = item.querySelector('.nav-link--toggle');
+                const submenu = item.querySelector('.nav-submenu');
+
+                if (!toggle || !submenu) {
+                    return;
+                }
+
+                toggle.setAttribute('aria-expanded', 'false');
+                submenu.classList.remove('nav-submenu--open');
+            });
+        };
+
+        navItems.forEach(item => {
+            const toggle = item.querySelector('.nav-link--toggle');
+            const submenu = item.querySelector('.nav-submenu');
+
+            if (!toggle || !submenu) {
+                return;
+            }
+
+            toggle.addEventListener('click', () => {
+                const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+                if (isExpanded) {
+                    toggle.setAttribute('aria-expanded', 'false');
+                    submenu.classList.remove('nav-submenu--open');
+                } else {
+                    closeAll(item);
+                    toggle.setAttribute('aria-expanded', 'true');
+                    submenu.classList.add('nav-submenu--open');
+                }
+            });
+
+            toggle.addEventListener('keydown', event => {
+                if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+                    toggle.setAttribute('aria-expanded', 'false');
+                    submenu.classList.remove('nav-submenu--open');
+                }
+            });
+
+            submenu.addEventListener('keydown', event => {
+                if (event.key === 'Escape') {
+                    toggle.setAttribute('aria-expanded', 'false');
+                    submenu.classList.remove('nav-submenu--open');
+                    toggle.focus();
+                }
+            });
+        });
+
+        document.addEventListener('click', event => {
+            const target = event.target;
+            const clickedInside = Array.from(navItems).some(item => item.contains(target));
+
+            if (!clickedInside) {
+                closeAll();
+            }
+        });
+
+        document.addEventListener('closeNavSubmenus', () => {
+            closeAll();
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeAll();
+            }
+        });
     }
 
     function setupAnimateOnScroll() {
@@ -192,6 +280,7 @@ activarLatidoDeSylvora();
     function init() {
         setupPreloader();
         setupMobileNavigation();
+        setupNavigationSubmenus();
         setupAnimateOnScroll();
         setupFooterNewsletterForm();
         setupSmoothScroll();
