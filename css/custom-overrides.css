@@ -120,6 +120,15 @@ html {
   background-position: center;
 }
 
+/* Laboratorio – Galleta de la Fortuna */
+.fortune-lab-img {
+  background-image: linear-gradient(135deg, rgba(28, 14, 46, 0.92), rgba(16, 37, 66, 0.9)),
+    url('../fortune_cookie/assets/cookie-open.svg');
+  background-size: cover, 140px;
+  background-position: center, 80% center;
+  background-repeat: no-repeat;
+}
+
 /* Estilo del tag "Laboratorio" */
 .lab-tag {
   background-color: var(--dorado-etereo);
