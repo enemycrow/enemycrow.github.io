@@ -182,10 +182,17 @@ export function applyReducedMotion() {
   if (media.matches) {
     document.documentElement.classList.add('reduced-motion');
   }
-  media.addEventListener('change', (event) => {
-    document.documentElement.classList.toggle('reduced-motion', event.matches);
-    reducedMotion = event.matches;
-  });
+  const handleChange = (event) => {
+    const matches = typeof event.matches === 'boolean' ? event.matches : media.matches;
+    document.documentElement.classList.toggle('reduced-motion', matches);
+    reducedMotion = matches;
+  };
+
+  if (typeof media.addEventListener === 'function') {
+    media.addEventListener('change', handleChange);
+  } else if (typeof media.addListener === 'function') {
+    media.addListener(handleChange);
+  }
   return media.matches;
 }
 
