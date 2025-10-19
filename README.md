@@ -214,6 +214,22 @@ El parámetro `id` es obligatorio y debe corresponder al campo `id` dentro de `p
 
 Si el post no existe o el archivo `posts.json` no puede leerse, el endpoint devuelve un mensaje de error y el código HTTP correspondiente.
 
+### Endpoint de galletas de la fortuna
+
+Para consultar una galleta específica expuesta en `fortune_cookies.json`, haz una petición GET a `api/fortune_cookie.php`:
+
+```bash
+curl "https://plumafarollama.com/api/fortune_cookie.php?id=50"
+```
+
+El parámetro `id` es obligatorio y debe coincidir con el campo `id` del archivo JSON. De forma opcional puedes añadir `slug` para asegurarte de que la galleta retornada corresponda a un identificador legible, por ejemplo:
+
+```bash
+curl "https://plumafarollama.com/api/fortune_cookie.php?id=50&slug=sunfelicity-fortune50"
+```
+
+Si no se encuentra la galleta o `fortune_cookies.json` presenta errores de lectura/formato, el servicio responde con un objeto `ok: false` y el código HTTP apropiado (`400`, `404` o `500` según el caso).
+
 ## Páginas individuales de obras (SEO)
 
 Para que Google indexe cada obra por separado, el repositorio incluye un generador que crea una página HTML por cada modal definido en `portfolio.html`.
