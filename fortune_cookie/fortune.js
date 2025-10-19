@@ -32,8 +32,20 @@ async function init() {
 }
 
 function attachEvents() {
-  cookieButton.addEventListener('click', () => {
+  cookieButton.addEventListener('click', async () => {
     if (!isCookieOpen) {
+      // Intentamos reproducir el sonido dentro del gesto del usuario.
+      if (typeof playCrackSound === 'function') {
+        try {
+          await triggerCrackSound();
+          // El sonido se reprodujo; evitamos que openCookie lo vuelva a intentar.
+          openCookie({ skipSound: true });
+          return;
+        } catch (err) {
+          // Si falla, dejamos que openCookie gestione el reintento.
+        }
+      }
+
       openCookie();
     }
   });
@@ -220,7 +232,8 @@ export async function renderFortune(fortune, options = {}) {
 
   if (reset) {
     resetCookieState();
-    scheduleOpen(immediate);
+    // No abrir automáticamente: el usuario debe hacer clic para abrir la galleta.
+    // scheduleOpen(immediate);
   }
 }
 
@@ -344,7 +357,8 @@ function scheduleOpen(immediate) {
   }, AUTO_OPEN_DELAY);
 }
 
-export function openCookie() {
+export function openCookie(options = {}) {
+  const { skipSound = false } = options;
   if (isCookieOpen || !currentFortune) {
     return;
   }
@@ -354,14 +368,16 @@ export function openCookie() {
   fortunePanel.classList.add('is-visible');
   fortunePanel.setAttribute('aria-hidden', 'false');
 
-  triggerCrackSound()
-    .then(() => {
-      audioNeedsInteraction = false;
-    })
-    .catch(() => {
-      audioNeedsInteraction = true;
-      scheduleAudioResume();
-    });
+  if (!skipSound) {
+    triggerCrackSound()
+      .then(() => {
+        audioNeedsInteraction = false;
+      })
+      .catch(() => {
+        audioNeedsInteraction = true;
+        scheduleAudioResume();
+      });
+  }
 }
 
 function triggerCrackSound() {

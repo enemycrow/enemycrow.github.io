@@ -14,8 +14,9 @@
     <div class="cookie-stage" aria-live="polite">
       <button id="cookieButton" class="cookie-button" aria-expanded="false" aria-controls="fortune-panel">
         <span class="sr-only">Abrir galleta de la fortuna</span>
-        <img src="assets/cookie-closed.svg" alt="Galleta cerrada" class="cookie cookie--closed">
-        <img src="assets/cookie-open.svg" alt="Galleta abierta" class="cookie cookie--open" aria-hidden="true">
+  <!-- Usar rutas absolutas y cache-bust para evitar cargar una versión en caché equivocada -->
+  <img src="/fortune_cookie/assets/cookie-closed.svg?v=3" alt="Galleta cerrada" class="cookie cookie--closed">
+  <img src="/fortune_cookie/assets/cookie-open.svg?v=3" alt="Galleta abierta" class="cookie cookie--open" aria-hidden="true">
       </button>
     </div>
 
@@ -34,7 +35,7 @@
         <div class="fortune-author" id="fortuneAvatar" aria-label="Autor"></div>
         <div class="fortune-image" id="fortuneImageWrapper">
           <img id="fortuneImage" alt="Ilustración de la fortuna" loading="lazy">
-          <p class="fortune-stamp">El Tucán que come lápices</p>
+          <p class="fortune-stamp">Marsheeall, Sharkody & Co.</p>
         </div>
         <div class="fortune-tags" id="fortuneTags" aria-label="Etiquetas"></div>
         <time id="fortuneDate" class="fortune-date" datetime=""></time>
@@ -57,5 +58,25 @@
   </template>
 
   <script src="fortune.js" type="module"></script>
+  <!-- Dev helper: si estamos en localhost, desregistrar service workers y limpiar caches para evitar servir assets obsoletos -->
+  <script>
+    (function() {
+      try {
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(regs => {
+              regs.forEach(r => r.unregister());
+            });
+          }
+          if (window.caches && caches.keys) {
+            caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+          }
+          console.info('Dev: Service workers unregistered and caches cleared (localhost).');
+        }
+      } catch (e) {
+        console.warn('Dev: no se pudo limpiar SW/caches', e);
+      }
+    })();
+  </script>
 </body>
 </html>

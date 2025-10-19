@@ -129,6 +129,23 @@ html {
   background-repeat: no-repeat;
 }
 
+/* Mobile nav fix: asegurar que los items del menú ocupen todo el ancho y el texto quede centrado
+   Esto corrige cuando la etiqueta del toggle (ej. "Diario") queda alineada a la izquierda en móvil. */
+@media screen and (max-width: 768px) {
+  .nav-links.active li,
+  .nav-links.active a,
+  .nav-links.active .nav-link--toggle {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Si el toggle contiene icono, mantener el contenido centrado */
+  .nav-links.active .nav-link--toggle {
+    justify-content: center !important;
+    gap: 0.4rem;
+  }
+}
+
 /* Estilo del tag "Laboratorio" */
 .lab-tag {
   background-color: var(--dorado-etereo);

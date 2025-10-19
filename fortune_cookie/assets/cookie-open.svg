@@ -1,25 +1,102 @@
-<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Galleta de la fortuna abierta</title>
-  <desc id="desc">Galleta abierta con trozos y una expresión alegre.</desc>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="shellA" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f7b36e"/>
-      <stop offset="100%" stop-color="#ed8d4a"/>
+    <linearGradient id="cookieFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FAD7A2"/>
+      <stop offset="100%" stop-color="#E39C5C"/>
     </linearGradient>
-    <linearGradient id="shellB" x1="100%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#fbd59b"/>
-      <stop offset="100%" stop-color="#f29a57"/>
+    <linearGradient id="rimShade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#B86B35"/>
+      <stop offset="100%" stop-color="#7D4822"/>
     </linearGradient>
+    <radialGradient id="innerSoft" cx="60%" cy="70%" r="70%">
+      <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.18)"/>
+    </radialGradient>
+    <radialGradient id="cavity" cx="70%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#643816" stop-opacity=".65"/>
+      <stop offset="100%" stop-color="#301A0B" stop-opacity=".9"/>
+    </radialGradient>
+    <radialGradient id="warmGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF8E6" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#FFF8E6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FFF8E6" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      :root { --line: #1E120A; --eye: #1E120A; --blush: #F67C8E; }
+      #cookieWrap { transform-origin: 256px 256px; }
+      #cookieWrap:hover { transform: scale(1.04); filter: brightness(1.06); transition: transform .2s ease, filter .2s ease; cursor: pointer; }
+      .stroke-bold { stroke: var(--line); stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .stroke-med  { stroke: var(--line); stroke-width: 6;  stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .nohit { pointer-events: none; }
+      .shadow { opacity:.12; }
+    </style>
   </defs>
-  <g fill="none" fill-rule="evenodd">
-    <path d="M42 112c2-36 30-62 52-66l12 36c-8 18-28 34-64 30z" fill="url(#shellA)"/>
-    <path d="M158 112c-2-36-30-62-52-66l-12 36c8 18 28 34 64 30z" fill="url(#shellB)"/>
-    <path d="M80 134c0 8-6 14-14 14s-14-6-14-14" stroke="#5b3b57" stroke-width="4" stroke-linecap="round"/>
-    <path d="M148 134c0 8-6 14-14 14s-14-6-14-14" stroke="#5b3b57" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="74" cy="110" r="6" fill="#5b3b57"/>
-    <circle cx="126" cy="110" r="6" fill="#5b3b57"/>
-    <path d="M100 70l6-20" stroke="#f7c485" stroke-width="6" stroke-linecap="round"/>
-    <path d="M54 72l-12-12" stroke="#f9c78a" stroke-width="6" stroke-linecap="round"/>
-    <path d="M146 72l12-12" stroke="#f9c78a" stroke-width="6" stroke-linecap="round"/>
+  <ellipse class="shadow" cx="260" cy="402" rx="150" ry="26" fill="#000"/>
+  <g id="cookieWrap">
+    <g id="cookie">
+      <path id="bodyFill"
+            d="M120,300
+               C120,220 190,170 260,170
+               C330,170 392,210 400,260
+               C404,286 392,305 378,318
+               C362,333 342,342 318,348
+               C284,356 248,358 214,356
+               C176,353 144,342 128,326
+               C122,320 120,310 120,300 Z"
+            fill="url(#cookieFill)"/>
+      <path d="M142,298
+               C142,246 198,206 262,206
+               C320,206 372,236 378,271
+               C380,284 370,298 355,310
+               C332,328 296,340 246,342
+               C203,344 166,335 150,320
+               C144,314 142,306 142,298 Z"
+            fill="url(#innerSoft)" opacity=".22"/>
+      <path d="M125,302
+               C140,328 210,350 288,344
+               C332,340 366,326 386,310"
+            stroke="url(#rimShade)" stroke-width="16" stroke-linecap="round" fill="none" opacity=".6"/>
+      <path id="bodyLine" class="stroke-bold"
+            d="M120,300
+               C120,220 190,170 260,170
+               C330,170 392,210 400,260
+               C404,286 392,305 378,318
+               C362,333 342,342 318,348
+               C284,356 248,358 214,356
+               C176,353 144,342 128,326
+               C122,320 120,310 120,300 Z"/>
+    </g>
+    <g id="opening">
+      <path d="M372,283
+               C382,277 392,271 398,270
+               C399,280 396,292 388,302
+               C380,312 364,322 348,327
+               C344,317 346,308 354,302
+               C360,297 366,292 372,283 Z"
+            fill="url(#cavity)" opacity=".9"/>
+      <path d="M366,286 C376,280 388,274 396,272" class="stroke-med" stroke="#FFDDB6" stroke-opacity=".6"/>
+      <path d="M396,272 C399,282 395,296 386,306" class="stroke-med"/>
+    </g>
+    <g id="face" class="nohit">
+      <circle cx="228" cy="262" r="9" fill="var(--eye)"/>
+      <circle cx="298" cy="262" r="9" fill="var(--eye)"/>
+      <path d="M240 280c10 8 36 8 46 0" class="stroke-med"/>
+      <ellipse cx="206" cy="278" rx="14" ry="8" fill="#F67C8E" opacity=".6"/>
+      <ellipse cx="320" cy="278" rx="14" ry="8" fill="#F67C8E" opacity=".6"/>
+    </g>
+    <g id="paper" transform="translate(372,270) rotate(-10)">
+      <path d="M0 0 L92 -10 L98 18 L6 26 Z" fill="#FFFFFF" stroke="#D3D3D3" stroke-width="2" opacity=".98"/>
+      <path d="M32 8
+               c-3 -10 12 -12 14 -2
+               c2 -10 18 -8 14 2
+               c-3 8 -14 14 -14 14
+               s-12 -6 -14 -14z"
+            fill="#F36C7C" opacity=".85"/>
+    </g>
+    <g id="glow" opacity=".9" class="nohit">
+      <ellipse id="glowEll" cx="-140" cy="120" rx="110" ry="60" fill="url(#warmGlow)" transform="rotate(-25)"/>
+      <animateTransform attributeName="transform" type="translate" from="-240 0" to="540 0" dur="5s" repeatCount="indefinite"/>
+    </g>
   </g>
 </svg>
