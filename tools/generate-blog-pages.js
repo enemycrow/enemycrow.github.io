@@ -7,10 +7,40 @@ const crypto = require('crypto');
 const PROJECT_ROOT = process.cwd();
 const POSTS_PATH = path.join(PROJECT_ROOT, 'posts.json');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'blog');
+const BLOG_TEMPLATE_PATH = path.join(PROJECT_ROOT, 'templates', 'blog-entry.html');
 const SITE_NAME = 'La Pluma, el Faro y la Llama';
 const SECTION_NAME = 'Diario de Creación';
 const BASE_URL = 'https://plumafarollama.com';
 const SELF_CLOSING_TAGS = new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
+
+const DEFAULT_PRELOADER = `<div class="preloader">
+  <div class="preloader-icon">
+    <i class="fas fa-feather-alt" aria-hidden="true"></i>
+  </div>
+</div>`;
+
+const DEFAULT_HEADER = `<header>
+  <div class="container">
+    <nav class="navbar">
+      <a href="../index.html" class="logo" data-sylvora-latido="true">
+        <span class="logo-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></span>
+        La Pluma, el Faro y la Llama
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="../about.html">Sobre Nosotros</a></li>
+        <li><a href="../portfolio.html">Obras</a></li>
+        <li><a href="../blog.html" class="active">Diario</a></li>
+        <li><a href="../services.html">Servicios</a></li>
+        <li><a href="../shop.html">Tienda</a></li>
+        <li><a href="../contact.html">Contacto</a></li>
+        <li><a href="../donate.html" class="btn btn-donate">Donar</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>`;
+
+let cachedTemplateSections = null;
 
 function readPosts() {
   if (!fs.existsSync(POSTS_PATH)) {
@@ -22,6 +52,75 @@ function readPosts() {
   } catch (error) {
     throw new Error(`No se pudo analizar posts.json: ${error.message}`);
   }
+}
+
+function extractElementFrom(html, startIndex, tagName) {
+  const openTag = `<${tagName}`;
+  const closeTag = `</${tagName}>`;
+  let index = startIndex;
+  let depth = 0;
+  while (index < html.length) {
+    const nextOpen = html.indexOf(openTag, index);
+    const nextClose = html.indexOf(closeTag, index);
+    const isNextOpenValid = nextOpen !== -1 && (nextOpen < nextClose || nextClose === -1);
+
+    if (isNextOpenValid) {
+      depth++;
+      index = nextOpen + openTag.length;
+      continue;
+    }
+
+    if (nextClose === -1) {
+      break;
+    }
+
+    depth--;
+    index = nextClose + closeTag.length;
+    if (depth <= 0) {
+      return html.slice(startIndex, index);
+    }
+  }
+  return null;
+}
+
+function extractFirstTag(html, tagName) {
+  const regex = new RegExp(`<${tagName}\\b`, 'i');
+  const match = regex.exec(html);
+  if (!match) return null;
+  return extractElementFrom(html, match.index, tagName);
+}
+
+function extractElementByClass(html, tagName, className) {
+  const regex = new RegExp(`<${tagName}[^>]*class=["'][^"']*\\b${className}\\b[^"']*["'][^>]*>`, 'i');
+  const match = regex.exec(html);
+  if (!match) return null;
+  return extractElementFrom(html, match.index, tagName);
+}
+
+function getTemplateSections() {
+  if (cachedTemplateSections) return cachedTemplateSections;
+
+  let preloader = DEFAULT_PRELOADER;
+  let header = DEFAULT_HEADER;
+
+  try {
+    if (fs.existsSync(BLOG_TEMPLATE_PATH)) {
+      const templateHtml = fs.readFileSync(BLOG_TEMPLATE_PATH, 'utf8');
+      const extractedPreloader = extractElementByClass(templateHtml, 'div', 'preloader');
+      const extractedHeader = extractFirstTag(templateHtml, 'header');
+      if (extractedPreloader) {
+        preloader = extractedPreloader.trim();
+      }
+      if (extractedHeader) {
+        header = extractedHeader.trim();
+      }
+    }
+  } catch (error) {
+    console.warn('generate-blog-pages: no se pudo leer templates/blog-entry.html:', error.message);
+  }
+
+  cachedTemplateSections = { preloader, header };
+  return cachedTemplateSections;
 }
 
 // Simple CLI flags handling
@@ -306,6 +405,7 @@ function buildHtml(post) {
   const title = `${post.titulo} | ${SECTION_NAME} – ${SITE_NAME}`;
   const twitterCard = imageInfo.socialImage ? 'summary_large_image' : 'summary';
   const contentHtml = normalizeHtmlContent(post.contenido_html || '');
+  const { preloader, header } = getTemplateSections();
 
   return `<!DOCTYPE html>
 <html lang="es">
@@ -339,26 +439,8 @@ function buildHtml(post) {
   <link rel="stylesheet" href="../css/custom-overrides.css" />
 </head>
 <body data-post-slug="${escapeHtml(slug)}" data-prerendered="true">
-  <header>
-    <div class="container">
-      <nav class="navbar">
-        <a href="../index.html" class="logo" data-sylvora-latido="true">
-          <span class="logo-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></span>
-          La Pluma, el Faro y la Llama
-        </a>
-        <ul class="nav-links">
-          <li><a href="../index.html">Inicio</a></li>
-          <li><a href="../about.html">Sobre Nosotros</a></li>
-          <li><a href="../portfolio.html">Obras</a></li>
-          <li><a href="../blog.html" class="active">Diario</a></li>
-          <li><a href="../services.html">Servicios</a></li>
-          <li><a href="../shop.html">Tienda</a></li>
-          <li><a href="../contact.html">Contacto</a></li>
-          <li><a href="../donate.html" class="btn btn-donate">Donar</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  ${preloader}
+  ${header}
   <main>
     <article class="blog-entry blog-entry--individual">
       <div class="container">

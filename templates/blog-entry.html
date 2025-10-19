@@ -18,12 +18,13 @@
     
     <!-- Estilos CSS -->
   <link rel="stylesheet" href="../css/styles.889d2a038d.css" />
+  <link rel="stylesheet" href="../css/custom-overrides.css" />
 </head>
 <body>
     <!-- Preloader con animación -->
     <div class="preloader">
         <div class="preloader-icon">
-            <i class="fas fa-feather-alt"></i>
+            <i class="fas fa-feather-alt" aria-hidden="true"></i>
         </div>
     </div>
 
@@ -31,12 +32,12 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="index.html" class="logo">
-                    <span class="logo-icon"><i class="fas fa-feather-alt"></i></span>
+                <a href="../index.html" class="logo" data-sylvora-latido="true">
+                    <span class="logo-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></span>
                     La Pluma, el Faro y la Llama
                 </a>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
+                <div class="mobile-menu" role="button" aria-label="Abrir menú">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
                 </div>
                 <ul class="nav-links">
                     <li><a href="../index.html">Inicio</a></li>
@@ -46,6 +47,7 @@
                     <li><a href="../services.html">Servicios</a></li>
                     <li><a href="../shop.html">Tienda</a></li>
                     <li><a href="../contact.html">Contacto</a></li>
+                    <li><a href="../donate.html" class="btn btn-donate">Donar</a></li>
                 </ul>
             </nav>
         </div>
