@@ -5449,6 +5449,97 @@ a:hover {
   width: 100%;
 }
 
+.nav-item--has-submenu {
+  position: relative;
+}
+
+.nav-link--toggle {
+  font-family: var(--fuente-manuscrita);
+  font-size: 1.1rem;
+  color: var(--blanco-brillante);
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+}
+
+.nav-link--toggle:focus-visible {
+  outline: 2px solid var(--violeta-pálido);
+  outline-offset: 3px;
+}
+
+.nav-link--toggle.is-current,
+.nav-submenu a[aria-current="page"] {
+  color: var(--violeta-pálido);
+}
+
+.nav-link__icon {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.nav-link--toggle[aria-expanded="true"] .nav-link__icon {
+  transform: rotate(-180deg);
+}
+
+.nav-submenu {
+  list-style: none;
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  left: 0;
+  min-width: 220px;
+  padding: 0.75rem 0;
+  background: var(--negro-sombra);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+  display: none;
+  z-index: 200;
+}
+
+.nav-submenu li {
+  margin: 0;
+}
+
+.nav-submenu a {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  font-family: var(--fuente-manuscrita);
+  font-size: 1rem;
+  color: var(--blanco-brillante);
+  white-space: nowrap;
+}
+
+.nav-submenu a:hover,
+.nav-submenu a:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-submenu.nav-submenu--open {
+  display: block;
+}
+
+@media (min-width: 769px) {
+  .nav-item--has-submenu:hover > .nav-submenu,
+  .nav-item--has-submenu:focus-within > .nav-submenu {
+    display: block;
+  }
+
+  .nav-item--has-submenu:hover > .nav-link--toggle,
+  .nav-item--has-submenu:focus-within > .nav-link--toggle {
+    color: var(--violeta-pálido);
+  }
+
+  .nav-item--has-submenu:hover .nav-link__icon,
+  .nav-item--has-submenu:focus-within .nav-link__icon {
+    transform: rotate(-180deg);
+  }
+}
+
 /* Estilos para secciones */
 .section {
   padding: 5rem 0;
@@ -5670,6 +5761,30 @@ a:hover {
 
   .nav-links li {
     margin: 0.5rem 0;
+  }
+
+  .nav-item--has-submenu {
+    width: 100%;
+  }
+
+  .nav-link--toggle {
+    justify-content: center;
+  }
+
+  .nav-submenu {
+    position: static;
+    width: 100%;
+    margin-top: 0.5rem;
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .nav-submenu a {
+    padding: 0.5rem;
+    text-align: center;
+    width: 100%;
   }
 
   .mobile-menu {

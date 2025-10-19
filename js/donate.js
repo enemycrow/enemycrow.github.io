@@ -68,7 +68,24 @@ document.addEventListener('DOMContentLoaded', () => {
       Se le ama cuando se le cree odiar y cuando se le desea lejos.
       Se le ama cuando el cuerpo y el alma empiezan a conversar.`,
       imageBase:'carta-desde-el-rio-hacia-el-mar', slug:'carta-desde-el-rio-hacia-el-mar', cc:'by-nc-nd',
-      author:'A.C. Elysia' }
+      author:'A.C. Elysia' },
+      { title:'Innotoriedad', year: 2025,
+      text:`Se esforzaba y esforzaba
+      Quería verse, notarse
+      Su pesar era heredad innotoriedad
+      ¿Qué más da? Sólo yo me daré cuenta`,
+      imageBase:'innotoriedad', slug:'innotoriedad', cc:'by-nc-nd',
+      author:'Draco Sahir' },
+      { title:'Eres una canción eterna', year: 2025,
+      text:`Eres una canción que tiene una nueva estrofa cada día.
+      A veces, tus compases se vuelven más alegrettos y otros días más adagios.
+      Tal vez, hay días en donde miras al cielo y tu mirada no tiene coros.
+      Hay días donde tu voz canta palabras en modo jónico
+      y vibras con el aria en tu corazón.
+      A veces, me cuesta entenderte en tus sonetos,
+      pero un fiel recuerdo me trae tu miel como canción de cuna.`,
+      imageBase:'eres-una-cancion-eterna', slug:'eres-una-cancion-eterna', cc:'by-nc-nd',
+      author:'Lauren Cuervo' },
   ];
 
   // === 2) DOM ===
