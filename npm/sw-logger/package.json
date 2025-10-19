@@ -1,0 +1,10 @@
+{
+  "name": "@enemycrow/sw-logger",
+  "version": "0.1.0",
+  "description": "Service Worker logger helpers (IndexedDB) and client script to request logs",
+  "main": "dist/client.js",
+  "author": "enemycrow",
+  "license": "MIT",
+  "keywords": ["service-worker","logger","indexeddb","logs","sw-logs"],
+  "files": ["dist"]
+}

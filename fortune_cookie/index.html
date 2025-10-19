@@ -78,6 +78,34 @@
       }
     })();
   </script>
+  <!-- Update UI: boton para aplicar nueva versión del SW -->
+  <div id="sw-update" style="position:fixed;right:12px;bottom:12px;z-index:9999;display:none">
+    <button id="applySwUpdate" class="pill-button">Aplicar actualización</button>
+  </div>
+  <script>
+    (function() {
+      if (!('serviceWorker' in navigator)) return;
+      navigator.serviceWorker.ready.then(registration => {
+        // Cuando hay un SW en 'waiting' significa que hay una nueva versión lista para activarse
+        if (registration.waiting) {
+          document.getElementById('sw-update').style.display = 'block';
+        }
+        // Listen for controllerchange in case the SW becomes active
+        navigator.serviceWorker.addEventListener('message', e => {
+          if (e.data && e.data.type === 'NEW_SW_ACTIVATED') {
+            // Forzar recarga para cargar activos nuevos
+            window.location.reload(true);
+          }
+        });
+
+        document.getElementById('applySwUpdate').addEventListener('click', function() {
+          if (registration.waiting) {
+            registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+          }
+        });
+      });
+    })();
+  </script>
   <!-- SW logs client: solicitar logs al service worker y mostrarlos -->
   <script>
     (function() {

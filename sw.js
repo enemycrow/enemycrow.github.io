@@ -1,4 +1,4 @@
-const CACHE_NAME = 'site-cache-v10'; // ⬅️ súbelo para forzar actualización
+const CACHE_NAME = 'site-cache-v11'; // bumped to force clients to refresh caches
 const urlsToCache = [
   '/',
   '/index.html',
@@ -141,11 +141,16 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    ).then(() => self.clients.claim())
-  );
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)));
+    await self.clients.claim();
+    // Notify clients that a new SW has activated
+    const all = await self.clients.matchAll({ includeUncontrolled: true });
+    for (const client of all) {
+      client.postMessage({ type: 'NEW_SW_ACTIVATED', cacheName: CACHE_NAME });
+    }
+  })());
 });
 
 self.addEventListener('fetch', event => {
@@ -232,6 +237,11 @@ self.addEventListener('fetch', event => {
 self.addEventListener('message', event => {
   const data = event.data || {};
   if (!data || !data.type) return;
+  // Allow a page to ask the SW to skip waiting and activate immediately
+  if (data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+    return;
+  }
   const source = event.source || null;
   if (data.type === 'get-sw-logs') {
     // dev: devolver los últimos logs al cliente que lo solicitó
