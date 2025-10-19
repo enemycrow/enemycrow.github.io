@@ -426,6 +426,7 @@ ${contentHtml}
       <p>&copy; 2025 La Pluma, el Faro y la Llama. Todos los derechos reservados.</p>
     </div>
   </footer>
+  <script defer src="../js/main.d9fb968dc8.js"></script>
   <script defer src="../js/blog-entry.js"></script>
 </body>
 </html>`;
