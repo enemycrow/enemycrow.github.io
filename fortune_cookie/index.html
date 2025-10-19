@@ -78,5 +78,45 @@
       }
     })();
   </script>
+  <!-- SW logs client: solicitar logs al service worker y mostrarlos -->
+  <script>
+    (function() {
+      if (!('serviceWorker' in navigator)) return;
+      function requestSWLogs(limit = 200) {
+        if (!navigator.serviceWorker.controller) {
+          console.info('No SW controlling this page');
+          return;
+        }
+        const messageChannel = new MessageChannel();
+        messageChannel.port1.onmessage = ev => {
+          const data = ev.data || {};
+          if (data.type === 'sw-logs') {
+            console.group('SW logs');
+            (data.logs || []).forEach(l => console.log(new Date(l.ts).toISOString(), l.msg));
+            console.groupEnd();
+            // Optionally render into DOM if #sw-logs exists
+            const container = document.getElementById('sw-logs');
+            if (container) {
+              container.innerHTML = '';
+              (data.logs || []).forEach(l => {
+                const el = document.createElement('div');
+                el.textContent = new Date(l.ts).toLocaleString() + ' — ' + l.msg;
+                container.appendChild(el);
+              });
+            }
+          }
+        };
+        navigator.serviceWorker.controller.postMessage({ type: 'get-sw-logs', limit }, [messageChannel.port2]);
+      }
+
+      // Auto-request logs in dev/localhost to help debugging
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        navigator.serviceWorker.ready.then(() => setTimeout(() => requestSWLogs(200), 500));
+      }
+
+      // Expose helper for manual use from console
+      window.requestSWLogs = requestSWLogs;
+    })();
+  </script>
 </body>
 </html>
