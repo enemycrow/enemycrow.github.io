@@ -146,6 +146,44 @@ html {
   }
 }
 
+/* Desktop: asegurar que el submenú del 'Diario' esté oculto por defecto
+   y sólo se muestre por hover/focus o cuando la lógica JS añade la clase
+   `nav-submenu--open`. Además forzar la tipografía del toggle para que
+   preserve el estilo del sitio. */
+@media screen and (min-width: 769px) {
+  /* Ocultar por defecto (refuerzo) */
+  .nav-submenu {
+    display: none !important;
+  }
+
+  /* Mostrar en hover / focus-within (menu accesible) */
+  .nav-item--has-submenu:hover > .nav-submenu,
+  .nav-item--has-submenu:focus-within > .nav-submenu,
+  .nav-submenu.nav-submenu--open {
+    display: block !important;
+  }
+
+  /* Forzar la tipografía del toggle para que coincida con los enlaces
+     (evita que el navegador use la fuente por defecto para botones). */
+  .nav-link--toggle {
+    font-family: var(--fuente-manuscrita) !important;
+    font-size: 1.1rem !important;
+    color: inherit !important;
+    background: none !important;
+  }
+
+  /* Asegurar que el icono no cambie el tamaño del texto */
+  .nav-link__icon { line-height: 1; }
+}
+
+/* Reduce distancia entre toggle y submenu para facilitar hover */
+@media screen and (min-width: 769px) {
+  .nav-submenu {
+    top: calc(100% + 0.25rem) !important;
+    min-width: 200px;
+  }
+}
+
 /* Estilo del tag "Laboratorio" */
 .lab-tag {
   background-color: var(--dorado-etereo);

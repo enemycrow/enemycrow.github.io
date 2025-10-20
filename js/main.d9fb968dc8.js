@@ -160,6 +160,32 @@ activarLatidoDeSylvora();
                     toggle.focus();
                 }
             });
+
+            // Desktop: mejorar la estabilidad del hover usando enter/leave con delay
+            // para que el submenu no desaparezca si el puntero tarda en llegar.
+            item.addEventListener('mouseenter', () => {
+                if (window.innerWidth <= 768) return;
+                // cancelar cierre pendiente
+                if (item._closeTimer) {
+                    clearTimeout(item._closeTimer);
+                    item._closeTimer = null;
+                }
+                // abrir este submenu y cerrar los demás
+                closeAll(item);
+                toggle.setAttribute('aria-expanded', 'true');
+                submenu.classList.add('nav-submenu--open');
+            });
+
+            item.addEventListener('mouseleave', () => {
+                if (window.innerWidth <= 768) return;
+                // poner un retraso pequeño antes de cerrar para evitar flicker
+                if (item._closeTimer) clearTimeout(item._closeTimer);
+                item._closeTimer = setTimeout(() => {
+                    toggle.setAttribute('aria-expanded', 'false');
+                    submenu.classList.remove('nav-submenu--open');
+                    item._closeTimer = null;
+                }, 300);
+            });
         });
 
         document.addEventListener('click', event => {
