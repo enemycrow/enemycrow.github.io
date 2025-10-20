@@ -14,25 +14,27 @@
     <div class="cookie-stage" aria-live="polite">
       <button id="cookieButton" class="cookie-button" aria-expanded="false" aria-controls="fortune-panel">
         <span class="sr-only">Abrir galleta de la fortuna</span>
-  <!-- Usar rutas absolutas y cache-bust para evitar cargar una versión en caché equivocada -->
-  <img src="/fortune_cookie/assets/cookie-closed.svg?v=3" alt="Galleta cerrada" class="cookie cookie--closed">
-  <img src="/fortune_cookie/assets/cookie-open.svg?v=3" alt="Galleta abierta" class="cookie cookie--open" aria-hidden="true">
+        <span class="cookie-instruction" aria-hidden="true">Haz clic para abrir la galletita</span>
+        <!-- Usar rutas absolutas y cache-bust para evitar cargar una versión en caché equivocada -->
+        <img src="/fortune_cookie/assets/cookie-closed.svg?v=3" alt="Galleta cerrada" class="cookie cookie--closed">
+        <img src="/fortune_cookie/assets/cookie-open.svg?v=3" alt="Galleta abierta" class="cookie cookie--open" aria-hidden="true">
       </button>
     </div>
 
     <section id="fortune-panel" class="fortune-panel" aria-hidden="true">
-      <div class="fortune-paper" role="presentation">
-        <img src="assets/paper.svg" alt="" aria-hidden="true" class="paper-art">
-        <div class="fortune-text">
-          <blockquote id="fortuneMessage" class="fortune-message">
-            <p></p>
-            <cite id="fortuneAuthor"></cite>
-          </blockquote>
-        </div>
+      <div class="fortune-card" role="presentation">
+        <span class="fortune-card__icon" aria-hidden="true">💌</span>
+        <blockquote id="fortuneMessage" class="fortune-message">
+          <p></p>
+          <cite id="fortuneAuthor"></cite>
+        </blockquote>
       </div>
 
       <div class="fortune-details">
-        <div class="fortune-author" id="fortuneAvatar" aria-label="Autor"></div>
+        <div class="fortune-author" id="fortuneAvatar" aria-label="Autor">
+          <img id="fortuneAvatarImage" alt="" hidden>
+          <span id="fortuneAvatarInitials" aria-hidden="true"></span>
+        </div>
         <div class="fortune-image" id="fortuneImageWrapper">
           <img id="fortuneImage" alt="Ilustración de la fortuna" loading="lazy">
           <p class="fortune-stamp">Marsheeall, Sharkody & Co.</p>
