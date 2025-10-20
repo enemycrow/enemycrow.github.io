@@ -6,6 +6,8 @@ const fortunePanel = document.getElementById('fortune-panel');
 const fortuneMessage = document.getElementById('fortuneMessage');
 const fortuneAuthor = document.getElementById('fortuneAuthor');
 const fortuneAvatar = document.getElementById('fortuneAvatar');
+const fortuneAvatarImage = document.getElementById('fortuneAvatarImage');
+const fortuneAvatarInitials = document.getElementById('fortuneAvatarInitials');
 const fortuneImage = document.getElementById('fortuneImage');
 const fortuneImageWrapper = document.getElementById('fortuneImageWrapper');
 const fortuneTags = document.getElementById('fortuneTags');
@@ -219,10 +221,10 @@ export async function renderFortune(fortune, options = {}) {
   currentFortune = fortune;
 
   const messageParagraph = fortuneMessage.querySelector('p');
-  messageParagraph.textContent = fortune.mensaje;
-  fortuneAuthor.textContent = fortune.personaje;
+  messageParagraph.textContent = fortune.mensaje ? `“${fortune.mensaje}”` : '';
+  fortuneAuthor.textContent = fortune.personaje ? `— ${fortune.personaje}` : '';
 
-  renderAvatar(fortune.personaje);
+  await renderAvatar(fortune.personaje);
   renderTags(fortune.tags);
   renderDate(fortune.fecha);
   await renderImage(fortune);
@@ -237,7 +239,7 @@ export async function renderFortune(fortune, options = {}) {
   }
 }
 
-function renderAvatar(name) {
+async function renderAvatar(name) {
   const initials = name
     .split(/\s+/)
     .filter(Boolean)
@@ -245,8 +247,34 @@ function renderAvatar(name) {
     .join('')
     .slice(0, 2)
     .toUpperCase();
-  fortuneAvatar.textContent = initials || '✨';
+  fortuneAvatar.classList.remove('fortune-author--image');
+  fortuneAvatarInitials.hidden = false;
+  fortuneAvatarInitials.textContent = initials || '✨';
+  fortuneAvatarImage.hidden = true;
+  fortuneAvatarImage.removeAttribute('src');
   fortuneAvatar.setAttribute('aria-label', name);
+
+  const sanitized = (name || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '');
+
+  if (!sanitized) {
+    return;
+  }
+
+  const avatarSrc = `/fortune_cookie/mascots/${encodeURIComponent(sanitized)}.png`;
+
+  try {
+    await preloadImage(avatarSrc);
+    fortuneAvatarImage.src = avatarSrc;
+    fortuneAvatarImage.alt = `Avatar de ${name}`;
+    fortuneAvatarImage.hidden = false;
+    fortuneAvatarInitials.hidden = true;
+    fortuneAvatar.classList.add('fortune-author--image');
+  } catch (error) {
+    fortuneAvatar.classList.remove('fortune-author--image');
+  }
 }
 
 function renderTags(tags = []) {
@@ -311,7 +339,7 @@ function showImageFallback(fortune) {
   removeFallbackText();
   const fallback = document.createElement('p');
   fallback.className = 'fallback-text';
-  fallback.textContent = `“${fortune.mensaje}” — ${fortune.personaje}`;
+  fallback.textContent = `Ilustración de ${fortune.personaje} no disponible en este momento.`;
   fortuneImageWrapper.appendChild(fallback);
 }
 
