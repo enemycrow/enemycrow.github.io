@@ -1,5 +1,5 @@
 # llms.txt para plumafarollama.com
-# Última actualización: 2024-06-10
+# Última actualización: 2025-10-28
 
 Sitio: https://plumafarollama.com/
 Contacto: contacto@plumafarollama.com
@@ -15,6 +15,7 @@ Esta política se aplica a todo el contenido servido desde plumafarollama.com y 
 - No se autoriza el uso del contenido para entrenar, refinar o mejorar modelos de lenguaje, ni otros modelos de aprendizaje automático, sin una licencia previa por escrito.
 - No se permite el almacenamiento persistente del contenido más allá de cachés temporales necesarios para la entrega inmediata de respuestas.
 - Se prohíbe redistribuir el contenido fuera del contexto de la interacción directa con el usuario final.
+- Se prohíbe el acceso a las API.
 
 [Requisitos de cumplimiento]
 - Respete las limitaciones de tasa razonables y evite técnicas de scraping agresivas.
