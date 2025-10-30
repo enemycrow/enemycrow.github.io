@@ -1,38 +1,3 @@
-// --- Conteo de posts por tópico y actualización de la sección de tópicos ---
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const res = await fetch('posts.json');
-    const posts = await res.json();
-    // Construir un mapa de conteo de tópicos
-    const topicCounts = {};
-    posts.forEach(post => {
-      if (Array.isArray(post.topicos)) {
-        post.topicos.forEach(topico => {
-          topico
-            .split(',')
-            .map(t => t.trim())
-            .forEach(t => {
-              if (t) {
-                topicCounts[t] = (topicCounts[t] || 0) + 1;
-              }
-            });
-        });
-      }
-    });
-    // Actualizar los contadores en la sección de tópicos
-    document.querySelectorAll('.topics-grid .topic-item').forEach(topicEl => {
-      const h3 = topicEl.querySelector('h3');
-      const countEl = topicEl.querySelector('.topic-count');
-      if (h3 && countEl) {
-        const nombre = h3.textContent.trim();
-        const count = topicCounts[nombre] || 0;
-        countEl.textContent = `${count} entrada${count === 1 ? '' : 's'}`;
-      }
-    });
-  } catch (err) {
-    // Silenciar error si no hay posts.json o estructura inesperada
-  }
-});
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#blog-posts-grid');
   const featuredContainer = document.querySelector('#featured-posts-container');
@@ -122,6 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const worksDropdownRoot = document.querySelector('#blog-filter-works');
   const topicsDropdownRoot = document.querySelector('#blog-filter-topics');
+  const searchInput = document.querySelector('#blog-filter-search-input');
+  const clearSearchButton = document.querySelector('#blog-filter-search-clear');
   const topicItems = document.querySelectorAll('.topics-grid .topic-item');
   const topicItemsMap = new Map();
   topicItems.forEach(item => {
@@ -133,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
       topicItemsMap.set(normalized, item);
     }
   });
-  const filterState = { work: null, topic: null };
+  const filterState = { work: null, topic: null, search: '' };
   let allPosts = [];
   let worksDropdown;
   let topicsDropdown;
@@ -180,6 +147,42 @@ document.addEventListener('DOMContentLoaded', () => {
       .normalize('NFD')
       .replace(/\p{Diacritic}/gu, '')
       .trim();
+  }
+
+  function postMatchesSearch(post, query) {
+    const normalizedQuery = normalizeText(query);
+    if (!normalizedQuery) return true;
+
+    const haystacks = [];
+    if (typeof post?.titulo === 'string') haystacks.push(post.titulo);
+    if (typeof post?.fragmento === 'string') haystacks.push(post.fragmento);
+    if (typeof post?.resumen === 'string') haystacks.push(post.resumen);
+    if (typeof post?.autor === 'string') haystacks.push(post.autor);
+
+    if (Array.isArray(post?.categoria_temas)) {
+      haystacks.push(post.categoria_temas.filter(t => typeof t === 'string').join(' '));
+    }
+
+    if (Array.isArray(post?.categoria_libros)) {
+      haystacks.push(post.categoria_libros.filter(t => typeof t === 'string').join(' '));
+    }
+
+    if (Array.isArray(post?.topicos)) {
+      const flattened = [];
+      post.topicos.forEach(raw => {
+        if (typeof raw !== 'string') return;
+        raw
+          .split(',')
+          .map(part => part.trim())
+          .filter(Boolean)
+          .forEach(part => flattened.push(part));
+      });
+      if (flattened.length) {
+        haystacks.push(flattened.join(' '));
+      }
+    }
+
+    return haystacks.some(text => normalizeText(text || '').includes(normalizedQuery));
   }
 
   function getTopicIcon(topic) {
@@ -240,6 +243,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function updateSearchClearVisibility() {
+    if (!searchInput || !clearSearchButton) return;
+    const hasValue = searchInput.value.trim().length > 0;
+    clearSearchButton.hidden = !hasValue;
+  }
+
+  function handleSearchChange({ scroll = false } = {}) {
+    if (!searchInput) return;
+    const rawValue = searchInput.value || '';
+    filterState.search = rawValue.trim();
+    updateSearchClearVisibility();
+    applyFilters();
+    if (scroll) {
+      scrollToPosts();
+    }
+  }
+
   function applyFilters() {
     let posts = allPosts.slice();
     if (filterState.work) {
@@ -259,6 +279,9 @@ document.addEventListener('DOMContentLoaded', () => {
         )
       );
     }
+    if (filterState.search) {
+      posts = posts.filter(post => postMatchesSearch(post, filterState.search));
+    }
     filteredPosts = posts;
     renderPage(1);
   }
@@ -266,12 +289,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function resetFilters() {
     filterState.work = null;
     filterState.topic = null;
+    filterState.search = '';
     if (worksDropdown) {
       worksDropdown.setValue(null);
     }
     if (topicsDropdown) {
       topicsDropdown.setValue(null);
     }
+    if (searchInput) {
+      searchInput.value = '';
+    }
+    updateSearchClearVisibility();
     syncTopicItems(null);
     applyFilters();
   }
@@ -526,6 +554,31 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollToPosts();
     }
   });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => handleSearchChange());
+    searchInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        handleSearchChange({ scroll: true });
+      }
+    });
+  }
+
+  if (clearSearchButton) {
+    clearSearchButton.addEventListener('click', () => {
+      if (!searchInput) return;
+      if (searchInput.value) {
+        searchInput.value = '';
+        handleSearchChange({ scroll: true });
+      } else {
+        updateSearchClearVisibility();
+      }
+      searchInput.focus();
+    });
+  }
+
+  updateSearchClearVisibility();
 
   const filterRoot = document.querySelector('.blog-filter');
   const filterToggle = filterRoot ? filterRoot.querySelector('.blog-filter__toggle') : null;

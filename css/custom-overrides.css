@@ -199,6 +199,18 @@ html {
 
 /* === Blog Entradas === */
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .blog-filter {
   margin: 2rem 0 2.5rem;
 }
@@ -226,6 +238,10 @@ html {
   flex: 1 1 260px;
 }
 
+.blog-filter__group--search {
+  flex: 1 1 100%;
+}
+
 .blog-filter__group--topics {
   align-items: flex-end;
 }
@@ -247,6 +263,68 @@ html {
 
 .blog-filter__group--topics .filter-dropdown {
   align-self: flex-end;
+}
+
+.blog-filter__search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(154, 111, 255, 0.45);
+  background: rgba(15, 14, 47, 0.55);
+  box-shadow: 0 12px 24px rgba(25, 19, 68, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.blog-filter__search:focus-within {
+  border-color: rgba(198, 173, 255, 0.9);
+  box-shadow: 0 0 0 2px rgba(137, 95, 255, 0.2), 0 16px 30px rgba(25, 19, 68, 0.45);
+}
+
+.blog-filter__search input[type="search"] {
+  flex: 1 1 auto;
+  background: transparent;
+  border: none;
+  color: var(--blanco-etereo);
+  font-size: 1rem;
+  outline: none;
+  min-width: 0;
+}
+
+.blog-filter__search input[type="search"]::placeholder {
+  color: rgba(232, 223, 255, 0.65);
+}
+
+.blog-filter__search-icon {
+  color: rgba(232, 223, 255, 0.8);
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.blog-filter__search-clear {
+  border: none;
+  background: rgba(137, 95, 255, 0.18);
+  color: var(--blanco-etereo);
+  border-radius: 999px;
+  padding: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.blog-filter__search-clear:hover,
+.blog-filter__search-clear:focus-visible {
+  background: rgba(137, 95, 255, 0.35);
+  color: #fff;
+}
+
+.blog-filter__search-clear[hidden] {
+  display: none;
 }
 
 .filter-dropdown__toggle {
@@ -447,6 +525,14 @@ html {
 
   .blog-filter__group {
     width: 100%;
+  }
+
+  .blog-filter__group--search {
+    width: 100%;
+  }
+
+  .blog-filter__search {
+    border-radius: 18px;
   }
 
   .blog-filter__group--topics {
