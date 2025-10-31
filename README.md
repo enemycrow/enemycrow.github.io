@@ -65,13 +65,26 @@ Cada entrada del archivo debe incluir los siguientes campos:
 - `tiempo`: tiempo estimado de lectura
 - `comentarios`: número de comentarios
 - `fragmento`: breve resumen que aparece en la tarjeta
-- `imagen`: nombre de la imagen almacenada en `assets/images/`
+- `imagen`: nombre de la imagen horizontal almacenada en `assets/images/`
+- `imagen_vertical`: ruta relativa dentro del repositorio (por ejemplo `assets/images/vertical/soledadenelarroyo-post97-portrait.webp`) a la versión vertical en formato `.webp`. Si no existe, deja una cadena vacía.
 - `slug`: identificador para la URL (ej. `algoritmos-del-caos`)
 - `destacado`: marca la entrada como destacada si su valor es `true`
 - `contenido_html`: cuerpo completo en HTML para `blog-entry.html`
 
 Para agregar una nueva entrada basta con editar `posts.json` y colocar la imagen correspondiente en `assets/images/`.
 Las páginas `blog.html` y `blog-entry.html` cargan este archivo mediante JavaScript, por lo que no es necesario modificar el HTML.
+
+Las galletas expuestas en `fortune_cookies.json` siguen un esquema similar:
+
+- `id`: identificador numérico único
+- `personaje`: nombre del personaje asociado
+- `mensaje`: texto a mostrar en la galleta
+- `imagen`: nombre del recurso horizontal principal (ubicado dentro de `assets/images/`)
+- `imagen_vertical`: ruta relativa dentro del repositorio a la variante vertical en formato `.webp` (por ejemplo `assets/images/fortune/portrait/sunfelicity-fortune50.webp`). Usa una cadena vacía cuando no exista.
+- `slug`: identificador legible en URLs
+- `prompt`: referencia descriptiva para la generación visual
+- `tags`: lista de etiquetas temáticas
+- `fecha`: fecha de publicación en formato `YYYY-MM-DD`
 
 ### Rotador y forzado de entradas destacadas (modo pruebas / control)
 
