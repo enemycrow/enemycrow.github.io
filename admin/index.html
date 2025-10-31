@@ -39,7 +39,7 @@
     <div id="fragmento_social_warning" style="color:#d9534f; font-weight:bold; display:none; margin-top:0.25rem;"></div>
   </div>
   <label>Imagen:<br><input id="imagen"></label><br><br>
-  <label>Imagen vertical (portrait, `assets/images/social/*.png`):<br><input id="imagen_vertical" placeholder="assets/images/social/ejemplo.png"></label><br><br>
+  <label>Imagen vertical (portrait, `assets/images/social/blog/*.png`):<br><input id="imagen_vertical" placeholder="assets/images/social/blog/ejemplo.png"></label><br><br>
   <label>Slug:<br><input id="slug"></label><br><br>
   <label>Destacado:<input id="destacado" type="checkbox"></label><br><br>
 
@@ -87,12 +87,24 @@
       let normalized = value.trim();
       normalized = normalized.replace(/^https?:\/\/[^/]+/i, '');
       normalized = normalized.replace(/^\/+/, '');
-      const lower = normalized.toLowerCase();
-      if (!lower.startsWith('assets/images/social/')) {
-        normalized = normalized.replace(/^assets\/images\/social\//i, '');
-        normalized = `assets/images/social/${normalized}`;
+
+      if (normalized.toLowerCase().startsWith('assets/images/social/')) {
+        normalized = normalized.slice('assets/images/social/'.length);
       }
-      return normalized;
+
+      normalized = normalized.replace(/^\/+/, '');
+      if (!normalized) return '';
+
+      if (!normalized.toLowerCase().startsWith('blog/')) {
+        normalized = normalized.replace(/^blog\//i, '');
+        normalized = normalized.replace(/^fortune_cookies\//i, '');
+        normalized = normalized.replace(/^\/+/, '');
+        normalized = `blog/${normalized}`;
+      } else {
+        normalized = `blog/${normalized.slice(5)}`;
+      }
+
+      return `assets/images/social/${normalized}`;
     }
 
     // Carga posts existentes
@@ -187,7 +199,7 @@
     document.getElementById('saveBtn').onclick = async () => {
       const imagenVerticalInput = normalizeSocialImagePath(document.getElementById('imagen_vertical').value);
       if (imagenVerticalInput && !imagenVerticalInput.toLowerCase().endsWith('.png')) {
-        alert('La imagen vertical debe ser un PNG ubicado en assets/images/social/');
+        alert('La imagen vertical debe ser un PNG ubicado en assets/images/social/blog/');
         return;
       }
 
