@@ -4,6 +4,7 @@ const sharp = require('sharp');
 
 const inputDir = path.join(__dirname, '..', 'assets', 'images');
 const outputDir = path.join(inputDir, 'responsive');
+const EXCLUDED_DIRS = new Set(['responsive', 'instagram']);
 const sizes = [400, 800, 1200];
 
 // ---- CLI flags
@@ -75,7 +76,7 @@ async function processDirectory(dir) {
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name === 'responsive') continue;
+      if (EXCLUDED_DIRS.has(entry.name)) continue;
       await processDirectory(fullPath);
     } else if (/\.(jpe?g|png|webp)$/i.test(entry.name)) {
       await processFile(fullPath);

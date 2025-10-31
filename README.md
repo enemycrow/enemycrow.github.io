@@ -17,6 +17,13 @@ Este repositorio contiene el sitio web de **La Pluma, el Faro y la Llama**, un p
 
 ## Desarrollo Local
   Automatizar en CI (recomendado para equipos): crear un workflow que, al hacer push sobre `posts.json`, ejecute la generación y opcionalmente haga commit/push de `blog/` o despliegue.
+
+## Imágenes responsive e Instagram
+
+El script [`tools/responsive-images.js`](tools/responsive-images.js) genera automáticamente variantes en formato `.webp` dentro de `assets/images/responsive/` para todas las imágenes base ubicadas en `assets/images/`.
+
+Cuando prepares versiones verticales destinadas a Instagram, colócalas en `assets/images/instagram/`. Este directorio se excluye del procesamiento automático para que puedas exportarlas manualmente con el recorte y la calidad que necesites para redes sociales.
+
 ## Despliegue
 
 Antes de publicar, ejecuta el script de versionado para regenerar los nombres con hash y actualizar las referencias en los archivos HTML y el service worker:
