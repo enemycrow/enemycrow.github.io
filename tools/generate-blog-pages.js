@@ -302,6 +302,12 @@ function buildHtml(post) {
   const categoriesHtml = buildCategoryTags(post.categoria_temas);
   const booksHtml = buildCategoryTags(post.categoria_libros);
   const imageInfo = getImageInfo(post);
+  const rawVerticalImage = typeof post.imagen_vertical === 'string' ? post.imagen_vertical.trim() : '';
+  const normalizedVerticalImage = rawVerticalImage
+    ? rawVerticalImage.replace(/^\.\/?/, '').replace(/^\/+/, '')
+    : '';
+  const verticalImagePath = normalizedVerticalImage ? `/${normalizedVerticalImage}` : '';
+  const verticalImageAbsolute = verticalImagePath ? `${BASE_URL}${verticalImagePath}` : '';
   const licenseHtml = buildLicense(post, canonicalUrl);
   const title = `${post.titulo} | ${SECTION_NAME} – ${SITE_NAME}`;
   const twitterCard = imageInfo.socialImage ? 'summary_large_image' : 'summary';
@@ -337,8 +343,9 @@ function buildHtml(post) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
   <link rel="stylesheet" href="../css/styles.889d2a038d.css">
   <link rel="stylesheet" href="../css/custom-overrides.css" />
+  ${verticalImageAbsolute ? `<link rel="alternate" media="(orientation: portrait)" href="${escapeHtml(verticalImageAbsolute)}">` : ''}
 </head>
-<body data-post-slug="${escapeHtml(slug)}" data-prerendered="true">
+<body data-post-slug="${escapeHtml(slug)}" data-prerendered="true"${verticalImagePath ? ` data-instagram-image="${escapeHtml(verticalImagePath)}"` : ''}>
   <header>
     <div class="container">
       <nav class="navbar">
