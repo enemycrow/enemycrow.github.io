@@ -4,7 +4,23 @@ const sharp = require('sharp');
 
 const inputDir = path.join(__dirname, '..', 'assets', 'images');
 const outputDir = path.join(inputDir, 'responsive');
+const EXCLUDED_DIRS = new Set(['responsive', 'instagram']);
 const sizes = [400, 800, 1200];
+
+function isWithinExcludedDir(fullPath) {
+  const relative = path.relative(inputDir, fullPath);
+
+  // path.relative returns a path starting with '..' when the target is
+  // outside of the base directory. Those files should not be considered
+  // excluded because they are not inside the tree we manage.
+  if (relative.startsWith('..') || path.isAbsolute(relative)) {
+    return false;
+  }
+
+  return relative
+    .split(path.sep)
+    .some(part => EXCLUDED_DIRS.has(part));
+}
 
 // ---- CLI flags
 const argv = Object.fromEntries(
@@ -41,6 +57,14 @@ async function exists(p) { try { await fs.stat(p); return true; } catch { return
 async function ensureDir(p) { await fs.mkdir(p, { recursive: true }); }
 
 async function processFile(fullPath) {
+  if (isWithinExcludedDir(fullPath)) {
+    if (VERBOSE) {
+      const rel = path.relative(process.cwd(), fullPath);
+      console.log(`[skip] ${rel} (excluded directory)`);
+    }
+    return;
+  }
+
   const relPath = path.relative(inputDir, fullPath);
   const parsed = path.parse(relPath);
   const webpOpts = webpOptionsForPreset(PRESET);
@@ -75,9 +99,10 @@ async function processDirectory(dir) {
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name === 'responsive') continue;
+      if (isWithinExcludedDir(fullPath)) continue;
       await processDirectory(fullPath);
     } else if (/\.(jpe?g|png|webp)$/i.test(entry.name)) {
+      if (isWithinExcludedDir(fullPath)) continue;
       await processFile(fullPath);
     }
   }
@@ -88,7 +113,15 @@ async function run() {
   if (files.length) {
     for (const file of files) {
       if (!/\.(jpe?g|png|webp)$/i.test(file)) continue;
-      await processFile(path.resolve(file));
+      const resolved = path.resolve(file);
+      if (isWithinExcludedDir(resolved)) {
+        if (VERBOSE) {
+          const rel = path.relative(process.cwd(), resolved);
+          console.log(`[skip] ${rel} (excluded directory)`);
+        }
+        continue;
+      }
+      await processFile(resolved);
     }
   } else {
     await processDirectory(inputDir);
