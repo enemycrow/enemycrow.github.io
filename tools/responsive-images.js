@@ -42,6 +42,10 @@ async function ensureDir(p) { await fs.mkdir(p, { recursive: true }); }
 
 async function processFile(fullPath) {
   const relPath = path.relative(inputDir, fullPath);
+  if (relPath.split(path.sep).includes('social')) {
+    if (VERBOSE) console.log(`[skip] ${relPath} (carpeta social excluida)`);
+    return;
+  }
   const parsed = path.parse(relPath);
   const webpOpts = webpOptionsForPreset(PRESET);
 
@@ -75,7 +79,7 @@ async function processDirectory(dir) {
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name === 'responsive') continue;
+      if (entry.name === 'responsive' || entry.name === 'social') continue;
       await processDirectory(fullPath);
     } else if (/\.(jpe?g|png|webp)$/i.test(entry.name)) {
       await processFile(fullPath);

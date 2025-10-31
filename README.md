@@ -66,7 +66,7 @@ Cada entrada del archivo debe incluir los siguientes campos:
 - `comentarios`: número de comentarios
 - `fragmento`: breve resumen que aparece en la tarjeta
 - `imagen`: nombre de la imagen horizontal almacenada en `assets/images/`
-- `imagen_vertical`: ruta relativa dentro del repositorio (por ejemplo `assets/images/vertical/soledadenelarroyo-post97-portrait.webp`) a la versión vertical en formato `.webp`. Si no existe, deja una cadena vacía.
+- `imagen_vertical`: ruta relativa dentro del repositorio (por ejemplo `assets/images/social/blog/soledadenelarroyo-post97-portrait.png`) a la versión vertical en formato `.png`. Si no existe, deja una cadena vacía. Estas imágenes solo se usan para automatizaciones externas y no se muestran en el sitio.
 - `slug`: identificador para la URL (ej. `algoritmos-del-caos`)
 - `destacado`: marca la entrada como destacada si su valor es `true`
 - `contenido_html`: cuerpo completo en HTML para `blog-entry.html`
@@ -74,13 +74,15 @@ Cada entrada del archivo debe incluir los siguientes campos:
 Para agregar una nueva entrada basta con editar `posts.json` y colocar la imagen correspondiente en `assets/images/`.
 Las páginas `blog.html` y `blog-entry.html` cargan este archivo mediante JavaScript, por lo que no es necesario modificar el HTML.
 
+> Nota: Las variantes verticales se guardan siempre en `assets/images/social/` con extensión `.png`. Usa `assets/images/social/blog/` para publicaciones del diario y `assets/images/social/fortune_cookies/` para las galletas. Todo el árbol `assets/images/social/` queda excluido del comando `npm run responsive` para preservar la calidad 9:16 exigida por redes sociales.
+
 Las galletas expuestas en `fortune_cookies.json` siguen un esquema similar:
 
 - `id`: identificador numérico único
 - `personaje`: nombre del personaje asociado
 - `mensaje`: texto a mostrar en la galleta
 - `imagen`: nombre del recurso horizontal principal (ubicado dentro de `assets/images/`)
-- `imagen_vertical`: ruta relativa dentro del repositorio a la variante vertical en formato `.webp` (por ejemplo `assets/images/fortune/portrait/sunfelicity-fortune50.webp`). Usa una cadena vacía cuando no exista.
+- `imagen_vertical`: ruta relativa dentro del repositorio a la variante vertical en formato `.png` (por ejemplo `assets/images/social/fortune_cookies/sunfelicity-fortune50.png`). Usa una cadena vacía cuando no exista. Se reserva para difusión en redes sociales.
 - `slug`: identificador legible en URLs
 - `prompt`: referencia descriptiva para la generación visual
 - `tags`: lista de etiquetas temáticas
