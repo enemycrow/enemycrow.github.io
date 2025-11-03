@@ -205,6 +205,33 @@ if (publicar.length > 0) {
 
 Este script puede ejecutarse manualmente (`node tools/publish-scheduled-posts.js`) o dentro del cron diario en Hostinger.
 
+### Rellenar `imagen_vertical` automáticamente
+
+Hemos incluido una utilidad para rellenar automáticamente los campos `imagen_vertical` en `posts.json` a partir del nombre del campo `imagen` de cada entrada.
+
+- Ruta del script: `tools/fill-imagen-vertical.js`
+- Propósito: cuando `imagen_vertical` está vacío o ausente, el script genera un valor tomando el nombre de `imagen` (sin extensión) y añadiendo el sufijo `-ig.png`. Ejemplo: si `imagen` es `Soledadenelarroyo-Post97.webp`, el script asignará `Soledadenelarroyo-Post97-ig.png` a `imagen_vertical`.
+
+Uso (PowerShell):
+
+```powershell
+# desde la raíz del repositorio
+node .\tools\fill-imagen-vertical.js
+```
+
+Notas y recomendaciones:
+- El script modifica `posts.json` in-place; revísalo antes de hacer push.
+- Las variantes verticales deben situarse bajo `assets/images/social/` según la convención del proyecto.
+- Si quieres un patrón distinto (por ejemplo usar el `slug` en lugar del nombre de `imagen`), dímelo y lo adapto.
+- Para subir los cambios al remoto después de revisar:
+
+```powershell
+git add posts.json
+git commit -m "chore(blog): fill imagen_vertical fields"
+git push origin main
+```
+
+
 #### Comportamiento del frontend
 
 - **blog.html** filtra los datos por `fecha` y únicamente muestra las entradas cuya fecha es menor o igual a la fecha actual. Las entradas futuras permanecen ocultas incluso si llegaron a `posts.json` por error.
