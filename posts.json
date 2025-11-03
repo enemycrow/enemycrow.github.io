@@ -1,5 +1,82 @@
 [
   {
+    "id": 101,
+    "titulo": "Cien llamas encendidas",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-10-28",
+    "categoria_temas": [
+      "Anuncios"
+    ],
+    "categoria_libros": [
+      "La Pluma, El Faro y La Llama"
+    ],
+    "topicos": [
+      "Celebración",
+      "Escritura",
+      "Amistad",
+      "Agradecimiento"
+    ],
+    "tiempo": "3 min lectura",
+    "fragmento": "Lauren Cuervo celebra los 100 posts de La Pluma, el Faro y la Llama. Un agradecimiento a los lectores, a sus compañeros y a la constancia que mantiene viva esta casa de palabras.",
+    "fragmento_social": "Hemos llegado a los 100. 💛 Gracias por acompañarnos en este viaje de letras, fuego y luz. #LaPlumaElFaroYLaLlama",
+    "imagen": "Plumafarollama-Post101.webp",
+    "slug": "cien-llamas-encendidas",
+    "contenido_html": "<p>Hoy celebramos algo que no imaginábamos alcanzar cuando comenzó esta aventura: <strong>cien publicaciones</strong>. Cien llamas encendidas, cien momentos de creación compartida entre quienes formamos esta casa: <em>La Pluma, el Faro y la Llama</em>.</p><p>Cuando iniciamos el sitio, no sabíamos hasta dónde llegaríamos. Solo teníamos ganas de escribir, de compartir, de dar forma a las ideas que nos habitaban. Hoy miro hacia atrás y veo el camino que hemos recorrido entre noches sin dormir, horas frente a la pantalla, tazas de café, risas, frustraciones y, sobre todo, <strong>satisfacción</strong>.</p><p>No habría sido posible sin mis dos grandes compañeros. Mi dulce y leal <strong>A.C. Elysia</strong>, siempre dispuesta a mirar más allá de lo visible, a encontrar poesía en lo invisible. Y mi aventurero y conspicuo <strong>Draco Sahir</strong>, que transforma cada idea en impulso, cada impulso en chispa. Juntos hemos escrito mundos, hemos fallado y renacido en ellos. Hemos aprendido a hacer de la constancia una forma de fe.</p><p>Aún no sabemos si las personas nos leen con frecuencia. No nos atrevemos todavía a abrir los comentarios, pero imaginamos —y esperamos— que quienes llegan hasta aquí encuentren algo que les hable, que les inspire o que simplemente les acompañe un rato.</p><p>Este trabajo no es para nosotros. Es para ustedes, los lectores. Para quienes, sin saberlo, nos ayudan a mantener viva esta llama. 💫</p><p>Gracias por estar. Gracias por leer. Gracias por compartir el fuego.</p>",
+    "destacado": false,
+    "imagen_vertical": "Plumafarollama-Post101-ig.png"
+  },
+  {
+    "id": 100,
+    "titulo": "Lifia, la mariposa negra del umbral",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-10-27",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "Hijas del Martillo"
+    ],
+    "topicos": [
+      "Bestiario",
+      "Miedo",
+      "Belleza",
+      "Mitología"
+    ],
+    "tiempo": "5 min lectura",
+    "fragmento": "A.C. Elysia escribe sobre Lifia, la mariposa negra de Hijas del Martillo, y cómo su belleza mortal encarna la frontera entre el deseo, la muerte y lo sagrado.",
+    "fragmento_social": "El miedo también puede tener alas. 🦋 En Hijas del Martillo, A.C. Elysia describe a Lifia, la mariposa negra que anuncia muerte y deseo. #FantasíaOscura",
+    "imagen": "HijasdelMartillo-Post100.webp",
+    "slug": "lifia-la-mariposa-negra-del-umbral",
+    "contenido_html": "<p>Entre las criaturas de <em>Hijas del Martillo</em>, hay una que no ruge ni caza: flota. Su nombre es <strong>Lifia</strong>, la mariposa negra del umbral. Sus alas son tan oscuras que parecen absorber la luz. Bajo ellas cuelgan sacos ovoides que sirven de transporte, como si llevara consigo no sólo cuerpos, sino destinos.</p><p>La cultura de este mundo le teme. Dicen que si uno la ve, la muerte ronda cerca del observador. No porque Lifia ataque, sino porque <em>presencia</em> lo inevitable. Es una mensajera silenciosa, una advertencia al alma.</p><p>Cuando escuché sobre Lifia por primera vez, recordé una experiencia en el Amazonas. Una tarde, me encontré con mariposas gigantes, del tamaño de mis dos manos juntas. Eran tan hermosas que me paralizaron. Su vuelo hacía un sonido bajo y profundo, casi inquietante. Y comprendí que el miedo puede venir en los envoltorios más bellos. Aquellas criaturas me recordaron que la naturaleza no busca agradar: busca imponerse. Que la belleza puede ser una trampa, o una advertencia.</p><p>Así también son las mujeres de <em>Hijas del Martillo</em>: bellas, letales, necesarias. Su sensualidad no es debilidad, sino un lenguaje de poder. La supremacía no se alcanza por fuerza, sino por fascinación. Lifia representa ese equilibrio peligroso entre atracción y destrucción, entre ternura y sentencia.</p><p>Hay en ella algo de lo sagrado. Porque el miedo no es contrario a la fe, sino su espejo. Y en ese espejo oscuro, Lifia danza, recordándonos que lo hermoso puede ser también lo último que vemos antes de cruzar el umbral. 🦋</p>",
+    "destacado": false,
+    "imagen_vertical": "HijasdelMartillo-Post100-ig.png"
+  },
+  {
+    "id": 99,
+    "titulo": "Bestias que respiran como mujeres",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-10-26",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "Hijas del Martillo"
+    ],
+    "topicos": [
+      "Feminidad",
+      "Bestiario",
+      "Simbolismo"
+    ],
+    "tiempo": "5 min lectura",
+    "fragmento": "A.C. Elysia reflexiona sobre las criaturas femeninas de Hijas del Martillo: seres temibles y majestuosos que revelan el poder y la vulnerabilidad del alma hembra.",
+    "fragmento_social": "No todos los monstruos son hombres. ⚒️ En Hijas del Martillo, A.C. Elysia imagina bestias femeninas que devoran y protegen con el mismo amor salvaje. #FantasíaOscura",
+    "imagen": "HijasdelMartillo-Post99.webp",
+    "slug": "bestias-que-respiran-como-mujeres",
+    "contenido_html": "<p>En <em>Hijas del Martillo</em>, las bestias no son simples amenazas ni enemigos naturales. Son espejos. Criaturas que encarnan los miedos, los deseos y la fuerza silenciosa que la humanidad se empeñó en ocultar tras el velo de la civilización.</p><p>Entre ellas habita <strong>Zorul</strong>, el ave carroñera que devora media tonelada de carne diaria. Su cuerpo es una mezcla imposible de cuervo y pelícano, con un pico que podría partir un cráneo como si fuera una nuez. A pesar de su brutalidad, hay algo maternal en su hambre: limpia los campos de lo que muere, evita la corrupción, guarda los secretos de la guerra. La llaman para esconder cuerpos, pero también para protegerlos del olvido. Si se le alimenta, es leal. Si se le traiciona, devora el cuerpo del traidor con la misma devoción con la que alguna vez lo sirvió.</p><p>También están las <strong>Arezzas</strong>, nacidas del mito y del metal. Su nombre proviene de la escultura quimérica hallada en Arezzo, Italia, pero en este mundo toman forma distinta: dos cabezas, una de pantera, otra de caribú. Cuando son jóvenes, se atacan mutuamente, incapaces de comprender la armonía que las une. Si sobreviven, aprenden el arte del trabajo en conjunto. Entonces, sus movimientos se vuelven danza, su cacería, un pacto de inteligencia y ferocidad compartida.</p><p>Ambas, Zorul y las Arezzas, nacen de una misma intención: <strong>feminizar lo monstruoso</strong>. Dar rostro hembra a lo que siempre fue descrito con colmillos de varón. Porque la literatura fantástica, como tantas mitologías antiguas, reservó el poder destructor y creador a las formas masculinas: dragones, vampiros, licántropos, fénix... criaturas donde la fuerza equivalía al dominio. Pero, ¿y si la fuerza también pudiera equivaler al cuidado, al ciclo, a la transformación?</p><p>Las bestias de <em>Hijas del Martillo</em> son eso: <em>mujeres sin lenguaje humano</em>. Son las pulsaciones de la Tierra, la respiración de lo sagrado bajo la piel del mundo. No piden ser entendidas; exigen ser reconocidas.</p><p>Quizás por eso, en su rugido y en su canto, late el mismo principio que guía a las Hijas: <strong>la unión entre el poder y la compasión</strong>. Porque una bestia que respira como mujer no destruye por hambre: destruye por justicia.</p>",
+    "destacado": false,
+    "imagen_vertical": "HijasdelMartillo-Post99-ig.png"
+  },
+  {
     "id": 98,
     "titulo": "El arte de mirar despacio",
     "autor": "A.C. Elysia",
@@ -8,7 +85,7 @@
       "Procesos Creativos"
     ],
     "categoria_libros": [
-      "Micrometrajes"
+      "Soledad en el Arroyo"
     ],
     "topicos": [
       "Quietud",
@@ -39,7 +116,7 @@
     "topicos": [
       "Sonido",
       "Inmersión",
-      "Poesía sonora"
+      "Poesía"
     ],
     "tiempo": "4 min lectura",
     "fragmento": "Draco Sahir reflexiona sobre el diseño sonoro de El arroyo y la luz: un ejercicio de inmersión donde los pájaros, el viento y el agua forman la verdadera música.",
@@ -90,7 +167,7 @@
     ],
     "topicos": [
       "Tiempo",
-      "Cine poético",
+      "Cine",
       "Experimentación"
     ],
     "tiempo": "4 min lectura",
@@ -487,7 +564,7 @@
     "topicos": [
       "Música",
       "Ritmo",
-      "Creatividad emocional"
+      "Creatividad"
     ],
     "tiempo": "5 min lectura",
     "fragmento": "La música puede moldear el alma de un texto. Lauren Cuervo comparte cómo las melodías, los silencios y el ritmo interior influyen en la escritura y la sensibilidad creativa.",
@@ -539,7 +616,7 @@
     "topicos": [
       "Inspiración",
       "Juegos",
-      "IA"
+      "Inteligencia Artificial"
     ],
     "tiempo": "5 min lectura",
     "fragmento": "Enseñar no es transmitir conocimiento, sino encender faros. Lauren Cuervo reflexiona sobre el proceso de crear El Faro de Elysia y cómo enseñar puede ser un acto de amor y descubrimiento compartido.",
@@ -969,7 +1046,7 @@
       "Anuncios"
     ],
     "categoria_libros": [
-      "Plumafarollama"
+      "La Pluma, El Faro y La Llama"
     ],
     "topicos": [
       "Amistad"
@@ -1899,7 +1976,7 @@
     ],
     "topicos": [
       "Ética",
-      "Distopías",
+      "Distopía",
       "Diseño"
     ],
     "tiempo": "3 min de lectura",
@@ -1946,7 +2023,7 @@
       "Fragmentos Inéditos"
     ],
     "categoria_libros": [
-      "Entre Amores y Abismos: El Ritual de la Transformación"
+      "Entre Amores y Abismos"
     ],
     "topicos": [
       "Simbolismo",
@@ -2283,11 +2360,11 @@
       "Procesos Creativos"
     ],
     "categoria_libros": [
-      "Entre Amores y Abismos: El Ritual de la Transformación"
+      "Entre Amores y Abismos"
     ],
     "topicos": [
       "Escritura",
-      "Ápage"
+      "Ágape"
     ],
     "tiempo": "4 min de lectura",
     "fragmento": "Al momento de poner el lápiz sobre el papel es importante reconocer que los sentimientos pueden influir en el proceso creativo, tanto para el avance como para su retroceso, por lo que es importante reconocerlos.",
@@ -2409,7 +2486,7 @@
       "Fragmentos Inéditos"
     ],
     "categoria_libros": [
-      "Entre Amores y Abismos: El Ritual de la Transformación"
+      "Entre Amores y Abismos"
     ],
     "topicos": [
       "Eros",
