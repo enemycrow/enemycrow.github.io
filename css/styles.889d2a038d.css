@@ -1357,7 +1357,7 @@ blockquote {
 
 .subscribe-image {
   flex: 0 0 40%;
-  background: url('https://images.unsplash.com/photo-1492724441997-5dc865305da6?auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+  background: url('/assets/images/site/plumafarollama-subscribe.webp') no-repeat center center;
   background-size: cover;
 }
 

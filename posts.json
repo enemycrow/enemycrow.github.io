@@ -1,5 +1,30 @@
 [
   {
+    "id": 98,
+    "titulo": "El arte de mirar despacio",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-10-25",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "Micrometrajes"
+    ],
+    "topicos": [
+      "Quietud",
+      "Reflexión",
+      "Plenitud"
+    ],
+    "tiempo": "4 min lectura",
+    "fragmento": "A.C. Elysia concluye la serie El arroyo y la luz con una reflexión sobre la quietud: el valor de detenerse en un mundo que confunde paz con aburrimiento.",
+    "fragmento_social": "La tranquilidad no es vacío, es completitud. 🌿✨ A.C. Elysia cierra El arroyo y la luz con una reflexión sobre el arte de mirar despacio. #Micrometrajes",
+    "imagen": "Soledadenelarroyo-Post98.webp",
+    "slug": "el-arte-de-mirar-despacio",
+    "contenido_html": "<p>La vida nos concede pocos instantes de detención. El resto del tiempo lo ocupamos corriendo, respondiendo, sobreviviendo. La sociedad, con su voz incesante, nos enseña que la paz es aburrida, que la calma es improductiva, que el silencio es una pérdida de tiempo.</p><p>Pero en realidad, la tranquilidad no es ausencia. Es <strong>completitud</strong>. Es el instante en que uno se reencuentra consigo mismo y descubre que no falta nada. Es el momento donde la vida se escucha sin interferencias.</p><p>En ese espacio nace el crecimiento verdadero. No en el ruido, sino en la pausa. No en la euforia, sino en el aislamiento voluntario. En la soledad elegida, la mente respira, el alma ordena su casa y el corazón vuelve a tener voz.</p><p>Quizás por eso esta historia —<em>El arroyo y la luz</em>— no busca vender nada, ni ofrecer moralejas. Solo devuelve un poco de eso que hemos olvidado: quietud, encuentro, libertad.</p><p>Mirar despacio no es un lujo, es una forma de sabiduría. 🌾</p><p>Y si alguna vez te sientas frente a un arroyo, deja que el tiempo se disuelva. Tal vez descubras que el mundo no necesita moverse para seguir fluyendo.</p>",
+    "destacado": false,
+    "imagen_vertical": "Soledadenelarroyo-Post98-ig.webp"
+  },
+  {
     "id": 97,
     "titulo": "Componer sin palabras",
     "autor": "Draco Sahir",
@@ -23,7 +48,7 @@
     "contenido_html": "<p>Antes de pensar en música, pensé en el silencio. Pero no en el silencio vacío, sino en ese que está lleno de sonidos diminutos: pájaros, agua, viento, hojas. Ese silencio que, si uno se queda quieto, se convierte en una sinfonía.</p><p>Mi propósito con el sonido de <em>El arroyo y la luz</em> es crear una situación de inmersión. No un fondo, sino un mundo. Los pájaros y el ruido blanco del agua serán el eje, pero a su alrededor habrá capas. Capas de vida: el silbido del viento entre las hojas, el roce del pasto, los insectos, el crujido de una rama. Pequeñas verdades sonoras que, juntas, hacen respirar la escena.</p><p>Porque el sonido no está detrás de la imagen: la sostiene. El oído nos sumerge donde el ojo no alcanza. Y hay sonidos que aún no sé cómo se escuchan, pero me gustaría descubrirlos. El viento que enreda el cabello. La caída de un mantel sobre el pasto. El roce de la tela contra la tierra. Son detalles simples, pero cargados de humanidad.</p><p>Más que un arte del silencio, es un arte de la <strong>presencia</strong>. No se trata de eliminar el ruido, sino de darle significado. De escuchar hasta lo invisible.</p><p>Hay músicas que se escriben con notas. Esta, quiero escribirla con aire. 🎶</p>",
     "destacado": false,
     "url": "blog/componer-sin-palabras.html",
-    "imagen_vertical": ""
+    "imagen_vertical": "Soledadenelarroyo-Post97-ig.webp"
   },
   {
     "id": 96,
