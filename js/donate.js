@@ -86,6 +86,30 @@ document.addEventListener('DOMContentLoaded', () => {
       pero un fiel recuerdo me trae tu miel como canción de cuna.`,
       imageBase:'eres-una-cancion-eterna', slug:'eres-una-cancion-eterna', cc:'by-nc-nd',
       author:'Lauren Cuervo' },
+      { title:'El rastro detrás de ti', year: 2025,
+      text:`Tus pisadas se escucharon más lejanas
+      El sol puso una cortina cegadora
+      Los océanos se vaciaron de sus mares
+      Los árboles desparramaron sus hojas
+
+      Te fuiste
+      Partiste
+
+      Hiriendo
+      Silencio
+
+      Las voces de la tierra se erosionaron
+      Una gruta atesoró tu voz, misterio
+      La penúltima flor se despidió triste
+      Hoy se retira la que queda, discreta
+
+      Abdicas
+      Renuncias
+
+      Oculta
+      Oscura`,
+      imageBase:'el-rastro-detras-de-ti', slug:'el-rastro-detras-de-ti', cc:'by-nc-nd',
+      author:'A.C Elysia' },
   ];
 
   // === 2) DOM ===

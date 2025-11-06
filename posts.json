@@ -1,5 +1,30 @@
 [
   {
+    "id": 102,
+    "titulo": "Una visión desde la partida",
+    "autor": "A.C. Elysia",
+    "fecha": "2025-10-29",
+    "categoria_temas": [
+      "Fragmentos Inéditos"
+    ],
+    "categoria_libros": [
+      "El rastro detrás de ti"
+    ],
+    "topicos": [
+      "Ausencia",
+      "Poesía",
+      "Entrevista"
+    ],
+    "tiempo": "4 min lectura",
+    "fragmento": "A.C. Elysia presenta su poema El Rastro detrás de ti y conversa sobre el silencio, la pérdida y la belleza de lo que ya no está.",
+    "fragmento_social": "El amor no desaparece: se convierte en eco. 🌫️ A.C. Elysia comparte su poema 'El Rastro detrás de ti' y reflexiona sobre la huella de las ausencias.",
+    "imagen": "ElRastroDetrasDeTi-Post102.webp",
+    "slug": "el-rastro-detras-de-ti",
+    "contenido_html": "<h3>El Rastro detrás de ti</h3><p>Tus pisadas se escucharon más lejanas<br>El sol puso una cortina cegadora<br>Los océanos se vaciaron de sus mares<br>Los árboles desparramaron sus hojas</p><p>Te fuiste<br>Partiste</p><p>Hiriendo<br>Silencio</p><p>Las voces de la tierra se erosionaron<br>Una gruta atesoró tu voz, misterio<br>La penúltima flor se despidió triste<br>Hoy se retira la que queda, discreta</p><p>Abdicas<br>Renuncias</p><p>Oculta<br>Oscura</p><hr><h3>Conversación con A.C. Elysia</h3><p><strong>—¿Cómo nació este poema?</strong><br>—Nació de una ausencia. No de una ruptura, ni de la muerte, sino de ese espacio que deja algo que ya no responde. Escribirlo fue reconocer la forma del silencio.</p><p><strong>—El texto parece calmo, casi sin lamento. ¿Por qué?</strong><br>—Porque el dolor, cuando se asienta, ya no grita. Es como el mar después de una tormenta: parece quieto, pero debajo todo sigue moviéndose. La voz del poema acepta que algo se fue, pero no deja de escucharlo.</p><p><strong>—¿Qué papel cumple el silencio en tu poesía?</strong><br>—Es mi materia favorita. El silencio revela lo que las palabras no pueden. Cuando digo “Te fuiste / Partiste”, no busco dramatismo; busco el peso de la pausa. Cada palabra es una respiración contenida.</p><p><strong>—Las últimas estrofas parecen una renuncia.</strong><br>—Sí. “Abdicas / Renuncias” es el momento en que la voz poética entiende que el otro eligió irse. Y aceptar esa decisión también es una forma de amor. No hay reclamo; solo reconocimiento.</p><p><strong>—¿Qué queda después?</strong><br>—El eco. Siempre el eco. El poema termina, pero su sonido continúa en quien lo lee. Y a veces, ese eco es más verdadero que la voz original.</p><hr><p>“El Rastro detrás de ti” es, al final, un pequeño altar al silencio. Un poema que no intenta retener lo que se fue, sino darle espacio para que siga existiendo en forma de memoria.</p>",
+    "destacado": false,
+    "imagen_vertical": "ElRastroDetrasDeTi-Post102-ig.png"
+  },
+  {
     "id": 101,
     "titulo": "Cien llamas encendidas",
     "autor": "Lauren Cuervo",
