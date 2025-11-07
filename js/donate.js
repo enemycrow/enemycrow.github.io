@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { title:'Innotoriedad', year: 2025,
       text:`Se esforzaba y esforzaba
       Quería verse, notarse
-      Su pesar era heredad innotoriedad
+      Su pesar era heredada innotoriedad
       ¿Qué más da? Sólo yo me daré cuenta`,
       imageBase:'innotoriedad', slug:'innotoriedad', cc:'by-nc-nd',
       author:'Draco Sahir' },
