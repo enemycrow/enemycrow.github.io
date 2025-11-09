@@ -1,29 +1,30 @@
 [
   {
-  "id": 106,
-  "titulo": "La noche en que me encontré con un hombre roto",
-  "autor": "Lauren Cuervo",
-  "fecha": "2025-11-02",
-  "categoria_temas": [
-    "Procesos Creativos"
-  ],
-  "categoria_libros": [
-    "La Pluma, El Faro y La Llama"
-  ],
-  "topicos": [
-    "Empatía",
-    "Violencia doméstica",
-    "Adicciones",
-    "Humanidad",
-    "Compasión"
-  ],
-  "tiempo": "6 min lectura",
-  "fragmento": "Una noche cualquiera, la vida me detuvo frente a un hombre que había perdido todo: su madre, su hogar y su esperanza. A veces, las batallas más duras no son contra otros, sino contra aquello que nos devora desde dentro.",
-  "imagen": "Plumafarollama-Post106.webp",
-  "slug": "la-noche-en-que-me-encontre-con-un-hombre-roto",
-  "contenido_html": "<p>Ayer, cuando la noche ya cubría la ciudad, algo me sucedió. En una banca del parque vi a un hombre con la mirada caída, el mentón apuntando al suelo y una respiración húmeda que se confundía con el frío. Al mirarlo con claridad, descubrí que lo que intentaba esconder eran lágrimas.</p><p>—Hola, hermano. ¿Necesitas ayuda? —le pregunté. El hombre apenas asintió, sin levantar la mirada. Encendía y apagaba un cigarrillo sin prenderlo. Su voz tembló cuando me dijo: “Hace dos semanas perdí a mi madre”.</p><p>Luego me contó que su esposa lo había golpeado. Tres veces: una en los labios y dos en los pómulos. En el farol del parque, su rostro inflamado brillaba de tristeza y vergüenza. “Lo que más me duele no es el golpe físico, es el emocional”, dijo. Su moral estaba devastada.</p><p>Le habían pedido que desalojara su casa. Los carabineros lo acompañaron fuera del domicilio. “Uno me dijo: ‘Póngase los pantalones, poco hombre’. ¿Qué se hace cuando la compasión también te cierra la puerta?”, pensé.</p><p>El hombre seguía hablando. Me dijo que estaba solo, que su familia vivía lejos y que su esposa había espantado a todos sus amigos. Ella había roto su celular y se había quedado con su dinero. Lloraba sin detenerse. Su voz se quebraba cuando pronunciaba la palabra ‘madre’. Sentía que le había fallado, porque ella le advirtió que esa mujer no le haría bien.</p><p>“Desde hace un tiempo, mi señora tiene comportamientos extraños”, confesó al final. “Creo que está en la droga. Le encontré cosas. Cuando le pregunté, me pegó otra vez. Me dolió. Pero lo que más me duele… es haber perdido todo”.</p><p>Me quedé junto a él todo lo que pude. No sabía qué hacer. Le compré un sándwich y algo para beber, y le pedí que volviera a intentar denunciar, porque la noche sería larga. Me dio las gracias, con la voz hecha cenizas.</p><p>Mientras me alejaba, pensé que la verdadera guerra no es entre hombres y mujeres. Es contra otra cosa. Una que se disfraza de estilo de vida, de música, de escape. La adicción. Esa prisión blanca que se apodera de todo y de todos.</p><p>Ojalá ese hombre logre recuperar su vida. Y ojalá ella también encuentre la fuerza para escapar de esa cárcel de polvo y líneas. Que la noche no se los trague a ambos.</p><p>Porque, a veces, las historias más duras no están en los libros. Están en la banca del parque más cercano.</p><p>Gracias por leer. Si este texto te tocó, te invito a seguir explorando este blog. Aquí compartimos historias que nos recuerdan que aún hay humanidad en medio de la oscuridad.</p>",
-  "destacado": false,
-  "imagen_vertical": "Plumafarollama-Post106-ig.png"
+    "id": 106,
+    "titulo": "La noche en que me encontré con un hombre roto",
+    "autor": "Lauren Cuervo",
+    "fecha": "2025-11-02",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "La Pluma, El Faro y La Llama"
+    ],
+    "topicos": [
+      "Empatía",
+      "Violencia doméstica",
+      "Adicciones",
+      "Humanidad",
+      "Compasión"
+    ],
+    "tiempo": "6 min lectura",
+    "fragmento": "Una noche cualquiera, la vida me detuvo frente a un hombre que había perdido todo: su madre, su hogar y su esperanza. A veces, las batallas más duras no son contra otros, sino contra aquello que nos devora desde dentro.",
+    "imagen": "Plumafarollama-Post106.webp",
+    "slug": "la-noche-en-que-me-encontre-con-un-hombre-roto",
+    "contenido_html": "<p>Ayer, cuando la noche ya cubría la ciudad, algo me sucedió. En una banca del parque vi a un hombre con la mirada caída, el mentón apuntando al suelo y una respiración húmeda que se confundía con el frío. Al mirarlo con claridad, descubrí que lo que intentaba esconder eran lágrimas.</p><p>—Hola, hermano. ¿Necesitas ayuda? —le pregunté. El hombre apenas asintió, sin levantar la mirada. Encendía y apagaba un cigarrillo sin prenderlo. Su voz tembló cuando me dijo: “Hace dos semanas perdí a mi madre”.</p><p>Luego me contó que su esposa lo había golpeado. Tres veces: una en los labios y dos en los pómulos. En el farol del parque, su rostro inflamado brillaba de tristeza y vergüenza. “Lo que más me duele no es el golpe físico, es el emocional”, dijo. Su moral estaba devastada.</p><p>Le habían pedido que desalojara su casa. Los carabineros lo acompañaron fuera del domicilio. “Uno me dijo: ‘Póngase los pantalones, poco hombre’. ¿Qué se hace cuando la compasión también te cierra la puerta?”, pensé.</p><p>El hombre seguía hablando. Me dijo que estaba solo, que su familia vivía lejos y que su esposa había espantado a todos sus amigos. Ella había roto su celular y se había quedado con su dinero. Lloraba sin detenerse. Su voz se quebraba cuando pronunciaba la palabra ‘madre’. Sentía que le había fallado, porque ella le advirtió que esa mujer no le haría bien.</p><p>“Desde hace un tiempo, mi señora tiene comportamientos extraños”, confesó al final. “Creo que está en la droga. Le encontré cosas. Cuando le pregunté, me pegó otra vez. Me dolió. Pero lo que más me duele… es haber perdido todo”.</p><p>Me quedé junto a él todo lo que pude. No sabía qué hacer. Le compré un sándwich y algo para beber, y le pedí que volviera a intentar denunciar, porque la noche sería larga. Me dio las gracias, con la voz hecha cenizas.</p><p>Mientras me alejaba, pensé que la verdadera guerra no es entre hombres y mujeres. Es contra otra cosa. Una que se disfraza de estilo de vida, de música, de escape. La adicción. Esa prisión blanca que se apodera de todo y de todos.</p><p>Ojalá ese hombre logre recuperar su vida. Y ojalá ella también encuentre la fuerza para escapar de esa cárcel de polvo y líneas. Que la noche no se los trague a ambos.</p><p>Porque, a veces, las historias más duras no están en los libros. Están en la banca del parque más cercano.</p><p>Gracias por leer. Si este texto te tocó, te invito a seguir explorando este blog. Aquí compartimos historias que nos recuerdan que aún hay humanidad en medio de la oscuridad.</p>",
+    "destacado": false,
+    "imagen_vertical": "Plumafarollama-Post106-ig.png",
+    "url": "blog/la-noche-en-que-me-encontre-con-un-hombre-roto.html"
   },
   {
     "id": 105,
@@ -48,7 +49,8 @@
     "slug": "el-alma-visible-del-libro",
     "contenido_html": "<p>Hay algo casi sagrado en la sensación de un libro. No importa si es de papel o digital: cuando lo abrimos, el mundo se detiene un instante. Lo sostenemos, respiramos su orden y su promesa. Un libro bien hecho tiene <strong>alma</strong>, aunque esté hecho de pixeles.</p><p>En <em>El Huevo que volvió a cantar</em>, esa alma era esencial. Su portada debía hablar antes que las palabras: mostrar una historia de ternura, de redención y de asombro. El color, las formas, las tipografías... todo debía vibrar en la misma frecuencia que el cuento. Porque el diseño no es adorno, es un lenguaje paralelo.</p><p>Me gusta pensar que cada libro tiene su <strong>panorama</strong>, su forma de entregarse. Algunos se abren como amaneceres y otros como cofres. En los digitales, esa sensación puede renacer gracias a los <strong>flipbooks</strong>. Son maravillosos. Pasar una página virtual con el sonido leve del papel que no existe, pero se siente... eso también es magia. 💫</p><p>Sueño con el día en que podamos compartir todos los libros del Faro en formato flipbook. Sé que <strong>Lauren</strong> podrá lograrlo. Tiene ese don de convertir las ideas en regalos visibles, en gestos que brillan. Será una forma nueva de decir gracias a los lectores: un regalo de movimiento, de textura, de amor.</p><p>El diseño es eso: una forma de ternura visible. Cada color, cada sombra, cada borde está pensado para acompañar a quien abre el libro. Porque un libro no se entrega con las manos, se entrega con el alma.</p>",
     "destacado": false,
-    "imagen_vertical": "Elhuevoquevolvioacantar-Post105-ig.png"
+    "imagen_vertical": "Elhuevoquevolvioacantar-Post105-ig.png",
+    "url": "blog/el-alma-visible-del-libro.html"
   },
   {
     "id": 104,
@@ -73,7 +75,8 @@
     "slug": "disenar-pensando-en-quien-lee",
     "contenido_html": "<p>Cuando diseño un libro, no pienso solo en cómo se ve, sino en cómo se siente. Cada línea, cada margen, cada espacio en blanco debe tener una razón de ser. <em>Diseñar pensando en quien lee</em> es imaginar sus ojos, su ritmo, su respiración. Es construir un camino amable para que las palabras no se pierdan en la forma.</p><p>En <em>El Huevo que volvió a cantar</em>, me acompañó algo que valoro mucho: <strong>la conversación con ChatGPT</strong>. A través de ella, pude ordenar ideas, probar combinaciones y descubrir nuevas maneras de equilibrar texto e imagen. A veces uno se encierra tanto en lo visual que olvida el corazón de la lectura: el mensaje. Esta herramienta me ayudó a volver siempre a esa pregunta esencial: <em>¿qué quiero que el lector sienta?</em></p><p>Hay libros que hablan de temas más serios y quiero que también puedan ser leídos por niños mayores, de siete años en adelante. En esos casos busco tipografías con forma, con una pequeña chispa de juego. Tal vez un niño no reconozca el tipo de letra, pero sí notará que hay algo en ella que sonríe. Y eso ya vale más que cualquier teoría tipográfica.</p><p>Por muy fácil que parezca, elegir el diseño es complejo. Hay que pensar en los <strong>contrastes</strong> entre el texto y el fondo: demasiado claros y cansan; demasiado suaves y desaparecen. Hay que encontrar el punto exacto donde el ojo se siente cómodo. También amo incluir <strong>imágenes</strong>. Pero colocar una ilustración no es cuestión de azar: debe dialogar con el texto, no interrumpirlo. Cada imagen es una pausa, un respiro, una ventana.</p><p>Cuando pienso en quien lee, entiendo que el diseño no es decoración: es acompañamiento. Diseñar es tender una mano invisible y decirle al lector, sin palabras: <em>camina conmigo, este camino fue hecho para ti</em>.</p>",
     "destacado": false,
-    "imagen_vertical": "Elhuevoquevolvioacantar-Post104-ig.png"
+    "imagen_vertical": "Elhuevoquevolvioacantar-Post104-ig.png",
+    "url": "blog/disenar-pensando-en-quien-lee.html"
   },
   {
     "id": 103,
@@ -100,7 +103,8 @@
     "slug": "la-voz-de-la-tipografia",
     "contenido_html": "<p>Siempre me ha gustado mirar las letras como si fueran criaturas pequeñas. Algunas caminan erguidas, otras se acurrucan. Hay letras que murmuran y otras que cantan. Y cuando todas se ponen de acuerdo, el libro respira. ✨</p><p>En <em>El Huevo que volvió a cantar</em> quise que esa respiración fuera serena y luminosa. Que el texto tuviera el mismo tono que el cuento: un equilibrio entre lo infantil y lo trascendental. Por eso me enamoré de fuentes como <strong>Playfair Display</strong> y <strong>Cormorant Garamond</strong>. Tienen algo solemne, pero también algo que se desliza con suavidad, como si recordaran los cuentos antiguos. Se sienten serias, sí, pero también llenas de esperanza.</p><p>Me encanta cuando las letras van en sintonía con lo que se quiere decir. Son como una orquesta silenciosa. Cada trazo, cada espacio entre palabras, marca el ritmo de la lectura. Si una letra es demasiado rígida, el texto pierde aire; si es demasiado juguetona, olvida su propósito. Pero cuando una tipografía acierta, el lector no la nota: simplemente siente que todo encaja.</p><p>Estoy muy agradecido de herramientas como <strong>Google Fonts</strong>. Gracias a ellas, la escritura puede tomar cuerpo y alma. Ya no hay fronteras entre la idea y su forma. Solo la emoción de encontrar la voz visual que acompañe al cuento.</p><p>Diseñar no es solo elegir. Es escuchar. Escuchar lo que el texto quiere decir y buscar las letras que sepan contarlo en su propio idioma.</p>",
     "destacado": false,
-    "imagen_vertical": "Elhuevoquevolvioacantar-Post103-ig.png"
+    "imagen_vertical": "Elhuevoquevolvioacantar-Post103-ig.png",
+    "url": "blog/la-voz-de-la-tipografia.html"
   },
   {
     "id": 102,
