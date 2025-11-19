@@ -37,6 +37,9 @@ activarLatidoDeSylvora();
             return;
         }
 
+        preloader.setAttribute('aria-hidden', 'true');
+        preloader.setAttribute('aria-live', 'off');
+
         const hidePreloader = () => {
             if (preloader.classList.contains('preloader--hidden')) {
                 return;
@@ -70,10 +73,26 @@ activarLatidoDeSylvora();
         const navLinks = document.querySelector('.nav-links');
 
         if (mobileMenu && navLinks) {
-            mobileMenu.addEventListener('click', function () {
-                navLinks.classList.toggle('active');
+            const navId = navLinks.id || 'primary-navigation';
+            if (!navLinks.id) {
+                navLinks.id = navId;
+            }
 
-                if (!navLinks.classList.contains('active')) {
+            mobileMenu.setAttribute('aria-controls', navId);
+            mobileMenu.setAttribute('aria-expanded', 'false');
+
+            const closeMobileMenu = () => {
+                navLinks.classList.remove('active');
+                mobileMenu.setAttribute('aria-expanded', 'false');
+            };
+
+            mobileMenu.addEventListener('click', function () {
+                const isExpanded = mobileMenu.getAttribute('aria-expanded') === 'true';
+                const nextState = !isExpanded;
+                mobileMenu.setAttribute('aria-expanded', nextState ? 'true' : 'false');
+                navLinks.classList.toggle('active', nextState);
+
+                if (!nextState) {
                     document.dispatchEvent(new CustomEvent('closeNavSubmenus'));
                 }
             });
@@ -84,7 +103,7 @@ activarLatidoDeSylvora();
                 navItems.forEach(item => {
                     item.addEventListener('click', function () {
                         if (window.innerWidth <= 768) {
-                            navLinks.classList.remove('active');
+                            closeMobileMenu();
                             document.dispatchEvent(new CustomEvent('closeNavSubmenus'));
                         }
                     });
@@ -93,7 +112,7 @@ activarLatidoDeSylvora();
 
             window.addEventListener('resize', function () {
                 if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
+                    closeMobileMenu();
                     document.dispatchEvent(new CustomEvent('closeNavSubmenus'));
                 }
             });
@@ -121,11 +140,12 @@ activarLatidoDeSylvora();
                 }
 
                 toggle.setAttribute('aria-expanded', 'false');
+                submenu.setAttribute('aria-hidden', 'true');
                 submenu.classList.remove('nav-submenu--open');
             });
         };
 
-        navItems.forEach(item => {
+        navItems.forEach((item, index) => {
             const toggle = item.querySelector('.nav-link--toggle');
             const submenu = item.querySelector('.nav-submenu');
 
@@ -133,30 +153,40 @@ activarLatidoDeSylvora();
                 return;
             }
 
+            if (!submenu.id) {
+                submenu.id = `nav-submenu-${index + 1}`;
+            }
+
+            toggle.setAttribute('aria-controls', submenu.id);
+            toggle.setAttribute('aria-expanded', toggle.getAttribute('aria-expanded') === 'true' ? 'true' : 'false');
+            submenu.setAttribute('aria-hidden', toggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+
+            const setSubmenuState = isExpanded => {
+                toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+                submenu.classList.toggle('nav-submenu--open', isExpanded);
+                submenu.setAttribute('aria-hidden', isExpanded ? 'false' : 'true');
+            };
+
             toggle.addEventListener('click', () => {
                 const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
 
                 if (isExpanded) {
-                    toggle.setAttribute('aria-expanded', 'false');
-                    submenu.classList.remove('nav-submenu--open');
+                    setSubmenuState(false);
                 } else {
                     closeAll(item);
-                    toggle.setAttribute('aria-expanded', 'true');
-                    submenu.classList.add('nav-submenu--open');
+                    setSubmenuState(true);
                 }
             });
 
             toggle.addEventListener('keydown', event => {
                 if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-                    toggle.setAttribute('aria-expanded', 'false');
-                    submenu.classList.remove('nav-submenu--open');
+                    setSubmenuState(false);
                 }
             });
 
             submenu.addEventListener('keydown', event => {
                 if (event.key === 'Escape') {
-                    toggle.setAttribute('aria-expanded', 'false');
-                    submenu.classList.remove('nav-submenu--open');
+                    setSubmenuState(false);
                     toggle.focus();
                 }
             });
@@ -172,8 +202,7 @@ activarLatidoDeSylvora();
                 }
                 // abrir este submenu y cerrar los demás
                 closeAll(item);
-                toggle.setAttribute('aria-expanded', 'true');
-                submenu.classList.add('nav-submenu--open');
+                setSubmenuState(true);
             });
 
             item.addEventListener('mouseleave', () => {
@@ -181,8 +210,7 @@ activarLatidoDeSylvora();
                 // poner un retraso pequeño antes de cerrar para evitar flicker
                 if (item._closeTimer) clearTimeout(item._closeTimer);
                 item._closeTimer = setTimeout(() => {
-                    toggle.setAttribute('aria-expanded', 'false');
-                    submenu.classList.remove('nav-submenu--open');
+                    setSubmenuState(false);
                     item._closeTimer = null;
                 }, 300);
             });
