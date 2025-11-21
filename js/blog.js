@@ -89,6 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const topicsDropdownRoot = document.querySelector('#blog-filter-topics');
   const searchInput = document.querySelector('#blog-filter-search-input');
   const clearSearchButton = document.querySelector('#blog-filter-search-clear');
+  const titleSearchInput = document.querySelector('#blog-title-search-input');
+  const clearTitleSearchButton = document.querySelector('#blog-title-search-clear');
   const topicItems = document.querySelectorAll('.topics-grid .topic-item');
   const topicItemsMap = new Map();
   topicItems.forEach(item => {
@@ -100,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
       topicItemsMap.set(normalized, item);
     }
   });
-  const filterState = { work: null, topic: null, search: '' };
+  const filterState = { work: null, topic: null, search: '', titleSearch: '' };
   let allPosts = [];
   let worksDropdown;
   let topicsDropdown;
@@ -185,6 +187,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return haystacks.some(text => normalizeText(text || '').includes(normalizedQuery));
   }
 
+  function postMatchesTitle(post, query) {
+    const normalizedQuery = normalizeText(query);
+    if (!normalizedQuery) return true;
+    const title = typeof post?.titulo === 'string' ? normalizeText(post.titulo) : '';
+    return title.includes(normalizedQuery);
+  }
+
   function getTopicIcon(topic) {
     const key = normalizeText(topic);
     if (!key) return '';
@@ -249,11 +258,28 @@ document.addEventListener('DOMContentLoaded', () => {
     clearSearchButton.hidden = !hasValue;
   }
 
+  function updateTitleSearchClearVisibility() {
+    if (!titleSearchInput || !clearTitleSearchButton) return;
+    const hasValue = titleSearchInput.value.trim().length > 0;
+    clearTitleSearchButton.hidden = !hasValue;
+  }
+
   function handleSearchChange({ scroll = false } = {}) {
     if (!searchInput) return;
     const rawValue = searchInput.value || '';
     filterState.search = rawValue.trim();
     updateSearchClearVisibility();
+    applyFilters();
+    if (scroll) {
+      scrollToPosts();
+    }
+  }
+
+  function handleTitleSearchChange({ scroll = false } = {}) {
+    if (!titleSearchInput) return;
+    const rawValue = titleSearchInput.value || '';
+    filterState.titleSearch = rawValue.trim();
+    updateTitleSearchClearVisibility();
     applyFilters();
     if (scroll) {
       scrollToPosts();
@@ -279,6 +305,9 @@ document.addEventListener('DOMContentLoaded', () => {
         )
       );
     }
+    if (filterState.titleSearch) {
+      posts = posts.filter(post => postMatchesTitle(post, filterState.titleSearch));
+    }
     if (filterState.search) {
       posts = posts.filter(post => postMatchesSearch(post, filterState.search));
     }
@@ -290,6 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
     filterState.work = null;
     filterState.topic = null;
     filterState.search = '';
+    filterState.titleSearch = '';
     if (worksDropdown) {
       worksDropdown.setValue(null);
     }
@@ -299,7 +329,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (searchInput) {
       searchInput.value = '';
     }
+    if (titleSearchInput) {
+      titleSearchInput.value = '';
+    }
     updateSearchClearVisibility();
+    updateTitleSearchClearVisibility();
     syncTopicItems(null);
     applyFilters();
   }
@@ -565,6 +599,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (titleSearchInput) {
+    titleSearchInput.addEventListener('input', () => handleTitleSearchChange());
+    titleSearchInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        handleTitleSearchChange({ scroll: true });
+      }
+    });
+  }
+
   if (clearSearchButton) {
     clearSearchButton.addEventListener('click', () => {
       if (!searchInput) return;
@@ -578,7 +622,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (clearTitleSearchButton) {
+    clearTitleSearchButton.addEventListener('click', () => {
+      if (!titleSearchInput) return;
+      if (titleSearchInput.value) {
+        titleSearchInput.value = '';
+        handleTitleSearchChange({ scroll: true });
+      } else {
+        updateTitleSearchClearVisibility();
+      }
+      titleSearchInput.focus();
+    });
+  }
+
   updateSearchClearVisibility();
+  updateTitleSearchClearVisibility();
 
   const filterRoot = document.querySelector('.blog-filter');
   const filterToggle = filterRoot ? filterRoot.querySelector('.blog-filter__toggle') : null;
