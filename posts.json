@@ -1,5 +1,181 @@
 [
   {
+  "id": 114,
+  "titulo": "¿Por qué no escribí?",
+  "autor": "Lauren Cuervo",
+  "fecha": "2025-11-10",
+  "categoria_temas": [
+    "Procesos Creativos"
+  ],
+  "categoria_libros": [],
+  "topicos": [
+    "Bloqueo creativo",
+    "Redes sociales",
+    "Silencio"
+    ],
+  "tiempo": "4 min lectura",
+  "fragmento": "Hubo un tiempo en que escribía casi todos los días. Luego entré a las redes sociales y algo se quebró. Este texto no es una excusa: es una constatación.",
+  "imagen": "Plumafarollama-Post114.webp",
+  "slug": "por-que-no-escribi",
+  "contenido_html": "<p>Hubo un tiempo en que escribía con una regularidad casi obstinada. Si un día no publicaba, volvía al siguiente. Escribir no era una estrategia ni una vitrina: era una forma de estar en el mundo.</p><p>Cuando entré a las redes sociales algo se quebró. Nunca me había dedicado a ellas. Comencé a mirar números que antes no existían: visualizaciones mensuales, alcance, interacciones. Mil visualizaciones al mes. Ese número, tan pequeño y tan ruidoso, empezó a hacerme preguntas que no sabía responder.</p><p>Sentí que mi aporte no le interesaba a nadie. Tal vez era cierto. O tal vez aún no había encontrado al público correcto. Pero el daño ya estaba hecho: comencé a culparme. Pensé que el contenido no era bueno, que la escritura había perdido filo, que quizás nunca lo tuvo. También comprendí algo incómodo: no entendía las redes, sus tiempos, sus gestos, sus silencios.</p><p>La tristeza no se quedó sólo en el blog. Se filtró a otros espacios de mi vida. Y entonces entendí algo más profundo: esa sensación no había nacido en Instagram ni en X. Las redes sólo habían encendido una luz sobre un vacío que ya estaba ahí.</p><p>¿Qué se hace cuando uno descubre eso?</p><p>Busqué respuestas. Muchas quedaron sin contestar. Otras, en cambio, comenzaron a ordenarse solas. No como soluciones, sino como pequeñas verdades asumidas. Y desde ese lugar empezaron a volver las palabras. Primero la prosa. Luego el verso. Después, algo más importante: la fuerza interior.</p><p>Esa fuerza es frágil. No es épica ni constante. Por eso la cuido. Por eso la nombro. Por eso escribo esto. Porque escribir, a veces, no es producir contenido: es rezar para que aquello que nos sostiene no nos abandone.</p><p>Si llegaste hasta aquí, te invito a seguir recorriendo este espacio. No como espectador, sino como testigo. La obra continúa, incluso —y sobre todo— después del silencio.</p>",
+  "destacado": false,
+  "imagen_vertical": "Plumafarollama-Post114-ig.png"
+  },
+  {
+  "id": 113,
+  "titulo": "La ciudad y las sombras - Parte 7: La propuesta",
+  "autor": "Lauren Cuervo",
+  "fecha": "2025-11-09",
+  "categoria_temas": [
+    "Procesos Creativos"
+  ],
+  "categoria_libros": [],
+  "topicos": [
+    "Propuesta",
+    "Comunidad",
+    "Continuidad"
+  ],
+  "tiempo": "4 min lectura",
+  "fragmento": "No hablo de redención perfecta. Hablo de un paso. Solo uno.",
+  "imagen": "CiudadSombras-Post113.webp",
+  "slug": "la-propuesta",
+  "contenido_html": "<p>Si vuelven a leer esto alguna vez —ellos, o cualquiera que haya estado cerca del filo— quisiera dejar algo más que un relato: una posibilidad.</p><p>No hablo de redención perfecta. No hablo de borrón y cuenta nueva. Hablo de un paso. Solo uno.</p><p>Un paso como el que se da para colgarse de la barra. Un paso como el que se da para volver a casa. Un paso como el que se da cuando alguien mira de frente y dice la verdad, aunque tiemble.</p><p>La propuesta es esta: que la fuerza que usan para sostenerse afuera la usen un poco hacia adentro. Que la disciplina del cuerpo acompañe una disciplina del alma. Que el músculo que levanta cien kilos logre levantar un silencio y escucharlo. Que si la vida parece muy rápida, se atrevan a detenerse un instante.</p><p>Y si se sienten solos —porque uno nunca dice esa palabra en voz alta, pero se siente igual— recuerden algo sencillo: hay otros luchando también. En otros rincones. A otras horas. Con otros miedos.</p><p>Quizás podríamos construir algo así como una comunidad invisible. No un club formal. No un templo. No un gimnasio. Un lugar silencioso donde lo humano respire.</p><p>Un espacio donde alguien pueda decir: “Estoy chato”. “Estoy perdido”. “Me duele”. “Quiero salir”. “Me quiero quedar”. “Quiero cambiar”. O simplemente: “Estoy aquí”.</p><p>No sé si volveremos a cruzarnos. No sé si la noche lo permitirá. Pero si llega ese día, y si vuelven a colgarse de esa barra, aquí estaré.</p><p>Porque la ciudad a veces mata, a veces asusta, a veces confunde… pero también une. Y mientras estemos vivos, mientras el corazón siga empujando sangre, tenemos derecho a buscar algo mejor que solo sobrevivir.</p><p>La propuesta es simple, casi humilde:</p><p><strong>seguir.</strong></p><p>Seguir moviéndose. Seguir entrenando. Seguir hablando. Seguir abriendo espacios donde el tiempo, por un momento, no corra tan rápido.</p><p>Y si un abrazo fue posible esa noche, quizá también sea posible algo más grande mañana.</p><p><em>Fin del encuentro. La historia queda abierta.</em></p>",
+  "destacado": true,
+  "imagen_vertical": "CiudadSombras-Post113-ig.png"
+  },
+  {
+  "id": 112,
+  "titulo": "La ciudad y las sombras - Parte 6: Lo que la noche deja",
+  "autor": "Lauren Cuervo",
+  "fecha": "2025-11-08",
+  "categoria_temas": [
+    "Procesos Creativos"
+  ],
+  "categoria_libros": [],
+  "topicos": [
+    "Reflexión",
+    "Fragilidad",
+    "Humanidad"
+  ],
+  "tiempo": "4 min lectura",
+  "fragmento": "A veces un encuentro pequeño —invisible para el resto del mundo— puede mover más que una gran noticia.",
+  "imagen": "CiudadSombras-Post112.webp",
+  "slug": "lo-que-la-noche-deja",
+  "contenido_html": "<p>Volví a casa caminando lento. No por cansancio físico, sino porque algo adentro necesitaba espacio para asentarse. Es curioso: a veces un encuentro pequeño —invisible para el resto del mundo— puede mover más que una gran noticia, un logro o una pérdida anunciada.</p><p>Pensé en los tres. En mí, en ellos, y en lo que quedó flotando entre medio.</p><p>Cada uno llevaba su propia batalla: yo con mi salud, con un cuerpo marcado por una amenaza que no elegí; ellos con su entorno, con caminos torcidos que sí eligieron… o que empezaron a elegir sin saberlo.</p><p>Pero lo que más me quedó fue el tono humano de todo esto. Nada fue forzado. Nada fue teatral. Éramos tres personas entrenando bajo una barra metálica, empujando el cuerpo contra la gravedad para no dejarnos caer por dentro.</p><p>Y me di cuenta de algo: la fuerza no está en el músculo que sube; está en la historia que uno carga mientras lo hace.</p><p>Pensé también en lo injusta que puede ser la palabra “merecer”. ¿Quién merece qué? ¿Quién merece morir antes de tiempo? ¿Quién merece tener miedo? ¿Quién merece ser juzgado por aquello que hace desde el vacío?</p><p>No tengo respuesta.</p><p>Pero sí tuve una sensación clara: la vida es más frágil de lo que creemos, y más profunda de lo que queremos admitir.</p><p>Esa noche entendí que la calle no es solo peligro. También es confesionario. Es espejo. Es altar. A veces, incluso, es perdón.</p><p>Y si fue posible que tres extraños se miraran sin máscaras, sin roles y sin resumen, entonces quizás aún queda algo bueno en la ciudad. Y en nosotros.</p><p>No sé si los volveré a ver. No sé si todo aquello quedará como un eco que se apagará mañana. Pero sí sé que algo en mí no es igual.</p><p>Algo se abrió. Algo se limpió. Algo se guardó.</p><p>La noche tenía fiebre. Pero el corazón se calmó.</p><p><em>Sexto fragmento de un encuentro narrado en siete partes. El cierre se aproxima.</em></p>",
+  "destacado": false,
+  "imagen_vertical": "CiudadSombras-Post112-ig.png"
+  },
+  {
+  "id": 111,
+  "titulo": "La ciudad y las sombras - Parte 5: Lo que queda después de escuchar",
+  "autor": "Lauren Cuervo",
+  "fecha": "2025-11-07",
+  "categoria_temas": [
+    "Procesos Creativos"
+  ],
+  "categoria_libros": [],
+  "topicos": [
+    "Concientización",
+    "Cambio",
+    "Vida"
+  ],
+  "tiempo": "4 min lectura",
+  "fragmento": "Vivir no es sobrevivir. A veces, el cambio empieza cuando alguien deja de ser extraño y se vuelve espejo.",
+  "imagen": "CiudadSombras-Post111.webp",
+  "slug": "lo-que-queda-despues-de-escuchar",
+  "contenido_html": "<p>Si pudiera decirles algo sin que sonara solemne, sería esto:</p><p>La vida no es una línea recta. No es una sola vida. Son varias, y a veces cambia entera en un solo paso.</p><p>El tiempo corre, sí. Pero también se detiene. Se detiene cuando hablamos. Cuando escuchamos. Cuando alguien deja de ser extraño y se vuelve espejo.</p><p>Me quedó claro algo esa noche: ustedes no son lo que hacen. Nadie lo es.</p><p>La calle enseña a esconderse detrás de la fama fácil, del dinero rápido, del respeto por miedo. Pero detrás de cada gesto duro se esconde una razón más blanda: el miedo a caer más abajo.</p><p>Yo no vine a entrenar para juzgar. No llegué para dar sermones. No tengo recetas livianas.</p><p>Solo tengo una verdad que aprendí cuando casi me fui de este mundo: vivir no es sobrevivir.</p><p>Ustedes tienen fuerza de sobra. Tienen voluntad. Tienen disciplina. Tienen lealtad. Tienen cuerpo.</p><p>Quizás lo único que falta es creer que ese mismo músculo que hoy levanta el peso del día… también puede levantar el peso del cambio.</p><p>No es fácil. No es rápido. No es heroico.</p><p>Pero es posible.</p><p>Y si la vida que llevan hoy les raspa el alma, dejen que esa incomodidad los despierte, no que los destruya.</p><p>El tiempo corre, sí. Pero también espera. Es cuestión de decidir hacia dónde se camina cuando uno abre los ojos.</p><p><em>Quinto fragmento de un encuentro narrado en siete partes. El sentido empieza a tomar forma.</em></p>",
+  "destacado": false,
+  "imagen_vertical": "CiudadSombras-Post111-ig.png"
+  },
+  {
+  "id": 110,
+  "titulo": "La ciudad y las sombras - Parte 4: El que escucha",
+  "autor": "Lauren Cuervo",
+  "fecha": "2025-11-06",
+  "categoria_temas": [
+    "Procesos Creativos"
+  ],
+  "categoria_libros": [],
+  "topicos": [
+    "Silencio",
+    "Lealtad",
+    "Vínculo"
+  ],
+  "tiempo": "4 min lectura",
+  "fragmento": "No entreno por deporte. Entreno porque necesito algo que no se me escape de las manos.",
+  "imagen": "CiudadSombras-Post110.webp",
+  "slug": "el-que-escucha",
+  "contenido_html": "<p>Yo no hablo mucho. No me sale. Prefiero escuchar.</p><p>De cabro chico aprendí que el que habla de más pierde. Que el que muestra lo que siente queda abierto pa’ que lo muerdan. Así que cierro la boca. Me guardo. Me cuido.</p><p>Pero escuché todo. Cada palabra del loco. Cada palabra de mi primo. También escuché el silencio entre medio. Ese silencio es el más peligroso.</p><p>No entreno por deporte. Entreno porque necesito algo que no se me escape de las manos. Algo que no dependa del resto. Algo que me duela por afuera cuando por dentro me estoy pudriendo. La barra no miente. O subes, o caes. Simple.</p><p>Cuando el loco dijo que parecíamos buenas personas, pensé: no nos conoces. Pero no lo dije. ¿Pa’ qué? Él veía algo. Lo respeté.</p><p>Lo del negocio ya es costumbre. No me asusta. No lo pienso mucho. La calle me enseñó que si empiezas a pensar, te quiebras. Prefiero funcionar. Moverme. Actuar. Callar.</p><p>A veces miro a mi primo y lo veo cansado. No cansado del día. Cansado de todo. Y no digo nada porque no sé si hablar lo ayuda… o lo termina.</p><p>Cuando el loco contó lo de su enfermedad, se me movió algo adentro. No era pena. No era susto. Era una rabia rara, como si el mundo estuviera repartiendo castigos sin mirar quién los merece.</p><p>Yo no creo en Dios. No confío en nadie. Pero esa noche, cuando él habló de lo suyo y mi primo habló de fe, sentí una grieta en el pecho. Chica, pero real.</p><p>No sé si quiero salir de esto. No sé si puedo. No sé si existe un “salir”. Pero sí sé que si mi primo se tira para otro lado, yo lo sigo. Y si no se tira, yo tampoco.</p><p>Cuando nos despedimos, sentí algo que casi nunca siento: respeto. Ese abrazo fue distinto. No fue de calle. Fue de verdad.</p><p>Y mientras volvíamos caminando, pensé en una frase que nunca digo en voz alta:</p><p><strong>No quiero morirme todavía.</strong></p><p><em>Cuarto fragmento de un encuentro narrado en siete partes. El nudo empieza a tensarse.</em></p>",
+  "destacado": false,
+  "imagen_vertical": "CiudadSombras-Post110-ig.png"
+  },
+  {
+  "id": 109,
+  "titulo": "La ciudad y las sombras - Parte 3: Lo que no se dice",
+  "autor": "Lauren Cuervo",
+  "fecha": "2025-11-05",
+  "categoria_temas": [
+    "Procesos Creativos"
+  ],
+  "categoria_libros": [],
+  "topicos": [
+    "Perspectiva ajena",
+    "Confesión",
+    "violencia simbólica"
+  ],
+  "tiempo": "4 min lectura",
+  "fragmento": "No lo dije pa’ provocar. Lo dije pa’ avisar. Pa’ que supiera que éramos peligrosos.",
+  "imagen": "CiudadSombras-Post109-ig.webp",
+  "slug": "lo-que-no-se-dice",
+  "contenido_html": "<p>Yo no sé por qué hablé tanto. Normalmente no cuento nada. Nadie pregunta. Nadie escucha. Y si escuchan, escuchan mal. Todo lo que digo se vuelve arma, se vuelve rumor, se vuelve mierda.</p><p>Pero esta noche fue distinta. Quizás porque el loco de la barra —el mayor— no tenía cara de policía ni de cura. Tenía cara de alguien que también está tratando de sostenerse. Y esa hueá se nota.</p><p>No sé cómo terminamos hablando de perros. Me gustan los perros. Son bacanes. No te mienten nunca. No te miran raro. No te juzgan. No te tiran mala. Si te quieren, te quieren entero. Si se quedan, se quedan hasta el final. Ojalá yo fuera así. Ojalá la gente fuera así.</p><p>Hablamos del deporte. De la fuerza. De cómo entrenar calma la cabeza. Yo entreno porque si no, me muero. Así de simple. Si no muevo el cuerpo, se me queda pegado el corazón.</p><p>Y el loco dice que parecíamos buenas personas. Casi me reí. No tiene idea. Nadie tiene idea.</p><p>Igual lo dije: “Nos portamos mal”. No lo dije pa’ provocar. Lo dije pa’ avisar. Pa’ que no nos confundiera. Pa’ que supiera que éramos peligrosos. Que andábamos en hueás raras. Que no somos del tipo que te dan confianza.</p><p>Pero él no se fue. Se quedó ahí. Escuchó.</p><p>No sé por qué conté lo del negocio. No sé por qué conté lo del dinero. No sé por qué conté lo del cansancio.</p><p>La verdad es que estoy chato. Aburrido de esta vida donde todo es rápido, intenso, fácil… y vacío. Uno se llena los bolsillos, pero se pudre por dentro. Es como vivir arriba de un tren sin frenos: si te tiras, te matas; si te quedas, igual te mueres.</p><p>Y sí. Pienso en Dios. Me da vergüenza decirlo, porque suena tonto. Pero creo que si no creo en algo, me pierdo. Si no creo, me vuelvo peligroso hasta pa’ mí mismo.</p><p>Cuando el loco contó que casi se había muerto, se me apretó la garganta. No sé por qué. Quizás porque encuentro injusto que alguien que no hace daño tenga la muerte tan cerca… mientras yo sigo vivo haciendo cagadas.</p><p>No sé si quiero seguir en esto. No sé cómo salirme. No sé si se puede salir. No sé si vale la pena.</p><p>Solo sé una cosa: el tiempo corre, hermano. Y cada día que me despierto… siento que me queda menos.</p><p><em>Tercer fragmento de un encuentro narrado en siete partes. Aún no todo ha sido dicho.</em></p>",
+  "destacado": false,
+  "imagen_vertical": "CiudadSombras-Post109-ig.png"
+  },
+  {
+  "id": 108,
+  "titulo": "La ciudad y las sombras - Parte 2: El cuerpo en la noche",
+  "autor": "Lauren Cuervo",
+  "fecha": "2025-11-04",
+  "categoria_temas": [
+    "Procesos Creativos"
+  ],
+  "categoria_libros": [],
+  "topicos": [
+    "Primera persona",
+    "Ciudad nocturna",
+    "Entrenamiento"
+  ],
+  "tiempo": "3 min lectura",
+  "fragmento": "La ciudad duerme para algunos, pero para mí se abre. Se hace más real.",
+  "imagen": "CiudadSombras-Post108.webp",
+  "slug": "el-cuerpo-en-la-noche",
+  "contenido_html": "<p>No sé por qué sigo entrenando a esta hora. A veces pienso que es porque el día no me alcanza; otras veces siento que es porque la noche me recibe distinto. La ciudad duerme para algunos, pero para mí se abre. Se hace más real.</p><p>Caminé hasta la barra como siempre, esquivando sombras que parecían gente o gente que parecía sombra. La calle olía a humedad, a cigarro y a algo más que nunca logro definir: una mezcla de rabia y abandono.</p><p>Llegué sin expectativas. Sólo quería mover el cuerpo, estirar los músculos, recordar que sigo acá. Que sigo vivo.</p><p>Pero antes de tocar el metal, escuché risas. Eran dos chicos. Jóvenes. Energía inquieta. Tonos de voz rápidos, como si cada palabra saliera disparada antes de perder valor. Los saludé con un gesto torpe, sin saber si interrumpía algo.</p><p>Me respondieron con naturalidad. Había una familiaridad extraña en su presencia. Ese tipo de confianza que se forma entre desconocidos cuando se encuentran en un lugar improbable.</p><p>No sé quién habló primero de los perros. Pero bastó esa entrada, pequeña, inocente y absurda a la vez, para que algo empezara a abrirse. Ellos entrenaban también. Se notaba en las manos marcadas, en la respiración firme, en la manera en que la barra recibía sus cuerpos como si fuera parte de ellos.</p><p>Conversamos de lo simple: del deporte, del cuerpo, de lo que hace bien. En algún momento les dije que se veían buenas personas. Y lo dije porque lo sentí. Ni más ni menos.</p><p>La noche seguía oscura. La barra seguía fría. Pero ya no estaba solo.</p><p>Y había algo en mí —no sé si curiosidad o intuición— que sospechaba que esa conversación, por más casual que pareciera, no iba a quedarse en la superficie.</p><p><em>Este texto forma parte de un encuentro narrado en siete fragmentos. La historia continúa.</em></p>",
+  "destacado": false,
+  "imagen_vertical": "CiudadSombras-Post108-ig.png"
+  },
+  {
+  "id": 107,
+  "titulo": "La ciudad y las sombras - Parte 1: El encuentro",
+  "autor": "Lauren Cuervo",
+  "fecha": "2025-11-03",
+  "categoria_temas": [
+    "Procesos Creativos"
+  ],
+  "categoria_libros": [],
+  "topicos": [
+    "Ciudad nocturna",
+    "Encuentro",
+    "relato urbano"
+  ],
+  "tiempo": "3 min lectura",
+  "fragmento": "La ciudad, a esa hora, parecía hablar con un lenguaje distinto. No era silencio: era expectativa.",
+  "imagen": "CiudadSombras-Post107.webp",
+  "slug": "la-ciudad-y-las-sombras",
+  "contenido_html": "<p>La ciudad, a esa hora, parecía hablar con un lenguaje distinto. Había ventanas encendidas sin nadie detrás, autos estacionados como restos inmóviles de un naufragio urbano, y un viento tibio que no refrescaba a nadie: sólo empujaba bolsas plásticas sobre el pavimento, como fantasmas buscando dueño.</p><p>Las plazas estaban vacías, pero no libres. Las calles estaban iluminadas, pero no claras. El silencio no era silencio: era expectativa.</p><p>A unas pocas cuadras de los edificios más altos —donde viven quienes ya no miran por la ventana— existía un sector donde la noche tomaba otra forma. Allí se mezclaban el sudor del entrenamiento clandestino, el cansancio de quienes escapaban del día, y el filo de una ciudad que cruje cuando baja el sol.</p><p>Bajo la luz amarillenta y cansada de un farol público, tres figuras coincidían junto a una estructura metálica clavada en el cemento; una barra fría que podía ser cruz o refugio, según quién la tocara.</p><p>No eran tres desconocidos. No eran tres amigos. Aún no eran nada.</p><p>Pero esa noche —antes de que el reloj golpeara la medianoche y antes de que la ciudad cerrara los ojos— algo iba a abrirse.</p><p>Algo íntimo. Algo oscuro. Algo verdadero.</p><p>Y aunque ninguno lo sabía todavía, esa conversación —nacida en un lugar improbable, entre ruido, riesgo y respiración— quedaría grabada donde quedan las cosas que importan: en el pecho.</p><p><em>Este es el primer fragmento de un encuentro real narrado en siete partes. Si deseas continuar, sigue recorriendo el blog.</em></p>",
+  "destacado": false,
+  "imagen_vertical": "CiudadSombras-Post107-ig.png"
+  },
+  {
     "id": 106,
     "titulo": "La noche en que me encontré con un hombre roto",
     "autor": "Lauren Cuervo",
