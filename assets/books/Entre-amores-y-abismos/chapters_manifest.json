@@ -1,0 +1,210 @@
+[
+  {
+    "order": 1,
+    "title": "Dedicatoria",
+    "slug": "dedicatoria",
+    "file": "01-dedicatoria.md",
+    "start_paragraph": 32,
+    "end_paragraph": 39
+  },
+  {
+    "order": 2,
+    "title": "Prólogo",
+    "slug": "prologo",
+    "file": "02-prologo.md",
+    "start_paragraph": 40,
+    "end_paragraph": 56
+  },
+  {
+    "order": 3,
+    "title": "El sonido del bosque",
+    "slug": "el-sonido-del-bosque",
+    "file": "03-el-sonido-del-bosque.md",
+    "start_paragraph": 57,
+    "end_paragraph": 68
+  },
+  {
+    "order": 4,
+    "title": "El eco de los gemidos",
+    "slug": "el-eco-de-los-gemidos",
+    "file": "04-el-eco-de-los-gemidos.md",
+    "start_paragraph": 69,
+    "end_paragraph": 84
+  },
+  {
+    "order": 5,
+    "title": "El clímax de la desesperación",
+    "slug": "el-climax-de-la-desesperacion",
+    "file": "05-el-climax-de-la-desesperacion.md",
+    "start_paragraph": 85,
+    "end_paragraph": 102
+  },
+  {
+    "order": 6,
+    "title": "El despertar del demonio",
+    "slug": "el-despertar-del-demonio",
+    "file": "06-el-despertar-del-demonio.md",
+    "start_paragraph": 103,
+    "end_paragraph": 120
+  },
+  {
+    "order": 7,
+    "title": "El templo oscuro",
+    "slug": "el-templo-oscuro",
+    "file": "07-el-templo-oscuro.md",
+    "start_paragraph": 121,
+    "end_paragraph": 136
+  },
+  {
+    "order": 8,
+    "title": "Vestigios de un Juramento",
+    "slug": "vestigios-de-un-juramento",
+    "file": "08-vestigios-de-un-juramento.md",
+    "start_paragraph": 137,
+    "end_paragraph": 163
+  },
+  {
+    "order": 9,
+    "title": "Dos Meses y un Susurro",
+    "slug": "dos-meses-y-un-susurro",
+    "file": "09-dos-meses-y-un-susurro.md",
+    "start_paragraph": 164,
+    "end_paragraph": 201
+  },
+  {
+    "order": 10,
+    "title": "Territorios Reconquistados",
+    "slug": "territorios-reconquistados",
+    "file": "10-territorios-reconquistados.md",
+    "start_paragraph": 202,
+    "end_paragraph": 240
+  },
+  {
+    "order": 11,
+    "title": "Pies Pesados, Corazón Ligero",
+    "slug": "pies-pesados-corazon-ligero",
+    "file": "11-pies-pesados-corazon-ligero.md",
+    "start_paragraph": 241,
+    "end_paragraph": 293
+  },
+  {
+    "order": 12,
+    "title": "El Primer Respiro",
+    "slug": "el-primer-respiro",
+    "file": "12-el-primer-respiro.md",
+    "start_paragraph": 294,
+    "end_paragraph": 365
+  },
+  {
+    "order": 13,
+    "title": "Trance de Fuego",
+    "slug": "trance-de-fuego",
+    "file": "13-trance-de-fuego.md",
+    "start_paragraph": 366,
+    "end_paragraph": 401
+  },
+  {
+    "order": 14,
+    "title": "Ámbar entre Sombras",
+    "slug": "ambar-entre-sombras",
+    "file": "14-ambar-entre-sombras.md",
+    "start_paragraph": 402,
+    "end_paragraph": 464
+  },
+  {
+    "order": 15,
+    "title": "El precio del vacío",
+    "slug": "el-precio-del-vacio",
+    "file": "15-el-precio-del-vacio.md",
+    "start_paragraph": 465,
+    "end_paragraph": 565
+  },
+  {
+    "order": 16,
+    "title": "Fragmentos de lo que fuimos",
+    "slug": "fragmentos-de-lo-que-fuimos",
+    "file": "16-fragmentos-de-lo-que-fuimos.md",
+    "start_paragraph": 566,
+    "end_paragraph": 681
+  },
+  {
+    "order": 17,
+    "title": "Entre el perdón y la culpa",
+    "slug": "entre-el-perdon-y-la-culpa",
+    "file": "17-entre-el-perdon-y-la-culpa.md",
+    "start_paragraph": 682,
+    "end_paragraph": 819
+  },
+  {
+    "order": 18,
+    "title": "Noche de Confesiones",
+    "slug": "noche-de-confesiones",
+    "file": "18-noche-de-confesiones.md",
+    "start_paragraph": 820,
+    "end_paragraph": 948
+  },
+  {
+    "order": 19,
+    "title": "Dos caminos hacia el perdón",
+    "slug": "dos-caminos-hacia-el-perdon",
+    "file": "19-dos-caminos-hacia-el-perdon.md",
+    "start_paragraph": 949,
+    "end_paragraph": 1030
+  },
+  {
+    "order": 20,
+    "title": "La flor del deseo",
+    "slug": "la-flor-del-deseo",
+    "file": "20-la-flor-del-deseo.md",
+    "start_paragraph": 1031,
+    "end_paragraph": 1259
+  },
+  {
+    "order": 21,
+    "title": "La Sombra de un Beso",
+    "slug": "la-sombra-de-un-beso",
+    "file": "21-la-sombra-de-un-beso.md",
+    "start_paragraph": 1260,
+    "end_paragraph": 1504
+  },
+  {
+    "order": 22,
+    "title": "El jardín y el fuego",
+    "slug": "el-jardin-y-el-fuego",
+    "file": "22-el-jardin-y-el-fuego.md",
+    "start_paragraph": 1505,
+    "end_paragraph": 1780
+  },
+  {
+    "order": 23,
+    "title": "El viaje hacia él",
+    "slug": "el-viaje-hacia-el",
+    "file": "23-el-viaje-hacia-el.md",
+    "start_paragraph": 1781,
+    "end_paragraph": 2090
+  },
+  {
+    "order": 24,
+    "title": "Ritual de la Transformación",
+    "slug": "ritual-de-la-transformacion",
+    "file": "24-ritual-de-la-transformacion.md",
+    "start_paragraph": 2091,
+    "end_paragraph": 2313
+  },
+  {
+    "order": 25,
+    "title": "El Peso de la Verdad",
+    "slug": "el-peso-de-la-verdad",
+    "file": "25-el-peso-de-la-verdad.md",
+    "start_paragraph": 2314,
+    "end_paragraph": 2653
+  },
+  {
+    "order": 26,
+    "title": "Epílogo",
+    "slug": "epilogo",
+    "file": "26-epilogo.md",
+    "start_paragraph": 2654,
+    "end_paragraph": 2783
+  }
+]
