@@ -54,51 +54,83 @@
     </header>
 
     <main>
-      <section class="hero hero--obra" style="background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--negro-profundo) 100%); color: var(--blanco-brillante);">
+      <!-- HERO -->
+      <section class="hero hero--obra"
+        style="background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--negro-profundo) 100%);
+              color: var(--blanco-brillante);">
         <div class="container hero__container">
           <div class="obra-hero-content">
-            <h1 class="hero__title">Leer</h1>
+            <h1 class="hero__title">Lecturas</h1>
             <div class="hero__divider"></div>
-            <p class="hero__subtitle">Lanzamientos semanales y rutas de lectura acompañadas.</p>
+            <p class="hero__subtitle">
+              Historias que se conocen, revelan y enseñan.<br />
+              Se consumen.
+            </p>
           </div>
         </div>
       </section>
 
-      <section class="container" style="padding: 3rem 1.5rem;">
-        <div class="grid" style="gap: 2rem;">
-          <article class="card card--feature" style="padding: 2rem; background: var(--gris-oscuro); color: var(--blanco-brillante);">
-            <header style="display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap;">
-              <div>
-                <p class="tag tag--accent" style="margin-bottom: .75rem;">Publicación seriada semanal</p>
-                <h2 style="margin: 0;">Entre Amores y Abismos</h2>
-                <p style="margin: .5rem 0 0;">Capítulos liberados cada semana para mantener el pulso SEO activo.</p>
-              </div>
-              <a class="btn btn-lauren" href="books/entre-amores-y-abismos/index.html">Leer el libro</a>
-            </header>
-            <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
-              <div>
-                <p><strong>Cadencia:</strong> una entrega semanal con metadatos actualizados.</p>
-                <p><strong>Ubicación:</strong> portafolio de lectura con URL dedicada y capítulos enlazados.</p>
-              </div>
-              <div>
-                <p><strong>Participación:</strong> cada capítulo incluirá llamada a la acción para donar o unirse al newsletter.</p>
-                <p><strong>SEO técnico:</strong> sitemap con frecuencia semanal y datos estructurados para la obra.</p>
-              </div>
-            </div>
-          </article>
-        </div>
+      <!-- INTRO SUAVE -->
+      <section class="container" style="padding: 3rem 1.5rem; max-width: 820px;">
+        <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
+          No todas las historias se leen igual.<br /><br />
+          Algunas piden tiempo. Otras, regreso.<br />
+          Aquí, cada obra se abre por partes.
+        </p>
       </section>
 
+      <!-- OBRA DESTACADA -->
       <section class="container" style="padding: 0 1.5rem 4rem;">
+        <article class="card card--feature"
+          style="padding: 2.5rem;
+                background: var(--gris-oscuro);
+                color: var(--blanco-brillante);
+                display: grid;
+                gap: 1.5rem;">
+          
+          <header>
+            <p class="tag tag--accent" style="margin-bottom: .75rem;">
+              Obra en publicación
+            </p>
+            <h2 style="margin: 0;">Entre Amores y Abismos</h2>
+            <p style="margin: .75rem 0 0; opacity: .9;">
+              Una historia que se revela fragmento a fragmento.<br />
+              Volver es parte de la experiencia.
+            </p>
+          </header>
+
+          <div style="display: grid; gap: 1rem; max-width: 640px;">
+            <p style="margin: 0;">
+              Cada semana, un nuevo capítulo se libera.
+              No hay prisa.
+            </p>
+            <p style="margin: 0; font-style: italic; opacity: .85;">
+              Siempre el mismo día. Siempre un poco más adentro.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+            <a class="btn btn-lauren" href="books/entre-amores-y-abismos/index.html">
+              Entrar a la obra
+            </a>
+            <a class="btn btn-elysia" href="donate.html">
+              Sostener la publicación
+            </a>
+          </div>
+        </article>
+      </section>
+
+      <!-- CÓMO LEER AQUÍ -->
+      <section class="container" style="padding: 0 1.5rem 4rem; max-width: 820px;">
         <div class="card" style="padding: 2rem;">
-          <h3>Cómo mantenemos el movimiento semanal a ojos del SEO</h3>
-          <ul style="margin: 1rem 0; padding-left: 1.25rem; line-height: 1.7;">
-            <li>Publicar o actualizar el capítulo destacado cada semana y enlazarlo desde esta página.</li>
-            <li>Actualizar el sitemap con frecuencia semanal para que los robots detecten cambios continuos.</li>
-            <li>Usar datos estructurados del libro y de cada capítulo para reflejar nuevas entregas.</li>
-            <li>Compartir cada nueva URL en el diario o redes para generar señales de frescura.</li>
-          </ul>
-          <p style="margin: 0;">Esta sección "Leer" centraliza las obras seriadas y facilita tanto la navegación humana como el rastreo de buscadores.</p>
+          <h3 style="margin-top: 0;">Cómo leer aquí</h3>
+          <p>
+            Puedes comenzar por el inicio o entrar donde algo te llame.
+            Cada capítulo es una puerta.
+          </p>
+          <p style="margin-bottom: 0;">
+            Si decides quedarte, habrá algo nuevo esperándote cada semana.
+          </p>
         </div>
       </section>
     </main>
