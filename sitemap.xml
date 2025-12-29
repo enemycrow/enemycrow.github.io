@@ -19,6 +19,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://plumafarollama.com/books.html</loc>
+    <lastmod>2025-12-29T17:25:29.000Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plumafarollama.com/books/entre-amores-y-abismos/</loc>
+    <lastmod>2025-12-29T17:25:29.000Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://plumafarollama.com/blog/abelan-el-renegado-de-la-casa.html</loc>
     <lastmod>2025-09-24T14:08:18.380Z</lastmod>
     <changefreq>monthly</changefreq>
