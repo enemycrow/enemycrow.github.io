@@ -1,6 +1,8 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { marked } = require('marked');
+// Disable deprecated behaviors to avoid warnings from marked@5+
+marked.setOptions({ mangle: false, headerIds: false });
 
 async function exists(p){ try{ await fs.access(p); return true }catch(e){ return false } }
 
