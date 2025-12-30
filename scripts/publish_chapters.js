@@ -66,12 +66,11 @@ async function run(){
     const outDir = path.join(repo, 'books', d.name);
     await fs.mkdir(outDir, { recursive: true });
 
-    // publish next unpublished chapter(s) - publish one per book per run
+    // publish or refresh every chapter so the HTML mirrors the Markdown sources
     let published = 0;
     for(const entry of manifest){
       const outName = `${pad(entry.order)}-${entry.slug}.html`;
       const outPath = path.join(outDir, outName);
-      if(await exists(outPath)) continue;
       const mdPath = path.join(bookDir, entry.file);
       if(!await exists(mdPath)) { console.warn('Missing md', mdPath); continue; }
       const md = await fs.readFile(mdPath, 'utf8');
@@ -80,7 +79,6 @@ async function run(){
       await fs.writeFile(outPath, rendered, 'utf8');
       console.log('Published', outName, 'for', d.name);
       published++;
-      break; // only one chapter per book per run
     }
 
     // regenerate main.html listing
