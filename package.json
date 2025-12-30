@@ -15,12 +15,16 @@
     "blog:generate:staged": "node tools/generate-blog-pages.js --staged",
     "seo": "npm run portfolio:generate && npm run blog:generate && node js/generate-sitemap.js",
     "rotate-featured": "node tools/rotate-featured.js"
+    ,
+    "books:discover": "node scripts/discover_books.js",
+    "publish:chapters": "node scripts/publish_chapters.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "marked": "^5.1.1"
   },
   "devDependencies": {
     "htmlhint": "^1.7.1",
