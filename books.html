@@ -73,12 +73,48 @@
               </div>
             </section>
 
+            <!-- AUTORES -->
+            <section class="container" style="padding: 2rem 1.5rem;">
+              <h2 style="margin-top: 0;">Autores</h2>
+              <div class="grid authors-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                <article class="card author-card author-card--active" id="author-elysia" style="padding: 1rem;">
+                  <div class="author-card__media" style="height:140px; background-image: url('assets/images/authors/elysia.webp'); background-size:cover; background-position:center; border-radius:6px;"></div>
+                  <h4 style="margin: .5rem 0 0;">A.C. Elysia</h4>
+                  <p style="margin: .25rem 0 .75rem; opacity:.9;">Autora de <em>Entre Amores y Abismos</em>. Lecturas seriadas y proyectos sensoriales.</p>
+                  <div style="display:flex; gap:.5rem;">
+                    <a class="btn btn-elysia" href="#author-elysia">Ver obras</a>
+                  </div>
+                  <div class="author-works" style="margin-top: .75rem; display:none;"></div>
+                </article>
+
+                <article class="card author-card author-card--disabled" id="author-lauren" style="padding: 1rem;">
+                  <div class="author-card__media" style="height:140px; background-image: url('assets/images/authors/lauren.webp'); background-size:cover; background-position:center; border-radius:6px; filter:grayscale(100%) brightness(.75);"></div>
+                  <h4 style="margin: .5rem 0 0;">Lauren Cuervo</h4>
+                  <p style="margin: .25rem 0 .75rem; opacity:.85;">Próximas publicaciones.</p>
+                  <div style="display:flex; gap:.5rem;">
+                    <a class="btn btn-ghost" href="#" aria-disabled="true" onclick="return false;">Sin obras</a>
+                  </div>
+                  <div class="author-works" style="margin-top: .75rem; display:none;"></div>
+                </article>
+
+                <article class="card author-card author-card--disabled" id="author-draco" style="padding: 1rem;">
+                  <div class="author-card__media" style="height:140px; background-image: url('assets/images/authors/sahir.webp'); background-size:cover; background-position:center; border-radius:6px; filter:grayscale(100%) brightness(.75);"></div>
+                  <h4 style="margin: .5rem 0 0;">Draco Sahir</h4>
+                  <p style="margin: .25rem 0 .75rem; opacity:.85;">Próximas publicaciones.</p>
+                  <div style="display:flex; gap:.5rem;">
+                    <a class="btn btn-ghost" href="#" aria-disabled="true" onclick="return false;">Sin obras</a>
+                  </div>
+                  <div class="author-works" style="margin-top: .75rem; display:none;"></div>
+                </article>
+              </div>
+            </section>
+
             <!-- ÍNDICE DE OBRAS -->
             <section class="container" style="padding: 3rem 1.5rem; display: grid; gap: 1.5rem;">
               <p style="max-width: 820px; opacity: .95;">Aquí encuentras las obras publicadas en fragmentos, lecturas seriadas y colecciones. Cada entrada tiene su propio calendario de lanzamientos y página dedicada.</p>
 
               <div class="grid" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-                <article class="card" style="padding: 1.25rem;">
+                <article class="card" id="work-entre-amores" data-author="A.C. Elysia" style="padding: 1.25rem;">
                   <h3 style="margin: .25rem 0;">Entre Amores y Abismos</h3>
                   <p style="margin: 0 .0 1rem; opacity: .9;">Lectura seriada: capítulos semanales, atmósfera sensorial y preguntas que invitan al regreso.</p>
                   <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
@@ -154,6 +190,7 @@
       </div>
     </footer>
 
+    <script defer src="js/books-authors.js"></script>
     <script defer src="js/main.d9fb968dc8.js"></script>
   </body>
 </html>

@@ -599,3 +599,31 @@ html {
   background-color: #2de2c3;
   color: var(--azul-noche);
 }
+
+/* ===== Autores (tarjetas) ===== */
+.authors-grid { margin-top: .75rem; }
+.author-card { display:flex; flex-direction:column; gap: .5rem; }
+.author-card__media { border-radius: 6px; height: 140px; background-color: #222; }
+.author-card { align-items: center; text-align: center; padding: 1.25rem; }
+.author-card__media { border-radius: 8px; height: 160px; width: 100%; background-color: #222; }
+.author-card h4 { margin: 0.5rem 0 0; font-size: 1.05rem; letter-spacing: 0.08em; }
+.author-card p { margin: 0.35rem 0 .75rem; font-size: .95rem; max-width: 22rem; }
+.author-card--disabled { opacity: .85; }
+.author-card--disabled .author-card__media { filter: grayscale(100%) contrast(.9) brightness(.75); }
+.author-card--disabled .btn { pointer-events: none; opacity: .7; }
+
+@media screen and (max-width: 640px) {
+  .authors-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Ensure author works list looks tidy */
+.author-works ul { margin: .5rem 0 0 1rem; padding: 0; }
+.author-works li { margin-bottom: .5rem; }
+.author-works a { color: var(--blanco-brillante); text-decoration: underline; }
+.author-works p { margin: 0 0 .5rem 0; font-size: .95rem; opacity: .9; }
+
+/* Layout tuning for authors grid on larger screens */
+@media screen and (min-width: 900px) {
+  .authors-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
