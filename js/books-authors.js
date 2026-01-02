@@ -28,21 +28,22 @@ document.addEventListener('DOMContentLoaded', function () {
         card.classList.remove('author-card--disabled');
         card.classList.add('author-card--active');
         if (btn) {
-          // find first work element on the page that matches this author
-          const workEl = document.querySelector(`[data-author="${authorName}"]`);
-          if (workEl && workEl.id) {
-            btn.setAttribute('href', `#${workEl.id}`);
-            btn.addEventListener('click', function (ev) {
-              ev.preventDefault();
-              const target = document.getElementById(workEl.id);
-              if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-          }
+          // make the button toggle the visibility of the works list (hidden by default)
+          btn.setAttribute('href', '#');
+          btn.setAttribute('role', 'button');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            if (!worksContainer) return;
+            var isHidden = window.getComputedStyle(worksContainer).display === 'none';
+            worksContainer.style.display = isHidden ? 'block' : 'none';
+            btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+          });
         }
 
-        // render list of works under the author card
+        // render list of works under the author card (kept hidden by default)
         if (worksContainer) {
-          worksContainer.style.display = '';
+          worksContainer.style.display = 'none';
           worksContainer.innerHTML = '';
           const ul = document.createElement('ul');
           ul.style.margin = '0';
