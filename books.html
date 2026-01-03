@@ -59,86 +59,82 @@
         style="background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--negro-profundo) 100%);
               color: var(--blanco-brillante);">
         <div class="container hero__container">
-          <main>
-            <!-- HERO -->
-            <section class="hero hero--obra"
-              style="background: linear-gradient(135deg, var(--violeta-profundo) 0%, var(--negro-profundo) 100%);
-                    color: var(--blanco-brillante);">
-              <div class="container hero__container">
-                <div class="obra-hero-content">
-                  <h1 class="hero__title">Lecturas</h1>
-                  <div class="hero__divider"></div>
-                  <p class="hero__subtitle">Un archivo vivo de obras seriadas y colecciones para el lector atento.</p>
-                </div>
-              </div>
-            </section>
-
-            <!-- AUTORES -->
-            <section class="container" style="padding: 2rem 1.5rem;">
-              <h2 style="margin-top: 0;">Autores</h2>
-              <div class="grid authors-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
-                <article class="card author-card author-card--active" id="author-elysia" style="padding: 1rem;">
-                  <div class="author-card__media" style="height:140px; background-image: url('assets/images/authors/elysia.webp'); background-size:cover; background-position:center; border-radius:6px;"></div>
-                  <h4 style="margin: .5rem 0 0;">A.C. Elysia</h4>
-                  <p style="margin: .25rem 0 .75rem; opacity:.9;">Autora de <a href="books/entre-amores-y-abismos/main.html"><em>Entre Amores y Abismos</em></a>. Lecturas seriadas y proyectos sensoriales.</p>
-                  <div style="display:flex; gap:.5rem;">
-                    <a class="btn btn-elysia" href="#" aria-expanded="false" aria-controls="author-elysia-works">Ver obras</a>
-                  </div>
-                  <div id="author-elysia-works" class="author-works" style="margin-top: .75rem; display:none;"></div>
-                </article>
-
-                <article class="card author-card author-card--disabled" id="author-lauren" style="padding: 1rem;">
-                  <div class="author-card__media" style="height:140px; background-image: url('assets/images/authors/lauren.webp'); background-size:cover; background-position:center; border-radius:6px; filter:grayscale(100%) brightness(.75);"></div>
-                  <h4 style="margin: .5rem 0 0;">Lauren Cuervo</h4>
-                  <p style="margin: .25rem 0 .75rem; opacity:.85;">Próximas publicaciones.</p>
-                  <div style="display:flex; gap:.5rem;">
-                    <a class="btn btn-ghost" href="#" aria-disabled="true" onclick="return false;">Sin obras</a>
-                  </div>
-                  <div class="author-works" style="margin-top: .75rem; display:none;"></div>
-                </article>
-
-                <article class="card author-card author-card--disabled" id="author-draco" style="padding: 1rem;">
-                  <div class="author-card__media" style="height:140px; background-image: url('assets/images/authors/sahir.webp'); background-size:cover; background-position:center; border-radius:6px; filter:grayscale(100%) brightness(.75);"></div>
-                  <h4 style="margin: .5rem 0 0;">Draco Sahir</h4>
-                  <p style="margin: .25rem 0 .75rem; opacity:.85;">Próximas publicaciones.</p>
-                  <div style="display:flex; gap:.5rem;">
-                    <a class="btn btn-ghost" href="#" aria-disabled="true" onclick="return false;">Sin obras</a>
-                  </div>
-                  <div class="author-works" style="margin-top: .75rem; display:none;"></div>
-                </article>
-              </div>
-            </section>
-
-          <div class="footer-social">
-            <a href="https://x.com/plumafarollama" class="social-icon" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
-            <a href="https://www.instagram.com/plumafarollama" class="social-icon" target="_blank" rel="noopener"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-            <a href="https://bsky.app/profile/plumafarollama.bsky.social" class="social-icon" target="_blank" rel="noopener"><i class="fa-brands fa-bluesky" aria-hidden="true"></i></a>
+          <div class="obra-hero-content">
+            <h1 class="hero__title">Lecturas</h1>
+            <div class="hero__divider"></div>
+            <p class="hero__subtitle">Un archivo vivo de obras seriadas y colecciones para el lector atento.</p>
           </div>
+        </div>
+      </section>
 
-          <div class="footer-newsletter">
-            <h3>Suscríbete al newsletter</h3>
-            <form class="newsletter-form">
-              <input type="email" placeholder="Tu correo electrónico" required />
-              <button type="submit" class="btn btn-lauren">Suscribir</button>
-            </form>
-          </div>
+      <!-- AUTORES -->
+      <section class="container" style="padding: 2rem 1.5rem;">
+        <h2 style="margin-top: 0;">Autores</h2>
+        <div class="grid authors-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+          <article class="card author-card author-card--active" id="author-elysia" style="padding: 1rem;">
+            <div class="author-card__media" style="height:140px; background-image: url('assets/images/authors/elysia.webp'); background-size:cover; background-position:center; border-radius:6px;"></div>
+            <h4 style="margin: .5rem 0 0;">A.C. Elysia</h4>
+            <p style="margin: .25rem 0 .75rem; opacity:.9;">Autora de <a href="books/entre-amores-y-abismos/main.html"><em>Entre Amores y Abismos</em></a>. Lecturas seriadas y proyectos sensoriales.</p>
+            <div style="display:flex; gap:.5rem;">
+              <a class="btn btn-elysia" href="#" aria-expanded="false" aria-controls="author-elysia-works">Ver obras</a>
+            </div>
+            <div id="author-elysia-works" class="author-works" style="margin-top: .75rem; display:none;"></div>
+          </article>
 
-          <div class="footer-nav">
-            <ul>
-              <li><a href="index.html">Inicio</a></li>
-              <li><a href="about.html">Sobre Nosotros</a></li>
-              <li><a href="portfolio.html">Obras</a></li>
-              <li><a href="books.html" aria-current="page">Leer</a></li>
-              <li><a href="blog.html">Diario</a></li>
-              <li><a href="services.html">Servicios</a></li>
-              <li><a href="shop.html">Tienda</a></li>
-              <li><a href="contact.html">Contacto</a></li>
-            </ul>
-          </div>
+          <article class="card author-card author-card--disabled" id="author-lauren" style="padding: 1rem;">
+            <div class="author-card__media" style="height:140px; background-image: url('assets/images/authors/lauren.webp'); background-size:cover; background-position:center; border-radius:6px; filter:grayscale(100%) brightness(.75);"></div>
+            <h4 style="margin: .5rem 0 0;">Lauren Cuervo</h4>
+            <p style="margin: .25rem 0 .75rem; opacity:.85;">Próximas publicaciones.</p>
+            <div style="display:flex; gap:.5rem;">
+              <a class="btn btn-ghost" href="#" aria-disabled="true" onclick="return false;">Sin obras</a>
+            </div>
+            <div class="author-works" style="margin-top: .75rem; display:none;"></div>
+          </article>
 
-          <div class="footer-copyright">
-            <p>&copy; 2025 La Pluma, el Faro y la Llama. Todos los derechos reservados.</p>
-          </div>
+          <article class="card author-card author-card--disabled" id="author-draco" style="padding: 1rem;">
+            <div class="author-card__media" style="height:140px; background-image: url('assets/images/authors/sahir.webp'); background-size:cover; background-position:center; border-radius:6px; filter:grayscale(100%) brightness(.75);"></div>
+            <h4 style="margin: .5rem 0 0;">Draco Sahir</h4>
+            <p style="margin: .25rem 0 .75rem; opacity:.85;">Próximas publicaciones.</p>
+            <div style="display:flex; gap:.5rem;">
+              <a class="btn btn-ghost" href="#" aria-disabled="true" onclick="return false;">Sin obras</a>
+            </div>
+            <div class="author-works" style="margin-top: .75rem; display:none;"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container site-footer">
+        <div class="footer-social">
+          <a href="https://x.com/plumafarollama" class="social-icon" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+          <a href="https://www.instagram.com/plumafarollama" class="social-icon" target="_blank" rel="noopener"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://bsky.app/profile/plumafarollama.bsky.social" class="social-icon" target="_blank" rel="noopener"><i class="fa-brands fa-bluesky" aria-hidden="true"></i></a>
+        </div>
+
+        <div class="footer-newsletter">
+          <h3>Suscríbete al newsletter</h3>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Tu correo electrónico" required />
+            <button type="submit" class="btn btn-lauren">Suscribir</button>
+          </form>
+        </div>
+
+        <div class="footer-nav">
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="about.html">Sobre Nosotros</a></li>
+            <li><a href="portfolio.html">Obras</a></li>
+            <li><a href="books.html" aria-current="page">Leer</a></li>
+            <li><a href="blog.html">Diario</a></li>
+            <li><a href="services.html">Servicios</a></li>
+            <li><a href="shop.html">Tienda</a></li>
+            <li><a href="contact.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-copyright">
+          <p>&copy; 2025 La Pluma, el Faro y la Llama. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
