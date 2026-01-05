@@ -378,6 +378,137 @@ activarLatidoDeSylvora();
         });
     }
 
+    function setupShareActions() {
+        const shareContainers = Array.from(document.querySelectorAll('.share-actions'));
+
+        if (!shareContainers.length) {
+            return;
+        }
+
+        const getShareData = () => {
+            const url = window.location.href;
+            const title = (document.querySelector('.hero__title')?.textContent || document.title || '').trim();
+            const subtitle = (document.querySelector('.hero__subtitle')?.textContent || '').trim();
+            const text = subtitle || 'Comparte este capítulo de Entre Amores y Abismos.';
+
+            return {
+                url,
+                title: title || 'Entre Amores y Abismos',
+                text
+            };
+        };
+
+        const setStatus = (container, message) => {
+            const status = container.querySelector('.share-actions__status');
+
+            if (!status) {
+                return;
+            }
+
+            status.textContent = message;
+        };
+
+        const openShareUrl = (type, data) => {
+            const encodedUrl = encodeURIComponent(data.url);
+            const encodedTitle = encodeURIComponent(data.title);
+            const encodedText = encodeURIComponent(data.text);
+
+            if (type === 'email') {
+                window.location.href = `mailto:?subject=${encodedTitle}&body=${encodedText}%0A%0A${encodedUrl}`;
+                return true;
+            }
+
+            const targets = {
+                x: `https://twitter.com/intent/tweet?text=${encodedTitle}%20-%20${encodedUrl}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`
+            };
+
+            if (targets[type]) {
+                const newWindow = window.open(targets[type], '_blank', 'noopener,noreferrer');
+
+                if (newWindow) {
+                    newWindow.opener = null;
+                }
+
+                return true;
+            }
+
+            return false;
+        };
+
+        const copyToClipboard = async (text, container) => {
+            try {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    setStatus(container, 'Enlace copiado al portapapeles.');
+                    return;
+                }
+            } catch (error) {
+                // Continuar hacia el fallback
+            }
+
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            tempInput.setAttribute('aria-hidden', 'true');
+            tempInput.style.position = 'fixed';
+            tempInput.style.opacity = '0';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            setStatus(container, 'Enlace copiado al portapapeles.');
+        };
+
+        shareContainers.forEach(container => {
+            const buttons = Array.from(container.querySelectorAll('.share-actions__button'));
+
+            if (!buttons.length) {
+                return;
+            }
+
+            buttons.forEach(button => {
+                button.addEventListener('click', event => {
+                    event.preventDefault();
+
+                    const type = button.dataset.share;
+                    const shareData = getShareData();
+
+                    if (!type) {
+                        return;
+                    }
+
+                    if (type === 'copy') {
+                        copyToClipboard(shareData.url, container);
+                        return;
+                    }
+
+                    if (navigator.share) {
+                        navigator
+                            .share({
+                                title: shareData.title,
+                                text: shareData.text,
+                                url: shareData.url
+                            })
+                            .then(() => {
+                                setStatus(container, 'Compartido desde tu dispositivo.');
+                            })
+                            .catch(() => {
+                                openShareUrl(type, shareData);
+                            });
+
+                        return;
+                    }
+
+                    const opened = openShareUrl(type, shareData);
+
+                    if (!opened) {
+                        setStatus(container, 'No se pudo abrir la opción de compartido.');
+                    }
+                });
+            });
+        });
+    }
+
     function init() {
         setupPreloader();
         setupMobileNavigation();
@@ -385,6 +516,7 @@ activarLatidoDeSylvora();
         setupAnimateOnScroll();
         setupFooterNewsletterForm();
         setupSmoothScroll();
+        setupShareActions();
         setupThemeToggle();
     }
 
@@ -396,7 +528,8 @@ activarLatidoDeSylvora();
         setupMobileNavigation,
         setupAnimateOnScroll,
         setupFooterNewsletterForm,
-        setupSmoothScroll
+        setupSmoothScroll,
+        setupShareActions
     };
 })(window, document);
 
