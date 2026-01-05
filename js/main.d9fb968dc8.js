@@ -331,6 +331,53 @@ activarLatidoDeSylvora();
         });
     }
 
+    function setupThemeToggle() {
+        const body = document.body;
+        const buttons = Array.from(document.querySelectorAll('.theme-toggle__button'));
+        const themes = ['theme-default', 'theme-light', 'theme-dark'];
+
+        const applyTheme = theme => {
+            const validTheme = themes.includes(theme) ? theme : 'theme-default';
+            themes.forEach(name => body.classList.remove(name));
+            body.classList.add(validTheme);
+            return validTheme;
+        };
+
+        const syncButtons = theme => {
+            buttons.forEach(button => {
+                const isActive = button.dataset.theme === theme;
+                button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                button.classList.toggle('is-active', isActive);
+            });
+        };
+
+        let storedTheme = null;
+
+        try {
+            storedTheme = localStorage.getItem('pfy-theme');
+        } catch (error) {
+            storedTheme = null;
+        }
+
+        const activeTheme = applyTheme(storedTheme);
+        syncButtons(activeTheme);
+
+        if (!buttons.length) {
+            return;
+        }
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const selectedTheme = applyTheme(button.dataset.theme);
+                syncButtons(selectedTheme);
+
+                try {
+                    localStorage.setItem('pfy-theme', selectedTheme);
+                } catch (error) {}
+            });
+        });
+    }
+
     function init() {
         setupPreloader();
         setupMobileNavigation();
@@ -338,6 +385,7 @@ activarLatidoDeSylvora();
         setupAnimateOnScroll();
         setupFooterNewsletterForm();
         setupSmoothScroll();
+        setupThemeToggle();
     }
 
     document.addEventListener('DOMContentLoaded', init);
