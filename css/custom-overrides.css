@@ -826,7 +826,7 @@ body.theme-dark .blog-entry__quote {
   padding: 0.45rem;
   border-radius: 999px;
   border: 1px solid var(--theme-border);
-  background: var(--theme-surface);
+  background: color-mix(in srgb, var(--theme-border) 15%, var(--theme-surface));
   color: var(--theme-text);
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
@@ -921,7 +921,7 @@ body.theme-dark .card {
   height: 2.6rem;
   border-radius: 0.7rem;
   border: 1px solid color-mix(in srgb, var(--theme-border) 70%, transparent);
-  background: color-mix(in srgb, var(--theme-highlight) 22%, var(--theme-surface));
+  background: color-mix(in srgb, var(--theme-highlight) 35%, var(--theme-surface));
   color: var(--theme-text);
   text-decoration: none;
   font-weight: 600;
