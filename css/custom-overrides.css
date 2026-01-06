@@ -779,13 +779,19 @@ body.theme-dark .blog-entry__quote {
 }
 
 .theme-toggle__button {
-  padding: 0.55rem 1rem;
+  padding: 0.45rem;
   border-radius: 999px;
   border: 1px solid var(--theme-border);
   background: var(--theme-surface);
   color: var(--theme-text);
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1rem;
 }
 
 .theme-toggle__button.is-active,
@@ -865,9 +871,11 @@ body.theme-dark .card {
 .share-actions__button {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.6rem 0.9rem;
-  border-radius: 0.9rem;
+  justify-content: center;
+  padding: 0.45rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.7rem;
   border: 1px solid color-mix(in srgb, var(--theme-border) 70%, transparent);
   background: color-mix(in srgb, var(--theme-highlight) 22%, var(--theme-surface));
   color: var(--theme-text);
@@ -877,8 +885,10 @@ body.theme-dark .card {
 }
 
 .share-actions__button i {
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
+
+.share-actions__button span { display: none !important; }
 
 .share-actions__button:hover,
 .share-actions__button:focus-visible {

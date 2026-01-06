@@ -420,7 +420,9 @@ activarLatidoDeSylvora();
 
             const targets = {
                 x: `https://twitter.com/intent/tweet?text=${encodedTitle}%20-%20${encodedUrl}`,
-                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+                instagram: `https://www.instagram.com/`,
+                bluesky: `https://bsky.app/`
             };
 
             if (targets[type]) {
