@@ -954,3 +954,34 @@ body.theme-dark .card {
   color: color-mix(in srgb, var(--theme-highlight) 70%, var(--theme-text));
 }
 
+
+/* Navegación entre capítulos */
+.chapter-nav {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--bordo-oscuro, rgba(255, 255, 255, 0.08));
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border-radius: 12px;
+}
+
+.chapter-nav__title {
+  margin: 0 0 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.chapter-nav__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.chapter-nav .btn {
+  min-width: 140px;
+  text-align: center;
+}
+
+.chapter-nav .btn-ghost {
+  color: inherit;
+  border-color: var(--bordo-oscuro, rgba(255, 255, 255, 0.2));
+}
