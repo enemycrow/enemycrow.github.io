@@ -12,4 +12,4 @@ jobs:
       - name: Ping site
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --location https://plumafarollama.com/ > /dev/null
+          curl --fail --silent --show-error --location --max-time 20 https://plumafarollama.com/ > /dev/null
