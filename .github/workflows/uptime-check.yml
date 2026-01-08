@@ -1,0 +1,15 @@
+name: Uptime Check
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  uptime-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping site
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location https://plumafarollama.com/ > /dev/null
