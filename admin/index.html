@@ -760,11 +760,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       updatePreview();
     });
 
-    document.getElementById('saveBtn').onclick = async () => {
+    const savePost = async () => {
       const errors = validateForm();
       if (errors.length) {
         updateStatusBanner('error', 'Revisa los campos', 'Hay errores de validación que debes corregir.');
-        return;
+        return false;
       }
 
       const imagenVerticalInput = normalizeSocialImagePath(formElements.imagen_vertical.value);
@@ -797,15 +797,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const timestamp = new Date().toLocaleString();
         lastSaved.textContent = timestamp;
         updateStatusBanner('success', 'Post guardado exitosamente', 'Tu entrada ya está lista para compartir.');
+        return true;
       } catch (err) {
         console.error(err);
         updateStatusBanner('error', 'No se pudo guardar', 'Hubo un problema al guardar el post.');
+        return false;
       }
     };
 
+    document.getElementById('saveBtn').onclick = async () => {
+      await savePost();
+    };
+
     document.getElementById('saveOpenBtn').onclick = async () => {
-      await document.getElementById('saveBtn').onclick();
-      if (errorCount.textContent === '0') {
+      const saved = await savePost();
+      if (saved) {
         const slug = formElements.slug.value.trim();
         if (slug) {
           window.open(`/blog/${encodeURIComponent(slug)}.html`, '_blank');
