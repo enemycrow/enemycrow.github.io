@@ -167,6 +167,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       min-height: 1.1rem;
     }
 
+    .admin-field__message--success {
+      color: #2e7d32;
+    }
+
     .admin-chip {
       display: inline-flex;
       align-items: center;
@@ -242,6 +246,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-weight: 600;
     }
 
+    .admin-required-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: #4a4a4a;
+      font-size: 0.9rem;
+    }
+
+    .admin-required-note {
+      margin-top: 0.6rem;
+      color: #6c6c6c;
+      font-size: 0.85rem;
+    }
+
+    .admin-label-required {
+      font-size: 0.8rem;
+      color: #b85a3f;
+      margin-left: 0.35rem;
+    }
+
+    .admin-preview .blog-entry {
+      margin: 0;
+    }
+
+    .admin-preview .blog-entry__title {
+      margin-top: 0;
+    }
+
     @media (max-width: 960px) {
       .admin-layout {
         grid-template-columns: 1fr;
@@ -279,6 +310,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </section>
 
         <section class="admin-card">
+          <div class="admin-section-title">Campos obligatorios</div>
+          <ul class="admin-required-list">
+            <li>Título del post</li>
+            <li>Slug</li>
+            <li>Fecha de publicación</li>
+            <li>Fragmento (120-240 caracteres)</li>
+            <li>Imagen principal</li>
+          </ul>
+          <div class="admin-required-note">Los mensajes de color verde confirman que el campo está listo.</div>
+        </section>
+
+        <section class="admin-card">
           <div class="admin-section-title">Metadata</div>
           <div class="admin-field">
             <label for="postSelect">Seleccionar post</label>
@@ -293,12 +336,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="admin-field__help">Si está vacío se generará con la fecha actual.</span>
           </div>
           <div class="admin-field">
-            <label for="titulo">Título</label>
+            <label for="titulo">Título<span class="admin-label-required">Obligatorio</span></label>
             <input id="titulo" class="admin-input" placeholder="Título inspirador">
             <span class="admin-field__message" id="titulo-message"></span>
           </div>
           <div class="admin-field">
-            <label for="slug">Slug</label>
+            <label for="slug">Slug<span class="admin-label-required">Obligatorio</span></label>
             <input id="slug" class="admin-input" placeholder="titulo-inspirador">
             <span class="admin-field__help">Se genera automáticamente, pero puedes editarlo.</span>
             <span class="admin-field__message" id="slug-message"></span>
@@ -308,7 +351,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <input id="autor" class="admin-input" placeholder="Nombre del autor">
           </div>
           <div class="admin-field">
-            <label for="fecha">Fecha (YYYY-MM-DD)</label>
+            <label for="fecha">Fecha (YYYY-MM-DD)<span class="admin-label-required">Obligatorio</span></label>
             <input id="fecha" class="admin-input" placeholder="2024-05-21">
             <span class="admin-field__message" id="fecha-message"></span>
           </div>
@@ -322,9 +365,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </section>
 
         <section class="admin-card">
+          <div class="admin-section-title">Imágenes</div>
+          <div class="admin-field">
+            <label for="imagen">Imagen<span class="admin-label-required">Obligatorio</span></label>
+            <input id="imagen" class="admin-input" placeholder="/assets/images/blog/...">
+            <span class="admin-field__help">Puedes ingresar el nombre del archivo (ej. Plumafarollama-Post114.webp) o una ruta completa.</span>
+            <span class="admin-field__message" id="imagen-message"></span>
+          </div>
+          <div class="admin-field">
+            <label for="imagen_vertical">Imagen vertical (portrait)</label>
+            <input id="imagen_vertical" class="admin-input" placeholder="assets/images/social/blog/ejemplo.png">
+            <span class="admin-field__help">Debe ser un PNG dentro de assets/images/social/blog/</span>
+            <span class="admin-field__message" id="imagen_vertical-message"></span>
+          </div>
+        </section>
+
+        <section class="admin-card">
           <div class="admin-section-title">SEO</div>
           <div class="admin-field">
-            <label for="fragmento">Fragmento</label>
+            <label for="fragmento">Fragmento<span class="admin-label-required">Obligatorio</span></label>
             <textarea id="fragmento" rows="4" class="admin-input" placeholder="Resumen breve del post"></textarea>
             <span class="admin-field__help">Ideal entre 120 y 240 caracteres.</span>
             <span class="admin-field__message" id="fragmento-message"></span>
@@ -349,20 +408,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="admin-field">
             <label for="topicos">Tópicos (coma)</label>
             <input id="topicos" class="admin-input" placeholder="misterio, inspiración">
-          </div>
-        </section>
-
-        <section class="admin-card">
-          <div class="admin-section-title">Imágenes</div>
-          <div class="admin-field">
-            <label for="imagen">Imagen</label>
-            <input id="imagen" class="admin-input" placeholder="/assets/images/blog/...">
-          </div>
-          <div class="admin-field">
-            <label for="imagen_vertical">Imagen vertical (portrait)</label>
-            <input id="imagen_vertical" class="admin-input" placeholder="assets/images/social/blog/ejemplo.png">
-            <span class="admin-field__help">Debe ser un PNG dentro de assets/images/social/blog/</span>
-            <span class="admin-field__message" id="imagen_vertical-message"></span>
           </div>
         </section>
       </aside>
@@ -495,10 +540,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (!field || !messageEl) return;
 
       field.classList.remove('admin-input--error', 'admin-input--ok');
+      messageEl.classList.remove('admin-field__message--success');
       if (status === 'error') {
         field.classList.add('admin-input--error');
       } else if (status === 'ok') {
         field.classList.add('admin-input--ok');
+        messageEl.classList.add('admin-field__message--success');
       }
       messageEl.textContent = message || '';
     }
@@ -529,6 +576,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
     }
 
+    function formatPreviewDate(value) {
+      if (!value) return 'Fecha de publicación';
+      if (!validateDate(value)) return value;
+      const [year, month, day] = value.split('-').map(Number);
+      const date = new Date(year, month - 1, day);
+      return date.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+
+    function getPreviewImageSrc(value) {
+      const placeholderImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+      if (!value) return placeholderImage;
+      const normalized = value.trim();
+      if (!normalized) return placeholderImage;
+      if (/^https?:\/\//i.test(normalized)) return normalized;
+      if (normalized.startsWith('/')) return normalized;
+      if (normalized.startsWith('assets/')) return `/${normalized}`;
+      if (normalized.includes('/')) return `/${normalized}`;
+      const baseName = normalized.replace(/\.webp$/i, '');
+      return `/assets/images/blog/${baseName}.webp`;
+    }
+
     function validateForm() {
       const errors = [];
       const titulo = formElements.titulo.value.trim();
@@ -536,20 +608,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const fecha = formElements.fecha.value.trim();
       const fragmento = formElements.fragmento.value.trim();
       const fragmentoSocial = formElements.fragmento_social.value.trim();
+      const imagen = formElements.imagen.value.trim();
       const imagenVertical = formElements.imagen_vertical.value.trim();
 
       if (!titulo) {
         setFieldState('titulo', 'error', 'El título es obligatorio.');
         errors.push('Falta el título del post.');
       } else {
-        setFieldState('titulo', 'ok', '');
+        setFieldState('titulo', 'ok', 'Título listo.');
       }
 
       if (!slug) {
         setFieldState('slug', 'error', 'El slug no puede estar vacío.');
         errors.push('El slug está vacío.');
       } else {
-        setFieldState('slug', 'ok', '');
+        setFieldState('slug', 'ok', 'Slug listo.');
       }
 
       if (!fecha) {
@@ -559,14 +632,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         setFieldState('fecha', 'error', 'Formato inválido. Usa YYYY-MM-DD.');
         errors.push('La fecha ingresada no es válida.');
       } else {
-        setFieldState('fecha', 'ok', '');
+        setFieldState('fecha', 'ok', 'Fecha válida.');
       }
 
-      if (fragmento.length > 360) {
-        setFieldState('fragmento', 'error', 'El fragmento es muy largo (máx 360 caracteres).');
-        errors.push('El fragmento supera el máximo recomendado.');
+      if (!fragmento) {
+        setFieldState('fragmento', 'error', 'El fragmento es obligatorio.');
+        errors.push('Falta el fragmento del post.');
+      } else if (fragmento.length < 120 || fragmento.length > 240) {
+        setFieldState('fragmento', 'error', 'Debe tener entre 120 y 240 caracteres.');
+        errors.push('El fragmento no cumple con la longitud recomendada.');
       } else {
-        setFieldState('fragmento', fragmento ? 'ok' : '', fragmento ? '' : '');
+        setFieldState('fragmento', 'ok', 'Fragmento listo.');
       }
 
       if (fragmentoSocial.length > 300) {
@@ -574,6 +650,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         errors.push('El fragmento social excede el máximo permitido.');
       } else {
         setFieldState('fragmento_social', fragmentoSocial ? 'ok' : '', fragmentoSocial ? '' : '');
+      }
+
+      if (!imagen) {
+        setFieldState('imagen', 'error', 'La imagen principal es obligatoria.');
+        errors.push('Falta la imagen principal.');
+      } else {
+        setFieldState('imagen', 'ok', 'Imagen principal lista.');
       }
 
       if (imagenVertical) {
@@ -594,21 +677,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     function buildPreview() {
       const titulo = formElements.titulo.value.trim() || 'Título del post';
-      const autor = formElements.autor.value.trim();
-      const fecha = formElements.fecha.value.trim() || 'Fecha de publicación';
-      const fragmento = formElements.fragmento.value.trim() || 'Fragmento del post.';
-      const imagen = formElements.imagen.value.trim();
+      const autor = formElements.autor.value.trim() || 'Lauren Cuervo';
+      const fecha = formatPreviewDate(formElements.fecha.value.trim());
+      const fragmento = formElements.fragmento.value.trim() || 'Comparte en pocas líneas la esencia del post.';
+      const imagen = getPreviewImageSrc(formElements.imagen.value.trim());
       const contenido = quill.root.innerHTML.trim() || '<p>Empieza a escribir el contenido para ver la vista previa.</p>';
-      const signature = autor ? `— ${autor}` : '';
-
-      const imageBlock = imagen
-        ? `
-          <figure>
-            <img loading="lazy" src="${escapeHtml(imagen)}" alt="${escapeHtml(titulo)}" class="blog-entry__image" />
-            <figcaption></figcaption>
-          </figure>
-        `
-        : '';
+      const signature = `— ${autor}`;
 
       return `
         <article class="blog-entry">
@@ -616,7 +690,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="blog-entry__date">${escapeHtml(fecha)}</span>
           <p class="blog-entry__snippet">${escapeHtml(fragmento)}</p>
           <div class="blog-entry__content">
-            ${imageBlock}
+            <figure>
+              <img loading="lazy" src="${escapeHtml(imagen)}" alt="${escapeHtml(titulo)}" class="blog-entry__image" />
+              <figcaption></figcaption>
+            </figure>
             ${contenido}
           </div>
           <p class="blog-entry__signature">${escapeHtml(signature)}</p>
@@ -723,7 +800,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
 
     formElements.slug.addEventListener('input', () => {
-      formElements.slug.dataset.manual = 'true';
+      formElements.slug.dataset.manual = formElements.slug.value.trim() ? 'true' : 'false';
       updatePreview();
       validateForm();
     });
@@ -750,6 +827,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     formElements.imagen.addEventListener('input', () => {
       updatePreview();
+      validateForm();
     });
 
     formElements.imagen_vertical.addEventListener('input', () => {
@@ -761,6 +839,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
 
     document.getElementById('saveBtn').onclick = async () => {
+      if (!formElements.slug.value.trim()) {
+        updateSlugFromTitle();
+      }
       const errors = validateForm();
       if (errors.length) {
         updateStatusBanner('error', 'Revisa los campos', 'Hay errores de validación que debes corregir.');
