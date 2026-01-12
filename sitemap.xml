@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://plumafarollama.com/404.html</loc>
-    <lastmod>2025-09-24T13:41:29.676Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://plumafarollama.com/about.html</loc>
     <lastmod>2025-09-24T13:41:29.676Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -415,12 +409,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://plumafarollama.com/blog-entry.html</loc>
-    <lastmod>2025-09-24T13:54:59.684Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://plumafarollama.com/blog.html</loc>
     <lastmod>2025-09-24T13:41:29.940Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -457,7 +445,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://plumafarollama.com/jigsaw_puzzle.html</loc>
+    <loc>https://plumafarollama.com/lighthouse_puzzle.html</loc>
     <lastmod>2025-09-24T13:41:29.944Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -590,30 +578,6 @@
   </url>
   <url>
     <loc>https://plumafarollama.com/shop.html</loc>
-    <lastmod>2025-09-24T13:41:29.948Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://plumafarollama.com/templates/blog-entry-template.html</loc>
-    <lastmod>2025-09-24T13:41:29.948Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://plumafarollama.com/templates/blog-entry.html</loc>
-    <lastmod>2025-09-24T13:41:29.948Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://plumafarollama.com/templates/obra-entry-modal.html</loc>
-    <lastmod>2025-09-24T13:41:29.948Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://plumafarollama.com/templates/obra-entry-template.html</loc>
     <lastmod>2025-09-24T13:41:29.948Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
