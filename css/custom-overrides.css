@@ -2,6 +2,23 @@ html {
   scroll-behavior: smooth;
 }
 
+/* === Font Awesome: improve font rendering and avoid layout shifts === */
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://use.fontawesome.com/releases/v6.7.2/webfonts/fa-brands-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("https://use.fontawesome.com/releases/v6.7.2/webfonts/fa-solid-900.woff2") format("woff2");
+}
+
 /* === Catálogo Completo === */
 .jesuita-img {
   background-image: url('../assets/images/oeuvres/jesuitadelvino.webp');
