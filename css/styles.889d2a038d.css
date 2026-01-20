@@ -2381,13 +2381,18 @@ input, textarea, select, input *, textarea *, select * {
   align-items: center;
   position: relative;
   color: #fff;
-  background: url("https://cdn.builder.io/api/v1/image/assets%2F33c5f996430b43939ac2042c30698447%2F296de50d7810414fbe188e3a88dc4835")
-    no-repeat center top;
-  background-size: cover;
+  background-color: #0b0a13;
+  overflow: hidden;
 }
 
 .hero-bg-image {
-  display: none; /* Using CSS background instead */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
 }
 
 .hero-gradient {
