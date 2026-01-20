@@ -4,12 +4,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabBtns = document.querySelectorAll('.voice-tab');
     const sections = document.querySelectorAll('section.voice-view');
     const header = document.querySelector('header');
-    let headerHeight = header ? header.offsetHeight : 0;
+    let headerHeight = 0;
+    const updateHeaderHeight = () => {
+        headerHeight = header ? header.offsetHeight : 0;
+    };
+
+    updateHeaderHeight();
 
     if (header) {
         window.addEventListener('resize', () => {
-            headerHeight = header.offsetHeight;
+            updateHeaderHeight();
         }, { passive: true });
+
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(updateHeaderHeight);
+        }
+
+        window.addEventListener('load', updateHeaderHeight, { once: true });
+
+        if ('ResizeObserver' in window) {
+            const headerObserver = new ResizeObserver(() => {
+                updateHeaderHeight();
+            });
+            headerObserver.observe(header);
+        }
     }
 
     if (tabBtns.length > 0 && sections.length > 0) {
