@@ -3,6 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const tabBtns = document.querySelectorAll('.voice-tab');
     const sections = document.querySelectorAll('section.voice-view');
+    const header = document.querySelector('header');
+    let headerHeight = header ? header.offsetHeight : 0;
+
+    if (header) {
+        window.addEventListener('resize', () => {
+            headerHeight = header.offsetHeight;
+        }, { passive: true });
+    }
 
     if (tabBtns.length > 0 && sections.length > 0) {
         tabBtns.forEach(btn => {
@@ -22,12 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const targetSection = document.getElementById(target);
                 if (targetSection) {
                     targetSection.classList.remove('hidden');
-                    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-                    const y = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                    window.scrollTo({ top: y, behavior: 'smooth' });
+                    requestAnimationFrame(() => {
+                        const y = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                    });
                 }
             });
         });
     }
 });
-
