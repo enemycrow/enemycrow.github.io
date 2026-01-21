@@ -1,3 +1,21 @@
+const getTrustedTypesPolicy = () => {
+  if (!window.trustedTypes) return null;
+  if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
+  try {
+    window.__trustedTypesPolicy = window.trustedTypes.createPolicy('default', {
+      createHTML: (input) => input
+    });
+  } catch (error) {
+    window.__trustedTypesPolicy = null;
+  }
+  return window.__trustedTypesPolicy;
+};
+
+const toTrustedHTML = (html) => {
+  const policy = getTrustedTypesPolicy();
+  return policy ? policy.createHTML(String(html)) : String(html);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   // === 1) Historias ===
   const stories = [
@@ -184,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
       img.src    = `/assets/images/stories/${s.imageBase}.webp`;
       img.srcset = srcsetFor(s.imageBase);
       img.sizes  = sizes;
-      lic.innerHTML = licenseHTML(s);
+      lic.innerHTML = toTrustedHTML(licenseHTML(s));
 
       img.classList.remove('fade-out');
       txt.classList.remove('fade-out');

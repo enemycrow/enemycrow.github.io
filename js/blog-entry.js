@@ -1,3 +1,21 @@
+const getTrustedTypesPolicy = () => {
+  if (!window.trustedTypes) return null;
+  if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
+  try {
+    window.__trustedTypesPolicy = window.trustedTypes.createPolicy('default', {
+      createHTML: (input) => input
+    });
+  } catch (error) {
+    window.__trustedTypesPolicy = null;
+  }
+  return window.__trustedTypesPolicy;
+};
+
+const toTrustedHTML = (html) => {
+  const policy = getTrustedTypesPolicy();
+  return policy ? policy.createHTML(String(html)) : String(html);
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const bodyEl = document.body;
@@ -76,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (el) el.textContent = '';
       });
       if (contentEl) {
-        contentEl.innerHTML = '<p>Esta entrada estará disponible pronto. Puedes explorar otras publicaciones en <a href="blog.html">el blog</a>.</p>';
+        contentEl.innerHTML = toTrustedHTML('<p>Esta entrada estará disponible pronto. Puedes explorar otras publicaciones en <a href="blog.html">el blog</a>.</p>');
       }
       if (imgEl) {
         imgEl.removeAttribute('src');
@@ -84,8 +102,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         imgEl.removeAttribute('sizes');
         imgEl.alt = '';
       }
-      if (catEl) catEl.innerHTML = '';
-      if (catElBlock) catElBlock.innerHTML = '';
+      if (catEl) catEl.innerHTML = toTrustedHTML('');
+      if (catElBlock) catElBlock.innerHTML = toTrustedHTML('');
       return;
     }
 
@@ -99,7 +117,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (titleEl) titleEl.textContent = entry.titulo;
     if (dateEl)  dateEl.textContent  = fechaTexto;
     if (timeEl)  timeEl.textContent  = entry.tiempo;
-    if (contentEl && !isPrerendered) contentEl.innerHTML = entry.contenido_html;
+    if (contentEl && !isPrerendered) contentEl.innerHTML = toTrustedHTML(entry.contenido_html);
     if (authorEl && !isPrerendered)  authorEl.textContent = `— ${entry.autor}`;
 
     if (imgEl) {
@@ -122,14 +140,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       const catsHtml = (entry.categoria_temas || [])
         .map(c => `<span class="category-tag">${c}</span>`)
         .join(' ');
-      catEl.innerHTML = catsHtml;
+      catEl.innerHTML = toTrustedHTML(catsHtml);
     }
 
     if (catElBlock) {
       const booksHtml = (entry.categoria_libros || [])
         .map(c => `<span class="category-tag">${c}</span>`)
         .join(' ');
-      catElBlock.innerHTML = booksHtml;
+      catElBlock.innerHTML = toTrustedHTML(booksHtml);
     }
 
     const siteName = 'La Pluma, el Faro y la Llama';
@@ -190,13 +208,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       const link = window.location.href;
       const titleWork = `Entrada de blog: ${entry.titulo}`;
       licenseEl.innerHTML =
+        toTrustedHTML(
         `<a href="${link}">${titleWork}</a> © ${year} by ` +
         `<a href="https://plumafarollama.com">${entry.autor}</a> is licensed under ` +
         `<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>` +
         `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
         `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
         `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">` +
-        `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">`;
+        `<img loading="lazy" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">`
+        );
     }
 
     // ---- Reacciones (API propia)
