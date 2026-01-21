@@ -1,4 +1,4 @@
-const CACHE_NAME = 'site-cache-v10'; // ⬅️ súbelo para forzar actualización
+const CACHE_NAME = 'site-cache-v11'; // ⬅️ súbelo para forzar actualización
 const urlsToCache = [
   '/',
   '/index.html',
@@ -23,6 +23,7 @@ const urlsToCache = [
   '/js/blog.js',
   '/js/blog-entry.js',
   '/js/firebase-init.js',
+  '/assets/images/site/plumafaroyllama.webp',
 ];
 
 /* --- IndexedDB tiny logger for SW ---
