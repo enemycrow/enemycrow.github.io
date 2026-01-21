@@ -150,6 +150,7 @@ function buildWorksData(items) {
 
 async function renderFeaturedWorks(container, works) {
   const desiredCount = parseInt(container.dataset.featuredCount, 10) || 3;
+  const featuredSource = container.dataset.featuredSource;
   const candidates = works.filter(work => !work.exclude);
   if (!candidates.length) {
     container.innerHTML = toTrustedHTML('');
@@ -159,22 +160,24 @@ async function renderFeaturedWorks(container, works) {
   const today = new Date();
   let selection = [];
 
-  try {
-    const res = await fetch('portfolio-featured.json', { cache: 'no-store' });
-    if (res && res.ok) {
-      const forcedList = await res.json();
-      const forcedWorks = Array.isArray(forcedList)
-        ? forcedList
-            .map(entry => resolveForcedWork(entry, candidates))
-            .filter(Boolean)
-        : [];
-      const forcedSet = new Set(forcedWorks.map(work => work.slug));
-      const pool = candidates.filter(work => !forcedSet.has(work.slug));
-      const auto = selectDailyWorksAvoidingYesterday(pool, desiredCount - forcedWorks.length, today);
-      selection = [...forcedWorks, ...auto].slice(0, desiredCount);
+  if (featuredSource) {
+    try {
+      const res = await fetch(featuredSource, { cache: 'no-store' });
+      if (res && res.ok) {
+        const forcedList = await res.json();
+        const forcedWorks = Array.isArray(forcedList)
+          ? forcedList
+              .map(entry => resolveForcedWork(entry, candidates))
+              .filter(Boolean)
+          : [];
+        const forcedSet = new Set(forcedWorks.map(work => work.slug));
+        const pool = candidates.filter(work => !forcedSet.has(work.slug));
+        const auto = selectDailyWorksAvoidingYesterday(pool, desiredCount - forcedWorks.length, today);
+        selection = [...forcedWorks, ...auto].slice(0, desiredCount);
+      }
+    } catch (err) {
+      // Ignorar errores y usar el rotador automatico
     }
-  } catch (err) {
-    // Ignorar errores y usar el rotador automatico
   }
 
   if (!selection.length) {
@@ -458,5 +461,4 @@ function selectDailyWorksAvoidingYesterday(works, count, referenceDate) {
 
   return selection.slice(0, count);
 }
-
 
