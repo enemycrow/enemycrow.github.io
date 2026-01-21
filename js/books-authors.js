@@ -1,3 +1,21 @@
+const getTrustedTypesPolicy = () => {
+  if (!window.trustedTypes) return null;
+  if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
+  try {
+    window.__trustedTypesPolicy = window.trustedTypes.createPolicy('default', {
+      createHTML: (input) => input
+    });
+  } catch (error) {
+    window.__trustedTypesPolicy = null;
+  }
+  return window.__trustedTypesPolicy;
+};
+
+const toTrustedHTML = (html) => {
+  const policy = getTrustedTypesPolicy();
+  return policy ? policy.createHTML(String(html)) : String(html);
+};
+
 document.addEventListener('DOMContentLoaded', function () {
   const indexPath = '/assets/books/books_index.json';
 
@@ -44,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // render list of works under the author card (kept hidden by default)
         if (worksContainer) {
           worksContainer.style.display = 'none';
-          worksContainer.innerHTML = '';
+          worksContainer.innerHTML = toTrustedHTML('');
           const ul = document.createElement('ul');
           ul.style.margin = '0';
           ul.style.paddingLeft = '1rem';

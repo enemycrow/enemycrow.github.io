@@ -1,3 +1,21 @@
+const getTrustedTypesPolicy = () => {
+  if (!window.trustedTypes) return null;
+  if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
+  try {
+    window.__trustedTypesPolicy = window.trustedTypes.createPolicy('default', {
+      createHTML: (input) => input
+    });
+  } catch (error) {
+    window.__trustedTypesPolicy = null;
+  }
+  return window.__trustedTypesPolicy;
+};
+
+const toTrustedHTML = (html) => {
+  const policy = getTrustedTypesPolicy();
+  return policy ? policy.createHTML(String(html)) : String(html);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#blog-posts-grid');
   const featuredContainer = document.querySelector('#featured-posts-container');
@@ -363,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         labelNode.className = desiredClass;
       }
-      labelNode.innerHTML = '';
+      labelNode.innerHTML = toTrustedHTML('');
       return labelNode;
     }
 
@@ -373,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const iconSpan = document.createElement('span');
         iconSpan.className = 'filter-dropdown__icon';
         iconSpan.setAttribute('aria-hidden', 'true');
-        iconSpan.innerHTML = `<i class="fas ${option.icon}"></i>`;
+        iconSpan.innerHTML = toTrustedHTML(`<i class="fas ${option.icon}"></i>`);
         node.appendChild(iconSpan);
       }
       const textSpan = document.createElement('span');
@@ -422,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const iconSpan = document.createElement('span');
         iconSpan.className = 'filter-dropdown__icon';
         iconSpan.setAttribute('aria-hidden', 'true');
-        iconSpan.innerHTML = `<i class="fas ${option.icon}"></i>`;
+        iconSpan.innerHTML = toTrustedHTML(`<i class="fas ${option.icon}"></i>`);
         labelSpan.appendChild(iconSpan);
       }
 
@@ -446,7 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderOptions() {
-      menu.innerHTML = '';
+      menu.innerHTML = toTrustedHTML('');
       menu.appendChild(renderOption({ value: '', label: allLabel }, true));
       options.forEach(option => {
         menu.appendChild(renderOption(option, false));
@@ -741,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
     article.setAttribute('data-category', `${authorSlug} ${themeSlug}`);
     const totalReactions = 0; // se actualizará desde Firestore
     const postLink = resolvePostUrl(post);
-    article.innerHTML = `
+    article.innerHTML = toTrustedHTML(`
       <div class="blog-post__image" style="background-image:url('assets/images/blog/${post.imagen}')">
         <div class="blog-post__date">
           <span>${dayStr} ${monthStr} ${yearStr}</span>
@@ -758,13 +776,13 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="meta-item"><i class="fas fa-bolt"></i> <span class="reactions-count" data-slug="${post.slug}">${totalReactions}</span> reacciones</span>
       </div>
       <a href="${postLink}" class="blog-post__link">Leer más <span class="arrow">→</span></a>
-    `;
+    `);
     target.appendChild(article);
   }
 
   function renderPosts(posts, target) {
     if (!target) return;
-    target.innerHTML = '';
+    target.innerHTML = toTrustedHTML('');
     posts.forEach(post => crearTarjeta(post, target));
     updateReactionCounts();
   }
@@ -792,7 +810,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Renderiza los botones y los puntos suspensivos
     paginationContainers.forEach(container => {
-      container.innerHTML = '';
+      container.innerHTML = toTrustedHTML('');
       visiblePages.forEach(item => {
         if (item === '...') {
           const span = document.createElement('span');
@@ -867,7 +885,7 @@ document.addEventListener('DOMContentLoaded', () => {
               const autoPool = candidatePool.filter(p => !forcedKeys.has(p.id) && !forcedKeys.has(p.slug));
               const auto = selectDailyFeaturedAvoidingYesterday(autoPool, desired - forcedPosts.length, new Date());
               const final = [...forcedPosts, ...auto].slice(0, desired);
-              featuredContainer.innerHTML = final.map(crearFeaturedPost).join('');
+              featuredContainer.innerHTML = toTrustedHTML(final.map(crearFeaturedPost).join(''));
               updateReactionCounts();
               return;
             }
@@ -877,7 +895,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // fallback to date-based selection
           const todaysFeatured = selectDailyFeaturedAvoidingYesterday(candidatePool, desired, new Date());
-          featuredContainer.innerHTML = todaysFeatured.length > 0 ? todaysFeatured.map(crearFeaturedPost).join('') : '';
+          featuredContainer.innerHTML = toTrustedHTML(todaysFeatured.length > 0 ? todaysFeatured.map(crearFeaturedPost).join('') : '');
           updateReactionCounts();
         })();
       }

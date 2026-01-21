@@ -1,4 +1,21 @@
 // JavaScript para la pagina de Obras y Portafolio
+const getTrustedTypesPolicy = () => {
+  if (!window.trustedTypes) return null;
+  if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
+  try {
+    window.__trustedTypesPolicy = window.trustedTypes.createPolicy('default', {
+      createHTML: (input) => input
+    });
+  } catch (error) {
+    window.__trustedTypesPolicy = null;
+  }
+  return window.__trustedTypesPolicy;
+};
+
+const toTrustedHTML = (html) => {
+  const policy = getTrustedTypesPolicy();
+  return policy ? policy.createHTML(String(html)) : String(html);
+};
 const FEATURED_META = {
   'faro-de-elysia': {
     format: 'Experiencia interactiva',
@@ -135,7 +152,7 @@ async function renderFeaturedWorks(container, works) {
   const desiredCount = parseInt(container.dataset.featuredCount, 10) || 3;
   const candidates = works.filter(work => !work.exclude);
   if (!candidates.length) {
-    container.innerHTML = '';
+    container.innerHTML = toTrustedHTML('');
     return;
   }
 
@@ -164,7 +181,7 @@ async function renderFeaturedWorks(container, works) {
     selection = selectDailyWorksAvoidingYesterday(candidates, desiredCount, today);
   }
 
-  container.innerHTML = selection.map(renderWorkCard).join('');
+  container.innerHTML = toTrustedHTML(selection.map(renderWorkCard).join(''));
 }
 
 function resolveForcedWork(entry, candidates) {
@@ -441,6 +458,5 @@ function selectDailyWorksAvoidingYesterday(works, count, referenceDate) {
 
   return selection.slice(0, count);
 }
-
 
 
