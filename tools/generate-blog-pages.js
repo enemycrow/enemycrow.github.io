@@ -310,7 +310,12 @@ function buildHtml(post) {
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
+<!-- Google Tag Manager -->
+<script src="/js/gtm-loader.js" defer></script>
+<!-- End Google Tag Manager -->
   <meta charset="UTF-8">
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com; frame-src https://www.googletagmanager.com; img-src 'self' data: https://www.googletagmanager.com https://plumafarollama.com https://mirrors.creativecommons.org; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com;" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
@@ -338,6 +343,10 @@ function buildHtml(post) {
   <link rel="stylesheet" href="../css/custom-overrides.css" />
 </head>
 <body data-post-slug="${escapeHtml(slug)}" data-prerendered="true">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NX2C8N3W" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
   <header>
     <div class="container">
       <nav class="navbar">

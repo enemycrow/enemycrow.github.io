@@ -116,7 +116,12 @@ function buildPage({ id, slug, modalHtml, meta }){
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
+<!-- Google Tag Manager -->
+<script src="/js/gtm-loader.js" defer></script>
+<!-- End Google Tag Manager -->
   <meta charset="UTF-8">
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com; frame-src https://www.googletagmanager.com; img-src 'self' data: https://www.googletagmanager.com https://plumafarollama.com https://mirrors.creativecommons.org; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com;" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${meta.title} | Obras – La Pluma, el Faro y la Llama</title>
   <meta name="description" content="${meta.description.replace(/"/g,'&quot;')}">
@@ -150,6 +155,11 @@ function buildPage({ id, slug, modalHtml, meta }){
   <link rel="stylesheet" href="../css/custom-overrides.css">
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NX2C8N3W"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
   <a href="../portfolio.html" class="btn btn-featured" style="position:fixed;z-index:9;left:16px;top:16px">← Volver a Obras</a>
   ${modalHtml}
   <a id="autostart" href="#${id}" class="open-modal" style="display:none">Abrir</a>
