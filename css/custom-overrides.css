@@ -45,7 +45,7 @@ html {
 }
 
 .izel-img {
-  background-image: url('../assets/images/oeuvres/izelitzel.webp');
+  background-image: url('../assets/images/oeuvres/izelitzel.webp?v=20260122');
   background-size: cover;
   background-position: center;
 }
@@ -63,7 +63,7 @@ html {
 }
 
 .tarotcuervoelysia-img {
-  background-image: url('../assets/images/oeuvres/tarotcuervoelysia.webp');
+  background-image: url('../assets/images/oeuvres/tarotcuervoelysia.webp?v=20260122');
   background-size: cover;
   background-position: center;
 }
@@ -125,7 +125,7 @@ html {
 
 /* Laboratorio – Faro de Elysia */
 .faro-lab-img {
-  background-image: url('../assets/images/oeuvres/faro-elysia.webp');
+  background-image: url('../assets/images/oeuvres/faro-elysia.webp?v=20260122');
   background-size: cover;
   background-position: center;
 }
@@ -689,7 +689,7 @@ html {
   .entre-abismos-img   { background-image: image-set(url('../assets/images/responsive/oeuvres/entreamoresabismos-400.webp') 1x, url('../assets/images/responsive/oeuvres/entreamoresabismos-800.webp') 2x); }
   .martillo-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/hijasdelmartillo-400.webp') 1x, url('../assets/images/responsive/oeuvres/hijasdelmartillo-800.webp') 2x); }
   .galactique-img      { background-image: image-set(url('../assets/images/responsive/oeuvres/galactique-400.webp') 1x, url('../assets/images/responsive/oeuvres/galactique-800.webp') 2x); }
-  .izel-img            { background-image: image-set(url('../assets/images/responsive/oeuvres/izelitzel-400.webp') 1x, url('../assets/images/responsive/oeuvres/izelitzel-800.webp') 2x); }
+  .izel-img            { background-image: image-set(url('../assets/images/responsive/oeuvres/izelitzel-400.webp?v=20260122') 1x, url('../assets/images/responsive/oeuvres/izelitzel-800.webp?v=20260122') 2x); }
   .libro-fusion-img    { background-image: image-set(url('../assets/images/responsive/oeuvres/librodelafusion-400.webp') 1x, url('../assets/images/responsive/oeuvres/librodelafusion-800.webp') 2x); }
   .dilacion-img        { background-image: image-set(url('../assets/images/responsive/oeuvres/efectodilaciontemporal-400.webp') 1x, url('../assets/images/responsive/oeuvres/efectodilaciontemporal-800.webp') 2x); }
   .tarotcuervoelysia-img { background-image: image-set(url('../assets/images/responsive/oeuvres/tarotcuervoelysia-400.webp') 1x, url('../assets/images/responsive/oeuvres/tarotcuervoelysia-800.webp') 2x); }

@@ -6,9 +6,9 @@
   display: flex;
   align-items: center;
   background-image: image-set(
-    url("../assets/images/responsive/oeuvres/izelitzel-400.webp") 1x,
-    url("../assets/images/responsive/oeuvres/izelitzel-800.webp") 2x,
-    url("../assets/images/responsive/oeuvres/izelitzel-1200.webp") 3x
+    url("../assets/images/responsive/oeuvres/izelitzel-400.webp?v=20260122") 1x,
+    url("../assets/images/responsive/oeuvres/izelitzel-800.webp?v=20260122") 2x,
+    url("../assets/images/responsive/oeuvres/izelitzel-1200.webp?v=20260122") 3x
   );
   background-position: center top;
   background-repeat: no-repeat;
@@ -4812,9 +4812,9 @@ a:hover {
 @media screen and (orientation: portrait) and (max-width: 600px) {
   .hero.hero--about {
     background-image: image-set(
-      url("../assets/images/responsive/oeuvres/izelitzel-400.webp") 1x,
-      url("../assets/images/responsive/oeuvres/izelitzel-800.webp") 2x,
-      url("../assets/images/responsive/oeuvres/izelitzel-1200.webp") 3x
+      url("../assets/images/responsive/oeuvres/izelitzel-400.webp?v=20260122") 1x,
+      url("../assets/images/responsive/oeuvres/izelitzel-800.webp?v=20260122") 2x,
+      url("../assets/images/responsive/oeuvres/izelitzel-1200.webp?v=20260122") 3x
     );
   }
   .hero.hero--blog {
@@ -4871,9 +4871,9 @@ a:hover {
 @media screen and (orientation: landscape) and (max-height: 500px) {
   .hero.hero--about {
     background-image: image-set(
-      url("../assets/images/responsive/oeuvres/izelitzel-400.webp") 1x,
-      url("../assets/images/responsive/oeuvres/izelitzel-800.webp") 2x,
-      url("../assets/images/responsive/oeuvres/izelitzel-1200.webp") 3x
+      url("../assets/images/responsive/oeuvres/izelitzel-400.webp?v=20260122") 1x,
+      url("../assets/images/responsive/oeuvres/izelitzel-800.webp?v=20260122") 2x,
+      url("../assets/images/responsive/oeuvres/izelitzel-1200.webp?v=20260122") 3x
     );
   }
   .hero.hero--blog {
@@ -4928,7 +4928,7 @@ a:hover {
 }
 
 @media (min-width: 1024px) {
-  .hero.hero--about { background-image: url("../assets/images/oeuvres/izelitzel.webp"); }
+  .hero.hero--about { background-image: url("../assets/images/oeuvres/izelitzel.webp?v=20260122"); }
   .hero.hero--blog { background-image: url("../assets/images/oeuvres/efectodilaciontemporal.webp"); }
   .hero.hero--contact { background-image: url("../assets/images/oeuvres/mundodelosveus.webp"); }
   .hero.hero--portfolio { background-image: url("../assets/images/oeuvres/librodelafusion.webp"); }
@@ -5000,7 +5000,7 @@ a:hover {
 }
 
 .elysia-image .voice-view__image {
-    background-image: url('../assets/images/authors/elysia.webp'); /* Imagen pequeña del autor */
+    background-image: url('../assets/images/authors/elysia.webp?v=20260122'); /* Imagen pequeña del autor */
     background-color: var(--elysia-secundario); /* Fallback */
 }
 
@@ -5113,7 +5113,7 @@ a:hover {
 }
 
 .lauren-image .voice-view__image {
-    background-image: url('../assets/images/authors/lauren.webp'); /* Imagen pequeña del autor */
+    background-image: url('../assets/images/authors/lauren.webp?v=20260122'); /* Imagen pequeña del autor */
     background-color: var(--lauren-acento); /* Fallback */
 }
 
@@ -5143,7 +5143,7 @@ a:hover {
 }
   
 .lauren-work-2 {
-    background-image: url('../assets/images/oeuvres/izelitzel.webp'); /* Imagen de Izel Itzel */
+    background-image: url('../assets/images/oeuvres/izelitzel.webp?v=20260122'); /* Imagen de Izel Itzel */
     background-color: var(--azul-noche); /* Fallback */
 }
   
@@ -5220,7 +5220,7 @@ a:hover {
 }
 
 .sahir-image .voice-view__image {
-    background-image: url('../assets/images/authors/sahir.webp'); /* Imagen pequeña del autor */
+    background-image: url('../assets/images/authors/sahir.webp?v=20260122'); /* Imagen pequeña del autor */
     background-color: var(--sahir-primario); /* Fallback */
 }
 
