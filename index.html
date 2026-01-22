@@ -5,8 +5,8 @@
 <script src="/js/gtm-loader.js" defer></script>
 <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
-    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com; frame-src https://www.googletagmanager.com; img-src 'self' data: https://www.googletagmanager.com https://plumafarollama.com https://mirrors.creativecommons.org; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com;" />
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin-allow-popups" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com; frame-src https://www.googletagmanager.com; frame-ancestors 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://plumafarollama.com https://mirrors.creativecommons.org; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com; upgrade-insecure-requests;" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>La Pluma, el Faro y la Llama | Tres voces, un solo corazón</title>
     <meta
@@ -56,6 +56,93 @@
     <link rel="preload" href="assets/images/site/plumafaroyllama.webp" as="image" fetchpriority="high">
     <link rel="canonical" href="https://plumafarollama.com/" />
     <meta name="robots" content="index, follow" />
+    <meta name="author" content="La Pluma, el Faro y la Llama" />
+    <meta name="keywords" content="literatura, ficción, cuentos, poesía, diario creativo, Lauren Cuervo, A.C. Elysia, Draco Sahir" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://plumafarollama.com/#organization",
+            "name": "La Pluma, el Faro y la Llama",
+            "url": "https://plumafarollama.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://plumafarollama.com/assets/images/site/plumafaroyllama.webp",
+              "width": 1536,
+              "height": 1024
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://plumafarollama.com/#website",
+            "url": "https://plumafarollama.com/",
+            "name": "La Pluma, el Faro y la Llama",
+            "description": "Tres voces literarias que comparten relatos, diarios, obras y servicios creativos.",
+            "inLanguage": "es",
+            "publisher": {
+              "@id": "https://plumafarollama.com/#organization"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://plumafarollama.com/#webpage",
+            "url": "https://plumafarollama.com/",
+            "name": "La Pluma, el Faro y la Llama | Tres voces, un solo corazón",
+            "description": "Un espacio literario donde convergen Lauren Cuervo, A.C. Elysia y Draco Sahir con relatos, diarios y obras.",
+            "inLanguage": "es",
+            "isPartOf": {
+              "@id": "https://plumafarollama.com/#website"
+            },
+            "about": [
+              {
+                "@id": "https://plumafarollama.com/#lauren-cuervo"
+              },
+              {
+                "@id": "https://plumafarollama.com/#ac-elysia"
+              },
+              {
+                "@id": "https://plumafarollama.com/#draco-sahir"
+              }
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://plumafarollama.com/#lauren-cuervo",
+            "name": "Lauren Cuervo",
+            "description": "Narrativa oscura y tecnológica con enfoque en historia, poder y culpa.",
+            "knowsAbout": [
+              "ficción oscura",
+              "historia alternativa",
+              "tecnología y poder"
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://plumafarollama.com/#ac-elysia",
+            "name": "A.C. Elysia",
+            "description": "Prosa lírica con énfasis en contemplación, belleza y luz interior.",
+            "knowsAbout": [
+              "poesía",
+              "mística",
+              "contemplación"
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://plumafarollama.com/#draco-sahir",
+            "name": "Draco Sahir",
+            "description": "Relatos simbólicos con mitología, ensoñación y aventuras interiores.",
+            "knowsAbout": [
+              "mitología",
+              "fantasía",
+              "relatos simbólicos"
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
 <!-- Google Tag Manager (noscript) -->
