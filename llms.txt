@@ -1,8 +1,24 @@
 # llms.txt para plumafarollama.com
-# Última actualización: 2025-10-28
+# Última actualización: 2025-03-08
 
 Sitio: https://plumafarollama.com/
 Contacto: contacto@plumafarollama.com
+
+[Resumen]
+Plataforma literaria en español con relatos, diarios creativos, obras y servicios de escritura. Reúne las voces de Lauren Cuervo, A.C. Elysia y Draco Sahir bajo un mismo universo narrativo.
+
+[Temas principales]
+- Ficción oscura y tecnología (Lauren Cuervo)
+- Prosa lírica y contemplativa (A.C. Elysia)
+- Mitología y relatos simbólicos (Draco Sahir)
+
+[URLs prioritarias]
+- Inicio: https://plumafarollama.com/
+- Sobre nosotros: https://plumafarollama.com/about.html
+- Obras: https://plumafarollama.com/portfolio.html
+- Leer: https://plumafarollama.com/books.html
+- Diario: https://plumafarollama.com/blog.html
+- Servicios: https://plumafarollama.com/services.html
 
 [Alcance]
 Esta política se aplica a todo el contenido servido desde plumafarollama.com y sus subdominios, salvo que se especifique lo contrario dentro del propio recurso.
