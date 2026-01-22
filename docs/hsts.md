@@ -50,6 +50,8 @@ add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" alway
   Strict-Transport-Security: max-age=86400
 ```
 
+> Nota: En Hostinger, el archivo `_headers` no se aplica; por eso este repositorio ya no incluye `_headers` y debes usar `.htaccess` con `mod_headers` para gestionar encabezados.
+
 ### Cloudflare
 
 1. Entra a **SSL/TLS > Edge Certificates**.
