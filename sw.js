@@ -1,4 +1,4 @@
-const CACHE_NAME = 'site-cache-v12'; // ⬅️ súbelo para forzar actualización
+const CACHE_NAME = 'site-cache-v14'; // ⬅️ súbelo para forzar actualización
 const urlsToCache = [
   '/',
   '/index.html',
