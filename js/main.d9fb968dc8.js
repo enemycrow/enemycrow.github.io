@@ -126,6 +126,18 @@ activarLatidoDeSylvora();
             return;
         }
 
+        const setSubmenuFocusable = (submenu, isExpanded) => {
+            const focusableLinks = submenu.querySelectorAll('a');
+
+            focusableLinks.forEach(link => {
+                if (isExpanded) {
+                    link.removeAttribute('tabindex');
+                } else {
+                    link.setAttribute('tabindex', '-1');
+                }
+            });
+        };
+
         const closeAll = (exception = null) => {
             navItems.forEach(item => {
                 if (exception && item === exception) {
@@ -142,6 +154,7 @@ activarLatidoDeSylvora();
                 toggle.setAttribute('aria-expanded', 'false');
                 submenu.setAttribute('aria-hidden', 'true');
                 submenu.classList.remove('nav-submenu--open');
+                setSubmenuFocusable(submenu, false);
             });
         };
 
@@ -160,11 +173,13 @@ activarLatidoDeSylvora();
             toggle.setAttribute('aria-controls', submenu.id);
             toggle.setAttribute('aria-expanded', toggle.getAttribute('aria-expanded') === 'true' ? 'true' : 'false');
             submenu.setAttribute('aria-hidden', toggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+            setSubmenuFocusable(submenu, toggle.getAttribute('aria-expanded') === 'true');
 
             const setSubmenuState = isExpanded => {
                 toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
                 submenu.classList.toggle('nav-submenu--open', isExpanded);
                 submenu.setAttribute('aria-hidden', isExpanded ? 'false' : 'true');
+                setSubmenuFocusable(submenu, isExpanded);
             };
 
             toggle.addEventListener('click', () => {
