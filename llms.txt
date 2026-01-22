@@ -1,5 +1,5 @@
 # llms.txt para plumafarollama.com
-# Última actualización: 2025-03-08
+# Última actualización: 2026-01-22
 
 Sitio: https://plumafarollama.com/
 Contacto: contacto@plumafarollama.com
