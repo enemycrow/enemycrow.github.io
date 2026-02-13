@@ -13,17 +13,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
+# Node (requires Node 20+)
 npm install                        # Install Node dependencies
 npm test                           # HTMLHint + SEO metadata validation
 npm run build                      # Responsive images + test
 npm run seo                        # Generate portfolio pages + blog pages + sitemap
 npm run blog:generate              # Full blog static page generation
 npm run blog:generate:inc          # Incremental (only changed pages)
+npm run blog:generate:staged       # Generate pages for staged posts (pre-commit hook use)
 npm run portfolio:generate         # Generate SEO pages for portfolio items
 npm run responsive                 # Generate responsive image variants (sharp)
 npm run version                    # Hash-version CSS/JS for cache busting
 npm run publish:chapters           # Render book chapters from markdown to HTML
+npm run books:discover             # Discover book metadata
 npm run rotate-featured            # Manage featured posts list
+
+# PHP (for API development)
+composer install                   # Install PHP dependencies (PHPMailer, Monolog, phpdotenv)
+
+# Firebase (local dev + deploy)
 firebase serve                     # Local dev server at http://localhost:5000
 firebase deploy                    # Deploy to Firebase Hosting
 ```
@@ -88,6 +96,8 @@ Config loaded from `.env` via `vlucas/phpdotenv`. PHP autoloading: `PSR-4` under
 - **Branch convention:** Feature branches use `codex/feature-description` pattern
 - **Blog posts:** Future-dated posts in `posts.json` are automatically filtered out by the frontend; use `posts-pendientes.json` for editorial scheduling
 - **SEO validation:** `npm test` checks all HTML pages for required meta tags (title, description, OG, Twitter cards, JSON-LD). Missing metadata fails the build.
+- **`posts.json` rewrite warning:** `generate-blog-pages.js` rewrites `posts.json` with a subset of fields for consistency — back up any custom fields before running
+- **Gitignored configs:** `firebase.json`, `.firebaserc`, `serviceAccount.json`, `api/config.php`, and `.env` are all gitignored; local dev requires creating them manually
 
 ## CI/CD Workflows (`.github/workflows/`)
 
@@ -95,3 +105,4 @@ Config loaded from `.env` via `vlucas/phpdotenv`. PHP autoloading: `PSR-4` under
 - `generate-blog.yml` — Push to `posts.json` → incremental blog generation → auto-commit
 - `publish-chapters.yml` — Weekly cron (Friday 00:00 UTC) → publish scheduled book chapters → auto-commit
 - `responsive-images.yml` — Generate responsive image variants
+- `uptime-check.yml` — Site availability monitoring
