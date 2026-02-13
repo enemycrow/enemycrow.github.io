@@ -6,6 +6,7 @@
 <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com; frame-src https://www.googletagmanager.com; img-src 'self' data: https://www.googletagmanager.com https://plumafarollama.com https://mirrors.creativecommons.org; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com; require-trusted-types-for 'script'; trusted-types default;" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fortune Cookie – Plumafarollama / Marsheeall, Sharkody &amp; Co.</title>
   <link rel="preload" href="https://fonts.googleapis.com" as="style" onload="this.rel='stylesheet'">
@@ -94,6 +95,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
   <!-- SW logs client: solicitar logs al service worker y mostrarlos -->
   <script>
+    const _ttp = (() => {
+      if (!window.trustedTypes) return { createHTML: s => s };
+      if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
+      try { return (window.__trustedTypesPolicy = trustedTypes.createPolicy('default', { createHTML: s => s })); }
+      catch(e) { return { createHTML: s => s }; }
+    })();
     (function() {
       if (!('serviceWorker' in navigator)) return;
       function requestSWLogs(limit = 200) {
@@ -111,7 +118,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // Optionally render into DOM if #sw-logs exists
             const container = document.getElementById('sw-logs');
             if (container) {
-              container.innerHTML = '';
+              container.innerHTML = _ttp.createHTML('');
               (data.logs || []).forEach(l => {
                 const el = document.createElement('div');
                 el.textContent = new Date(l.ts).toLocaleString() + ' — ' + l.msg;

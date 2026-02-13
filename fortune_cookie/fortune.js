@@ -1,3 +1,10 @@
+const _ttp = (() => {
+  if (!window.trustedTypes) return { createHTML: s => s };
+  if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
+  try { return (window.__trustedTypesPolicy = trustedTypes.createPolicy('default', { createHTML: s => s })); }
+  catch(e) { return { createHTML: s => s }; }
+})();
+
 const COOKIE_STORAGE_KEY = 'seenFortunes';
 const AUTO_OPEN_DELAY = 1200;
 
@@ -278,7 +285,7 @@ async function renderAvatar(name) {
 }
 
 function renderTags(tags = []) {
-  fortuneTags.innerHTML = '';
+  fortuneTags.innerHTML = _ttp.createHTML('');
   if (!tags || tags.length === 0) {
     fortuneTags.setAttribute('aria-hidden', 'true');
     return;
