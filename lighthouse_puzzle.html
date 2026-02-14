@@ -6,7 +6,7 @@
 <!-- End Google Tag Manager -->
 <meta charset="utf-8" />
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com; frame-src https://www.googletagmanager.com; img-src 'self' data: https://www.googletagmanager.com https://plumafarollama.com https://mirrors.creativecommons.org; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com; frame-src https://www.googletagmanager.com; img-src 'self' data: https://www.googletagmanager.com https://plumafarollama.com https://mirrors.creativecommons.org; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com; require-trusted-types-for 'script'; trusted-types default;" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>El Puzzle en el Faro | La Pluma, el Faro y la Llama</title>
 <meta name="description" content="Rompecabezas deslizante inspirado en el Faro de Elysia. Mezcla piezas y explora las fotografías del Diario para crear tu propio reto." />
@@ -512,6 +512,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- Scripts generales -->
 <script defer src="js/main.d9fb968dc8.js"></script>
 <script>
+const _ttp = (() => {
+  if (!window.trustedTypes) return { createHTML: s => s };
+  if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
+  try { return (window.__trustedTypesPolicy = trustedTypes.createPolicy('default', { createHTML: s => s, createScriptURL: s => s })); }
+  catch(e) { return { createHTML: s => s }; }
+})();
 (() => {
   /* ---------- Helper utils ---------- */
   function range(n){ return Array.from({length:n},(_,i)=>i); }
@@ -610,7 +616,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   function renderBoard(){
-    boardEl.innerHTML = '';
+    boardEl.innerHTML = _ttp.createHTML('');
     const tilePx = calcTileDimensions();
     const boardPixels = tilePx * size;
     boardEl.style.width = boardPixels + 'px';
@@ -660,10 +666,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     renderBoard();
     if(isSolved(tiles)){
       stopTimer();
-      statusEl.innerHTML = '<span class="win">¡Resuelto! 🎉</span>';
+      statusEl.innerHTML = _ttp.createHTML('<span class="win">¡Resuelto! 🎉</span>');
       trySaveRecord();
     } else {
-      statusEl.innerHTML = '';
+      statusEl.innerHTML = _ttp.createHTML('');
     }
   }
 
@@ -672,7 +678,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     moves = 0;
     movesEl.textContent = moves;
     resetTimer();
-    statusEl.innerHTML = '';
+    statusEl.innerHTML = _ttp.createHTML('');
     renderBoard();
   }
 
@@ -682,7 +688,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     movesEl.textContent = moves;
     resetTimer();
     startTimer();
-    statusEl.innerHTML = '';
+    statusEl.innerHTML = _ttp.createHTML('');
     renderBoard();
   }
 
@@ -772,7 +778,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const best = grouped[s].sort((a,b)=> a.time - b.time)[0];
       html += `Mejor (${s}×${s}): ${formatSec(best.time)} — ${best.moves} mov — ${new Date(best.when).toLocaleDateString()}<br>`;
     }
-    recordsEl.innerHTML = html;
+    recordsEl.innerHTML = _ttp.createHTML(html);
   }
 
   function formatSec(sec){
