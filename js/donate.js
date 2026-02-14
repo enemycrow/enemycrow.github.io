@@ -3,7 +3,8 @@ const getTrustedTypesPolicy = () => {
   if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
   try {
     window.__trustedTypesPolicy = window.trustedTypes.createPolicy('default', {
-      createHTML: (input) => input
+      createHTML: (input) => input,
+      createScriptURL: (input) => input
     });
   } catch (error) {
     window.__trustedTypesPolicy = null;

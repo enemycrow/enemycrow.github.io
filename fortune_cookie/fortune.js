@@ -1,7 +1,7 @@
 const _ttp = (() => {
   if (!window.trustedTypes) return { createHTML: s => s };
   if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
-  try { return (window.__trustedTypesPolicy = trustedTypes.createPolicy('default', { createHTML: s => s })); }
+  try { return (window.__trustedTypesPolicy = trustedTypes.createPolicy('default', { createHTML: s => s, createScriptURL: s => s })); }
   catch(e) { return { createHTML: s => s }; }
 })();
 

@@ -68,7 +68,8 @@ function buildDescription(post) {
 
 function formatDate(dateString) {
   if (!dateString) return '';
-  const date = new Date(dateString);
+  const [year, month, day] = dateString.split('-').map(Number);
+  const date = new Date(year, month - 1, day);
   if (Number.isNaN(date.getTime())) return '';
   return new Intl.DateTimeFormat('es-ES', {
     day: '2-digit',
