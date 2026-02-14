@@ -3029,66 +3029,6 @@ input, textarea, select, input *, textarea *, select * {
   }
 }
 
-/* Preloader */
-.preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--negro-profundo);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transition:
-    opacity 0.5s ease,
-    visibility 0.5s ease;
-}
-
-.preloader-icon {
-  display: flex;
-  align-items: center;
-}
-
-.preloader-icon i {
-  font-size: 2rem;
-  margin: 0 1rem;
-  opacity: 0;
-}
-
-.preloader-icon i:first-child {
-  color: var(--azul-noche);
-  animation: fadeInOut 2s infinite 0.3s;
-}
-
-.preloader-icon i:last-child {
-  color: var(--violeta-pálido);
-  animation: fadeInOut 2s infinite 0.6s;
-}
-
-.preloader--hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-@keyframes fadeInOut {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes loadingPulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
-}
-
 /* Footer Styles */
 .footer {
   background: var(--negro-profundo);

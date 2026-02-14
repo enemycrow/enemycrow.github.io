@@ -49,7 +49,16 @@
 
     <!-- <link rel="stylesheet" href="css/home.css" /> -->
     
-    <link rel="preload" href="assets/images/site/plumafaroyllama.webp" as="image" fetchpriority="high">
+    <style>
+      .hero-section{display:flex;height:720px;justify-content:center;align-items:center;position:relative;color:#fff;background:#0b0a13;overflow:hidden}
+      .hero-bg-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0}
+      .hero-gradient{position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(103,58,183,.45),transparent 60%),linear-gradient(to top,rgba(0,0,0,.35),rgba(0,0,0,0) 50%);pointer-events:none;z-index:1}
+      .hero-container{display:flex;width:100%;max-width:1200px;padding:32px 0 64px;flex-direction:column;justify-content:center;align-items:center;position:relative;z-index:2}
+    </style>
+    <link rel="preload" as="image" fetchpriority="high"
+          href="assets/images/site/plumafaroyllama.webp"
+          imagesrcset="assets/images/responsive/site/plumafaroyllama-400.webp 400w, assets/images/responsive/site/plumafaroyllama-800.webp 800w, assets/images/responsive/site/plumafaroyllama-1200.webp 1200w, assets/images/site/plumafaroyllama.webp 1536w"
+          imagesizes="100vw">
     <link rel="canonical" href="https://plumafarollama.com/" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="La Pluma, el Faro y la Llama" />
@@ -146,14 +155,6 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-
-    <!-- Preloader con animación -->
-    <div class="preloader" aria-hidden="true">
-      <div class="preloader-icon">
-        <i class="fas fa-feather-alt" aria-hidden="true"></i>
-      </div>
-    </div>
-
     <!-- Navegación -->
     <header>
       <div class="container">
@@ -195,6 +196,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img
         class="hero-bg-image"
         src="assets/images/site/plumafaroyllama.webp"
+        srcset="assets/images/responsive/site/plumafaroyllama-400.webp 400w, assets/images/responsive/site/plumafaroyllama-800.webp 800w, assets/images/responsive/site/plumafaroyllama-1200.webp 1200w, assets/images/site/plumafaroyllama.webp 1536w"
+        sizes="100vw"
         width="1536"
         height="1024"
         alt=""

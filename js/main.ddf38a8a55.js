@@ -31,43 +31,6 @@ activarLatidoDeSylvora();
         };
     })();
 
-    function setupPreloader() {
-        const preloader = document.querySelector('.preloader');
-        if (!preloader) {
-            return;
-        }
-
-        preloader.setAttribute('aria-hidden', 'true');
-        preloader.setAttribute('aria-live', 'off');
-
-        const hidePreloader = () => {
-            if (preloader.classList.contains('preloader--hidden')) {
-                return;
-            }
-            preloader.classList.add('preloader--hidden');
-        };
-
-        const handleTransitionEnd = event => {
-            if (event.target === preloader && preloader.classList.contains('preloader--hidden')) {
-                preloader.style.display = 'none';
-                preloader.removeEventListener('transitionend', handleTransitionEnd);
-            }
-        };
-
-        const handleAnimationEnd = () => {
-            hidePreloader();
-        };
-
-        preloader.addEventListener('transitionend', handleTransitionEnd);
-        preloader.addEventListener('animationend', handleAnimationEnd, { once: true });
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', hidePreloader, { once: true });
-        } else {
-            hidePreloader();
-        }
-    }
-
     function setupMobileNavigation() {
         const mobileMenu = document.querySelector('.mobile-menu');
         const navLinks = document.querySelector('.nav-links');
@@ -527,7 +490,6 @@ activarLatidoDeSylvora();
     }
 
     function init() {
-        setupPreloader();
         setupMobileNavigation();
         setupNavigationSubmenus();
         setupAnimateOnScroll();
@@ -541,7 +503,6 @@ activarLatidoDeSylvora();
 
     window.Main = {
         init,
-        setupPreloader,
         setupMobileNavigation,
         setupAnimateOnScroll,
         setupFooterNewsletterForm,
