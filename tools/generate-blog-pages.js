@@ -380,6 +380,8 @@ function buildHtml(post) {
           "` : ''}
           sizes="${escapeHtml(imageInfo.sizes)}"
           alt="${imageInfo.alt}"
+          width="1200"
+          height="800"
           loading="lazy"
           fetchpriority="low" />
         <div class="reactions-block">

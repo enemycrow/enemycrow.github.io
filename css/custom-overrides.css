@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 /* === Font Awesome: improve font rendering and avoid layout shifts === */
@@ -1001,4 +1002,36 @@ body.theme-dark .card {
 .chapter-nav .btn-ghost {
   color: inherit;
   border-color: var(--bordo-oscuro, rgba(255, 255, 255, 0.2));
+}
+
+/* === CLS: reserve space for blog entry images === */
+.blog-entry__image {
+  aspect-ratio: 3 / 2;
+}
+
+/* === CLS: reserve space for JS-populated containers === */
+#featured-posts-container {
+  min-height: 320px;
+}
+
+.blog-posts-grid {
+  min-height: 600px;
+}
+
+.portfolio-grid--featured {
+  min-height: 300px;
+}
+
+@media (max-width: 768px) {
+  #featured-posts-container {
+    min-height: 260px;
+  }
+
+  .blog-posts-grid {
+    min-height: 400px;
+  }
+
+  .portfolio-grid--featured {
+    min-height: 200px;
+  }
 }
