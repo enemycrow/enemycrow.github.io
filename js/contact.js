@@ -1,4 +1,18 @@
 // JavaScript para la página de Contacto y Newsletter sin Firebase
+const getTrustedTypesPolicy = () => {
+  if (!window.trustedTypes) return null;
+  if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
+  try {
+    window.__trustedTypesPolicy = window.trustedTypes.createPolicy('default', {
+      createHTML: (input) => input,
+      createScriptURL: (input) => input
+    });
+  } catch (error) {
+    window.__trustedTypesPolicy = null;
+  }
+  return window.__trustedTypesPolicy;
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 
   let siteKey = '';
@@ -9,7 +23,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await new Promise((resolve, reject) => {
       const script = document.createElement('script');
-      script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+      const url = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+      const policy = getTrustedTypesPolicy();
+      script.src = policy ? policy.createScriptURL(url) : url;
       script.onload = resolve;
       script.onerror = reject;
       document.head.appendChild(script);
