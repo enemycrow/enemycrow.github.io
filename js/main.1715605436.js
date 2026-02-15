@@ -513,8 +513,21 @@ activarLatidoDeSylvora();
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
+    var swUrl = '/sw.js';
+    if (window.__trustedTypesPolicy) {
+      swUrl = window.__trustedTypesPolicy.createScriptURL(swUrl);
+    } else if (window.trustedTypes) {
+      try {
+        var p = window.trustedTypes.createPolicy('default', {
+          createHTML: function(i){return i;},
+          createScriptURL: function(i){return i;}
+        });
+        window.__trustedTypesPolicy = p;
+        swUrl = p.createScriptURL(swUrl);
+      } catch(e){}
+    }
     navigator.serviceWorker
-      .register('/sw.js', { updateViaCache: 'none' })
+      .register(swUrl, { updateViaCache: 'none' })
       .catch(function(){});
   });
 }

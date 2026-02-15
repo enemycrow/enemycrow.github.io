@@ -15,7 +15,7 @@ const urlsToCache = [
   '/posts.json',
   '/css/styles.0b1ed20a10.css',
   '/css/styles.0b1ed20a10.css?v=20260122',
-  '/js/main.540637884e.js',
+  '/js/main.1715605436.js',
   '/js/about.js',
   '/js/about.js?v=20260122',
   '/js/contact.js',

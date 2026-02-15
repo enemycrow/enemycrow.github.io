@@ -3,6 +3,20 @@
   const LOAD_DELAY_MS = 2000;
   let gtmLoaded = false;
 
+  const getTrustedTypesPolicy = () => {
+    if (!window.trustedTypes) return null;
+    if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
+    try {
+      window.__trustedTypesPolicy = window.trustedTypes.createPolicy('default', {
+        createHTML: (input) => input,
+        createScriptURL: (input) => input
+      });
+    } catch (error) {
+      window.__trustedTypesPolicy = null;
+    }
+    return window.__trustedTypesPolicy;
+  };
+
   const loadGtm = () => {
     if (gtmLoaded) {
       return;
@@ -16,7 +30,9 @@
 
     const script = document.createElement('script');
     script.async = true;
-    script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+    const url = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+    const policy = getTrustedTypesPolicy();
+    script.src = policy ? policy.createScriptURL(url) : url;
     document.head.appendChild(script);
   };
 
