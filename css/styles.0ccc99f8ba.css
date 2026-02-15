@@ -5567,14 +5567,15 @@ a:hover {
 }
 
 .btn-elysia {
-  background-color: var(--violeta-pálido);
-  color: var(--negro-profundo);
+  background-color: #7b1fa2;
+  color: #ffffff;
+  border: 1px solid rgba(216, 194, 255, 0.35);
 }
 
 .btn-elysia:hover {
-  background-color: var(--violeta-profundo);
-  color: var(--blanco-brillante);
-  box-shadow: 0 0 10px var(--violeta-pálido);
+  background-color: #9c27b0;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(156, 39, 176, 0.5);
 }
 
 /* Elementos simbólicos */
