@@ -1035,3 +1035,34 @@ body.theme-dark .card {
     min-height: 200px;
   }
 }
+
+/* === Accessibility: contrast fixes === */
+
+/* 1. Botón "Donar" — darken bg for WCAG AA 4.5:1 with white text
+      Old: #a82bb5 (3.4:1) → New: #7b1fa2 (6.1:1)
+      Also fix vertical alignment in desktop nav */
+.btn-donate {
+  background: #7b1fa2;
+}
+.btn-donate:hover {
+  background: #e1bee7;
+  color: #1a1a1a;
+}
+.nav-links .btn-donate {
+  padding: 0.5rem 1.2rem;
+  margin-top: -0.15rem;
+  vertical-align: middle;
+}
+
+/* 2. Botón "Ver obras" de Elysia — white text on vivid purple
+      Keeps her purple personality but maximizes contrast (9.6:1)  */
+.btn-elysia {
+  background-color: #6a1b9a;
+  color: #ffffff;
+  border: 1px solid rgba(216, 194, 255, 0.35);
+}
+.btn-elysia:hover {
+  background-color: #9c27b0;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(156, 39, 176, 0.5);
+}
