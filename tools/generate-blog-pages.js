@@ -312,7 +312,7 @@ function buildHtml(post) {
 <html lang="es">
 <head>
 <!-- Google Tag Manager -->
-<script src="/js/gtm-loader.js" defer></script>
+<script src="/js/gtm-loader.js?v=2" defer></script>
 <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
