@@ -80,3 +80,5 @@
 .fa-goodreads::before { content: "\f3a8"; }
 .fa-instagram::before { content: "\f16d"; }
 .fa-twitter::before { content: "\f099"; }
+.fa-x-twitter::before { content: "\e61b"; }
+.fa-bluesky::before { content: "\e671"; }
