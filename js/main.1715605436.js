@@ -386,6 +386,18 @@ activarLatidoDeSylvora();
             status.textContent = message;
         };
 
+        const emitShareEvent = channel => {
+            try {
+                document.dispatchEvent(
+                    new CustomEvent('pfy:share', {
+                        detail: {
+                            channel
+                        }
+                    })
+                );
+            } catch (error) {}
+        };
+
         const openShareUrl = (type, data) => {
             const encodedUrl = encodeURIComponent(data.url);
             const encodedTitle = encodeURIComponent(data.title);
@@ -421,6 +433,7 @@ activarLatidoDeSylvora();
                 if (navigator.clipboard?.writeText) {
                     await navigator.clipboard.writeText(text);
                     setStatus(container, 'Enlace copiado al portapapeles.');
+                    emitShareEvent('copy');
                     return;
                 }
             } catch (error) {
@@ -437,6 +450,7 @@ activarLatidoDeSylvora();
             document.execCommand('copy');
             document.body.removeChild(tempInput);
             setStatus(container, 'Enlace copiado al portapapeles.');
+            emitShareEvent('copy');
         };
 
         shareContainers.forEach(container => {
@@ -471,15 +485,23 @@ activarLatidoDeSylvora();
                             })
                             .then(() => {
                                 setStatus(container, 'Compartido desde tu dispositivo.');
+                                emitShareEvent(type);
                             })
                             .catch(() => {
-                                openShareUrl(type, shareData);
+                                const openedFallback = openShareUrl(type, shareData);
+                                if (openedFallback) {
+                                    emitShareEvent(type);
+                                }
                             });
 
                         return;
                     }
 
                     const opened = openShareUrl(type, shareData);
+
+                    if (opened) {
+                        emitShareEvent(type);
+                    }
 
                     if (!opened) {
                         setStatus(container, 'No se pudo abrir la opción de compartido.');
