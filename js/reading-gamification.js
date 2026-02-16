@@ -2,6 +2,7 @@
   'use strict';
 
   const STORAGE_KEY = 'pfy-gamification-v1';
+  const RESET_EVENT = 'pfy:gamification-reset';
   const MIN_COMPLETION_SECONDS = 45;
   const END_THRESHOLD = 0.95;
 
@@ -305,9 +306,16 @@
       }
     };
 
+    const onReset = () => {
+      elapsedSeconds = 0;
+      completed = false;
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
+    document.addEventListener(RESET_EVENT, onReset);
     window.addEventListener('beforeunload', () => {
       window.clearInterval(tick);
+      document.removeEventListener(RESET_EVENT, onReset);
       registerProgress();
     });
   }
@@ -330,6 +338,8 @@
         showToast('No pudimos restablecer el progreso. Intenta de nuevo.');
         return;
       }
+
+      document.dispatchEvent(new window.CustomEvent(RESET_EVENT));
 
       document.querySelectorAll('[data-gamification-reaction], [data-gamification-favorite]').forEach(item => {
         item.setAttribute('aria-pressed', 'false');
