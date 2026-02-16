@@ -311,6 +311,12 @@ function buildHtml(post) {
   const description = buildDescription(post);
   const formattedDate = formatDate(post.fecha);
   const categoriesHtml = buildCategoryTags(post.categoria_temas);
+  const authorClass = (() => {
+    const a = (post.autor || '').toLowerCase();
+    if (a.includes('elysia')) return 'blog-entry--elysia';
+    if (a.includes('draco') || a.includes('sahir')) return 'blog-entry--sahir';
+    return 'blog-entry--lauren';
+  })();
   const booksHtml = buildCategoryTags(post.categoria_libros);
   const imageInfo = getImageInfo(post);
   const licenseHtml = buildLicense(post, canonicalUrl);
@@ -390,7 +396,7 @@ function buildHtml(post) {
     </div>
   </header>
   <main>
-    <article class="blog-entry blog-entry--individual">
+    <article class="blog-entry blog-entry--individual ${authorClass}">
       <div class="container">
         <img
           id="entry-image"
@@ -442,7 +448,7 @@ function buildHtml(post) {
         <h1 class="blog-entry__title" id="entry-title">${escapeHtml(post.titulo)}</h1>
         <span class="blog-entry__date" id="entry-date">${escapeHtml(formattedDate)}</span>
         <div class="blog-entry__meta">
-          <span class="meta-item" id="entry-time">${escapeHtml(post.tiempo || '')}</span>
+          <span class="meta-item" id="entry-time"><i class="fas fa-clock" aria-hidden="true"></i>${escapeHtml(post.tiempo || '')}</span>
           <span class="meta-item" id="entry-comments"></span>
         </div>
         <div class="blog-entry__content" id="entry-content">
