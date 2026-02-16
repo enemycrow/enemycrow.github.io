@@ -57,6 +57,15 @@
     }
   }
 
+  function resetGamificationState() {
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   function getReadingSeconds(state, chapterId) {
     const current = state.readingTimeByChapter.find(item => item.chapterId === chapterId);
     return current ? Number(current.seconds) || 0 : 0;
@@ -303,6 +312,39 @@
     });
   }
 
+  function wireResetControl() {
+    const resetButton = document.querySelector('[data-gamification-reset]');
+
+    if (!resetButton) {
+      return;
+    }
+
+    bindActivation(resetButton, () => {
+      const shouldReset = window.confirm('Se restablecerán solo tus medallas y progreso de lectura en este navegador.');
+      if (!shouldReset) {
+        return;
+      }
+
+      const didReset = resetGamificationState();
+      if (!didReset) {
+        showToast('No pudimos restablecer el progreso. Intenta de nuevo.');
+        return;
+      }
+
+      document.querySelectorAll('[data-gamification-reaction], [data-gamification-favorite]').forEach(item => {
+        item.setAttribute('aria-pressed', 'false');
+        item.classList.remove('selected');
+      });
+
+      const helper = resetButton.closest('details');
+      if (helper) {
+        helper.open = false;
+      }
+
+      showToast('Progreso restablecido en este navegador.');
+    });
+  }
+
   function init() {
     const context = getChapterContext();
 
@@ -314,11 +356,13 @@
     wireFavorite(context);
     wireShareTracking(context);
     wireReadingProgress(context);
+    wireResetControl();
   }
 
   window.ReadingGamification = {
     loadGamificationState,
     saveGamificationState,
+    resetGamificationState,
     registerEvent,
     evaluateBadges,
     init

@@ -8,6 +8,23 @@ async function exists(p){ try{ await fs.access(p); return true }catch(e){ return
 
 function pad(n){ return String(n).padStart(2,'0'); }
 
+
+function extractCoverFigure(html){
+  if(!html) return '';
+  const match = html.match(/<figure[^>]*class="[^"]*obra-entry__cover[^"]*"[\s\S]*?<\/figure>/i);
+  return match ? match[0] : '';
+}
+
+function preserveCustomCover(renderedHtml, existingHtml){
+  const existingCover = extractCoverFigure(existingHtml);
+  if(!existingCover) return renderedHtml;
+
+  return renderedHtml.replace(
+    /<figure[^>]*class="[^"]*obra-entry__cover[^"]*"[\s\S]*?<\/figure>/i,
+    existingCover
+  );
+}
+
 async function renderChapter(template, bookRelPath, entry, htmlContent){
   // template is the full HTML template from templates/book-chapter-template.html
   // Replace title/meta
@@ -76,7 +93,9 @@ async function run(){
       const md = await fs.readFile(mdPath, 'utf8');
       const html = marked.parse(md);
       const rendered = await renderChapter(template, d.name, entry, html);
-      await fs.writeFile(outPath, rendered, 'utf8');
+      const existingHtml = await exists(outPath) ? await fs.readFile(outPath, 'utf8') : '';
+      const finalHtml = preserveCustomCover(rendered, existingHtml);
+      await fs.writeFile(outPath, finalHtml, 'utf8');
       console.log('Published', outName, 'for', d.name);
       published++;
     }
