@@ -1,5 +1,5 @@
 /* Font Awesome 6 Subset — only the icons used on this site.
-   @font-face declarations live in custom-overrides.css. */
+   @font-face declarations live in styles.css (custom overrides section). */
 
 .fas, .far, .fab,
 .fa-solid, .fa-regular, .fa-brands {
