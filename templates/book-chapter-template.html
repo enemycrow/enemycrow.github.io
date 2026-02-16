@@ -16,6 +16,90 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"></noscript>
     <style>.fas,.far,.fab,.fa-solid,.fa-regular,.fa-brands{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-block;font-style:normal;font-variant:normal;line-height:1;text-rendering:auto}.fas,.fa-solid{font-family:"Font Awesome 6 Free";font-weight:900}.far,.fa-regular{font-family:"Font Awesome 6 Free";font-weight:400}.fab,.fa-brands{font-family:"Font Awesome 6 Brands";font-weight:400}.fa-arrow-right::before{content:"\f061"}.fa-bars::before{content:"\f0c9"}.fa-bolt::before{content:"\f0e7"}.fa-book::before{content:"\f02d"}.fa-calendar-alt::before,.fa-calendar-days::before{content:"\f073"}.fa-check::before{content:"\f00c"}.fa-chevron-down::before{content:"\f078"}.fa-chevron-left::before{content:"\f053"}.fa-chevron-right::before{content:"\f054"}.fa-child::before{content:"\f1ae"}.fa-circle::before{content:"\f111"}.fa-clock::before{content:"\f017"}.fa-comments::before{content:"\f086"}.fa-dice::before{content:"\f522"}.fa-dove::before{content:"\f4ba"}.fa-envelope::before{content:"\f0e0"}.fa-fire-flame-simple::before{content:"\f46a"}.fa-feather::before{content:"\f52d"}.fa-feather-alt::before,.fa-feather-pointed::before{content:"\f56b"}.fa-gamepad::before{content:"\f11b"}.fa-gift::before{content:"\f06b"}.fa-globe::before{content:"\f0ac"}.fa-globe-americas::before,.fa-earth-americas::before{content:"\f57d"}.fa-heart::before{content:"\f004"}.fa-jedi::before{content:"\f669"}.fa-lightbulb::before{content:"\f0eb"}.fa-magnifying-glass::before,.fa-search::before{content:"\f002"}.fa-map-marker-alt::before,.fa-location-dot::before{content:"\f3c5"}.fa-masks-theater::before{content:"\f630"}.fa-microchip::before{content:"\f2db"}.fa-monument::before{content:"\f5a6"}.fa-pen-fancy::before{content:"\f5ac"}.fa-pen-nib::before{content:"\f5ad"}.fa-phone-alt::before,.fa-phone-flip::before{content:"\f879"}.fa-plus::before{content:"\f067"}.fa-pray::before,.fa-person-praying::before{content:"\f683"}.fa-quote-left::before{content:"\f10d"}.fa-robot::before{content:"\f544"}.fa-rocket::before{content:"\f135"}.fa-scale-balanced::before{content:"\f24e"}.fa-seedling::before{content:"\f4d8"}.fa-shield-alt::before,.fa-shield-halved::before{content:"\f3ed"}.fa-skull::before{content:"\f54c"}.fa-star::before{content:"\f005"}.fa-star-of-david::before{content:"\f69a"}.fa-times::before,.fa-xmark::before{content:"\f00d"}.fa-user::before{content:"\f007"}.fa-users::before{content:"\f0c0"}.fa-user-secret::before{content:"\f21b"}.fa-water::before{content:"\f773"}.fa-facebook::before{content:"\f09a"}.fa-goodreads::before{content:"\f3a8"}.fa-instagram::before{content:"\f16d"}.fa-twitter::before{content:"\f099"}.fa-x-twitter::before{content:"\e61b"}.fa-bluesky::before{content:"\e671"}</style>
     <link rel="stylesheet" href="../../css/styles.227c2ed157.css">
+    <style>
+      .chapter-gamification__privacy {
+        margin-top: .75rem;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .chapter-gamification__privacy-label {
+        margin: 0;
+        font-size: .79rem;
+        color: #f9e8bf;
+      }
+
+      .chapter-gamification__help {
+        position: relative;
+      }
+
+      .chapter-gamification__help summary {
+        list-style: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        border: 1px solid #ffe2a8;
+        background: #fff8eb;
+        color: #3e2600;
+        font-weight: 700;
+        font-size: .95rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chapter-gamification__help summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .chapter-gamification__privacy-panel {
+        margin-top: .45rem;
+        position: absolute;
+        right: 0;
+        z-index: 4;
+        width: min(20rem, calc(100vw - 2.5rem));
+        padding: .7rem;
+        border-radius: .6rem;
+        background: rgba(16, 20, 36, .96);
+        border: 1px solid rgba(246, 212, 145, .45);
+        color: #fff7eb;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, .2);
+      }
+
+      [data-gamification-reset] {
+        margin-top: .6rem;
+        padding: .4rem .65rem;
+        border-radius: .45rem;
+        border: 1px solid #ffe2a8;
+        background: #fff8eb;
+        color: #3e2600;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      [data-gamification-reset]:focus-visible,
+      .chapter-gamification__help summary:focus-visible {
+        outline: 3px solid #ffe2a8;
+        outline-offset: 2px;
+      }
+
+      @media (max-width: 640px) {
+        .chapter-gamification__privacy {
+          margin-top: .6rem;
+        }
+
+        .chapter-gamification__privacy-label {
+          font-size: .74rem;
+        }
+
+        .chapter-gamification__help summary {
+          width: 1.4rem;
+          height: 1.4rem;
+          font-size: .85rem;
+        }
+      }
+    </style>
 </head>
   <body>
 <!-- Google Tag Manager (noscript) -->
@@ -122,6 +206,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span class="reaction-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></span>
                 <span class="reaction-tooltip">Llévame a esos lugares</span>
               </div>
+            </div>
+            <div class="chapter-gamification__privacy">
+              <p id="gamification-storage-note" class="chapter-gamification__privacy-label">
+                Progreso local
+              </p>
+              <details class="chapter-gamification__help" style="margin-left: .45rem;">
+                <summary aria-label="¿Cómo funciona el progreso local?" aria-describedby="gamification-storage-note">?</summary>
+                <div id="gamification-howto" class="chapter-gamification__privacy-panel" role="note">
+                  <p style="margin: 0; font-size: .86rem; line-height: 1.45;">Tus medallas y progreso se guardan solo en este navegador (almacenamiento local). No necesitas cuenta.</p>
+                  <p style="margin: .4rem 0 0; font-size: .82rem; line-height: 1.42;">Guardamos únicamente reacciones, tiempo de lectura y medallas en este dispositivo; al cambiar de equipo, no se transfiere.</p>
+                  <button type="button" data-gamification-reset aria-describedby="gamification-storage-note gamification-howto">Restablecer progreso</button>
+                </div>
+              </details>
             </div>
           </section>
 
