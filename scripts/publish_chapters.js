@@ -51,6 +51,9 @@ async function renderChapter(template, bookRelPath, entry, htmlContent){
 
 async function generateMain(bookOutDir, bookMeta, manifest){
   const mainPath = path.join(bookOutDir, 'main.html');
+  // Only generate if main.html doesn't exist yet (initialization for new books).
+  // Once customized, the file is preserved across publish runs.
+  if(await exists(mainPath)){ console.log('main.html already exists, skipping generation for', bookMeta.title); return; }
   const lines = [];
   lines.push(`<!doctype html>`);
   lines.push(`<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${bookMeta.title}</title><link rel="stylesheet" href="../../css/styles.889d2a038d.css"></head><body>`);
