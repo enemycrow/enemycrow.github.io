@@ -89,6 +89,9 @@ async function run(){
   const dirs = await fs.readdir(assetsBooks, { withFileTypes: true });
   const template = await fs.readFile(templatePath, 'utf8');
 
+  const booksToPublish = [];
+  const slugOwners = new Map();
+
   for(const d of dirs){
     if(!d.isDirectory()) continue;
     const bookDir = path.join(assetsBooks, d.name);
@@ -96,15 +99,31 @@ async function run(){
     const metaPath = path.join(bookDir, 'metadata.json');
     if(!await exists(manifestPath)) continue;
 
-    let manifest = [];
-    try{ manifest = JSON.parse(await fs.readFile(manifestPath,'utf8')); }catch(e){ console.warn('Invalid manifest', d.name); continue; }
-
     let meta = { title: d.name, description: '', slug: d.name };
     if(await exists(metaPath)){
       try{ meta = JSON.parse(await fs.readFile(metaPath,'utf8')); }catch(e){}
     }
 
     const canonicalSlug = normalizeSlug(meta.slug || d.name) || normalizeSlug(d.name);
+    if(!canonicalSlug){
+      throw new Error(`Cannot publish "${d.name}": normalized slug is empty. Set metadata.slug to an ASCII slug with letters or numbers.`);
+    }
+
+    if(slugOwners.has(canonicalSlug)){
+      throw new Error(`Cannot publish: duplicate canonical slug "${canonicalSlug}" for "${slugOwners.get(canonicalSlug)}" and "${d.name}".`);
+    }
+
+    slugOwners.set(canonicalSlug, d.name);
+    booksToPublish.push({ d, bookDir, manifestPath, metaPath, meta, canonicalSlug });
+  }
+
+  for(const book of booksToPublish){
+    const { d, bookDir, manifestPath, metaPath, canonicalSlug } = book;
+
+    let manifest = [];
+    try{ manifest = JSON.parse(await fs.readFile(manifestPath,'utf8')); }catch(e){ console.warn('Invalid manifest', d.name); continue; }
+
+    const meta = book.meta;
     if(meta.slug !== canonicalSlug){
       meta.slug = canonicalSlug;
       await fs.writeFile(metaPath, JSON.stringify(meta, null, 2), 'utf8');
