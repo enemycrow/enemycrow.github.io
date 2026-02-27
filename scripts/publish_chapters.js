@@ -8,6 +8,15 @@ async function exists(p){ try{ await fs.access(p); return true }catch(e){ return
 
 function pad(n){ return String(n).padStart(2,'0'); }
 
+function normalizeSlug(value){
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
 
 function extractCoverFigure(html){
   if(!html) return '';
@@ -54,9 +63,24 @@ async function generateMain(bookOutDir, bookMeta, manifest){
   await fs.writeFile(mainPath, lines.join('\n'), 'utf8');
 }
 
+async function removeLegacyCaseVariants(booksRoot, canonicalDirName){
+  const canonicalLower = canonicalDirName.toLowerCase();
+  const existing = await fs.readdir(booksRoot, { withFileTypes: true });
+
+  for(const item of existing){
+    if(!item.isDirectory()) continue;
+    if(item.name.toLowerCase() !== canonicalLower) continue;
+    if(item.name === canonicalDirName) continue;
+
+    await fs.rm(path.join(booksRoot, item.name), { recursive: true, force: true });
+    console.log('Removed legacy directory variant:', item.name);
+  }
+}
+
 async function run(){
   const repo = path.join(__dirname, '..');
   const assetsBooks = path.join(repo, 'assets', 'books');
+  const booksRoot = path.join(repo, 'books');
   const templatePath = path.join(repo, 'templates', 'book-chapter-template.html');
 
   if(!await exists(assetsBooks)) { console.error('No assets/books'); process.exit(1); }
@@ -65,6 +89,9 @@ async function run(){
   const dirs = await fs.readdir(assetsBooks, { withFileTypes: true });
   const template = await fs.readFile(templatePath, 'utf8');
 
+  const booksToPublish = [];
+  const slugOwners = new Map();
+
   for(const d of dirs){
     if(!d.isDirectory()) continue;
     const bookDir = path.join(assetsBooks, d.name);
@@ -72,15 +99,41 @@ async function run(){
     const metaPath = path.join(bookDir, 'metadata.json');
     if(!await exists(manifestPath)) continue;
 
-    let manifest = [];
-    try{ manifest = JSON.parse(await fs.readFile(manifestPath,'utf8')); }catch(e){ console.warn('Invalid manifest', d.name); continue; }
-
-    let meta = { title: d.name, description: '' };
+    let meta = { title: d.name, description: '', slug: d.name };
     if(await exists(metaPath)){
       try{ meta = JSON.parse(await fs.readFile(metaPath,'utf8')); }catch(e){}
     }
 
-    const outDir = path.join(repo, 'books', d.name);
+    const canonicalSlug = normalizeSlug(meta.slug || d.name) || normalizeSlug(d.name);
+    if(!canonicalSlug){
+      throw new Error(`Cannot publish "${d.name}": normalized slug is empty. Set metadata.slug to an ASCII slug with letters or numbers.`);
+    }
+
+    if(slugOwners.has(canonicalSlug)){
+      throw new Error(`Cannot publish: duplicate canonical slug "${canonicalSlug}" for "${slugOwners.get(canonicalSlug)}" and "${d.name}".`);
+    }
+
+    slugOwners.set(canonicalSlug, d.name);
+    booksToPublish.push({ d, bookDir, manifestPath, metaPath, meta, canonicalSlug });
+  }
+
+  for(const book of booksToPublish){
+    const { d, bookDir, manifestPath, metaPath, canonicalSlug } = book;
+
+    let manifest = [];
+    try{ manifest = JSON.parse(await fs.readFile(manifestPath,'utf8')); }catch(e){ console.warn('Invalid manifest', d.name); continue; }
+
+    const meta = book.meta;
+    if(meta.slug !== canonicalSlug){
+      meta.slug = canonicalSlug;
+      await fs.writeFile(metaPath, JSON.stringify(meta, null, 2), 'utf8');
+      console.log('Normalized metadata slug for', d.name, '->', canonicalSlug);
+    }
+
+    await fs.mkdir(booksRoot, { recursive: true });
+    await removeLegacyCaseVariants(booksRoot, canonicalSlug);
+
+    const outDir = path.join(booksRoot, canonicalSlug);
     await fs.mkdir(outDir, { recursive: true });
 
     // publish or refresh every chapter so the HTML mirrors the Markdown sources
@@ -92,17 +145,17 @@ async function run(){
       if(!await exists(mdPath)) { console.warn('Missing md', mdPath); continue; }
       const md = await fs.readFile(mdPath, 'utf8');
       const html = marked.parse(md);
-      const rendered = await renderChapter(template, d.name, entry, html);
+      const rendered = await renderChapter(template, canonicalSlug, entry, html);
       const existingHtml = await exists(outPath) ? await fs.readFile(outPath, 'utf8') : '';
       const finalHtml = preserveCustomCover(rendered, existingHtml);
       await fs.writeFile(outPath, finalHtml, 'utf8');
-      console.log('Published', outName, 'for', d.name);
+      console.log('Published', outName, 'for', canonicalSlug);
       published++;
     }
 
     // regenerate main.html listing
     await generateMain(outDir, meta, manifest);
-    if(published===0) console.log('No new chapters for', d.name);
+    if(published===0) console.log('No new chapters for', canonicalSlug);
   }
 }
 
