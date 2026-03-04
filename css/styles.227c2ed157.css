@@ -5602,8 +5602,22 @@ a:hover {
 }
 
 /* Animaciones y transiciones */
+
+/* Elementos animados por scroll: empiezan invisibles para evitar el flash inicial */
+.portfolio-item--featured,
+.portfolio-item--catalog,
+.symbolic-item,
+.upcoming-project,
+.service-item,
+.timeline-item,
+.testimonial-item,
+.faq__item {
+  opacity: 0;
+}
+
 .fade-in {
   animation: fadeIn 1.5s ease-in-out;
+  opacity: 1; /* mantiene el estado visible al terminar la animación */
 }
 
 @keyframes fadeIn {
