@@ -14,23 +14,6 @@ activarLatidoDeSylvora();
 
 // JavaScript principal para todas las páginas
 (function (window, document) {
-    document.documentElement.classList.add('js-ready');
-    const getFirebaseServices = (() => {
-        let loadPromise = null;
-
-        return () => {
-            if (!loadPromise) {
-                loadPromise = import('/js/firebase-init.js')
-                    .then(module => module.initializeFirebase())
-                    .catch(error => {
-                        loadPromise = null;
-                        throw error;
-                    });
-            }
-
-            return loadPromise;
-        };
-    })();
 
     function setupMobileNavigation() {
         const mobileMenu = document.querySelector('.mobile-menu');
@@ -253,13 +236,13 @@ activarLatidoDeSylvora();
                 }
 
                 try {
-                    const { firebase, db } = await getFirebaseServices();
-                    const data = {
-                        email,
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                    };
+                    const resp = await fetch('/api/newsletter/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email }),
+                    });
 
-                    await db.collection('newsletter_subscribers').add(data);
+                    if (!resp.ok) throw new Error('Error del servidor');
 
                     const successMessage = document.createElement('div');
                     successMessage.className = 'newsletter-success';

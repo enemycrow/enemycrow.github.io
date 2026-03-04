@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   async function fetchTotals(slug) {
     try {
-      const res = await fetch(`/api/reactions.php?slug=${encodeURIComponent(slug)}`, {
+      const res = await fetch(`/api/reactions?slug=${encodeURIComponent(slug)}`, {
         cache: 'no-store',
         credentials: 'same-origin'   // 👈 agregado
       });
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     fd.append('slug', slug);
     fd.append('reaction', reaction);
     fd.append('action', add ? 'add' : 'remove');
-    const res = await fetch('/api/react.php', {
+    const res = await fetch('/api/react', {
       method: 'POST',
       body: fd,
       credentials: 'same-origin',

@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   let siteKey = '';
   try {
-    const resp = await fetch('api/recaptcha-site-key.php');
+    const resp = await fetch('api/recaptcha-site-key');
     const data = await resp.json();
     siteKey = data.siteKey;
 
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           const formData = new FormData(contactForm);
           formData.append('token', token);
 
-          const resp = await fetch('api/submit.php', {
+          const resp = await fetch('api/submit', {
             method: 'POST',
             body: formData
           });
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           const formData = new FormData(newsletterForm);
           formData.append('token', token);
 
-          const resp = await fetch('api/newsletter.php', {
+          const resp = await fetch('api/newsletter', {
             method: 'POST',
             body: formData
           });

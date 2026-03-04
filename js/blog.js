@@ -625,7 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function fetchTotalReactions(slug) {
     try {
-      const res = await fetch(`/api/reactions.php?slug=${encodeURIComponent(slug)}`, { cache: 'no-store' });
+      const res = await fetch(`/api/reactions?slug=${encodeURIComponent(slug)}`, { cache: 'no-store' });
       const json = await res.json();
       if (!json.ok) return 0;
       const t = json.totals || {};
