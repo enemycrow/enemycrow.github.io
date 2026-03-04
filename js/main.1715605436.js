@@ -14,6 +14,7 @@ activarLatidoDeSylvora();
 
 // JavaScript principal para todas las páginas
 (function (window, document) {
+    document.documentElement.classList.add('js-ready');
     const getFirebaseServices = (() => {
         let loadPromise = null;
 
