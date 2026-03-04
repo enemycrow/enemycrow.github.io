@@ -13,6 +13,7 @@ const getTrustedTypesPolicy = () => {
   return window.__trustedTypesPolicy;
 };
 
+document.documentElement.classList.add('js-ready');
 document.addEventListener('DOMContentLoaded', async () => {
 
   let siteKey = '';

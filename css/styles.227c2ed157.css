@@ -5604,14 +5604,14 @@ a:hover {
 /* Animaciones y transiciones */
 
 /* Elementos animados por scroll: empiezan invisibles para evitar el flash inicial */
-.portfolio-item--featured,
-.portfolio-item--catalog,
-.symbolic-item,
-.upcoming-project,
-.service-item,
-.timeline-item,
-.testimonial-item,
-.faq__item {
+.js-ready .portfolio-item--featured,
+.js-ready .portfolio-item--catalog,
+.js-ready .symbolic-item,
+.js-ready .upcoming-project,
+.js-ready .service-item,
+.js-ready .timeline-item,
+.js-ready .testimonial-item,
+.js-ready .faq__item {
   opacity: 0;
 }
 
