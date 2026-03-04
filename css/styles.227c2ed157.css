@@ -5611,7 +5611,9 @@ a:hover {
 .js-ready .service-item,
 .js-ready .timeline-item,
 .js-ready .testimonial-item,
-.js-ready .faq__item {
+.js-ready .faq__item,
+.js-ready .contact-method,
+.js-ready .newsletter__feature {
   opacity: 0;
 }
 

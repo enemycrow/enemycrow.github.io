@@ -363,9 +363,18 @@ function setupModals() {
 document.documentElement.classList.add('js-ready');
 
 function setupScrollAnimations() {
+  const elements = document.querySelectorAll('.portfolio-item--featured, .portfolio-item--catalog, .symbolic-item, .upcoming-project');
+
+  // Al cargar: elementos ya visibles en viewport se revelan sin animación
+  elements.forEach(element => {
+    if (element.getBoundingClientRect().top < window.innerHeight) {
+      element.style.opacity = '1';
+    }
+  });
+
   const animate = () => {
-    const elements = document.querySelectorAll('.portfolio-item--featured, .portfolio-item--catalog, .symbolic-item, .upcoming-project');
     elements.forEach(element => {
+      if (element.classList.contains('fade-in') || element.style.opacity === '1') return;
       const elementPosition = element.getBoundingClientRect().top;
       const screenPosition = window.innerHeight / 1.2;
       if (elementPosition < screenPosition) {
@@ -374,7 +383,6 @@ function setupScrollAnimations() {
     });
   };
 
-  animate();
   window.addEventListener('scroll', animate);
 }
 

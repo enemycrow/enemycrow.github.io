@@ -99,22 +99,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Animación para elementos al hacer scroll
+    const scrollElements = document.querySelectorAll('.service-item, .timeline-item, .testimonial-item, .faq__item');
+
+    // Al cargar: elementos ya visibles en viewport se revelan sin animación
+    scrollElements.forEach(element => {
+        if (element.getBoundingClientRect().top < window.innerHeight) {
+            element.style.opacity = '1';
+        }
+    });
+
     const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.service-item, .timeline-item, .testimonial-item, .faq__item');
-        
-        elements.forEach(element => {
+        scrollElements.forEach(element => {
+            if (element.classList.contains('fade-in') || element.style.opacity === '1') return;
             const elementPosition = element.getBoundingClientRect().top;
             const screenPosition = window.innerHeight / 1.2;
-            
             if (elementPosition < screenPosition) {
                 element.classList.add('fade-in');
             }
         });
     };
-    
-    // Ejecutar animación al cargar la página
-    animateOnScroll();
-    
+
     // Ejecutar animación al hacer scroll
     window.addEventListener('scroll', animateOnScroll);
 

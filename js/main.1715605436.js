@@ -235,39 +235,8 @@ activarLatidoDeSylvora();
                     return;
                 }
 
-                try {
-                    const resp = await fetch('/api/newsletter/subscribe', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email }),
-                    });
-
-                    if (!resp.ok) throw new Error('Error del servidor');
-
-                    const successMessage = document.createElement('div');
-                    successMessage.className = 'newsletter-success';
-                    successMessage.textContent = '¡Gracias por suscribirte!';
-                    successMessage.style.color = '#2ecc71';
-                    successMessage.style.marginTop = '0.5rem';
-
-                    this.appendChild(successMessage);
-                    this.reset();
-
-                    setTimeout(() => {
-                        successMessage.remove();
-                    }, 3000);
-                } catch (err) {
-                    console.error('Error al guardar la suscripción', err);
-                    const errorMessage = document.createElement('div');
-                    errorMessage.className = 'newsletter-error';
-                    errorMessage.textContent = 'Hubo un problema. Intenta más tarde.';
-                    errorMessage.style.color = '#e74c3c';
-                    errorMessage.style.marginTop = '0.5rem';
-                    this.appendChild(errorMessage);
-                    setTimeout(() => {
-                        errorMessage.remove();
-                    }, 3000);
-                }
+                // Redirigir al formulario completo de newsletter en la página de contacto
+                window.location.href = '/contact.html#newsletter-section';
             });
         });
     }
