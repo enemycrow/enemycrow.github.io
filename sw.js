@@ -1,4 +1,4 @@
-const CACHE_NAME = 'site-cache-v15'; // ⬅️ súbelo para forzar actualización
+const CACHE_NAME = 'site-cache-v16'; // ⬅️ súbelo para forzar actualización
 const urlsToCache = [
   '/',
   '/index.html',
@@ -204,7 +204,11 @@ self.addEventListener('fetch', event => {
           }
           return response;
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => caches.match(event.request).then(cached => {
+          if (cached) return cached;
+          if (isDocument) return caches.match('/404.html');
+          return new Response('', { status: 503, statusText: 'Service Unavailable' });
+        }))
     );
   } else {
     // Otros assets: cache-first con actualización

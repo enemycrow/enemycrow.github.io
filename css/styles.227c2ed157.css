@@ -6265,6 +6265,14 @@ a:hover {
     opacity: 1;
   }
 }
+@keyframes loadingPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
 .latido-activo {
   animation: latido 3s infinite ease-in-out;
 }
