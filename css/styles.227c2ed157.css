@@ -5611,7 +5611,9 @@ a:hover {
 .service-item,
 .timeline-item,
 .testimonial-item,
-.faq__item {
+.faq__item,
+.contact-method,
+.newsletter__feature {
   opacity: 0;
 }
 

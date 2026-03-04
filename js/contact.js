@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   let siteKey = '';
   try {
-    const resp = await fetch('api/recaptcha-site-key');
+    const resp = await fetch('api/recaptcha-site-key.php');
     const data = await resp.json();
     siteKey = data.siteKey;
 
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           const formData = new FormData(contactForm);
           formData.append('token', token);
 
-          const resp = await fetch('api/submit', {
+          const resp = await fetch('api/submit.php', {
             method: 'POST',
             body: formData
           });
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           const formData = new FormData(newsletterForm);
           formData.append('token', token);
 
-          const resp = await fetch('api/newsletter', {
+          const resp = await fetch('api/newsletter.php', {
             method: 'POST',
             body: formData
           });
@@ -152,9 +152,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // --- Animación para elementos al hacer scroll ---
+  const scrollElements = document.querySelectorAll('.contact-method, .newsletter__feature, .faq__item');
+
+  // Al cargar: elementos ya visibles en viewport se revelan sin animación
+  scrollElements.forEach(element => {
+    if (element.getBoundingClientRect().top < window.innerHeight) {
+      element.style.opacity = '1';
+    }
+  });
+
   const animateOnScroll = function () {
-    const elements = document.querySelectorAll('.contact-method, .newsletter__feature, .faq__item');
-    elements.forEach(element => {
+    scrollElements.forEach(element => {
+      if (element.classList.contains('fade-in') || element.style.opacity === '1') return;
       const elementPosition = element.getBoundingClientRect().top;
       const screenPosition = window.innerHeight / 1.2;
       if (elementPosition < screenPosition) {
@@ -162,7 +171,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
   };
-  animateOnScroll();
   window.addEventListener('scroll', animateOnScroll);
 
   // --- Validación de formularios ---
