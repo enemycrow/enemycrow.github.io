@@ -1,4 +1,5 @@
 // JavaScript para la página de Servicios Creativos
+document.documentElement.classList.add('js-ready');
 document.addEventListener('DOMContentLoaded', function() {
 
     // Toggle detalles de servicios

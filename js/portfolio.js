@@ -360,6 +360,8 @@ function setupModals() {
   });
 }
 
+document.documentElement.classList.add('js-ready');
+
 function setupScrollAnimations() {
   const elements = document.querySelectorAll('.portfolio-item--featured, .portfolio-item--catalog, .symbolic-item, .upcoming-project');
 
