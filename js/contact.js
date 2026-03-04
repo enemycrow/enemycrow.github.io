@@ -16,6 +16,88 @@ const getTrustedTypesPolicy = () => {
 document.documentElement.classList.add('js-ready');
 document.addEventListener('DOMContentLoaded', async () => {
 
+  // --- Acordeón de FAQ ---
+  const faqQuestions = document.querySelectorAll('.faq__question');
+
+  if (faqQuestions.length > 0) {
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', function () {
+        const faqItem = this.parentElement;
+        faqItem.classList.toggle('faq__item--active');
+        document.querySelectorAll('.faq__item').forEach(item => {
+          if (item !== faqItem && item.classList.contains('faq__item--active')) {
+            item.classList.remove('faq__item--active');
+          }
+        });
+      });
+    });
+  }
+
+  // --- Animación para elementos al hacer scroll ---
+  const scrollElements = document.querySelectorAll('.contact-method, .newsletter__feature, .faq__item');
+
+  // Al cargar: elementos ya visibles en viewport se revelan sin animación
+  scrollElements.forEach(element => {
+    if (element.getBoundingClientRect().top < window.innerHeight) {
+      element.style.opacity = '1';
+    }
+  });
+
+  const animateOnScroll = function () {
+    scrollElements.forEach(element => {
+      if (element.classList.contains('fade-in') || element.style.opacity === '1') return;
+      const elementPosition = element.getBoundingClientRect().top;
+      const screenPosition = window.innerHeight / 1.2;
+      if (elementPosition < screenPosition) {
+        element.classList.add('fade-in');
+      }
+    });
+  };
+  window.addEventListener('scroll', animateOnScroll);
+
+  // --- Validación de formularios ---
+  const validateForm = (form) => {
+    let isValid = true;
+    const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
+    inputs.forEach(input => {
+      input.classList.remove('error');
+      if (!input.value.trim()) {
+        isValid = false;
+        input.classList.add('error');
+      }
+      if (input.type === 'email' && input.value.trim()) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(input.value.trim())) {
+          isValid = false;
+          input.classList.add('error');
+        }
+      }
+    });
+    // Validar checkbox de privacidad
+    const privacyCheckbox = form.querySelector('input[type="checkbox"][name$="privacy"]');
+    if (privacyCheckbox && !privacyCheckbox.checked) {
+        isValid = false;
+        // Podrías añadir una clase de error al label del checkbox si quieres
+    }
+    return isValid;
+  };
+
+  // --- Helper para mostrar mensajes ---
+  const displayTemporaryMessage = (formElement, text, type, formType = 'contact') => {
+      const message = document.createElement('div');
+      const baseClass = formType === 'newsletter' ? 'newsletter__message' : 'contact-form__message';
+      message.className = `${baseClass} ${baseClass}--${type}`;
+      message.textContent = text;
+
+      formElement.parentNode.insertBefore(message, formElement);
+      message.style.display = 'block';
+
+      setTimeout(() => {
+          message.style.display = 'none';
+          setTimeout(() => message.remove(), 500);
+      }, 5000);
+  };
+
   let siteKey = '';
   try {
     const resp = await fetch('api/recaptcha-site-key.php');
@@ -118,87 +200,5 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     }
   });
-
-  // --- Helper para mostrar mensajes ---
-  const displayTemporaryMessage = (formElement, text, type, formType = 'contact') => {
-      const message = document.createElement('div');
-      const baseClass = formType === 'newsletter' ? 'newsletter__message' : 'contact-form__message';
-      message.className = `${baseClass} ${baseClass}--${type}`;
-      message.textContent = text;
-      
-      formElement.parentNode.insertBefore(message, formElement);
-      message.style.display = 'block';
-
-      setTimeout(() => {
-          message.style.display = 'none';
-          setTimeout(() => message.remove(), 500);
-      }, 5000);
-  };
-  
-  // --- Acordeón de FAQ ---
-  const faqQuestions = document.querySelectorAll('.faq__question');
-
-  if (faqQuestions.length > 0) {
-    faqQuestions.forEach(question => {
-      question.addEventListener('click', function () {
-        const faqItem = this.parentElement;
-        faqItem.classList.toggle('faq__item--active');
-        document.querySelectorAll('.faq__item').forEach(item => {
-          if (item !== faqItem && item.classList.contains('faq__item--active')) {
-            item.classList.remove('faq__item--active');
-          }
-        });
-      });
-    });
-  }
-
-  // --- Animación para elementos al hacer scroll ---
-  const scrollElements = document.querySelectorAll('.contact-method, .newsletter__feature, .faq__item');
-
-  // Al cargar: elementos ya visibles en viewport se revelan sin animación
-  scrollElements.forEach(element => {
-    if (element.getBoundingClientRect().top < window.innerHeight) {
-      element.style.opacity = '1';
-    }
-  });
-
-  const animateOnScroll = function () {
-    scrollElements.forEach(element => {
-      if (element.classList.contains('fade-in') || element.style.opacity === '1') return;
-      const elementPosition = element.getBoundingClientRect().top;
-      const screenPosition = window.innerHeight / 1.2;
-      if (elementPosition < screenPosition) {
-        element.classList.add('fade-in');
-      }
-    });
-  };
-  window.addEventListener('scroll', animateOnScroll);
-
-  // --- Validación de formularios ---
-  const validateForm = (form) => {
-    let isValid = true;
-    const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
-    inputs.forEach(input => {
-      input.classList.remove('error');
-      if (!input.value.trim()) {
-        isValid = false;
-        input.classList.add('error');
-      }
-      if (input.type === 'email' && input.value.trim()) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(input.value.trim())) {
-          isValid = false;
-          input.classList.add('error');
-        }
-      }
-    });
-    // Validar checkbox de privacidad
-    const privacyCheckbox = form.querySelector('input[type="checkbox"][name$="privacy"]');
-    if (privacyCheckbox && !privacyCheckbox.checked) {
-        isValid = false;
-        // Podrías añadir una clase de error al label del checkbox si quieres
-    }
-    return isValid;
-  };
 
 });
