@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const resp = await fetch('api/recaptcha-site-key.php');
     const data = await resp.json();
+    if (!data.siteKey) throw new Error(data.error || 'Clave reCAPTCHA no recibida');
     siteKey = data.siteKey;
 
     await new Promise((resolve, reject) => {
@@ -142,7 +143,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
           const token = await grecaptcha.execute(siteKey, { action: 'submit' });
           const formData = new FormData(contactForm);
-          formData.append('token', token);
+          formData.set('token', token);
 
           const resp = await fetch('api/submit.php', {
             method: 'POST',
@@ -178,7 +179,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
           const token = await grecaptcha.execute(siteKey, { action: 'newsletter' });
           const formData = new FormData(newsletterForm);
-          formData.append('token', token);
+          formData.set('token', token);
 
           const resp = await fetch('api/newsletter.php', {
             method: 'POST',
