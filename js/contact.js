@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   let siteKey = '';
+  let recaptchaReady = false;
   try {
     const resp = await fetch('api/recaptcha-site-key.php');
     const data = await resp.json();
@@ -114,21 +115,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       script.onerror = reject;
       document.head.appendChild(script);
     });
+    recaptchaReady = true;
   } catch (err) {
-    console.error('Error loading reCAPTCHA site key', err);
-    // Mostrar un error al usuario en la UI si no carga reCAPTCHA
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'contact-form__message contact-form__message--error';
-        errorMessage.textContent = 'No se pudo cargar reCAPTCHA. Refresca la página.';
-        contactForm.parentNode.insertBefore(errorMessage, contactForm);
-        errorMessage.style.display = 'block';
-    }
-    return;
+    console.warn('reCAPTCHA no disponible, el formulario continuará con protección básica:', err.message);
   }
 
-  grecaptcha.ready(() => {
+  const registerFormHandlers = () => {
     const contactForm = document.getElementById('contactForm');
 
     if (contactForm) {
@@ -141,7 +133,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         try {
-          const token = await grecaptcha.execute(siteKey, { action: 'submit' });
+          const token = recaptchaReady ? await grecaptcha.execute(siteKey, { action: 'submit' }) : '';
           const formData = new FormData(contactForm);
           formData.set('token', token);
 
@@ -177,7 +169,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         try {
-          const token = await grecaptcha.execute(siteKey, { action: 'newsletter' });
+          const token = recaptchaReady ? await grecaptcha.execute(siteKey, { action: 'newsletter' }) : '';
           const formData = new FormData(newsletterForm);
           formData.set('token', token);
 
@@ -200,6 +192,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
     }
-  });
+  };
+
+  if (recaptchaReady) {
+    grecaptcha.ready(registerFormHandlers);
+  } else {
+    registerFormHandlers();
+  }
 
 });

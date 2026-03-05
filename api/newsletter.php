@@ -60,32 +60,48 @@ $sahir  = !empty($input['nl-sahir']) ? 1 : 0;
 $privacyAccepted = !empty($input['nl-privacy']) ? 1 : 0;
 $token  = trim((string)($input['token'] ?? ''));
 
-// ====== VERIFICAR reCAPTCHA ======
-$secret = $config['recaptcha_secret'] ?? '';
-try {
-    $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, stream_context_create([
-        'http' => [
-            'method' => 'POST',
-            'header' => 'Content-type: application/x-www-form-urlencoded',
-            'content' => http_build_query([
-                'secret'   => $secret,
-                'response' => $token,
-            ]),
-            'timeout' => 10,
-        ],
-    ]));
+// ====== IP Y USER AGENT (necesario para log del honeypot) ======
+$xff = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
+$ip  = $xff ? trim(explode(',', $xff)[0]) : ($_SERVER['REMOTE_ADDR'] ?? null);
 
-    $captcha = json_decode($response, true);
-    if (empty($captcha['success']) || ($captcha['score'] ?? 0) < 0.5) {
-        http_response_code(400);
-        echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido', 'code' => 'RECAPTCHA_INVALID']);
+// ====== HONEYPOT: campo invisible — si viene relleno es un bot ======
+$honeypot = trim((string)($input['website'] ?? ''));
+if ($honeypot !== '') {
+    error_log("Honeypot activado (newsletter) desde IP: {$ip}");
+    echo json_encode(['ok' => true]);
+    exit;
+}
+
+// ====== VERIFICAR reCAPTCHA (opcional: si el ad-blocker lo impidió, se omite) ======
+$secret = $config['recaptcha_secret'] ?? '';
+if ($token !== '') {
+    try {
+        $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => 'Content-type: application/x-www-form-urlencoded',
+                'content' => http_build_query([
+                    'secret'   => $secret,
+                    'response' => $token,
+                ]),
+                'timeout' => 10,
+            ],
+        ]));
+
+        $captcha = json_decode($response, true);
+        if (empty($captcha['success']) || ($captcha['score'] ?? 0) < 0.5) {
+            http_response_code(400);
+            echo json_encode(['ok' => false, 'error' => 'reCAPTCHA inválido', 'code' => 'RECAPTCHA_INVALID']);
+            exit;
+        }
+    } catch (Throwable $e) {
+        http_response_code(500);
+        echo json_encode(['ok' => false, 'error' => 'Error al verificar reCAPTCHA', 'code' => 'RECAPTCHA_ERROR']);
+        error_log('reCAPTCHA verification failed: ' . (string)$e);
         exit;
     }
-} catch (Throwable $e) {
-    http_response_code(400);
-    echo json_encode(['ok' => false, 'error' => 'Error al verificar reCAPTCHA', 'code' => 'RECAPTCHA_ERROR']);
-    error_log('reCAPTCHA verification failed: ' . (string)$e);
-    exit;
+} else {
+    error_log("Suscripción sin token reCAPTCHA desde IP: {$ip} — protección activa: honeypot + validación");
 }
 
 // ====== VALIDACIONES ======
@@ -106,9 +122,7 @@ if (!$privacyAccepted) {
     exit;
 }
 
-// ====== IP Y USER AGENT ======
-$xff = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
-$ip = $xff ? trim(explode(',', $xff)[0]) : ($_SERVER['REMOTE_ADDR'] ?? null);
+// ====== USER AGENT ======
 $ua = $_SERVER['HTTP_USER_AGENT'] ?? null;
 
 // ====== DB: INSERTAR ======
