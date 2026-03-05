@@ -13,7 +13,11 @@ $configPaths = [
 $config = null;
 foreach ($configPaths as $path) {
     if (is_readable($path)) {
-        $config = require $path;
+        try {
+            $config = require $path;
+        } catch (Throwable $e) {
+            error_log('recaptcha-site-key: error cargando config: ' . $e->getMessage());
+        }
         break;
     }
 }
