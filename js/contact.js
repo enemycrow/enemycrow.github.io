@@ -100,12 +100,33 @@ document.addEventListener('DOMContentLoaded', async () => {
       }, 5000);
   };
 
-  let siteKey = '';
-  try {
-    const resp = await fetch('api/recaptcha-site-key.php');
+  const getSiteKeyFromPage = () => {
+    const meta = document.querySelector('meta[name="recaptcha-site-key"]');
+    if (meta && meta.content) return meta.content.trim();
+    if (typeof window.RECAPTCHA_SITE_KEY === 'string' && window.RECAPTCHA_SITE_KEY.trim()) {
+      return window.RECAPTCHA_SITE_KEY.trim();
+    }
+    return '';
+  };
+
+  const fetchJsonSiteKey = async (url) => {
+    const resp = await fetch(url, { cache: 'no-store' });
+    if (!resp.ok) return '';
+    const contentType = resp.headers.get('content-type') || '';
+    if (!contentType.toLowerCase().includes('application/json')) return '';
     const data = await resp.json();
-    if (!data.siteKey) throw new Error(data.error || 'Clave reCAPTCHA no recibida');
-    siteKey = data.siteKey;
+    return typeof data.siteKey === 'string' ? data.siteKey.trim() : '';
+  };
+
+  let siteKey = getSiteKeyFromPage();
+  try {
+    if (!siteKey) {
+      siteKey = await fetchJsonSiteKey('api/recaptcha-site-key.json');
+    }
+    if (!siteKey) {
+      siteKey = await fetchJsonSiteKey('api/recaptcha-site-key.php');
+    }
+    if (!siteKey) throw new Error('Clave reCAPTCHA no recibida');
 
     await new Promise((resolve, reject) => {
       const script = document.createElement('script');
