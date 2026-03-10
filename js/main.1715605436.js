@@ -1,4 +1,26 @@
 // js/main.js
+
+// Utilidades compartidas — disponibles globalmente para todos los scripts de la página
+window.SiteUtils = (function () {
+  'use strict';
+  function debounce(fn, delay) {
+    var timer;
+    return function () {
+      var args = arguments, ctx = this;
+      clearTimeout(timer);
+      timer = setTimeout(function () { fn.apply(ctx, args); }, delay);
+    };
+  }
+  function throttle(fn, limit) {
+    var last = 0;
+    return function () {
+      var now = Date.now();
+      if (now - last >= limit) { last = now; fn.apply(this, arguments); }
+    };
+  }
+  return { debounce: debounce, throttle: throttle };
+})();
+
 // Activar el latido de Sylvora entre las 00:00 y 03:00
 const activarLatidoDeSylvora = () => {
   const ahora = new Date();
@@ -57,12 +79,12 @@ activarLatidoDeSylvora();
                 });
             }
 
-            window.addEventListener('resize', function () {
+            window.addEventListener('resize', window.SiteUtils.debounce(function () {
                 if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
                     closeMobileMenu();
                     document.dispatchEvent(new CustomEvent('closeNavSubmenus'));
                 }
-            });
+            }, 150));
         }
     }
 
@@ -179,10 +201,7 @@ activarLatidoDeSylvora();
         });
 
         document.addEventListener('click', event => {
-            const target = event.target;
-            const clickedInside = Array.from(navItems).some(item => item.contains(target));
-
-            if (!clickedInside) {
+            if (!event.target.closest('.nav-item--has-submenu')) {
                 closeAll();
             }
         });
@@ -191,30 +210,35 @@ activarLatidoDeSylvora();
             closeAll();
         });
 
-        window.addEventListener('resize', () => {
+        window.addEventListener('resize', window.SiteUtils.debounce(() => {
             if (window.innerWidth > 768) {
                 closeAll();
             }
-        });
+        }, 150));
     }
 
     function setupAnimateOnScroll() {
+        const elements = Array.from(document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right'));
+
+        if (!elements.length) return;
+
         const animateOnScroll = function () {
-            const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
-
+            const screenPosition = window.innerHeight / 1.2;
+            let remaining = false;
             elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-
-                if (elementPosition < screenPosition) {
+                if (element.style.opacity === '1') return;
+                remaining = true;
+                if (element.getBoundingClientRect().top < screenPosition) {
                     element.style.opacity = '1';
                     element.style.transform = 'translateY(0)';
                 }
             });
+            if (!remaining) window.removeEventListener('scroll', throttledAnimate);
         };
 
+        const throttledAnimate = window.SiteUtils.throttle(animateOnScroll, 100);
         animateOnScroll();
-        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('scroll', throttledAnimate);
     }
 
     function setupFooterNewsletterForm() {

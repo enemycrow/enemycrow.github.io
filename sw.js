@@ -24,7 +24,6 @@ const urlsToCache = [
   '/js/shop.js',
   '/js/blog.js',
   '/js/blog-entry.js',
-  '/js/firebase-init.js',
   '/assets/images/site/plumafaroyllama.webp',
 ];
 

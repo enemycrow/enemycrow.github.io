@@ -274,8 +274,9 @@
 
   function wireReadingProgress(context) {
     const chapterKey = scopedChapterId(context);
-    let elapsedSeconds = getReadingSeconds(loadGamificationState(), chapterKey);
-    let completed = loadGamificationState().completedChapters.includes(chapterKey);
+    const initialState = loadGamificationState(); // cargar una sola vez
+    let elapsedSeconds = getReadingSeconds(initialState, chapterKey);
+    let completed = initialState.completedChapters.includes(chapterKey);
 
     const registerProgress = () => {
       registerEvent('reading-time', { chapterId: chapterKey, seconds: elapsedSeconds });

@@ -17,6 +17,9 @@ const toTrustedHTML = (html) => {
   const policy = getTrustedTypesPolicy();
   return policy ? policy.createHTML(String(html)) : String(html);
 };
+
+// Evaluar CSS.supports() una sola vez — no cambia entre aperturas de modal
+const _supportsImageSet = CSS.supports('background-image', 'image-set(url("x") 1x)');
 const FEATURED_META = {
   'faro-de-elysia': {
     format: 'Experiencia interactiva',
@@ -313,15 +316,7 @@ function setupModals() {
           imgSet = `image-set(url(${img1200}) 1x, url(${imgOriginal}) 2x)`;
         }
 
-        const testImg = new Image();
-        testImg.src = imgPath;
-        testImg.onload = () => {
-          const supportsImageSet = CSS.supports('background-image', imgSet);
-          banner.style.backgroundImage = supportsImageSet ? imgSet : `url(${imgPath})`;
-        };
-        testImg.onerror = () => {
-          banner.style.backgroundImage = `url(${imgOriginal})`;
-        };
+        banner.style.backgroundImage = _supportsImageSet ? imgSet : `url(${imgPath})`;
       });
 
       modal.style.display = 'block';
@@ -383,7 +378,10 @@ function setupScrollAnimations() {
     });
   };
 
-  window.addEventListener('scroll', animate);
+  const throttledPortfolioScroll = window.SiteUtils
+    ? window.SiteUtils.throttle(animate, 100)
+    : animate;
+  window.addEventListener('scroll', throttledPortfolioScroll);
 }
 
 function slugify(text) {
