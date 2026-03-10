@@ -218,26 +218,17 @@ activarLatidoDeSylvora();
     }
 
     function setupAnimateOnScroll() {
-        const elements = Array.from(document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right'));
-
-        if (!elements.length) return;
-
         const animateOnScroll = function () {
             const screenPosition = window.innerHeight / 1.2;
-            let remaining = false;
-            elements.forEach(element => {
-                if (element.style.opacity === '1') return;
-                remaining = true;
+            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(element => {
                 if (element.getBoundingClientRect().top < screenPosition) {
                     element.style.opacity = '1';
                     element.style.transform = 'translateY(0)';
                 }
             });
-            if (!remaining) window.removeEventListener('scroll', throttledAnimate);
         };
-
-        const throttledAnimate = window.SiteUtils.throttle(animateOnScroll, 100);
         animateOnScroll();
+        const throttledAnimate = window.SiteUtils.throttle(animateOnScroll, 100);
         window.addEventListener('scroll', throttledAnimate);
     }
 
