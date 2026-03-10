@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await renderFeaturedWorks(featuredGrid, worksData);
   }
 
-  setupFilters();
+  setupFilters(featuredGrid, worksData);
   setupModals();
   setupScrollAnimations();
 });
@@ -245,23 +245,37 @@ function renderWorkCard(work) {
     </div>`;
 }
 
-function setupFilters() {
+function setupFilters(featuredGrid, worksData) {
   const filterBtns = document.querySelectorAll('.filter-btn');
   if (!filterBtns.length) return;
+
+  const originalFeaturedHTML = featuredGrid ? featuredGrid.innerHTML : null;
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', function() {
       filterBtns.forEach(b => b.classList.remove('active'));
       this.classList.add('active');
       const filter = this.getAttribute('data-filter');
-      const items = document.querySelectorAll('.portfolio-item--featured, .portfolio-item--catalog');
 
-      items.forEach(item => {
-        if (filter === 'all') {
-          item.style.display = 'block';
-          return;
+      // Re-renderizar la sección featured según el filtro activo
+      if (featuredGrid) {
+        if (filter === 'all' && originalFeaturedHTML !== null) {
+          featuredGrid.innerHTML = toTrustedHTML(originalFeaturedHTML);
+        } else if (filter !== 'all' && worksData) {
+          const filtered = worksData.filter(w => !w.exclude && w.extraClasses.includes(filter));
+          const desiredCount = parseInt(featuredGrid.dataset.featuredCount, 10) || 3;
+          const selection = selectDailyWorksAvoidingYesterday(filtered, desiredCount, new Date());
+          featuredGrid.innerHTML = toTrustedHTML(selection.map(renderWorkCard).join(''));
         }
-        item.style.display = item.classList.contains(filter) ? 'block' : 'none';
+        // Hacer visibles inmediatamente los nuevos items (están sobre el fold)
+        featuredGrid.querySelectorAll('.portfolio-item--featured').forEach(el => {
+          el.style.opacity = '1';
+        });
+      }
+
+      // Filtrar catálogo
+      document.querySelectorAll('.portfolio-item--catalog').forEach(item => {
+        item.style.display = (filter === 'all' || item.classList.contains(filter)) ? 'block' : 'none';
       });
 
       const worksSection = document.querySelector('.featured-works');
@@ -273,55 +287,53 @@ function setupFilters() {
 }
 
 function setupModals() {
-  const modalLinks = document.querySelectorAll('.open-modal');
-  if (!modalLinks.length) return;
+  // Event delegation para apertura de modales — funciona con items featured re-renderizados
+  document.addEventListener('click', function(event) {
+    const link = event.target.closest('a.open-modal');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) return;
+    event.preventDefault();
+    const modalId = href.substring(1);
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
 
-  modalLinks.forEach(link => {
-    link.addEventListener('click', function(event) {
-      const href = this.getAttribute('href');
-      if (!href || !href.startsWith('#')) return;
-      event.preventDefault();
-      const modalId = href.substring(1);
-      const modal = document.getElementById(modalId);
-      if (!modal) return;
+    const banners = modal.querySelectorAll('.modal-banner');
+    const baseName = modalId.replace('-modal', '');
+    const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+    const smallPortrait = isPortrait && window.matchMedia('(max-width: 600px)').matches;
+    const smallLandscape = !isPortrait && window.matchMedia('(max-width: 500px)').matches;
 
-      const banners = modal.querySelectorAll('.modal-banner');
-      const baseName = modalId.replace('-modal', '');
-      const isPortrait = window.matchMedia('(orientation: portrait)').matches;
-      const smallPortrait = isPortrait && window.matchMedia('(max-width: 600px)').matches;
-      const smallLandscape = !isPortrait && window.matchMedia('(max-width: 500px)').matches;
+    banners.forEach(banner => {
+      const side = banner.classList.contains('modal-banner-left') ? 'left' : 'right';
+      const dataImg = banner.getAttribute('data-image');
+      const basePath = dataImg ? dataImg.replace(/\.[^/.]+$/, '') : `assets/images/banners/${baseName}-${side}`;
+      const responsiveBase = basePath.replace('/banners/', '/responsive/banners/');
+      const dpr = window.devicePixelRatio || 1;
+      const img400 = `${responsiveBase}-400.webp`;
+      const img800 = `${responsiveBase}-800.webp`;
+      const img1200 = `${responsiveBase}-1200.webp`;
+      const imgOriginal = `${basePath}.webp`;
 
-      banners.forEach(banner => {
-        const side = banner.classList.contains('modal-banner-left') ? 'left' : 'right';
-        const dataImg = banner.getAttribute('data-image');
-        const basePath = dataImg ? dataImg.replace(/\.[^/.]+$/, '') : `assets/images/banners/${baseName}-${side}`;
-        const responsiveBase = basePath.replace('/banners/', '/responsive/banners/');
-        const dpr = window.devicePixelRatio || 1;
-        const img400 = `${responsiveBase}-400.webp`;
-        const img800 = `${responsiveBase}-800.webp`;
-        const img1200 = `${responsiveBase}-1200.webp`;
-        const imgOriginal = `${basePath}.webp`;
+      let imgPath = imgOriginal;
+      let imgSet = `image-set(url(${img400}) 1x, url(${img800}) 2x)`;
 
-        let imgPath = imgOriginal;
-        let imgSet = `image-set(url(${img400}) 1x, url(${img800}) 2x)`;
+      if (smallPortrait) {
+        imgPath = dpr > 1 ? img800 : img400;
+        imgSet = `image-set(url(${img400}) 1x, url(${img800}) 2x)`;
+      } else if (smallLandscape) {
+        imgPath = dpr > 1 ? img1200 : img800;
+        imgSet = `image-set(url(${img800}) 1x, url(${img1200}) 2x)`;
+      } else {
+        imgPath = dpr > 1 ? imgOriginal : img1200;
+        imgSet = `image-set(url(${img1200}) 1x, url(${imgOriginal}) 2x)`;
+      }
 
-        if (smallPortrait) {
-          imgPath = dpr > 1 ? img800 : img400;
-          imgSet = `image-set(url(${img400}) 1x, url(${img800}) 2x)`;
-        } else if (smallLandscape) {
-          imgPath = dpr > 1 ? img1200 : img800;
-          imgSet = `image-set(url(${img800}) 1x, url(${img1200}) 2x)`;
-        } else {
-          imgPath = dpr > 1 ? imgOriginal : img1200;
-          imgSet = `image-set(url(${img1200}) 1x, url(${imgOriginal}) 2x)`;
-        }
-
-        banner.style.backgroundImage = _supportsImageSet ? imgSet : `url(${imgPath})`;
-      });
-
-      modal.style.display = 'block';
-      document.body.style.overflow = 'hidden';
+      banner.style.backgroundImage = _supportsImageSet ? imgSet : `url(${imgPath})`;
     });
+
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
   });
 
   const closeButtons = document.querySelectorAll('.close-modal, [data-close-modal]');
