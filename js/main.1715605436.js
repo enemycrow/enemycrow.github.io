@@ -220,6 +220,8 @@ activarLatidoDeSylvora();
     function setupAnimateOnScroll() {
         const elements = Array.from(document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right'));
 
+        if (!elements.length) return;
+
         const animateOnScroll = function () {
             const screenPosition = window.innerHeight / 1.2;
             let remaining = false;
@@ -234,8 +236,8 @@ activarLatidoDeSylvora();
             if (!remaining) window.removeEventListener('scroll', throttledAnimate);
         };
 
-        animateOnScroll();
         const throttledAnimate = window.SiteUtils.throttle(animateOnScroll, 100);
+        animateOnScroll();
         window.addEventListener('scroll', throttledAnimate);
     }
 
