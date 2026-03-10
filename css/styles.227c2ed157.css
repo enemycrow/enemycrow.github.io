@@ -5618,7 +5618,7 @@ a:hover {
 }
 
 .fade-in {
-  animation: fadeIn 1.5s ease-in-out;
+  animation: fadeIn 1.5s ease-in-out forwards;
   opacity: 1; /* mantiene el estado visible al terminar la animación */
 }
 
