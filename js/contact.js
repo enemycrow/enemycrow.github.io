@@ -18,16 +18,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // --- Acordeón de FAQ ---
   const faqQuestions = document.querySelectorAll('.faq__question');
+  const faqItems = document.querySelectorAll('.faq__item');
 
   if (faqQuestions.length > 0) {
     faqQuestions.forEach(question => {
       question.addEventListener('click', function () {
         const faqItem = this.parentElement;
         faqItem.classList.toggle('faq__item--active');
-        document.querySelectorAll('.faq__item').forEach(item => {
-          if (item !== faqItem && item.classList.contains('faq__item--active')) {
-            item.classList.remove('faq__item--active');
-          }
+        faqItems.forEach(item => {
+          if (item !== faqItem) item.classList.remove('faq__item--active');
         });
       });
     });
@@ -53,7 +52,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
   };
-  window.addEventListener('scroll', animateOnScroll);
+  const throttledContactScroll = window.SiteUtils
+    ? window.SiteUtils.throttle(animateOnScroll, 100)
+    : animateOnScroll;
+  window.addEventListener('scroll', throttledContactScroll);
 
   // --- Validación de formularios ---
   const validateForm = (form) => {

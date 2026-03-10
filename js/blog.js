@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const categoryClass = catClass ? `category-tag ${catClass}` : 'category-tag';
       categoryTag = `<span class="${categoryClass}">${cat}</span>`;
     }
-    const totalReactions = 0; // placeholder, se actualizará desde Firestore
+    const totalReactions = 0;
     const postLink = resolvePostUrl(post);
 
     const baseName = post.imagen.replace(/\.[^.]+$/, '');
@@ -637,15 +637,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateReactionCounts() {
-    const elements = document.querySelectorAll('.reactions-count[data-slug]');
-    const slugs = [...new Set(Array.from(elements).map(el => el.dataset.slug))];
-    slugs.forEach(async slug => {
-      const total = await fetchTotalReactions(slug);
-      document.querySelectorAll(`.reactions-count[data-slug="${slug}"]`).forEach(el => {
-        el.textContent = total;
-      });
-      try { localStorage.removeItem(`reactions_${slug}`); } catch(e) {}
+    // Construir mapa slug → elementos una sola vez para evitar O(n*m) queries
+    const elementsBySlug = new Map();
+    document.querySelectorAll('.reactions-count[data-slug]').forEach(el => {
+      const slug = el.dataset.slug;
+      if (!elementsBySlug.has(slug)) elementsBySlug.set(slug, []);
+      elementsBySlug.get(slug).push(el);
     });
+    const slugs = [...elementsBySlug.keys()];
+    // Procesar en lotes de 5 para no saturar la red
+    const BATCH = 5;
+    async function processBatch(i) {
+      if (i >= slugs.length) return;
+      await Promise.all(
+        slugs.slice(i, i + BATCH).map(async slug => {
+          const total = await fetchTotalReactions(slug);
+          elementsBySlug.get(slug).forEach(el => { el.textContent = total; });
+          try { localStorage.removeItem(`reactions_${slug}`); } catch (e) {}
+        })
+      );
+      return processBatch(i + BATCH);
+    }
+    processBatch(0);
   }
 
   // --- Helpers for deterministic daily random selection ---
@@ -758,7 +771,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const article = document.createElement('article');
     article.className = `blog-post blog-entry blog-entry--${authorSlug} ${authorSlug} ${themeSlug} ${catClass}`;
     article.setAttribute('data-category', `${authorSlug} ${themeSlug}`);
-    const totalReactions = 0; // se actualizará desde Firestore
+    const totalReactions = 0;
     const postLink = resolvePostUrl(post);
     article.innerHTML = toTrustedHTML(`
       <div class="blog-post__image" style="background-image:url('assets/images/blog/${post.imagen}')">
@@ -947,15 +960,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const animateOnScroll = function () {
-    const elements = document.querySelectorAll('.blog-post, .topic-item');
-    elements.forEach(element => {
-      const elementPosition = element.getBoundingClientRect().top;
-      const screenPosition = window.innerHeight / 1.2;
-      if (elementPosition < screenPosition) {
+    const screenPosition = window.innerHeight / 1.2;
+    document.querySelectorAll('.blog-post, .topic-item').forEach(element => {
+      if (element.classList.contains('fade-in')) return;
+      if (element.getBoundingClientRect().top < screenPosition) {
         element.classList.add('fade-in');
       }
     });
   };
   animateOnScroll();
-  window.addEventListener('scroll', animateOnScroll);
+  const throttledBlogScroll = window.SiteUtils
+    ? window.SiteUtils.throttle(animateOnScroll, 100)
+    : animateOnScroll;
+  window.addEventListener('scroll', throttledBlogScroll);
 });

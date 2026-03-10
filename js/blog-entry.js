@@ -238,42 +238,39 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (key && voted[key]) reactionEl.classList.add('reacted');
     });
 
-    // Handlers de click (toggle add/remove)
-    document.querySelectorAll('.reaction').forEach(reactionEl => {
+    // Un solo listener delegado en lugar de uno por botón
+    const busy = {};
+    document.addEventListener('click', async (e) => {
+      const reactionEl = e.target.closest('.reaction');
+      if (!reactionEl) return;
       const key = reactionEl.getAttribute('data-reaction');
       if (!key || !reactionKeys.includes(key)) return;
 
-      let busy = false;
+      if (busy[key]) return;
+      busy[key] = true;
+      reactionEl.classList.add('is-loading');
 
-      reactionEl.addEventListener('click', async () => {
-        if (busy) return;
-        busy = true;
-        reactionEl.classList.add('is-loading'); // opcional, para CSS animación
+      try {
+        const add = !voted[key];
+        const updated = await sendReaction(slug, key, add);
 
-        try {
-          const add = !voted[key];
-          const updated = await sendReaction(slug, key, add);
+        reactionKeys.forEach(k => {
+          const el = document.getElementById(`reaction-${k}-count`);
+          if (el) el.textContent = updated[k] ?? 0;
+        });
 
-          // Actualiza contadores en la UI
-          reactionKeys.forEach(k => {
-            const el = document.getElementById(`reaction-${k}-count`);
-            if (el) el.textContent = updated[k] ?? 0;
-          });
+        voted[key] = add ? true : undefined;
+        if (!add) delete voted[key];
+        localStorage.setItem(votedKey, JSON.stringify(voted));
 
-          // Actualiza estado local
-          voted[key] = add ? true : undefined;
-          if (!add) delete voted[key];
-          localStorage.setItem(votedKey, JSON.stringify(voted));
-
-          reactionEl.classList.toggle('reacted', !!voted[key]);
-        } catch (err) {
-          console.error('Error al enviar reacción', err);
-        } finally {
-          busy = false;                      // 👈 libera el flag
-          reactionEl.classList.remove('is-loading'); // opcional
-        }
-      });
-    }); // ← cierra el segundo forEach
+        reactionEl.classList.toggle('reacted', !!voted[key]);
+      } catch (err) {
+        console.error('Error al enviar reacción', err);
+      } finally {
+        busy[key] = false;
+        reactionEl.classList.remove('is-loading');
+      }
+    });
   } catch (err) {
     console.error('Error al cargar la entrada', err);
   }
