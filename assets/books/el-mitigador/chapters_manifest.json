@@ -1,0 +1,10 @@
+[
+  {
+    "order": 1,
+    "title": "El Mitigador",
+    "slug": "mitigador",
+    "file": "chapters/01-mitigador.md",
+    "start_paragraph": 1,
+    "end_paragraph": 200
+  }
+]

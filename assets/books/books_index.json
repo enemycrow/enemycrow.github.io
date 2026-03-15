@@ -1,11 +1,22 @@
 [
   {
+    "dir": "el-mitigador",
+    "metadata": {
+      "title": "El Mitigador",
+      "slug": "el-mitigador",
+      "description": "Cuento breve de ciencia ficción sobre un mundo de placeres y muerte consentida.",
+      "author": "Lauren Cuervo",
+      "startDate": "2026-03-14"
+    },
+    "chapters": 1
+  },
+  {
     "dir": "Entre-amores-y-abismos",
     "metadata": {
       "title": "Entre-amores-y-abismos",
-      "slug": "Entre-amores-y-abismos",
+      "slug": "entre-amores-y-abismos",
       "description": "",
-      "author": "A.C. Elysia",
+      "author": "",
       "startDate": null
     },
     "chapters": 26
