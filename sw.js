@@ -1,4 +1,4 @@
-const CACHE_NAME = 'site-cache-v16'; // ⬅️ súbelo para forzar actualización
+const CACHE_NAME = 'site-cache-v17'; // ⬅️ súbelo para forzar actualización
 const urlsToCache = [
   '/',
   '/index.html',
@@ -13,6 +13,7 @@ const urlsToCache = [
   '/blog.html',
   '/blog-entry.html',
   '/posts.json',
+  '/posts-index.json',
   '/css/styles.227c2ed157.css',
   '/css/styles.227c2ed157.css?v=20260122',
   '/js/main.1715605436.js',
