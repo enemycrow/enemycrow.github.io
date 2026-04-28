@@ -1,5 +1,3 @@
-const { text } = require("express");
-
 const getTrustedTypesPolicy = () => {
   if (!window.trustedTypes) return null;
   if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
