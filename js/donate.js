@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
       Poesía que se lee como canción
       Mujer que se toca al igual que un instrumento`,
       imageBase:'sarcelle', slug:'sarcelle', cc:'by-nc-nd',
-      author:'Lauren Cuervo' },
+      author:'Lauren Cuervo' }
 
   ];
 
