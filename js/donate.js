@@ -1,3 +1,5 @@
+const { text } = require("express");
+
 const getTrustedTypesPolicy = () => {
   if (!window.trustedTypes) return null;
   if (window.__trustedTypesPolicy) return window.__trustedTypesPolicy;
@@ -129,6 +131,26 @@ document.addEventListener('DOMContentLoaded', () => {
       Oscura`,
       imageBase:'el-rastro-detras-de-ti', slug:'el-rastro-detras-de-ti', cc:'by-nc-nd',
       author:'A.C Elysia' },
+
+      { title:'Sarcelle', year: 2026,
+      text: `Aura que danza alrededor mío
+      Silencio que se convierte en deseo
+      Profundidad que se transforma en manifiesto
+
+      Rayo que se observa como un haz
+      Luna que cubre el firmamento
+      Vela que acompaña la flama
+
+      Entrega que se manifiesta en unión
+      Regocijo que se siente como un descanso
+      Verde que colinda con el azul
+
+      Silueta que se traza como una curva
+      Poesía que se lee como canción
+      Mujer que se toca al igual que un instrumento`,
+      imageBase:'sarcelle', slug:'sarcelle', cc:'by-nc-nd',
+      author:'Lauren Cuervo' },
+
   ];
 
   // === 2) DOM ===
