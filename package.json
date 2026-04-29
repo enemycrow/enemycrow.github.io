@@ -15,8 +15,7 @@
     "blog:generate:staged": "node tools/generate-blog-pages.js --staged",
     "posts:index": "node tools/generate-posts-index.js",
     "seo": "npm run portfolio:generate && npm run blog:generate && npm run posts:index && node js/generate-sitemap.js",
-    "rotate-featured": "node tools/rotate-featured.js"
-    ,
+    "rotate-featured": "node tools/rotate-featured.js",
     "books:discover": "node scripts/discover_books.js",
     "publish:chapters": "node scripts/publish_chapters.js",
     "server:start": "node server/index.js",
@@ -26,14 +25,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sharp": "^0.33.5",
-    "marked": "^5.1.1",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
     "helmet": "^7.1.0",
+    "marked": "^5.1.1",
+    "multer": "^2.1.1",
     "mysql2": "^3.9.8",
     "nodemailer": "^6.9.13",
-    "express-rate-limit": "^7.3.1",
-    "dotenv": "^16.4.5"
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "htmlhint": "^1.7.1",

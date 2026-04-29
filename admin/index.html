@@ -1,822 +1,582 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<!-- Google Tag Manager -->
-<script src="/js/gtm-loader.js?v=2" defer></script>
-<!-- End Google Tag Manager -->
   <meta charset="UTF-8">
-    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel del Blog</title>
-
-  <!-- estilos del sitio para la vista previa -->
-  <link rel="stylesheet" href="/css/styles.227c2ed157.css">
-
-  <!-- Quill -->
-  <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+  <title>Panel editorial — La Pluma, el Faro y la Llama</title>
+  <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
   <style>
-    :root {
-      color-scheme: light;
-    }
-
-    body {
-      background: #f6f4f1;
-      margin: 0;
-      font-family: "Inter", "Segoe UI", sans-serif;
-    }
-
-    #editor { height: 320px; }
-
-    .admin-shell {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .admin-header {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .admin-brand__title {
-      font-size: 2rem;
-      font-weight: 700;
-      margin: 0;
-      color: #2b2b2b;
-    }
-
-    .admin-brand__subtitle {
-      display: block;
-      margin-top: 0.35rem;
-      color: #6c6c6c;
-      font-size: 0.95rem;
-    }
-
-    .admin-status {
-      background: #ffffff;
-      border-radius: 16px;
-      border: 1px solid rgba(0,0,0,0.08);
-      padding: 1rem 1.25rem;
-      min-width: 260px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-    }
-
-    .admin-status--success {
-      border-color: rgba(46, 125, 50, 0.4);
-      background: #eef8f0;
-    }
-
-    .admin-status--error {
-      border-color: rgba(211, 47, 47, 0.4);
-      background: #fff1f1;
-    }
-
-    .admin-status time {
-      display: block;
-      margin-top: 0.4rem;
-      color: #6c6c6c;
-      font-size: 0.85rem;
-    }
-
-    .admin-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
-      gap: 2rem;
-    }
-
-    .admin-column {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .admin-card {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 1.5rem;
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
-    }
-
-    .admin-card h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      color: #2b2b2b;
-    }
-
-    .admin-field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
-    }
-
-    .admin-field label {
-      font-weight: 600;
-      color: #2b2b2b;
-    }
-
-    .admin-input,
-    .admin-field textarea,
-    .admin-field select {
-      border-radius: 12px;
-      border: 1px solid rgba(0,0,0,0.15);
-      padding: 0.65rem 0.75rem;
-      font-size: 0.95rem;
-      background: #fff;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .admin-input:focus,
-    .admin-field textarea:focus,
-    .admin-field select:focus {
-      outline: none;
-      border-color: #333;
-      box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
-    }
-
-    .admin-input--error,
-    .admin-field textarea.admin-input--error {
-      border-color: #d32f2f;
-      box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.12);
-    }
-
-    .admin-input--ok,
-    .admin-field textarea.admin-input--ok {
-      border-color: #2e7d32;
-    }
-
-    .admin-field__help {
-      color: #6c6c6c;
-      font-size: 0.85rem;
-    }
-
-    .admin-field__message {
-      color: #d32f2f;
-      font-size: 0.85rem;
-      min-height: 1.1rem;
-    }
-
-    .admin-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
-      color: #2b2b2b;
-    }
-
-    .admin-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .admin-button {
-      border-radius: 999px;
-      border: none;
-      padding: 0.7rem 1.6rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .admin-button--primary {
-      background: #1d1d1d;
-      color: #fff;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-
-    .admin-button--secondary {
-      background: #e6e1da;
-      color: #2b2b2b;
-      border: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .admin-button--ghost {
-      background: transparent;
-      color: #2b2b2b;
-      border: 1px solid rgba(0,0,0,0.2);
-    }
-
-    .admin-button:active {
-      transform: scale(0.98);
-    }
-
-    .admin-preview {
-      border-radius: 18px;
-      padding: 1.5rem;
-      background: #fefefe;
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-
-    .admin-status-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      font-size: 0.9rem;
-      color: #2b2b2b;
-    }
-
-    .admin-status-panel ul {
-      padding-left: 1.2rem;
-      margin: 0;
-      color: #d32f2f;
-    }
-
-    .admin-section-title {
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #8a7f74;
-      margin-bottom: 0.75rem;
-      font-weight: 600;
-    }
-
-    @media (max-width: 960px) {
-      .admin-layout {
-        grid-template-columns: 1fr;
-      }
-    }
+    :root{color-scheme:light}
+    body{background:#f6f4f1;margin:0;font-family:"Inter","Segoe UI",sans-serif}
+    .admin-shell{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 3rem;display:flex;flex-direction:column;gap:2rem}
+    .admin-header{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-between}
+    .admin-brand__title{font-size:2rem;font-weight:700;margin:0;color:#2b2b2b}
+    .admin-brand__subtitle{display:block;margin-top:.35rem;color:#6c6c6c;font-size:.95rem}
+    .admin-status{background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,.08);padding:1rem 1.25rem;min-width:260px;box-shadow:0 12px 30px rgba(0,0,0,.08)}
+    .admin-status--success{border-color:rgba(46,125,50,.4);background:#eef8f0}
+    .admin-status--error{border-color:rgba(211,47,47,.4);background:#fff1f1}
+    .admin-status time{display:block;margin-top:.4rem;color:#6c6c6c;font-size:.85rem}
+    .admin-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem}
+    .admin-tab{border-radius:999px;border:1px solid rgba(0,0,0,.15);padding:.5rem 1.2rem;font-weight:600;cursor:pointer;background:transparent;color:#6c6c6c;font-size:.9rem;transition:all .2s}
+    .admin-tab.active{background:#1d1d1d;color:#fff;border-color:#1d1d1d}
+    .admin-panel{display:none}
+    .admin-panel.active{display:block}
+    .admin-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:2rem}
+    .admin-column{display:flex;flex-direction:column;gap:1.5rem}
+    .admin-card{background:#fff;border-radius:18px;padding:1.5rem;border:1px solid rgba(0,0,0,.06);box-shadow:0 12px 30px rgba(0,0,0,.06)}
+    .admin-section-title{font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:#8a7f74;margin-bottom:.75rem;font-weight:600}
+    .admin-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+    .admin-field label{font-weight:600;color:#2b2b2b;font-size:.95rem}
+    .admin-input,.admin-field textarea,.admin-field select{border-radius:12px;border:1px solid rgba(0,0,0,.15);padding:.65rem .75rem;font-size:.95rem;background:#fff;transition:border-color .2s,box-shadow .2s;width:100%;box-sizing:border-box;font-family:inherit}
+    .admin-input:focus,.admin-field textarea:focus,.admin-field select:focus{outline:none;border-color:#333;box-shadow:0 0 0 3px rgba(0,0,0,.08)}
+    .admin-input--error{border-color:#d32f2f!important}
+    .admin-field__help{color:#6c6c6c;font-size:.85rem}
+    .admin-field__message{color:#d32f2f;font-size:.85rem;min-height:1.1rem}
+    .admin-chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;color:#2b2b2b}
+    .admin-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+    .admin-button{border-radius:999px;border:none;padding:.7rem 1.6rem;font-weight:600;cursor:pointer;transition:transform .2s;font-size:.9rem;font-family:inherit}
+    .admin-button--primary{background:#1d1d1d;color:#fff;box-shadow:0 10px 20px rgba(0,0,0,.2)}
+    .admin-button--secondary{background:#e6e1da;color:#2b2b2b;border:1px solid rgba(0,0,0,.1)}
+    .admin-button--ghost{background:transparent;color:#2b2b2b;border:1px solid rgba(0,0,0,.2)}
+    .admin-button--danger{background:#d32f2f;color:#fff}
+    .admin-button:active{transform:scale(.98)}
+    .admin-upload-row{display:flex;gap:.5rem;align-items:flex-end}
+    .admin-upload-row .admin-input{flex:1}
+    .counter{font-size:.8rem;color:#6c6c6c;margin-top:.2rem}
+    #md-editor .toastui-editor-defaultUI,#md-editor-books .toastui-editor-defaultUI{border-radius:12px;overflow:hidden}
+    .chapter-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.4rem;max-height:280px;overflow-y:auto}
+    .chapter-list li{padding:.6rem .9rem;border-radius:10px;cursor:pointer;border:1px solid rgba(0,0,0,.08);background:#fafafa;font-size:.9rem}
+    .chapter-list li.active{background:#1d1d1d;color:#fff}
+    .chapter-list li:hover:not(.active){background:#f0ece6}
+    @media(max-width:960px){.admin-layout{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NX2C8N3W"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-  <div class="admin-shell">
-    <header class="admin-header">
-      <div class="admin-brand">
-        <h1 class="admin-brand__title">Panel editorial del blog</h1>
-        <span class="admin-brand__subtitle">La Pluma, el Faro y la Llama</span>
-      </div>
-      <div id="statusBanner" class="admin-status" role="status" aria-live="polite">
-        <strong id="statusTitle">Listo para editar</strong>
-        <div id="statusMessage">Completa los campos para guardar y compartir la entrada.</div>
-        <time id="statusTimestamp"></time>
-      </div>
-    </header>
-
-    <main class="admin-layout">
+<div class="admin-shell">
+  <header class="admin-header">
+    <div class="admin-brand">
+      <h1 class="admin-brand__title">Panel editorial</h1>
+      <span class="admin-brand__subtitle">La Pluma, el Faro y la Llama</span>
+    </div>
+    <div id="statusBanner" class="admin-status" role="status" aria-live="polite">
+      <strong id="statusTitle">Listo</strong>
+      <div id="statusMessage">Selecciona una pestaña para comenzar.</div>
+      <time id="statusTimestamp"></time>
+    </div>
+  </header>
+  <nav class="admin-tabs">
+    <button class="admin-tab" data-tab="blog">Blog</button>
+    <button class="admin-tab" data-tab="galletitas">Galletitas</button>
+    <button class="admin-tab" data-tab="historias">Historias</button>
+    <button class="admin-tab" data-tab="libros">Libros</button>
+    <button class="admin-tab" data-tab="obras">Obras</button>
+    <button class="admin-tab" data-tab="productos">Productos</button>
+  </nav>
+  <div class="admin-panel" id="panel-blog">
+    <div class="admin-layout">
       <aside class="admin-column">
         <section class="admin-card">
-          <div class="admin-section-title">Estado</div>
-          <div class="admin-status-panel">
-            <div><strong>Último guardado:</strong> <span id="lastSaved">Aún no guardado</span></div>
-            <div><strong>Errores activos:</strong> <span id="errorCount">0</span></div>
-            <ul id="errorList"></ul>
-          </div>
-        </section>
-
-        <section class="admin-card">
-          <div class="admin-section-title">Metadata</div>
+          <div class="admin-section-title">Post</div>
           <div class="admin-field">
-            <label for="postSelect">Seleccionar post</label>
-            <select id="postSelect" class="admin-input">
-              <option value="">— Nuevo —</option>
+            <label>Cargar post existente</label>
+            <select id="b-select" class="admin-input"><option value="">— Nuevo —</option></select>
+          </div>
+          <div class="admin-field">
+            <label>ID</label>
+            <input id="b-id" type="number" class="admin-input">
+          </div>
+          <div class="admin-field">
+            <label>Título *</label>
+            <input id="b-titulo" class="admin-input" placeholder="Título del post">
+            <span class="admin-field__message" id="b-titulo-msg"></span>
+          </div>
+          <div class="admin-field">
+            <label>Slug *</label>
+            <input id="b-slug" class="admin-input" placeholder="titulo-del-post">
+            <span class="admin-field__message" id="b-slug-msg"></span>
+          </div>
+          <div class="admin-field">
+            <label>Autor</label>
+            <select id="b-autor" class="admin-input">
+              <option>Lauren Cuervo</option>
+              <option>A.C. Elysia</option>
+              <option>Draco Sahir</option>
             </select>
-            <span class="admin-field__help">Carga un post existente o crea uno nuevo.</span>
           </div>
           <div class="admin-field">
-            <label for="id">ID</label>
-            <input id="id" type="number" class="admin-input">
-            <span class="admin-field__help">Si está vacío se generará con la fecha actual.</span>
+            <label>Fecha (YYYY-MM-DD) *</label>
+            <input id="b-fecha" class="admin-input" placeholder="2025-06-01">
+            <span class="admin-field__message" id="b-fecha-msg"></span>
           </div>
           <div class="admin-field">
-            <label for="titulo">Título</label>
-            <input id="titulo" class="admin-input" placeholder="Título inspirador">
-            <span class="admin-field__message" id="titulo-message"></span>
+            <label>Tiempo de lectura</label>
+            <input id="b-tiempo" class="admin-input" placeholder="5 min lectura">
           </div>
           <div class="admin-field">
-            <label for="slug">Slug</label>
-            <input id="slug" class="admin-input" placeholder="titulo-inspirador">
-            <span class="admin-field__help">Se genera automáticamente, pero puedes editarlo.</span>
-            <span class="admin-field__message" id="slug-message"></span>
-          </div>
-          <div class="admin-field">
-            <label for="autor">Autor</label>
-            <input id="autor" class="admin-input" placeholder="Nombre del autor">
-          </div>
-          <div class="admin-field">
-            <label for="fecha">Fecha (YYYY-MM-DD)</label>
-            <input id="fecha" class="admin-input" placeholder="2024-05-21">
-            <span class="admin-field__message" id="fecha-message"></span>
-          </div>
-          <div class="admin-field">
-            <label for="tiempo">Tiempo de lectura</label>
-            <input id="tiempo" class="admin-input" placeholder="7 min">
-          </div>
-          <div class="admin-field">
-            <label class="admin-chip"><input id="destacado" type="checkbox"> Destacado</label>
+            <label class="admin-chip"><input id="b-destacado" type="checkbox"> Destacado</label>
           </div>
         </section>
-
         <section class="admin-card">
           <div class="admin-section-title">SEO</div>
           <div class="admin-field">
-            <label for="fragmento">Fragmento</label>
-            <textarea id="fragmento" rows="4" class="admin-input" placeholder="Resumen breve del post"></textarea>
-            <span class="admin-field__help">Ideal entre 120 y 240 caracteres.</span>
-            <span class="admin-field__message" id="fragmento-message"></span>
+            <label>Fragmento (max 360)</label>
+            <textarea id="b-fragmento" rows="3" class="admin-input" placeholder="Resumen breve..."></textarea>
+            <span class="counter"><span id="b-frag-count">0</span>/360</span>
+            <span class="admin-field__message" id="b-fragmento-msg"></span>
           </div>
           <div class="admin-field">
-            <label for="fragmento_social">Fragmento social</label>
-            <textarea id="fragmento_social" rows="3" class="admin-input" placeholder="Texto corto para redes"></textarea>
-            <div id="fragmento_social_counters">
-              <small>280: <span id="fragmento_social_count_280">0/280</span></small><br>
-              <small>300: <span id="fragmento_social_count_300">0/300</span></small>
-            </div>
-            <span class="admin-field__message" id="fragmento_social-message"></span>
+            <label>Fragmento social (max 300)</label>
+            <textarea id="b-fsocial" rows="2" class="admin-input"></textarea>
+            <span class="counter"><span id="b-fsoc-count">0</span>/300</span>
           </div>
           <div class="admin-field">
-            <label for="categoria_temas">Categoría Temas (coma)</label>
-            <input id="categoria_temas" class="admin-input" placeholder="creación, espiritualidad">
+            <label>Categoría temas (coma)</label>
+            <input id="b-ctemas" class="admin-input" placeholder="Creación, Espiritualidad">
           </div>
           <div class="admin-field">
-            <label for="categoria_libros">Categoría Libros (coma)</label>
-            <input id="categoria_libros" class="admin-input" placeholder="saga, mundo">
+            <label>Categoría libros (coma)</label>
+            <input id="b-clibros" class="admin-input">
           </div>
           <div class="admin-field">
-            <label for="topicos">Tópicos (coma)</label>
-            <input id="topicos" class="admin-input" placeholder="misterio, inspiración">
+            <label>Tópicos (coma)</label>
+            <input id="b-topicos" class="admin-input">
           </div>
         </section>
-
         <section class="admin-card">
           <div class="admin-section-title">Imágenes</div>
           <div class="admin-field">
-            <label for="imagen">Imagen</label>
-            <input id="imagen" class="admin-input" placeholder="/assets/images/blog/...">
+            <label>Imagen principal</label>
+            <div class="admin-upload-row">
+              <input id="b-imagen" class="admin-input" placeholder="Plumafarollama-Post115.webp">
+              <input type="file" id="b-img-file" accept="image/*" style="display:none">
+              <button class="admin-button admin-button--ghost" onclick="document.getElementById('b-img-file').click()">Subir</button>
+            </div>
           </div>
           <div class="admin-field">
-            <label for="imagen_vertical">Imagen vertical (portrait)</label>
-            <input id="imagen_vertical" class="admin-input" placeholder="assets/images/social/blog/ejemplo.png">
-            <span class="admin-field__help">Debe ser un PNG dentro de assets/images/social/blog/</span>
-            <span class="admin-field__message" id="imagen_vertical-message"></span>
+            <label>Imagen vertical (social)</label>
+            <div class="admin-upload-row">
+              <input id="b-imgv" class="admin-input" placeholder="assets/images/social/blog/Post115-ig.png">
+              <input type="file" id="b-imgv-file" accept="image/*" style="display:none">
+              <button class="admin-button admin-button--ghost" onclick="document.getElementById('b-imgv-file').click()">Subir</button>
+            </div>
+            <span class="admin-field__message" id="b-imgv-msg"></span>
           </div>
         </section>
       </aside>
-
       <section class="admin-column">
         <section class="admin-card">
-          <div class="admin-section-title">Contenido</div>
-          <div id="editor"></div>
-          <div class="admin-actions" style="margin-top: 1.25rem;">
-            <button id="previewBtn" class="admin-button admin-button--ghost">Vista previa</button>
-            <button id="saveBtn" class="admin-button admin-button--secondary">Guardar</button>
-            <button id="saveOpenBtn" class="admin-button admin-button--primary">Guardar y abrir</button>
+          <div class="admin-section-title">Contenido (Markdown)</div>
+          <div id="md-editor"></div>
+          <div style="margin-top:.75rem">
+            <label class="admin-chip"><input id="b-rebuild" type="checkbox"> Regenerar páginas del blog al guardar</label>
           </div>
-        </section>
-
-        <section class="admin-card">
-          <div class="admin-section-title">Vista previa</div>
-          <div class="admin-preview" id="preview"></div>
+          <div class="admin-actions">
+            <button class="admin-button admin-button--primary" onclick="blogSave()">Guardar</button>
+            <button class="admin-button admin-button--secondary" onclick="blogNew()">Nuevo</button>
+            <button class="admin-button admin-button--danger" onclick="blogDelete()">Eliminar</button>
+          </div>
         </section>
       </section>
-    </main>
+    </div>
+  </div>
+  <div class="admin-panel" id="panel-galletitas">
+    <div class="admin-layout">
+      <aside class="admin-column">
+        <section class="admin-card">
+          <div class="admin-section-title">Galletita</div>
+          <div class="admin-field"><label>Cargar existente</label><select id="g-select" class="admin-input"><option value="">— Nueva —</option></select></div>
+          <div class="admin-field"><label>ID</label><input id="g-id" type="number" class="admin-input"></div>
+          <div class="admin-field"><label>Personaje</label>
+            <select id="g-personaje" class="admin-input">
+              <option>Sunfelicity</option><option>Marsheeall</option><option>Sharkody</option>
+              <option>Axolittle</option><option>Deliciosa</option><option>Fowsymph</option>
+              <option>Pangolike</option><option>Panthmeow</option><option>Rubberic</option><option>Tulipretty</option>
+            </select>
+          </div>
+          <div class="admin-field"><label>Slug</label><input id="g-slug" class="admin-input"></div>
+          <div class="admin-field"><label>Mensaje (max 150)</label><textarea id="g-mensaje" rows="3" class="admin-input"></textarea><span class="counter"><span id="g-msg-count">0</span>/150</span></div>
+          <div class="admin-field"><label>Tags (coma)</label><input id="g-tags" class="admin-input" placeholder="gratitud, esperanza"></div>
+          <div class="admin-field"><label>Fecha</label><input id="g-fecha" type="date" class="admin-input"></div>
+          <div class="admin-field"><label>Licencia CC</label><input id="g-cc" class="admin-input" value="by-nc-nd"></div>
+        </section>
+      </aside>
+      <section class="admin-column">
+        <section class="admin-card">
+          <div class="admin-section-title">Imágenes</div>
+          <div class="admin-field"><label>Imagen</label>
+            <div class="admin-upload-row"><input id="g-imagen" class="admin-input" placeholder="Sunfelicity-fortune51.webp"><input type="file" id="g-img-file" accept="image/*" style="display:none"><button class="admin-button admin-button--ghost" onclick="document.getElementById('g-img-file').click()">Subir</button></div>
+          </div>
+          <div class="admin-field"><label>Imagen vertical</label>
+            <div class="admin-upload-row"><input id="g-imgv" class="admin-input"><input type="file" id="g-imgv-file" accept="image/*" style="display:none"><button class="admin-button admin-button--ghost" onclick="document.getElementById('g-imgv-file').click()">Subir</button></div>
+          </div>
+        </section>
+        <section class="admin-card">
+          <div class="admin-section-title">Prompt (generación de imagen)</div>
+          <div class="admin-field"><textarea id="g-prompt" rows="5" class="admin-input" placeholder="Kawaii character with..."></textarea></div>
+          <div class="admin-actions">
+            <button class="admin-button admin-button--primary" onclick="galSave()">Guardar</button>
+            <button class="admin-button admin-button--secondary" onclick="galNew()">Nueva</button>
+            <button class="admin-button admin-button--danger" onclick="galDelete()">Eliminar</button>
+          </div>
+        </section>
+      </section>
+    </div>
+  </div>
+  <div class="admin-panel" id="panel-historias">
+    <div class="admin-layout">
+      <aside class="admin-column">
+        <section class="admin-card">
+          <div class="admin-section-title">Historia</div>
+          <div class="admin-field"><label>Cargar existente</label><select id="h-select" class="admin-input"><option value="">— Nueva —</option></select></div>
+          <div class="admin-field"><label>ID</label><input id="h-id" type="number" class="admin-input"></div>
+          <div class="admin-field"><label>Título</label><input id="h-title" class="admin-input"></div>
+          <div class="admin-field"><label>Slug</label><input id="h-slug" class="admin-input"></div>
+          <div class="admin-field"><label>Autor</label>
+            <select id="h-author" class="admin-input">
+              <option>Lauren Cuervo</option><option>A.C. Elysia</option><option>Draco Sahir</option>
+            </select>
+          </div>
+          <div class="admin-field"><label>Año</label><input id="h-year" type="number" class="admin-input" placeholder="2025"></div>
+          <div class="admin-field"><label>Licencia CC</label><input id="h-cc" class="admin-input" value="by-nc-nd"></div>
+        </section>
+      </aside>
+      <section class="admin-column">
+        <section class="admin-card">
+          <div class="admin-section-title">Texto</div>
+          <div class="admin-field"><textarea id="h-text" rows="8" class="admin-input" placeholder="Texto de la historia o poema..."></textarea></div>
+          <div class="admin-field"><label>Imagen base</label>
+            <div class="admin-upload-row"><input id="h-imageBase" class="admin-input" placeholder="nombre-sin-extension"><input type="file" id="h-img-file" accept="image/*" style="display:none"><button class="admin-button admin-button--ghost" onclick="document.getElementById('h-img-file').click()">Subir</button></div>
+            <span class="admin-field__help">Nombre sin extensión, ej: pluma-de-la-dinastia</span>
+          </div>
+          <div class="admin-actions">
+            <button class="admin-button admin-button--primary" onclick="histSave()">Guardar</button>
+            <button class="admin-button admin-button--secondary" onclick="histNew()">Nueva</button>
+            <button class="admin-button admin-button--danger" onclick="histDelete()">Eliminar</button>
+          </div>
+        </section>
+      </section>
+    </div>
+  </div>
+  <div class="admin-panel" id="panel-libros">
+    <div class="admin-layout">
+      <aside class="admin-column">
+        <section class="admin-card">
+          <div class="admin-section-title">Libro</div>
+          <div class="admin-field"><label>Seleccionar libro</label><select id="l-book" class="admin-input"><option value="">— Selecciona —</option></select></div>
+          <div id="l-meta-section" style="display:none">
+            <div class="admin-section-title" style="margin-top:1rem">Metadata del libro</div>
+            <div class="admin-field"><label>Título</label><input id="l-meta-title" class="admin-input"></div>
+            <div class="admin-field"><label>Descripción</label><textarea id="l-meta-desc" rows="2" class="admin-input"></textarea></div>
+            <div class="admin-field"><label>Autor</label><input id="l-meta-author" class="admin-input"></div>
+            <div class="admin-field"><label>Fecha inicio</label><input id="l-meta-date" class="admin-input" placeholder="2026-01-01"></div>
+            <button class="admin-button admin-button--secondary" onclick="libroSaveMeta()">Guardar metadata</button>
+          </div>
+        </section>
+        <section class="admin-card" id="l-chapters-card" style="display:none">
+          <div class="admin-section-title">Capítulos</div>
+          <ul class="chapter-list" id="l-chapter-list"></ul>
+          <div class="admin-actions"><button class="admin-button admin-button--ghost" onclick="libroNewChapter()">+ Nuevo capítulo</button></div>
+        </section>
+      </aside>
+      <section class="admin-column">
+        <section class="admin-card" id="l-editor-card" style="display:none">
+          <div class="admin-section-title">Capítulo</div>
+          <div style="display:grid;grid-template-columns:1fr auto;gap:.75rem;margin-bottom:.75rem">
+            <div class="admin-field" style="margin:0"><label>Título</label><input id="l-ch-title" class="admin-input"></div>
+            <div class="admin-field" style="margin:0"><label>Orden</label><input id="l-ch-order" type="number" class="admin-input" style="width:80px"></div>
+          </div>
+          <div class="admin-field"><label>Slug</label><input id="l-ch-slug" class="admin-input"></div>
+          <div id="md-editor-books"></div>
+          <div class="admin-actions">
+            <button class="admin-button admin-button--primary" onclick="libroSaveChapter()">Guardar capítulo</button>
+            <button class="admin-button admin-button--secondary" onclick="libroPublish()">Publicar libro</button>
+          </div>
+        </section>
+      </section>
+    </div>
   </div>
 
-  <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
-  <script>
-    const quill = new Quill('#editor', { theme: 'snow' });
+  <div class="admin-panel" id="panel-obras">
+    <div class="admin-card">
+      <div class="admin-section-title">Obras / Portfolio</div>
+      <p style="color:#6c6c6c;font-size:.95rem">Edita el archivo <code>portfolio_items.json</code> directamente. Cada objeto debe tener: <code>slug, title, description, category, imageClass, meta</code>.</p>
+      <div class="admin-field"><textarea id="o-json" rows="18" class="admin-input" style="font-family:monospace;font-size:.85rem" placeholder="[]"></textarea></div>
+      <div class="admin-actions">
+        <button class="admin-button admin-button--secondary" onclick="obrasLoad()">Recargar</button>
+        <button class="admin-button admin-button--primary" onclick="obrasSave()">Guardar todo</button>
+      </div>
+    </div>
+  </div>
 
-    const TOKEN_KEY = 'adminToken';
-
-    const formElements = {
-      id: document.getElementById('id'),
-      titulo: document.getElementById('titulo'),
-      slug: document.getElementById('slug'),
-      autor: document.getElementById('autor'),
-      fecha: document.getElementById('fecha'),
-      categoria_temas: document.getElementById('categoria_temas'),
-      categoria_libros: document.getElementById('categoria_libros'),
-      topicos: document.getElementById('topicos'),
-      tiempo: document.getElementById('tiempo'),
-      fragmento: document.getElementById('fragmento'),
-      fragmento_social: document.getElementById('fragmento_social'),
-      imagen: document.getElementById('imagen'),
-      imagen_vertical: document.getElementById('imagen_vertical'),
-      destacado: document.getElementById('destacado')
-    };
-
-    const statusBanner = document.getElementById('statusBanner');
-    const statusTitle = document.getElementById('statusTitle');
-    const statusMessage = document.getElementById('statusMessage');
-    const statusTimestamp = document.getElementById('statusTimestamp');
-    const lastSaved = document.getElementById('lastSaved');
-    const errorCount = document.getElementById('errorCount');
-    const errorList = document.getElementById('errorList');
-
-    function getToken() {
-      let token = sessionStorage.getItem(TOKEN_KEY);
-      if (!token) {
-        token = prompt('Ingresa el token de administrador');
-        if (token) sessionStorage.setItem(TOKEN_KEY, token.trim());
-      }
-      return token;
-    }
-
-    async function fetchWithAuth(url, options = {}) {
-      const token = getToken();
-      if (!token) throw new Error('No se proporcionó token de administrador');
-
-      const opts = { ...options };
-      const headers = new Headers(opts.headers || {});
-      headers.set('x-admin-token', token);
-      opts.headers = headers;
-
-      const response = await fetch(url, opts);
-      if (response.status === 401) {
-        sessionStorage.removeItem(TOKEN_KEY);
-        alert('Token inválido o falta autorización. Intenta nuevamente.');
-        throw new Error('Unauthorized');
-      }
-      return response;
-    }
-
-    function normalizeSocialImagePath(value) {
-      if (!value) return '';
-      let normalized = value.trim();
-      normalized = normalized.replace(/^https?:\/\/[^/]+/i, '');
-      normalized = normalized.replace(/^\/+/, '');
-
-      if (normalized.toLowerCase().startsWith('assets/images/social/')) {
-        normalized = normalized.slice('assets/images/social/'.length);
-      }
-
-      normalized = normalized.replace(/^\/+/, '');
-      if (!normalized) return '';
-
-      if (!normalized.toLowerCase().startsWith('blog/')) {
-        normalized = normalized.replace(/^blog\//i, '');
-        normalized = normalized.replace(/^fortune_cookies\//i, '');
-        normalized = normalized.replace(/^\/+/, '');
-        normalized = `blog/${normalized}`;
-      } else {
-        normalized = `blog/${normalized.slice(5)}`;
-      }
-
-      return `assets/images/social/${normalized}`;
-    }
-
-    function slugify(value) {
-      return value
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^a-z0-9\s-]/g, '')
-        .trim()
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-');
-    }
-
-    function escapeHtml(value) {
-      return value
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
-
-    function setFieldState(fieldId, status, message) {
-      const field = document.getElementById(fieldId);
-      const messageEl = document.getElementById(`${fieldId}-message`);
-      if (!field || !messageEl) return;
-
-      field.classList.remove('admin-input--error', 'admin-input--ok');
-      if (status === 'error') {
-        field.classList.add('admin-input--error');
-      } else if (status === 'ok') {
-        field.classList.add('admin-input--ok');
-      }
-      messageEl.textContent = message || '';
-    }
-
-    function updateStatusBanner(type, title, message) {
-      statusBanner.classList.remove('admin-status--success', 'admin-status--error');
-      if (type === 'success') statusBanner.classList.add('admin-status--success');
-      if (type === 'error') statusBanner.classList.add('admin-status--error');
-      statusTitle.textContent = title;
-      statusMessage.textContent = message;
-      statusTimestamp.textContent = type === 'success' ? `Actualizado: ${new Date().toLocaleString()}` : '';
-    }
-
-    function updateErrorPanel(errors) {
-      errorCount.textContent = String(errors.length);
-      errorList.innerHTML = '';
-      errors.forEach(error => {
-        const li = document.createElement('li');
-        li.textContent = error;
-        errorList.appendChild(li);
-      });
-    }
-
-    function validateDate(value) {
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-      const [year, month, day] = value.split('-').map(Number);
-      const date = new Date(year, month - 1, day);
-      return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
-    }
-
-    function validateForm() {
-      const errors = [];
-      const titulo = formElements.titulo.value.trim();
-      const slug = formElements.slug.value.trim();
-      const fecha = formElements.fecha.value.trim();
-      const fragmento = formElements.fragmento.value.trim();
-      const fragmentoSocial = formElements.fragmento_social.value.trim();
-      const imagenVertical = formElements.imagen_vertical.value.trim();
-
-      if (!titulo) {
-        setFieldState('titulo', 'error', 'El título es obligatorio.');
-        errors.push('Falta el título del post.');
-      } else {
-        setFieldState('titulo', 'ok', '');
-      }
-
-      if (!slug) {
-        setFieldState('slug', 'error', 'El slug no puede estar vacío.');
-        errors.push('El slug está vacío.');
-      } else {
-        setFieldState('slug', 'ok', '');
-      }
-
-      if (!fecha) {
-        setFieldState('fecha', 'error', 'Ingresa una fecha de publicación.');
-        errors.push('Falta la fecha de publicación.');
-      } else if (!validateDate(fecha)) {
-        setFieldState('fecha', 'error', 'Formato inválido. Usa YYYY-MM-DD.');
-        errors.push('La fecha ingresada no es válida.');
-      } else {
-        setFieldState('fecha', 'ok', '');
-      }
-
-      if (fragmento.length > 360) {
-        setFieldState('fragmento', 'error', 'El fragmento es muy largo (máx 360 caracteres).');
-        errors.push('El fragmento supera el máximo recomendado.');
-      } else {
-        setFieldState('fragmento', fragmento ? 'ok' : '', fragmento ? '' : '');
-      }
-
-      if (fragmentoSocial.length > 300) {
-        setFieldState('fragmento_social', 'error', 'El fragmento social supera 300 caracteres.');
-        errors.push('El fragmento social excede el máximo permitido.');
-      } else {
-        setFieldState('fragmento_social', fragmentoSocial ? 'ok' : '', fragmentoSocial ? '' : '');
-      }
-
-      if (imagenVertical) {
-        const normalized = normalizeSocialImagePath(imagenVertical);
-        if (!normalized.toLowerCase().endsWith('.png') || !normalized.toLowerCase().startsWith('assets/images/social/blog/')) {
-          setFieldState('imagen_vertical', 'error', 'Debe ser un PNG dentro de assets/images/social/blog/.');
-          errors.push('La imagen vertical no cumple con el formato requerido.');
-        } else {
-          setFieldState('imagen_vertical', 'ok', '');
-        }
-      } else {
-        setFieldState('imagen_vertical', '', '');
-      }
-
-      updateErrorPanel(errors);
-      return errors;
-    }
-
-    function buildPreview() {
-      const titulo = formElements.titulo.value.trim() || 'Título del post';
-      const autor = formElements.autor.value.trim();
-      const fecha = formElements.fecha.value.trim() || 'Fecha de publicación';
-      const fragmento = formElements.fragmento.value.trim() || 'Fragmento del post.';
-      const imagen = formElements.imagen.value.trim();
-      const contenido = quill.root.innerHTML.trim() || '<p>Empieza a escribir el contenido para ver la vista previa.</p>';
-      const signature = autor ? `— ${autor}` : '';
-
-      const imageBlock = imagen
-        ? `
-          <figure>
-            <img loading="lazy" src="${escapeHtml(imagen)}" alt="${escapeHtml(titulo)}" class="blog-entry__image" />
-            <figcaption></figcaption>
-          </figure>
-        `
-        : '';
-
-      return `
-        <article class="blog-entry">
-          <h1 class="blog-entry__title">${escapeHtml(titulo)}</h1>
-          <span class="blog-entry__date">${escapeHtml(fecha)}</span>
-          <p class="blog-entry__snippet">${escapeHtml(fragmento)}</p>
-          <div class="blog-entry__content">
-            ${imageBlock}
-            ${contenido}
+  <div class="admin-panel" id="panel-productos">
+    <div class="admin-layout">
+      <aside class="admin-column">
+        <section class="admin-card">
+          <div class="admin-section-title">Producto</div>
+          <div class="admin-field"><label>Cargar existente</label><select id="p-select" class="admin-input"><option value="">— Nuevo —</option></select></div>
+          <div class="admin-field"><label>ID</label><input id="p-id" type="number" class="admin-input"></div>
+          <div class="admin-field"><label>Nombre</label><input id="p-nombre" class="admin-input"></div>
+          <div class="admin-field"><label>Descripción</label><textarea id="p-desc" rows="3" class="admin-input"></textarea></div>
+          <div class="admin-field"><label>Precio</label><input id="p-precio" class="admin-input" placeholder="5.00 USD"></div>
+          <div class="admin-field"><label>URL de compra</label><input id="p-url" class="admin-input" placeholder="https://..."></div>
+        </section>
+      </aside>
+      <section class="admin-column">
+        <section class="admin-card">
+          <div class="admin-section-title">Imagen</div>
+          <div class="admin-field"><label>Ruta de imagen</label>
+            <div class="admin-upload-row">
+              <input id="p-imagen" class="admin-input" placeholder="assets/images/oeuvres/...">
+              <input type="file" id="p-img-file" accept="image/*" style="display:none">
+              <button class="admin-button admin-button--ghost" onclick="document.getElementById('p-img-file').click()">Subir</button>
+            </div>
           </div>
-          <p class="blog-entry__signature">${escapeHtml(signature)}</p>
-        </article>
-      `;
-    }
-
-    function updatePreview() {
-      document.getElementById('preview').innerHTML = buildPreview();
-    }
-
-    function updateFragmentoSocialCounters() {
-      const len = formElements.fragmento_social.value.length;
-      const fragmentoSocialCounter280 = document.getElementById('fragmento_social_count_280');
-      const fragmentoSocialCounter300 = document.getElementById('fragmento_social_count_300');
-
-      if (fragmentoSocialCounter280) {
-        fragmentoSocialCounter280.textContent = `${len}/280`;
-        fragmentoSocialCounter280.style.color = len > 280 ? '#f0ad4e' : '';
-      }
-      if (fragmentoSocialCounter300) {
-        fragmentoSocialCounter300.textContent = `${len}/300`;
-        fragmentoSocialCounter300.style.color = len > 300 ? '#d9534f' : '';
-      }
-    }
-
-    function updateSlugFromTitle() {
-      if (formElements.slug.dataset.manual === 'true') {
-        return;
-      }
-      formElements.slug.value = slugify(formElements.titulo.value);
-    }
-
-    // Carga posts existentes
-    let posts = [];
-    async function loadPosts() {
-      try {
-        posts = await fetchWithAuth('/posts', { credentials: 'include' }).then(r => r.json());
-      } catch (err) {
-        console.error(err);
-        return;
-      }
-      const select = document.getElementById('postSelect');
-      posts.forEach(p => {
-        const opt = document.createElement('option');
-        opt.value = p.id;
-        opt.textContent = `${p.id} – ${p.titulo}`;
-        select.appendChild(opt);
-      });
-      select.onchange = () => {
-        const p = posts.find(x => x.id == select.value);
-        if (p) fillForm(p); else clearForm();
-      };
-    }
-
-    function fillForm(p) {
-      formElements.id.value = p.id;
-      formElements.titulo.value = p.titulo;
-      formElements.autor.value = p.autor;
-      formElements.fecha.value = p.fecha;
-      formElements.categoria_temas.value = p.categoria_temas.join(', ');
-      formElements.categoria_libros.value = p.categoria_libros.join(', ');
-      formElements.topicos.value = p.topicos.join(', ');
-      formElements.tiempo.value = p.tiempo;
-      formElements.fragmento.value = p.fragmento;
-      formElements.fragmento_social.value = p.fragmento_social || '';
-      formElements.imagen.value = p.imagen;
-      formElements.imagen_vertical.value = normalizeSocialImagePath(p.imagen_vertical || '');
-      formElements.slug.value = p.slug;
-      formElements.slug.dataset.manual = 'true';
-      formElements.destacado.checked = p.destacado;
-      quill.root.innerHTML = p.contenido_html;
-      updateFragmentoSocialCounters();
-      updatePreview();
-      validateForm();
-    }
-
-    function clearForm() {
-      document.querySelectorAll('input.admin-input, textarea.admin-input').forEach(e => {
-        e.value = '';
-      });
-      formElements.destacado.checked = false;
-      formElements.slug.dataset.manual = 'false';
-      quill.root.innerHTML = '';
-      updateFragmentoSocialCounters();
-      updatePreview();
-      validateForm();
-    }
-
-    document.getElementById('previewBtn').onclick = () => {
-      updatePreview();
-      document.getElementById('preview').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
-
-    const fragmentoSocial = document.getElementById('fragmento_social');
-
-    updateFragmentoSocialCounters();
-    updatePreview();
-
-    formElements.titulo.addEventListener('input', () => {
-      updateSlugFromTitle();
-      updatePreview();
-      validateForm();
-    });
-
-    formElements.slug.addEventListener('input', () => {
-      formElements.slug.dataset.manual = 'true';
-      updatePreview();
-      validateForm();
-    });
-
-    formElements.fecha.addEventListener('input', () => {
-      updatePreview();
-      validateForm();
-    });
-
-    formElements.fragmento.addEventListener('input', () => {
-      updatePreview();
-      validateForm();
-    });
-
-    fragmentoSocial.addEventListener('input', () => {
-      updateFragmentoSocialCounters();
-      updatePreview();
-      validateForm();
-    });
-
-    formElements.autor.addEventListener('input', () => {
-      updatePreview();
-    });
-
-    formElements.imagen.addEventListener('input', () => {
-      updatePreview();
-    });
-
-    formElements.imagen_vertical.addEventListener('input', () => {
-      validateForm();
-    });
-
-    quill.on('text-change', () => {
-      updatePreview();
-    });
-
-    const savePost = async () => {
-      const errors = validateForm();
-      if (errors.length) {
-        updateStatusBanner('error', 'Revisa los campos', 'Hay errores de validación que debes corregir.');
-        return false;
-      }
-
-      const imagenVerticalInput = normalizeSocialImagePath(formElements.imagen_vertical.value);
-
-      const post = {
-        id: Number(formElements.id.value || Date.now()),
-        titulo: formElements.titulo.value,
-        autor: formElements.autor.value,
-        fecha: formElements.fecha.value,
-        categoria_temas: formElements.categoria_temas.value.split(',').map(s => s.trim()).filter(Boolean),
-        categoria_libros: formElements.categoria_libros.value.split(',').map(s => s.trim()).filter(Boolean),
-        topicos: formElements.topicos.value.split(',').map(s => s.trim()).filter(Boolean),
-        tiempo: formElements.tiempo.value,
-        fragmento: formElements.fragmento.value,
-        fragmento_social: fragmentoSocial.value,
-        imagen: formElements.imagen.value,
-        imagen_vertical: imagenVerticalInput,
-        slug: formElements.slug.value || slugify(formElements.titulo.value),
-        contenido_html: quill.root.innerHTML,
-        destacado: formElements.destacado.checked
-      };
-
-      try {
-        await fetchWithAuth('/save-post', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(post),
-          credentials: 'include'
-        });
-        const timestamp = new Date().toLocaleString();
-        lastSaved.textContent = timestamp;
-        updateStatusBanner('success', 'Post guardado exitosamente', 'Tu entrada ya está lista para compartir.');
-        return true;
-      } catch (err) {
-        console.error(err);
-        updateStatusBanner('error', 'No se pudo guardar', 'Hubo un problema al guardar el post.');
-        return false;
-      }
-    };
-
-    document.getElementById('saveBtn').onclick = async () => {
-      await savePost();
-    };
-
-    document.getElementById('saveOpenBtn').onclick = async () => {
-      const saved = await savePost();
-      if (saved) {
-        const slug = formElements.slug.value.trim();
-        if (slug) {
-          window.open(`/blog/${encodeURIComponent(slug)}.html`, '_blank');
-        }
-      }
-    };
-
-    loadPosts();
-  </script>
+          <div class="admin-actions">
+            <button class="admin-button admin-button--primary" onclick="prodSave()">Guardar</button>
+            <button class="admin-button admin-button--secondary" onclick="prodNew()">Nuevo</button>
+            <button class="admin-button admin-button--danger" onclick="prodDelete()">Eliminar</button>
+          </div>
+        </section>
+      </section>
+    </div>
+  </div>
+</div>
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor.min.js"></script>
+<script id="s-blog">
+let blogPosts=[], blogEditor;
+document.addEventListener('DOMContentLoaded',()=>{
+  blogEditor=new toastui.Editor({el:document.getElementById('md-editor'),height:'420px',initialEditType:'markdown',previewStyle:'vertical',usageStatistics:false,
+    hooks:{addImageBlobHook:async(blob,cb)=>{try{const p=await uploadImage(blob,'blog');cb(p,blob.name);}catch(e){setStatus('error','Error','No se pudo subir la imagen.');}}
+  }});
+  document.getElementById('b-titulo').addEventListener('input',e=>{document.getElementById('b-slug').value=slugify(e.target.value);});
+  document.getElementById('b-fragmento').addEventListener('input',e=>document.getElementById('b-frag-count').textContent=e.target.value.length);
+  document.getElementById('b-fsocial').addEventListener('input',e=>document.getElementById('b-fsoc-count').textContent=e.target.value.length);
+  document.getElementById('b-img-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const p=await uploadImage(f,'blog');document.getElementById('b-imagen').value=p.replace('/assets/images/blog/','');}catch(err){setStatus('error','Error',err.message);}});
+  document.getElementById('b-imgv-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const p=await uploadImage(f,'social');document.getElementById('b-imgv').value=p.replace('/','');}catch(err){setStatus('error','Error',err.message);}});
+  blogLoad();
+});
+async function blogLoad(){
+  try{blogPosts=await api('/posts');const sel=document.getElementById('b-select');sel.innerHTML='<option value="">— Nuevo —</option>';[...blogPosts].reverse().forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=`#${p.id} ${p.titulo}`;sel.appendChild(o);});sel.onchange=()=>{const p=blogPosts.find(x=>x.id===Number(sel.value));p?blogFill(p):blogNew();};}catch(e){setStatus('error','Error','No se pudieron cargar los posts.');}
+}
+function blogFill(p){
+  document.getElementById('b-id').value=p.id||'';
+  document.getElementById('b-titulo').value=p.titulo||'';
+  document.getElementById('b-slug').value=p.slug||'';
+  const a=document.getElementById('b-autor');[...a.options].forEach(o=>o.selected=o.value===p.autor);
+  document.getElementById('b-fecha').value=p.fecha||'';
+  document.getElementById('b-tiempo').value=p.tiempo||'';
+  document.getElementById('b-destacado').checked=!!p.destacado;
+  document.getElementById('b-fragmento').value=p.fragmento||'';document.getElementById('b-frag-count').textContent=(p.fragmento||'').length;
+  document.getElementById('b-fsocial').value=p.fragmento_social||'';document.getElementById('b-fsoc-count').textContent=(p.fragmento_social||'').length;
+  document.getElementById('b-ctemas').value=(p.categoria_temas||[]).join(', ');
+  document.getElementById('b-clibros').value=(p.categoria_libros||[]).join(', ');
+  document.getElementById('b-topicos').value=(p.topicos||[]).join(', ');
+  document.getElementById('b-imagen').value=p.imagen||'';
+  document.getElementById('b-imgv').value=p.imagen_vertical||'';
+  blogEditor.setMarkdown(p.contenido_md||'');
+}
+function blogNew(){document.getElementById('b-select').value='';['b-id','b-titulo','b-slug','b-fecha','b-tiempo','b-fragmento','b-fsocial','b-ctemas','b-clibros','b-topicos','b-imagen','b-imgv'].forEach(id=>document.getElementById(id).value='');document.getElementById('b-destacado').checked=false;blogEditor.setMarkdown('');}
+function blogValidate(){
+  let ok=true;
+  const titulo=document.getElementById('b-titulo').value.trim();
+  const slug=document.getElementById('b-slug').value.trim();
+  const fecha=document.getElementById('b-fecha').value.trim();
+  const frag=document.getElementById('b-fragmento').value.trim();
+  const imgv=document.getElementById('b-imgv').value.trim();
+  document.getElementById('b-titulo-msg').textContent=titulo?'':'El título es obligatorio.';if(!titulo)ok=false;
+  document.getElementById('b-slug-msg').textContent=slug?'':'El slug es obligatorio.';if(!slug)ok=false;
+  const fechaOk=/^\d{4}-\d{2}-\d{2}$/.test(fecha)&&!isNaN(new Date(fecha));
+  document.getElementById('b-fecha-msg').textContent=fechaOk?'':'Fecha inválida (YYYY-MM-DD).';if(!fechaOk)ok=false;
+  document.getElementById('b-fragmento-msg').textContent=frag.length<=360?'':'Máximo 360 caracteres.';if(frag.length>360)ok=false;
+  if(imgv&&!imgv.includes('assets/images/social/')){document.getElementById('b-imgv-msg').textContent='Debe estar en assets/images/social/';ok=false;}else document.getElementById('b-imgv-msg').textContent='';
+  return ok;
+}
+async function blogSave(){
+  if(!blogValidate())return setStatus('error','Errores','Corrige los campos marcados.');
+  const split=v=>v.split(',').map(s=>s.trim()).filter(Boolean);
+  const post={
+    id:Number(document.getElementById('b-id').value)||Date.now(),
+    titulo:document.getElementById('b-titulo').value.trim(),
+    slug:document.getElementById('b-slug').value.trim(),
+    autor:document.getElementById('b-autor').value,
+    fecha:document.getElementById('b-fecha').value.trim(),
+    tiempo:document.getElementById('b-tiempo').value.trim(),
+    destacado:document.getElementById('b-destacado').checked,
+    fragmento:document.getElementById('b-fragmento').value.trim(),
+    fragmento_social:document.getElementById('b-fsocial').value.trim(),
+    categoria_temas:split(document.getElementById('b-ctemas').value),
+    categoria_libros:split(document.getElementById('b-clibros').value),
+    topicos:split(document.getElementById('b-topicos').value),
+    imagen:document.getElementById('b-imagen').value.trim(),
+    imagen_vertical:document.getElementById('b-imgv').value.trim(),
+    contenido_md:blogEditor.getMarkdown(),
+    triggerRebuild:document.getElementById('b-rebuild').checked
+  };
+  try{const r=await api('/save-post',{method:'POST',body:JSON.stringify(post)});setStatus('success','Guardado',r.rebuilding?'Post guardado. Regenerando blog...':'Post guardado correctamente.');blogLoad();}
+  catch(e){setStatus('error','Error','No se pudo guardar.');}
+}
+async function blogDelete(){
+  const id=Number(document.getElementById('b-id').value);
+  if(!id||!confirm('¿Eliminar este post?'))return;
+  try{await api('/delete-post?id='+id,{method:'DELETE'});setStatus('success','Eliminado','Post eliminado.');blogNew();blogLoad();}
+  catch(e){setStatus('error','Error','No se pudo eliminar.');}
+}
+</script>
+<script id="s-gal">
+let galItems=[];
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('g-mensaje').addEventListener('input',e=>document.getElementById('g-msg-count').textContent=e.target.value.length);
+  document.getElementById('g-personaje').addEventListener('change',galAutoSlug);
+  document.getElementById('g-img-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const p=await uploadImage(f,'fortune');document.getElementById('g-imagen').value=p.replace('/assets/images/social/fortune_cookies/','');}catch(err){setStatus('error','Error',err.message);}});
+  document.getElementById('g-imgv-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const p=await uploadImage(f,'fortune');document.getElementById('g-imgv').value=p.replace('/','');}catch(err){setStatus('error','Error',err.message);}});
+  galLoad();
+});
+function galAutoSlug(){const p=slugify(document.getElementById('g-personaje').value);const id=document.getElementById('g-id').value||'';document.getElementById('g-slug').value=id?`${p}-fortune${id}`:p;}
+async function galLoad(){
+  try{galItems=await api('/fortune-cookies');const sel=document.getElementById('g-select');sel.innerHTML='<option value="">— Nueva —</option>';[...galItems].reverse().forEach(i=>{const o=document.createElement('option');o.value=i.id;o.textContent=`#${i.id} ${i.personaje}`;sel.appendChild(o);});sel.onchange=()=>{const item=galItems.find(x=>x.id===Number(sel.value));item?galFill(item):galNew();};}catch(e){setStatus('error','Error','No se pudieron cargar las galletitas.');}
+}
+function galFill(i){
+  document.getElementById('g-id').value=i.id||'';
+  const p=document.getElementById('g-personaje');[...p.options].forEach(o=>o.selected=o.value===i.personaje);
+  document.getElementById('g-slug').value=i.slug||'';
+  document.getElementById('g-mensaje').value=i.mensaje||'';document.getElementById('g-msg-count').textContent=(i.mensaje||'').length;
+  document.getElementById('g-tags').value=(i.tags||[]).join(', ');
+  document.getElementById('g-fecha').value=i.fecha||'';
+  document.getElementById('g-cc').value=i.cc||'by-nc-nd';
+  document.getElementById('g-imagen').value=i.imagen||'';
+  document.getElementById('g-imgv').value=i.imagen_vertical||'';
+  document.getElementById('g-prompt').value=i.prompt||'';
+}
+function galNew(){['g-id','g-slug','g-mensaje','g-tags','g-fecha','g-imagen','g-imgv','g-prompt'].forEach(id=>document.getElementById(id).value='');document.getElementById('g-cc').value='by-nc-nd';document.getElementById('g-select').value='';document.getElementById('g-msg-count').textContent='0';}
+async function galSave(){
+  const split=v=>v.split(',').map(s=>s.trim()).filter(Boolean);
+  const maxId=galItems.reduce((m,i)=>Math.max(m,i.id||0),0);
+  const id=Number(document.getElementById('g-id').value)||maxId+1;
+  const item={id,personaje:document.getElementById('g-personaje').value,slug:document.getElementById('g-slug').value||slugify(document.getElementById('g-personaje').value)+'-fortune'+id,mensaje:document.getElementById('g-mensaje').value.trim(),tags:split(document.getElementById('g-tags').value),fecha:document.getElementById('g-fecha').value,cc:document.getElementById('g-cc').value||'by-nc-nd',imagen:document.getElementById('g-imagen').value.trim(),imagen_vertical:document.getElementById('g-imgv').value.trim(),prompt:document.getElementById('g-prompt').value.trim()};
+  try{await api('/save-fortune-cookie',{method:'POST',body:JSON.stringify(item)});setStatus('success','Guardado','Galletita guardada.');galLoad();}catch(e){setStatus('error','Error','No se pudo guardar.');}
+}
+async function galDelete(){const id=Number(document.getElementById('g-id').value);if(!id||!confirm('¿Eliminar?'))return;try{await api('/delete-fortune-cookie?id='+id,{method:'DELETE'});setStatus('success','Eliminado','Galletita eliminada.');galNew();galLoad();}catch(e){setStatus('error','Error','No se pudo eliminar.');}}
+</script>
+<script id="s-hist">
+let histItems=[];
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('h-title').addEventListener('input',e=>{document.getElementById('h-slug').value=slugify(e.target.value);});
+  document.getElementById('h-img-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const p=await uploadImage(f,'stories');document.getElementById('h-imageBase').value=f.name.replace(/\.[^.]+$/,'');}catch(err){setStatus('error','Error',err.message);}});
+  histLoad();
+});
+async function histLoad(){
+  try{histItems=await api('/stories');const sel=document.getElementById('h-select');sel.innerHTML='<option value="">— Nueva —</option>';histItems.forEach(i=>{const o=document.createElement('option');o.value=i.slug;o.textContent=`${i.title} (${i.author})`;sel.appendChild(o);});sel.onchange=()=>{const item=histItems.find(x=>x.slug===sel.value);item?histFill(item):histNew();};}catch(e){setStatus('error','Error','No se pudieron cargar las historias.');}
+}
+function histFill(i){
+  document.getElementById('h-id').value=i.id||'';
+  document.getElementById('h-title').value=i.title||'';
+  document.getElementById('h-slug').value=i.slug||'';
+  const a=document.getElementById('h-author');[...a.options].forEach(o=>o.selected=o.value===i.author);
+  document.getElementById('h-year').value=i.year||new Date().getFullYear();
+  document.getElementById('h-cc').value=i.cc||'by-nc-nd';
+  document.getElementById('h-text').value=i.text||'';
+  document.getElementById('h-imageBase').value=i.imageBase||'';
+}
+function histNew(){['h-id','h-title','h-slug','h-text','h-imageBase'].forEach(id=>document.getElementById(id).value='');document.getElementById('h-year').value=new Date().getFullYear();document.getElementById('h-cc').value='by-nc-nd';document.getElementById('h-select').value='';}
+async function histSave(){
+  const maxId=histItems.reduce((m,i)=>Math.max(m,i.id||0),0);
+  const id=Number(document.getElementById('h-id').value)||maxId+1;
+  const item={id,title:document.getElementById('h-title').value.trim(),slug:document.getElementById('h-slug').value.trim()||slugify(document.getElementById('h-title').value),author:document.getElementById('h-author').value,year:Number(document.getElementById('h-year').value)||new Date().getFullYear(),cc:document.getElementById('h-cc').value||'by-nc-nd',text:document.getElementById('h-text').value,imageBase:document.getElementById('h-imageBase').value.trim()};
+  try{await api('/save-story',{method:'POST',body:JSON.stringify(item)});setStatus('success','Guardado','Historia guardada.');histLoad();}catch(e){setStatus('error','Error','No se pudo guardar.');}
+}
+async function histDelete(){const slug=document.getElementById('h-slug').value;if(!slug||!confirm('¿Eliminar?'))return;try{await api('/delete-story?slug='+encodeURIComponent(slug),{method:'DELETE'});setStatus('success','Eliminado','Historia eliminada.');histNew();histLoad();}catch(e){setStatus('error','Error','No se pudo eliminar.');}}
+</script>
+<script id="s-libros">
+let libroList=[], libroChapters=[], libroEditor, libroCurrentBook='';
+document.addEventListener('DOMContentLoaded',()=>{
+  libroEditor=new toastui.Editor({el:document.getElementById('md-editor-books'),height:'380px',initialEditType:'markdown',previewStyle:'vertical',usageStatistics:false});
+  document.getElementById('l-ch-title').addEventListener('input',e=>{document.getElementById('l-ch-slug').value=slugify(e.target.value);});
+  document.getElementById('l-book').addEventListener('change',e=>{libroCurrentBook=e.target.value;if(libroCurrentBook)libroLoadBook(libroCurrentBook);else{document.getElementById('l-meta-section').style.display='none';document.getElementById('l-chapters-card').style.display='none';document.getElementById('l-editor-card').style.display='none';}});
+  libroLoadList();
+});
+async function libroLoadList(){
+  try{libroList=await api('/books');const sel=document.getElementById('l-book');sel.innerHTML='<option value="">— Selecciona —</option>';libroList.forEach(b=>{const o=document.createElement('option');o.value=b.dir;o.textContent=b.metadata.title||b.dir;sel.appendChild(o);});}catch(e){setStatus('error','Error','No se pudieron cargar los libros.');}
+}
+async function libroLoadBook(slug){
+  try{
+    const b=libroList.find(x=>x.dir===slug);
+    if(b&&b.metadata){document.getElementById('l-meta-title').value=b.metadata.title||'';document.getElementById('l-meta-desc').value=b.metadata.description||'';document.getElementById('l-meta-author').value=b.metadata.author||'';document.getElementById('l-meta-date').value=b.metadata.startDate||'';}
+    document.getElementById('l-meta-section').style.display='block';
+    libroChapters=await api('/books/'+slug+'/chapters');
+    const ul=document.getElementById('l-chapter-list');ul.innerHTML='';
+    libroChapters.forEach((ch,i)=>{const li=document.createElement('li');li.textContent=`${ch.order}. ${ch.title}`;li.onclick=()=>libroLoadChapter(ch,li);ul.appendChild(li);});
+    document.getElementById('l-chapters-card').style.display='block';
+    document.getElementById('l-editor-card').style.display='none';
+  }catch(e){setStatus('error','Error','No se pudo cargar el libro.');}
+}
+function libroLoadChapter(ch,el){
+  document.querySelectorAll('.chapter-list li').forEach(l=>l.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('l-ch-title').value=ch.title||'';
+  document.getElementById('l-ch-slug').value=ch.slug||'';
+  document.getElementById('l-ch-order').value=ch.order||'';
+  libroEditor.setMarkdown(ch.content||'');
+  document.getElementById('l-editor-card').style.display='block';
+}
+function libroNewChapter(){document.querySelectorAll('.chapter-list li').forEach(l=>l.classList.remove('active'));document.getElementById('l-ch-title').value='';document.getElementById('l-ch-slug').value='';document.getElementById('l-ch-order').value=libroChapters.length+1;libroEditor.setMarkdown('');document.getElementById('l-editor-card').style.display='block';}
+async function libroSaveChapter(){
+  if(!libroCurrentBook)return setStatus('error','Error','Selecciona un libro primero.');
+  const ch={order:Number(document.getElementById('l-ch-order').value)||1,title:document.getElementById('l-ch-title').value.trim(),chapterSlug:document.getElementById('l-ch-slug').value.trim(),content:libroEditor.getMarkdown()};
+  try{await api('/books/'+libroCurrentBook+'/save-chapter',{method:'POST',body:JSON.stringify(ch)});setStatus('success','Guardado','Capítulo guardado.');libroLoadBook(libroCurrentBook);}catch(e){setStatus('error','Error','No se pudo guardar.');}
+}
+async function libroSaveMeta(){
+  if(!libroCurrentBook)return;
+  const meta={title:document.getElementById('l-meta-title').value.trim(),description:document.getElementById('l-meta-desc').value.trim(),author:document.getElementById('l-meta-author').value.trim(),startDate:document.getElementById('l-meta-date').value.trim(),slug:libroCurrentBook};
+  try{await api('/books/'+libroCurrentBook+'/save-metadata',{method:'POST',body:JSON.stringify(meta)});setStatus('success','Guardado','Metadata guardada.');}catch(e){setStatus('error','Error','No se pudo guardar.');}
+}
+async function libroPublish(){
+  if(!libroCurrentBook||!confirm('¿Publicar el libro? Esto ejecuta publish_chapters.js.'))return;
+  try{await api('/books/'+libroCurrentBook+'/publish',{method:'POST',body:JSON.stringify({})});setStatus('success','Publicando','El libro se está publicando en background.');}catch(e){setStatus('error','Error','No se pudo publicar.');}
+}
+</script>
+<script id="s-obras">
+document.addEventListener('DOMContentLoaded',()=>{ if(document.querySelector('[data-tab="obras"]'))obrasLoad(); });
+async function obrasLoad(){
+  try{const items=await api('/portfolio-items');document.getElementById('o-json').value=JSON.stringify(items,null,2);}
+  catch(e){document.getElementById('o-json').value='[]';}
+}
+async function obrasSave(){
+  let items;try{items=JSON.parse(document.getElementById('o-json').value);}catch(e){return setStatus('error','Error','JSON inválido.');}
+  try{
+    await Promise.all(items.map(item=>api('/save-portfolio-item',{method:'POST',body:JSON.stringify(item)})));
+    setStatus('success','Guardado','Obras guardadas.');
+  }catch(e){setStatus('error','Error','No se pudo guardar.');}
+}
+</script>
+<script id="s-prod">
+let prodItems=[];
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('p-img-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const p=await uploadImage(f,'oeuvres');document.getElementById('p-imagen').value=p.replace('/','');}catch(err){setStatus('error','Error',err.message);}});
+  prodLoad();
+});
+async function prodLoad(){
+  try{prodItems=await api('/products');const sel=document.getElementById('p-select');sel.innerHTML='<option value="">— Nuevo —</option>';prodItems.forEach(i=>{const o=document.createElement('option');o.value=i.id;o.textContent=`#${i.id} ${i.nombre}`;sel.appendChild(o);});sel.onchange=()=>{const item=prodItems.find(x=>x.id===Number(sel.value));item?prodFill(item):prodNew();};}catch(e){setStatus('error','Error','No se pudieron cargar los productos.');}
+}
+function prodFill(i){document.getElementById('p-id').value=i.id||'';document.getElementById('p-nombre').value=i.nombre||'';document.getElementById('p-desc').value=i.descripcion||'';document.getElementById('p-precio').value=i.precio||'';document.getElementById('p-url').value=i.url||'';document.getElementById('p-imagen').value=i.imagen||'';}
+function prodNew(){['p-id','p-nombre','p-desc','p-precio','p-url','p-imagen'].forEach(id=>document.getElementById(id).value='');document.getElementById('p-select').value='';}
+async function prodSave(){
+  const maxId=prodItems.reduce((m,i)=>Math.max(m,i.id||0),0);
+  const id=Number(document.getElementById('p-id').value)||maxId+1;
+  const item={id,nombre:document.getElementById('p-nombre').value.trim(),descripcion:document.getElementById('p-desc').value.trim(),precio:document.getElementById('p-precio').value.trim(),url:document.getElementById('p-url').value.trim(),imagen:document.getElementById('p-imagen').value.trim()};
+  try{await api('/save-product',{method:'POST',body:JSON.stringify(item)});setStatus('success','Guardado','Producto guardado.');prodLoad();}catch(e){setStatus('error','Error','No se pudo guardar.');}
+}
+async function prodDelete(){const id=Number(document.getElementById('p-id').value);if(!id||!confirm('¿Eliminar?'))return;try{await api('/delete-product?id='+id,{method:'DELETE'});setStatus('success','Eliminado','Producto eliminado.');prodNew();prodLoad();}catch(e){setStatus('error','Error','No se pudo eliminar.');}}
+</script>
+<script id="s0">
+const TOKEN_KEY='adminToken';
+function getToken(){let t=sessionStorage.getItem(TOKEN_KEY);if(!t){t=prompt('Token de administrador:');if(t)sessionStorage.setItem(TOKEN_KEY,t.trim());}return t;}
+async function api(url,opts={}){const h=new Headers(opts.headers||{});h.set('x-admin-token',getToken()||'');if(!(opts.body instanceof FormData))h.set('Content-Type','application/json');const r=await fetch(url,{...opts,headers:h});if(r.status===401){sessionStorage.removeItem(TOKEN_KEY);alert('Token inválido');throw new Error('401');}return r.json();}
+function slugify(v){return v.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-');}
+function setStatus(type,title,msg){const b=document.getElementById('statusBanner');b.className='admin-status'+(type==='success'?' admin-status--success':type==='error'?' admin-status--error':'');document.getElementById('statusTitle').textContent=title;document.getElementById('statusMessage').textContent=msg;document.getElementById('statusTimestamp').textContent=type==='success'?'Actualizado: '+new Date().toLocaleString():'';}
+async function uploadImage(file,destino){const fd=new FormData();fd.append('file',file,file.name);fd.append('destino',destino);const r=await api('/upload-image',{method:'POST',body:fd});if(!r.ok)throw new Error(r.error||'Error');return r.path;}
+function switchTab(name){document.querySelectorAll('.admin-tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===name));document.querySelectorAll('.admin-panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+name));}
+document.querySelectorAll('.admin-tab').forEach(t=>t.addEventListener('click',()=>switchTab(t.dataset.tab)));
+switchTab('blog');
+</script>
 </body>
 </html>
