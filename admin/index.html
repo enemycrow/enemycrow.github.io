@@ -211,8 +211,6 @@
           </div>
         </section>
         <section class="admin-card">
-          <div class="admin-section-title">Prompt (generación de imagen)</div>
-          <div class="admin-field"><textarea id="g-prompt" rows="5" class="admin-input" placeholder="Kawaii character with..."></textarea></div>
           <div class="admin-actions">
             <button class="admin-button admin-button--primary" onclick="galSave()">Guardar</button>
             <button class="admin-button admin-button--secondary" onclick="galNew()">Nueva</button>
@@ -341,7 +339,7 @@
     </div>
   </div>
 </div>
-<script src="https://uicdn.toast.com/editor/latest/toastui-editor.min.js"></script>
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script id="s-blog">
 let blogPosts=[], blogEditor;
 document.addEventListener('DOMContentLoaded',()=>{
@@ -445,14 +443,13 @@ function galFill(i){
   document.getElementById('g-cc').value=i.cc||'by-nc-nd';
   document.getElementById('g-imagen').value=i.imagen||'';
   document.getElementById('g-imgv').value=i.imagen_vertical||'';
-  document.getElementById('g-prompt').value=i.prompt||'';
 }
-function galNew(){['g-id','g-slug','g-mensaje','g-tags','g-fecha','g-imagen','g-imgv','g-prompt'].forEach(id=>document.getElementById(id).value='');document.getElementById('g-cc').value='by-nc-nd';document.getElementById('g-select').value='';document.getElementById('g-msg-count').textContent='0';}
+function galNew(){['g-id','g-slug','g-mensaje','g-tags','g-fecha','g-imagen','g-imgv'].forEach(id=>document.getElementById(id).value='');document.getElementById('g-cc').value='by-nc-nd';document.getElementById('g-select').value='';document.getElementById('g-msg-count').textContent='0';}
 async function galSave(){
   const split=v=>v.split(',').map(s=>s.trim()).filter(Boolean);
   const maxId=galItems.reduce((m,i)=>Math.max(m,i.id||0),0);
   const id=Number(document.getElementById('g-id').value)||maxId+1;
-  const item={id,personaje:document.getElementById('g-personaje').value,slug:document.getElementById('g-slug').value||slugify(document.getElementById('g-personaje').value)+'-fortune'+id,mensaje:document.getElementById('g-mensaje').value.trim(),tags:split(document.getElementById('g-tags').value),fecha:document.getElementById('g-fecha').value,cc:document.getElementById('g-cc').value||'by-nc-nd',imagen:document.getElementById('g-imagen').value.trim(),imagen_vertical:document.getElementById('g-imgv').value.trim(),prompt:document.getElementById('g-prompt').value.trim()};
+  const item={id,personaje:document.getElementById('g-personaje').value,slug:document.getElementById('g-slug').value||slugify(document.getElementById('g-personaje').value)+'-fortune'+id,mensaje:document.getElementById('g-mensaje').value.trim(),tags:split(document.getElementById('g-tags').value),fecha:document.getElementById('g-fecha').value,cc:document.getElementById('g-cc').value||'by-nc-nd',imagen:document.getElementById('g-imagen').value.trim(),imagen_vertical:document.getElementById('g-imgv').value.trim()};
   try{await api('/save-fortune-cookie',{method:'POST',body:JSON.stringify(item)});setStatus('success','Guardado','Galletita guardada.');galLoad();}catch(e){setStatus('error','Error','No se pudo guardar.');}
 }
 async function galDelete(){const id=Number(document.getElementById('g-id').value);if(!id||!confirm('¿Eliminar?'))return;try{await api('/delete-fortune-cookie?id='+id,{method:'DELETE'});setStatus('success','Eliminado','Galletita eliminada.');galNew();galLoad();}catch(e){setStatus('error','Error','No se pudo eliminar.');}}
