@@ -295,14 +295,39 @@
   </div>
 
   <div class="admin-panel" id="panel-obras">
-    <div class="admin-card">
-      <div class="admin-section-title">Obras / Portfolio</div>
-      <p style="color:#6c6c6c;font-size:.95rem">Edita el archivo <code>portfolio_items.json</code> directamente. Cada objeto debe tener: <code>slug, title, description, category, imageClass, meta</code>.</p>
-      <div class="admin-field"><textarea id="o-json" rows="18" class="admin-input" style="font-family:monospace;font-size:.85rem" placeholder="[]"></textarea></div>
-      <div class="admin-actions">
-        <button class="admin-button admin-button--secondary" onclick="obrasLoad()">Recargar</button>
-        <button class="admin-button admin-button--primary" onclick="obrasSave()">Guardar todo</button>
-      </div>
+    <div class="admin-layout">
+      <aside class="admin-column">
+        <section class="admin-card">
+          <div class="admin-section-title">Obra</div>
+          <div class="admin-field"><label>Cargar existente</label><select id="o-select" class="admin-input"><option value="">— Nueva —</option></select></div>
+          <div class="admin-field"><label>Slug *</label><input id="o-slug" class="admin-input" placeholder="el-jesuita-del-vino"></div>
+          <div class="admin-field"><label>Título</label><input id="o-title" class="admin-input"></div>
+          <div class="admin-field"><label>Categoría</label>
+            <select id="o-category" class="admin-input">
+              <option value="lauren">Lauren Cuervo</option>
+              <option value="elysia">A.C. Elysia</option>
+              <option value="sahir">Draco Sahir</option>
+              <option value="colectivo">Colectivo</option>
+            </select>
+          </div>
+          <div class="admin-field"><label>Formato</label><input id="o-format" class="admin-input" placeholder="Novela, Saga, Relato ilustrado…"></div>
+          <div class="admin-field"><label>Período</label><input id="o-timeline" class="admin-input" placeholder="2024-2025"></div>
+          <div class="admin-field"><label>Clase CSS de imagen</label><input id="o-imageClass" class="admin-input" placeholder="jesuita-img"><span class="admin-field__help">Clase del selector CSS que define el fondo de la card.</span></div>
+          <div class="admin-field"><label>URL del CTA</label><input id="o-cta-href" class="admin-input" placeholder="https:// o #modal-id"></div>
+          <div class="admin-field"><label>Texto del CTA</label><input id="o-cta-label" class="admin-input" placeholder="Leer ahora"></div>
+        </section>
+      </aside>
+      <section class="admin-column">
+        <section class="admin-card">
+          <div class="admin-section-title">Descripción (Markdown)</div>
+          <div id="md-editor-obras"></div>
+          <div class="admin-actions">
+            <button class="admin-button admin-button--primary" onclick="obrasSave()">Guardar</button>
+            <button class="admin-button admin-button--secondary" onclick="obrasNew()">Nueva</button>
+            <button class="admin-button admin-button--danger" onclick="obrasDelete()">Eliminar</button>
+          </div>
+        </section>
+      </section>
     </div>
   </div>
 
@@ -371,7 +396,9 @@ function blogFill(p){
   document.getElementById('b-topicos').value=(p.topicos||[]).join(', ');
   document.getElementById('b-imagen').value=p.imagen||'';
   document.getElementById('b-imgv').value=p.imagen_vertical||'';
-  blogEditor.setMarkdown(p.contenido_md||'');
+  if(p.contenido_md)blogEditor.setMarkdown(p.contenido_md);
+  else if(p.contenido_html)blogEditor.setHTML(p.contenido_html);
+  else blogEditor.setMarkdown('');
 }
 function blogNew(){document.getElementById('b-select').value='';['b-id','b-titulo','b-slug','b-fecha','b-tiempo','b-fragmento','b-fsocial','b-ctemas','b-clibros','b-topicos','b-imagen','b-imgv'].forEach(id=>document.getElementById(id).value='');document.getElementById('b-destacado').checked=false;blogEditor.setMarkdown('');}
 function blogValidate(){
@@ -532,18 +559,36 @@ async function libroPublish(){
 }
 </script>
 <script id="s-obras">
-document.addEventListener('DOMContentLoaded',()=>{ if(document.querySelector('[data-tab="obras"]'))obrasLoad(); });
+let obrasItems=[], obrasEditor;
+document.addEventListener('DOMContentLoaded',()=>{
+  obrasEditor=new toastui.Editor({el:document.getElementById('md-editor-obras'),height:'320px',initialEditType:'markdown',previewStyle:'vertical',usageStatistics:false});
+  document.getElementById('o-title').addEventListener('input',e=>{if(!document.getElementById('o-select').value)document.getElementById('o-slug').value=slugify(e.target.value);});
+  obrasLoad();
+});
 async function obrasLoad(){
-  try{const items=await api('/portfolio-items');document.getElementById('o-json').value=JSON.stringify(items,null,2);}
-  catch(e){document.getElementById('o-json').value='[]';}
+  try{obrasItems=await api('/portfolio-items');const sel=document.getElementById('o-select');sel.innerHTML='<option value="">— Nueva —</option>';obrasItems.forEach(i=>{const o=document.createElement('option');o.value=i.slug;o.textContent=i.title||i.slug;sel.appendChild(o);});sel.onchange=()=>{const item=obrasItems.find(x=>x.slug===sel.value);item?obrasFill(item):obrasNew();};}
+  catch(e){setStatus('error','Error','No se pudieron cargar las obras.');}
 }
+function obrasFill(i){
+  document.getElementById('o-slug').value=i.slug||'';
+  document.getElementById('o-title').value=i.title||'';
+  const cat=document.getElementById('o-category');[...cat.options].forEach(o=>o.selected=o.value===i.category);
+  document.getElementById('o-format').value=(i.meta&&i.meta.format)||'';
+  document.getElementById('o-timeline').value=(i.meta&&i.meta.timeline)||'';
+  document.getElementById('o-imageClass').value=i.imageClass||'';
+  document.getElementById('o-cta-href').value=(i.cta&&i.cta.href)||'';
+  document.getElementById('o-cta-label').value=(i.cta&&i.cta.label)||'';
+  obrasEditor.setMarkdown(i.description||'');
+}
+function obrasNew(){['o-slug','o-title','o-format','o-timeline','o-imageClass','o-cta-href','o-cta-label'].forEach(id=>document.getElementById(id).value='');obrasEditor.setMarkdown('');document.getElementById('o-select').value='';}
 async function obrasSave(){
-  let items;try{items=JSON.parse(document.getElementById('o-json').value);}catch(e){return setStatus('error','Error','JSON inválido.');}
-  try{
-    await Promise.all(items.map(item=>api('/save-portfolio-item',{method:'POST',body:JSON.stringify(item)})));
-    setStatus('success','Guardado','Obras guardadas.');
-  }catch(e){setStatus('error','Error','No se pudo guardar.');}
+  const slug=document.getElementById('o-slug').value.trim();
+  if(!slug)return setStatus('error','Error','El slug es obligatorio.');
+  const item={slug,title:document.getElementById('o-title').value.trim(),category:document.getElementById('o-category').value,description:obrasEditor.getMarkdown(),imageClass:document.getElementById('o-imageClass').value.trim(),meta:{format:document.getElementById('o-format').value.trim(),timeline:document.getElementById('o-timeline').value.trim()},cta:{href:document.getElementById('o-cta-href').value.trim(),label:document.getElementById('o-cta-label').value.trim()}};
+  try{await api('/save-portfolio-item',{method:'POST',body:JSON.stringify(item)});setStatus('success','Guardado','Obra guardada.');obrasLoad();}
+  catch(e){setStatus('error','Error','No se pudo guardar.');}
 }
+async function obrasDelete(){const slug=document.getElementById('o-slug').value.trim();if(!slug||!confirm('¿Eliminar?'))return;try{await api('/delete-portfolio-item?slug='+encodeURIComponent(slug),{method:'DELETE'});setStatus('success','Eliminado','Obra eliminada.');obrasNew();obrasLoad();}catch(e){setStatus('error','Error','No se pudo eliminar.');}}
 </script>
 <script id="s-prod">
 let prodItems=[];
