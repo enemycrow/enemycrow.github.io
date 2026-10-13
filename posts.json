@@ -1,5 +1,32 @@
 [
   {
+    "id": 115,
+    "titulo": "El Conquistador del Vino: una canción que enseña a creer",
+    "autor": "Lauren Cuervo",
+    "fecha": "2026-10-13",
+    "categoria_temas": [
+      "Procesos Creativos"
+    ],
+    "categoria_libros": [
+      "El Conquistador del Vino"
+    ],
+    "topicos": [
+      "Escritura",
+      "Música",
+      "Fe",
+      "Dogma",
+      "Marineros"
+    ],
+    "tiempo": "2 min lectura",
+    "fragmento": "Retomo la escritura de El Conquistador del Vino con un pasaje donde la música conecta la vida marginal de los marineros con la fe y la autoridad de Bartolomeo.",
+    "fragmento_social": "Una canción en un idioma desconocido abre el camino a la fe y al poder. Así retomo la escritura de El Conquistador del Vino.",
+    "imagen": "ConquistadorDelVino-Post115.webp",
+    "slug": "el-conquistador-del-vino-una-cancion-que-ensena-a-creer",
+    "contenido_html": "<p>He vuelto a escribir de a poco. Comencé reescribiendo el primer capítulo de <em>El Conquistador del Vino</em>, la segunda parte de <em>El Jesuita del Vino</em>, que había quedado detenido.</p><p>El capítulo retoma la vida en el barco después del desenlace anterior: qué sucede con Bartolomeo y su alquimia, qué roles adquieren él y Santiago a bordo y cómo estos cambios alcanzan a los marineros.</p><p>No quiero adelantar demasiado, pero hay un aspecto de este pasaje que me interesa compartir: la conexión entre la vida marginal de los marineros y la espiritualidad, a través de la música y los actos de fe.</p><p>Los hombres reciben una canción en un idioma que no comprenden. Bartolomeo le otorga suficiente importancia como para convertirla en el inicio de una enseñanza dogmática. Las salomas que hasta entonces los acompañaban, de escaso desarrollo intelectual, empiezan a ceder su lugar a un constructo religioso real del siglo XVIII, puesto al servicio de sus propósitos.</p><p>Ese reemplazo abre una tensión: los marineros pueden aprender a cantar las palabras antes de comprenderlas. La repetición les permite participar, mientras Bartolomeo ocupa el lugar de quien explica qué están cantando y por qué deben hacerlo. La música se vuelve así una puerta de entrada a una doctrina cuya interpretación queda en sus manos.</p><p>Me interesa explorar ese encuentro entre una expresión colectiva y la autoridad de quien le concede un significado. Allí, la fe tiene una dimensión espiritual, pero también interviene en la manera de conducir a los hombres.</p><p>Este es uno de los pasajes con los que estoy dando forma a <em>El Conquistador del Vino</em>. Te invito a seguir el blog para acompañar la escritura de esta segunda parte y descubrir, poco a poco, el mundo que continúa a bordo.</p>",
+    "destacado": false,
+    "url": "blog/el-conquistador-del-vino-una-cancion-que-ensena-a-creer.html"
+  },
+  {
     "id": 114,
     "titulo": "¿Por qué no escribí?",
     "autor": "Lauren Cuervo",
