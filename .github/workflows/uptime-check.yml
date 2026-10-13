@@ -5,11 +5,62 @@ on:
     - cron: "*/10 * * * *"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   uptime-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
-      - name: Ping site
+      - name: Check site with retries and diagnostics
+        shell: bash
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --location --max-time 20 https://plumafarollama.com/ > /dev/null
+          url="https://plumafarollama.com/"
+          report="$RUNNER_TEMP/uptime-report.md"
+          printf '# Uptime Check\n\nURL: %s\n\n' "$url" > "$report"
+          printf '| UTC | Intento | curl | HTTP | IP remota | DNS (s) | TCP (s) | TLS (s) | Primer byte (s) | Total (s) |\n|---|---|---|---|---|---|---|---|---|---|\n' >> "$report"
+          success=false
+          for attempt in 1 2 3; do
+            error_file="$RUNNER_TEMP/uptime-error-$attempt.txt"
+            code=0
+            metrics=$(curl --fail --silent --show-error --location --output /dev/null \
+              --connect-timeout 10 --max-time 30 \
+              --write-out '%{http_code}|%{remote_ip}|%{time_namelookup}|%{time_connect}|%{time_appconnect}|%{time_starttransfer}|%{time_total}' \
+              "$url" 2>"$error_file") || code=$?
+            printf '| %s | %s | %s | %s |\n' "$(date -u +%FT%TZ)" "$attempt" "$code" "${metrics//|/ | }" >> "$report"
+            if [ "$code" -eq 0 ]; then
+              success=true
+              break
+            fi
+            case "$code" in
+              6) reason="No se pudo resolver el dominio (DNS)" ;;
+              7) reason="No se pudo conectar al servidor" ;;
+              22) reason="El servidor devolvio un error HTTP" ;;
+              28) reason="Se agoto el tiempo de espera" ;;
+              35) reason="Fallo la negociacion TLS" ;;
+              60) reason="No se pudo validar el certificado TLS" ;;
+              *) reason="Error de curl: $code" ;;
+            esac
+            printf 'Intento %s: %s\n' "$attempt" "$reason"
+            cat "$error_file"
+            printf '\n### Intento %s: %s\n\n```text\n' "$attempt" "$reason" >> "$RUNNER_TEMP/uptime-details.md"
+            cat "$error_file" >> "$RUNNER_TEMP/uptime-details.md"
+            printf '\n```\n' >> "$RUNNER_TEMP/uptime-details.md"
+            if [ "$attempt" -lt 3 ]; then sleep 5; fi
+          done
+          if [ -f "$RUNNER_TEMP/uptime-details.md" ]; then
+            cat "$RUNNER_TEMP/uptime-details.md" >> "$report"
+          fi
+          if [ "$success" = true ]; then
+            printf '\nResultado: sitio accesible en el intento %s.\n' "$attempt" >> "$report"
+          else
+            printf '\nResultado: fallaron los tres intentos. Estos datos describen el fallo desde GitHub; no prueban por si solos una caida global.\n' >> "$report"
+          fi
+          cat "$report"
+          cat "$report" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$success" != true ]; then
+            echo "::error::El sitio no respondio correctamente en tres intentos. Consulta el resumen para ver los detalles."
+            exit 1
+          fi
