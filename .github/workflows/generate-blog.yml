@@ -4,9 +4,13 @@ on:
   push:
     paths:
       - 'posts.json'
+      - 'stories.json'
+      - 'tools/generate-home.js'
   pull_request:
     paths:
       - 'posts.json'
+      - 'stories.json'
+      - 'tools/generate-home.js'
 
 jobs:
   generate:
@@ -34,14 +38,16 @@ jobs:
           npm rebuild sharp --update-binary || npm rebuild sharp --build-from-source || npm install --include=optional sharp || true
 
       - name: Run generator (incremental)
-        run: npm run blog:generate:inc
+        run: |
+          npm run blog:generate:inc
+          npm run home:generate
 
       - name: Commit generated files
         run: |
           git config user.name "github-actions[bot]";
           git config user.email "github-actions[bot]@users.noreply.github.com";
           if ! git diff --quiet; then
-            git add blog/ posts.json package-lock.json || true;
+            git add blog/ posts.json index.html package-lock.json || true;
             git commit -m "chore: regenerate blog pages (CI)" || echo "No changes to commit";
             git push || echo "Push failed";
           else
