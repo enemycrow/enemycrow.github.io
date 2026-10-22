@@ -1,0 +1,13 @@
+/* Keep the manifesto independent of the catalog's shared author-card rules. */
+#manifiesto .manifesto-container{width:100%;max-width:1200px;padding:0 1.5rem;box-sizing:border-box;min-width:0}
+#manifiesto .authors-cards-container{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;align-items:stretch}
+#manifiesto .card-separator{display:none}
+#manifiesto .author-card{width:auto;max-width:none;min-width:0;padding:0;display:block;text-align:left}
+#manifiesto .author-card__background{height:100%;min-height:0;padding:1.5rem;box-sizing:border-box}
+#manifiesto .author-card__quote{padding:0;margin-bottom:1.5rem}
+#manifiesto .author-card p{max-width:none}
+#manifiesto .author-card__description{min-height:0;margin:0}
+#manifiesto .author-card__description p{text-align:left;margin:0}
+#manifiesto .manifesto-signature{flex-wrap:wrap}
+#manifiesto .manifesto-cta a{box-sizing:border-box;max-width:100%}
+@media(max-width:900px){#manifiesto .authors-cards-container{grid-template-columns:1fr}#manifiesto .author-card__background{height:auto}#manifiesto .manifesto-text-container{padding:1.5rem}#manifiesto .manifesto-title{margin-bottom:3rem}}
