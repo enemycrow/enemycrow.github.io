@@ -6,6 +6,7 @@ on:
       - 'posts.json'
       - 'stories.json'
       - 'tools/generate-home.js'
+      - 'js/editorial-selection.js'
       - 'tools/generate-poetry.js'
       - 'sordida-y-decorosa.html'
   pull_request:
@@ -13,6 +14,7 @@ on:
       - 'posts.json'
       - 'stories.json'
       - 'tools/generate-home.js'
+      - 'js/editorial-selection.js'
       - 'tools/generate-poetry.js'
       - 'sordida-y-decorosa.html'
 

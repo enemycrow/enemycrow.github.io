@@ -1,19 +1,34 @@
-// Generate a readable, zero-JavaScript front page from the existing content.
+// Complete static reading selection; the browser refreshes it on a new Santiago day.
 const fs = require('fs');
 const path = require('path');
+const editorial = require('../js/editorial-selection');
 const root = path.join(__dirname, '..');
 const read = name => JSON.parse(fs.readFileSync(path.join(root, name), 'utf8'));
-const esc = value => String(value || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const today = new Intl.DateTimeFormat('en-CA', {timeZone:'America/Santiago',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-const posts = read('posts.json').filter(p => p.fecha && p.fecha <= today && /^[a-z0-9-]+$/.test(p.slug)).sort((a,b) => b.fecha.localeCompare(a.fecha) || b.id-a.id).slice(0,4);
-const stories = read('stories.json').slice(-2).reverse();
-const image = (folder, base, alt, eager=false) => `<img src="assets/images/${folder}/${esc(base)}.webp" srcset="${[400,800,1200].map(w=>`assets/images/responsive/${folder}/${esc(base)}-${w}.webp ${w}w`).join(', ')}" sizes="(max-width: 760px) 100vw, ${eager?'65vw':'30vw'}" width="1600" height="900" alt="${esc(alt)}" loading="${eager?'eager':'lazy'}" ${eager?'fetchpriority="high" ':''}decoding="async">`;
-function article(p, lead=false) {
- const url=`blog/${p.slug}.html`;
- const base=String(p.imagen||'').replace(/\.webp$/,'');
- return `<article${lead?' id="editorial-lead"':''}>${base?`<a href="${url}" tabindex="-1" aria-hidden="true">${image('blog',base,'',lead)}</a>`:''}<p>${esc((p.categoria_temas||[]).join(' · '))}</p><h${lead?'2':'3'}><a href="${url}">${esc(p.titulo)}</a></h${lead?'2':'3'}><p>${esc(p.fragmento)}</p><p><span>${esc(p.autor)}</span> · <time datetime="${esc(p.fecha)}">${esc(p.fecha.split('-').reverse().join('/'))}</time></p><a href="${url}">Leer la entrada →</a></article>`;
-}
-const html=`<section id="novedades" aria-label="Novedades del diario"><div id="editorial-front">${posts[0]?article(posts[0],true):'<p>Descubre nuestras <a href="blog.html">entradas del diario</a>.</p>'}<aside id="editorial-shortcuts" aria-labelledby="shortcuts-title"><p>En esta casa</p><h2 id="shortcuts-title">Encuentra tu próxima lectura</h2><a href="books.html"><strong>Leer</strong><span>Obras y capítulos para seguir una historia.</span></a><a href="sordida-y-decorosa.html"><strong>Sórdida (y) Decorosa</strong><span>Dos historietas de A.C. Elysia para empezar a leer.</span></a><a href="donate.html"><strong>Donar</strong><span>Acompaña la creación de nuevas historias.</span></a><a href="about.html#manifiesto"><strong>Nosotros</strong><span>Tres voces y un manifiesto.</span></a></aside></div><div id="editorial-latest"><h2>Más del diario</h2><div>${posts.slice(1).map(p=>article(p)).join('')}</div><p><a href="blog.html">Todas las entradas del diario →</a></p></div></section><section id="editorial-poems" aria-labelledby="poems-title"><h2 id="poems-title">Un espacio para la poesía</h2><div>${stories.map(s=>`<article><a href="poesia-${esc(s.slug)}.html" tabindex="-1" aria-hidden="true">${image('stories',s.imageBase,'')}</a><p>${esc(s.author)}</p><h3><a href="poesia-${esc(s.slug)}.html">${esc(s.title)}</a></h3><blockquote>${esc(s.text.replace(/\\n/g, '\n').split('\n').slice(0,3).join('\n'))}</blockquote><a href="poesia-${esc(s.slug)}.html">Leer el poema →</a></article>`).join('')}</div><p><a href="poesia.html">Todos los poemas y textos →</a></p></section>`;
-const file=path.join(root,'index.html');
-fs.writeFileSync(file,fs.readFileSync(file,'utf8').replace(/<!-- EDITORIAL:START -->[\s\S]*?<!-- EDITORIAL:END -->/,`<!-- EDITORIAL:START -->\n${html}\n<!-- EDITORIAL:END -->`));
-console.log(`Portada generada: ${posts.length} entradas y ${stories.length} poemas.`);
+const stories = read('stories.json');
+const data = {
+  posts: read('posts.json').filter(p => p.fecha && /^[a-z0-9-]+$/.test(p.slug)).map(p => ({
+    id: p.id, slug: p.slug, titulo: p.titulo, autor: p.autor, fecha: p.fecha,
+    categoria_temas: p.categoria_temas || [], categoria_libros: p.categoria_libros || [],
+    fragmento: p.fragmento || '', imagen: p.imagen || ''
+  })),
+  readings: stories.map(s => ({
+    title: s.title, author: s.author, kind: 'Poesía y prosa breve',
+    href: `poesia-${s.slug}.html`, folder: 'stories', imageBase: s.imageBase,
+    excerpt: s.text.replace(/\\n/g, '\n').split('\n').slice(0, 3).join('\n')
+  })).concat([
+    { title: 'Viaje a la playa', author: 'A.C. Elysia', kind: 'Historieta', href: 'sordida-y-decorosa-viaje-a-la-playa.html', folder: 'historietas', imageBase: 'viaje-a-la-playa', excerpt: 'Dos amigas preparan una salida a la playa. Una conversación de Sórdida (y) Decorosa.' },
+    { title: 'La cecina', author: 'A.C. Elysia', kind: 'Historieta', href: 'sordida-y-decorosa-la-cecina.html', folder: 'historietas', imageBase: 'la-cecina', excerpt: 'Una búsqueda de comida termina en un malentendido. Una conversación de Sórdida (y) Decorosa.' }
+  ])
+};
+const selected = editorial.select(data);
+const html = `<div id="editorial-front">
+  <section aria-labelledby="daily-reading-title"><p class="editorial-label" id="daily-reading-title">Una lectura para hoy</p><div id="editorial-reading">${editorial.render(editorial.readingCard(selected.reading))}</div></section>
+  <aside aria-labelledby="latest-title"><p class="editorial-label" id="latest-title">Última entrada del Diario</p><div id="editorial-latest">${editorial.render(editorial.postCard(selected.latest, true))}</div><p class="editorial-more"><a href="blog.html">Explorar el Diario →</a></p></aside>
+</div>
+<section id="editorial-archive" aria-labelledby="archive-title"><h2 id="archive-title">Del archivo: ideas para volver</h2><p>Libros, escritura y pensamientos. Textos para descubrir de nuevo, más allá de su fecha.</p><div id="editorial-archive-grid">${selected.archive.map(p => editorial.render(editorial.postCard(p))).join('\n')}</div></section>
+<script type="application/json" id="editorial-data">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
+const file = path.join(root, 'index.html');
+const source = fs.readFileSync(file, 'utf8');
+if (!source.includes('<!-- EDITORIAL:START -->') || !source.includes('<!-- EDITORIAL:END -->')) throw new Error('Missing editorial markers');
+fs.writeFileSync(file, source.replace(/data-selection-day="[^"]*"/, `data-selection-day="${selected.day}"`).replace(/<!-- EDITORIAL:START -->[\s\S]*?<!-- EDITORIAL:END -->/, `<!-- EDITORIAL:START -->\n${html}\n<!-- EDITORIAL:END -->`));
+console.log(`Portada generada: una lectura entre ${data.readings.length}, última entrada y ${selected.archive.length} textos del archivo.`);
