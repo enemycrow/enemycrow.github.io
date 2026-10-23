@@ -14,12 +14,14 @@
     "blog:generate:inc": "node tools/generate-blog-pages.js --incremental",
     "blog:generate:staged": "node tools/generate-blog-pages.js --staged",
     "posts:index": "node tools/generate-posts-index.js",
-    "seo": "npm run portfolio:generate && npm run blog:generate && npm run posts:index && node js/generate-sitemap.js",
+    "seo": "npm run portfolio:generate && npm run blog:generate && npm run posts:index && npm run poetry:generate && node js/generate-sitemap.js && npm run home:generate",
     "rotate-featured": "node tools/rotate-featured.js",
     "books:discover": "node scripts/discover_books.js",
     "publish:chapters": "node scripts/publish_chapters.js",
     "server:start": "node server/index.js",
-    "server:dev": "node --watch server/index.js"
+    "server:dev": "node --watch server/index.js",
+    "home:generate": "node tools/generate-home.js",
+    "poetry:generate": "node tools/generate-poetry.js"
   },
   "keywords": [],
   "author": "",
