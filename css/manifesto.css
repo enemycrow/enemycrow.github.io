@@ -1,0 +1,12 @@
+/* A short introduction, the existing author selector, then the collective text. */
+.hero.hero--about{height:auto;min-height:240px;padding:2rem 0}
+#manifiesto{scroll-margin-top:7rem;padding:3rem 0}
+#manifiesto .manifesto-container{width:90%;max-width:1000px;margin:0 auto;box-sizing:border-box;min-width:0}
+#manifiesto .manifesto-text-container{max-width:100%;margin:0 auto;padding:2rem}
+#manifiesto .manifesto-signature{flex-wrap:wrap}
+@media(max-width:600px){.hero.hero--about{min-height:180px;padding:1.5rem 0}#manifiesto .manifesto-text-container{padding:1.2rem}.voice-selector .tab-container{display:flex;flex-wrap:wrap;justify-content:center}.voice-selector .voice-tab{padding:.7rem .8rem;font-size:.85rem}}
+#trial-view .trial-container{display:grid;width:100%;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+#trial-view .trial-container>.voice-view{min-width:0;margin:0;padding:1.5rem}
+#trial-view .trial-divider{display:none}
+@media(max-width:1100px){#trial-view .trial-container{grid-template-columns:1fr}}
+@media(max-width:600px){#trial-view .trial-container>.voice-view{padding:1rem}.single-author-container{padding:0;min-width:0}.author-content{min-width:0}}
