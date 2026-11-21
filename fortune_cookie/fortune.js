@@ -325,7 +325,7 @@ async function renderImage(fortune) {
   fortuneImage.removeAttribute('src');
   removeFallbackText();
 
-  const src = `/assets/fortune/${encodeURI(fortune.imagen)}`;
+  const src = `/assets/fortune/${encodeURIComponent(fortune.imagen)}`;
 
   try {
     await preloadImage(src);
