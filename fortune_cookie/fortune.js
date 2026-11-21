@@ -41,23 +41,7 @@ async function init() {
 }
 
 function attachEvents() {
-  cookieButton.addEventListener('click', async () => {
-    if (!isCookieOpen) {
-      // Intentamos reproducir el sonido dentro del gesto del usuario.
-      if (typeof playCrackSound === 'function') {
-        try {
-          await triggerCrackSound();
-          // El sonido se reprodujo; evitamos que openCookie lo vuelva a intentar.
-          openCookie({ skipSound: true });
-          return;
-        } catch (err) {
-          // Si falla, dejamos que openCookie gestione el reintento.
-        }
-      }
-
-      openCookie();
-    }
-  });
+  cookieButton.addEventListener('click', () => openCookie());
 
   anotherFortuneButton.addEventListener('click', async () => {
     if (!fortunesCache.length) return;
@@ -225,6 +209,7 @@ export function updateURLWithSlug(slug) {
 
 export async function renderFortune(fortune, options = {}) {
   const { reset = false, immediate = false } = options;
+  cookieButton.disabled = true;
   currentFortune = fortune;
 
   const messageParagraph = fortuneMessage.querySelector('p');
@@ -241,6 +226,7 @@ export async function renderFortune(fortune, options = {}) {
 
   if (reset) {
     resetCookieState();
+    cookieButton.disabled = false;
     // No abrir automáticamente: el usuario debe hacer clic para abrir la galleta.
     // scheduleOpen(immediate);
   }

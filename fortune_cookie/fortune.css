@@ -32,7 +32,7 @@ body {
 .cookie-stage { display: flex; justify-content: center; margin: 0 auto 1rem; }
 .cookie-button {
   appearance: none; background: transparent; border: 0; cursor: pointer; position: relative;
-  width: clamp(130px, 21vw, 205px); aspect-ratio: 1; padding: 0;
+  width: min(58vw, 235px); aspect-ratio: 924 / 700; padding: 0;
   display: grid; place-items: center; transition: transform .3s ease;
 }
 .cookie-button:hover { transform: translateY(-5px) rotate(-3deg); }
@@ -45,9 +45,28 @@ body {
 }
 .cookie-button.is-open .cookie-instruction { opacity: 0; transform: translate(-50%, 8px); }
 .cookie { width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; transition: opacity .4s, transform .4s; }
-.cookie--open { opacity: 0; transform: scale(.9) translateY(8px); }
-.cookie-button.is-open .cookie--closed { opacity: 0; transform: scale(.8) translateY(-8px); }
-.cookie-button.is-open .cookie--open { opacity: 1; transform: scale(1) translateY(0); }
+.cookie--shard {
+  background: url("assets/cookie-broken.webp") center / contain no-repeat;
+  opacity: 0;
+}
+/* Follow the jagged inner edge of the left piece where it meets the slip. */
+.cookie--left { clip-path: polygon(0 0, 50% 0, 50% 43%, 45% 53%, 41% 54%, 36% 68%, 39% 71%, 34% 81%, 34% 100%, 0 100%); }
+.cookie--right { clip-path: polygon(50% 0, 100% 0, 100% 100%, 34% 100%, 34% 81%, 39% 71%, 36% 68%, 41% 54%, 45% 53%, 50% 43%); }
+.cookie-button.is-open .cookie--closed { opacity: 0; transition-duration: 110ms; }
+.cookie-button.is-open .cookie--shard { opacity: 1; transition-duration: 120ms; }
+.cookie-button.is-open .cookie--left { animation: break-left 520ms ease-out both; }
+.cookie-button.is-open .cookie--right { animation: break-right 520ms ease-out both; }
+@keyframes break-left {
+  from { transform: translateX(6%) rotate(3deg); }
+  65% { transform: translateX(-3%) rotate(-4deg); }
+  to { transform: none; }
+}
+@keyframes break-right {
+  from { transform: translateX(-6%) rotate(-3deg); }
+  65% { transform: translateX(3%) rotate(4deg); }
+  to { transform: none; }
+}
+.fortune-panel[aria-hidden="true"] { display: none; }
 .fortune-panel {
   position: relative; max-width: 790px; margin: 0 auto; padding: clamp(2rem, 6vw, 4.5rem);
   text-align: center; background: var(--paper); border: 1px solid rgba(119,88,78,.12);
@@ -113,7 +132,7 @@ body {
 @media (max-width: 600px) {
   body { padding: 1.1rem; }
   .fortune-app::before { inset: .45rem; }
-  .cookie-button { width: 145px; }
+  .cookie-button { width: min(62vw, 200px); }
   .fortune-panel { padding: 2rem 1.2rem 2.7rem; border-radius: .9rem; }
   .fortune-panel::before { margin-bottom: 1.4rem; }
   .fortune-card { padding: 1.2rem .3rem 1.4rem; }

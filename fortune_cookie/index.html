@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Lora:wght@400;500;600&display=swap"></noscript>
-  <link rel="stylesheet" href="fortune.css?v=4">
+  <link rel="stylesheet" href="fortune.css?v=5">
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -26,9 +26,10 @@
     <div class="cookie-stage" aria-live="polite">
       <button id="cookieButton" class="cookie-button" aria-expanded="false" aria-controls="fortune-panel" type="button">
         <span class="sr-only">Abrir galleta de la fortuna</span>
-        <span class="cookie-instruction" aria-hidden="true">Abre tu mensaje</span>
-        <img src="/fortune_cookie/assets/cookie-closed.svg?v=3" alt="" class="cookie cookie--closed">
-        <img src="/fortune_cookie/assets/cookie-open.svg?v=3" alt="" class="cookie cookie--open" aria-hidden="true">
+        <span class="cookie-instruction" aria-hidden="true">Rompe la galletita</span>
+        <img src="assets/cookie-whole.webp" alt="" class="cookie cookie--closed">
+        <span class="cookie cookie--shard cookie--left" aria-hidden="true"></span>
+        <span class="cookie cookie--shard cookie--right" aria-hidden="true"></span>
       </button>
     </div>
 
@@ -70,7 +71,7 @@
     <span class="fortune-chip"></span>
   </template>
 
-  <script src="fortune.js?v=4" type="module"></script>
+  <script src="fortune.js?v=5" type="module"></script>
   <!-- Dev helper: limpiar service workers y caché únicamente en localhost. -->
   <script>
     (function () {
