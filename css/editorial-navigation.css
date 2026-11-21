@@ -1,0 +1,5 @@
+/* Navigation on the two editorial pages, including keyboard-operable mobile buttons. */
+.mobile-menu{border:0;background:transparent;color:inherit;position:relative;z-index:10000}
+.mobile-menu:focus-visible{outline:2px solid #d7bf88;outline-offset:4px}
+@media(min-width:769px) and (max-width:1200px){.navbar{flex-wrap:wrap;justify-content:center;gap:1rem}.navbar>.logo{justify-content:center;width:100%}.navbar>.nav-links{flex-wrap:wrap;justify-content:center;gap:.6rem 1rem}.navbar>.nav-links>li{margin-left:0}}
+@media(max-width:768px){.navbar>.nav-links.active{overflow-y:auto;justify-content:flex-start;padding:5rem 1rem 2rem}}

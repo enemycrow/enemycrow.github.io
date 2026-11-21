@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function licenseHTML({ title, author, slug, cc='by-nc-nd', year }){
     const currentYear = year ?? new Date().getFullYear();
-    const link = slug ? `${location.origin}/blog.html?slug=${encodeURIComponent(slug)}` : location.href;
+    const link = slug ? `${location.origin}/poesia-${encodeURIComponent(slug)}.html` : location.href;
     const icons = (CC_ICONS[cc] || CC_ICONS['by-nc-nd'])
       .map(i => `<img src="${CC_ICONS_BASE}/${i}.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;">`)
       .join('');
